@@ -2,10 +2,7 @@
 
 module tb_hcnt;
 
-localparam [21:0] PROM_START = `ifdef JTFRAME_PROM_START `JTFRAME_PROM_START `else 22'h1f000 `endif;
-localparam [21:0] E7_OFFSET  = PROM_START + 22'h220;
-localparam [21:0] E8_OFFSET  = PROM_START + 22'h240;
-localparam [31:0] E7_FSEEK   = { 10'd0, E7_OFFSET };
+localparam real CLK_HALF_NS = 27.126736111; // 18.432 MHz
 
 reg         clk       = 1'b0;
 reg         rst       = 1'b0;
@@ -22,13 +19,9 @@ wire        clkq, clkq_n, clkq_cen;
 wire        hblank_n, thblk_n, hsync_n;
 wire [ 7:0] e9_q;
 
-reg  [ 7:0] e7_img[0:31];
-reg  [ 7:0] e8_img[0:31];
-reg  [1023:0] rom_path;
-integer f, rc, i;
 integer sim_us;
 
-always #5 clk = ~clk;
+always #(CLK_HALF_NS) clk = ~clk;
 
 jtmzone_hcnt uut(
     .rst        ( rst       ),
@@ -58,36 +51,10 @@ jtmzone_hcnt uut(
     .e9_q       ( e9_q      )
 );
 
-task load_proms;
-    begin
-        if( !$value$plusargs("ROM=%s", rom_path) )
-            rom_path = "../../ver/game/rom.bin";
-
-        f = $fopen(rom_path, "rb");
-        if( f == 0 ) begin
-            $display("ERROR: cannot open ROM file %0s", rom_path);
-            $finish;
-        end
-
-        rc = $fseek(f, E7_FSEEK, 0);
-        rc = $fread(e7_img, f);
-        rc = $fread(e8_img, f);
-        $fclose(f);
-
-        $display("MZONE hcnt preload E7[00]=%02x E8[00]=%02x", e7_img[0], e8_img[0]);
-
-        for( i=0; i<32; i=i+1 ) begin
-            uut.e7[i] = e7_img[i];
-            uut.e8[i] = e8_img[i];
-        end
-    end
-endtask
-
 initial begin
     $dumpfile("hcnt.vcd");
     $dumpvars(0, tb_hcnt);
 
-    load_proms();
     pxl_cen = 1'b1;
 
     if( !$value$plusargs("US=%d", sim_us) )

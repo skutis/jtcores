@@ -12,7 +12,9 @@
     You should have received a copy of the GNU General Public License
     along with JTCORES.  If not, see <http://www.gnu.org/licenses/>. */
 
-module jtmzone_hcnt(
+module jtmzone_hcnt #(parameter
+    PROM_SIMFILE = "../../ver/game/rom.bin"
+)(
     input               rst,
     input               clk,
     input               pxl_cen,
@@ -47,8 +49,6 @@ localparam [21:0] E7_OFFSET = `ifdef JTFRAME_PROM_START `JTFRAME_PROM_START + 22
 localparam [21:0] E8_OFFSET = `ifdef JTFRAME_PROM_START `JTFRAME_PROM_START + 22'h240 `else 22'h240 `endif;
 
 reg  [3:0] c15_q;
-reg  [7:0] e7[0:31];
-reg  [7:0] e8[0:31];
 reg  [8:0] line_x;
 wire [8:0] hdisp;
 reg        clkq_n_q;
@@ -56,6 +56,8 @@ reg        hsync60_clk_q;
 reg  [7:0] hsync60_q;
 wire [4:0] prom_addr;
 wire [7:0] prom_dout;
+wire [7:0] e7_dout;
+wire [7:0] e8_dout;
 wire [7:0] e9_d;
 wire [7:0] hcnt_pcb;
 
@@ -85,8 +87,8 @@ assign h16_n = ~c15_rco;
 assign h16   = e9_q[7];
 assign h32   = e9_q[0];
 assign h32_n = ~h32;
-assign h64   = e9_q[5];
-assign h128   = e9_q[6];
+assign h64   = e9_q[2];
+assign h128   = e9_q[3];
 
 assign hrdp2 = e9_q[1];
 assign hrdp3 = e9_q[6];
@@ -116,8 +118,8 @@ assign prom_addr = { e9_q[7], e9_q[0], e9_q[1], e9_q[6], e9_q[5] };
 assign flip_n    = ~flip;
 assign e7_oe_n   =  flip_n;
 assign e8_oe_n   = ~flip_n;
-assign prom_dout = !e7_oe_n ? e7[prom_addr] :
-                   !e8_oe_n ? e8[prom_addr] : 8'hff;
+assign prom_dout = !e7_oe_n ? e7_dout :
+                   !e8_oe_n ? e8_dout : 8'hff;
 
 // PROM pins O1..O8 feed E9 pins D7,D0,D1,D6,D5,D2,D3,D4.
 assign e9_d = {
@@ -142,10 +144,6 @@ reg     hcnt_e8_00_log;
 initial begin
     c15_q = 4'd0;
     e9_q  = 8'h00;
-    for( integer i=0; i<32; i=i+1 ) begin
-        e7[i] = 8'hff;
-        e8[i] = 8'hff;
-    end
     line_x = 9'd0;
     clkq_n_q = 1'b1;
     clkq_cen = 1'b0;
@@ -157,11 +155,42 @@ initial begin
 end
 `endif
 
+jtframe_prom #(
+    .DW     ( 8            ),
+    .AW     ( 5            ),
+    .SIMFILE( PROM_SIMFILE ),
+    .OFFSET ( E7_OFFSET    ),
+    .ASYNC  ( 1            )
+) u_e7(
+    .clk    ( clk                 ),
+    .cen    ( pxl_cen             ),
+    .data   ( prog_data           ),
+    .wr_addr( prog_addr[4:0]      ),
+    .we     ( prom_we && prog_addr >= E7_OFFSET && prog_addr < E7_OFFSET+22'h20 ),
+    .rd_addr( prom_addr           ),
+    .q      ( e7_dout             )
+);
+
+jtframe_prom #(
+    .DW     ( 8            ),
+    .AW     ( 5            ),
+    .SIMFILE( PROM_SIMFILE ),
+    .OFFSET ( E8_OFFSET    ),
+    .ASYNC  ( 1            )
+) u_e8(
+    .clk    ( clk                 ),
+    .cen    ( pxl_cen             ),
+    .data   ( prog_data           ),
+    .wr_addr( prog_addr[4:0]      ),
+    .we     ( prom_we && prog_addr >= E8_OFFSET && prog_addr < E8_OFFSET+22'h20 ),
+    .rd_addr( prom_addr           ),
+    .q      ( e8_dout             )
+);
+
 always @(posedge clk) begin
     clkq_cen <= 1'b0;
 
     if( prom_we && prog_addr >= E7_OFFSET && prog_addr < E7_OFFSET+22'h20 ) begin
-        e7[prog_addr[4:0]] <= prog_data;
 `ifdef SIMULATION
         if( prog_addr[4:0] == 5'h00 && !hcnt_e7_00_log ) begin
             $display("MZONE hcnt load E7[00]=%02x t=%0t", prog_data, $time);
@@ -171,7 +200,6 @@ always @(posedge clk) begin
     end
 
     if( prom_we && prog_addr >= E8_OFFSET && prog_addr < E8_OFFSET+22'h20 ) begin
-        e8[prog_addr[4:0]] <= prog_data;
 `ifdef SIMULATION
         if( prog_addr[4:0] == 5'h00 && !hcnt_e8_00_log ) begin
             $display("MZONE hcnt load E8[00]=%02x t=%0t", prog_data, $time);
