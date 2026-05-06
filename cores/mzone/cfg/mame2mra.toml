@@ -1,0 +1,32 @@
+[global]
+author=["jotego"]
+overrule=[ {rotate=90} ]
+
+[features]
+beta=true
+
+[parse]
+sourcefile=[ "megazone.cpp" ]
+main="megazone"
+
+[buttons]
+names=[
+    { names="Fire" }
+]
+
+[dipsw]
+delete=[{names=["Unused","Unknown"]}]
+
+[ROM]
+regions = [
+    { name="maincpu" },
+    { name="audiocpu", start="SND_START" },
+    { name="daccpu", start="DAC_START" },
+    { name="gfx1", width=16, no_offset=true, start="OBJ_START" },
+    { name="gfx2", width=16, no_offset=true, start="SCR_START" },
+    { name="proms", start="JTFRAME_PROM_START", no_offset=true },
+]
+
+order = [
+    "maincpu", "audiocpu", "daccpu", "gfx1", "gfx2", "proms"
+]
