@@ -43,6 +43,9 @@ module jtmzone_main(
     input      [ 7:0] main_cram0_dout,
     input      [ 7:0] main_cram1_dout,
 
+    input      [ 9:0] objram_rd_addr,
+    output     [ 7:0] objram_rd_data,
+
     output reg [ 7:0] scrolly,
     output reg [ 7:0] scrollx,
     output            flip,
@@ -68,9 +71,18 @@ reg         b_a13_intst;
 wire [15:0] A;
 wire        RnW, VMA;
 wire        intst       = b_a13_intst;
-wire        irq_n;
+reg         irq_n;
 wire        firq_n;
 wire        main_mbs = BS;
+reg         vblank_l;
+
+`ifdef MZONE_VRAM_WRITE_WATCH
+`ifndef MZONE_VRAM_WRITE_WATCH_FROM
+`define MZONE_VRAM_WRITE_WATCH_FROM 0
+`endif
+integer     vram_watch_frame;
+reg         vram_watch_vblank_l;
+`endif
 
 wire        ram_cs        = scrolly_cs | scrollx_cs | vram0_cs | vram1_cs |
                             cram0_cs | cram1_cs | objram_cs | shared_cs;
@@ -95,6 +107,14 @@ wire        n_shared     = ~(VMA && A[15:11] == 5'h07);
 
 reg  [ 7:0] objram [0:1023];
 
+`ifdef SIMULATION
+integer objram_init_i;
+initial begin
+    for( objram_init_i=0; objram_init_i<1024; objram_init_i=objram_init_i+1 )
+        objram[objram_init_i] = 8'd0;
+end
+`endif
+
 assign rom_addr = A;
 assign cpu_rnw  = RnW;
 assign shared_addr = A[10:0];
@@ -106,23 +126,40 @@ assign main_vram0_we  = ram_we && vram0_cs;
 assign main_vram1_we  = ram_we && vram1_cs;
 assign main_cram0_we  = ram_we && cram0_cs;
 assign main_cram1_we  = ram_we && cram1_cs;
+assign objram_rd_data = objram[objram_rd_addr];
 assign flip      = b_a13_flip;
 assign irq_mask  = intst;
 assign snd_int   = b_a13_int;
 
-// B_C12A on the schematic: nIRQ is clocked low by BLANK and released by INTST.
-// Use qn so jtframe_ff reset leaves the active-low IRQ inactive.
-jtframe_ff u_nirq(
-    .rst      ( rst         ),
-    .clk      ( clk         ),
-    .cen      ( 1'b1        ),
-    .din      ( 1'b1        ),
-    .q        (             ),
-    .qn       ( irq_n       ),
-    .set      ( 1'b0        ),
-    .clr      ( ~intst      ),
-    .sigedge  ( blank       )
-);
+always @(posedge clk) begin
+    vblank_l <= vblank;
+    if( rst ) begin
+        irq_n    <= 1'b1;
+        vblank_l <= 1'b1;
+    end else begin
+        if( !intst || irq_ack ) irq_n <= 1'b1;
+        else if( vblank_l && !vblank ) irq_n <= 1'b0;
+    end
+end
+
+`ifdef MZONE_VRAM_WRITE_WATCH
+always @(posedge clk) begin
+    if( rst ) begin
+        vram_watch_frame    <= 0;
+        vram_watch_vblank_l <= 1'b1;
+    end else begin
+        vram_watch_vblank_l <= vblank;
+        if( vram_watch_vblank_l && !vblank )
+            vram_watch_frame <= vram_watch_frame + 1;
+        if( ram_we && vram_watch_frame >= `MZONE_VRAM_WRITE_WATCH_FROM ) begin
+            if( vram0_cs ) $display("MZONE_VRAM_WR frame=%0d addr=%04x ram=vram0 off=%03x data=%02x", vram_watch_frame, A, A[9:0], cpu_dout);
+            if( vram1_cs ) $display("MZONE_VRAM_WR frame=%0d addr=%04x ram=vram1 off=%03x data=%02x", vram_watch_frame, A, A[9:0], cpu_dout);
+            if( cram0_cs ) $display("MZONE_VRAM_WR frame=%0d addr=%04x ram=cram0 off=%03x data=%02x", vram_watch_frame, A, A[9:0], cpu_dout);
+            if( cram1_cs ) $display("MZONE_VRAM_WR frame=%0d addr=%04x ram=cram1 off=%03x data=%02x", vram_watch_frame, A, A[9:0], cpu_dout);
+        end
+    end
+end
+`endif
 
 // B_C1B on the schematic: ~FIRQ is clocked by ~INTMAIN and released by ~MBS.
 // Use qn so jtframe_ff reset leaves the active-low FIRQ inactive.
@@ -203,6 +240,7 @@ always @(posedge clk) begin
                 3'd3: b_a13_int   <= cpu_dout[0];
                 3'd5: b_a13_flip  <= cpu_dout[0];
                 3'd7: b_a13_intst  <= cpu_dout[0];
+                default: ;
             endcase
         end
     end
@@ -212,7 +250,7 @@ jtframe_sys6809 #(
     .RAM_AW     ( 0 ),
     .KONAMI     ( 1 ),
     .RECOVERY   ( 0 ),
-    .CENDIV     ( 0 )
+    .CENDIV     ( 1 )
 ) u_cpu(
     .rstn       ( ~rst      ),
     .clk        ( clk       ),

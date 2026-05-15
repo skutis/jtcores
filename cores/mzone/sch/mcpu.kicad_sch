@@ -16145,16 +16145,6 @@
 	)
 	(wire
 		(pts
-			(xy 99.06 72.39) (xy 104.14 72.39)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0471c0a3-b046-4818-883b-517b979ef07d")
-	)
-	(wire
-		(pts
 			(xy 146.05 68.58) (xy 142.24 68.58)
 		)
 		(stroke
@@ -16165,6 +16155,16 @@
 	)
 	(wire
 		(pts
+			(xy 99.06 72.39) (xy 104.14 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "04c7b75b-1afd-4562-ad66-bc93eed31afe")
+	)
+	(wire
+		(pts
 			(xy 166.37 267.97) (xy 140.97 267.97)
 		)
 		(stroke
@@ -16172,6 +16172,16 @@
 			(type default)
 		)
 		(uuid "04e6bc54-dbd3-48e7-bdfc-e96cbc021b0c")
+	)
+	(wire
+		(pts
+			(xy 99.06 74.93) (xy 104.14 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0523f139-0342-4248-b81c-a97919ef17f0")
 	)
 	(wire
 		(pts
@@ -16452,6 +16462,16 @@
 			(type default)
 		)
 		(uuid "0d555eb3-13e4-4f2e-9266-d5a581e5e3c8")
+	)
+	(wire
+		(pts
+			(xy 99.06 80.01) (xy 104.14 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0d95a8fb-0787-4829-89e3-3643d026b7e5")
 	)
 	(wire
 		(pts
@@ -19063,16 +19083,6 @@
 		)
 		(uuid "5928a6f8-a5ec-4a08-9cda-dd0aa2789473")
 	)
-	(wire
-		(pts
-			(xy 99.06 77.47) (xy 104.14 77.47)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5996a999-dde8-4032-9db7-2bd310ceb8d4")
-	)
 	(bus
 		(pts
 			(xy 261.62 190.5) (xy 261.62 187.96)
@@ -20082,16 +20092,6 @@
 			(type default)
 		)
 		(uuid "739a60b2-9a5a-41ad-b659-8d09180fe057")
-	)
-	(wire
-		(pts
-			(xy 99.06 80.01) (xy 104.14 80.01)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "740e8de3-2b05-4d8f-92a9-b47c5f189c10")
 	)
 	(wire
 		(pts
@@ -22135,6 +22135,16 @@
 	)
 	(wire
 		(pts
+			(xy 99.06 77.47) (xy 104.14 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "acd75b93-30d7-45e5-9127-c9d3fa1fce1f")
+	)
+	(wire
+		(pts
 			(xy 102.87 234.95) (xy 107.95 234.95)
 		)
 		(stroke
@@ -23885,6 +23895,16 @@
 	)
 	(wire
 		(pts
+			(xy 99.06 69.85) (xy 104.14 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dd8d53dc-1771-40c5-8ec9-4ad7ceb36d3a")
+	)
+	(wire
+		(pts
 			(xy 80.01 127) (xy 80.01 129.54)
 		)
 		(stroke
@@ -24433,16 +24453,6 @@
 		)
 		(uuid "ed6c2247-1066-4a76-b8d2-b17261d70421")
 	)
-	(wire
-		(pts
-			(xy 99.06 69.85) (xy 104.14 69.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ed7cb11c-147d-4d44-b248-8fa7b9bb72f1")
-	)
 	(bus
 		(pts
 			(xy 369.57 92.71) (xy 369.57 95.25)
@@ -24682,16 +24692,6 @@
 			(type default)
 		)
 		(uuid "f44b2913-d733-402d-85d6-de24db009bb8")
-	)
-	(wire
-		(pts
-			(xy 99.06 74.93) (xy 104.14 74.93)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f4adc52d-f45a-4e2e-82ad-4b3995db2eeb")
 	)
 	(bus
 		(pts
@@ -25089,7 +25089,7 @@
 	)
 	(text "BA and BS guessed to be NC"
 		(exclude_from_sim no)
-		(at 171.45 53.34 0)
+		(at 160.02 53.34 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25659,6 +25659,17 @@
 		)
 		(uuid "1658c852-98ee-4113-bcb1-8881d562da90")
 	)
+	(label "MD''0"
+		(at 99.06 80.01 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "169e64dd-845f-4c36-bf78-c552d0ac180f")
+	)
 	(label "FLIP'"
 		(at 226.06 107.95 0)
 		(fields_autoplaced yes)
@@ -25912,7 +25923,7 @@
 		)
 		(uuid "21d9a273-c955-4dd3-ba2e-8c343ad42ce8")
 	)
-	(label "MD'''3"
+	(label "MD'''0"
 		(at 67.31 80.01 0)
 		(fields_autoplaced yes)
 		(effects
@@ -26562,7 +26573,7 @@
 		(uuid "40e5b8e5-2890-4168-a321-93522d6dc09b")
 	)
 	(label "MD''1"
-		(at 99.06 72.39 0)
+		(at 99.06 77.47 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -27024,7 +27035,7 @@
 		(uuid "4f8ac117-e849-4456-abfe-f3f3b345fede")
 	)
 	(label "MD''2"
-		(at 99.06 77.47 0)
+		(at 99.06 74.93 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -27848,7 +27859,7 @@
 		)
 		(uuid "6e672f55-85fa-4af9-b542-44d9376a1fc1")
 	)
-	(label "MD'''1"
+	(label "MD'''3"
 		(at 67.31 72.39 0)
 		(fields_autoplaced yes)
 		(effects
@@ -27947,17 +27958,6 @@
 		)
 		(uuid "739a86a3-2d29-485d-9168-ca0dd1b418a0")
 	)
-	(label "MD''3"
-		(at 99.06 80.01 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "73c51ce2-ac61-42da-a0e9-2df625b81298")
-	)
 	(label "AB12"
 		(at 347.98 40.64 0)
 		(fields_autoplaced yes)
@@ -27991,7 +27991,7 @@
 		)
 		(uuid "75bba269-4717-4353-b4e3-89f2ee0510a9")
 	)
-	(label "MD'''5"
+	(label "MD'''4"
 		(at 67.31 69.85 0)
 		(fields_autoplaced yes)
 		(effects
@@ -28277,7 +28277,7 @@
 		)
 		(uuid "860e6485-4764-4830-b888-334988ea82b8")
 	)
-	(label "MD'''0"
+	(label "MD'''5"
 		(at 67.31 67.31 0)
 		(fields_autoplaced yes)
 		(effects
@@ -28751,7 +28751,7 @@
 		(uuid "99fed44d-feab-4e4b-86bc-4d181ccb35cf")
 	)
 	(label "MD''4"
-		(at 99.06 74.93 0)
+		(at 99.06 69.85 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -29102,7 +29102,7 @@
 		)
 		(uuid "aabee8b8-c41d-464b-a264-a612eb04a765")
 	)
-	(label "MD'''4"
+	(label "MD'''2"
 		(at 67.31 74.93 0)
 		(fields_autoplaced yes)
 		(effects
@@ -29554,7 +29554,7 @@
 		(uuid "bcaa11d3-ebdc-44dd-b1f3-a5b3764ea7dd")
 	)
 	(label "MD''5"
-		(at 99.06 69.85 0)
+		(at 99.06 67.31 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -30312,7 +30312,7 @@
 		)
 		(uuid "d56f80ea-3465-4ea3-bf5d-ceefd6a59f39")
 	)
-	(label "MD'''2"
+	(label "MD'''1"
 		(at 67.31 77.47 0)
 		(fields_autoplaced yes)
 		(effects
@@ -30697,17 +30697,6 @@
 		)
 		(uuid "e7660a9b-4837-4620-97dd-b635b1bdd951")
 	)
-	(label "MD''0"
-		(at 99.06 67.31 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e8cc13b0-911b-43fa-aed3-90ee30e23a0d")
-	)
 	(label "MD''7"
 		(at 99.06 62.23 0)
 		(fields_autoplaced yes)
@@ -31049,6 +31038,17 @@
 		)
 		(uuid "f9f60e8f-6958-49c8-8fba-a5f4f3295f45")
 	)
+	(label "MD''3"
+		(at 99.06 72.39 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fada65f4-6912-4cbf-a1a0-49d6af8e5572")
+	)
 	(label "MD6"
 		(at 349.25 161.29 180)
 		(fields_autoplaced yes)
@@ -31215,7 +31215,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0684019e-3166-42fd-b5bd-080ccd94c900")
-		(property "Reference" "B_C11"
+		(property "Reference" "A_C11"
 			(at 123.1817 313.69 0)
 			(effects
 				(font
@@ -31303,7 +31303,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_C11")
+					(reference "A_C11")
 					(unit 1)
 				)
 			)
@@ -31319,7 +31319,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0972e1d9-69b1-4998-aa9d-26b9be0e87a1")
-		(property "Reference" "B_B12"
+		(property "Reference" "A_B12"
 			(at 33.02 237.49 0)
 			(effects
 				(font
@@ -31407,7 +31407,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_B12")
+					(reference "A_B12")
 					(unit 2)
 				)
 			)
@@ -31687,7 +31687,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "131f1efc-ea28-495f-8a49-af23d9b04848")
-		(property "Reference" "B_DE13"
+		(property "Reference" "A_DE13"
 			(at 96.52 39.37 0)
 			(effects
 				(font
@@ -31775,7 +31775,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_DE13")
+					(reference "A_DE13")
 					(unit 1)
 				)
 			)
@@ -31923,7 +31923,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "162d6072-3f21-4039-bfc4-42a1beb549bc")
-		(property "Reference" "B_C13"
+		(property "Reference" "A_C13"
 			(at 87.63 143.51 0)
 			(effects
 				(font
@@ -32011,7 +32011,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_C13")
+					(reference "A_C13")
 					(unit 2)
 				)
 			)
@@ -32026,7 +32026,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "17310865-71cf-4baa-83d5-c61ebdc6a200")
-		(property "Reference" "B_G6"
+		(property "Reference" "A_G6"
 			(at 248.92 276.86 0)
 			(effects
 				(font
@@ -32114,7 +32114,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_G6")
+					(reference "A_G6")
 					(unit 1)
 				)
 			)
@@ -32247,110 +32247,6 @@
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
 					(reference "#PWR0180")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "jt74:74LS04")
-		(at 12.7 306.07 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "1a41f4d5-ecc7-45fc-9547-82a3deadf5e1")
-		(property "Reference" "B_A11"
-			(at 12.7 297.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "74LS04"
-			(at 12.7 299.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 12.7 306.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "http://www.ti.com/lit/gpn/sn74LS04"
-			(at 12.7 306.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 12.7 306.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "33dcc3cf-efc8-4d29-8729-33532a40f80d")
-		)
-		(pin "7"
-			(uuid "2dbe7b1e-e8e1-4c1e-905c-3ffa00db6313")
-		)
-		(pin "10"
-			(uuid "253db550-4851-4a8f-b9db-6c0c9d6a5233")
-		)
-		(pin "11"
-			(uuid "94fb0f23-88ff-4aed-a7c9-efb32c2e8fcf")
-		)
-		(pin "8"
-			(uuid "4da36d2e-0568-4a37-81e0-9b1ba32f5105")
-		)
-		(pin "5"
-			(uuid "34604873-d306-49b8-be85-e37adcc6770c")
-		)
-		(pin "4"
-			(uuid "f1e59afd-f1f9-40dd-9118-336c124fefae")
-		)
-		(pin "12"
-			(uuid "315667b2-3e30-4306-8dc3-b38d33def6b3")
-		)
-		(pin "9"
-			(uuid "1ea544b4-9b5c-48a2-afd8-54e757c5fc81")
-		)
-		(pin "2"
-			(uuid "8e6fbfd9-4af2-4724-b0bc-5970556a4ef9")
-		)
-		(pin "6"
-			(uuid "341dff59-1422-460e-acf3-e517651f6216")
-		)
-		(pin "14"
-			(uuid "f4a9d5fd-74ab-402f-b683-df85d60af064")
-		)
-		(pin "13"
-			(uuid "2af36f80-03e5-476f-b8f9-dc68da5bfc06")
-		)
-		(pin "1"
-			(uuid "34329719-c3b8-4cc4-aced-2c6e41ba1ed7")
-		)
-		(instances
-			(project "megazone"
-				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_A11")
 					(unit 1)
 				)
 			)
@@ -32499,7 +32395,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1f71e59e-4858-44b5-963c-d5c7ad4f3453")
-		(property "Reference" "B_C13"
+		(property "Reference" "A_C13"
 			(at 76.2 38.1 0)
 			(effects
 				(font
@@ -32587,7 +32483,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_C13")
+					(reference "A_C13")
 					(unit 1)
 				)
 			)
@@ -32659,110 +32555,6 @@
 		)
 	)
 	(symbol
-		(lib_id "jt74:74LS04")
-		(at 58.42 321.31 0)
-		(unit 6)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "21b9ed57-de14-4496-baab-9920525ad4e1")
-		(property "Reference" "B_A11"
-			(at 58.42 312.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "74LS04"
-			(at 58.42 314.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 58.42 321.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "http://www.ti.com/lit/gpn/sn74LS04"
-			(at 58.42 321.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 58.42 321.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "33dcc3cf-efc8-4d29-8729-33532a40f808")
-		)
-		(pin "7"
-			(uuid "2dbe7b1e-e8e1-4c1e-905c-3ffa00db630e")
-		)
-		(pin "10"
-			(uuid "253db550-4851-4a8f-b9db-6c0c9d6a522e")
-		)
-		(pin "11"
-			(uuid "94fb0f23-88ff-4aed-a7c9-efb32c2e8fca")
-		)
-		(pin "8"
-			(uuid "4da36d2e-0568-4a37-81e0-9b1ba32f5100")
-		)
-		(pin "5"
-			(uuid "34604873-d306-49b8-be85-e37adcc67707")
-		)
-		(pin "4"
-			(uuid "f1e59afd-f1f9-40dd-9118-336c124fefa9")
-		)
-		(pin "12"
-			(uuid "7b9ca622-5ed7-4ba9-ac4c-bbdd0947c3f2")
-		)
-		(pin "9"
-			(uuid "1ea544b4-9b5c-48a2-afd8-54e757c5fc7c")
-		)
-		(pin "2"
-			(uuid "e50b5db5-f2b5-453f-a051-b1c669b3f2a8")
-		)
-		(pin "6"
-			(uuid "341dff59-1422-460e-acf3-e517651f6211")
-		)
-		(pin "14"
-			(uuid "f4a9d5fd-74ab-402f-b683-df85d60af05f")
-		)
-		(pin "13"
-			(uuid "a42a3500-0270-4bed-ba8e-3674cf73a43a")
-		)
-		(pin "1"
-			(uuid "49f2210e-7315-4203-8f29-34f204250cae")
-		)
-		(instances
-			(project "megazone"
-				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_A11")
-					(unit 6)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "jt74:74LS32")
 		(at 74.93 187.96 0)
 		(unit 1)
@@ -32771,7 +32563,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2511891c-0c21-47f1-944d-29d693c9b0a0")
-		(property "Reference" "B_DE12"
+		(property "Reference" "A_DE12"
 			(at 74.93 182.88 0)
 			(effects
 				(font
@@ -32859,7 +32651,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_DE12")
+					(reference "A_DE12")
 					(unit 1)
 				)
 			)
@@ -33018,7 +32810,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2dddcdc4-1c89-4b59-ab07-741a464324ae")
-		(property "Reference" "B_DE11"
+		(property "Reference" "A_DE11"
 			(at 57.15 34.29 0)
 			(effects
 				(font
@@ -33106,7 +32898,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_DE11")
+					(reference "A_DE11")
 					(unit 2)
 				)
 			)
@@ -33121,7 +32913,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "32224188-f897-48e7-8b0e-ba2252c09325")
-		(property "Reference" "B_B7"
+		(property "Reference" "A_B7"
 			(at 303.53 13.97 0)
 			(effects
 				(font
@@ -33209,112 +33001,8 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_B7")
+					(reference "A_B7")
 					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "jt74:74LS04")
-		(at 33.02 307.34 0)
-		(unit 2)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "325cb2d7-6366-4b84-9bae-b507aa9b52ef")
-		(property "Reference" "B_A11"
-			(at 33.02 298.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "74LS04"
-			(at 33.02 300.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 33.02 307.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "http://www.ti.com/lit/gpn/sn74LS04"
-			(at 33.02 307.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 33.02 307.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "80784512-10b4-4840-bf68-251050a05433")
-		)
-		(pin "7"
-			(uuid "2dbe7b1e-e8e1-4c1e-905c-3ffa00db630f")
-		)
-		(pin "10"
-			(uuid "253db550-4851-4a8f-b9db-6c0c9d6a522f")
-		)
-		(pin "11"
-			(uuid "94fb0f23-88ff-4aed-a7c9-efb32c2e8fcb")
-		)
-		(pin "8"
-			(uuid "4da36d2e-0568-4a37-81e0-9b1ba32f5101")
-		)
-		(pin "5"
-			(uuid "34604873-d306-49b8-be85-e37adcc67708")
-		)
-		(pin "4"
-			(uuid "c7dd8596-2804-4e7c-bb8f-afc6319cf20f")
-		)
-		(pin "12"
-			(uuid "315667b2-3e30-4306-8dc3-b38d33def6af")
-		)
-		(pin "9"
-			(uuid "1ea544b4-9b5c-48a2-afd8-54e757c5fc7d")
-		)
-		(pin "2"
-			(uuid "e50b5db5-f2b5-453f-a051-b1c669b3f2a9")
-		)
-		(pin "6"
-			(uuid "341dff59-1422-460e-acf3-e517651f6212")
-		)
-		(pin "14"
-			(uuid "f4a9d5fd-74ab-402f-b683-df85d60af060")
-		)
-		(pin "13"
-			(uuid "2af36f80-03e5-476f-b8f9-dc68da5bfc02")
-		)
-		(pin "1"
-			(uuid "49f2210e-7315-4203-8f29-34f204250caf")
-		)
-		(instances
-			(project "megazone"
-				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_A11")
-					(unit 2)
 				)
 			)
 		)
@@ -33462,7 +33150,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "365860fd-5c23-4d71-b890-3e76b694852a")
-		(property "Reference" "B_H14"
+		(property "Reference" "A_H14"
 			(at 127 15.24 0)
 			(effects
 				(font
@@ -33562,7 +33250,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_H14")
+					(reference "A_H14")
 					(unit 1)
 				)
 			)
@@ -33825,110 +33513,6 @@
 		)
 	)
 	(symbol
-		(lib_id "jt74:74LS04")
-		(at 54.61 304.8 0)
-		(unit 3)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "3894f5ec-ae8c-4cbc-b4a2-603025267069")
-		(property "Reference" "B_A11"
-			(at 54.61 295.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "74LS04"
-			(at 54.61 298.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 54.61 304.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "http://www.ti.com/lit/gpn/sn74LS04"
-			(at 54.61 304.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 54.61 304.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "33dcc3cf-efc8-4d29-8729-33532a40f80c")
-		)
-		(pin "7"
-			(uuid "2dbe7b1e-e8e1-4c1e-905c-3ffa00db6312")
-		)
-		(pin "10"
-			(uuid "253db550-4851-4a8f-b9db-6c0c9d6a5232")
-		)
-		(pin "11"
-			(uuid "94fb0f23-88ff-4aed-a7c9-efb32c2e8fce")
-		)
-		(pin "8"
-			(uuid "4da36d2e-0568-4a37-81e0-9b1ba32f5104")
-		)
-		(pin "5"
-			(uuid "969428d6-92da-45e5-acd6-73b503edd629")
-		)
-		(pin "4"
-			(uuid "f1e59afd-f1f9-40dd-9118-336c124fefad")
-		)
-		(pin "12"
-			(uuid "315667b2-3e30-4306-8dc3-b38d33def6b2")
-		)
-		(pin "9"
-			(uuid "1ea544b4-9b5c-48a2-afd8-54e757c5fc80")
-		)
-		(pin "2"
-			(uuid "e50b5db5-f2b5-453f-a051-b1c669b3f2ac")
-		)
-		(pin "6"
-			(uuid "c3729890-1bb7-402c-8f41-911299672c32")
-		)
-		(pin "14"
-			(uuid "f4a9d5fd-74ab-402f-b683-df85d60af063")
-		)
-		(pin "13"
-			(uuid "2af36f80-03e5-476f-b8f9-dc68da5bfc05")
-		)
-		(pin "1"
-			(uuid "49f2210e-7315-4203-8f29-34f204250cb2")
-		)
-		(instances
-			(project "megazone"
-				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_A11")
-					(unit 3)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 243.84 81.28 270)
 		(unit 1)
@@ -34004,7 +33588,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "43752537-3274-4764-ac3d-1768ce092852")
-		(property "Reference" "B_DE9"
+		(property "Reference" "A_DE9"
 			(at 176.53 118.11 0)
 			(effects
 				(font
@@ -34092,7 +33676,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_DE9")
+					(reference "A_DE9")
 					(unit 4)
 				)
 			)
@@ -34310,7 +33894,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4f37a2b5-7166-43d9-bf89-970194c24634")
-		(property "Reference" "B_C9"
+		(property "Reference" "A_C9"
 			(at 59.69 233.68 0)
 			(effects
 				(font
@@ -34400,7 +33984,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_C9")
+					(reference "A_C9")
 					(unit 1)
 				)
 			)
@@ -34481,7 +34065,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "546a4bb8-9de4-4acc-88cd-db5719d2901e")
-		(property "Reference" "B_B7"
+		(property "Reference" "A_B7"
 			(at 143.51 240.03 0)
 			(effects
 				(font
@@ -34569,7 +34153,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_B7")
+					(reference "A_B7")
 					(unit 1)
 				)
 			)
@@ -34651,7 +34235,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5c1ea788-1e4c-4913-b092-106218e59423")
-		(property "Reference" "B_H6"
+		(property "Reference" "A_H6"
 			(at 335.28 82.55 0)
 			(effects
 				(font
@@ -34781,7 +34365,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_H6")
+					(reference "A_H6")
 					(unit 1)
 				)
 			)
@@ -34797,7 +34381,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5f820597-6014-4c58-bfd9-04bb6f719ed5")
-		(property "Reference" "B_A11"
+		(property "Reference" "A11"
 			(at 59.69 176.53 0)
 			(effects
 				(font
@@ -34885,7 +34469,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_A11")
+					(reference "A11")
 					(unit 5)
 				)
 			)
@@ -35101,7 +34685,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "62571eec-19bb-4351-ba3a-89b2d5deddd9")
-		(property "Reference" "B_DE13"
+		(property "Reference" "A_DE13"
 			(at 87.63 137.16 0)
 			(effects
 				(font
@@ -35189,7 +34773,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_DE13")
+					(reference "A_DE13")
 					(unit 2)
 				)
 			)
@@ -35337,7 +34921,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6b219b8a-6f5f-4ee3-a01b-f71015d9ab33")
-		(property "Reference" "B_C12"
+		(property "Reference" "A_C12"
 			(at 173.99 59.69 0)
 			(effects
 				(font
@@ -35427,7 +35011,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_C12")
+					(reference "A_C12")
 					(unit 1)
 				)
 			)
@@ -35509,7 +35093,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6c983202-5f57-477d-8a75-1d2961f75a7c")
-		(property "Reference" "B_H12"
+		(property "Reference" "A_H12"
 			(at 387.35 194.31 0)
 			(effects
 				(font
@@ -35639,7 +35223,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_H12")
+					(reference "A_H12")
 					(unit 1)
 				)
 			)
@@ -35800,7 +35384,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6dc9b07e-7488-4886-ba7d-8b65e431c43f")
-		(property "Reference" "B_RA7"
+		(property "Reference" "A_RA7"
 			(at 161.29 101.6 90)
 			(effects
 				(font
@@ -35861,7 +35445,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_RA7")
+					(reference "A_RA7")
 					(unit 1)
 				)
 			)
@@ -35943,7 +35527,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "7225c462-43df-4361-bd3a-e4f4b833b0dd")
-		(property "Reference" "B_D8"
+		(property "Reference" "A_D8"
 			(at 246.38 171.45 0)
 			(effects
 				(font
@@ -36061,7 +35645,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_D8")
+					(reference "A_D8")
 					(unit 1)
 				)
 			)
@@ -36076,7 +35660,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "77dd069c-f47e-4cd9-a18d-4d0b08869de7")
-		(property "Reference" "B_DE9"
+		(property "Reference" "A_DE9"
 			(at 255.27 172.72 0)
 			(effects
 				(font
@@ -36164,7 +35748,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_DE9")
+					(reference "A_DE9")
 					(unit 2)
 				)
 			)
@@ -36245,7 +35829,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "7bd76189-3a97-4e74-a5fa-a8f0a5aa544a")
-		(property "Reference" "B_G7"
+		(property "Reference" "A_G7"
 			(at 248.92 207.01 0)
 			(effects
 				(font
@@ -36333,7 +35917,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_G7")
+					(reference "A_G7")
 					(unit 1)
 				)
 			)
@@ -36415,7 +35999,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "7f837eca-0b3a-4ca6-8206-150077efd52b")
-		(property "Reference" "B_G9"
+		(property "Reference" "A_G9"
 			(at 129.54 57.15 0)
 			(effects
 				(font
@@ -36521,7 +36105,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_G9")
+					(reference "A_G9")
 					(unit 1)
 				)
 			)
@@ -36537,7 +36121,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "81fb0aa0-0196-480f-8ef6-3f6bc0c7f8b8")
-		(property "Reference" "B_H8"
+		(property "Reference" "A_H8"
 			(at 335.28 194.31 0)
 			(effects
 				(font
@@ -36667,7 +36251,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_H8")
+					(reference "A_H8")
 					(unit 1)
 				)
 			)
@@ -36749,7 +36333,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8501b516-f55b-4fd4-b2dc-3249fe336147")
-		(property "Reference" "B_DE11"
+		(property "Reference" "A_DE11"
 			(at 92.71 195.58 0)
 			(effects
 				(font
@@ -36837,7 +36421,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_DE11")
+					(reference "A_DE11")
 					(unit 4)
 				)
 			)
@@ -36975,7 +36559,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "88844d28-4e20-4a40-8dc0-7c05f4582a4b")
-		(property "Reference" "B_A14"
+		(property "Reference" "A_A14"
 			(at 255.27 88.9 0)
 			(effects
 				(font
@@ -37081,7 +36665,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_A14")
+					(reference "A_A14")
 					(unit 1)
 				)
 			)
@@ -37163,7 +36747,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8b27e926-915c-4f0f-8ee2-13cfd2e999dd")
-		(property "Reference" "B_B12"
+		(property "Reference" "A_B12"
 			(at 342.9 24.13 0)
 			(effects
 				(font
@@ -37251,7 +36835,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_B12")
+					(reference "A_B12")
 					(unit 4)
 				)
 			)
@@ -37448,7 +37032,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "922943d6-31e5-44cf-b46a-1d9192101a1f")
-		(property "Reference" "B_C1"
+		(property "Reference" "A_C1"
 			(at 173.99 82.55 0)
 			(effects
 				(font
@@ -37538,7 +37122,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_C1")
+					(reference "A_C1")
 					(unit 2)
 				)
 			)
@@ -37689,7 +37273,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9ea88769-6571-467d-9c2e-55a91ca361bf")
-		(property "Reference" "B_B13"
+		(property "Reference" "A_B13"
 			(at 365.76 17.78 0)
 			(effects
 				(font
@@ -37783,7 +37367,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_B13")
+					(reference "A_B13")
 					(unit 2)
 				)
 			)
@@ -37799,7 +37383,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a0c4848a-8c50-42e9-b8f7-fa09fcfc0fa5")
-		(property "Reference" "B_A11"
+		(property "Reference" "A11"
 			(at 133.35 267.97 0)
 			(effects
 				(font
@@ -37887,7 +37471,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_A11")
+					(reference "A11")
 					(unit 4)
 				)
 			)
@@ -37970,7 +37554,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a47eabd7-49f0-4675-a503-2db65d02ec31")
-		(property "Reference" "B_B12"
+		(property "Reference" "A_B12"
 			(at 148.59 279.4 0)
 			(effects
 				(font
@@ -38058,7 +37642,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_B12")
+					(reference "A_B12")
 					(unit 3)
 				)
 			)
@@ -38074,7 +37658,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a5c95d20-3974-456f-9bcc-1ebb36e45d96")
-		(property "Reference" "B_G8"
+		(property "Reference" "A_G8"
 			(at 279.4 175.26 0)
 			(effects
 				(font
@@ -38192,7 +37776,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_G8")
+					(reference "A_G8")
 					(unit 1)
 				)
 			)
@@ -38207,7 +37791,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a6db6efd-e910-4e17-a557-55cb87d8c327")
-		(property "Reference" "B_DE12"
+		(property "Reference" "A_DE12"
 			(at 102.87 129.54 0)
 			(effects
 				(font
@@ -38295,7 +37879,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_DE12")
+					(reference "A_DE12")
 					(unit 3)
 				)
 			)
@@ -38311,7 +37895,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a8485ed6-515a-4876-96f0-232f6a45b418")
-		(property "Reference" "B_C11"
+		(property "Reference" "A_C11"
 			(at 148.5817 313.69 0)
 			(effects
 				(font
@@ -38399,7 +37983,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_C11")
+					(reference "A_C11")
 					(unit 2)
 				)
 			)
@@ -38664,7 +38248,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ac313439-b8ca-4631-ad01-ead7926cfb70")
-		(property "Reference" "B_C10"
+		(property "Reference" "A_C10"
 			(at 141.8941 124.46 0)
 			(effects
 				(font
@@ -38754,7 +38338,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_C10")
+					(reference "A_C10")
 					(unit 2)
 				)
 			)
@@ -39024,7 +38608,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b3ee04dd-f1e5-4338-a636-c9e93c09113d")
-		(property "Reference" "B_DE11"
+		(property "Reference" "A_DE11"
 			(at 92.71 177.8 0)
 			(effects
 				(font
@@ -39112,7 +38696,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_DE11")
+					(reference "A_DE11")
 					(unit 1)
 				)
 			)
@@ -39128,7 +38712,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b7807b8a-1bee-4720-9021-cbcdbc551652")
-		(property "Reference" "B_H7"
+		(property "Reference" "A_H7"
 			(at 335.28 138.43 0)
 			(effects
 				(font
@@ -39258,7 +38842,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_H7")
+					(reference "A_H7")
 					(unit 1)
 				)
 			)
@@ -39339,7 +38923,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "bc964cfd-eded-4ef0-b21c-8901cb65ff13")
-		(property "Reference" "B_D14"
+		(property "Reference" "A_D14"
 			(at 44.45 132.08 0)
 			(effects
 				(font
@@ -39445,7 +39029,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_D14")
+					(reference "A_D14")
 					(unit 1)
 				)
 			)
@@ -39460,7 +39044,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "bd95339b-9ca7-4904-a5f1-fdb8f96e5169")
-		(property "Reference" "B_C11"
+		(property "Reference" "A_C11"
 			(at 50.8 229.87 0)
 			(effects
 				(font
@@ -39548,7 +39132,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_C11")
+					(reference "A_C11")
 					(unit 3)
 				)
 			)
@@ -39564,7 +39148,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c259795f-8b9b-4d3f-8aa8-36b957623330")
-		(property "Reference" "B_FG14"
+		(property "Reference" "A_FG14"
 			(at 33.02 50.8 0)
 			(effects
 				(font
@@ -39670,7 +39254,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_FG14")
+					(reference "A_FG14")
 					(unit 1)
 				)
 			)
@@ -39685,7 +39269,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c2c9d7c3-9459-410d-af39-fa1de9877e12")
-		(property "Reference" "B_B12"
+		(property "Reference" "A_B12"
 			(at 342.9 55.88 0)
 			(effects
 				(font
@@ -39773,7 +39357,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_B12")
+					(reference "A_B12")
 					(unit 1)
 				)
 			)
@@ -39920,7 +39504,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "cb25e987-cfea-45fd-8d48-ddfc17522831")
-		(property "Reference" "B_F6"
+		(property "Reference" "A_F6"
 			(at 248.92 242.57 0)
 			(effects
 				(font
@@ -40008,7 +39592,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_F6")
+					(reference "A_F6")
 					(unit 1)
 				)
 			)
@@ -40023,7 +39607,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "cfdcba37-0557-46eb-9279-822f53fef38c")
-		(property "Reference" "B_DE12"
+		(property "Reference" "A_DE12"
 			(at 87.63 119.38 0)
 			(effects
 				(font
@@ -40111,7 +39695,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_DE12")
+					(reference "A_DE12")
 					(unit 4)
 				)
 			)
@@ -40127,7 +39711,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d126a18d-b2ce-4587-ab4d-ebfc01239f92")
-		(property "Reference" "B_D10"
+		(property "Reference" "A_D10"
 			(at 184.15 157.48 0)
 			(effects
 				(font
@@ -40233,7 +39817,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_D10")
+					(reference "A_D10")
 					(unit 1)
 				)
 			)
@@ -40315,7 +39899,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d3077640-172e-4e5e-be63-acb22d168094")
-		(property "Reference" "B_F10"
+		(property "Reference" "A_F10"
 			(at 167.64 15.24 0)
 			(effects
 				(font
@@ -40415,7 +39999,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_F10")
+					(reference "A_F10")
 					(unit 1)
 				)
 			)
@@ -40431,7 +40015,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d3efa26b-279d-46b4-a0bb-0c1e5a706b26")
-		(property "Reference" "B_A13"
+		(property "Reference" "A_A13"
 			(at 213.36 87.63 0)
 			(effects
 				(font
@@ -40525,7 +40109,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_A13")
+					(reference "A_A13")
 					(unit 1)
 				)
 			)
@@ -40541,7 +40125,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d4a89436-3095-4bb9-b823-6818dad24e08")
-		(property "Reference" "B_H10"
+		(property "Reference" "A_H10"
 			(at 387.35 82.55 0)
 			(effects
 				(font
@@ -40671,7 +40255,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_H10")
+					(reference "A_H10")
 					(unit 1)
 				)
 			)
@@ -40753,7 +40337,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d96a23b3-7d92-480e-be7f-fb92413c3103")
-		(property "Reference" "B_B13"
+		(property "Reference" "A_B13"
 			(at 365.76 36.83 0)
 			(effects
 				(font
@@ -40847,7 +40431,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_B13")
+					(reference "A_B13")
 					(unit 1)
 				)
 			)
@@ -41127,7 +40711,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e4e36487-0074-4419-bb85-36b73d05ee5a")
-		(property "Reference" "B_C11"
+		(property "Reference" "A_C11"
 			(at 49.53 271.78 0)
 			(effects
 				(font
@@ -41215,7 +40799,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_C11")
+					(reference "A_C11")
 					(unit 4)
 				)
 			)
@@ -41494,7 +41078,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f67659c6-9ae2-4fa6-a9b5-61f018593fb4")
-		(property "Reference" "B_F9"
+		(property "Reference" "A_F9"
 			(at 293.37 250.19 0)
 			(effects
 				(font
@@ -41594,7 +41178,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_F9")
+					(reference "A_F9")
 					(unit 1)
 				)
 			)
@@ -41609,7 +41193,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f79dd3fc-cb0d-480f-a4df-c45ded12b5c0")
-		(property "Reference" "B_C9"
+		(property "Reference" "A_C9"
 			(at 59.69 255.27 0)
 			(effects
 				(font
@@ -41699,7 +41283,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_C9")
+					(reference "A_C9")
 					(unit 2)
 				)
 			)
@@ -41714,7 +41298,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "fb4c3ff0-e24f-4349-9c1e-61b44e322588")
-		(property "Reference" "B_DE9"
+		(property "Reference" "A_DE9"
 			(at 30.48 279.4 0)
 			(effects
 				(font
@@ -41802,7 +41386,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_DE9")
+					(reference "A_DE9")
 					(unit 3)
 				)
 			)
@@ -41884,7 +41468,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ff72be89-dad6-4220-acbb-8cd7b51736c7")
-		(property "Reference" "B_H11"
+		(property "Reference" "A_H11"
 			(at 387.35 138.43 0)
 			(effects
 				(font
@@ -42014,7 +41598,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
-					(reference "B_H11")
+					(reference "A_H11")
 					(unit 1)
 				)
 			)

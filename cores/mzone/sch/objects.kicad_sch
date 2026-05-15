@@ -23306,7 +23306,7 @@
 		)
 		(uuid "211677e9-2d65-4951-aa95-ec94621fe33b")
 	)
-	(label "MD'''4"
+	(label "MD'''2"
 		(at 139.7 234.95 180)
 		(fields_autoplaced yes)
 		(effects
@@ -23438,7 +23438,7 @@
 		)
 		(uuid "2ab3e9e1-03de-4b98-9d09-1db507991304")
 	)
-	(label "MD'''0"
+	(label "MD'''5"
 		(at 139.7 227.33 180)
 		(fields_autoplaced yes)
 		(effects
@@ -23790,7 +23790,7 @@
 		)
 		(uuid "41c28354-6e57-4fe5-9671-9f48e6f3e4b2")
 	)
-	(label "MD'''5"
+	(label "MD'''4"
 		(at 139.7 229.87 180)
 		(fields_autoplaced yes)
 		(effects
@@ -23856,7 +23856,7 @@
 		)
 		(uuid "45d48695-472d-47fc-b306-da62a8cc4b51")
 	)
-	(label "MD'''1"
+	(label "MD'''3"
 		(at 139.7 232.41 180)
 		(fields_autoplaced yes)
 		(effects
@@ -24505,7 +24505,7 @@
 		)
 		(uuid "6e042ab4-6dbb-4dda-9f43-0f2aae9b5aeb")
 	)
-	(label "MD'''3"
+	(label "MD'''0"
 		(at 139.7 240.03 180)
 		(fields_autoplaced yes)
 		(effects
@@ -27046,7 +27046,7 @@
 		)
 		(uuid "fb474212-19b4-4e3a-8176-8b6d6fc21680")
 	)
-	(label "MD'''2"
+	(label "MD'''1"
 		(at 139.7 237.49 180)
 		(fields_autoplaced yes)
 		(effects

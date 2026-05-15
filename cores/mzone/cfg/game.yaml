@@ -5,21 +5,33 @@ game:
       - jtmzone_main.v
       - jtmzone_snd.v
       - jtmzone_video.v
+      - jtmzone_obj.v
+      - jtmzone_scroll.v
+      - jtmzone_fix.v
+      - jtmzone_colmix.v
+      - jtmzone_video_debug.v
       # Planned local modules once schematic extraction reaches those blocks:
+  - from: mzone
+    unless: NOSOUND,MZONE_FAST_SOUND
+    get:
+      - jtmzone_8039.v
   - from: kicker
     get:
       - common.yaml
-      - jtkicker_colmix.v
-  - from: yiear
-    get:
-      - jtyiear_colmix.v
 jtframe:
   - get:
       - jtframe_ff.v
   - from: cpu
     get:
       - jtframe_6809.yaml
+  - from: cpu
+    unless: NOSOUND
+    get:
       - jtframe_z80.yaml
+  - from: cpu
+    unless: NOSOUND,MZONE_FAST_SOUND
+    get:
+      - t48/t48.yaml
   - from: ram
     get:
       - jtframe_ram.v
@@ -33,13 +45,19 @@ jtframe:
     get:
       - jtframe_dwnld.v
   - from: sound
+    unless: NOSOUND
     get:
       - jtframe_mixer.v
   - from: clocking
     get:
       - jtframe_cen48.v
-      - jtframe_frac_cen.v
       - jtframe_crossclk_cen.v
+  - from: clocking
+    unless: NOSOUND
+    get:
+      - jtframe_frac_cen.v
 modules:
-  jt:
-    - name: jt49
+  other:
+    - unless: NOSOUND,MZONE_FAST_SOUND
+      get:
+        - jt49/hdl/jt49.yaml

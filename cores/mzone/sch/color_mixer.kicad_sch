@@ -4864,7 +4864,7 @@
 		)
 		(uuid "ff39f51c-a693-49b9-84f3-16dd3298d5e2")
 	)
-	(text "During THBLK' active,\nwhich is around horizontal blanking,\nthe pixel data is output from\ntile layer.\nSEL = 1, Tilemap selected\nSEL = 0, Objects selected"
+	(text "During FIX' active,\nwhich is around horizontal blanking,\nthe pixel data is output from\ntile layer.\nSEL = 1, Tilemap selected\nSEL = 0, Objects selected"
 		(exclude_from_sim no)
 		(at 138.43 199.39 0)
 		(effects
@@ -4963,7 +4963,7 @@
 		)
 		(uuid "5be00d12-1472-4fd9-b1ce-d5925d9981dc")
 	)
-	(label "THBLK'"
+	(label "FIX'"
 		(at 138.43 165.1 0)
 		(fields_autoplaced yes)
 		(effects

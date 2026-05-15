@@ -3,6 +3,7 @@ params:
   - { name: DAC_OFFSET, value: "`DAC_START >> 1" }
   - { name: OBJ_OFFSET, value: "`OBJ_START >> 1" }
   - { name: SCR_OFFSET, value: "`SCR_START >> 1" }
+  - { name: FIX_OFFSET, value: "`SCR_START >> 1" }
 
 clocks:
   clk24:
@@ -34,15 +35,20 @@ sdram:
     -
       buses:
         -
+          name: fixrom
+          addr_width: 14
+          data_width: 32
+          offset: FIX_OFFSET
+        -
+          name: scrrom
+          addr_width: 14
+          data_width: 32
+          offset: SCR_OFFSET
+        -
           name: objrom
           addr_width: 15
           data_width: 16
           offset: OBJ_OFFSET
-        -
-          name: scr
-          addr_width: 14
-          data_width: 32
-          offset: SCR_OFFSET
         -
           name: snd
           addr_width: 13
@@ -62,7 +68,7 @@ bram:
   - name: vram0
     addr_width: 10
     data_width: 8
-    addr: video_ram_addr
+    addr: video_scroll_ram_addr
     dual_port:
       name: main_vram0
       addr: main_vram_addr
@@ -73,7 +79,7 @@ bram:
   - name: vram1
     addr_width: 10
     data_width: 8
-    addr: video_ram_addr
+    addr: video_fix_ram_addr
     dual_port:
       name: main_vram1
       addr: main_vram_addr
@@ -84,7 +90,7 @@ bram:
   - name: cram0
     addr_width: 10
     data_width: 8
-    addr: video_ram_addr
+    addr: video_scroll_ram_addr
     dual_port:
       name: main_cram0
       addr: main_vram_addr
@@ -95,7 +101,7 @@ bram:
   - name: cram1
     addr_width: 10
     data_width: 8
-    addr: video_ram_addr
+    addr: video_fix_ram_addr
     dual_port:
       name: main_cram1
       addr: main_vram_addr

@@ -13487,6 +13487,16 @@
 	)
 	(wire
 		(pts
+			(xy 74.93 165.1) (xy 81.28 165.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "341e2f68-d2a9-44f7-8eb2-f7faeca1853d")
+	)
+	(wire
+		(pts
 			(xy 90.17 229.87) (xy 90.17 237.49)
 		)
 		(stroke
@@ -15997,6 +16007,16 @@
 	)
 	(wire
 		(pts
+			(xy 74.93 167.64) (xy 81.28 167.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "93e04b9b-b4e9-41fa-be6d-63e173646a4e")
+	)
+	(wire
+		(pts
 			(xy 168.91 200.66) (xy 173.99 200.66)
 		)
 		(stroke
@@ -18197,6 +18217,16 @@
 	)
 	(wire
 		(pts
+			(xy 74.93 172.72) (xy 81.28 172.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e49ebc35-d53f-42c4-ae62-922c8eb0c6cc")
+	)
+	(wire
+		(pts
 			(xy 308.61 179.07) (xy 314.96 179.07)
 		)
 		(stroke
@@ -18547,6 +18577,16 @@
 	)
 	(wire
 		(pts
+			(xy 74.93 170.18) (xy 81.28 170.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f200a725-9f31-438f-a411-100b05e6d8c0")
+	)
+	(wire
+		(pts
 			(xy 199.39 168.91) (xy 205.74 168.91)
 		)
 		(stroke
@@ -18845,17 +18885,6 @@
 		)
 		(uuid "fffbf1c1-daf4-41b2-9d08-0cc18f1be413")
 	)
-	(text "Byt till X"
-		(exclude_from_sim no)
-		(at 53.34 67.31 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "073d102d-a657-40f1-bcec-cd3c236bb199")
-	)
 	(text "32"
 		(exclude_from_sim no)
 		(at 66.04 76.2 0)
@@ -18866,17 +18895,6 @@
 			(justify left bottom)
 		)
 		(uuid "1b7ec90b-5591-4a97-aeed-a9dc58f432c7")
-	)
-	(text "Byt till Y"
-		(exclude_from_sim no)
-		(at 57.15 107.95 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "22440e43-aa68-426b-82be-6c73f130a65c")
 	)
 	(text "check connections"
 		(exclude_from_sim no)
@@ -18900,9 +18918,20 @@
 		)
 		(uuid "2d878bbb-a44b-495a-8ec0-d025c46c52ea")
 	)
-	(text "kolla upp THBLK anslutningar"
+	(text "H2S = H2F + SCRY1\nH4S = H4F + SCRY2\nH8S = H8F + SCRY3\nH16S = H16F + SCRY4\nH32S = H32F + SCRY5\nH64S = H64F + SCRY6\nH128S = H128F + SCRY7\n\nSCRY0 selects which of the two pixels are being rendered first."
 		(exclude_from_sim no)
-		(at 74.93 195.58 0)
+		(at 77.47 194.31 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "345005aa-a759-40ab-954a-dc0d084aed04")
+	)
+	(text "kolla upp FIX anslutningar"
+		(exclude_from_sim no)
+		(at 68.58 200.66 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -18921,6 +18950,16 @@
 			(justify left bottom)
 		)
 		(uuid "845cab09-9f32-4f63-aa32-ea4dfd0d9192")
+	)
+	(text "Check SCRY0"
+		(exclude_from_sim no)
+		(at 24.13 163.83 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "900c7a1e-d531-4a05-9628-d85736e6a068")
 	)
 	(text "((m_colorram[0][offs] & (1 << 7) ? 256 : 0)"
 		(exclude_from_sim no)
@@ -18966,7 +19005,7 @@
 		)
 		(uuid "f342b849-ec74-4bbd-9687-d6faf7cd3662")
 	)
-	(label "SCRX5"
+	(label "SCRX4"
 		(at 74.93 66.04 0)
 		(fields_autoplaced yes)
 		(effects
@@ -19010,7 +19049,7 @@
 		)
 		(uuid "0336647a-cc65-43f0-8f39-ad1a06cc12ba")
 	)
-	(label "MD'''0"
+	(label "MD'''5"
 		(at 26.67 115.57 0)
 		(fields_autoplaced yes)
 		(effects
@@ -19032,7 +19071,7 @@
 		)
 		(uuid "04a06496-21e6-4436-8d50-28a8b2c03ac8")
 	)
-	(label "~{THBLK'}"
+	(label "~{FIX'}"
 		(at 102.87 204.47 0)
 		(fields_autoplaced yes)
 		(effects
@@ -19175,7 +19214,7 @@
 		)
 		(uuid "09da3c56-a94b-4ae9-8332-ccfffa2f53ae")
 	)
-	(label "MD'''4"
+	(label "MD'''2"
 		(at 245.11 57.15 180)
 		(fields_autoplaced yes)
 		(effects
@@ -19208,7 +19247,7 @@
 		)
 		(uuid "0bf4ae21-2b04-4852-aac2-aa0fbc52307f")
 	)
-	(label "~{XSCR3}"
+	(label "SCRY''0"
 		(at 130.81 245.11 0)
 		(fields_autoplaced yes)
 		(effects
@@ -19230,7 +19269,7 @@
 		)
 		(uuid "0d5ff4ed-ac6b-4cae-b12d-e5e49d56a7ee")
 	)
-	(label "XSCR'3"
+	(label "SCRY'0"
 		(at 52.07 269.24 0)
 		(fields_autoplaced yes)
 		(effects
@@ -19252,7 +19291,7 @@
 		)
 		(uuid "0d996e55-0715-464d-a2a3-446734b9fc34")
 	)
-	(label "MD'''4"
+	(label "MD'''2"
 		(at 26.67 125.73 0)
 		(fields_autoplaced yes)
 		(effects
@@ -19351,7 +19390,7 @@
 		)
 		(uuid "12f0ca0a-6309-426e-8862-bdf96b428458")
 	)
-	(label "MD'''3"
+	(label "MD'''0"
 		(at 26.67 123.19 0)
 		(fields_autoplaced yes)
 		(effects
@@ -19428,7 +19467,7 @@
 		)
 		(uuid "149d1370-1156-40f2-8327-3ed3304b4d60")
 	)
-	(label "XSCR4"
+	(label "SCRY2"
 		(at 35.56 167.64 0)
 		(fields_autoplaced yes)
 		(effects
@@ -19461,7 +19500,7 @@
 		)
 		(uuid "15b54d05-bfa2-4a48-898a-f9c25a49b02a")
 	)
-	(label "SCRY0"
+	(label "SCRY5"
 		(at 41.91 41.91 0)
 		(fields_autoplaced yes)
 		(effects
@@ -19615,7 +19654,7 @@
 		)
 		(uuid "1fcdd33b-56dd-4dad-bde9-af0a9d7344cd")
 	)
-	(label "SCRX0"
+	(label "SCRX5"
 		(at 74.93 68.58 0)
 		(fields_autoplaced yes)
 		(effects
@@ -19637,7 +19676,7 @@
 		)
 		(uuid "21964201-7c5f-4e9f-abd0-735eb161e8e6")
 	)
-	(label "MD'''0"
+	(label "MD'''5"
 		(at 26.67 76.2 0)
 		(fields_autoplaced yes)
 		(effects
@@ -19714,7 +19753,7 @@
 		)
 		(uuid "253cd89c-0915-426a-9339-b4fe1e5b9bb7")
 	)
-	(label "XSCR5"
+	(label "SCRY4"
 		(at 58.42 128.27 0)
 		(fields_autoplaced yes)
 		(effects
@@ -19758,7 +19797,7 @@
 		)
 		(uuid "26c543f5-fd3c-4238-acf8-9cf46dd88fad")
 	)
-	(label "SCRX2"
+	(label "SCRX1"
 		(at 58.42 81.28 0)
 		(fields_autoplaced yes)
 		(effects
@@ -19846,7 +19885,18 @@
 		)
 		(uuid "2d47c159-70bf-4cb8-94da-a85dec18e4e0")
 	)
-	(label "MD'''2"
+	(label "SCRY1"
+		(at 74.93 165.1 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2d8495d4-fd54-46d3-a635-5cfef9eceeeb")
+	)
+	(label "MD'''1"
 		(at 205.74 205.74 180)
 		(fields_autoplaced yes)
 		(effects
@@ -19923,7 +19973,7 @@
 		)
 		(uuid "3179ea42-7e7f-4fe4-b920-ead19cba09ab")
 	)
-	(label "XSCR6"
+	(label "SCRY6"
 		(at 35.56 172.72 0)
 		(fields_autoplaced yes)
 		(effects
@@ -19934,7 +19984,7 @@
 		)
 		(uuid "3235edd8-681b-4a00-b154-b20943cd13ff")
 	)
-	(label "XSCR5"
+	(label "SCRY4"
 		(at 35.56 170.18 0)
 		(fields_autoplaced yes)
 		(effects
@@ -20022,7 +20072,7 @@
 		)
 		(uuid "371ce488-a9a3-474a-ab2d-29cc39eda071")
 	)
-	(label "~{XSCR3F}"
+	(label "SCRY0F"
 		(at 340.36 201.93 0)
 		(fields_autoplaced yes)
 		(effects
@@ -20077,7 +20127,7 @@
 		)
 		(uuid "39f6baea-e6fe-4216-b21e-c09d60d27af9")
 	)
-	(label "XSCR1"
+	(label "SCRY3"
 		(at 58.42 118.11 0)
 		(fields_autoplaced yes)
 		(effects
@@ -20088,7 +20138,7 @@
 		)
 		(uuid "3a0927b2-61d2-4c5d-8231-be0d17316f6b")
 	)
-	(label "XSCR0"
+	(label "SCRY5"
 		(at 58.42 115.57 0)
 		(fields_autoplaced yes)
 		(effects
@@ -20165,7 +20215,7 @@
 		)
 		(uuid "3efa91f0-001a-4e96-82c8-353d2de531ea")
 	)
-	(label "XSCR7"
+	(label "SCRY7"
 		(at 35.56 154.94 0)
 		(fields_autoplaced yes)
 		(effects
@@ -20187,7 +20237,7 @@
 		)
 		(uuid "40cd632b-7b54-4010-bee5-9af54aa169ed")
 	)
-	(label "~{XSCR3F}"
+	(label "SCRY0F"
 		(at 196.85 240.03 0)
 		(fields_autoplaced yes)
 		(effects
@@ -20253,7 +20303,7 @@
 		)
 		(uuid "4290d19e-964f-420a-8c5a-60fea3b23492")
 	)
-	(label "SCRY5"
+	(label "SCRY4"
 		(at 41.91 54.61 0)
 		(fields_autoplaced yes)
 		(effects
@@ -20319,7 +20369,7 @@
 		)
 		(uuid "4417a393-0dec-4f11-8e97-e36dfc9ea4ce")
 	)
-	(label "MD'''3"
+	(label "MD'''0"
 		(at 245.11 62.23 180)
 		(fields_autoplaced yes)
 		(effects
@@ -20341,7 +20391,7 @@
 		)
 		(uuid "46d58eff-1933-4ac0-a8c2-f0f3e2e087fb")
 	)
-	(label "XSCR1"
+	(label "SCRY3"
 		(at 35.56 160.02 0)
 		(fields_autoplaced yes)
 		(effects
@@ -20550,7 +20600,7 @@
 		)
 		(uuid "50f1bb0d-a5ee-44f8-8267-93bdcc54110f")
 	)
-	(label "XSCR3"
+	(label "SCRY0"
 		(at 44.45 181.61 0)
 		(fields_autoplaced yes)
 		(effects
@@ -20572,7 +20622,7 @@
 		)
 		(uuid "52437881-9d51-4936-9b58-735b9914e822")
 	)
-	(label "THBLK"
+	(label "FIX"
 		(at 24.13 138.43 0)
 		(fields_autoplaced yes)
 		(effects
@@ -20616,7 +20666,7 @@
 		)
 		(uuid "53f65a4d-292e-4e8a-aa38-e6852a73a061")
 	)
-	(label "MD'''2"
+	(label "MD'''1"
 		(at 26.67 81.28 0)
 		(fields_autoplaced yes)
 		(effects
@@ -20627,7 +20677,7 @@
 		)
 		(uuid "5413783b-ded2-40cd-b16e-128f9d5e7a3b")
 	)
-	(label "MD'''4"
+	(label "MD'''2"
 		(at 26.67 86.36 0)
 		(fields_autoplaced yes)
 		(effects
@@ -20660,7 +20710,7 @@
 		)
 		(uuid "54cc9f74-e31c-4000-8aeb-b41ad4f3e66d")
 	)
-	(label "SCRX4"
+	(label "SCRX2"
 		(at 74.93 104.14 0)
 		(fields_autoplaced yes)
 		(effects
@@ -20671,7 +20721,7 @@
 		)
 		(uuid "556dcd83-2a53-4425-b7a4-9b7930006955")
 	)
-	(label "SCRX1"
+	(label "SCRX3"
 		(at 58.42 78.74 0)
 		(fields_autoplaced yes)
 		(effects
@@ -20704,7 +20754,7 @@
 		)
 		(uuid "599db881-9a21-4774-85e4-2c04544e56e2")
 	)
-	(label "MD'''3"
+	(label "MD'''0"
 		(at 26.67 83.82 0)
 		(fields_autoplaced yes)
 		(effects
@@ -20748,7 +20798,7 @@
 		)
 		(uuid "5bcd53b5-d6cb-4a31-aca0-8da0c26f1c87")
 	)
-	(label "THBLK"
+	(label "FIX"
 		(at 86.36 215.9 0)
 		(fields_autoplaced yes)
 		(effects
@@ -20836,7 +20886,7 @@
 		)
 		(uuid "62b97495-597e-4d54-8d36-d1822a7f2f8e")
 	)
-	(label "XSCR2"
+	(label "SCRY1"
 		(at 35.56 162.56 0)
 		(fields_autoplaced yes)
 		(effects
@@ -20935,7 +20985,7 @@
 		)
 		(uuid "65ae33c1-2d8d-4720-8212-087631117776")
 	)
-	(label "THBLK'"
+	(label "FIX'"
 		(at 125.73 209.55 0)
 		(fields_autoplaced yes)
 		(effects
@@ -21034,7 +21084,7 @@
 		)
 		(uuid "6763e280-9ac1-4b15-8ba4-9b733eb1b2d5")
 	)
-	(label "SCRX4"
+	(label "SCRX2"
 		(at 58.42 86.36 0)
 		(fields_autoplaced yes)
 		(effects
@@ -21100,7 +21150,7 @@
 		)
 		(uuid "6aaf5e1f-cb6f-4894-a099-9d1f6c383ed3")
 	)
-	(label "SCRY2"
+	(label "SCRY1"
 		(at 41.91 46.99 0)
 		(fields_autoplaced yes)
 		(effects
@@ -21166,7 +21216,7 @@
 		)
 		(uuid "6f1487d9-c248-478b-9d6e-38229ad2d8ca")
 	)
-	(label "SCRY3"
+	(label "SCRY0"
 		(at 41.91 49.53 0)
 		(fields_autoplaced yes)
 		(effects
@@ -21177,7 +21227,7 @@
 		)
 		(uuid "722d0331-ce91-4c77-99d0-f6ee0e476949")
 	)
-	(label "MD'''1"
+	(label "MD'''3"
 		(at 26.67 118.11 0)
 		(fields_autoplaced yes)
 		(effects
@@ -21287,7 +21337,7 @@
 		)
 		(uuid "797b4bef-a350-4149-8cac-bca7de33d8b0")
 	)
-	(label "SCRX2"
+	(label "SCRX1"
 		(at 74.93 101.6 0)
 		(fields_autoplaced yes)
 		(effects
@@ -21331,7 +21381,7 @@
 		)
 		(uuid "7ce187a6-a5df-407a-8b13-f58d3fc9849a")
 	)
-	(label "MD'''4"
+	(label "MD'''2"
 		(at 205.74 203.2 180)
 		(fields_autoplaced yes)
 		(effects
@@ -21364,7 +21414,7 @@
 		)
 		(uuid "7dd9affe-1fbc-4106-b9a5-0542c7369c5a")
 	)
-	(label "XSCR7"
+	(label "SCRY7"
 		(at 58.42 113.03 0)
 		(fields_autoplaced yes)
 		(effects
@@ -21441,7 +21491,7 @@
 		)
 		(uuid "854ee7aa-7832-4890-ad97-02f4de3291d0")
 	)
-	(label "XSCR'3"
+	(label "SCRY'0"
 		(at 19.05 266.7 0)
 		(fields_autoplaced yes)
 		(effects
@@ -21474,7 +21524,7 @@
 		)
 		(uuid "8653f46a-49c8-4313-a0fc-3efc9f763d88")
 	)
-	(label "MD'''5"
+	(label "MD'''4"
 		(at 26.67 128.27 0)
 		(fields_autoplaced yes)
 		(effects
@@ -21540,7 +21590,7 @@
 		)
 		(uuid "89292a21-5395-412a-a49e-0a043f8d0a0e")
 	)
-	(label "~{THBLK}"
+	(label "~{FIX}"
 		(at 45.72 232.41 0)
 		(fields_autoplaced yes)
 		(effects
@@ -21573,7 +21623,7 @@
 		)
 		(uuid "8aaf90ee-7fd0-49f4-9112-54fec56d834e")
 	)
-	(label "SCRX0"
+	(label "SCRX5"
 		(at 58.42 76.2 0)
 		(fields_autoplaced yes)
 		(effects
@@ -21628,7 +21678,7 @@
 		)
 		(uuid "8ca9c11f-f650-4bea-b2d4-cb6708e69726")
 	)
-	(label "MD'''2"
+	(label "MD'''1"
 		(at 26.67 120.65 0)
 		(fields_autoplaced yes)
 		(effects
@@ -21650,7 +21700,7 @@
 		)
 		(uuid "8da96a6d-6f73-4d2a-85ce-8c5dd526d42b")
 	)
-	(label "XSCR4"
+	(label "SCRY2"
 		(at 58.42 125.73 0)
 		(fields_autoplaced yes)
 		(effects
@@ -21694,7 +21744,7 @@
 		)
 		(uuid "90bde848-8574-471d-89be-820fbbb0ccb0")
 	)
-	(label "XSCR3"
+	(label "SCRY0"
 		(at 58.42 123.19 0)
 		(fields_autoplaced yes)
 		(effects
@@ -21738,7 +21788,7 @@
 		)
 		(uuid "95334349-d2ee-480c-b26e-0576a0c657f9")
 	)
-	(label "XSCR6"
+	(label "SCRY6"
 		(at 58.42 130.81 0)
 		(fields_autoplaced yes)
 		(effects
@@ -21749,7 +21799,7 @@
 		)
 		(uuid "9608f57a-70a0-4f45-8ec9-20cb850a6f91")
 	)
-	(label "SCRX3"
+	(label "SCRX0"
 		(at 58.42 83.82 0)
 		(fields_autoplaced yes)
 		(effects
@@ -21760,7 +21810,7 @@
 		)
 		(uuid "9650f1c6-ab4e-4662-8350-62a3b21393ef")
 	)
-	(label "MD'''1"
+	(label "MD'''3"
 		(at 245.11 54.61 180)
 		(fields_autoplaced yes)
 		(effects
@@ -21903,7 +21953,7 @@
 		)
 		(uuid "9c6f5b2a-71c1-4b16-81ae-88d28b92ba69")
 	)
-	(label "MD'''1"
+	(label "MD'''3"
 		(at 26.67 78.74 0)
 		(fields_autoplaced yes)
 		(effects
@@ -22024,7 +22074,7 @@
 		)
 		(uuid "9fc9d43f-94cb-4978-b60a-a04275f7edea")
 	)
-	(label "MD'''0"
+	(label "MD'''5"
 		(at 245.11 49.53 180)
 		(fields_autoplaced yes)
 		(effects
@@ -22090,7 +22140,7 @@
 		)
 		(uuid "a20cb08d-0440-40d8-9a53-ba593a1b4d6b")
 	)
-	(label "SCRY1"
+	(label "SCRY3"
 		(at 41.91 44.45 0)
 		(fields_autoplaced yes)
 		(effects
@@ -22145,7 +22195,7 @@
 		)
 		(uuid "a4fa811c-fd84-4fef-b47d-6f7269728484")
 	)
-	(label "XSCR'3"
+	(label "SCRY'0"
 		(at 77.47 242.57 0)
 		(fields_autoplaced yes)
 		(effects
@@ -22156,7 +22206,7 @@
 		)
 		(uuid "a51460c0-7eef-4cff-aecc-0508dbd97c47")
 	)
-	(label "XSCR3"
+	(label "SCRY0"
 		(at 35.56 165.1 0)
 		(fields_autoplaced yes)
 		(effects
@@ -22167,7 +22217,7 @@
 		)
 		(uuid "a55451b1-c063-40c2-b331-36689af4cec4")
 	)
-	(label "SCRX3"
+	(label "SCRX0"
 		(at 74.93 99.06 0)
 		(fields_autoplaced yes)
 		(effects
@@ -22200,7 +22250,7 @@
 		)
 		(uuid "a5c995ba-66c4-4b7f-aaab-fdfb0cd27fd6")
 	)
-	(label "~{THBLK}"
+	(label "~{FIX}"
 		(at 64.77 215.9 0)
 		(fields_autoplaced yes)
 		(effects
@@ -22244,7 +22294,7 @@
 		)
 		(uuid "a864eacc-2f4a-4b3b-ab16-ba6cdbddd228")
 	)
-	(label "XSCR0"
+	(label "SCRY5"
 		(at 74.93 132.08 0)
 		(fields_autoplaced yes)
 		(effects
@@ -22354,7 +22404,7 @@
 		)
 		(uuid "ae4a8681-e216-4e30-beda-e5bc3ddb0de2")
 	)
-	(label "MD'''1"
+	(label "MD'''3"
 		(at 205.74 200.66 180)
 		(fields_autoplaced yes)
 		(effects
@@ -22398,7 +22448,7 @@
 		)
 		(uuid "b0c182be-f1bc-4c9b-a920-efc5ce8de674")
 	)
-	(label "MD'''2"
+	(label "MD'''1"
 		(at 245.11 59.69 180)
 		(fields_autoplaced yes)
 		(effects
@@ -22408,6 +22458,17 @@
 			(justify right bottom)
 		)
 		(uuid "b0cd67bd-05fb-4003-8bd7-f83b736102b1")
+	)
+	(label "SCRY2"
+		(at 74.93 167.64 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b3b6df6f-3cde-4fbc-ba2c-9d540421361d")
 	)
 	(label "V1S"
 		(at 168.91 156.21 0)
@@ -22497,7 +22558,7 @@
 		)
 		(uuid "b8bfd7e8-a619-4f0b-b95b-d289617a29b9")
 	)
-	(label "MD'''5"
+	(label "MD'''4"
 		(at 205.74 198.12 180)
 		(fields_autoplaced yes)
 		(effects
@@ -22552,7 +22613,7 @@
 		)
 		(uuid "bd1001df-e449-4d93-b34f-1472cde14764")
 	)
-	(label "SCRY4"
+	(label "SCRY2"
 		(at 41.91 52.07 0)
 		(fields_autoplaced yes)
 		(effects
@@ -22585,7 +22646,7 @@
 		)
 		(uuid "be0cde00-1ed7-49d0-b812-732b1914d3e0")
 	)
-	(label "MD'''0"
+	(label "MD'''5"
 		(at 205.74 195.58 180)
 		(fields_autoplaced yes)
 		(effects
@@ -22662,7 +22723,7 @@
 		)
 		(uuid "c1c85b47-638f-4611-820a-2eb7d8ee21b8")
 	)
-	(label "THBLK"
+	(label "FIX"
 		(at 24.13 99.06 0)
 		(fields_autoplaced yes)
 		(effects
@@ -22684,7 +22745,7 @@
 		)
 		(uuid "c2a8fa14-05a1-4007-882d-608ed66f23db")
 	)
-	(label "XSCR6"
+	(label "SCRY6"
 		(at 74.93 134.62 0)
 		(fields_autoplaced yes)
 		(effects
@@ -22695,7 +22756,7 @@
 		)
 		(uuid "c314b369-8eff-47b4-be92-b7cdc4f97bc7")
 	)
-	(label "MD'''5"
+	(label "MD'''4"
 		(at 245.11 52.07 180)
 		(fields_autoplaced yes)
 		(effects
@@ -22827,7 +22888,7 @@
 		)
 		(uuid "ca708060-fb30-436c-bf6c-e7ab57e7d8d9")
 	)
-	(label "SCRX1"
+	(label "SCRX3"
 		(at 74.93 106.68 0)
 		(fields_autoplaced yes)
 		(effects
@@ -22871,7 +22932,7 @@
 		)
 		(uuid "cdb7d55a-a8c5-451d-a476-4ba15caaec69")
 	)
-	(label "XSCR2"
+	(label "SCRY1"
 		(at 58.42 120.65 0)
 		(fields_autoplaced yes)
 		(effects
@@ -22947,6 +23008,17 @@
 			(justify left bottom)
 		)
 		(uuid "d02d8478-b62e-4b21-a31d-296f9fcca9e4")
+	)
+	(label "SCRY4"
+		(at 74.93 172.72 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d04e846b-50c4-4b2f-8214-5de4256643b7")
 	)
 	(label "V128S"
 		(at 106.68 55.88 0)
@@ -23179,7 +23251,7 @@
 		)
 		(uuid "dd7e4c84-31fc-4a0f-a497-adeaf624b4ac")
 	)
-	(label "MD'''5"
+	(label "MD'''4"
 		(at 26.67 88.9 0)
 		(fields_autoplaced yes)
 		(effects
@@ -23201,7 +23273,7 @@
 		)
 		(uuid "e17f75e0-81f6-4b6b-824b-fe6942cf4b79")
 	)
-	(label "~{THBLK'}"
+	(label "~{FIX'}"
 		(at 77.47 232.41 0)
 		(fields_autoplaced yes)
 		(effects
@@ -23289,7 +23361,7 @@
 		)
 		(uuid "e5d9dfaf-944d-44de-84d2-43f39aa79abc")
 	)
-	(label "THBLK"
+	(label "FIX"
 		(at 121.92 63.5 0)
 		(fields_autoplaced yes)
 		(effects
@@ -23322,6 +23394,17 @@
 		)
 		(uuid "e830c6c8-3d27-43ac-b292-b24775e47c8c")
 	)
+	(label "SCRY3"
+		(at 74.93 170.18 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e8dc805c-bf2c-496b-95df-0edbcfee5f69")
+	)
 	(label "H32F"
 		(at 74.93 119.38 0)
 		(fields_autoplaced yes)
@@ -23344,7 +23427,7 @@
 		)
 		(uuid "ec334cd7-0545-4bf6-9755-26f21d670f52")
 	)
-	(label "XSCR3"
+	(label "SCRY0"
 		(at 45.72 242.57 0)
 		(fields_autoplaced yes)
 		(effects
@@ -23399,7 +23482,7 @@
 		)
 		(uuid "eda82031-7f0d-414c-adda-a2c663c7ea99")
 	)
-	(label "THBLK"
+	(label "FIX"
 		(at 74.93 147.32 0)
 		(fields_autoplaced yes)
 		(effects
@@ -23454,7 +23537,7 @@
 		)
 		(uuid "f0b477d1-3162-4944-a9df-779b20b74544")
 	)
-	(label "SCRX5"
+	(label "SCRX4"
 		(at 58.42 88.9 0)
 		(fields_autoplaced yes)
 		(effects
@@ -23531,7 +23614,7 @@
 		)
 		(uuid "f532d520-e192-410c-b24f-da29ebf64dc1")
 	)
-	(label "THBLK"
+	(label "FIX"
 		(at 74.93 81.28 0)
 		(fields_autoplaced yes)
 		(effects
@@ -23619,7 +23702,7 @@
 		)
 		(uuid "f86c6750-2a11-4069-b74f-1abe00de67df")
 	)
-	(label "XSCR0"
+	(label "SCRY5"
 		(at 35.56 157.48 0)
 		(fields_autoplaced yes)
 		(effects
@@ -23652,7 +23735,7 @@
 		)
 		(uuid "f8f587d0-06e2-4a62-85b7-3e410472b4de")
 	)
-	(label "MD'''3"
+	(label "MD'''0"
 		(at 205.74 208.28 180)
 		(fields_autoplaced yes)
 		(effects
@@ -23674,7 +23757,7 @@
 		)
 		(uuid "fc096dcd-8da3-4d79-ba33-fdef53f83793")
 	)
-	(label "XSCR7"
+	(label "SCRY7"
 		(at 74.93 137.16 0)
 		(fields_autoplaced yes)
 		(effects
