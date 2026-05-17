@@ -21,9 +21,7 @@ localparam [21:0] SND_START = `SND_START;
 wire [15:0] main_stub_addr;
 wire        main_stub_cs;
 wire        main_cpu_cen;
-wire        main_cpu_cen_src;
 wire        clkq_cen;
-wire        clkq_cen24;
 wire        main_cpu_rnw;
 wire [ 7:0] main_cpu_dout;
 wire [ 8:0] video_vdump;
@@ -330,23 +328,10 @@ always @(*) begin
     post_addr = prog_addr;
 end
 
-`ifdef JTMZONE_SCH_HCNT
-assign main_cpu_cen_src = clkq_cen24;
-`else
-assign main_cpu_cen_src = cpu4_cen;
-`endif
-
-jtframe_crossclk_cen u_clkq_cen24(
-    .clk_in     ( clk           ),
-    .cen_in     ( clkq_cen      ),
-    .clk_out    ( clk24         ),
-    .cen_out    ( clkq_cen24    )
-);
-
 jtmzone_main u_main(
     .rst        ( rst24          ),
     .clk        ( clk24          ),
-    .cpu_clk_cen( main_cpu_cen_src ),
+    .cpu_clk_cen( cpu4_cen       ),
     .cpu_cen    ( main_cpu_cen   ),
 
     .rom_addr   ( main_stub_addr ),

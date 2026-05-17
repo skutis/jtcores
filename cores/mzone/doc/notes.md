@@ -38,3 +38,42 @@ MAME `screen_update()` video RAM use:
   - in non-flip mode it draws at screen columns `0..5`; in flip mode it maps to `35..30`
 
 Timing notes and schematic-derived signal mapping live in [timing.md](timing.md).
+
+## Verilator Compatibility Notes
+
+The Mega Zone simulation has been checked on these Verilator versions:
+
+- Verilator 5.024, 2024-04-05, `v5.024-42-gc561fe8ba`: known-good reference
+  during initial bring-up. `./sim.sh -video 5` transferred the ROM by frame 3,
+  the main CPU reached the expected boot code area, and video frames were not
+  black.
+- Verilator 5.044: treated upstream as the last safe Verilator release for
+  JTCORES image-producing simulations after 5.046 regressed them. Commit
+  `2dc101217` (`verilator v5.046 does not produce images in simulation`,
+  2026-03-21) changed `modules/jtframe/bin/install/jotego_20.04.sh` to check
+  out `v5.044` and records the reason in a comment.
+- Verilator 5.046, 2026-02-28, `v5.046-55-g1264184fb`: exposed a simulation
+  issue when the external SDRAM data bus was left as a Verilog `inout` in the
+  Verilator build. The C++ SDRAM model read the ROM data correctly, but the HDL
+  side saw zeroed data at the top-level bus. The result was black video except
+  for local debug markers, no useful VRAM/CRAM writes, and the main CPU running
+  from a bad reset/vector path instead of the expected ROM code.
+
+Verilator's 5.046 changelog does not call out this exact SDRAM `inout` symptom.
+The local evidence narrows the JTCORES regression window to `v5.044` good /
+`v5.046` bad; finding the exact Verilator commit still requires a Verilator
+git bisect between those tags using the unfixed JTFRAME SDRAM `inout` code.
+
+The framework-side fix is to make the SDRAM data bus input-only in Verilator
+builds and keep it bidirectional for synthesis:
+
+- `modules/jtframe/hdl/ver/game_test.v`: `SDRAM_DQ` is `input [15:0]` under
+  `ifdef VERILATOR`, otherwise `inout [15:0]`.
+- `modules/jtframe/hdl/sdram/jtframe_sdram64.v`: `sdram_dq` is `input [15:0]`
+  under `ifdef VERILATOR`, otherwise `inout [15:0]`.
+
+After that change, Verilator 5.046 produced the same useful behavior as 5.024:
+the CPU reached the boot ROM area and `./sim.sh -video 5` generated non-black
+frames. The same `inout` symptom was also observed with `kicker` on 5.046, so
+this should be treated as a JTFRAME simulation-port issue rather than a
+Mega Zone reset or ROM packing bug.

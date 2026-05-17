@@ -140,16 +140,18 @@ def main():
     pc = sta_ext(rom, pc, 0x1000)  # horizontal scroll
     pc = sta_ext(rom, pc, 0x1800)  # vertical scroll
 
-    # A grid of varied real sprite codes. Entry format is attr, ypos, code, xpos.
-    # Keep the palette fixed for most entries so OBJ decode/order can be compared
-    # without also changing the C6 palette row.
+    # A cluster of real sprite codes placed as far right as the current FPGA
+    # object coordinate path allows. The path maps xpos to xpos+32, so $ff
+    # starts at X=287: only the first sprite pixel is still visible before HBLK.
+    # This stresses the transition into HBLK with many objects queued at once.
     sprite_codes = (0xAA,) * 16
     sprite_colors = tuple(range(16))
+    sprite_xpos = (0xFF, 0xFF, 0xFE, 0xFF)
     for i, code in enumerate(sprite_codes):
         base = 0x33FC - i * 4
         color = sprite_colors[i]
-        ypos = 0x38 + (i // 4) * 0x28
-        xpos = 0x18 + (i % 4) * 0x38
+        ypos = 0x30 + (i // 4) * 0x20
+        xpos = sprite_xpos[i % 4]
         pc = lda_imm(rom, pc, color)
         pc = sta_ext(rom, pc, base + 0)
         pc = lda_imm(rom, pc, ypos)

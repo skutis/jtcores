@@ -37,6 +37,7 @@
 *.summary
 *.trace
 *.vcd
+*.vvp
 *.wav
 *.zip
 */mist
