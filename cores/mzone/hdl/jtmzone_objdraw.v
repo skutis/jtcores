@@ -8,7 +8,6 @@ module jtmzone_objdraw(
     input               rst,
     input               clk,
     input               pxl_cen,
-    input               obj_cen,
 
     input               LHBL,
     input        [ 8:0] hdump,
@@ -47,8 +46,6 @@ reg [ 1:0] dr_st;
 reg [ 7:0] low_byte, high_byte;
 reg [ 3:0] pix_cnt;
 reg        req_byte_lsb;
-reg        rom_done;
-reg [15:0] rom_data_l;
 reg        buf_we;
 reg [ 3:0] draw_pen;
 reg [ 3:0] cur_pal;
@@ -114,8 +111,6 @@ always @(posedge clk) begin
         group    <= 2'd0;
         dr_st    <= 2'd0;
         pix_cnt  <= 4'd0;
-        rom_done <= 1'b0;
-        rom_data_l <= 16'd0;
         buf_we   <= 1'b0;
         draw_line_has_obj <= 1'b0;
         read_line_has_obj <= 1'b0;
@@ -125,77 +120,66 @@ always @(posedge clk) begin
     end else begin
         buf_we <= 1'b0;
 
-        if( rom_ok ) begin
-            rom_done <= 1'b1;
-            rom_data_l <= rom_data;
-        end
-
         if( line_start ) begin
             read_line_has_obj <= draw_line_has_obj;
             draw_line_has_obj <= 1'b0;
         end
 
-        if( obj_cen ) begin
-            case( dr_st )
-                2'd0: if( draw && !busy ) begin
-                    cur_code      <= code;
-                    cur_xpos      <= xpos;
-                    cur_pal       <= pal;
-                    cur_hflip     <= hflip;
-                    cur_rom_hflip <= rom_hflip;
-                    cur_ysub      <= ysub;
+        case( dr_st )
+            2'd0: if( draw && !busy ) begin
+                cur_code      <= code;
+                cur_xpos      <= xpos;
+                cur_pal       <= pal;
+                cur_hflip     <= hflip;
+                cur_rom_hflip <= rom_hflip;
+                cur_ysub      <= ysub;
 `ifdef MZONE_OBJ_WATCH
-                    watch_code     <= code;
+                watch_code     <= code;
 `endif
-                    group         <= 2'd0;
-                    rom_addr      <= start_byte_addr[14:1];
-                    req_byte_lsb  <= start_byte_addr[0];
-                    rom_done      <= 1'b0;
-                    rom_cs        <= 1'b1;
-                    busy          <= 1'b1;
-                    dr_st         <= 2'd1;
-                end
-                2'd1: if( rom_done ) begin
-                    low_byte <= req_byte_lsb ? rom_data_l[15:8] : rom_data_l[7:0];
-                    rom_addr <= high_byte_addr[14:1];
-                    rom_cs   <= 1'b1;
-                    req_byte_lsb <= high_byte_addr[0];
-                    rom_done <= 1'b0;
-                    dr_st <= 2'd2;
-                end
-                2'd2: if( rom_done ) begin
-                    high_byte <= req_byte_lsb ? rom_data_l[15:8] : rom_data_l[7:0];
-                    rom_cs    <= 1'b0;
-                    rom_done  <= 1'b0;
-                    pix_cnt   <= 4'd0;
-                    dr_st     <= 2'd3;
-                end
-                2'd3: begin
-                    if( pix_cnt < 4'd4 ) begin
-                        buf_we  <= 1'b1;
+                group         <= 2'd0;
+                rom_addr      <= start_byte_addr[14:1];
+                req_byte_lsb  <= start_byte_addr[0];
+                rom_cs        <= 1'b1;
+                busy          <= 1'b1;
+                dr_st         <= 2'd1;
+            end
+            2'd1: if( rom_ok ) begin
+                low_byte <= req_byte_lsb ? rom_data[15:8] : rom_data[7:0];
+                rom_addr <= high_byte_addr[14:1];
+                rom_cs   <= 1'b1;
+                req_byte_lsb <= high_byte_addr[0];
+                dr_st <= 2'd2;
+            end
+            2'd2: if( rom_ok ) begin
+                high_byte <= req_byte_lsb ? rom_data[15:8] : rom_data[7:0];
+                rom_cs    <= 1'b0;
+                pix_cnt   <= 4'd0;
+                dr_st     <= 2'd3;
+            end
+            2'd3: begin
+                if( pix_cnt < 4'd4 ) begin
+                    buf_we  <= 1'b1;
 `ifdef MZONE_OBJ_WATCH
-                        if( watch_code==8'haa )
-                            $display("MZONE_OBJ_DRAW hdump=%0d xpos=%0d group=%0d pix=%0d draw_x=%0d draw_addr=%03x pen=%x lut=%x",
-                                hdump, cur_xpos, group, pix_cnt[1:0], draw_x, draw_addr,
-                                draw_pen, draw_lut_pxl);
+                    if( watch_code==8'haa )
+                        $display("MZONE_OBJ_DRAW hdump=%0d xpos=%0d group=%0d pix=%0d draw_x=%0d draw_addr=%03x pen=%x lut=%x",
+                            hdump, cur_xpos, group, pix_cnt[1:0], draw_x, draw_addr,
+                            draw_pen, draw_lut_pxl);
 `endif
-                        pix_cnt <= pix_cnt + 4'd1;
-                        if( draw_lut_pxl != 4'd0 ) draw_line_has_obj <= 1'b1;
-                    end else if( group==2'd3 ) begin
-                        busy  <= 1'b0;
-                        dr_st <= 2'd0;
-                    end else begin
-                        group <= next_group;
-                        rom_addr <= next_byte_addr[14:1];
-                        req_byte_lsb <= next_byte_addr[0];
-                        rom_done <= 1'b0;
-                        rom_cs <= 1'b1;
-                        pix_cnt <= 4'd0;
-                        dr_st <= 2'd1;
-                    end
+                    pix_cnt <= pix_cnt + 4'd1;
+                    if( draw_lut_pxl != 4'd0 ) draw_line_has_obj <= 1'b1;
+                end else if( group==2'd3 ) begin
+                    busy  <= 1'b0;
+                    dr_st <= 2'd0;
+                end else begin
+                    group <= next_group;
+                    rom_addr <= next_byte_addr[14:1];
+                    req_byte_lsb <= next_byte_addr[0];
+                    rom_cs <= 1'b1;
+                    pix_cnt <= 4'd0;
+                    dr_st <= 2'd1;
                 end
-            endcase
-        end
+            end
+        endcase
     end
 end
 

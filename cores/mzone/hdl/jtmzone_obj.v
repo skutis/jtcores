@@ -186,7 +186,7 @@ always @(posedge clk) begin
             obj_render_addr <= 10'd0;
             draw      <= 1'b0;
             scan_en   <= 1'b1;
-        end else if( scan_en && dma_cen ) begin
+        end else if( scan_en ) begin
             case( scan_st )
                 3'd0: if( !busy ) begin
                     obj_render_addr <= scan_base + 10'd1;
@@ -262,7 +262,6 @@ jtmzone_objdraw u_draw(
     .rst        ( rst       ),
     .clk        ( clk       ),
     .pxl_cen    ( pxl_cen   ),
-    .obj_cen    ( dma_cen   ),
 
     .LHBL       ( LHBL      ),
     .hdump      ( hdump     ),
