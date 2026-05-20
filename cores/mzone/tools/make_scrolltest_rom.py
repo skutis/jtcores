@@ -145,10 +145,10 @@ def main():
     # starts at X=287: only the first sprite pixel is still visible before HBLK.
     # This stresses the transition into HBLK with many objects queued at once.
     sprite_codes = (0xAA,) * 16
-    sprite_colors = tuple(range(16))
-    sprite_xpos = (0xFF, 0xFF, 0xFE, 0xFF)
+    sprite_colors = (0x0F,) + tuple(range(1, 16))
+    sprite_xpos = (0x17, 0x06, 0x05, 0x06)
     for i, code in enumerate(sprite_codes):
-        base = 0x33FC - i * 4
+        base = 0x3000 + i * 4
         color = sprite_colors[i]
         ypos = 0x30 + (i // 4) * 0x20
         xpos = sprite_xpos[i % 4]
@@ -177,35 +177,35 @@ def main():
     pc = sta_ext(rom, pc, 0x1000)  # horizontal scroll
     pc = sta_ext(rom, pc, 0x1800)  # vertical scroll
 
-    pc = lda_ext(rom, pc, 0x3FF0)  # sprite 0 x moves forward
-    pc = sta_ext(rom, pc, 0x33FF)
+    pc = lda_imm(rom, pc, 0x17)    # sprite 0 starts 7 pixels after SCROLL X=48
+    pc = sta_ext(rom, pc, 0x3003)
     pc = lda_ext(rom, pc, 0x3FF0)  # sprite 0 y moves opposite
     pc = nega(rom, pc)
     pc = adda_imm(rom, pc, 0xD0)
-    pc = sta_ext(rom, pc, 0x33FD)
+    pc = sta_ext(rom, pc, 0x3001)
 
     pc = lda_ext(rom, pc, 0x3FF0)  # sprite 1 x offset
-    pc = adda_imm(rom, pc, 0x50)
-    pc = sta_ext(rom, pc, 0x33FB)
+    pc = adda_imm(rom, pc, 0x57)
+    pc = sta_ext(rom, pc, 0x3007)
     pc = lda_ext(rom, pc, 0x3FF0)  # sprite 1 y moves forward
     pc = adda_imm(rom, pc, 0x70)
-    pc = sta_ext(rom, pc, 0x33F9)
+    pc = sta_ext(rom, pc, 0x3005)
 
     pc = lda_ext(rom, pc, 0x3FF0)  # sprite 2 x opposite
     pc = nega(rom, pc)
-    pc = adda_imm(rom, pc, 0xC0)
-    pc = sta_ext(rom, pc, 0x33F7)
+    pc = adda_imm(rom, pc, 0xC7)
+    pc = sta_ext(rom, pc, 0x300B)
     pc = lda_ext(rom, pc, 0x3FF0)  # sprite 2 y offset
     pc = adda_imm(rom, pc, 0x40)
-    pc = sta_ext(rom, pc, 0x33F5)
+    pc = sta_ext(rom, pc, 0x3009)
 
     pc = lda_ext(rom, pc, 0x3FF0)  # sprite 3 x slower-looking diagonal
-    pc = adda_imm(rom, pc, 0x20)
-    pc = sta_ext(rom, pc, 0x33F3)
+    pc = adda_imm(rom, pc, 0x27)
+    pc = sta_ext(rom, pc, 0x300F)
     pc = lda_ext(rom, pc, 0x3FF0)
     pc = nega(rom, pc)
     pc = adda_imm(rom, pc, 0x90)
-    pc = sta_ext(rom, pc, 0x33F1)
+    pc = sta_ext(rom, pc, 0x300D)
 
     op(rom, pc, 0x3B)              # rti
 

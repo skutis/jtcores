@@ -30,6 +30,10 @@ wire [ 8:0] video_vrender;
 wire        main_scrolly_cs, main_scrollx_cs;
 wire        main_vram0_cs, main_vram1_cs, main_cram0_cs, main_cram1_cs;
 wire        main_objram_cs, main_shared_cs;
+wire [ 9:0] main_objram_addr;
+wire [ 7:0] main_objram_din;
+wire [ 7:0] main_objram_dout;
+wire        main_objram_we;
 wire [ 9:0] objram_rd_addr;
 wire [ 7:0] objram_rd_data;
 wire [ 7:0] main_scrolly, main_scrollx;
@@ -39,6 +43,8 @@ wire        main_ba;
 wire        main_bs;
 wire        blank;
 wire        h2;
+wire        obj_dma_cen;
+wire [ 1:0] obj_dma_cen_bus;
 wire        fix_n, fix_en, fix_delayed_n;
 wire [ 7:0] video_vram1_mux;
 reg         blank_q;
@@ -365,8 +371,10 @@ jtmzone_main u_main(
     .main_vram1_dout( main_vram1_dout ),
     .main_cram0_dout( main_cram0_dout ),
     .main_cram1_dout( main_cram1_dout ),
-    .objram_rd_addr( objram_rd_addr ),
-    .objram_rd_data( objram_rd_data ),
+    .main_objram_addr( main_objram_addr ),
+    .main_objram_din ( main_objram_din  ),
+    .main_objram_we  ( main_objram_we   ),
+    .main_objram_dout( main_objram_dout ),
 
     .scrolly    ( main_scrolly   ),
     .scrollx    ( main_scrollx   ),
@@ -382,6 +390,23 @@ jtmzone_main u_main(
     .BS         ( main_bs        ),
     .snd_irq_n  ( snd_irq_n      ),
     .snd_dout   ( 8'hff          )
+);
+
+jtframe_dual_ram #(
+    .AW ( 10 ),
+    .DW ( 8  )
+) u_objram(
+    .clk0   ( clk24             ),
+    .data0  ( main_objram_din   ),
+    .addr0  ( main_objram_addr  ),
+    .we0    ( main_objram_we    ),
+    .q0     ( main_objram_dout  ),
+
+    .clk1   ( clk               ),
+    .data1  ( 8'd0              ),
+    .addr1  ( objram_rd_addr    ),
+    .we1    ( 1'b0              ),
+    .q1     ( objram_rd_data    )
 );
 
 jtmzone_snd u_snd(
@@ -424,11 +449,24 @@ jtmzone_snd u_snd(
     .dac        ( dac            )
 );
 
+// OBJ DMA on the PCB is clocked from 18.432 MHz. The JTFRAME SDRAM clock
+// used here is the 8/3 multiple, so this enable recreates that DMA clock.
+jtframe_frac_cen #(.W(2),.WC(4)) u_obj_dma_cen(
+    .clk    ( clk             ),
+    .n      ( 4'd3            ),
+    .m      ( 4'd8            ),
+    .cen    ( obj_dma_cen_bus ),
+    .cenb   (                 )
+);
+
+assign obj_dma_cen = obj_dma_cen_bus[0];
+
 jtmzone_video u_video(
     .rst        ( rst            ),
     .clk        ( clk            ),
     .pxl_cen    ( pxl_cen        ),
     .pxl2_cen   ( pxl2_cen       ),
+    .obj_dma_cen( obj_dma_cen    ),
 
     .scrolly    ( main_scrolly   ),
     .scrollx    ( main_scrollx   ),

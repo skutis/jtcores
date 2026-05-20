@@ -9,6 +9,7 @@ module jtmzone_video(
     input               clk,
     input               pxl_cen,
     input               pxl2_cen,
+    input               obj_dma_cen,
 
     input        [ 7:0] scrolly,
     input        [ 7:0] scrollx,
@@ -153,6 +154,7 @@ jtmzone_obj u_obj(
     .rst        ( rst          ),
     .clk        ( clk          ),
     .pxl_cen    ( pxl_cen      ),
+    .dma_cen    ( obj_dma_cen  ),
     .LHBL       ( pre_lhbl     ),
     .LVBL       ( pre_lvbl     ),
     .hdump      ( hdump        ),

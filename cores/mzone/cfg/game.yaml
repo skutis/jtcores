@@ -6,6 +6,7 @@ game:
       - jtmzone_snd.v
       - jtmzone_video.v
       - jtmzone_obj.v
+      - jtmzone_objdraw.v
       - jtmzone_scroll.v
       - jtmzone_fix.v
       - jtmzone_colmix.v
@@ -52,9 +53,6 @@ jtframe:
     get:
       - jtframe_cen48.v
       - jtframe_crossclk_cen.v
-  - from: clocking
-    unless: NOSOUND
-    get:
       - jtframe_frac_cen.v
 modules:
   other:

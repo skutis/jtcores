@@ -6145,7 +6145,7 @@
 		)
 		(uuid "a23c5cfb-7446-4efc-8e47-b37f7e081dbb")
 	)
-	(text "http://www.bitsavers.org/components/fujitsu/_dataBooks/1982_Fujitsu_Memory_Data_Book.pdf"
+	(text "http://www.bitsavers.org/components/fujitsu/_dataBooks/1982_Fujitsu_Memory_DatB_Book.pdf"
 		(exclude_from_sim no)
 		(at 229.87 245.11 0)
 		(effects
@@ -6200,8 +6200,19 @@
 		)
 		(uuid "d7578806-6ed3-45fe-bc0e-17cce92cbd07")
 	)
+	(text "ok"
+		(exclude_from_sim no)
+		(at 229.87 67.31 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "e494ef8f-a5b3-4775-8487-e613a665d6e9")
+	)
 	(label "~{OBWR2}"
 		(at 210.82 203.2 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6210,8 +6221,9 @@
 		)
 		(uuid "0455c8ca-cc8f-45de-a474-556f585c0773")
 	)
-	(label "XPOS24"
+	(label "XPOS20"
 		(at 238.76 82.55 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6222,6 +6234,7 @@
 	)
 	(label "~{COL}11"
 		(at 162.56 153.67 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6232,6 +6245,7 @@
 	)
 	(label "COL21"
 		(at 313.69 85.09 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6242,6 +6256,7 @@
 	)
 	(label "~{LB2EN}"
 		(at 194.31 157.48 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6252,6 +6267,7 @@
 	)
 	(label "XPOS10"
 		(at 238.76 168.91 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6262,6 +6278,7 @@
 	)
 	(label "~{COL}10"
 		(at 162.56 156.21 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6272,6 +6289,7 @@
 	)
 	(label "~{OSEL}1"
 		(at 194.31 154.94 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6282,6 +6300,7 @@
 	)
 	(label "~{OBEN1}"
 		(at 238.76 179.07 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6292,6 +6311,7 @@
 	)
 	(label "COL22"
 		(at 194.31 93.98 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6302,6 +6322,7 @@
 	)
 	(label "COL'3"
 		(at 191.77 72.39 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6312,6 +6333,7 @@
 	)
 	(label "XPOS12"
 		(at 238.76 151.13 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6322,6 +6344,7 @@
 	)
 	(label "COL23"
 		(at 335.28 113.03 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6330,8 +6353,9 @@
 		)
 		(uuid "2b9ec157-9e8e-485a-8d52-c040035d12c2")
 	)
-	(label "M18D32M45"
+	(label "~{ODB}5"
 		(at 237.49 219.71 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6342,6 +6366,7 @@
 	)
 	(label "CLK2"
 		(at 128.27 210.82 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6352,6 +6377,7 @@
 	)
 	(label "OCLK1"
 		(at 161.29 204.47 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6362,6 +6388,7 @@
 	)
 	(label "OCLK1"
 		(at 238.76 138.43 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6372,6 +6399,7 @@
 	)
 	(label "~{COL}22"
 		(at 313.69 92.71 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6382,6 +6410,7 @@
 	)
 	(label "COL10"
 		(at 194.31 130.81 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6392,6 +6421,7 @@
 	)
 	(label "~{OBWR2}"
 		(at 238.76 97.79 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6402,6 +6432,7 @@
 	)
 	(label "COL'0"
 		(at 194.31 101.6 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6412,6 +6443,7 @@
 	)
 	(label "~{COL}20"
 		(at 162.56 109.22 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6420,8 +6452,9 @@
 		)
 		(uuid "3d3859bc-6cca-4d92-a390-45ec0ed02b23")
 	)
-	(label "M18D32M45"
+	(label "~{ODB}5"
 		(at 237.49 204.47 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6432,6 +6465,7 @@
 	)
 	(label "OCLK2"
 		(at 238.76 135.89 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6442,6 +6476,7 @@
 	)
 	(label "~{LB1EN}"
 		(at 194.31 115.57 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6452,6 +6487,7 @@
 	)
 	(label "~{COL}12"
 		(at 314.96 146.05 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6462,6 +6498,7 @@
 	)
 	(label "M18DIV2"
 		(at 128.27 203.2 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6472,6 +6509,7 @@
 	)
 	(label "COL22"
 		(at 335.28 110.49 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6482,6 +6520,7 @@
 	)
 	(label "COL22"
 		(at 313.69 90.17 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6492,6 +6531,7 @@
 	)
 	(label "M18DIV2"
 		(at 128.27 213.36 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6502,6 +6542,7 @@
 	)
 	(label "~{COL}12"
 		(at 162.56 158.75 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6512,6 +6553,7 @@
 	)
 	(label "~{COL}13"
 		(at 162.56 151.13 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6522,6 +6564,7 @@
 	)
 	(label "CLK1"
 		(at 128.27 215.9 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6532,6 +6575,7 @@
 	)
 	(label "XPOS16"
 		(at 238.76 173.99 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6540,8 +6584,9 @@
 		)
 		(uuid "60a62584-cbd4-4a35-9ecb-58582c66f708")
 	)
-	(label "XPOS21"
+	(label "XPOS25"
 		(at 238.76 77.47 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6552,6 +6597,7 @@
 	)
 	(label "~{OBEN''}"
 		(at 130.81 182.88 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6562,6 +6608,7 @@
 	)
 	(label "COL12"
 		(at 194.31 135.89 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6572,6 +6619,7 @@
 	)
 	(label "OCLK3"
 		(at 161.29 209.55 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6582,6 +6630,7 @@
 	)
 	(label "M18DIV2"
 		(at 128.27 198.12 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6592,6 +6641,7 @@
 	)
 	(label "COL'1"
 		(at 194.31 146.05 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6602,6 +6652,7 @@
 	)
 	(label "COL10"
 		(at 314.96 133.35 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6612,6 +6663,7 @@
 	)
 	(label "COL13"
 		(at 194.31 138.43 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6620,8 +6672,9 @@
 		)
 		(uuid "6e78dc4e-943b-4231-bc9a-7d0a6d55a2b2")
 	)
-	(label "XPOS22"
+	(label "XPOS26"
 		(at 238.76 74.93 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6632,6 +6685,7 @@
 	)
 	(label "XPOS17"
 		(at 238.76 153.67 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6642,6 +6696,7 @@
 	)
 	(label "~{OSEL}2"
 		(at 194.31 113.03 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6652,6 +6707,7 @@
 	)
 	(label "~{OSEL}1"
 		(at 237.49 199.39 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6662,6 +6718,7 @@
 	)
 	(label "XPOS14"
 		(at 238.76 161.29 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6670,8 +6727,9 @@
 		)
 		(uuid "75a56792-22d2-47d1-9c4c-86f94cee40af")
 	)
-	(label "XPOS23"
+	(label "XPOS27"
 		(at 238.76 67.31 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6682,6 +6740,7 @@
 	)
 	(label "CLK1"
 		(at 128.27 205.74 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6692,6 +6751,7 @@
 	)
 	(label "~{OBEN1}"
 		(at 154.94 180.34 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6700,8 +6760,9 @@
 		)
 		(uuid "7bf5a0b7-920f-4d7c-90f7-faa9088c251d")
 	)
-	(label "XPOS27"
+	(label "XPOS23"
 		(at 238.76 90.17 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6712,6 +6773,7 @@
 	)
 	(label "COL11"
 		(at 314.96 138.43 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6722,6 +6784,7 @@
 	)
 	(label "CLK2"
 		(at 128.27 200.66 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6732,6 +6795,7 @@
 	)
 	(label "OCLK2"
 		(at 179.07 203.2 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6742,6 +6806,7 @@
 	)
 	(label "~{LDLNCT1}"
 		(at 274.32 213.36 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6752,6 +6817,7 @@
 	)
 	(label "OCLK4"
 		(at 161.29 212.09 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6762,6 +6828,7 @@
 	)
 	(label "~{COL}22"
 		(at 162.56 114.3 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6770,8 +6837,9 @@
 		)
 		(uuid "86b76ff0-c739-4f9b-a9e3-12abac3fe7d9")
 	)
-	(label "XPOS26"
+	(label "XPOS22"
 		(at 238.76 87.63 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6782,6 +6850,7 @@
 	)
 	(label "COL'3"
 		(at 194.31 109.22 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6792,6 +6861,7 @@
 	)
 	(label "COL20"
 		(at 194.31 88.9 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6802,6 +6872,7 @@
 	)
 	(label "COL12"
 		(at 314.96 143.51 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6812,6 +6883,7 @@
 	)
 	(label "~{LB1EN}"
 		(at 130.81 177.8 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6822,6 +6894,7 @@
 	)
 	(label "COL21"
 		(at 194.31 91.44 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6832,6 +6905,7 @@
 	)
 	(label "COL'0"
 		(at 194.31 143.51 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6842,6 +6916,7 @@
 	)
 	(label "~{OBEN''}"
 		(at 130.81 175.26 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6852,6 +6927,7 @@
 	)
 	(label "COL'0"
 		(at 191.77 64.77 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6862,6 +6938,7 @@
 	)
 	(label "COL'2"
 		(at 194.31 106.68 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6872,6 +6949,7 @@
 	)
 	(label "XPOS11"
 		(at 238.76 158.75 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6882,6 +6960,7 @@
 	)
 	(label "~{COL}21"
 		(at 162.56 111.76 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6892,6 +6971,7 @@
 	)
 	(label "COL'2"
 		(at 191.77 69.85 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6902,6 +6982,7 @@
 	)
 	(label "COL13"
 		(at 314.96 148.59 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6912,6 +6993,7 @@
 	)
 	(label "~{COL}13"
 		(at 314.96 151.13 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6922,6 +7004,7 @@
 	)
 	(label "COL23"
 		(at 194.31 96.52 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6932,6 +7015,7 @@
 	)
 	(label "~{COL}20"
 		(at 313.69 82.55 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6942,6 +7026,7 @@
 	)
 	(label "OCOL2"
 		(at 367.03 116.84 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6952,6 +7037,7 @@
 	)
 	(label "~{LB2EN}"
 		(at 332.74 129.54 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6962,6 +7048,7 @@
 	)
 	(label "COL12"
 		(at 335.28 123.19 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6970,8 +7057,9 @@
 		)
 		(uuid "a72b0e1c-8dbb-4dbf-a0ed-b090e3ebf8b2")
 	)
-	(label "XPOS20"
+	(label "XPOS24"
 		(at 238.76 80.01 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6982,6 +7070,7 @@
 	)
 	(label "COL23"
 		(at 313.69 95.25 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6992,6 +7081,7 @@
 	)
 	(label "COL'3"
 		(at 194.31 151.13 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7002,6 +7092,7 @@
 	)
 	(label "OCLK4"
 		(at 280.67 102.87 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7012,6 +7103,7 @@
 	)
 	(label "XPOS15"
 		(at 238.76 171.45 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7022,6 +7114,7 @@
 	)
 	(label "~{OBWR1}"
 		(at 238.76 181.61 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7032,6 +7125,7 @@
 	)
 	(label "COL20"
 		(at 313.69 80.01 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7042,6 +7136,7 @@
 	)
 	(label "OCOL1"
 		(at 367.03 114.3 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7052,6 +7147,7 @@
 	)
 	(label "OCOL3"
 		(at 367.03 119.38 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7062,6 +7158,7 @@
 	)
 	(label "~{LB1EN}"
 		(at 240.03 223.52 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7072,6 +7169,7 @@
 	)
 	(label "~{LDLNCT2}"
 		(at 274.32 210.82 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7082,6 +7180,7 @@
 	)
 	(label "~{OBWR1}"
 		(at 210.82 208.28 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7092,6 +7191,7 @@
 	)
 	(label "~{COL}23"
 		(at 313.69 97.79 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7102,6 +7202,7 @@
 	)
 	(label "~{COL}23"
 		(at 162.56 116.84 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7112,6 +7213,7 @@
 	)
 	(label "COL'2"
 		(at 194.31 148.59 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7122,6 +7224,7 @@
 	)
 	(label "OCLK2"
 		(at 161.29 207.01 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7132,6 +7235,7 @@
 	)
 	(label "COL10"
 		(at 335.28 118.11 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7142,6 +7246,7 @@
 	)
 	(label "~{COL}10"
 		(at 314.96 135.89 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7152,6 +7257,7 @@
 	)
 	(label "XPOS13"
 		(at 238.76 156.21 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7162,6 +7268,7 @@
 	)
 	(label "COL11"
 		(at 335.28 120.65 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7172,6 +7279,7 @@
 	)
 	(label "~{COL}11"
 		(at 314.96 140.97 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7182,6 +7290,7 @@
 	)
 	(label "COL13"
 		(at 335.28 125.73 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7192,6 +7301,7 @@
 	)
 	(label "COL'1"
 		(at 194.31 104.14 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7202,6 +7312,7 @@
 	)
 	(label "COL21"
 		(at 335.28 107.95 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7212,6 +7323,7 @@
 	)
 	(label "~{LB2EN}"
 		(at 127 222.25 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7222,6 +7334,7 @@
 	)
 	(label "OCLK3"
 		(at 280.67 156.21 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7232,6 +7345,7 @@
 	)
 	(label "~{COL}21"
 		(at 313.69 87.63 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7240,8 +7354,9 @@
 		)
 		(uuid "ed977dc5-328e-4d28-939b-44541a9969e6")
 	)
-	(label "XPOS25"
+	(label "XPOS21"
 		(at 238.76 85.09 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7252,6 +7367,7 @@
 	)
 	(label "~{OBEN2}"
 		(at 238.76 95.25 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7262,6 +7378,7 @@
 	)
 	(label "OCOL0"
 		(at 367.03 111.76 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7272,6 +7389,7 @@
 	)
 	(label "COL'1"
 		(at 191.77 67.31 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7282,6 +7400,7 @@
 	)
 	(label "~{OSEL}2"
 		(at 237.49 212.09 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7292,6 +7411,7 @@
 	)
 	(label "COL11"
 		(at 194.31 133.35 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7302,6 +7422,7 @@
 	)
 	(label "OCLK1"
 		(at 179.07 208.28 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7312,6 +7433,7 @@
 	)
 	(label "~{OBEN2}"
 		(at 154.94 172.72 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7322,6 +7444,7 @@
 	)
 	(label "M18DIV2"
 		(at 128.27 218.44 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7332,6 +7455,7 @@
 	)
 	(label "COL20"
 		(at 335.28 105.41 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7342,6 +7466,7 @@
 	)
 	(label "~{LB2EN}"
 		(at 130.81 170.18 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7353,6 +7478,7 @@
 	(hierarchical_label "OCOL[3..0]"
 		(shape output)
 		(at 378.46 109.22 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7364,6 +7490,7 @@
 	(hierarchical_label "SEL"
 		(shape output)
 		(at 274.32 205.74 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)

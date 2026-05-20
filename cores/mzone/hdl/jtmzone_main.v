@@ -43,8 +43,10 @@ module jtmzone_main(
     input      [ 7:0] main_cram0_dout,
     input      [ 7:0] main_cram1_dout,
 
-    input      [ 9:0] objram_rd_addr,
-    output     [ 7:0] objram_rd_data,
+    output     [ 9:0] main_objram_addr,
+    output     [ 7:0] main_objram_din,
+    output            main_objram_we,
+    input      [ 7:0] main_objram_dout,
 
     output reg [ 7:0] scrolly,
     output reg [ 7:0] scrollx,
@@ -105,16 +107,6 @@ wire        n_cram1      = ~(~n_cram &&  A[10]);
 wire        n_objram     = ~(VMA && A[15:11] == 5'h06);
 wire        n_shared     = ~(VMA && A[15:11] == 5'h07);
 
-reg  [ 7:0] objram [0:1023];
-
-`ifdef SIMULATION
-integer objram_init_i;
-initial begin
-    for( objram_init_i=0; objram_init_i<1024; objram_init_i=objram_init_i+1 )
-        objram[objram_init_i] = 8'd0;
-end
-`endif
-
 assign rom_addr = A;
 assign cpu_rnw  = RnW;
 assign shared_addr = A[10:0];
@@ -122,11 +114,13 @@ assign shared_dout = cpu_dout;
 assign shared_we   = ram_we && shared_cs;
 assign main_vram_addr = A[9:0];
 assign main_vram_din  = cpu_dout;
+assign main_objram_addr = A[9:0];
+assign main_objram_din  = cpu_dout;
+assign main_objram_we   = ram_we && objram_cs;
 assign main_vram0_we  = ram_we && vram0_cs;
 assign main_vram1_we  = ram_we && vram1_cs;
 assign main_cram0_we  = ram_we && cram0_cs;
 assign main_cram1_we  = ram_we && cram1_cs;
-assign objram_rd_data = objram[objram_rd_addr];
 assign flip      = b_a13_flip;
 assign irq_mask  = intst;
 assign snd_int   = b_a13_int;
@@ -211,7 +205,7 @@ always @(*) begin
     end else if( cram1_cs ) begin
         cpu_din = main_cram1_dout;
     end else if( objram_cs ) begin
-        cpu_din = objram[A[9:0]];
+        cpu_din = main_objram_dout;
     end else if( shared_cs ) begin
         cpu_din = shared_din;
     end
@@ -230,7 +224,6 @@ always @(posedge clk) begin
         if( ram_we ) begin
             if( scrolly_cs ) scrolly <= cpu_dout;
             if( scrollx_cs ) scrollx <= cpu_dout;
-            if( objram_cs  ) objram[A[9:0]]  <= cpu_dout;
         end else if( !n_main_latch && !RnW && cpu_bus_cen ) begin
             // B_A13 is a 74LS259 addressable latch. Only the schematic nets
             // currently used by the core are modeled here.
