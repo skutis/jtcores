@@ -34,8 +34,8 @@ wire [ 9:0] main_objram_addr;
 wire [ 7:0] main_objram_din;
 wire [ 7:0] main_objram_dout;
 wire        main_objram_we;
-wire [ 9:0] objram_rd_addr;
-wire [ 7:0] objram_rd_data;
+wire [ 9:0] obj_oram_addr;
+wire [ 7:0] obj_oram_dout;
 wire [ 7:0] main_scrolly, main_scrollx;
 wire        main_flip, main_irq_mask, main_int;
 wire        main_irq_ack, snd_irq_n;
@@ -404,9 +404,9 @@ jtframe_dual_ram #(
 
     .clk1   ( clk               ),
     .data1  ( 8'd0              ),
-    .addr1  ( objram_rd_addr    ),
+    .addr1  ( obj_oram_addr     ),
     .we1    ( 1'b0              ),
-    .q1     ( objram_rd_data    )
+    .q1     ( obj_oram_dout     )
 );
 
 jtmzone_snd u_snd(
@@ -490,8 +490,8 @@ jtmzone_video u_video(
     .scrrom_cs  ( scrrom_cs        ),
     .scrrom_data( scrrom_data      ),
     .scrrom_ok  ( scrrom_ok        ),
-    .objram_addr( objram_rd_addr   ),
-    .objram_data( objram_rd_data   ),
+    .oram_addr ( obj_oram_addr     ),
+    .oram_dout ( obj_oram_dout     ),
     .obj_addr   ( objrom_addr      ),
     .obj_cs     ( objrom_cs        ),
     .obj_data   ( objrom_data      ),
