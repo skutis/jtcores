@@ -93,15 +93,6 @@ always @(posedge clk) begin
         scan_st     <= 3'd0;
         scan_base   <= 10'd0;
         scan_addr   <= 10'd0;
-        oram_addr   <= 10'd0;
-        dma_addr    <= 10'd0;
-        copy_addr   <= 10'd0;
-        dma_din     <= 8'd0;
-        dma_en      <= 1'b0;
-        dma_wait    <= 1'b0;
-        dma_wr      <= 1'b0;
-        dma_hcnt    <= 10'd0;
-        dma_acc     <= 12'd0;
         draw        <= 1'b0;
         dr_code     <= 8'd0;
         dr_xpos     <= 9'd0;
@@ -125,74 +116,10 @@ always @(posedge clk) begin
         if( busy ) draw <= 1'b0;
 
         if( vblk_start ) begin
-`ifdef MZONE_OBJ_DMA_WATCH
-            $display("MZONE_OBJ_DMA_START frame=%0d hdump=%0d vdump=%0d LVBL=%b",
-                frame_cnt, hdump, vdump, LVBL);
-`endif
-            copy_addr   <= 10'd0;
-            dma_wait    <= 1'b1;
-            dma_en      <= 1'b1;
-            dma_wr      <= 1'b0;
-            dma_hcnt    <= 10'd0;
-            dma_acc     <= 12'd0;
-            oram_addr   <= 10'd0;
-            dma_addr    <= 10'd0;
-            dma_din     <= 8'd0;
             scan_addr   <= 10'd0;
             scan_st <= 3'd0;
             draw <= 1'b0;
             scan_en <= 1'b0;
-        end else if( dma_en ) begin
-            if( dma_wait ) begin
-                if( dma_cen ) begin
-                    dma_wait <= 1'b0;
-                    dma_wr <= 1'b0;
-                    copy_addr <= 10'd0;
-                    oram_addr <= 10'd0;
-                    dma_addr <= 10'd0;
-                    dma_din  <= 8'd0;
-                    dma_hcnt <= 10'd0;
-                    dma_acc <= 12'd0;
-                end
-            end else begin
-                if( dma_cen && copy_addr != DMA_STOP ) begin
-                    dma_acc <= dma_count_step ? dma_acc_next[11:0] - DMA_TICKS :
-                                                dma_acc_next[11:0];
-                end
-
-                if( dma_count_step ) begin
-                    if( dma_wr ) begin
-`ifdef MZONE_OBJ_DMA_WATCH
-                        if( dma_addr < 10'd32 || dma_addr >= DMA_STOP-10'd4 )
-                            $display("MZONE_OBJ_DMA frame=%0d hcnt=%0d dst=%03x data=%02x",
-                                frame_cnt, dma_hcnt, dma_addr, dma_din);
-`endif
-                    end
-                    dma_din   <= oram_dout;
-                    dma_addr  <= copy_addr;
-                    oram_addr <= copy_addr + 10'd1;
-                    copy_addr <= copy_addr + 10'd1;
-                    dma_wr <= 1'b1;
-                end else if( dma_wr ) begin
-`ifdef MZONE_OBJ_DMA_WATCH
-                    if( dma_addr < 10'd32 || dma_addr >= DMA_STOP-10'd4 )
-                        $display("MZONE_OBJ_DMA frame=%0d hcnt=%0d dst=%03x data=%02x",
-                            frame_cnt, dma_hcnt, dma_addr, dma_din);
-`endif
-                    dma_wr <= 1'b0;
-                end
-
-                if( dma_hstep )
-                    dma_hcnt <= dma_hcnt + 10'd1;
-
-                if( pxl_cen && dma_hcnt==DMA_HCOUNTS && copy_addr==DMA_STOP && !dma_wr ) begin
-`ifdef MZONE_OBJ_DMA_WATCH
-                    $display("MZONE_OBJ_DMA_DONE frame=%0d hcnt=%0d copy_addr=%03x hdump=%0d vdump=%0d",
-                        frame_cnt, dma_hcnt, copy_addr, hdump, vdump);
-`endif
-                    dma_en <= 1'b0;
-                end
-            end
         end else if( line_start ) begin
             scan_st   <= 3'd0;
             scan_base <= 10'd0;
@@ -254,6 +181,87 @@ always @(posedge clk) begin
     end
 end
 
+always @(posedge clk) begin
+    if( rst ) begin
+        oram_addr <= 10'd0;
+        dma_addr  <= 10'd0;
+        copy_addr <= 10'd0;
+        dma_din   <= 8'd0;
+        dma_en    <= 1'b0;
+        dma_wait  <= 1'b0;
+        dma_wr    <= 1'b0;
+        dma_hcnt  <= 10'd0;
+        dma_acc   <= 12'd0;
+    end else begin
+        if( vblk_start ) begin
+`ifdef MZONE_OBJ_DMA_WATCH
+            $display("MZONE_OBJ_DMA_START frame=%0d hdump=%0d vdump=%0d LVBL=%b",
+                frame_cnt, hdump, vdump, LVBL);
+`endif
+            copy_addr <= 10'd0;
+            dma_wait  <= 1'b1;
+            dma_en    <= 1'b1;
+            dma_wr    <= 1'b0;
+            dma_hcnt  <= 10'd0;
+            dma_acc   <= 12'd0;
+            oram_addr <= 10'd0;
+            dma_addr  <= 10'd0;
+            dma_din   <= 8'd0;
+        end else if( dma_en ) begin
+            if( dma_wait ) begin
+                if( dma_cen ) begin
+                    dma_wait  <= 1'b0;
+                    dma_wr    <= 1'b0;
+                    copy_addr <= 10'd0;
+                    oram_addr <= 10'd0;
+                    dma_addr  <= 10'd0;
+                    dma_din   <= 8'd0;
+                    dma_hcnt  <= 10'd0;
+                    dma_acc   <= 12'd0;
+                end
+            end else begin
+                if( dma_cen && copy_addr != DMA_STOP ) begin
+                    dma_acc <= dma_count_step ? dma_acc_next[11:0] - DMA_TICKS :
+                                                dma_acc_next[11:0];
+                end
+
+                if( dma_count_step ) begin
+                    if( dma_wr ) begin
+`ifdef MZONE_OBJ_DMA_WATCH
+                        if( dma_addr < 10'd32 || dma_addr >= DMA_STOP-10'd4 )
+                            $display("MZONE_OBJ_DMA frame=%0d hcnt=%0d dst=%03x data=%02x",
+                                frame_cnt, dma_hcnt, dma_addr, dma_din);
+`endif
+                    end
+                    dma_din   <= oram_dout;
+                    dma_addr  <= copy_addr;
+                    oram_addr <= copy_addr + 10'd1;
+                    copy_addr <= copy_addr + 10'd1;
+                    dma_wr    <= 1'b1;
+                end else if( dma_wr ) begin
+`ifdef MZONE_OBJ_DMA_WATCH
+                    if( dma_addr < 10'd32 || dma_addr >= DMA_STOP-10'd4 )
+                        $display("MZONE_OBJ_DMA frame=%0d hcnt=%0d dst=%03x data=%02x",
+                            frame_cnt, dma_hcnt, dma_addr, dma_din);
+`endif
+                    dma_wr <= 1'b0;
+                end
+
+                if( dma_hstep )
+                    dma_hcnt <= dma_hcnt + 10'd1;
+
+                if( pxl_cen && dma_hcnt==DMA_HCOUNTS && copy_addr==DMA_STOP && !dma_wr ) begin
+`ifdef MZONE_OBJ_DMA_WATCH
+                    $display("MZONE_OBJ_DMA_DONE frame=%0d hcnt=%0d copy_addr=%03x hdump=%0d vdump=%0d",
+                        frame_cnt, dma_hcnt, copy_addr, hdump, vdump);
+`endif
+                    dma_en <= 1'b0;
+                end
+            end
+        end
+    end
+end
+
 assign done = scan_base==OBJ_SCAN_LAST;
 
 // DMA buffer
@@ -278,6 +286,7 @@ jtmzone_objdraw u_draw(
     .rst        ( rst       ),
     .clk        ( clk       ),
     .pxl_cen    ( pxl_cen   ),
+    .dma_cen    ( dma_cen   ),
 
     .LHBL       ( LHBL      ),
     .hdump      ( hdump     ),

@@ -8,6 +8,7 @@ module jtmzone_objdraw(
     input               rst,
     input               clk,
     input               pxl_cen,
+    input               dma_cen,
 
     input               LHBL,
     input        [ 8:0] hdump,
@@ -46,6 +47,8 @@ reg [ 1:0] dr_st;
 reg [ 7:0] low_byte, high_byte;
 reg [ 3:0] pix_cnt;
 reg        req_byte_lsb;
+reg        rom_pending;
+reg [15:0] rom_pending_data;
 reg        buf_we;
 reg [ 3:0] draw_pen;
 reg [ 3:0] cur_pal;
@@ -60,6 +63,8 @@ reg [7:0] watch_code;
 `endif
 wire [ 3:0] draw_lut_pxl;
 wire [ 3:0] lut_pxl;
+wire       rom_ready = rom_pending || (rom_cs && rom_ok);
+wire [15:0] rom_word = rom_pending ? rom_pending_data : rom_data;
 wire       line_start = lhbl_l && !LHBL;
 wire [8:0] hread = hdump - HOFFSET;
 wire       buf_active = hdump >= OBJ_START && hdump < HVISIBLE;
@@ -111,6 +116,8 @@ always @(posedge clk) begin
         group    <= 2'd0;
         dr_st    <= 2'd0;
         pix_cnt  <= 4'd0;
+        rom_pending <= 1'b0;
+        rom_pending_data <= 16'd0;
         buf_we   <= 1'b0;
         draw_line_has_obj <= 1'b0;
         read_line_has_obj <= 1'b0;
@@ -120,12 +127,17 @@ always @(posedge clk) begin
     end else begin
         buf_we <= 1'b0;
 
+        if( rom_cs && rom_ok && !rom_pending )
+            rom_pending_data <= rom_data;
+        if( rom_cs && rom_ok && !rom_pending )
+            rom_pending <= 1'b1;
+
         if( line_start ) begin
             read_line_has_obj <= draw_line_has_obj;
             draw_line_has_obj <= 1'b0;
         end
 
-        case( dr_st )
+        if( dma_cen ) case( dr_st )
             2'd0: if( draw && !busy ) begin
                 cur_code      <= code;
                 cur_xpos      <= xpos;
@@ -143,15 +155,17 @@ always @(posedge clk) begin
                 busy          <= 1'b1;
                 dr_st         <= 2'd1;
             end
-            2'd1: if( rom_ok ) begin
-                low_byte <= req_byte_lsb ? rom_data[15:8] : rom_data[7:0];
+            2'd1: if( rom_ready ) begin
+                rom_pending <= 1'b0;
+                low_byte <= req_byte_lsb ? rom_word[15:8] : rom_word[7:0];
                 rom_addr <= high_byte_addr[14:1];
                 rom_cs   <= 1'b1;
                 req_byte_lsb <= high_byte_addr[0];
                 dr_st <= 2'd2;
             end
-            2'd2: if( rom_ok ) begin
-                high_byte <= req_byte_lsb ? rom_data[15:8] : rom_data[7:0];
+            2'd2: if( rom_ready ) begin
+                rom_pending <= 1'b0;
+                high_byte <= req_byte_lsb ? rom_word[15:8] : rom_word[7:0];
                 rom_cs    <= 1'b0;
                 pix_cnt   <= 4'd0;
                 dr_st     <= 2'd3;

@@ -1,7 +1,9 @@
 #!/bin/bash
 
-if [ ! -e rom.bin ]; then
-    ln -s $ROM/megazone.rom rom.bin || exit 1
+MZONE_ROM=${MZONE_ROM:-$ROM/${MZONE_SETNAME:-megazone}.rom}
+
+if [ ! -e rom.bin ] || [ "$(readlink -f rom.bin)" != "$(readlink -f "$MZONE_ROM")" ]; then
+    ln -srf "$MZONE_ROM" rom.bin || exit 1
 fi
 
 if [ -z "$MZONE_SOUND" ]; then
