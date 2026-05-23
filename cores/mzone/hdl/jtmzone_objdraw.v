@@ -8,7 +8,6 @@ module jtmzone_objdraw(
     input               rst,
     input               clk,
     input               pxl_cen,
-    input               dma_cen,
 
     input               LHBL,
     input        [ 8:0] hdump,
@@ -67,7 +66,7 @@ wire       rom_ready = rom_pending || (rom_cs && rom_ok);
 wire [15:0] rom_word = rom_pending ? rom_pending_data : rom_data;
 wire       line_start = lhbl_l && !LHBL;
 wire [8:0] hread = hdump - HOFFSET;
-wire       buf_active = hdump >= OBJ_START && hdump < HVISIBLE;
+wire       buf_active = hdump < HVISIBLE;
 wire       obj_visible = hdump >= OBJ_VISIBLE && hdump < HVISIBLE;
 wire       buf_rd = pxl_cen && buf_active;
 wire [5:0] row_base = cur_ysub[3] ? {3'b100,cur_ysub[2:0]} : {3'b000,cur_ysub[2:0]};
@@ -137,7 +136,7 @@ always @(posedge clk) begin
             draw_line_has_obj <= 1'b0;
         end
 
-        if( dma_cen ) case( dr_st )
+        case( dr_st )
             2'd0: if( draw && !busy ) begin
                 cur_code      <= code;
                 cur_xpos      <= xpos;
@@ -172,7 +171,7 @@ always @(posedge clk) begin
             end
             2'd3: begin
                 if( pix_cnt < 4'd4 ) begin
-                    buf_we  <= 1'b1;
+                    buf_we <= 1'b1;
 `ifdef MZONE_OBJ_WATCH
                     if( watch_code==8'haa )
                         $display("MZONE_OBJ_DRAW hdump=%0d xpos=%0d group=%0d pix=%0d draw_x=%0d draw_addr=%03x pen=%x lut=%x",
@@ -197,15 +196,9 @@ always @(posedge clk) begin
     end
 end
 
-jtframe_obj_buffer #(
-    .AW     ( 10 ),
-    .DW     ( 4 ),
-    .ALPHAW ( 4 ),
-    .ALPHA  ( 0 )
-) u_line(
+jtmzone_objbuf u_line(
     .clk    ( clk          ),
     .LHBL   ( LHBL         ),
-    .flip   ( 1'b0         ),
     .wr_data( draw_lut_pxl ),
     .wr_addr( draw_addr     ),
     .we     ( buf_we       ),
@@ -235,5 +228,63 @@ jtframe_prom #(
     .rd_addr( { cur_pal, draw_pen }  ),
     .q      ( draw_lut_pxl           )
 );
+
+endmodule
+
+module jtmzone_objbuf(
+    input               clk,
+    input               LHBL,
+
+    input        [ 3:0] wr_data,
+    input        [ 9:0] wr_addr,
+    input               we,
+
+    input        [ 9:0] rd_addr,
+    input               rd,
+    output reg   [ 3:0] rd_data
+);
+
+reg        line, last_LHBL;
+reg [ 3:0] buf0 [0:1023];
+reg [ 3:0] buf1 [0:1023];
+integer    i;
+wire [3:0] dst_pxl = line ? buf1[wr_addr] : buf0[wr_addr];
+wire       dst_blank = dst_pxl==4'd0;
+
+`ifdef SIMULATION
+initial begin
+    line = 1'b0;
+    last_LHBL = 1'b0;
+    rd_data = 4'd0;
+    for( i=0; i<1024; i=i+1 ) begin
+        buf0[i] = 4'd0;
+        buf1[i] = 4'd0;
+    end
+end
+`endif
+
+always @(posedge clk) begin
+    last_LHBL <= LHBL;
+    if( !LHBL && last_LHBL )
+        line <= ~line;
+
+    if( rd ) begin
+        if( line ) begin
+            rd_data <= buf0[rd_addr];
+            buf0[rd_addr] <= 4'd0;
+        end else begin
+            rd_data <= buf1[rd_addr];
+            buf1[rd_addr] <= 4'd0;
+        end
+    end
+
+    if( we && wr_data!=4'd0 && dst_blank ) begin
+        if( line ) begin
+            buf1[wr_addr] <= wr_data;
+        end else begin
+            buf0[wr_addr] <= wr_data;
+        end
+    end
+end
 
 endmodule

@@ -1,5 +1,6 @@
 [all]
 include ../../kicker/cfg/common.def
+JTFRAME_MCLK=49153840
 
 JTFRAME_WIDTH=288
 JTFRAME_HEIGHT=224

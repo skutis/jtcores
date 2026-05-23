@@ -43,8 +43,6 @@ wire        main_ba;
 wire        main_bs;
 wire        blank;
 wire        h2;
-wire        obj_dma_cen;
-wire [ 1:0] obj_dma_cen_bus;
 wire        fix_n, fix_en, fix_delayed_n;
 wire [ 7:0] video_vram1_mux;
 reg         blank_q;
@@ -449,24 +447,11 @@ jtmzone_snd u_snd(
     .dac        ( dac            )
 );
 
-// OBJ DMA on the PCB is clocked from 18.432 MHz. The JTFRAME SDRAM clock
-// used here is the 8/3 multiple, so this enable recreates that DMA clock.
-jtframe_frac_cen #(.W(2),.WC(4)) u_obj_dma_cen(
-    .clk    ( clk             ),
-    .n      ( 4'd3            ),
-    .m      ( 4'd8            ),
-    .cen    ( obj_dma_cen_bus ),
-    .cenb   (                 )
-);
-
-assign obj_dma_cen = obj_dma_cen_bus[0];
-
 jtmzone_video u_video(
     .rst        ( rst            ),
     .clk        ( clk            ),
     .pxl_cen    ( pxl_cen        ),
     .pxl2_cen   ( pxl2_cen       ),
-    .obj_dma_cen( obj_dma_cen    ),
 
     .scrolly    ( main_scrolly   ),
     .scrollx    ( main_scrollx   ),
