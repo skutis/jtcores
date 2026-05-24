@@ -35,10 +35,9 @@ module jtmzone_obj(
 On real Megazone PCB:
 
 Object rendering:
-Object render RAM is scanned from entry A=0..143 in one HBLK period,
-starting at HCNT=40 after HBLK and lasting 384 HCNTs. This implementation
-derives an object-start scan enable from pxl_cen so the 144 entries are
-distributed over that window; the four bytes in an entry are read on clk.
+Object render RAM is scanned from byte A=0..143 once per line. The scan
+starts at HCNT=40 and completes before the next HCNT=40. The 144 bytes are
+36 object entries, four bytes each.
 
 Object DMA:
 DMA starts one HCNT after VBLK goes active and lasts for 240*4+1 HCNTs.
@@ -46,7 +45,8 @@ The object RAM and object render RAM address go from 0 to 240 in that time.
 
 */
 localparam [8:0] OBJ_START       = 9'd40;
-localparam [9:0] OBJ_SCAN_LAST   = 10'd143;
+localparam [8:0] OBJ_ARM         = OBJ_START - 9'd1;
+localparam [9:0] OBJ_SCAN_LAST   = 10'd35;
 localparam [9:0] OBJ_ENTRY_BYTES = 10'd4;
 localparam [8:0] HCOUNTS         = 9'd384;
 localparam [9:0] DMA_COPY_BYTES  = 10'd240;
@@ -65,12 +65,12 @@ reg [ 3:0] sub_cnt;
 reg [ 8:0] scan_hcnt;
 reg [ 8:0] scan_acc;
 reg        scan_cen, scan_done;
-reg [ 7:0] attr, ypos, code;
+reg [ 7:0] attr, ypos, code, raw_xpos;
 reg [ 9:0] dma_addr;
 reg [ 7:0] dma_din;
 reg        scan_en;
 reg        dma_en, dma_start_wait, dma_wr;
-reg [ 9:0] dma_hcnt;dma_hcnt
+reg [ 9:0] dma_hcnt;
 
 reg        draw;
 reg [ 7:0] dr_code;
@@ -80,7 +80,7 @@ reg        dr_hflip, dr_rom_hflip;
 reg [ 3:0] dr_ysub;
 wire       busy;
 wire       line_start = lhbl_l && !LHBL;
-wire       scan_start = pxl_cen && hdump == OBJ_START;
+    wire       scan_start = pxl_cen && hdump == OBJ_ARM;
 wire       vblk_start = !LVBL && lvbl_l;
 wire       dma_copy = pxl_cen && dma_hcnt[1:0]==2'd0 && dma_addr != DMA_COPY_BYTES;
 wire       dma_we = dma_en && dma_wr;
@@ -92,8 +92,9 @@ wire [7:0] raw_sy = 8'd255 - (ypos + 8'd16);
 wire [7:0] ydiff  = vdump[7:0] - raw_sy;
 wire       inzone = ydiff < 8'd16;
 wire [3:0] ysub   = attr[7] ? ~ydiff[3:0] : ydiff[3:0];
-wire [8:0] xpos   = flip ? {1'b0,scan_dout} - 9'd11 :
-                           {1'b0,scan_dout} + 9'd32;
+wire [7:0] xpos_raw_eff = sub_cnt==4'd8 ? scan_dout : raw_xpos;
+wire [8:0] xpos   = flip ? {1'b0,xpos_raw_eff} - 9'd11 :
+                           {1'b0,xpos_raw_eff} + 9'd32;
 wire [9:0] scan_acc_next = {1'b0,scan_acc} + (OBJ_SCAN_LAST+10'd1);
 wire       scan_acc_step = scan_acc_next >= {1'b0,HCOUNTS};
 
@@ -120,6 +121,7 @@ always @(posedge clk) begin
         dr_hflip    <= 1'b0;
         dr_rom_hflip<= 1'b0;
         dr_ysub     <= 4'd0;
+        raw_xpos    <= 8'd0;
         scan_en     <= 1'b0;
         lvbl_l    <= 1'b0;
 `ifdef MZONE_OBJ_WATCH
@@ -135,7 +137,6 @@ always @(posedge clk) begin
 `endif
         scan_cen <= 1'b0;
         if( busy ) draw <= 1'b0;
-
         if( vblk_start ) begin
             scan_addr   <= 10'd0;
             sub_cnt <= 4'd0;
@@ -144,21 +145,11 @@ always @(posedge clk) begin
             scan_done <= 1'b0;
             scan_hcnt <= 9'd0;
             scan_acc <= 9'd0;
-        end else if( line_start ) begin
-            scan_base <= 10'd0;
-            scan_obj  <= 10'd0;
-            scan_addr <= 10'd0;
-            sub_cnt   <= 4'd0;
-            draw      <= 1'b0;
-            scan_en   <= 1'b0;
-            scan_done <= 1'b0;
-            scan_hcnt <= 9'd0;
-            scan_acc  <= 9'd0;
         end else if( scan_start ) begin
             scan_base <= 10'd0;
             scan_obj  <= 10'd0;
             scan_addr <= 10'd0;
-            sub_cnt   <= 4'd0;
+            sub_cnt   <= 4'd1;
             draw      <= 1'b0;
             scan_en   <= 1'b1;
             scan_done <= 1'b0;
@@ -205,8 +196,8 @@ always @(posedge clk) begin
                         sub_cnt <= 4'd8;
                     end
                     default: begin
-                        if( !inzone || !busy ) begin
-                            if( inzone ) begin
+                        raw_xpos <= scan_dout;
+                        if( inzone && !busy ) begin
                                 dr_code      <= code;
                                 dr_xpos      <= xpos;
                                 dr_pal       <= attr[3:0];
@@ -220,17 +211,20 @@ always @(posedge clk) begin
                                         frame_cnt, vdump[7:0], scan_base, attr, ypos, code, scan_dout,
                                         raw_sy, ydiff, ysub, attr[6], attr[7], attr[3:0]);
 `endif
-                            end
-                            if( scan_obj==OBJ_SCAN_LAST ) begin
-                                scan_done <= 1'b1;
-                                scan_en   <= 1'b0;
-                                sub_cnt   <= 4'd0;
-                            end else begin
-                                scan_obj  <= scan_obj + 10'd1;
-                                scan_base <= scan_base + OBJ_ENTRY_BYTES;
-                                scan_addr <= scan_base + OBJ_ENTRY_BYTES;
-                                sub_cnt   <= 4'd0;
-                            end
+                        end
+                        if( scan_obj==OBJ_SCAN_LAST ) begin
+                            scan_done <= 1'b1;
+                            scan_en   <= 1'b0;
+                            sub_cnt   <= 4'd0;
+`ifdef MZONE_OBJ_SCAN_WATCH
+                            $display("MZONE_OBJ_SCAN_DONE vdump=%0d hdump=%0d scan_obj=%0d scan_base=%0d scan_addr=%0d scan_hcnt=%0d",
+                                vdump, hdump, scan_obj, scan_base, scan_base + 10'd3, scan_hcnt);
+`endif
+                        end else begin
+                            scan_obj  <= scan_obj + 10'd1;
+                            scan_base <= scan_base + OBJ_ENTRY_BYTES;
+                            scan_addr <= scan_base + OBJ_ENTRY_BYTES;
+                            sub_cnt   <= 4'd0;
                         end
                     end
                 endcase

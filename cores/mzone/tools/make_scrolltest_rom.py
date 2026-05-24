@@ -7,6 +7,7 @@ SRC = ROOT / "rom" / "megazone.rom"
 OUT = ROOT / "rom" / "megazone_scrolltest.rom"
 SCR_START = 0x1B000
 OBJ_START = 0x13000
+PROM_START = 0x1F000
 
 
 def konami_opcode(addr, plain):
@@ -74,6 +75,8 @@ def main():
     for row in range(8):
         word_addr = (0x08 << 3) | row
         put(rom, SCR_START + word_addr * 4, 0xFF, 0xFF, 0xFF, 0xFF)
+
+    obj_code = 0xAA
 
     # Main CPU IRQ test program at $8000. Opcode bytes are Konami-1 encoded;
     # operands are stored plain because jtframe only decodes opcode fetches.
@@ -144,7 +147,7 @@ def main():
         pc = lda_imm(rom, pc, 0x00)
         pc = sta_ext(rom, pc, 0x3000 + offs)
 
-    sprite_codes = (0xAA,) * 4
+    sprite_codes = (obj_code,) * 4
     sprite_colors = (0x0F,) * 4
     sprite_xpos = (0x17, 0x06, 0x05, 0x06)
     for i, code in enumerate(sprite_codes):

@@ -33,5 +33,8 @@ fi
 export FRAMERATE=${FRAMERATE:-60}
 export CCACHE_DIR=${CCACHE_DIR:-/tmp/ccache}
 export CCACHE_TEMPDIR=${CCACHE_TEMPDIR:-/tmp/ccache-tmp}
+# Verilator 5.046 can reuse stale generated objects across trace/non-trace
+# layouts through ccache/PCH, producing a trace-only crash in ctor_var_reset.
+export OBJCACHE=${OBJCACHE:-}
 
 jtsim -mist -sysname mzone -load -verilator "$@"
