@@ -22,7 +22,7 @@ regions = [
     { name="maincpu" },
     { name="audiocpu", start="SND_START" },
     { name="daccpu", start="DAC_START" },
-    { name="gfx1", no_offset=true, start="OBJ_START" },
+    { name="gfx1", no_offset=true, start="OBJ_START", width=16, sequence=[0,2,1,3] },
     { name="gfx2", no_offset=true, start="SCR_START" },
     { name="proms", start="JTFRAME_PROM_START", no_offset=true },
 ]

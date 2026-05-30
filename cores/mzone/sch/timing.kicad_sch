@@ -9724,6 +9724,15 @@
 		(uuid "0284dab1-967b-42cb-814e-ae81e96b8bdc")
 	)
 	(bus_entry
+		(at 247.015 60.96)
+		(size 2.54 2.54)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "07124fa5-b7f4-4e1c-b57b-5c41f472ce3c")
+	)
+	(bus_entry
 		(at 242.57 260.35)
 		(size 2.54 -2.54)
 		(stroke
@@ -14925,6 +14934,16 @@
 			)
 		)
 		(uuid "6bb39d31-dd5c-41d5-bb33-b403f5534491")
+	)
+	(text "18.432MHz / 3 = 6.144MHz"
+		(exclude_from_sim no)
+		(at 134.62 75.565 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "77913395-80b5-4e25-99ed-0612c59a2e6a")
 	)
 	(text "~{ODB}7"
 		(exclude_from_sim no)

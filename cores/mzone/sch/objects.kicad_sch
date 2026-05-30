@@ -23418,7 +23418,7 @@
 		)
 		(uuid "23651066-51d7-4b37-8737-e8f45b65ab55")
 	)
-	(label "~{LDLNCT1}"
+	(label "~{ODB}5L1"
 		(at 177.8 264.16 0)
 		(fields_autoplaced yes)
 		(effects
@@ -25189,7 +25189,7 @@
 		)
 		(uuid "947dc90a-9269-4755-8e89-4084b5cac9aa")
 	)
-	(label "~{LDLNCT2}"
+	(label "~{ODB}5L2"
 		(at 177.8 160.02 0)
 		(fields_autoplaced yes)
 		(effects
@@ -26784,7 +26784,7 @@
 		)
 		(uuid "e7159140-8ba7-485b-ab57-64ab38e55ec2")
 	)
-	(label "~{LDLNCT1}"
+	(label "~{ODB}5L1"
 		(at 177.8 228.6 0)
 		(fields_autoplaced yes)
 		(effects
@@ -27037,7 +27037,7 @@
 		)
 		(uuid "f4657e3d-f6e6-4237-85de-daa980684a96")
 	)
-	(label "~{LDLNCT2}"
+	(label "~{ODB}5L2"
 		(at 177.8 195.58 0)
 		(fields_autoplaced yes)
 		(effects

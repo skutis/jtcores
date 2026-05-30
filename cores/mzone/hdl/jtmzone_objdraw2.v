@@ -4,7 +4,7 @@
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version. */
 
-module jtmzone_objdraw(
+module jtmzone_objdraw2(
     input               rst,
     input               clk,
     input               pxl_cen,
@@ -196,7 +196,7 @@ always @(posedge clk) begin
     end
 end
 
-jtmzone_objbuf u_line(
+jtmzone_objbuf2 u_line(
     .clk    ( clk          ),
     .LHBL   ( LHBL         ),
     .wr_data( draw_lut_pxl ),
@@ -231,7 +231,7 @@ jtframe_prom #(
 
 endmodule
 
-module jtmzone_objbuf(
+module jtmzone_objbuf2(
     input               clk,
     input               LHBL,
 

@@ -6804,7 +6804,7 @@
 		)
 		(uuid "84e32dd8-4b28-40a3-98b7-ae27559799b0")
 	)
-	(label "~{LDLNCT1}"
+	(label "~{ODB}5L1"
 		(at 274.32 213.36 0)
 		(fields_autoplaced yes)
 		(effects
@@ -7167,7 +7167,7 @@
 		)
 		(uuid "c01ad61b-ec6d-4bb6-8872-12b58c7349f7")
 	)
-	(label "~{LDLNCT2}"
+	(label "~{ODB}5L2"
 		(at 274.32 210.82 0)
 		(fields_autoplaced yes)
 		(effects
