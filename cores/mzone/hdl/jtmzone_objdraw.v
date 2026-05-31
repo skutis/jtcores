@@ -4,7 +4,7 @@
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version. */
 
-module jtmzone_objdraw2(
+module jtmzone_objdraw(
     input               rst,
     input               clk,
     input               pxl_cen,
@@ -36,9 +36,7 @@ module jtmzone_objdraw2(
 );
 
 localparam [8:0] HOFFSET = 9'd0;
-localparam [8:0] HVISIBLE = 9'd288;
-localparam [8:0] OBJ_START = 9'd44;
-localparam [8:0] OBJ_VISIBLE = 9'd48;
+localparam [8:0] HVISIBLE = 9'd244;
 
 reg        lhbl_l;
 reg [ 1:0] group;
@@ -67,7 +65,7 @@ wire [15:0] rom_word = rom_pending ? rom_pending_data : rom_data;
 wire       line_start = lhbl_l && !LHBL;
 wire [8:0] hread = hdump - HOFFSET;
 wire       buf_active = hdump < HVISIBLE;
-wire       obj_visible = hdump >= OBJ_VISIBLE && hdump < HVISIBLE;
+wire       obj_visible = hdump < HVISIBLE;
 wire       buf_rd = pxl_cen && buf_active;
 wire [5:0] row_base = cur_ysub[3] ? {3'b100,cur_ysub[2:0]} : {3'b000,cur_ysub[2:0]};
 wire [1:0] rom_group = cur_rom_hflip ? ~group : group;
@@ -196,7 +194,7 @@ always @(posedge clk) begin
     end
 end
 
-jtmzone_objbuf2 u_line(
+jtmzone_objbuf u_line(
     .clk    ( clk          ),
     .LHBL   ( LHBL         ),
     .wr_data( draw_lut_pxl ),
@@ -231,7 +229,7 @@ jtframe_prom #(
 
 endmodule
 
-module jtmzone_objbuf2(
+module jtmzone_objbuf(
     input               clk,
     input               LHBL,
 

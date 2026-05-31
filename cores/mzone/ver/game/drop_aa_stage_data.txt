@@ -1,0 +1,68 @@
+Mega Zone drop sprite stage reference
+source_rom=/home/skutis/github/jtcores-fork/rom/megazone.rom
+obj_code=0xaa color=0x0f
+
+Stage A: raw object ROM bytes as used by parent jtmzone_objdraw.v
+byte_addr = code*64 + row_base + group*8
+low_byte = gfx[byte_addr], high_byte = gfx[byte_addr+0x4000]
+draw_pen[pix] = { high[pix], high[pix+4], low[pix], low[pix+4] }
+
+y=00 row_base=00 g0:addr=2a80 lo=00 hi=00 pens=0000 | g1:addr=2a88 lo=00 hi=00 pens=0000 | g2:addr=2a90 lo=00 hi=00 pens=0000 | g3:addr=2a98 lo=00 hi=00 pens=0000
+y=01 row_base=01 g0:addr=2a81 lo=00 hi=00 pens=0000 | g1:addr=2a89 lo=00 hi=00 pens=0000 | g2:addr=2a91 lo=00 hi=00 pens=0000 | g3:addr=2a99 lo=00 hi=00 pens=0000
+y=02 row_base=02 g0:addr=2a82 lo=00 hi=00 pens=0000 | g1:addr=2a8a lo=00 hi=00 pens=0000 | g2:addr=2a92 lo=00 hi=00 pens=0000 | g3:addr=2a9a lo=00 hi=00 pens=0000
+y=03 row_base=03 g0:addr=2a83 lo=00 hi=00 pens=0000 | g1:addr=2a8b lo=0f hi=0f pens=aaaa | g2:addr=2a93 lo=08 hi=08 pens=000a | g3:addr=2a9b lo=00 hi=00 pens=0000
+y=04 row_base=04 g0:addr=2a84 lo=03 hi=03 pens=aa00 | g1:addr=2a8c lo=08 hi=0f pens=888a | g2:addr=2a94 lo=0e hi=0e pens=0aaa | g3:addr=2a9c lo=00 hi=00 pens=0000
+y=05 row_base=05 g0:addr=2a85 lo=02 hi=03 pens=8a00 | g1:addr=2a8d lo=00 hi=0f pens=8888 | g2:addr=2a95 lo=03 hi=0f pens=aa88 | g3:addr=2a9d lo=00 hi=00 pens=0000
+y=06 row_base=06 g0:addr=2a86 lo=06 hi=07 pens=8aa0 | g1:addr=2a8e lo=00 hi=0f pens=8888 | g2:addr=2a96 lo=01 hi=0f pens=a888 | g3:addr=2a9e lo=08 hi=08 pens=000a
+y=07 row_base=07 g0:addr=2a87 lo=04 hi=07 pens=88a0 | g1:addr=2a8f lo=00 hi=0f pens=8888 | g2:addr=2a97 lo=00 hi=0f pens=8888 | g3:addr=2a9f lo=04 hi=0c pens=00a8
+y=08 row_base=20 g0:addr=2aa0 lo=04 hi=07 pens=88a0 | g1:addr=2aa8 lo=00 hi=0f pens=8888 | g2:addr=2ab0 lo=00 hi=0f pens=8888 | g3:addr=2ab8 lo=00 hi=0f pens=8888
+y=09 row_base=21 g0:addr=2aa1 lo=04 hi=07 pens=88a0 | g1:addr=2aa9 lo=00 hi=0f pens=8888 | g2:addr=2ab1 lo=00 hi=0f pens=8888 | g3:addr=2ab9 lo=00 hi=0c pens=0088
+y=10 row_base=22 g0:addr=2aa2 lo=04 hi=07 pens=88a0 | g1:addr=2aaa lo=00 hi=0f pens=8888 | g2:addr=2ab2 lo=00 hi=0f pens=8888 | g3:addr=2aba lo=08 hi=08 pens=000a
+y=11 row_base=23 g0:addr=2aa3 lo=02 hi=03 pens=8a00 | g1:addr=2aab lo=00 hi=8f pens=888c | g2:addr=2ab3 lo=01 hi=2f pens=ac88 | g3:addr=2abb lo=00 hi=00 pens=0000
+y=12 row_base=24 g0:addr=2aa4 lo=03 hi=03 pens=aa00 | g1:addr=2aac lo=00 hi=7f pens=ccc8 | g2:addr=2ab4 lo=02 hi=8e pens=0a8c | g3:addr=2abc lo=00 hi=00 pens=0000
+y=13 row_base=25 g0:addr=2aa5 lo=00 hi=00 pens=0000 | g1:addr=2aad lo=0f hi=0f pens=aaaa | g2:addr=2ab5 lo=08 hi=08 pens=000a | g3:addr=2abd lo=00 hi=00 pens=0000
+y=14 row_base=26 g0:addr=2aa6 lo=00 hi=00 pens=0000 | g1:addr=2aae lo=00 hi=00 pens=0000 | g2:addr=2ab6 lo=00 hi=00 pens=0000 | g3:addr=2abe lo=00 hi=00 pens=0000
+y=15 row_base=27 g0:addr=2aa7 lo=00 hi=00 pens=0000 | g1:addr=2aaf lo=00 hi=00 pens=0000 | g2:addr=2ab7 lo=00 hi=00 pens=0000 | g3:addr=2abf lo=00 hi=00 pens=0000
+
+Stage B: decoded 16x16 pens before C6/A16 PROM
+0000000000000000
+0000000000000000
+0000000000000000
+0000aaaa000a0000
+aa00888a0aaa0000
+8a008888aa880000
+8aa08888a888000a
+88a08888888800a8
+88a0888888888888
+88a0888888880088
+88a088888888000a
+8a00888cac880000
+aa00ccc80a8c0000
+0000aaaa000a0000
+0000000000000000
+0000000000000000
+
+Stage C: object LUT/PROM result for color 0x0f
+format: pen -> c6_addr c6_out a16_addr a16_prom
+pen=0 c6_addr=f0 c6=0 a16_addr=00 a16=00
+pen=8 c6_addr=f8 c6=8 a16_addr=08 a16=07
+pen=a c6_addr=fa c6=a a16_addr=0a a16=05
+pen=c c6_addr=fc c6=c a16_addr=0c a16=2f
+
+Stage D: post-C6 object pixel indices, color 0x0f
+0000000000000000
+0000000000000000
+0000000000000000
+0000aaaa000a0000
+aa00888a0aaa0000
+8a008888aa880000
+8aa08888a888000a
+88a08888888800a8
+88a0888888888888
+88a0888888880088
+88a088888888000a
+8a00888cac880000
+aa00ccc80a8c0000
+0000aaaa000a0000
+0000000000000000
+0000000000000000

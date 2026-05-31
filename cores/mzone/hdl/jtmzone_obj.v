@@ -18,9 +18,9 @@ module jtmzone_obj(
     output reg   [ 9:0] oram_addr,
     input        [ 7:0] oram_dout,
 
-    output       [12:0] rom_addr,
+    output       [13:0] rom_addr,
     output              rom_cs,
-    input        [31:0] rom_data,
+    input        [15:0] rom_data,
     input               rom_ok,
 
     input        [ 3:0] prog_data,
@@ -43,64 +43,6 @@ Object DMA:
 DMA starts one HCNT after VBLK goes active and lasts for 240*4+1 HCNTs.
 The object RAM and object render RAM address go from 0 to 240 in that time.
 
-
-PCB object ROMs:
-Four ROMs are read as two selectable pairs. Object code byte 2 bit 7 selects
-the pair:
-
-    code[7]=0: codes 0x00..0x7f output { byte23, byte01 }
-    code[7]=1: codes 0x80..0xff output { byte23, byte01 }
-
-For one 4-pixel group, MAME's x offsets use bit 0 for pixel 0:
-
-    byte01 = { pl0_px3, pl0_px2, pl0_px1, pl0_px0,
-               pl1_px3, pl1_px2, pl1_px1, pl1_px0 }
-
-    byte23 = { pl2_px3, pl2_px2, pl2_px1, pl2_px0,
-               pl3_px3, pl3_px2, pl3_px1, pl3_px0 }
-
-Pixels are reconstructed as:
-
-    pxN = { pl3_pxN, pl2_pxN, pl1_pxN, pl0_pxN }
-
-PCB address order inside the selected ROM pair:
-
-    addr[0] = v0
-    addr[1] = v1
-    addr[2] = v2
-    addr[3] = h0
-    addr[4] = h1
-    addr[5] = v3
-
-MAME flattens the four ROMs into one gfx1 region:
-
-    gfx1 + 0x0000: byte01 for codes 0x00..0x7f
-    gfx1 + 0x2000: byte01 for codes 0x80..0xff
-    gfx1 + 0x4000: byte23 for codes 0x00..0x7f
-    gfx1 + 0x6000: byte23 for codes 0x80..0xff
-
-Core ROM layout:
-mame2mra repacks MAME order with sequence=[0,2,1,3], width=16 so matching
-bytes become adjacent:
-
-    word16 = { byte23, byte01 }
-
-mem.yaml uses gfx_sort: hhvvvx so adjacent horizontal groups of the same row
-share one 32-bit SDRAM word:
-
-    rom_data = { byte23_g1, byte01_g1, byte23_g0, byte01_g0 }
-
-jtframe_objdraw requests graphics as:
-
-    draw_rom_addr = { code, half, ysub }
-
-The core maps that request to sorted SDRAM as:
-
-    rom_addr = { code, ysub, half }
-
-and swizzles the returned word into:
-
-    pxl_data = { pl3[7:0], pl2[7:0], pl1[7:0], pl0[7:0] }
 */
 localparam [8:0] OBJ_START       = 9'd40;
 localparam [8:0] OBJ_ARM         = OBJ_START - 9'd1;
@@ -137,7 +79,8 @@ reg [ 3:0] dr_pal;
 reg        dr_hflip, dr_rom_hflip;
 reg [ 3:0] dr_ysub;
 wire       busy;
-wire       scan_start = pxl_cen && hdump == OBJ_ARM;
+wire       line_start = lhbl_l && !LHBL;
+    wire       scan_start = pxl_cen && hdump == OBJ_ARM;
 wire       vblk_start = !LVBL && lvbl_l;
 wire       dma_copy = pxl_cen && dma_hcnt[1:0]==2'd0 && dma_addr != DMA_COPY_BYTES;
 wire       dma_we = dma_en && dma_wr;
@@ -145,46 +88,26 @@ wire [7:0] scan_dout;
 wire       dbg_dma_window     /* verilator public_flat */;
 wire       dbg_dma_copy       /* verilator public_flat */;
 wire       dbg_dma_we         /* verilator public_flat */;
-wire [8:0] ysum      = {1'b0,vdump[7:0]} + {1'b0,ypos};
-wire [7:0] ysum8  = ysum[7:0];
-wire       inzone = ysum[7:4] == 4'hf;
-wire [3:0] ysub   = attr[7] ? ~ysum[3:0] : ysum[3:0];
-wire [7:0] xpos_raw_eff = sub_cnt==4'd8 ? scan_dout : raw_xpos;
-wire [8:0] xpos   = flip ? {1'b0,xpos_raw_eff} - 9'd11 :
-                           {1'b0,xpos_raw_eff} + 9'd32;
+wire [7:0] raw_sy = 8'd255 - (ypos + 8'd16);
+wire [7:0] ydiff  = vdump[7:0] - raw_sy;
+wire       inzone = ydiff < 8'd16;
+wire [3:0] ysub   = attr[7] ? ~ydiff[3:0] : ydiff[3:0];
+	wire [8:0] xpos   = {1'b0,raw_xpos};
+	// PCB OBJ X/read counter. It is independent from the core's continuous
+	// hdump numbering: the PCB holds OBJ X at 0 for HCNT 40..43, switches the
+	// object line buffer at HCNT 44, then advances X from 0. Before HCNT 40 it
+	// wraps through the end of the 384-count line, so HCNT 39 reads as X=383.
+	wire       draw_hs = hdump == 9'd44;
+	wire [8:0] draw_hdump = hdump < 9'd40 ? hdump + 9'd344 :
+	                        hdump < 9'd44 ? 9'd0 :
+	                                        hdump - 9'd44;
+	wire       draw_lhbl = ~draw_hs;
 wire [9:0] scan_acc_next = {1'b0,scan_acc} + (OBJ_SCAN_LAST+10'd1);
 wire       scan_acc_step = scan_acc_next >= {1'b0,HCOUNTS};
-/*
-  code = object graphics code
-  half = 0 -> pixels 0..7 of the 16-pixel row
-  half = 1 -> pixels 8..15 of the 16-pixel row
-  ysub = row 0..15 inside the object
-*/
-wire [12:0] draw_rom_addr;
-wire        draw_rom_cs;
-wire [ 7:0] draw_pxl;
-wire [ 3:0] lut_pxl;
-wire        draw_hs = hdump == 9'd0;
-wire        obj_visible = hdump >= 9'd48 && hdump < 9'd288;
-wire        mem_half = dr_rom_hflip ? ~draw_rom_addr[4] : draw_rom_addr[4];
-wire [31:0] pxl_rom  = dr_rom_hflip ? { rom_data[15:8], rom_data[7:0], rom_data[31:24], rom_data[23:16] } :
-                                       rom_data;
-wire [31:0] pxl_data = {
-    pxl_rom[27], pxl_rom[26], pxl_rom[25], pxl_rom[24],
-    pxl_rom[11], pxl_rom[10], pxl_rom[ 9], pxl_rom[ 8],
-    pxl_rom[31], pxl_rom[30], pxl_rom[29], pxl_rom[28],
-    pxl_rom[15], pxl_rom[14], pxl_rom[13], pxl_rom[12],
-    pxl_rom[19], pxl_rom[18], pxl_rom[17], pxl_rom[16],
-    pxl_rom[ 3], pxl_rom[ 2], pxl_rom[ 1], pxl_rom[ 0],
-    pxl_rom[23], pxl_rom[22], pxl_rom[21], pxl_rom[20],
-    pxl_rom[ 7], pxl_rom[ 6], pxl_rom[ 5], pxl_rom[ 4]
-};
 
 assign dbg_dma_window     = dma_en;
 assign dbg_dma_copy       = dma_copy;
 assign dbg_dma_we         = dma_we;
-assign rom_addr           = { draw_rom_addr[12:5], draw_rom_addr[3:0], mem_half };
-assign rom_cs             = draw_rom_cs;
 
 always @(posedge clk) begin
     lhbl_l <= LHBL;
@@ -279,41 +202,39 @@ always @(posedge clk) begin
                     4'd7: begin
                         sub_cnt <= 4'd8;
                     end
-                    default: begin
+                    4'd8: begin
                         raw_xpos <= scan_dout;
-                        if( inzone && busy ) begin
-                            scan_addr <= scan_base + 10'd3;
-                            sub_cnt   <= 4'd8;
-                        end else begin
-                            if( inzone ) begin
-                                dr_code      <= code;
-                                dr_xpos      <= xpos;
-                                dr_pal       <= attr[3:0];
-                                dr_hflip     <= attr[6];
-                                dr_rom_hflip <= ~attr[6];
-                                dr_ysub      <= ysub;
-                                draw <= 1'b1;
+                        sub_cnt  <= 4'd9;
+                    end
+                    default: begin
+                        if( inzone && !busy ) begin
+                            dr_code      <= code;
+                            dr_xpos      <= xpos;
+                            dr_pal       <= attr[3:0];
+                            dr_hflip     <= attr[6];
+                            dr_rom_hflip <= ~attr[6];
+                            dr_ysub      <= ysub;
+                            draw <= 1'b1;
 `ifdef MZONE_OBJ_WATCH
-                                if( frame_cnt >= `MZONE_OBJ_WATCH_FROM && frame_cnt <= `MZONE_OBJ_WATCH_TO )
-                                    $display("MZONE_OBJ frame=%0d line=%0d base=%03x attr=%02x ypos=%02x code=%02x xpos=%02x ysum=%02x ysub=%x hflip=%b vflip=%b color=%x",
-                                        frame_cnt, vdump[7:0], scan_base, attr, ypos, code, scan_dout,
-                                        ysum8, ysub, attr[6], attr[7], attr[3:0]);
+                            if( frame_cnt >= `MZONE_OBJ_WATCH_FROM && frame_cnt <= `MZONE_OBJ_WATCH_TO )
+                                $display("MZONE_OBJ frame=%0d line=%0d base=%03x attr=%02x ypos=%02x code=%02x xpos=%02x raw_sy=%02x ydiff=%02x ysub=%x hflip=%b vflip=%b color=%x",
+                                    frame_cnt, vdump[7:0], scan_base, attr, ypos, code, raw_xpos,
+                                    raw_sy, ydiff, ysub, attr[6], attr[7], attr[3:0]);
 `endif
-                            end
-                            if( scan_obj==OBJ_SCAN_LAST ) begin
-                                scan_done <= 1'b1;
-                                scan_en   <= 1'b0;
-                                sub_cnt   <= 4'd0;
+                        end
+                        if( scan_obj==OBJ_SCAN_LAST ) begin
+                            scan_done <= 1'b1;
+                            scan_en   <= 1'b0;
+                            sub_cnt   <= 4'd0;
 `ifdef MZONE_OBJ_SCAN_WATCH
-                                $display("MZONE_OBJ_SCAN_DONE vdump=%0d hdump=%0d scan_obj=%0d scan_base=%0d scan_addr=%0d scan_hcnt=%0d",
-                                    vdump, hdump, scan_obj, scan_base, scan_base + 10'd3, scan_hcnt);
+                            $display("MZONE_OBJ_SCAN_DONE vdump=%0d hdump=%0d scan_obj=%0d scan_base=%0d scan_addr=%0d scan_hcnt=%0d",
+                                vdump, hdump, scan_obj, scan_base, scan_base + 10'd3, scan_hcnt);
 `endif
-                            end else begin
-                                scan_obj  <= scan_obj + 10'd1;
-                                scan_base <= scan_base + OBJ_ENTRY_BYTES;
-                                scan_addr <= scan_base + OBJ_ENTRY_BYTES;
-                                sub_cnt   <= 4'd0;
-                            end
+                        end else begin
+                            scan_obj  <= scan_obj + 10'd1;
+                            scan_base <= scan_base + OBJ_ENTRY_BYTES;
+                            scan_addr <= scan_base + OBJ_ENTRY_BYTES;
+                            sub_cnt   <= 4'd0;
                         end
                     end
                 endcase
@@ -443,60 +364,35 @@ jtframe_dual_ram #(
     .q1     ( scan_dout        )
 );
 
-jtframe_objdraw #(
-    .CW       (  8 ),
-    .PW       (  8 ),
-    .LATCH    (  1 ),
-    .ALPHA    (  0 ),
-    .KEEP_OLD (  1 )
-) u_draw(
-    .rst        ( rst           ),
-    .clk        ( clk           ),
-    .pxl_cen    ( pxl_cen       ),
-    .hs         ( draw_hs       ),
-    .flip       ( 1'b0          ),
-    .hdump      ( hdump         ),
+jtmzone_objdraw u_draw(
+    .rst        ( rst       ),
+    .clk        ( clk       ),
+    .pxl_cen    ( pxl_cen   ),
 
-    .draw       ( draw          ),
-    .busy       ( busy          ),
-    .code       ( dr_code       ),
-    .xpos       ( dr_xpos       ),
-    .ysub       ( dr_ysub       ),
-    .hzoom      ( 6'd0          ),
-    .hz_keep    ( 1'b0          ),
+	    .LHBL       ( draw_lhbl ),
+	    .hdump      ( draw_hdump),
 
-    .hflip      ( dr_hflip      ),
-    .vflip      ( 1'b0          ),
-    .pal        ( dr_pal        ),
+    .draw       ( draw      ),
+    .busy       ( busy      ),
 
-    .rom_addr   ( draw_rom_addr ),
-    .rom_cs     ( draw_rom_cs   ),
-    .rom_ok     ( rom_ok        ),
-    .rom_data   ( pxl_data      ),
+    .code       ( dr_code      ),
+    .xpos       ( dr_xpos      ),
+    .pal        ( dr_pal       ),
+    .hflip      ( dr_hflip     ),
+    .rom_hflip  ( dr_rom_hflip ),
+    .ysub       ( dr_ysub      ),
 
-    .pxl        ( draw_pxl      )
+    .prog_data  ( prog_data ),
+    .prog_addr  ( prog_addr ),
+    .prog_en    ( prog_en   ),
+
+    .rom_addr   ( rom_addr  ),
+    .rom_cs     ( rom_cs    ),
+    .rom_data   ( rom_data  ),
+    .rom_ok     ( rom_ok    ),
+
+    .pxl        ( pxl       ),
+    .pxl_en     ( pxl_en    )
 );
-
-jtframe_prom #(
-    .DW     ( 4 ),
-    .AW     ( 8 ),
-    .ASYNC  ( 1 )
-) u_obj_lut(
-    .clk    ( clk       ),
-    .cen    ( pxl_cen   ),
-    .data   ( prog_data ),
-    .wr_addr( prog_addr ),
-    .we     ( prog_en   ),
-    .rd_addr( draw_pxl  ),
-    .q      ( lut_pxl   )
-);
-
-`ifdef MZONE_NOOBJ
-assign pxl    = 4'd0;
-assign pxl_en = 1'b0;
-`else
-assign pxl_en = pxl_cen && obj_visible && lut_pxl != 4'd0;
-assign pxl    = pxl_en ? lut_pxl : 4'd0;
-`endif
 
 endmodule

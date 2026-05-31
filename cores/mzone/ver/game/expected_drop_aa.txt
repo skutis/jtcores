@@ -1,0 +1,38 @@
+Mega Zone OBJ expected drop reference
+
+Source:
+- ROM: /home/skutis/github/jtcores-fork/rom/megazone.rom
+- OBJ code: 0xaa
+- OBJ color: 0x0f
+- Decode basis: parent commit 22b57b32d object drawer byte/bit path.
+
+The authoritative staged reference is:
+
+- ver/game/drop_aa_stage_data.txt
+
+That file includes raw object ROM bytes, decoded pens before C6/A16 PROM,
+and post-C6 object pixel indices.
+
+Expected pen matrix, 16 rows x 16 columns:
+
+0000000000000000
+0000000000000000
+0000000000000000
+0000aaaa000a0000
+aa00888a0aaa0000
+8a008888aa880000
+8aa08888a888000a
+88a08888888800a8
+88a0888888888888
+88a0888888880088
+88a088888888000a
+8a00888cac880000
+aa00ccc80a8c0000
+0000aaaa000a0000
+0000000000000000
+0000000000000000
+
+Visual reference files:
+- staged expected data: ver/game/drop_aa_stage_data.txt
+- previous commit 22b57b32d frame-8 crop: ver/game/drop_crop_prev_commit.png
+- last commit 0769d0d18 frame-8 crop: ver/game/drop_crop_head2.png

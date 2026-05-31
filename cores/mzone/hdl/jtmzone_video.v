@@ -36,9 +36,9 @@ module jtmzone_video(
 
     output       [ 9:0] oram_addr,
     input        [ 7:0] oram_dout,
-    output       [12:0] obj_addr,
+    output       [13:0] obj_addr,
     output              obj_cs,
-    input        [31:0] obj_data,
+    input        [15:0] obj_data,
     input               obj_ok,
 
     output              HS,
@@ -60,28 +60,23 @@ module jtmzone_video(
 );
 
 localparam [8:0] HVISIBLE = 9'd288;
+localparam [8:0] VPHASE   = 9'd2;
 localparam [8:0] FIX_WIDTH= 9'd48;
 localparam [8:0] HTOTAL   = 9'd384;
 localparam [8:0] HB_END   = HTOTAL-9'd1;
 localparam [8:0] HB_START = HVISIBLE-9'd1;
 localparam [8:0] HS_START = 9'd319;
 localparam [8:0] HS_END   = 9'd351;
-localparam [8:0] H_VB     = HB_START + 9'd32;
 localparam [8:0] H_VNEXT  = HTOTAL-9'd9;
-localparam [8:0] CHR_VPHASE = 9'd1;
-localparam [8:0] VB_START = 9'd240;
-localparam [8:0] VB_END   = 9'd016;
-localparam [8:0] VS_START = 9'd256;
-localparam [8:0] VS_END   = 9'd000;
-localparam [8:0] VCNT_END = 9'd263;
+localparam [8:0] VB_START = 9'd238;
+localparam [8:0] VB_END   = 9'd014;
 localparam [21:0] OBJ_OFFSET = `ifdef JTFRAME_PROM_START `JTFRAME_PROM_START + 22'h020 `else 22'h020 `endif;
 localparam [21:0] CHR_OFFSET = `ifdef JTFRAME_PROM_START `JTFRAME_PROM_START + 22'h120 `else 22'h120 `endif;
 
-wire        pre_lhbl, pre_lvbl, pre_hs, vt_vs;
-reg         pcb_vs;
+wire        pre_lhbl, pre_lvbl, pre_hs;
 wire        lhbl_dly, lvbl_dly, pre_lbl_dly;
 wire [ 8:0] raw_hdump, raw_vdump;
-wire [ 8:0] chr_vdump;
+wire [ 8:0] tile_vcnt;
 wire        fix_active;
 wire [ 9:0] tile_scroll_ram_addr, tile_fix_ram_addr;
 wire [ 8:0] tile_dbg_hcnt;
@@ -101,18 +96,17 @@ assign obj_lut_we = prom_we && prog_addr >= OBJ_OFFSET && prog_addr < OBJ_OFFSET
 assign char_lut_we = prom_we && prog_addr >= CHR_OFFSET && prog_addr < CHR_OFFSET+22'h100;
 
 assign hdump  = raw_hdump;
-assign vdump  = raw_vdump;
-assign chr_vdump = raw_vdump - CHR_VPHASE;
+assign vdump  = tile_vcnt;
 assign HS     = pre_hs;
-assign VS     = pcb_vs;
 assign LHBL   = lhbl_dly;
 assign LVBL   = lvbl_dly;
 assign fix_active = raw_hdump < FIX_WIDTH;
+assign tile_vcnt = raw_vdump + VPHASE;
 
 assign fix_n = ~fix_active;
 assign fix_en = fix_active;
 assign fix_delayed_n = ~fix_active;
-assign h2 = raw_hdump[1];
+assign h2 = tile_dbg_hcnt[1];
 assign clkq_cen = 1'b0;
 
 jtmzone_scroll u_scroll(
@@ -120,7 +114,7 @@ jtmzone_scroll u_scroll(
     .clk        ( clk             ),
     .pxl_cen    ( pxl_cen         ),
     .hdump      ( raw_hdump       ),
-    .vdump      ( chr_vdump       ),
+    .vdump      ( tile_vcnt       ),
     .scrollx    ( scrollx         ),
     .scrolly    ( scrolly         ),
     .flip       ( flip            ),
@@ -235,53 +229,17 @@ always @(posedge clk) begin
 end
 `endif
 
-always @(posedge clk) begin
-    if( rst ) begin
-        pcb_vs <= 1'b0;
-    end else if( pxl_cen && raw_hdump == 9'd0 ) begin
-        if( raw_vdump == VS_START ) pcb_vs <= 1'b1;
-        if( raw_vdump == VS_END   ) pcb_vs <= 1'b0;
-    end
-end
-
-`ifdef MZONE_VCNT_WATCH
-reg        vcnt_watch_lvbl_l, vcnt_watch_vs_l;
-always @(posedge clk) begin
-    if( rst ) begin
-        vcnt_watch_lvbl_l <= 1'b1;
-        vcnt_watch_vs_l   <= 1'b0;
-    end else if( pxl_cen ) begin
-        vcnt_watch_lvbl_l <= pre_lvbl;
-        vcnt_watch_vs_l   <= VS;
-        if( VS != vcnt_watch_vs_l || pre_lvbl != vcnt_watch_lvbl_l ) begin
-            $display("MZONE_VCNT_EDGE hcnt=%03d vcnt=%03d LVBL=%b VS=%b lvbl_edge=%b vs_edge=%b",
-                raw_hdump, raw_vdump, pre_lvbl, VS,
-                pre_lvbl != vcnt_watch_lvbl_l,
-                VS != vcnt_watch_vs_l);
-        end
-        if( raw_hdump == 9'd0 &&
-            (raw_vdump == 9'd240 || raw_vdump == 9'd248 ||
-             raw_vdump == 9'd256 || raw_vdump == 9'd263 ||
-             raw_vdump == 9'd0   || raw_vdump == 9'd16) ) begin
-            $display("MZONE_VCNT_MARK hcnt=%03d vcnt=%03d LVBL=%b VS=%b",
-                raw_hdump, raw_vdump, pre_lvbl, VS);
-        end
-    end
-end
-`endif
-
 jtframe_vtimer #(
     .VB_START   ( VB_START ),
     .VB_END     ( VB_END   ),
-    .VCNT_END   ( VCNT_END ),
-    .VS_START   ( VS_START ),
-    .VS_END     ( VS_END   ),
+    .VCNT_END   ( 9'd255 ),
+    .VS_START   ( 9'd248 ),
     .HB_END     ( HB_END   ),
     .HB_START   ( HB_START ),
     .HCNT_END   ( HB_END   ),
     .HS_START   ( HS_START ),
     .HS_END     ( HS_END   ),
-    .H_VB       ( H_VB     ),
+    .H_VB       ( HB_END   ),
     .H_VNEXT    ( H_VNEXT  )
 ) u_vtimer(
     .clk        ( clk       ),
@@ -295,7 +253,7 @@ jtframe_vtimer #(
     .LHBL       ( pre_lhbl  ),
     .LVBL       ( pre_lvbl  ),
     .HS         ( pre_hs    ),
-    .VS         ( vt_vs     )
+    .VS         ( VS        )
 );
 
 endmodule

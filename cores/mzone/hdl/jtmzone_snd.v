@@ -57,7 +57,7 @@ wire        [ 7:0] ay_a8, ay_b8, ay_c8;
 wire        [ 7:0] dac_status;
 wire        [15:0] A;
 wire                m1_n, mreq_n, iorq_n, rd_n, wr_n, rfsh_n;
-wire [1:0]          dac_cen_v;
+wire [1:0]          cpu_cen_v, dac_cen_v;
 wire                cpu_cen, ay_cen, dac_cen, irq_rst, int_n, snmi_n;
 wire                wdog_reset_n, snmi_set_n;
 wire                wait_n;
@@ -67,7 +67,6 @@ reg         [ 7:0]  cpu_din;
 reg         [ 1:0]  ay0a_rcen_r, ay0b_rcen_r, ay0c_rcen_r;
 reg                 latch_cs, inp0_cs, inp1_cs, inp2_cs, dsw2_cs, dsw1_cs;
 reg                 shared_cs, i8039_irq_cs, i8039_wdog_cs;
-reg  [2:0]          z80_cen_cnt;
 wire                snd_irq;
 `ifdef MZONE_FAST_SOUND
 reg         [ 7:0]  fast_timer;
@@ -125,11 +124,19 @@ assign dac_status  = { fast_timer[7:4], 4'd0 };
 assign ay_dout     = dac_status;
 assign ay_iob      = 8'd0;
 `endif
-assign wait_n      = 1'b1;
+assign wait_n      = ((~rom_cs) | rom_ok) & ((~shared_cs) | ~h2);
 assign wdog_reset_n = ~i8039_wdog_cs;
 assign snmi_set_n   = ~rst & (wdog_reset_n | A[0]);
 assign int_n        = ~snd_irq;
 assign main_irq_req = iorq_n && !wr_n && A == 16'ha000;
+
+jtframe_frac_cen #(.W(2),.WC(8)) u_cpu_cen(
+    .clk    ( clk      ),
+    .n      ( 8'd16    ),  // 24 MHz * 16 / 125 = 3.072 MHz
+    .m      ( 8'd125   ),
+    .cen    ( cpu_cen_v ),
+    .cenb   (          )
+);
 
 jtframe_cen3p57 #(.CLK24(1)) u_ay_cen(
     .clk      ( clk      ),
@@ -147,7 +154,7 @@ jtframe_frac_cen #(.W(2),.WC(8)) u_dac_cen(
 );
 `endif
 
-assign cpu_cen = z80_cen_cnt == 3'd0;
+assign cpu_cen = cpu_cen_v[0];
 `ifndef MZONE_FAST_SOUND
 assign dac_cen = dac_cen_v[0];
 `endif
@@ -204,12 +211,10 @@ always @(posedge clk) begin
         ay0a_rcen_r <= 2'd0;
         ay0b_rcen_r <= 2'd0;
         ay0c_rcen_r <= 2'd0;
-        z80_cen_cnt <= 3'd0;
 `ifdef MZONE_FAST_SOUND
         fast_timer  <= 8'd0;
 `endif
     end else begin
-        z80_cen_cnt <= z80_cen_cnt + 3'd1;
 `ifndef MZONE_FAST_SOUND
         ay0a_rcen_r <= rc_sel(ay_iob[1:0]);
         ay0b_rcen_r <= rc_sel(ay_iob[3:2]);

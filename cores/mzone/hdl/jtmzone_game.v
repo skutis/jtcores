@@ -316,8 +316,6 @@ assign debug_view = 0;
 
 assign main_addr   = main_stub_addr;
 assign main_cs     = main_stub_cs;
-assign objend_addr = 4'd0;
-assign objend_cs   = 1'b0;
 assign blank       = ~blank_q;
 assign video_vram1_mux = vram1_dout;
 
