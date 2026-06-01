@@ -130,9 +130,11 @@ assign snmi_set_n   = ~rst & (wdog_reset_n | A[0]);
 assign int_n        = ~snd_irq;
 assign main_irq_req = iorq_n && !wr_n && A == 16'ha000;
 
+// PCB Z80 clock is 18.432 MHz / (3*2) = 3.072 MHz. The core clock here is
+// 24 MHz, so generate an exact 24 MHz * 16 / 125 enable.
 jtframe_frac_cen #(.W(2),.WC(8)) u_cpu_cen(
     .clk    ( clk      ),
-    .n      ( 8'd16    ),  // 24 MHz * 16 / 125 = 3.072 MHz
+    .n      ( 8'd16    ),
     .m      ( 8'd125   ),
     .cen    ( cpu_cen_v ),
     .cenb   (          )

@@ -147,15 +147,19 @@ def main():
         pc = lda_imm(rom, pc, 0x00)
         pc = sta_ext(rom, pc, 0x3000 + offs)
 
-    sprite_codes = (obj_code,) * 4
-    sprite_colors = (0x0F,) * 4
-    sprite_xpos = (0x17, 0x06, 0x05, 0x06)
+    sprite_codes = (obj_code,) * 8
+    sprite_attrs = (
+        0x4F, 0x4F, 0x4F, 0x4F,
+        0x4F, 0x0F, 0xCF, 0x8F,
+    )
+    sprite_xpos = (0x17, 0x06, 0x05, 0x06, 0x20, 0x48, 0x70, 0x98)
+    sprite_ypos = (0x30, 0x30, 0x30, 0x30, 0x70, 0x70, 0x70, 0x70)
     for i, code in enumerate(sprite_codes):
         base = 0x3000 + i * 4
-        color = sprite_colors[i]
-        ypos = 0x30 + (i // 4) * 0x20
-        xpos = sprite_xpos[i % 4]
-        pc = lda_imm(rom, pc, color)
+        attr = sprite_attrs[i]
+        ypos = sprite_ypos[i]
+        xpos = sprite_xpos[i]
+        pc = lda_imm(rom, pc, attr)
         pc = sta_ext(rom, pc, base + 0)
         pc = lda_imm(rom, pc, ypos)
         pc = sta_ext(rom, pc, base + 1)

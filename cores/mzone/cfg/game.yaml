@@ -6,7 +6,6 @@ game:
       - jtmzone_snd.v
       - jtmzone_video.v
       - jtmzone_obj.v
-      - jtmzone_objdraw.v
       - jtmzone_scroll.v
       - jtmzone_fix.v
       - jtmzone_colmix.v
@@ -37,11 +36,11 @@ jtframe:
     get:
       - jtframe_ram.v
       - jtframe_dual_ram.v
-      - jtframe_obj_buffer.v
   - from: video
     get:
       - jtframe_vtimer.v
       - jtframe_blank.v
+      - jtframe_obj.yaml
   - from: sdram
     get:
       - jtframe_dwnld.v
