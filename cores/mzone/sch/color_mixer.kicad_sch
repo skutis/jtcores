@@ -4126,7 +4126,7 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 181.61) (xy 146.05 181.61)
+			(xy 136.525 181.61) (xy 146.05 181.61)
 		)
 		(stroke
 			(width 0)
@@ -4436,7 +4436,7 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 179.07) (xy 146.05 179.07)
+			(xy 136.525 179.07) (xy 146.05 179.07)
 		)
 		(stroke
 			(width 0)
@@ -4736,7 +4736,7 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 176.53) (xy 146.05 176.53)
+			(xy 136.525 176.53) (xy 146.05 176.53)
 		)
 		(stroke
 			(width 0)
@@ -4846,7 +4846,7 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 165.1) (xy 146.05 165.1)
+			(xy 140.97 165.1) (xy 146.05 165.1)
 		)
 		(stroke
 			(width 0)
@@ -4864,7 +4864,7 @@
 		)
 		(uuid "ff39f51c-a693-49b9-84f3-16dd3298d5e2")
 	)
-	(text "During FIX' active,\nwhich is around horizontal blanking,\nthe pixel data is output from\ntile layer.\nSEL = 1, Tilemap selected\nSEL = 0, Objects selected"
+	(text "During CFIX active,\nwhich is around horizontal blanking,\nthe pixel data is output from\ntile layer.\nSEL = 1, Tilemap selected\nSEL = 0, Objects selected"
 		(exclude_from_sim no)
 		(at 138.43 199.39 0)
 		(effects
@@ -4942,7 +4942,7 @@
 		(uuid "436e0a0e-52d5-463f-bc53-f9671e853272")
 	)
 	(label "~{BLANK}"
-		(at 138.43 179.07 0)
+		(at 136.525 179.07 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4963,8 +4963,8 @@
 		)
 		(uuid "5be00d12-1472-4fd9-b1ce-d5925d9981dc")
 	)
-	(label "FIX'"
-		(at 138.43 165.1 0)
+	(label "CFIX"
+		(at 140.97 165.1 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4985,8 +4985,8 @@
 		)
 		(uuid "6ffc66a0-753e-41d9-9cbf-b8487356c86c")
 	)
-	(label "~{HBLANK'}"
-		(at 138.43 181.61 0)
+	(label "~{CHBLANK}"
+		(at 136.525 181.61 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5118,7 +5118,7 @@
 		(uuid "c17176a1-4137-4c75-af63-fb4a793d6cdd")
 	)
 	(label "~{HBLANK''}"
-		(at 138.43 176.53 0)
+		(at 136.525 176.53 0)
 		(fields_autoplaced yes)
 		(effects
 			(font

@@ -68,13 +68,20 @@ wire        display_fix = hdump < FIX_WIDTH + SCROLL_START_DLY;
 wire [ 8:0] fix_hcnt = hdump;
 wire [ 7:0] fix_x = fix_hcnt[7:0];
 wire [ 7:0] fix_y = vdump[7:0];
+// Prime the first FIX tile at the end of the previous line. The visible
+// x=0 pixels are output before the normal x=4 ROM load can fill the shifter.
+wire        fix_left_prime = hdump >= 9'd379;
+wire [ 7:0] fix_mem_x = fix_left_prime ? 8'd0 : fix_x;
 wire [ 7:0] fix_pat_x = flip ? ~fix_x : fix_x;
+wire [ 7:0] fix_mem_pat_x = flip ? ~fix_mem_x : fix_mem_x;
 wire [ 7:0] fix_pat_y = flip ? ~fix_y : fix_y;
-wire [ 7:0] fix_rd_pat_x = fix_pat_x + 8'd1;
-wire        fix_fetch = raw_visible && hdump < FIX_WIDTH &&
-                        fix_pat_x[2:0] == 3'd0;
-wire        fix_load = raw_visible && hdump < FIX_WIDTH &&
-                       fix_pat_x[2:0] == 3'd4;
+wire [ 7:0] fix_rd_pat_x = fix_mem_pat_x + 8'd1;
+wire        fix_fetch = (raw_visible && hdump < FIX_WIDTH &&
+                         fix_pat_x[2:0] == 3'd0) ||
+                        hdump == 9'd379;
+wire        fix_load = (raw_visible && hdump < FIX_WIDTH &&
+                        fix_pat_x[2:0] == 3'd4) ||
+                       hdump == 9'd383;
 wire [11:0] fix_tile_addr = { cram1[7], vram1, fix_pat_y[2:0] ^ {3{cram1[5]}} };
 wire [31:0] fix_decoded_row;
 

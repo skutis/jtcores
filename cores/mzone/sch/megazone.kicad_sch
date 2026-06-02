@@ -9669,7 +9669,7 @@
 		)
 		(uuid "b9951a6b-0b8c-4b9d-8acf-f5e8b988283f")
 	)
-	(label "~{HBLANK'}"
+	(label "~{CHBLANK}"
 		(at 187.96 87.63 0)
 		(fields_autoplaced yes)
 		(effects

@@ -6057,17 +6057,6 @@
 		)
 		(uuid "ff90e3db-ad93-4925-8474-1cd299a28465")
 	)
-	(text "LS375 latches data\nwhen enable is high"
-		(exclude_from_sim no)
-		(at 292.1 163.83 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "0c520613-4f06-4470-a8d9-2dd4f0a2a099")
-	)
 	(text "CLK2 is phase shifted 120deg\nin respect to CLK1"
 		(exclude_from_sim no)
 		(at 135.89 236.22 0)

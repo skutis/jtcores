@@ -18929,6 +18929,17 @@
 		)
 		(uuid "345005aa-a759-40ab-954a-dc0d084aed04")
 	)
+	(text "CFIX and ~{CHBLANK} are delayed 4 pixels relative to\ntheir source signals ~{FIX} and ~{HBLANK}."
+		(exclude_from_sim no)
+		(at 13.97 210.185 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "690c032f-63b9-45f7-b2cf-d978df0add94")
+	)
 	(text "kolla upp FIX anslutningar"
 		(exclude_from_sim no)
 		(at 68.58 200.66 0)
@@ -20985,7 +20996,7 @@
 		)
 		(uuid "65ae33c1-2d8d-4720-8212-087631117776")
 	)
-	(label "FIX'"
+	(label "CFIX"
 		(at 125.73 209.55 0)
 		(fields_autoplaced yes)
 		(effects
@@ -21667,7 +21678,7 @@
 		)
 		(uuid "8ca054a0-3328-48d6-849a-d2d34d1cfa90")
 	)
-	(label "~{HBLANK'}"
+	(label "~{CHBLANK}"
 		(at 130.81 237.49 0)
 		(fields_autoplaced yes)
 		(effects
