@@ -22749,7 +22749,6 @@
 	)
 	(label "OCD7"
 		(at 368.3 123.19 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22760,7 +22759,6 @@
 	)
 	(label "D'4"
 		(at 138.43 121.92 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22771,7 +22769,6 @@
 	)
 	(label "D'3"
 		(at 137.16 91.44 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22782,7 +22779,6 @@
 	)
 	(label "OCHA6"
 		(at 325.12 147.32 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22793,7 +22789,6 @@
 	)
 	(label "H2''"
 		(at 29.21 269.24 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22804,7 +22799,6 @@
 	)
 	(label "OD1"
 		(at 104.14 227.33 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22815,7 +22809,6 @@
 	)
 	(label "~{OCHAH}"
 		(at 326.39 58.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22826,7 +22819,6 @@
 	)
 	(label "OCHA11"
 		(at 325.12 50.8 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22837,7 +22829,6 @@
 	)
 	(label "D2"
 		(at 92.71 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22848,7 +22839,6 @@
 	)
 	(label "V16"
 		(at 182.88 22.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22859,7 +22849,6 @@
 	)
 	(label "D'7"
 		(at 138.43 119.38 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22870,7 +22859,6 @@
 	)
 	(label "XPOS12"
 		(at 212.09 220.98 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22881,7 +22869,6 @@
 	)
 	(label "OCD3"
 		(at 353.06 139.7 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22892,7 +22879,6 @@
 	)
 	(label "D'2"
 		(at 138.43 111.76 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22903,7 +22889,6 @@
 	)
 	(label "OCD14"
 		(at 353.06 38.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22914,7 +22899,6 @@
 	)
 	(label "D5"
 		(at 133.35 184.15 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22925,7 +22909,6 @@
 	)
 	(label "COL'2"
 		(at 393.7 180.34 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22936,7 +22919,6 @@
 	)
 	(label "OA4"
 		(at 63.5 236.22 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22947,7 +22929,6 @@
 	)
 	(label "PAL'0"
 		(at 370.84 185.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22958,7 +22939,6 @@
 	)
 	(label "~{DMWR}"
 		(at 53.34 107.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22969,7 +22949,6 @@
 	)
 	(label "OCHA9"
 		(at 166.37 109.22 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22980,7 +22959,6 @@
 	)
 	(label "DM1"
 		(at 55.88 38.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22991,7 +22969,6 @@
 	)
 	(label "XPOS24"
 		(at 212.09 182.88 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23002,7 +22979,6 @@
 	)
 	(label "OCHA4"
 		(at 325.12 33.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23013,7 +22989,6 @@
 	)
 	(label "OCHA1"
 		(at 325.12 189.23 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23024,7 +22999,6 @@
 	)
 	(label "OCHA7"
 		(at 325.12 95.25 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23035,7 +23009,6 @@
 	)
 	(label "D'2"
 		(at 182.88 220.98 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23046,7 +23019,6 @@
 	)
 	(label "XPOS13"
 		(at 212.09 223.52 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23057,7 +23029,6 @@
 	)
 	(label "OCHA2"
 		(at 325.12 137.16 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23068,7 +23039,6 @@
 	)
 	(label "XPOS20"
 		(at 212.09 147.32 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23079,7 +23049,6 @@
 	)
 	(label "D'6"
 		(at 137.16 88.9 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23090,7 +23059,6 @@
 	)
 	(label "OA9"
 		(at 63.5 248.92 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23101,7 +23069,6 @@
 	)
 	(label "~{OCHAL}"
 		(at 326.39 167.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23112,7 +23079,6 @@
 	)
 	(label "D'2"
 		(at 137.16 35.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23123,7 +23089,6 @@
 	)
 	(label "PAL3"
 		(at 275.59 128.27 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23134,7 +23099,6 @@
 	)
 	(label "D'0"
 		(at 138.43 116.84 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23145,7 +23109,6 @@
 	)
 	(label "OCHA9"
 		(at 325.12 100.33 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23156,7 +23119,6 @@
 	)
 	(label "D'0"
 		(at 120.65 38.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23167,7 +23129,6 @@
 	)
 	(label "D'6"
 		(at 120.65 48.26 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23178,7 +23139,6 @@
 	)
 	(label "OCHA3"
 		(at 325.12 194.31 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23189,7 +23149,6 @@
 	)
 	(label "XPOS25"
 		(at 212.09 185.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23200,7 +23159,6 @@
 	)
 	(label "PAL3"
 		(at 166.37 91.44 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23211,7 +23169,6 @@
 	)
 	(label "WRIH"
 		(at 13.97 170.18 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23222,7 +23179,6 @@
 	)
 	(label "XPOS23"
 		(at 212.09 154.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23233,7 +23189,6 @@
 	)
 	(label "OCA2"
 		(at 287.02 57.15 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23244,7 +23199,6 @@
 	)
 	(label "~{OBJRAM'}"
 		(at 31.75 167.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23255,7 +23209,6 @@
 	)
 	(label "OCHA10"
 		(at 325.12 102.87 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23266,7 +23219,6 @@
 	)
 	(label "PAL2"
 		(at 275.59 115.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23277,7 +23229,6 @@
 	)
 	(label "DMA"
 		(at 34.29 158.75 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23288,7 +23239,6 @@
 	)
 	(label "OCHA1"
 		(at 311.15 67.31 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23299,7 +23249,6 @@
 	)
 	(label "OA8"
 		(at 63.5 246.38 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23310,7 +23259,6 @@
 	)
 	(label "OD5"
 		(at 104.14 184.15 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23321,7 +23269,6 @@
 	)
 	(label "OCHA4"
 		(at 311.15 44.45 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23332,7 +23279,6 @@
 	)
 	(label "OCHA9"
 		(at 325.12 209.55 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23343,7 +23289,6 @@
 	)
 	(label "H2''"
 		(at 29.21 276.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23354,7 +23299,6 @@
 	)
 	(label "YPOS0"
 		(at 165.1 48.26 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23365,7 +23309,6 @@
 	)
 	(label "OA2"
 		(at 63.5 189.23 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23376,7 +23319,6 @@
 	)
 	(label "~{ODB}3"
 		(at 231.14 68.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23387,7 +23329,6 @@
 	)
 	(label "D'3"
 		(at 137.16 38.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23398,7 +23339,6 @@
 	)
 	(label "MD'''2"
 		(at 139.7 234.95 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23409,7 +23349,6 @@
 	)
 	(label "~{MRD'}"
 		(at 13.97 172.72 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23420,7 +23359,6 @@
 	)
 	(label "~{ODB}5L1"
 		(at 177.8 264.16 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23431,7 +23369,6 @@
 	)
 	(label "COL'1"
 		(at 393.7 177.8 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23442,7 +23379,6 @@
 	)
 	(label "OCHA4"
 		(at 325.12 87.63 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23453,7 +23389,6 @@
 	)
 	(label "YPOS5"
 		(at 181.61 38.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23464,7 +23399,6 @@
 	)
 	(label "~{DMWR}"
 		(at 54.61 148.59 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23475,7 +23409,6 @@
 	)
 	(label "OD1"
 		(at 104.14 199.39 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23486,7 +23419,6 @@
 	)
 	(label "~{OCHAL}"
 		(at 200.66 115.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23497,7 +23429,6 @@
 	)
 	(label "YPOS6"
 		(at 181.61 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23508,7 +23439,6 @@
 	)
 	(label "OCHA7"
 		(at 325.12 149.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23519,7 +23449,6 @@
 	)
 	(label "PAL3'"
 		(at 307.34 128.27 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23530,7 +23459,6 @@
 	)
 	(label "MD'''5"
 		(at 139.7 227.33 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23541,7 +23469,6 @@
 	)
 	(label "OCD11"
 		(at 368.3 133.35 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23552,7 +23479,6 @@
 	)
 	(label "D3"
 		(at 80.01 43.18 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23563,7 +23489,6 @@
 	)
 	(label "D0"
 		(at 133.35 186.69 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23574,7 +23499,6 @@
 	)
 	(label "OCA2"
 		(at 269.24 45.72 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23585,7 +23509,6 @@
 	)
 	(label "D'5"
 		(at 120.65 35.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23596,7 +23519,6 @@
 	)
 	(label "DM0"
 		(at 55.88 35.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23607,7 +23529,6 @@
 	)
 	(label "DM6"
 		(at 19.05 184.15 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23618,7 +23539,6 @@
 	)
 	(label "OA4"
 		(at 63.5 194.31 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23629,7 +23549,6 @@
 	)
 	(label "D'1"
 		(at 120.65 50.8 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23640,7 +23559,6 @@
 	)
 	(label "OD6"
 		(at 104.14 234.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23651,7 +23569,6 @@
 	)
 	(label "~{ODB}0"
 		(at 129.54 96.52 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23662,7 +23579,6 @@
 	)
 	(label "DMA"
 		(at 34.29 146.05 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23673,7 +23589,6 @@
 	)
 	(label "DM3"
 		(at 55.88 85.09 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23684,7 +23599,6 @@
 	)
 	(label "OCHA4"
 		(at 325.12 196.85 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23695,7 +23609,6 @@
 	)
 	(label "COL'3"
 		(at 393.7 182.88 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23706,7 +23619,6 @@
 	)
 	(label "YPOS2"
 		(at 181.61 76.2 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23717,7 +23629,6 @@
 	)
 	(label "OCHA0"
 		(at 325.12 22.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23728,7 +23639,6 @@
 	)
 	(label "OCHA7"
 		(at 325.12 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23739,7 +23649,6 @@
 	)
 	(label "COL'0"
 		(at 393.7 175.26 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23750,7 +23659,6 @@
 	)
 	(label "XPOS16"
 		(at 212.09 256.54 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23761,7 +23669,6 @@
 	)
 	(label "OCHA0"
 		(at 325.12 77.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23772,7 +23679,6 @@
 	)
 	(label "XPOS26"
 		(at 212.09 187.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23783,7 +23689,6 @@
 	)
 	(label "OCD13"
 		(at 353.06 35.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23794,7 +23699,6 @@
 	)
 	(label "OCD12"
 		(at 368.3 135.89 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23805,7 +23709,6 @@
 	)
 	(label "OCHA6"
 		(at 325.12 38.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23816,7 +23719,6 @@
 	)
 	(label "D'4"
 		(at 120.65 53.34 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23827,7 +23729,6 @@
 	)
 	(label "D'5"
 		(at 182.88 254 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23838,7 +23739,6 @@
 	)
 	(label "OCHA11"
 		(at 166.37 124.46 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23849,7 +23749,6 @@
 	)
 	(label "OA6"
 		(at 49.53 190.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23860,7 +23759,6 @@
 	)
 	(label "OCA0"
 		(at 269.24 58.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23871,7 +23769,6 @@
 	)
 	(label "~{LBRST}"
 		(at 177.8 172.72 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23882,7 +23779,6 @@
 	)
 	(label "MD'''4"
 		(at 139.7 229.87 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23893,7 +23789,6 @@
 	)
 	(label "OCHA10"
 		(at 325.12 212.09 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23904,7 +23799,6 @@
 	)
 	(label "D'0"
 		(at 137.16 48.26 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23915,7 +23809,6 @@
 	)
 	(label "PAL'1"
 		(at 307.34 113.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23926,7 +23819,6 @@
 	)
 	(label "~{LBRST}"
 		(at 177.8 208.28 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23937,7 +23829,6 @@
 	)
 	(label "OCHA2"
 		(at 325.12 82.55 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23948,7 +23839,6 @@
 	)
 	(label "MD'''3"
 		(at 139.7 232.41 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23959,7 +23849,6 @@
 	)
 	(label "OCHA3"
 		(at 311.15 52.07 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23970,7 +23859,6 @@
 	)
 	(label "OA8"
 		(at 49.53 274.32 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23981,7 +23869,6 @@
 	)
 	(label "OCHA3"
 		(at 325.12 30.48 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23992,7 +23879,6 @@
 	)
 	(label "FLIPX'"
 		(at 283.21 25.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24003,7 +23889,6 @@
 	)
 	(label "XPOS10"
 		(at 212.09 215.9 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24014,7 +23899,6 @@
 	)
 	(label "OCD9"
 		(at 353.06 80.01 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24025,7 +23909,6 @@
 	)
 	(label "D'0"
 		(at 182.88 147.32 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24036,7 +23919,6 @@
 	)
 	(label "OCD1"
 		(at 368.3 107.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24047,7 +23929,6 @@
 	)
 	(label "H2''"
 		(at 104.14 207.01 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24058,7 +23939,6 @@
 	)
 	(label "DM7"
 		(at 19.05 186.69 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24069,7 +23949,6 @@
 	)
 	(label "OCD1"
 		(at 353.06 134.62 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24080,7 +23959,6 @@
 	)
 	(label "OD1"
 		(at 87.63 228.6 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24091,7 +23969,6 @@
 	)
 	(label "MD'''6"
 		(at 139.7 224.79 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24102,7 +23979,6 @@
 	)
 	(label "OCHA9"
 		(at 325.12 45.72 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24113,7 +23989,6 @@
 	)
 	(label "D'7"
 		(at 182.88 259.08 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24124,7 +23999,6 @@
 	)
 	(label "~{DMWR}"
 		(at 53.34 66.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24135,7 +24009,6 @@
 	)
 	(label "PAL1"
 		(at 275.59 113.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24146,7 +24019,6 @@
 	)
 	(label "MD'''7"
 		(at 139.7 222.25 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24157,7 +24029,6 @@
 	)
 	(label "OD0"
 		(at 104.14 186.69 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24168,7 +24039,6 @@
 	)
 	(label "OCHA6"
 		(at 325.12 92.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24179,7 +24049,6 @@
 	)
 	(label "D'5"
 		(at 138.43 124.46 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24190,7 +24059,6 @@
 	)
 	(label "OCD8"
 		(at 353.06 77.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24201,7 +24069,6 @@
 	)
 	(label "DM6"
 		(at 55.88 92.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24212,7 +24079,6 @@
 	)
 	(label "FLIPY"
 		(at 166.37 86.36 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24223,7 +24089,6 @@
 	)
 	(label "DM5"
 		(at 19.05 191.77 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24234,7 +24099,6 @@
 	)
 	(label "YPOS4"
 		(at 181.61 35.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24245,7 +24109,6 @@
 	)
 	(label "OA9"
 		(at 49.53 266.7 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24256,7 +24119,6 @@
 	)
 	(label "OA3"
 		(at 63.5 191.77 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24267,7 +24129,6 @@
 	)
 	(label "OA7"
 		(at 63.5 201.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24278,7 +24139,6 @@
 	)
 	(label "FLIPX''"
 		(at 367.03 148.59 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24289,7 +24149,6 @@
 	)
 	(label "COL0"
 		(at 370.84 175.26 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24300,7 +24159,6 @@
 	)
 	(label "OCD10"
 		(at 368.3 130.81 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24311,7 +24169,6 @@
 	)
 	(label "AB''7"
 		(at 19.05 199.39 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24322,7 +24179,6 @@
 	)
 	(label "OCHA5"
 		(at 325.12 90.17 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24333,7 +24189,6 @@
 	)
 	(label "DM4"
 		(at 55.88 87.63 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24344,7 +24199,6 @@
 	)
 	(label "YPOS2"
 		(at 165.1 35.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24355,7 +24209,6 @@
 	)
 	(label "OCA3"
 		(at 269.24 60.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24366,7 +24219,6 @@
 	)
 	(label "~{OBEN'}"
 		(at 275.59 120.65 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24377,7 +24229,6 @@
 	)
 	(label "~{ODB}1"
 		(at 128.27 58.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24388,7 +24239,6 @@
 	)
 	(label "H2''"
 		(at 19.05 208.28 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24399,7 +24249,6 @@
 	)
 	(label "OCHA2"
 		(at 325.12 27.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24410,7 +24259,6 @@
 	)
 	(label "D0"
 		(at 92.71 38.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24421,7 +24269,6 @@
 	)
 	(label "~{H2''}"
 		(at 17.78 151.13 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24432,7 +24279,6 @@
 	)
 	(label "DM4"
 		(at 55.88 45.72 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24443,7 +24289,6 @@
 	)
 	(label "OCHA11"
 		(at 325.12 214.63 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24454,7 +24299,6 @@
 	)
 	(label "OCA0"
 		(at 287.02 72.39 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24465,7 +24309,6 @@
 	)
 	(label "XPOS15"
 		(at 212.09 254 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24476,7 +24319,6 @@
 	)
 	(label "D'7"
 		(at 137.16 86.36 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24487,7 +24329,6 @@
 	)
 	(label "D'1"
 		(at 137.16 78.74 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24498,7 +24339,6 @@
 	)
 	(label "DM3"
 		(at 20.32 228.6 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24509,7 +24349,6 @@
 	)
 	(label "D6"
 		(at 80.01 82.55 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24520,7 +24359,6 @@
 	)
 	(label "AB''0"
 		(at 19.05 248.92 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24531,7 +24369,6 @@
 	)
 	(label "OCD6"
 		(at 368.3 120.65 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24542,7 +24379,6 @@
 	)
 	(label "OD2"
 		(at 104.14 224.79 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24553,7 +24389,6 @@
 	)
 	(label "D3"
 		(at 92.71 43.18 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24564,7 +24399,6 @@
 	)
 	(label "D'2"
 		(at 137.16 83.82 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24575,7 +24409,6 @@
 	)
 	(label "OA0"
 		(at 49.53 242.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24586,7 +24419,6 @@
 	)
 	(label "AB''2"
 		(at 19.05 246.38 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24597,7 +24429,6 @@
 	)
 	(label "MD'''0"
 		(at 139.7 240.03 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24608,7 +24439,6 @@
 	)
 	(label "YPOS1"
 		(at 181.61 73.66 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24619,7 +24449,6 @@
 	)
 	(label "OCD0"
 		(at 353.06 186.69 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24630,7 +24459,6 @@
 	)
 	(label "OCHA12"
 		(at 166.37 127 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24641,7 +24469,6 @@
 	)
 	(label "OD2"
 		(at 87.63 231.14 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24652,7 +24479,6 @@
 	)
 	(label "OCD0"
 		(at 353.06 132.08 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24663,7 +24489,6 @@
 	)
 	(label "OCLK1"
 		(at 179.07 236.22 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24674,7 +24499,6 @@
 	)
 	(label "M18DIV2"
 		(at 270.51 133.35 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24685,7 +24509,6 @@
 	)
 	(label "OCHA9"
 		(at 325.12 154.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24696,7 +24519,6 @@
 	)
 	(label "OD5"
 		(at 87.63 186.69 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24707,7 +24529,6 @@
 	)
 	(label "~{OCHAH}"
 		(at 326.39 222.25 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24718,7 +24539,6 @@
 	)
 	(label "PAL'1"
 		(at 370.84 187.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24729,7 +24549,6 @@
 	)
 	(label "OD6"
 		(at 104.14 196.85 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24740,7 +24559,6 @@
 	)
 	(label "YPOS3"
 		(at 181.61 78.74 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24751,7 +24569,6 @@
 	)
 	(label "XPOS17"
 		(at 212.09 259.08 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24762,7 +24579,6 @@
 	)
 	(label "OCHA11"
 		(at 325.12 105.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24773,7 +24589,6 @@
 	)
 	(label "OCHA6"
 		(at 166.37 116.84 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24784,7 +24599,6 @@
 	)
 	(label "OCHA12"
 		(at 325.12 217.17 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24795,7 +24609,6 @@
 	)
 	(label "OCHA10"
 		(at 166.37 121.92 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24806,7 +24619,6 @@
 	)
 	(label "OCHA11"
 		(at 325.12 160.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24817,7 +24629,6 @@
 	)
 	(label "V32"
 		(at 182.88 25.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24828,7 +24639,6 @@
 	)
 	(label "OA0"
 		(at 63.5 184.15 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24839,7 +24649,6 @@
 	)
 	(label "WRIH"
 		(at 34.29 148.59 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24850,7 +24659,6 @@
 	)
 	(label "OCD9"
 		(at 368.3 128.27 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24861,7 +24669,6 @@
 	)
 	(label "OD3"
 		(at 104.14 222.25 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24872,7 +24679,6 @@
 	)
 	(label "DM3"
 		(at 55.88 43.18 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24883,7 +24689,6 @@
 	)
 	(label "OCA3"
 		(at 287.02 34.29 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24894,7 +24699,6 @@
 	)
 	(label "PAL'3"
 		(at 370.84 193.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24905,7 +24709,6 @@
 	)
 	(label "OA7"
 		(at 63.5 243.84 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24916,7 +24719,6 @@
 	)
 	(label "XPOS14"
 		(at 212.09 251.46 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24927,7 +24729,6 @@
 	)
 	(label "OCD4"
 		(at 353.06 196.85 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24938,7 +24739,6 @@
 	)
 	(label "OCHA0"
 		(at 311.15 74.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24949,7 +24749,6 @@
 	)
 	(label "D1"
 		(at 92.71 50.8 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24960,7 +24759,6 @@
 	)
 	(label "YPOS6"
 		(at 165.1 43.18 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24971,7 +24769,6 @@
 	)
 	(label "M18DIV2"
 		(at 364.49 153.67 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24982,7 +24779,6 @@
 	)
 	(label "OD7"
 		(at 104.14 232.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24993,7 +24789,6 @@
 	)
 	(label "D'4"
 		(at 182.88 182.88 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25004,7 +24799,6 @@
 	)
 	(label "D'0"
 		(at 182.88 215.9 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25015,7 +24809,6 @@
 	)
 	(label "PAL'2"
 		(at 370.84 190.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25026,7 +24819,6 @@
 	)
 	(label "DM5"
 		(at 55.88 90.17 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25037,7 +24829,6 @@
 	)
 	(label "D'7"
 		(at 182.88 190.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25048,7 +24839,6 @@
 	)
 	(label "~{OCHAL}"
 		(at 326.39 113.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25059,7 +24849,6 @@
 	)
 	(label "D'3"
 		(at 182.88 223.52 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25070,7 +24859,6 @@
 	)
 	(label "V64"
 		(at 182.88 27.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25081,7 +24869,6 @@
 	)
 	(label "DM6"
 		(at 55.88 50.8 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25092,7 +24879,6 @@
 	)
 	(label "OA3"
 		(at 63.5 233.68 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25103,7 +24889,6 @@
 	)
 	(label "OCHA8"
 		(at 325.12 43.18 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25114,7 +24899,6 @@
 	)
 	(label "OA5"
 		(at 63.5 196.85 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25125,7 +24909,6 @@
 	)
 	(label "OCD12"
 		(at 353.06 33.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25136,7 +24919,6 @@
 	)
 	(label "D'1"
 		(at 182.88 149.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25147,7 +24929,6 @@
 	)
 	(label "OCA1"
 		(at 269.24 63.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25158,7 +24939,6 @@
 	)
 	(label "PAL0"
 		(at 166.37 81.28 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25169,7 +24949,6 @@
 	)
 	(label "OCHA2"
 		(at 325.12 191.77 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25180,7 +24959,6 @@
 	)
 	(label "D'6"
 		(at 182.88 187.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25191,7 +24969,6 @@
 	)
 	(label "~{ODB}5L2"
 		(at 177.8 160.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25202,7 +24979,6 @@
 	)
 	(label "DM0"
 		(at 55.88 77.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25213,7 +24989,6 @@
 	)
 	(label "COL2"
 		(at 394.97 110.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25224,7 +24999,6 @@
 	)
 	(label "OCD13"
 		(at 368.3 138.43 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25235,7 +25009,6 @@
 	)
 	(label "~{ODB}3"
 		(at 129.54 132.08 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25246,7 +25019,6 @@
 	)
 	(label "OCHA0"
 		(at 325.12 132.08 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25257,7 +25029,6 @@
 	)
 	(label "~{OBJRAM'}"
 		(at 100.33 247.65 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25268,7 +25039,6 @@
 	)
 	(label "AB''3"
 		(at 19.05 241.3 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25279,7 +25049,6 @@
 	)
 	(label "OCD2"
 		(at 353.06 137.16 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25290,7 +25059,6 @@
 	)
 	(label "D7"
 		(at 80.01 85.09 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25301,7 +25069,6 @@
 	)
 	(label "OCLK2"
 		(at 177.8 167.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25312,7 +25079,6 @@
 	)
 	(label "OCD4"
 		(at 353.06 142.24 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25323,7 +25089,6 @@
 	)
 	(label "D4"
 		(at 80.01 77.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25334,7 +25099,6 @@
 	)
 	(label "DM1"
 		(at 20.32 231.14 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25345,7 +25109,6 @@
 	)
 	(label "V4"
 		(at 182.88 63.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25356,7 +25119,6 @@
 	)
 	(label "OCHA12"
 		(at 325.12 107.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25367,7 +25129,6 @@
 	)
 	(label "OCHA8"
 		(at 325.12 97.79 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25378,7 +25139,6 @@
 	)
 	(label "OCD6"
 		(at 353.06 147.32 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25389,7 +25149,6 @@
 	)
 	(label "FLIPY'"
 		(at 269.24 50.8 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25400,7 +25159,6 @@
 	)
 	(label "OA1"
 		(at 49.53 237.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25411,7 +25169,6 @@
 	)
 	(label "D7"
 		(at 92.71 45.72 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25422,7 +25179,6 @@
 	)
 	(label "D1"
 		(at 80.01 38.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25433,7 +25189,6 @@
 	)
 	(label "OA2"
 		(at 63.5 231.14 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25444,7 +25199,6 @@
 	)
 	(label "AB''8"
 		(at 29.21 271.78 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25455,7 +25209,6 @@
 	)
 	(label "OCHA1"
 		(at 325.12 134.62 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25466,7 +25219,6 @@
 	)
 	(label "~{OBEN}"
 		(at 269.24 55.88 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25477,7 +25229,6 @@
 	)
 	(label "OA9"
 		(at 63.5 207.01 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25488,7 +25239,6 @@
 	)
 	(label "YPOS4"
 		(at 165.1 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25499,7 +25249,6 @@
 	)
 	(label "YPOS7"
 		(at 165.1 50.8 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25510,7 +25259,6 @@
 	)
 	(label "OCD4"
 		(at 368.3 115.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25521,7 +25269,6 @@
 	)
 	(label "OCHA0"
 		(at 325.12 186.69 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25532,7 +25279,6 @@
 	)
 	(label "OCD15"
 		(at 353.06 95.25 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25543,7 +25289,6 @@
 	)
 	(label "YPOS5"
 		(at 165.1 45.72 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25554,7 +25299,6 @@
 	)
 	(label "D4"
 		(at 92.71 53.34 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25565,7 +25309,6 @@
 	)
 	(label "OA5"
 		(at 63.5 238.76 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25576,7 +25319,6 @@
 	)
 	(label "OD4"
 		(at 104.14 240.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25587,7 +25329,6 @@
 	)
 	(label "D1"
 		(at 133.35 199.39 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25598,7 +25339,6 @@
 	)
 	(label "D'4"
 		(at 182.88 251.46 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25609,7 +25349,6 @@
 	)
 	(label "OCHA7"
 		(at 166.37 114.3 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25620,7 +25359,6 @@
 	)
 	(label "PAL1"
 		(at 166.37 78.74 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25631,7 +25369,6 @@
 	)
 	(label "OCD5"
 		(at 368.3 118.11 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25642,7 +25379,6 @@
 	)
 	(label "M18DIV32"
 		(at 287.02 41.91 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25653,7 +25389,6 @@
 	)
 	(label "COL0"
 		(at 394.97 105.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25664,7 +25399,6 @@
 	)
 	(label "OCD5"
 		(at 353.06 199.39 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25675,7 +25409,6 @@
 	)
 	(label "OCA1"
 		(at 287.02 64.77 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25686,7 +25419,6 @@
 	)
 	(label "OCHA8"
 		(at 166.37 111.76 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25697,7 +25429,6 @@
 	)
 	(label "D2"
 		(at 80.01 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25708,7 +25439,6 @@
 	)
 	(label "~{LBRST}"
 		(at 177.8 241.3 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25719,7 +25449,6 @@
 	)
 	(label "DM5"
 		(at 55.88 48.26 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25730,7 +25459,6 @@
 	)
 	(label "OCD7"
 		(at 353.06 204.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25741,7 +25469,6 @@
 	)
 	(label "OCHA5"
 		(at 325.12 35.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25752,7 +25479,6 @@
 	)
 	(label "OCD9"
 		(at 353.06 25.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25763,7 +25489,6 @@
 	)
 	(label "PAL'2"
 		(at 307.34 115.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25774,7 +25499,6 @@
 	)
 	(label "OA1"
 		(at 63.5 228.6 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25785,7 +25509,6 @@
 	)
 	(label "OA6"
 		(at 63.5 241.3 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25796,7 +25519,6 @@
 	)
 	(label "OD0"
 		(at 104.14 229.87 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25807,7 +25529,6 @@
 	)
 	(label "V2"
 		(at 182.88 60.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25818,7 +25539,6 @@
 	)
 	(label "COL3"
 		(at 394.97 113.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25829,7 +25549,6 @@
 	)
 	(label "OCD2"
 		(at 353.06 191.77 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25840,7 +25559,6 @@
 	)
 	(label "OA8"
 		(at 63.5 204.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25851,7 +25569,6 @@
 	)
 	(label "OA1"
 		(at 63.5 186.69 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25862,7 +25579,6 @@
 	)
 	(label "V128"
 		(at 182.88 30.48 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25873,7 +25589,6 @@
 	)
 	(label "OCD1"
 		(at 353.06 189.23 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25884,7 +25599,6 @@
 	)
 	(label "D6"
 		(at 133.35 196.85 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25895,7 +25609,6 @@
 	)
 	(label "OD7"
 		(at 87.63 191.77 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25906,7 +25619,6 @@
 	)
 	(label "OCD8"
 		(at 368.3 125.73 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25917,7 +25629,6 @@
 	)
 	(label "D'7"
 		(at 137.16 50.8 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25928,7 +25639,6 @@
 	)
 	(label "AB''1"
 		(at 19.05 243.84 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25939,7 +25649,6 @@
 	)
 	(label "OD4"
 		(at 87.63 184.15 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25950,7 +25659,6 @@
 	)
 	(label "OCHA2"
 		(at 311.15 59.69 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25961,7 +25669,6 @@
 	)
 	(label "OCD6"
 		(at 353.06 201.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25972,7 +25679,6 @@
 	)
 	(label "~{OCHAH}"
 		(at 200.66 121.92 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25983,7 +25689,6 @@
 	)
 	(label "OCHA6"
 		(at 325.12 201.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25994,7 +25699,6 @@
 	)
 	(label "OCHA12"
 		(at 325.12 162.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26005,7 +25709,6 @@
 	)
 	(label "AB''5"
 		(at 19.05 204.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26016,7 +25719,6 @@
 	)
 	(label "D'5"
 		(at 182.88 185.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26027,7 +25729,6 @@
 	)
 	(label "OCD10"
 		(at 353.06 82.55 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26038,7 +25739,6 @@
 	)
 	(label "D'2"
 		(at 120.65 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26049,7 +25749,6 @@
 	)
 	(label "OCHA3"
 		(at 325.12 85.09 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26060,7 +25759,6 @@
 	)
 	(label "XPOS22"
 		(at 212.09 152.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26071,7 +25769,6 @@
 	)
 	(label "D'6"
 		(at 182.88 256.54 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26082,7 +25779,6 @@
 	)
 	(label "DM7"
 		(at 55.88 95.25 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26093,7 +25789,6 @@
 	)
 	(label "D'1"
 		(at 137.16 53.34 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26104,7 +25799,6 @@
 	)
 	(label "PAL'0"
 		(at 307.34 110.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26115,7 +25809,6 @@
 	)
 	(label "OD7"
 		(at 104.14 191.77 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26126,7 +25819,6 @@
 	)
 	(label "OCD14"
 		(at 368.3 140.97 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26137,7 +25829,6 @@
 	)
 	(label "D0"
 		(at 80.01 35.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26148,7 +25839,6 @@
 	)
 	(label "D'6"
 		(at 138.43 127 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26159,7 +25849,6 @@
 	)
 	(label "OCHA10"
 		(at 325.12 48.26 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26170,7 +25859,6 @@
 	)
 	(label "OCD13"
 		(at 353.06 90.17 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26181,7 +25869,6 @@
 	)
 	(label "D'6"
 		(at 137.16 43.18 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26192,7 +25879,6 @@
 	)
 	(label "DM7"
 		(at 55.88 53.34 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26203,7 +25889,6 @@
 	)
 	(label "H2''"
 		(at 19.05 252.73 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26214,7 +25899,6 @@
 	)
 	(label "D'4"
 		(at 137.16 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26225,7 +25909,6 @@
 	)
 	(label "~{DMCNTEN'}"
 		(at 251.46 123.19 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26236,7 +25919,6 @@
 	)
 	(label "OCHA8"
 		(at 325.12 152.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26247,7 +25929,6 @@
 	)
 	(label "OCD14"
 		(at 353.06 92.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26258,7 +25939,6 @@
 	)
 	(label "D'0"
 		(at 137.16 81.28 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26269,7 +25949,6 @@
 	)
 	(label "XPOS21"
 		(at 212.09 149.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26280,7 +25959,6 @@
 	)
 	(label "XPOS27"
 		(at 212.09 190.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26291,7 +25969,6 @@
 	)
 	(label "OCD11"
 		(at 353.06 85.09 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26302,7 +25979,6 @@
 	)
 	(label "PAL0"
 		(at 275.59 110.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26313,7 +25989,6 @@
 	)
 	(label "COL3"
 		(at 370.84 182.88 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26324,7 +25999,6 @@
 	)
 	(label "DM0"
 		(at 20.32 236.22 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26335,7 +26009,6 @@
 	)
 	(label "OCHA10"
 		(at 325.12 157.48 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26346,7 +26019,6 @@
 	)
 	(label "OA2"
 		(at 49.53 240.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26357,7 +26029,6 @@
 	)
 	(label "D'7"
 		(at 120.65 45.72 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26368,7 +26039,6 @@
 	)
 	(label "OD6"
 		(at 87.63 189.23 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26379,7 +26049,6 @@
 	)
 	(label "D'3"
 		(at 120.65 43.18 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26390,7 +26059,6 @@
 	)
 	(label "OA6"
 		(at 63.5 199.39 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26401,7 +26069,6 @@
 	)
 	(label "V1"
 		(at 182.88 58.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26412,7 +26079,6 @@
 	)
 	(label "XPOS11"
 		(at 212.09 218.44 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26423,7 +26089,6 @@
 	)
 	(label "OCHA3"
 		(at 325.12 139.7 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26434,7 +26099,6 @@
 	)
 	(label "OD3"
 		(at 87.63 233.68 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26445,7 +26109,6 @@
 	)
 	(label "D'2"
 		(at 182.88 152.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26456,7 +26119,6 @@
 	)
 	(label "DM1"
 		(at 55.88 80.01 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26467,7 +26129,6 @@
 	)
 	(label "OCHA1"
 		(at 325.12 25.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26478,7 +26139,6 @@
 	)
 	(label "OCD15"
 		(at 368.3 143.51 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26489,7 +26149,6 @@
 	)
 	(label "OD0"
 		(at 87.63 226.06 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26500,7 +26159,6 @@
 	)
 	(label "OD2"
 		(at 104.14 189.23 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26511,7 +26169,6 @@
 	)
 	(label "D'1"
 		(at 138.43 114.3 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26522,7 +26179,6 @@
 	)
 	(label "OCD3"
 		(at 368.3 113.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26533,7 +26189,6 @@
 	)
 	(label "OA0"
 		(at 63.5 226.06 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26544,7 +26199,6 @@
 	)
 	(label "YPOS0"
 		(at 181.61 71.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26555,7 +26209,6 @@
 	)
 	(label "OA4"
 		(at 49.53 195.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26566,7 +26219,6 @@
 	)
 	(label "OD5"
 		(at 104.14 237.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26577,7 +26229,6 @@
 	)
 	(label "~{LBRST}"
 		(at 177.8 276.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26588,7 +26239,6 @@
 	)
 	(label "YPOS7"
 		(at 181.61 43.18 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26599,7 +26249,6 @@
 	)
 	(label "DM2"
 		(at 55.88 82.55 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26610,7 +26259,6 @@
 	)
 	(label "OCD0"
 		(at 368.3 105.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26621,7 +26269,6 @@
 	)
 	(label "OCHA12"
 		(at 325.12 53.34 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26632,7 +26279,6 @@
 	)
 	(label "D'5"
 		(at 137.16 45.72 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26643,7 +26289,6 @@
 	)
 	(label "COL1"
 		(at 394.97 107.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26654,7 +26299,6 @@
 	)
 	(label "D6"
 		(at 92.71 48.26 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26665,7 +26309,6 @@
 	)
 	(label "OA7"
 		(at 49.53 193.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26676,7 +26319,6 @@
 	)
 	(label "OCD7"
 		(at 353.06 149.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26687,7 +26329,6 @@
 	)
 	(label "OCHA1"
 		(at 325.12 80.01 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26698,7 +26339,6 @@
 	)
 	(label "OA5"
 		(at 49.53 198.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26709,7 +26349,6 @@
 	)
 	(label "DM2"
 		(at 55.88 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26720,7 +26359,6 @@
 	)
 	(label "D'3"
 		(at 182.88 154.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26731,7 +26369,6 @@
 	)
 	(label "OCD2"
 		(at 368.3 110.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26742,7 +26379,6 @@
 	)
 	(label "OCLK1"
 		(at 177.8 271.78 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26753,7 +26389,6 @@
 	)
 	(label "OCD11"
 		(at 353.06 30.48 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26764,7 +26399,6 @@
 	)
 	(label "H2''"
 		(at 13.97 175.26 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26775,7 +26409,6 @@
 	)
 	(label "D'1"
 		(at 182.88 218.44 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26786,7 +26419,6 @@
 	)
 	(label "~{ODB}5L1"
 		(at 177.8 228.6 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26797,7 +26429,6 @@
 	)
 	(label "OD3"
 		(at 104.14 194.31 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26808,7 +26439,6 @@
 	)
 	(label "D2"
 		(at 133.35 189.23 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26819,7 +26449,6 @@
 	)
 	(label "YPOS3"
 		(at 165.1 38.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26830,7 +26459,6 @@
 	)
 	(label "D3"
 		(at 133.35 194.31 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26841,7 +26469,6 @@
 	)
 	(label "DM4"
 		(at 19.05 189.23 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26852,7 +26479,6 @@
 	)
 	(label "COL2"
 		(at 370.84 180.34 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26863,7 +26489,6 @@
 	)
 	(label "~{ODB}5"
 		(at 270.51 135.89 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26874,7 +26499,6 @@
 	)
 	(label "OCD5"
 		(at 353.06 144.78 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26885,7 +26509,6 @@
 	)
 	(label "OCHA4"
 		(at 325.12 142.24 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26896,7 +26519,6 @@
 	)
 	(label "D5"
 		(at 80.01 80.01 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26907,7 +26529,6 @@
 	)
 	(label "OCHA8"
 		(at 325.12 207.01 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26918,7 +26539,6 @@
 	)
 	(label "AB''6"
 		(at 19.05 196.85 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26929,7 +26549,6 @@
 	)
 	(label "OCD15"
 		(at 353.06 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26940,7 +26559,6 @@
 	)
 	(label "FLIPX'"
 		(at 269.24 48.26 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26951,7 +26569,6 @@
 	)
 	(label "OD4"
 		(at 104.14 201.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26962,7 +26579,6 @@
 	)
 	(label "FLIPX'"
 		(at 275.59 118.11 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26973,7 +26589,6 @@
 	)
 	(label "OCD8"
 		(at 353.06 22.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26984,7 +26599,6 @@
 	)
 	(label "OCD10"
 		(at 353.06 27.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26995,7 +26609,6 @@
 	)
 	(label "OCHA5"
 		(at 325.12 199.39 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27006,7 +26619,6 @@
 	)
 	(label "COL1"
 		(at 370.84 177.8 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27017,7 +26629,6 @@
 	)
 	(label "OA3"
 		(at 49.53 234.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27028,7 +26639,6 @@
 	)
 	(label "OCLK2"
 		(at 177.8 203.2 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27039,7 +26649,6 @@
 	)
 	(label "~{ODB}5L2"
 		(at 177.8 195.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27050,7 +26659,6 @@
 	)
 	(label "AB''4"
 		(at 19.05 201.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27061,7 +26669,6 @@
 	)
 	(label "~{M18DIV16}"
 		(at 287.02 54.61 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27072,7 +26679,6 @@
 	)
 	(label "OCD3"
 		(at 353.06 194.31 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27083,7 +26689,6 @@
 	)
 	(label "PAL2"
 		(at 166.37 83.82 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27094,7 +26699,6 @@
 	)
 	(label "AB''9"
 		(at 29.21 264.16 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27105,7 +26709,6 @@
 	)
 	(label "DM2"
 		(at 20.32 233.68 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27116,7 +26719,6 @@
 	)
 	(label "OCD12"
 		(at 353.06 87.63 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27127,7 +26729,6 @@
 	)
 	(label "YPOS1"
 		(at 165.1 53.34 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27138,7 +26739,6 @@
 	)
 	(label "MD'''1"
 		(at 139.7 237.49 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27149,7 +26749,6 @@
 	)
 	(label "FLIPX"
 		(at 166.37 88.9 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27160,7 +26759,6 @@
 	)
 	(label "D'3"
 		(at 138.43 109.22 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27171,7 +26769,6 @@
 	)
 	(label "OCHA5"
 		(at 325.12 144.78 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27182,7 +26779,6 @@
 	)
 	(label "V8"
 		(at 182.88 66.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27193,7 +26789,6 @@
 	)
 	(label "OCHA5"
 		(at 311.15 36.83 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27204,7 +26799,6 @@
 	)
 	(label "D5"
 		(at 92.71 35.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27215,7 +26809,6 @@
 	)
 	(label "M18DIV8M4"
 		(at 364.49 151.13 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27226,7 +26819,6 @@
 	)
 	(label "D4"
 		(at 133.35 201.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27237,7 +26829,6 @@
 	)
 	(label "OCHA7"
 		(at 325.12 204.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27248,7 +26839,6 @@
 	)
 	(label "D7"
 		(at 133.35 191.77 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27260,7 +26850,6 @@
 	(hierarchical_label "FLIPX''"
 		(shape output)
 		(at 307.34 118.11 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27272,7 +26861,6 @@
 	(hierarchical_label "~{OBEN''}"
 		(shape output)
 		(at 307.34 120.65 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)

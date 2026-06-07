@@ -12,7 +12,7 @@
     You should have received a copy of the GNU General Public License
     along with JTCORES.  If not, see <http://www.gnu.org/licenses/>. */
 
-module jtmzone_fix(
+module jtmzone_fix_old(
     // video inputs
     input        [8:0] hdump,
     input        [8:0] vdump,

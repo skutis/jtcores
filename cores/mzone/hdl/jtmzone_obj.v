@@ -115,6 +115,10 @@ reg        lhbl_l, lvbl_l;
 reg [15:0] frame_cnt;
 `elsif MZONE_OBJ_DMA_WATCH
 reg [15:0] frame_cnt;
+`elsif MZONE_OBJ_PXL_WATCH
+reg [15:0] frame_cnt;
+`elsif MZONE_OBJ_ROM_WATCH
+reg [15:0] frame_cnt;
 `endif
 reg [ 9:0] scan_obj;
 reg [ 3:0] sub_cnt;
@@ -143,10 +147,9 @@ wire [7:0] scan_dout;
 wire       dbg_dma_window     /* verilator public_flat */;
 wire       dbg_dma_copy       /* verilator public_flat */;
 wire       dbg_dma_we         /* verilator public_flat */;
-wire [8:0] ysum      = {1'b0,vdump[7:0]} + {1'b0,ypos};
-wire [7:0] ysum8  = ysum[7:0];
+wire [8:0] ysum   = {1'b0,vdump[7:0]} + {1'b0,ypos};
 wire       inzone = ysum[7:4] == 4'hf;
-wire [3:0] ysub   = ysum[3:0];
+wire [3:0] ysub   = ysum[3:0] ^ {4{attr[7]}};
 wire [7:0] xpos_raw_eff = sub_cnt==4'd8 ? scan_dout : raw_xpos;
 wire [8:0] xpos   = {1'b0,xpos_raw_eff};
 wire [1:0] scan_byte = sub_cnt[3] ? 2'd3 : sub_cnt[2:1];
@@ -163,13 +166,9 @@ wire [12:0] draw_rom_addr;
 wire        draw_rom_cs;
 wire [ 7:0] draw_pxl;
 wire [ 3:0] lut_pxl;
-// PCB OBJ X/read counter domain. The object X value from RAM is used raw; the
-// draw/read side is aligned to the PCB object counter instead of offsetting X.
-wire        draw_hs = hdump == 9'd44;
-wire [8:0]  draw_hdump = hdump < 9'd40 ? hdump + 9'd344 :
-                         hdump < 9'd44 ? 9'd0 :
-                                         hdump - 9'd44;
-wire        obj_visible = draw_hdump < 9'd244;
+wire        draw_hs = hdump == 9'd0;
+wire [8:0]  draw_hdump = hdump;
+wire        obj_visible = hdump < 9'd288;
 // jtframe_draw handles horizontal flip internally: hflip=1 makes it request
 // the second 8-pixel half first and shift pixels in the opposite direction.
 // Do not also invert the ROM half here. The Konami 083-style hardware exposes
@@ -218,11 +217,19 @@ always @(posedge clk) begin
         frame_cnt <= 16'd0;
 `elsif MZONE_OBJ_DMA_WATCH
         frame_cnt <= 16'd0;
+`elsif MZONE_OBJ_PXL_WATCH
+        frame_cnt <= 16'd0;
+`elsif MZONE_OBJ_ROM_WATCH
+        frame_cnt <= 16'd0;
 `endif
     end else begin
 `ifdef MZONE_OBJ_WATCH
         if( LVBL && !lvbl_l ) frame_cnt <= frame_cnt + 16'd1;
 `elsif MZONE_OBJ_DMA_WATCH
+        if( LVBL && !lvbl_l ) frame_cnt <= frame_cnt + 16'd1;
+`elsif MZONE_OBJ_PXL_WATCH
+        if( LVBL && !lvbl_l ) frame_cnt <= frame_cnt + 16'd1;
+`elsif MZONE_OBJ_ROM_WATCH
         if( LVBL && !lvbl_l ) frame_cnt <= frame_cnt + 16'd1;
 `endif
         scan_cen <= 1'b0;
@@ -285,21 +292,18 @@ always @(posedge clk) begin
                         end else begin
                             if( inzone ) begin
                                 dr_code      <= code;
-                                dr_xpos      <= xpos;
+                                dr_xpos      <= flip ? xpos - 9'd11 : xpos + 9'd32;
                                 dr_pal       <= attr[3:0];
-                                // Object attribute bit 6 is passed as the
-                                // logical horizontal flip expected by
-                                // jtframe_objdraw. jtframe then owns both
-                                // half order and bit-shift direction.
-                                dr_hflip     <= attr[6];
+                                // MAME/PCB polarity: bit 6 clear means flip X.
+                                dr_hflip     <= ~attr[6];
                                 dr_vflip     <= attr[7];
                                 dr_ysub      <= ysub;
                                 draw <= 1'b1;
 `ifdef MZONE_OBJ_WATCH
                                 if( frame_cnt >= `MZONE_OBJ_WATCH_FROM && frame_cnt <= `MZONE_OBJ_WATCH_TO )
-                                    $display("MZONE_OBJ frame=%0d line=%0d base=%03x attr=%02x ypos=%02x code=%02x xpos=%02x ysum=%02x ysub=%x hflip=%b vflip=%b color=%x",
+                                    $display("MZONE_OBJ frame=%0d line=%0d base=%03x attr=%02x ypos=%02x code=%02x xpos=%02x ysum=%03x ysub=%x hflip=%b vflip=%b color=%x",
                                         frame_cnt, vdump[7:0], { scan_obj[7:0], 2'b00 }, attr, ypos, code, scan_dout,
-                                        ysum8, ysub, attr[6], attr[7], attr[3:0]);
+                                        ysum, ysub, ~attr[6], attr[7], attr[3:0]);
 `endif
                             end
                             if( scan_obj==OBJ_SCAN_LAST ) begin
@@ -497,6 +501,34 @@ assign pxl_en = 1'b0;
 `else
 assign pxl_en = pxl_cen && obj_visible && lut_pxl != 4'd0;
 assign pxl    = pxl_en ? lut_pxl : 4'd0;
+`endif
+
+`ifdef MZONE_OBJ_PXL_WATCH
+always @(posedge clk) begin
+    if( pxl_cen &&
+        frame_cnt >= `MZONE_OBJ_PXL_WATCH_FROM &&
+        frame_cnt <= `MZONE_OBJ_PXL_WATCH_TO &&
+        hdump >= `MZONE_OBJ_PXL_X0 && hdump <= `MZONE_OBJ_PXL_X1 &&
+        vdump >= `MZONE_OBJ_PXL_Y0 && vdump <= `MZONE_OBJ_PXL_Y1 ) begin
+        $display("MZONE_OBJ_PXL frame=%0d x=%0d y=%0d draw_x=%0d visible=%b draw_pxl=%02x lut=%x pxl_en=%b pxl=%x",
+            frame_cnt, hdump, vdump, draw_hdump, obj_visible,
+            draw_pxl, lut_pxl, pxl_en, pxl);
+    end
+end
+`endif
+
+`ifdef MZONE_OBJ_ROM_WATCH
+always @(posedge clk) begin
+    if( rom_ok && draw_rom_cs &&
+        frame_cnt >= `MZONE_OBJ_ROM_WATCH_FROM &&
+        frame_cnt <= `MZONE_OBJ_ROM_WATCH_TO &&
+        draw_rom_addr[12:5] == 8'haa &&
+        draw_rom_addr[3:0] == `MZONE_OBJ_ROM_WATCH_ROW ) begin
+        $display("MZONE_OBJ_ROM frame=%0d req=%03x code=%02x half=%0d row=%x addr=%04x raw=%08x pxl_data=%08x hflip=%b",
+            frame_cnt, draw_rom_addr, draw_rom_addr[12:5], draw_rom_addr[4],
+            draw_rom_addr[3:0], rom_addr, rom_data, pxl_data, dr_hflip);
+    end
+end
 `endif
 
 endmodule

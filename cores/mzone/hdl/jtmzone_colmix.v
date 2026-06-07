@@ -54,15 +54,14 @@ wire        pal_a4 = !obj_en;
 wire [ 3:0] scr_gated = scr_pxl;
 wire [ 4:0] pal_mux = { pal_a4, obj_en ? obj_pxl : scr_gated };
 
-reg  [ 4:0] mux;
 `ifdef MZONE_COLMIX_WATCH
 reg  [15:0] frame_cnt;
 reg         lvbl_l;
 `endif
 
-assign pal_addr = { 3'd0, mux };
-assign dbg_pal_idx = mux;
-assign dbg_obj_opaque = !mux[4];
+assign pal_addr = { 3'd0, pal_mux };
+assign dbg_pal_idx = pal_mux;
+assign dbg_obj_opaque = !pal_mux[4];
 assign red_raw   = rg_dac( pal_prom_dout[2:0] );
 assign green_raw = rg_dac( pal_prom_dout[5:3] );
 assign blue_raw  = b_dac ( pal_prom_dout[7:6] );
@@ -114,7 +113,6 @@ jtmzone_video_debug u_debug(
 
 always @(posedge clk) begin
     if( rst ) begin
-        mux <= 5'd0;
 `ifdef MZONE_COLMIX_WATCH
         frame_cnt <= 16'd0;
         lvbl_l    <= 1'b0;
@@ -124,15 +122,13 @@ always @(posedge clk) begin
         lvbl_l <= LVBL;
         if( LVBL && !lvbl_l ) frame_cnt <= frame_cnt + 16'd1;
 `endif
-        mux[4]   <= pal_a4;
-        mux[3:0] <= obj_en ? obj_pxl : scr_gated;
 `ifdef MZONE_COLMIX_WATCH
         if( frame_cnt >= `MZONE_COLMIX_WATCH_FROM && frame_cnt <= `MZONE_COLMIX_WATCH_TO &&
             hdump >= `MZONE_COLMIX_X0 && hdump <= `MZONE_COLMIX_X1 &&
             vdump >= `MZONE_COLMIX_Y0 && vdump <= `MZONE_COLMIX_Y1 ) begin
-            $display("MZONE_COLMIX frame=%0d x=%0d y=%0d obj_en=%b obj=%b fix=%b obj_pxl=%x scr_pxl=%x mux=%02x pal_mux=%02x prom=%02x rgb=%x%x%x",
+            $display("MZONE_COLMIX frame=%0d x=%0d y=%0d obj_en=%b obj=%b fix=%b obj_pxl=%x scr_pxl=%x pal_mux=%02x prom=%02x rgb=%x%x%x",
                 frame_cnt, hdump, vdump, obj_en, obj_pxl_en, fix_en, obj_pxl, scr_pxl,
-                mux, pal_mux, pal_prom_dout, red_raw, green_raw, blue_raw);
+                pal_mux, pal_prom_dout, red_raw, green_raw, blue_raw);
         end
 `endif
     end

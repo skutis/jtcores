@@ -12,13 +12,15 @@ from gi.repository import Gdk, GdkPixbuf, GLib, Gtk
 
 
 class ImageWatcher:
-    def __init__(self, path, interval_ms, zoom):
+    def __init__(self, path, interval_ms, zoom, hbase, vbase):
         self.path = path
         self.directory = os.path.dirname(path) or "."
         self.files = []
         self.index = 0
         self.interval_ms = interval_ms
         self.zoom = zoom
+        self.hbase = hbase
+        self.vbase = vbase
         self.mtime = None
         self.base_pixbuf = None
         self.drag_button = None
@@ -27,6 +29,10 @@ class ImageWatcher:
         self.drag_h = 0.0
         self.drag_v = 0.0
         self.maximized = False
+        self.coord_text = "x=- y=-"
+        self.coremod = self.read_coremod()
+        self.scaled_width = 0
+        self.scaled_height = 0
 
         self.window = Gtk.Window(title="watch_image")
         self.window.set_default_size(900, 700)
@@ -94,7 +100,7 @@ class ImageWatcher:
         files = [
             os.path.join(self.directory, name)
             for name in names
-            if name.lower().endswith((".jpg", ".jpeg"))
+            if name.lower().endswith((".jpg", ".jpeg", ".png"))
         ]
         files.sort()
         if not files:
@@ -118,6 +124,14 @@ class ImageWatcher:
         except FileNotFoundError:
             return None
 
+    def read_coremod(self):
+        try:
+            with open("core.mod", "rb") as f:
+                data = f.read(1)
+        except OSError:
+            return 0
+        return data[0] if data else 0
+
     def reload(self, force):
         mtime = self.stat_mtime()
         if mtime is None:
@@ -133,6 +147,58 @@ class ImageWatcher:
         self.base_pixbuf = pixbuf
         self.update_image()
 
+    def update_title(self):
+        if self.base_pixbuf is None:
+            return
+
+        width = max(1, int(round(self.base_pixbuf.get_width() * self.zoom)))
+        height = max(1, int(round(self.base_pixbuf.get_height() * self.zoom)))
+        title = (
+            f"{os.path.basename(self.path)}  {self.index + 1}/{len(self.files)}  "
+            f"zoom={self.zoom:.2f}x  {width}x{height}  {self.coord_text}"
+        )
+        self.window.set_title(title)
+        self.header.set_title(title)
+
+    def update_coords(self, x, y):
+        if self.base_pixbuf is None:
+            return
+
+        alloc = self.image.get_allocation()
+        px = x - alloc.x
+        py = y - alloc.y
+        if self.scaled_width and self.scaled_height:
+            px -= max(0, (alloc.width - self.scaled_width) / 2)
+            py -= max(0, (alloc.height - self.scaled_height) / 2)
+
+        img_x = int(px / self.zoom)
+        img_y = int(py / self.zoom)
+        if (
+            0 <= img_x < self.base_pixbuf.get_width()
+            and 0 <= img_y < self.base_pixbuf.get_height()
+        ):
+            raw_x, raw_y = self.raw_coords(img_x, img_y)
+            hpos = (raw_x + self.hbase) % 384
+            vpos = (raw_y + self.vbase) % 264
+            self.coord_text = (
+                f"img x={img_x} y={img_y}  raw x={raw_x} y={raw_y}  "
+                f"hpos={hpos} vpos={vpos}"
+            )
+        else:
+            self.coord_text = "x=- y=-"
+        self.update_title()
+
+    def raw_coords(self, img_x, img_y):
+        if not (self.coremod & 1):
+            return img_x, img_y
+
+        raw_w = self.base_pixbuf.get_height()
+        raw_h = self.base_pixbuf.get_width()
+        ccw = bool(self.coremod & 4)
+        if ccw:
+            return img_y, raw_h - 1 - img_x
+        return img_y, raw_h - 1 - img_x
+
     def update_image(self, scroll_to=None):
         if self.base_pixbuf is None:
             return
@@ -143,16 +209,13 @@ class ImageWatcher:
 
         width = max(1, int(round(self.base_pixbuf.get_width() * self.zoom)))
         height = max(1, int(round(self.base_pixbuf.get_height() * self.zoom)))
+        self.scaled_width = width
+        self.scaled_height = height
         interp = GdkPixbuf.InterpType.NEAREST
         scaled = self.base_pixbuf.scale_simple(width, height, interp)
         self.image.set_from_pixbuf(scaled)
 
-        title = (
-            f"{os.path.basename(self.path)}  {self.index + 1}/{len(self.files)}  "
-            f"zoom={self.zoom:.2f}x  {width}x{height}"
-        )
-        self.window.set_title(title)
-        self.header.set_title(title)
+        self.update_title()
 
         GLib.idle_add(self.restore_scroll, old_x, old_y)
 
@@ -248,6 +311,7 @@ class ImageWatcher:
         return False
 
     def on_motion(self, _widget, event):
+        self.update_coords(event.x, event.y)
         if self.drag_button is None:
             return False
 
@@ -280,15 +344,17 @@ def main():
     parser.add_argument(
         "path",
         nargs="*",
-        default="frames/frame_00004.jpg",
-        help="image file(s) to watch, default: frames/frame_00004.jpg",
+        default="frames/frame_00004.png",
+        help="image file(s) to watch, default: frames/frame_00004.png",
     )
     parser.add_argument("--interval", type=float, default=0.25, help="poll interval in seconds")
     parser.add_argument("--zoom", type=float, default=3.0, help="initial zoom")
+    parser.add_argument("--hbase", type=int, default=0, help="raw active x to hpos offset")
+    parser.add_argument("--vbase", type=int, default=16, help="raw active y to vpos offset")
     args = parser.parse_args()
 
-    path = args.path[0] if args.path else "frames/frame_00004.jpg"
-    ImageWatcher(path, max(50, int(args.interval * 1000)), args.zoom)
+    path = args.path[0] if args.path else "frames/frame_00004.png"
+    ImageWatcher(path, max(50, int(args.interval * 1000)), args.zoom, args.hbase, args.vbase)
     Gtk.main()
 
 
