@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from pathlib import Path
+import os
 
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -44,6 +45,16 @@ def encode_row(pens):
     return bytes((data[1], data[0], data[3], data[2]))
 
 
+def write_tile_rows(buf, tile, rows):
+    for row in range(8):
+        pens = [
+            0xF if rows[7 - x][7 - row] != "." else 0x0
+            for x in range(8)
+        ]
+        word_addr = (tile << 3) | row
+        put(buf, SCR_START + word_addr * 4, *encode_row(pens))
+
+
 def op(buf, addr, value):
     put(buf, addr, konami_opcode(addr, value))
 
@@ -60,6 +71,24 @@ def lda_ext(buf, pc, addr):
     return pc + 3
 
 
+def ldb_imm(buf, pc, value):
+    op(buf, pc, 0xC6)
+    put(buf, pc + 1, value)
+    return pc + 2
+
+
+def ldx_imm(buf, pc, value):
+    op(buf, pc, 0x8E)
+    put(buf, pc + 1, value >> 8, value)
+    return pc + 3
+
+
+def stb_x_postinc(buf, pc):
+    op(buf, pc, 0xE7)
+    put(buf, pc + 1, 0x80)
+    return pc + 2
+
+
 def sta_ext(buf, pc, addr):
     op(buf, pc, 0xB7)
     put(buf, pc + 1, addr >> 8, addr)
@@ -69,6 +98,23 @@ def sta_ext(buf, pc, addr):
 def adda_imm(buf, pc, value):
     op(buf, pc, 0x8B)
     put(buf, pc + 1, value)
+    return pc + 2
+
+
+def cmpa_imm(buf, pc, value):
+    op(buf, pc, 0x81)
+    put(buf, pc + 1, value)
+    return pc + 2
+
+
+def lsla(buf, pc):
+    op(buf, pc, 0x48)
+    return pc + 1
+
+
+def bcs(buf, pc, rel):
+    op(buf, pc, 0x25)
+    put(buf, pc + 1, rel)
     return pc + 2
 
 
@@ -82,6 +128,14 @@ def write_vram_cram(buf, pc, vram_base, cram_base, offs, tile, color):
     pc = sta_ext(buf, pc, vram_base + offs)
     pc = lda_imm(buf, pc, color)
     pc = sta_ext(buf, pc, cram_base + offs)
+    return pc
+
+
+def write_tile_row(buf, pc, base, row, values):
+    pc = ldx_imm(buf, pc, base + (row << 5))
+    for value in values:
+        pc = ldb_imm(buf, pc, value)
+        pc = stb_x_postinc(buf, pc)
     return pc
 
 
@@ -100,126 +154,166 @@ def write_sprite(buf, pc, index, attr, ypos, code, xpos):
 
 def main():
     rom = bytearray(SRC.read_bytes())
+    flip_screen = os.environ.get("MZONE_SCROLLTEST_FLIP") == "1"
+    show_sprites = os.environ.get("MZONE_SCROLLTEST_SPRITES") == "1"
+    first2_yb = os.environ.get("MZONE_SCROLLTEST_FIRST2_YB") == "1"
+    solid_marker = os.environ.get("MZONE_SCROLLTEST_SOLID_MARKER") == "1"
+    column_numbers = os.environ.get("MZONE_SCROLLTEST_COLUMN_NUMBERS") == "1"
+    scroll_towards_fix = os.environ.get("MZONE_SCROLLTEST_AWAY_FIX") != "1"
+    scroll_step = int(os.environ.get("MZONE_SCROLLTEST_SCROLL_STEP", "8"), 0) & 0xFF
+    if scroll_step not in (0, 1, 2, 4, 8):
+        raise ValueError("MZONE_SCROLLTEST_SCROLL_STEP must be 0, 1, 2, 4, or 8")
 
-    # Give only the start-position diagnostic markers their own CRAM color.
+    # Give diagnostic markers two CRAM colors so the same tile can make a
+    # checkerboard without changing graphics data between columns.
     marker_color = 0x0B
+    marker_color_alt = 0x0A
+    marker_color_red = 0x09
+    marker_tile = 0x7F
+    marker_hole_tile = 0x7E
     put(rom, PROM_START + 0x120 + 0xB7, 0x3E)
     put(rom, PROM_START + 0x120 + 0xBF, 0x3E)
+    put(rom, PROM_START + 0x120 + 0xA7, 0x3D)
+    put(rom, PROM_START + 0x120 + 0xAF, 0x3D)
+    put(rom, PROM_START + 0x120 + 0x97, 0x3C)
+    put(rom, PROM_START + 0x120 + 0x9F, 0x3C)
     put(rom, PROM_START + 0x01E, 0x3F)
+    put(rom, PROM_START + 0x01D, 0xC0)
+    put(rom, PROM_START + 0x01C, 0x07)
+    for pen in range(1, 16):
+        put(rom, PROM_START + 0x020 + 0x10 + pen, 0x0D)
 
-    border_rows = []
-    for row in range(8):
-        pens = [0x0] * 8
-        if row == 0 or row == 7:
-            pens = [0xF] * 8
-        else:
-            pens[0] = 0xF
-            pens[7] = 0xF
-        if row == 0:
-            pens[7] = 0xE
-        border_rows.append(encode_row(pens))
+    # Put the outside-border marker on a high diagnostic tile code so the
+    # normal 8/9 glyphs can still be used in numbered test rows.
+    write_tile_rows(rom, marker_tile, (
+        "########",
+        "########",
+        "########",
+        "########",
+        "########",
+        "########",
+        "########",
+        "########",
+    ))
+    write_tile_rows(rom, marker_hole_tile, (
+        "########",
+        "########",
+        "########",
+        "###.####",
+        "########",
+        "########",
+        "########",
+        "########",
+    ))
 
-    # Make tile $08 a solid diagnostic tile in the scroll/fix graphics region.
-    # jtmzone_scroll addresses graphics as 32-bit words:
-    # {code_msb, tile_code, row}. Four $ff bytes decode to pen $f for all pixels.
-    for row in range(8):
-        word_addr = (0x08 << 3) | row
-        put(rom, SCR_START + word_addr * 4, 0xFF, 0xFF, 0xFF, 0xFF)
-
-    # Tile $09 is an extra copy of the outside-border marker.
-    for row, data in enumerate(border_rows):
-        word_addr = (0x09 << 3) | row
-        put(rom, SCR_START + word_addr * 4, *data)
+    letter_rows = {
+        0x00: ("........", "..####..", ".##..##.", ".##..##.", ".##..##.", ".##..##.", "..####..", "........"),
+        0x01: ("........", "...##...", "..###...", "...##...", "...##...", "...##...", ".######.", "........"),
+        0x02: ("........", "..####..", ".##..##.", "....##..", "...##...", "..##....", ".######.", "........"),
+        0x03: ("........", ".#####..", "....##..", "...###..", "....##..", ".##..##.", "..####..", "........"),
+        0x04: ("........", "...###..", "..####..", ".##.##..", ".######.", "....##..", "....##..", "........"),
+        0x05: ("........", ".######.", ".##.....", ".#####..", "....##..", ".##..##.", "..####..", "........"),
+        0x06: ("........", "..####..", ".##.....", ".#####..", ".##..##.", ".##..##.", "..####..", "........"),
+        0x07: ("........", ".######.", "....##..", "...##...", "..##....", "..##....", "..##....", "........"),
+        0x08: ("........", "..####..", ".##..##.", "..####..", ".##..##.", ".##..##.", "..####..", "........"),
+        0x09: ("........", "..####..", ".##..##.", ".##..##.", "..#####.", "....##..", "..####..", "........"),
+        0x0A: ("........", "..####..", ".##..##.", ".##..##.", ".######.", ".##..##.", ".##..##.", "........"),
+        0x0B: ("........", ".#####..", ".##..##.", ".#####..", ".##..##.", ".##..##.", ".#####..", "........"),
+        0x0C: ("........", "..####..", ".##..##.", ".##.....", ".##.....", ".##..##.", "..####..", "........"),
+        0x0D: ("........", ".#####..", ".##..##.", ".##..##.", ".##..##.", ".##..##.", ".#####..", "........"),
+        0x0E: ("........", ".######.", ".##.....", ".#####..", ".##.....", ".##.....", ".######.", "........"),
+        0x0F: ("........", ".######.", ".##.....", ".#####..", ".##.....", ".##.....", ".##.....", "........"),
+        0x10: ("........", "..####..", ".##..##.", ".##.....", ".##.###.", ".##..##.", "..####..", "........"),
+        0x11: ("........", ".##..##.", ".##..##.", ".######.", ".##..##.", ".##..##.", ".##..##.", "........"),
+        0x12: ("........", "..####..", "...##...", "...##...", "...##...", "...##...", "..####..", "........"),
+        0x13: ("........", "...####.", "....##..", "....##..", "....##..", ".##.##..", "..###...", "........"),
+        0x14: ("........", ".##..##.", ".##.##..", ".####...", ".##.##..", ".##..##.", ".##..##.", "........"),
+        0x15: ("........", ".##.....", ".##.....", ".##.....", ".##.....", ".##.....", ".######.", "........"),
+        0x16: ("........", ".##..##.", ".######.", ".######.", ".##..##.", ".##..##.", ".##..##.", "........"),
+        0x17: ("........", ".##..##.", ".###.##.", ".######.", ".##.###.", ".##..##.", ".##..##.", "........"),
+        0x18: ("........", "..####..", ".##..##.", ".##..##.", ".##..##.", ".##..##.", "..####..", "........"),
+        0x19: ("........", ".#####..", ".##..##.", ".##..##.", ".#####..", ".##.....", ".##.....", "........"),
+        0x1A: ("........", "..####..", ".##..##.", ".##..##.", ".##.###.", ".##..##.", "..#####.", "........"),
+        0x1B: ("........", ".#####..", ".##..##.", ".##..##.", ".#####..", ".##.##..", ".##..##.", "........"),
+        0x1C: ("........", "..####..", ".##..##.", ".###....", "...###..", ".##..##.", "..####..", "........"),
+        0x1D: ("........", ".######.", "...##...", "...##...", "...##...", "...##...", "...##...", "........"),
+        0x1E: ("........", ".##..##.", ".##..##.", ".##..##.", ".##..##.", ".##..##.", "..####..", "........"),
+        0x1F: ("........", ".##..##.", ".##..##.", ".##..##.", ".##..##.", "..####..", "...##...", "........"),
+    }
+    for tile, rows in letter_rows.items():
+        write_tile_rows(rom, tile, rows)
 
     obj_code = 0xAA
+    probe_y = int(os.environ.get("MZONE_SCROLLTEST_PROBE_Y", "0x70"), 0) & 0xFF
+    bottom_y = int(os.environ.get("MZONE_SCROLLTEST_BOTTOM_Y", "0x09"), 0) & 0xFF
 
     # Main CPU IRQ test program at $8000. Opcode bytes are Konami-1 encoded;
     # operands are stored plain because jtframe only decodes opcode fetches.
-    # The IRQ handler increments both scroll registers once per vblank IRQ.
+    # The IRQ handler advances the scroll register once per vblank IRQ.
+    # Default to an 8-pixel step so short video captures move by whole
+    # character columns, but allow 1-pixel fine-scroll diagnostics.
     pc = 0x8000
     op(rom, pc, 0x10)              # lds #$3fff, stack in shared RAM
     op(rom, pc + 1, 0xCE)
     put(rom, pc + 2, 0x3F, 0xFF)
     pc += 4
+    if flip_screen:
+        pc = lda_imm(rom, pc, 0x01)
+        pc = sta_ext(rom, pc, 0x0005)  # screen flip latch
 
     for offs in range(240):
         pc = lda_imm(rom, pc, 0x00)
         pc = sta_ext(rom, pc, 0x3000 + offs)
 
-    # Put the reference sprite in object RAM before the longer tilemap setup, so
-    # the first vblank DMA used by the video dump already has stable data.
-    pc = write_sprite(rom, pc, 0, 0x4F, 0xC5, obj_code, 0x17)
+    # Optional reference sprites for object tests. Keep them out of the default
+    # scroll/FIX diagnostic so they do not cover tile boundary pixels.
+    if show_sprites:
+        pc = write_sprite(rom, pc, 0, 0x4E, 0xC5, obj_code, 0x13)
+        pc = write_sprite(rom, pc, 7, 0x4F, bottom_y, obj_code, 0x40)
 
-    for offs in range(0x400):
-        op(rom, pc, 0x86)          # lda #visible SCROLL zero tile
-        put(rom, pc + 1, 0x00)
-        pc += 2
-        op(rom, pc, 0xB7)          # sta SCROLL VRAM
-        put(rom, pc + 1, 0x20 | (offs >> 8), offs & 0xFF)
-        pc += 3
+    for row in range(32):
+        for col in range(7):
+            pc = write_vram_cram(rom, pc, 0x2400, 0x2C00, (row << 5) | col, col + 1, 0x0F)
 
-    for offs in range(0x400):
-        op(rom, pc, 0x86)          # lda #default SCROLL zero color
-        put(rom, pc + 1, 0x00)
-        pc += 2
-        op(rom, pc, 0xB7)          # sta SCROLL CRAM
-        put(rom, pc + 1, 0x28 | (offs >> 8), offs & 0xFF)
-        pc += 3
+    for row in range(32):
+        if column_numbers:
+            scroll_tiles = [
+                (col - 2) & 0x1F
+                for col in range(32)
+            ]
+        else:
+            scroll_tiles = [
+                (col % 0x1F) + 1
+                for col in range(32)
+            ]
+            scroll_tiles[0] = marker_tile if solid_marker or (row & 1) == 0 else marker_hole_tile
+        scroll_colors = [
+            0x0F
+            for col in range(32)
+        ]
+        if not column_numbers:
+            scroll_colors[0] = marker_color if (row & 1) == 0 else marker_color_alt
+            if first2_yb:
+                scroll_tiles[0] = marker_tile if solid_marker or (row & 1) == 0 else marker_hole_tile
+                scroll_colors[0] = marker_color if (row & 1) == 0 else marker_color_alt
+        pc = write_tile_row(rom, pc, 0x2000, row, scroll_tiles)
+        pc = write_tile_row(rom, pc, 0x2800, row, scroll_colors)
 
-    for offs in range(0x400):
-        col = offs & 0x1F
-        op(rom, pc, 0x86)          # lda #visible repeating FIX zero tile
-        put(rom, pc + 1, 0x00)
-        pc += 2
-        op(rom, pc, 0xB7)          # sta FIX VRAM
-        put(rom, pc + 1, 0x24 | (offs >> 8), offs & 0xFF)
-        pc += 3
-
-    for offs in range(0x400):
-        col = offs & 0x1F
-        op(rom, pc, 0x86)          # lda #default FIX zero color
-        put(rom, pc + 1, 0x00)
-        pc += 2
-        op(rom, pc, 0xB7)          # sta FIX CRAM
-        put(rom, pc + 1, 0x2C | (offs >> 8), offs & 0xFF)
-        pc += 3
-
-    for digit, offs in (
-        (0x01, 0x043),             # SCROLL (0,0)
-        (0x02, 0x040),             # SCROLL top-right
-        (0x03, 0x3A3),             # SCROLL (27,0)
-        (0x04, 0x3F8),             # SCROLL bottom-right
-    ):
-        pc = write_vram_cram(rom, pc, 0x2000, 0x2800, offs, digit, 0x0F)
-    pc = write_vram_cram(rom, pc, 0x2000, 0x2800, 0x000, 0x09, 0x0F)
-    pc = write_vram_cram(rom, pc, 0x2000, 0x2800, 0x042, 0x09, marker_color)
-
-    fix_markers = [
-        (0x01, 0x041, 0x0F),        # FIX (0,0), green on current palette
-        (0x02, 0x046, 0x0E),        # FIX top-right
-        (0x03, 0x3E1, 0x0D),        # FIX bottom-left
-        (0x04, 0x3E6, 0x0C),        # FIX bottom-right
-    ]
-    for digit, row, col in (
-        (0x01, 0, 30),
-        (0x02, 0, 31),
-        (0x03, 0,  0),
-        (0x04, 0,  1),
-        (0x05, 1, 30),
-        (0x06, 1, 31),
-    ):
-        fix_markers.append((digit, (row << 5) | col, 0x0F))
-
-    for digit, offs, color in fix_markers:
-        pc = write_vram_cram(rom, pc, 0x2400, 0x2C00, offs, digit, color)
-
-    # Number the first visible FIX row so the left/right FIX ownership can be
-    # identified directly from VRAM column order. MAME shows the first visible
-    # FIX row at $2440, i.e. FIX VRAM offset $040.
-    for col in range(32):
-        tile = 0x09 if col == 0 else col
-        color = marker_color if col == 0 else 0x0F
-        pc = write_vram_cram(rom, pc, 0x2400, 0x2C00, 0x040 + col, tile, color)
+    # First-visible probe cells seen by the core as 0x2042 and 0x2440.
+    # Give them different colors so scroll/FIX address selection can be
+    # checked visually at the boundary.
+    if column_numbers:
+        pc = write_vram_cram(rom, pc, 0x2000, 0x2800, 0x042, marker_tile, marker_color_alt)
+    elif first2_yb:
+        pc = write_vram_cram(rom, pc, 0x2000, 0x2800, 0x042, marker_tile, marker_color_alt)
+        pc = write_vram_cram(rom, pc, 0x2000, 0x2800, 0x041, marker_tile, marker_color)
+    else:
+        pc = write_vram_cram(rom, pc, 0x2000, 0x2800, 0x042, marker_tile, 0x0A)
+        pc = write_vram_cram(rom, pc, 0x2000, 0x2800, 0x041, marker_tile, marker_color_red)
+    pc = write_vram_cram(rom, pc, 0x2400, 0x2C00, 0x040, marker_tile, 0x0B)
+    if not column_numbers:
+        pc = write_vram_cram(rom, pc, 0x2000, 0x2800, 0x3A2, 0x00, 0x0A)
+        pc = write_vram_cram(rom, pc, 0x2400, 0x2C00, 0x3A0, 0x00, 0x0B)
 
     op(rom, pc, 0x4F)              # clra
     pc += 1
@@ -227,18 +321,20 @@ def main():
     pc = sta_ext(rom, pc, 0x1000)  # horizontal scroll
     pc = sta_ext(rom, pc, 0x1800)  # vertical scroll
 
-    sprite_codes = (obj_code,) * 8
-    sprite_attrs = (
-        0x4F, 0x4F, 0x4F, 0x4F,
-        0x4F, 0x0F, 0xCF, 0x8F,
-    )
-    sprite_xpos = (0x17, 0x06, 0x05, 0x06, 0x20, 0x48, 0x70, 0x98)
-    sprite_ypos = (0xC5, 0x30, 0x30, 0x30, 0x70, 0x70, 0x70, 0x70)
-    for i, code in enumerate(sprite_codes):
-        attr = sprite_attrs[i]
-        ypos = sprite_ypos[i]
-        xpos = sprite_xpos[i]
-        pc = write_sprite(rom, pc, i, attr, ypos, code, xpos)
+    if show_sprites:
+        sprite_codes = (obj_code,) * 9
+        sprite_attrs = (
+            0x4F, 0x4F, 0x41, 0x4F,
+            0x4F, 0x0F, 0xCF, 0x4F, 0x4F,
+        )
+        sprite_xpos = (0x13, 0x06, 0x05, 0x06, 0x20, 0x48, 0x70, 0x40, 0xFC)
+        sprite_ypos = (0xC5, 0x30, 0x30, 0x30, probe_y, 0x70, 0x70, bottom_y, probe_y)
+        for i, code in enumerate(sprite_codes):
+            attr = sprite_attrs[i]
+            ypos = sprite_ypos[i]
+            xpos = sprite_xpos[i]
+            pc = write_sprite(rom, pc, i, attr, ypos, code, xpos)
+        pc = write_sprite(rom, pc, 0x21, 0x00, 0x78, 0x44, 0x10)
 
     pc = lda_imm(rom, pc, 0x01)
     pc = sta_ext(rom, pc, 0x0007)  # enable main IRQ latch
@@ -248,45 +344,61 @@ def main():
     op(rom, pc, 0x20)              # bra self
     put(rom, pc + 1, 0xFE)
 
-    pc = 0xF000
+    pc = 0xFE00
     pc = lda_ext(rom, pc, 0x3FF0)  # irq: lda counter
-    op(rom, pc, 0x4C)              # inca
-    pc += 1
+    pc = adda_imm(rom, pc, 0x01)
     pc = sta_ext(rom, pc, 0x3FF0)
+    pc = cmpa_imm(rom, pc, 0x04)   # keep early frames at zero scroll
+    skip_scroll_branch = pc
+    pc = bcs(rom, pc, 0x00)
+    pc = adda_imm(rom, pc, 0xFD)   # then use (counter-3)*scroll_step
+    if scroll_step == 1:
+        pass
+    elif scroll_step == 2:
+        pc = lsla(rom, pc)
+    elif scroll_step == 4:
+        pc = lsla(rom, pc)
+        pc = lsla(rom, pc)
+    elif scroll_step == 8:
+        pc = lsla(rom, pc)
+        pc = lsla(rom, pc)
+        pc = lsla(rom, pc)
+    if scroll_towards_fix:
+        pc = nega(rom, pc)         # default: move scroll layer toward FIX
     pc = sta_ext(rom, pc, 0x1000)  # horizontal scroll
-    pc = sta_ext(rom, pc, 0x1800)  # vertical scroll
+    put(rom, skip_scroll_branch + 1, pc - (skip_scroll_branch + 2))
 
-    pc = write_sprite(rom, pc, 0, 0x4F, 0xC5, obj_code, 0x17)
+    if show_sprites:
+        pc = write_sprite(rom, pc, 0, 0x4E, 0xC5, obj_code, 0x13)
 
-    pc = lda_ext(rom, pc, 0x3FF0)  # sprite 1 x offset
-    pc = adda_imm(rom, pc, 0x57)
-    pc = sta_ext(rom, pc, 0x3007)
-    pc = lda_ext(rom, pc, 0x3FF0)  # sprite 1 y moves forward
-    pc = adda_imm(rom, pc, 0x70)
-    pc = sta_ext(rom, pc, 0x3005)
+        pc = lda_ext(rom, pc, 0x3FF0)  # sprite 1 x offset
+        pc = adda_imm(rom, pc, 0x57)
+        pc = sta_ext(rom, pc, 0x3007)
+        pc = lda_ext(rom, pc, 0x3FF0)  # sprite 1 y moves down on screen
+        pc = nega(rom, pc)
+        pc = adda_imm(rom, pc, 0x70)
+        pc = sta_ext(rom, pc, 0x3005)
 
-    pc = lda_ext(rom, pc, 0x3FF0)  # sprite 2 x opposite
-    pc = nega(rom, pc)
-    pc = adda_imm(rom, pc, 0xC7)
-    pc = sta_ext(rom, pc, 0x300B)
-    pc = lda_ext(rom, pc, 0x3FF0)  # sprite 2 y offset
-    pc = adda_imm(rom, pc, 0x40)
-    pc = sta_ext(rom, pc, 0x3009)
+        pc = lda_ext(rom, pc, 0x3FF0)  # sprite 2 x / visible y motion
+        pc = adda_imm(rom, pc, 0xC7)
+        pc = sta_ext(rom, pc, 0x300B)
+        pc = lda_imm(rom, pc, 0x40)    # sprite 2 visible x fixed
+        pc = sta_ext(rom, pc, 0x3009)
 
-    pc = lda_ext(rom, pc, 0x3FF0)  # sprite 3 x slower-looking diagonal
-    pc = adda_imm(rom, pc, 0x27)
-    pc = sta_ext(rom, pc, 0x300F)
-    pc = lda_ext(rom, pc, 0x3FF0)
-    pc = nega(rom, pc)
-    pc = adda_imm(rom, pc, 0x90)
-    pc = sta_ext(rom, pc, 0x300D)
+        pc = lda_ext(rom, pc, 0x3FF0)  # sprite 3 x slower-looking diagonal
+        pc = adda_imm(rom, pc, 0x27)
+        pc = sta_ext(rom, pc, 0x300F)
+        pc = lda_ext(rom, pc, 0x3FF0)
+        pc = nega(rom, pc)
+        pc = adda_imm(rom, pc, 0x90)
+        pc = sta_ext(rom, pc, 0x300D)
 
     op(rom, pc, 0x3B)              # rti
 
     # Patch both possible vector locations used by local/JTFRAME layouts.
-    put(rom, 0x7FF8, 0xF0, 0x00)
+    put(rom, 0x7FF8, 0xFE, 0x00)
     put(rom, 0x7FFE, 0x80, 0x00)
-    put(rom, 0xFFF8, 0xF0, 0x00)
+    put(rom, 0xFFF8, 0xFE, 0x00)
     put(rom, 0xFFFE, 0x80, 0x00)
 
     OUT.write_bytes(rom)

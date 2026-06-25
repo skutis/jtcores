@@ -59,6 +59,7 @@ module jtmzone_main(
 
     input             blank,
     input             vblank,
+    input             h2,
     input             dip_pause,
     input             snd_irq_n,
     input      [ 7:0] snd_dout
@@ -70,6 +71,8 @@ reg         b_a13_coin1;
 reg         b_a13_flip;
 reg         b_a13_int;
 reg         b_a13_intst;
+reg         scroll_pend, scroll_pend_x;
+reg  [ 7:0] scroll_pend_data;
 wire [15:0] A;
 wire        RnW, VMA;
 wire        intst       = b_a13_intst;
@@ -90,6 +93,7 @@ wire        ram_cs        = scrolly_cs | scrollx_cs | vram0_cs | vram1_cs |
                             cram0_cs | cram1_cs | objram_cs | shared_cs;
 wire        cpu_bus_cen   = cpu_cen;
 wire        ram_we        = ram_cs && !RnW && cpu_bus_cen;
+wire        scroll_cs     = scrolly_cs | scrollx_cs;
 
 // Schematic-equivalent active-low decode terms. B_B7 decodes the main CPU
 // address space using A15..A11, so each select covers a 2 KB block.
@@ -121,7 +125,11 @@ assign main_vram0_we  = ram_we && vram0_cs;
 assign main_vram1_we  = ram_we && vram1_cs;
 assign main_cram0_we  = ram_we && cram0_cs;
 assign main_cram1_we  = ram_we && cram1_cs;
+`ifdef MZONE_FORCE_FLIP
+assign flip      = 1'b1;
+`else
 assign flip      = b_a13_flip;
+`endif
 assign irq_mask  = intst;
 assign snd_int   = b_a13_int;
 
@@ -220,11 +228,26 @@ always @(posedge clk) begin
         b_a13_flip    <= 1'b0;
         b_a13_int     <= 1'b0;
         b_a13_intst   <= 1'b0;
+        scroll_pend   <= 1'b0;
+        scroll_pend_x <= 1'b0;
+        scroll_pend_data <= 8'd0;
     end else begin
-        if( ram_we ) begin
-            if( scrolly_cs ) scrolly <= cpu_dout;
-            if( scrollx_cs ) scrollx <= cpu_dout;
-        end else if( !n_main_latch && !RnW && cpu_bus_cen ) begin
+        if( ram_we && scroll_cs ) begin
+            if( !h2 ) begin
+                if( scrolly_cs ) scrolly <= cpu_dout;
+                if( scrollx_cs ) scrollx <= cpu_dout;
+                scroll_pend <= 1'b0;
+            end else begin
+                scroll_pend      <= 1'b1;
+                scroll_pend_x    <= scrollx_cs;
+                scroll_pend_data <= cpu_dout;
+            end
+        end else if( scroll_pend && !h2 ) begin
+            if( scroll_pend_x ) scrollx <= scroll_pend_data;
+            else                scrolly <= scroll_pend_data;
+            scroll_pend <= 1'b0;
+        end
+        if( !n_main_latch && !RnW && cpu_bus_cen ) begin
             // B_A13 is a 74LS259 addressable latch. Only the schematic nets
             // currently used by the core are modeled here.
             case( A[2:0] )
@@ -242,7 +265,7 @@ end
 jtframe_sys6809 #(
     .RAM_AW     ( 0 ),
     .KONAMI     ( 1 ),
-    .RECOVERY   ( 0 ),
+    .RECOVERY   ( 1 ),
     .CENDIV     ( 1 )
 ) u_cpu(
     .rstn       ( ~rst      ),

@@ -68,6 +68,26 @@ reg         [ 1:0]  ay0a_rcen_r, ay0b_rcen_r, ay0c_rcen_r;
 reg                 latch_cs, inp0_cs, inp1_cs, inp2_cs, dsw2_cs, dsw1_cs;
 reg                 shared_cs, i8039_irq_cs, i8039_wdog_cs;
 wire                snd_irq;
+`ifdef MZONE_SND_INPUT_WATCH
+`ifndef MZONE_SND_INPUT_WATCH_FROM
+`define MZONE_SND_INPUT_WATCH_FROM 0
+`endif
+`ifndef MZONE_SND_INPUT_WATCH_TO
+`define MZONE_SND_INPUT_WATCH_TO 16'hffff
+`endif
+reg [15:0] input_watch_frame;
+reg        input_watch_blank_l;
+`endif
+`ifdef MZONE_SND_SHARED_WATCH
+`ifndef MZONE_SND_SHARED_WATCH_FROM
+`define MZONE_SND_SHARED_WATCH_FROM 0
+`endif
+`ifndef MZONE_SND_SHARED_WATCH_TO
+`define MZONE_SND_SHARED_WATCH_TO 16'hffff
+`endif
+reg [15:0] shared_watch_frame;
+reg        shared_watch_blank_l;
+`endif
 `ifdef MZONE_FAST_SOUND
 reg         [ 7:0]  fast_timer;
 `endif
@@ -124,7 +144,12 @@ assign dac_status  = { fast_timer[7:4], 4'd0 };
 assign ay_dout     = dac_status;
 assign ay_iob      = 8'd0;
 `endif
-assign wait_n      = ((~rom_cs) | rom_ok) & ((~shared_cs) | ~h2);
+assign wait_n      =
+`ifdef MZONE_Z80_NO_WAIT
+                     1'b1;
+`else
+                     ((~rom_cs) | rom_ok) & ((~shared_cs) | ~h2);
+`endif
 assign wdog_reset_n = ~i8039_wdog_cs;
 assign snmi_set_n   = ~rst & (wdog_reset_n | A[0]);
 assign int_n        = ~snd_irq;
@@ -213,10 +238,44 @@ always @(posedge clk) begin
         ay0a_rcen_r <= 2'd0;
         ay0b_rcen_r <= 2'd0;
         ay0c_rcen_r <= 2'd0;
+`ifdef MZONE_SND_INPUT_WATCH
+        input_watch_frame <= 16'd0;
+        input_watch_blank_l <= 1'b1;
+`endif
+`ifdef MZONE_SND_SHARED_WATCH
+        shared_watch_frame <= 16'd0;
+        shared_watch_blank_l <= 1'b1;
+`endif
 `ifdef MZONE_FAST_SOUND
         fast_timer  <= 8'd0;
 `endif
     end else begin
+`ifdef MZONE_SND_INPUT_WATCH
+        input_watch_blank_l <= blank;
+        if( blank && !input_watch_blank_l )
+            input_watch_frame <= input_watch_frame + 16'd1;
+        if( cpu_cen && !rd_n &&
+            input_watch_frame >= `MZONE_SND_INPUT_WATCH_FROM &&
+            input_watch_frame <= `MZONE_SND_INPUT_WATCH_TO &&
+            (inp0_cs || inp1_cs || inp2_cs || dsw1_cs || dsw2_cs) ) begin
+            $display("MZONE_SND_IN frame=%0d pc=%04x addr=%04x in0=%b in1=%b in2=%b dsw1=%b dsw2=%b din=%02x pack0=%02x cab=%b coin=%b service=%b joy1=%02x joy2=%02x",
+                input_watch_frame, A, A, inp0_cs, inp1_cs, inp2_cs, dsw1_cs, dsw2_cs,
+                cpu_din, pack_in0(1'b0), cab_1p, coin, service, joystick1, joystick2);
+        end
+`endif
+`ifdef MZONE_SND_SHARED_WATCH
+        shared_watch_blank_l <= blank;
+        if( blank && !shared_watch_blank_l )
+            shared_watch_frame <= shared_watch_frame + 16'd1;
+        if( cpu_cen &&
+            shared_watch_frame >= `MZONE_SND_SHARED_WATCH_FROM &&
+            shared_watch_frame <= `MZONE_SND_SHARED_WATCH_TO &&
+            (shared_cs || main_irq_req) ) begin
+            $display("MZONE_SND_SH frame=%0d addr=%04x rd=%b wr=%b shared=%b main_irq_req=%b din=%02x dout=%02x",
+                shared_watch_frame, A, !rd_n, !wr_n, shared_cs, main_irq_req,
+                shared_din, cpu_dout);
+        end
+`endif
 `ifndef MZONE_FAST_SOUND
         ay0a_rcen_r <= rc_sel(ay_iob[1:0]);
         ay0b_rcen_r <= rc_sel(ay_iob[3:2]);

@@ -29,17 +29,20 @@ class ImageWatcher:
         self.drag_h = 0.0
         self.drag_v = 0.0
         self.maximized = False
+        self.ctrl_down = False
         self.coord_text = "x=- y=-"
         self.coremod = self.read_coremod()
         self.scaled_width = 0
         self.scaled_height = 0
+        self.scaled_pixbuf = None
+        self.scroll_generation = 0
 
         self.window = Gtk.Window(title="watch_image")
         self.window.set_default_size(900, 700)
         self.window.add_events(Gdk.EventMask.SCROLL_MASK | Gdk.EventMask.SMOOTH_SCROLL_MASK)
         self.window.connect("destroy", Gtk.main_quit)
         self.window.connect("key-press-event", self.on_key_press)
-        self.window.connect("scroll-event", self.on_scroll)
+        self.window.connect("key-release-event", self.on_key_release)
         self.window.connect("window-state-event", self.on_window_state)
 
         self.header = Gtk.HeaderBar()
@@ -58,8 +61,11 @@ class ImageWatcher:
         self.header.pack_end(self.min_button)
         self.window.set_titlebar(self.header)
 
-        self.image = Gtk.Image()
+        self.image = Gtk.DrawingArea()
+        self.image.connect("draw", self.on_draw)
         self.event_box = Gtk.EventBox()
+        self.event_box.set_halign(Gtk.Align.START)
+        self.event_box.set_valign(Gtk.Align.START)
         self.event_box.add_events(
             Gdk.EventMask.SCROLL_MASK
             | Gdk.EventMask.SMOOTH_SCROLL_MASK
@@ -75,8 +81,9 @@ class ImageWatcher:
 
         self.scrolled = Gtk.ScrolledWindow()
         self.scrolled.add_events(Gdk.EventMask.SCROLL_MASK | Gdk.EventMask.SMOOTH_SCROLL_MASK)
-        self.scrolled.connect("scroll-event", self.on_scroll)
         self.viewport = Gtk.Viewport()
+        self.viewport.set_halign(Gtk.Align.START)
+        self.viewport.set_valign(Gtk.Align.START)
         self.viewport.add(self.event_box)
         self.scrolled.add(self.viewport)
         self.window.add(self.scrolled)
@@ -164,12 +171,8 @@ class ImageWatcher:
         if self.base_pixbuf is None:
             return
 
-        alloc = self.image.get_allocation()
-        px = x - alloc.x
-        py = y - alloc.y
-        if self.scaled_width and self.scaled_height:
-            px -= max(0, (alloc.width - self.scaled_width) / 2)
-            py -= max(0, (alloc.height - self.scaled_height) / 2)
+        px = x
+        py = y
 
         img_x = int(px / self.zoom)
         img_y = int(py / self.zoom)
@@ -178,26 +181,18 @@ class ImageWatcher:
             and 0 <= img_y < self.base_pixbuf.get_height()
         ):
             raw_x, raw_y = self.raw_coords(img_x, img_y)
-            hpos = (raw_x + self.hbase) % 384
-            vpos = (raw_y + self.vbase) % 264
+            hdump = (raw_x + self.hbase) % 384
+            vdump = (raw_y + self.vbase) % 264
             self.coord_text = (
                 f"img x={img_x} y={img_y}  raw x={raw_x} y={raw_y}  "
-                f"hpos={hpos} vpos={vpos}"
+                f"hdump={hdump} vdump={vdump}"
             )
         else:
             self.coord_text = "x=- y=-"
         self.update_title()
 
     def raw_coords(self, img_x, img_y):
-        if not (self.coremod & 1):
-            return img_x, img_y
-
-        raw_w = self.base_pixbuf.get_height()
-        raw_h = self.base_pixbuf.get_width()
-        ccw = bool(self.coremod & 4)
-        if ccw:
-            return img_y, raw_h - 1 - img_x
-        return img_y, raw_h - 1 - img_x
+        return img_y, img_x
 
     def update_image(self, scroll_to=None):
         if self.base_pixbuf is None:
@@ -212,14 +207,26 @@ class ImageWatcher:
         self.scaled_width = width
         self.scaled_height = height
         interp = GdkPixbuf.InterpType.NEAREST
-        scaled = self.base_pixbuf.scale_simple(width, height, interp)
-        self.image.set_from_pixbuf(scaled)
+        self.scaled_pixbuf = self.base_pixbuf.scale_simple(width, height, interp)
+        self.image.set_size_request(width, height)
+        self.event_box.set_size_request(width, height)
+        self.image.queue_draw()
 
         self.update_title()
 
-        GLib.idle_add(self.restore_scroll, old_x, old_y)
+        self.scroll_generation += 1
+        GLib.idle_add(self.restore_scroll, self.scroll_generation, old_x, old_y)
 
-    def restore_scroll(self, x, y):
+    def on_draw(self, _widget, cr):
+        if self.scaled_pixbuf is None:
+            return False
+        Gdk.cairo_set_source_pixbuf(cr, self.scaled_pixbuf, 0, 0)
+        cr.paint()
+        return False
+
+    def restore_scroll(self, generation, x, y):
+        if generation != self.scroll_generation:
+            return False
         hadj = self.scrolled.get_hadjustment()
         vadj = self.scrolled.get_vadjustment()
         self.set_scroll(hadj, x)
@@ -235,6 +242,9 @@ class ImageWatcher:
         self.update_image()
 
     def set_zoom_at(self, zoom, x, y):
+        self.set_zoom_at_point(zoom, x, y)
+
+    def set_zoom_at_point(self, zoom, content_x, content_y):
         old_zoom = self.zoom
         new_zoom = max(0.25, min(32.0, zoom))
         if new_zoom == old_zoom:
@@ -242,11 +252,13 @@ class ImageWatcher:
 
         hadj = self.scrolled.get_hadjustment()
         vadj = self.scrolled.get_vadjustment()
-        img_x = (hadj.get_value() + x) / old_zoom
-        img_y = (vadj.get_value() + y) / old_zoom
+        view_x = content_x - hadj.get_value()
+        view_y = content_y - vadj.get_value()
+        img_x = content_x / old_zoom
+        img_y = content_y / old_zoom
 
         self.zoom = new_zoom
-        self.update_image((img_x * new_zoom - x, img_y * new_zoom - y))
+        self.update_image((img_x * new_zoom - view_x, img_y * new_zoom - view_y))
 
     def step_file(self, delta):
         self.refresh_file_list()
@@ -259,6 +271,9 @@ class ImageWatcher:
 
     def on_key_press(self, _window, event):
         key = Gdk.keyval_name(event.keyval)
+        if key in ("Control_L", "Control_R"):
+            self.ctrl_down = True
+            return False
         if key in ("q", "Q", "Escape"):
             Gtk.main_quit()
         elif key in ("Left", "KP_Left"):
@@ -274,7 +289,16 @@ class ImageWatcher:
         elif key in ("r", "R"):
             self.reload(force=True)
 
+    def on_key_release(self, _window, event):
+        key = Gdk.keyval_name(event.keyval)
+        if key in ("Control_L", "Control_R"):
+            self.ctrl_down = False
+        return False
+
     def on_scroll(self, _widget, event):
+        if not (self.ctrl_down or event.state & Gdk.ModifierType.CONTROL_MASK):
+            return False
+
         if event.direction == Gdk.ScrollDirection.UP:
             factor = 1.25
         elif event.direction == Gdk.ScrollDirection.DOWN:
@@ -289,7 +313,7 @@ class ImageWatcher:
         else:
             return False
 
-        self.set_zoom_at(self.zoom * factor, event.x, event.y)
+        self.set_zoom_at_point(self.zoom * factor, event.x, event.y)
         return True
 
     def on_button_press(self, widget, event):
@@ -349,8 +373,8 @@ def main():
     )
     parser.add_argument("--interval", type=float, default=0.25, help="poll interval in seconds")
     parser.add_argument("--zoom", type=float, default=3.0, help="initial zoom")
-    parser.add_argument("--hbase", type=int, default=0, help="raw active x to hpos offset")
-    parser.add_argument("--vbase", type=int, default=16, help="raw active y to vpos offset")
+    parser.add_argument("--hbase", type=int, default=0, help="raw active x to hdump offset")
+    parser.add_argument("--vbase", type=int, default=16, help="raw active y to vdump offset")
     args = parser.parse_args()
 
     path = args.path[0] if args.path else "frames/frame_00004.png"

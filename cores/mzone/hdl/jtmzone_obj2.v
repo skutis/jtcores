@@ -60,7 +60,7 @@ reg        draw_line_has_obj;
 reg        read_line_has_obj;
 wire [ 3:0] buf_pen;
 wire [ 3:0] buf_color_out;
-wire [ 3:0] lut_pxl;
+wire [ 3:0] pal_pxl;
 wire       line_start = lhbl_l && !LHBL;
 wire [7:0] objram_q = spram[ram_addr];
 wire [7:0] raw_sy = 8'd255 - (ypos + 8'd16);
@@ -264,8 +264,8 @@ jtframe_obj_buffer #(
 assign pxl = 4'd0;
 assign pxl_en = 1'b0;
 `else
-assign pxl_en = buf_rd && read_line_has_obj && lut_pxl != 4'd0;
-assign pxl = buf_rd && read_line_has_obj && lut_pxl != 4'd0 ? lut_pxl : 4'd0;
+assign pxl_en = buf_rd && read_line_has_obj && pal_pxl != 4'd0;
+assign pxl = buf_rd && read_line_has_obj && pal_pxl != 4'd0 ? pal_pxl : 4'd0;
 `endif
 
 `ifdef MZONE_OBJ_COLOR_WATCH
@@ -273,9 +273,9 @@ always @(posedge clk) if( pxl_cen && pxl_en &&
     frame_cnt >= `MZONE_OBJ_WATCH_FROM && frame_cnt <= `MZONE_OBJ_WATCH_TO &&
     hdump >= `MZONE_OBJ_COLOR_X0 && hdump <= `MZONE_OBJ_COLOR_X1 &&
     vdump >= `MZONE_OBJ_COLOR_Y0 && vdump <= `MZONE_OBJ_COLOR_Y1 ) begin
-    $display("MZONE_OBJ_COLOR frame=%0d x=%0d y=%0d color=%x pen=%x c6_addr=%02x c6_raw=%x lut=%x",
+    $display("MZONE_OBJ_COLOR frame=%0d x=%0d y=%0d color=%x pen=%x pal_addr=%02x pal_pxl=%x pxl=%x",
         frame_cnt, hdump, vdump, buf_color_out, buf_pen,
-        { buf_color_out, buf_pen }, lut_pxl, lut_pxl);
+        { buf_color_out, buf_pen }, pal_pxl, pal_pxl);
 end
 `endif
 
@@ -283,14 +283,14 @@ jtframe_prom #(
     .DW ( 4 ),
     .AW ( 8 ),
     .ASYNC( 1 )
-) u_obj_lut(
+) u_palette(
     .clk    ( clk                    ),
     .cen    ( pxl_cen                ),
     .data   ( prog_data              ),
     .wr_addr( prog_addr              ),
     .we     ( prog_en                ),
     .rd_addr( { buf_color_out, buf_pen } ),
-    .q      ( lut_pxl                )
+    .q      ( pal_pxl                )
 );
 
 endmodule

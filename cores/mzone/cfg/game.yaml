@@ -6,6 +6,7 @@ game:
       - jtmzone_snd.v
       - jtmzone_video.v
       - jtmzone_obj.v
+      - jtmzone_objdraw.v
       - jtmzone_scroll.v
       - jtmzone_fix_old.v
       - jtmzone_colmix.v

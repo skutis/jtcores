@@ -39,6 +39,15 @@ MAME `screen_update()` video RAM use:
 
 Timing notes and schematic-derived signal mapping live in [timing.md](timing.md).
 
+## Simulation Debugging Notes
+
+Keep trace/watch windows narrow. Redirect large simulation logs to `/tmp/*.log`,
+then inspect them with `rg`/`tail` and copy only the relevant lines into notes or
+discussion. Avoid dumping broad multi-frame traces into chat or review context.
+
+Follow the Kicker core naming style for video signals. Keep mzone HDL compact:
+avoid verbose helper names and avoid carrying several names for the same signal.
+
 ## Verilator Compatibility Notes
 
 The Mega Zone simulation has been checked on these Verilator versions:

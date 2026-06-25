@@ -29,6 +29,11 @@ wire [ 8:0] video_hdump;
 wire [ 8:0] video_vrender;
 wire        main_scrolly_cs, main_scrollx_cs;
 wire        main_vram0_cs, main_vram1_cs, main_cram0_cs, main_cram1_cs;
+wire        main_vram0_we, main_vram1_we, main_cram0_we, main_cram1_we;
+wire [ 9:0] main_vram_ofs;
+wire [ 9:0] main_tile_addr;
+wire [ 7:0] main_vram_din;
+wire [ 7:0] main_vram0_dout, main_vram1_dout, main_cram0_dout, main_cram1_dout;
 wire        main_objram_cs, main_shared_cs;
 wire [ 9:0] main_objram_addr;
 wire [ 7:0] main_objram_din;
@@ -42,11 +47,50 @@ wire        main_irq_ack, snd_irq_n;
 wire        main_ba;
 wire        main_bs;
 wire        blank;
+wire        video_pre_lvbl;
 wire        h2;
-wire        fix_n, fix_en, fix_delayed_n;
-wire [ 7:0] video_vram1_mux;
+wire        fix_en;
 reg         blank_q;
 reg         v16_q;
+
+`ifdef MZONE_GAME_STATE_WATCH
+`ifndef MZONE_GAME_STATE_WATCH_FROM
+`define MZONE_GAME_STATE_WATCH_FROM 0
+`endif
+`ifndef MZONE_GAME_STATE_WATCH_TO
+`define MZONE_GAME_STATE_WATCH_TO 16'hffff
+`endif
+integer game_state_frame;
+reg     game_state_lvbl_l;
+wire    game_state_active = game_state_frame >= `MZONE_GAME_STATE_WATCH_FROM &&
+                            game_state_frame <= `MZONE_GAME_STATE_WATCH_TO;
+
+always @(posedge clk24) begin
+    if( rst24 ) begin
+        game_state_frame  <= 0;
+        game_state_lvbl_l <= 1'b1;
+    end else begin
+        game_state_lvbl_l <= LVBL;
+        if( game_state_lvbl_l && !LVBL )
+            game_state_frame <= game_state_frame + 1;
+
+        if( game_state_active && main_cpu_cen && u_main.VMA && main_shared_cs &&
+            (main_shared_addr == 11'h31e || main_shared_addr == 11'h31f ||
+             main_shared_addr == 11'h320 || main_shared_addr == 11'h020 ||
+             main_shared_addr == 11'h021) ) begin
+            $display("MZONE_MAIN_SH frame=%0d pc=%04x addr=%03x rw=%b data=%02x",
+                game_state_frame, u_main.u_cpu.u_sys6809.reg_pc, main_shared_addr,
+                u_main.RnW, u_main.RnW ? main_shared_dout : main_shared_din);
+        end
+
+        if( game_state_active && main_objram_we && main_objram_din != 8'd0 ) begin
+            $display("MZONE_OBJRAM_WR frame=%0d pc=%04x addr=%03x data=%02x",
+                game_state_frame, u_main.u_cpu.u_sys6809.reg_pc,
+                main_objram_addr, main_objram_din);
+        end
+    end
+end
+`endif
 
 `ifdef MZONE_CPU_WATCH
 `ifndef MZONE_CPU_WATCH_FROM
@@ -181,10 +225,10 @@ always @(posedge clk24) begin
         if( main_cpu_cen && u_main.u_cpu.u_sys6809.reg_pc == 16'hab80 ) main_irq_rti_cnt <= main_irq_rti_cnt + 1;
         if( main_cpu_cen && u_main.u_cpu.u_sys6809.reg_pc >= 16'hf000 && u_main.u_cpu.u_sys6809.reg_pc <= 16'hf00d )
             main_test_irq_cnt <= main_test_irq_cnt + 1;
-        if( main_vram1_we && main_vram_addr >= 10'h3bc ) begin
+        if( main_vram1_we && main_vram_ofs >= 10'h3bc ) begin
             queue_wr_cnt  <= queue_wr_cnt + 1;
             queue_wr_pc   <= u_main.u_cpu.u_sys6809.reg_pc;
-            queue_wr_addr <= main_vram_addr;
+            queue_wr_addr <= main_vram_ofs;
             queue_wr_data <= main_vram_din;
             if( main_vram_din != 8'd0 ) queue_nz_wr_cnt <= queue_nz_wr_cnt + 1;
         end
@@ -317,7 +361,291 @@ assign debug_view = 0;
 assign main_addr   = main_stub_addr;
 assign main_cs     = main_stub_cs;
 assign blank       = ~blank_q;
-assign video_vram1_mux = vram1_dout;
+assign main_tile_addr = main_vram_ofs;
+
+`ifdef MZONE_MAIN_LOCAL_ROM
+reg [7:0] main_local_rom[0:65535];
+
+initial begin
+    $readmemh("/tmp/mzone_main.hex", main_local_rom);
+    $display("MZONE_MAIN_LOCAL_ROM loaded /tmp/mzone_main.hex");
+end
+
+wire [7:0] main_rom_data = main_local_rom[main_addr];
+wire       main_rom_ok   = 1'b1;
+`else
+wire [7:0] main_rom_data = main_data;
+wire       main_rom_ok   = main_ok;
+`endif
+
+`ifdef MZONE_SCROLL_REG_WATCH
+`ifndef MZONE_SCROLL_REG_WATCH_FROM
+`define MZONE_SCROLL_REG_WATCH_FROM 0
+`endif
+`ifndef MZONE_SCROLL_REG_WATCH_TO
+`define MZONE_SCROLL_REG_WATCH_TO 65535
+`endif
+integer scroll_watch_frame;
+reg     scroll_watch_lvbl_l;
+
+always @(posedge clk24) begin
+    if( rst24 ) begin
+        scroll_watch_frame  <= 0;
+        scroll_watch_lvbl_l <= 1'b1;
+    end else begin
+        scroll_watch_lvbl_l <= LVBL;
+        if( scroll_watch_lvbl_l && !LVBL )
+            scroll_watch_frame <= scroll_watch_frame + 1;
+        if( main_cpu_cen && !main_cpu_rnw && (main_scrolly_cs || main_scrollx_cs) &&
+            scroll_watch_frame >= `MZONE_SCROLL_REG_WATCH_FROM &&
+            scroll_watch_frame <= `MZONE_SCROLL_REG_WATCH_TO ) begin
+            $display("MZONE_SCROLL_REG frame=%0d hdump=%0d vdump=%0d reg=%s data=%02x held_x=%02x held_y=%02x",
+                scroll_watch_frame, video_hdump, video_vdump,
+                main_scrollx_cs ? "scrollx" : "scrolly",
+                main_cpu_dout, main_scrollx, main_scrolly);
+        end
+    end
+end
+`endif
+
+`ifdef MZONE_VRAM_POS_WATCH
+`ifndef MZONE_VRAM_POS_WATCH_FROM
+`define MZONE_VRAM_POS_WATCH_FROM 0
+`endif
+`ifndef MZONE_VRAM_POS_WATCH_TO
+`define MZONE_VRAM_POS_WATCH_TO 65535
+`endif
+integer vram_pos_frame;
+reg     vram_pos_lvbl_l;
+
+always @(posedge clk24) begin
+    if( rst24 ) begin
+        vram_pos_frame  <= 0;
+        vram_pos_lvbl_l <= 1'b1;
+    end else begin
+        vram_pos_lvbl_l <= LVBL;
+        if( vram_pos_lvbl_l && !LVBL )
+            vram_pos_frame <= vram_pos_frame + 1;
+        if( vram_pos_frame >= `MZONE_VRAM_POS_WATCH_FROM &&
+            vram_pos_frame <= `MZONE_VRAM_POS_WATCH_TO ) begin
+            if( main_vram0_we )
+                $display("MZONE_VRAM_POS frame=%0d hdump=%0d vdump=%0d ram=vram0 off=%03x data=%02x",
+                    vram_pos_frame, video_hdump, video_vdump, main_vram_ofs, main_vram_din);
+            if( main_cram0_we )
+                $display("MZONE_VRAM_POS frame=%0d hdump=%0d vdump=%0d ram=cram0 off=%03x data=%02x",
+                    vram_pos_frame, video_hdump, video_vdump, main_vram_ofs, main_vram_din);
+        end
+    end
+end
+`endif
+
+`ifdef MZONE_MAIN_WAIT_WATCH
+`ifndef MZONE_MAIN_WAIT_WATCH_FROM
+`define MZONE_MAIN_WAIT_WATCH_FROM 0
+`endif
+`ifndef MZONE_MAIN_WAIT_WATCH_TO
+`define MZONE_MAIN_WAIT_WATCH_TO 65535
+`endif
+integer main_wait_frame, main_wait_cycles, main_wait_reqs, main_wait_max;
+integer main_wait_start;
+reg     main_wait_lvbl_l, main_wait_pending;
+reg     main_cs_prev;
+reg [15:0] main_wait_addr;
+
+always @(posedge clk24) begin
+    if( rst24 ) begin
+        main_wait_frame  <= 0;
+        main_wait_cycles <= 0;
+        main_wait_reqs   <= 0;
+        main_wait_max    <= 0;
+        main_wait_start  <= 0;
+        main_wait_lvbl_l <= 1'b1;
+        main_wait_pending<= 1'b0;
+        main_cs_prev     <= 1'b0;
+        main_wait_addr   <= 16'd0;
+    end else begin
+        main_wait_lvbl_l <= LVBL;
+        main_cs_prev <= main_cs;
+
+        if( main_cs && !main_rom_ok )
+            main_wait_cycles <= main_wait_cycles + 1;
+
+        if( main_cs && !main_cs_prev ) begin
+            main_wait_reqs <= main_wait_reqs + 1;
+            main_wait_addr <= main_addr;
+            main_wait_start <= main_wait_cycles;
+            main_wait_pending <= 1'b1;
+        end
+
+        if( main_wait_pending && main_rom_ok ) begin
+            if( main_wait_cycles-main_wait_start > main_wait_max )
+                main_wait_max <= main_wait_cycles-main_wait_start;
+            if( main_wait_frame >= `MZONE_MAIN_WAIT_WATCH_FROM &&
+                main_wait_frame <= `MZONE_MAIN_WAIT_WATCH_TO &&
+                main_wait_cycles-main_wait_start > 0 )
+                $display("MZONE_MAIN_WAIT_REQ frame=%0d hdump=%0d vdump=%0d addr=%04x wait=%0d main_ok=%b",
+                    main_wait_frame, video_hdump, video_vdump, main_wait_addr,
+                    main_wait_cycles-main_wait_start, main_rom_ok);
+            main_wait_pending <= 1'b0;
+        end
+
+        if( main_wait_lvbl_l && !LVBL ) begin
+            if( main_wait_frame >= `MZONE_MAIN_WAIT_WATCH_FROM &&
+                main_wait_frame <= `MZONE_MAIN_WAIT_WATCH_TO )
+                $display("MZONE_MAIN_WAIT_FRAME frame=%0d wait_cycles=%0d reqs=%0d max_wait=%0d",
+                    main_wait_frame, main_wait_cycles, main_wait_reqs, main_wait_max);
+            main_wait_frame  <= main_wait_frame + 1;
+            main_wait_cycles <= 0;
+            main_wait_reqs   <= 0;
+            main_wait_max    <= 0;
+        end
+    end
+end
+`endif
+
+`ifdef MZONE_ROM_REQ_WATCH
+`ifndef MZONE_ROM_REQ_WATCH_FROM
+`define MZONE_ROM_REQ_WATCH_FROM 0
+`endif
+`ifndef MZONE_ROM_REQ_WATCH_TO
+`define MZONE_ROM_REQ_WATCH_TO 65535
+`endif
+
+reg scr_cs_l, obj_cs_l;
+reg scr_pend, obj_pend;
+integer gfx_cyc, scr_start, obj_start;
+integer rom_watch_frame;
+reg rom_watch_vs_l;
+wire rom_watch_active = rom_watch_frame >= `MZONE_ROM_REQ_WATCH_FROM &&
+                        rom_watch_frame <= `MZONE_ROM_REQ_WATCH_TO;
+
+reg main_cs_l, snd_cs_l, dac_cs_l;
+reg main_pend, snd_pend, dac_pend;
+integer cpu_cyc, main_start, snd_start, dac_start;
+
+always @(posedge clk) begin
+    if( rst ) begin
+        scr_cs_l <= 1'b0;
+        obj_cs_l <= 1'b0;
+        scr_pend <= 1'b0;
+        obj_pend <= 1'b0;
+        gfx_cyc  <= 0;
+        rom_watch_frame <= 0;
+        rom_watch_vs_l <= 1'b0;
+    end else begin
+        gfx_cyc <= gfx_cyc + 1;
+        rom_watch_vs_l <= VS;
+        if( VS && !rom_watch_vs_l ) rom_watch_frame <= rom_watch_frame + 1;
+        scr_cs_l <= scrrom_cs;
+        obj_cs_l <= objrom_cs;
+
+        if( scrrom_cs && !scr_cs_l ) begin
+            scr_pend  <= 1'b1;
+            scr_start <= gfx_cyc;
+            if( rom_watch_active )
+                $display("MZONE_ROM_REQ port=scr cyc=%0d frame=%0d x=%0d y=%0d addr=%03x",
+                    gfx_cyc, rom_watch_frame, video_hdump, video_vdump, scrrom_addr);
+        end
+        if( objrom_cs && !obj_cs_l ) begin
+            obj_pend  <= 1'b1;
+            obj_start <= gfx_cyc;
+            if( rom_watch_active )
+                $display("MZONE_ROM_REQ port=obj cyc=%0d frame=%0d x=%0d y=%0d addr=%04x",
+                    gfx_cyc, rom_watch_frame, video_hdump, video_vdump, objrom_addr);
+        end
+
+        if( scr_pend && scrrom_ok ) begin
+            if( rom_watch_active )
+                $display("MZONE_ROM_OK port=scr cyc=%0d lat=%0d addr=%03x", gfx_cyc, gfx_cyc-scr_start, scrrom_addr);
+            scr_pend <= 1'b0;
+        end
+        if( obj_pend && objrom_ok ) begin
+            if( rom_watch_active )
+                $display("MZONE_ROM_OK port=obj cyc=%0d lat=%0d addr=%04x", gfx_cyc, gfx_cyc-obj_start, objrom_addr);
+            obj_pend <= 1'b0;
+        end
+
+        if( scr_pend && !scrrom_cs && !scrrom_ok ) begin
+            if( rom_watch_active )
+                $display("MZONE_ROM_DROP port=scr cyc=%0d wait=%0d addr=%03x", gfx_cyc, gfx_cyc-scr_start, scrrom_addr);
+            scr_pend <= 1'b0;
+        end
+        if( obj_pend && !objrom_cs && !objrom_ok ) begin
+            if( rom_watch_active )
+                $display("MZONE_ROM_DROP port=obj cyc=%0d wait=%0d addr=%04x", gfx_cyc, gfx_cyc-obj_start, objrom_addr);
+            obj_pend <= 1'b0;
+        end
+    end
+end
+
+always @(posedge clk24) begin
+    if( rst24 ) begin
+        main_cs_l <= 1'b0;
+        snd_cs_l  <= 1'b0;
+        dac_cs_l  <= 1'b0;
+        main_pend <= 1'b0;
+        snd_pend  <= 1'b0;
+        dac_pend  <= 1'b0;
+        cpu_cyc   <= 0;
+    end else begin
+        cpu_cyc <= cpu_cyc + 1;
+        main_cs_l <= main_cs;
+        snd_cs_l  <= snd_cs;
+        dac_cs_l  <= dac_cs;
+
+        if( main_cs && !main_cs_l ) begin
+            main_pend  <= 1'b1;
+            main_start <= cpu_cyc;
+            if( rom_watch_active )
+                $display("MZONE_ROM_REQ port=main cyc=%0d addr=%04x", cpu_cyc, main_addr);
+        end
+        if( snd_cs && !snd_cs_l ) begin
+            snd_pend  <= 1'b1;
+            snd_start <= cpu_cyc;
+            if( rom_watch_active )
+                $display("MZONE_ROM_REQ port=snd cyc=%0d addr=%04x", cpu_cyc, snd_addr);
+        end
+        if( dac_cs && !dac_cs_l ) begin
+            dac_pend  <= 1'b1;
+            dac_start <= cpu_cyc;
+            if( rom_watch_active )
+                $display("MZONE_ROM_REQ port=dac cyc=%0d addr=%03x", cpu_cyc, dac_addr);
+        end
+
+        if( main_pend && main_rom_ok ) begin
+            if( rom_watch_active )
+                $display("MZONE_ROM_OK port=main cyc=%0d lat=%0d addr=%04x", cpu_cyc, cpu_cyc-main_start, main_addr);
+            main_pend <= 1'b0;
+        end
+        if( snd_pend && snd_ok ) begin
+            if( rom_watch_active )
+                $display("MZONE_ROM_OK port=snd cyc=%0d lat=%0d addr=%04x", cpu_cyc, cpu_cyc-snd_start, snd_addr);
+            snd_pend <= 1'b0;
+        end
+        if( dac_pend && dac_ok ) begin
+            if( rom_watch_active )
+                $display("MZONE_ROM_OK port=dac cyc=%0d lat=%0d addr=%03x", cpu_cyc, cpu_cyc-dac_start, dac_addr);
+            dac_pend <= 1'b0;
+        end
+
+        if( main_pend && !main_cs && !main_rom_ok ) begin
+            if( rom_watch_active )
+                $display("MZONE_ROM_DROP port=main cyc=%0d wait=%0d addr=%04x", cpu_cyc, cpu_cyc-main_start, main_addr);
+            main_pend <= 1'b0;
+        end
+        if( snd_pend && !snd_cs && !snd_ok ) begin
+            if( rom_watch_active )
+                $display("MZONE_ROM_DROP port=snd cyc=%0d wait=%0d addr=%04x", cpu_cyc, cpu_cyc-snd_start, snd_addr);
+            snd_pend <= 1'b0;
+        end
+        if( dac_pend && !dac_cs && !dac_ok ) begin
+            if( rom_watch_active )
+                $display("MZONE_ROM_DROP port=dac cyc=%0d wait=%0d addr=%03x", cpu_cyc, cpu_cyc-dac_start, dac_addr);
+            dac_pend <= 1'b0;
+        end
+    end
+end
+`endif
 
 `ifdef JTFRAME_LF_BUFFER
 assign game_hdump   = video_hdump;
@@ -340,8 +668,8 @@ jtmzone_main u_main(
 
     .rom_addr   ( main_stub_addr ),
     .rom_cs     ( main_stub_cs   ),
-    .rom_data   ( main_data      ),
-    .rom_ok     ( main_ok        ),
+    .rom_data   ( main_rom_data  ),
+    .rom_ok     ( main_rom_ok    ),
 
     .cpu_rnw    ( main_cpu_rnw   ),
     .cpu_dout   ( main_cpu_dout  ),
@@ -359,7 +687,7 @@ jtmzone_main u_main(
     .shared_we  ( main_shared_we   ),
     .shared_din ( main_shared_dout ),
 
-    .main_vram_addr( main_vram_addr ),
+    .main_vram_addr( main_vram_ofs  ),
     .main_vram_din ( main_vram_din  ),
     .main_vram0_we ( main_vram0_we  ),
     .main_vram1_we ( main_vram1_we  ),
@@ -382,6 +710,7 @@ jtmzone_main u_main(
 
     .vblank     ( LVBL           ),
     .blank      ( blank          ),
+    .h2         ( h2             ),
     .dip_pause  ( dip_pause      ),
     .irq_ack    ( main_irq_ack   ),
     .BA         ( main_ba        ),
@@ -450,8 +779,21 @@ jtmzone_snd u_snd(
 jtmzone_video u_video(
     .rst        ( rst            ),
     .clk        ( clk            ),
+    .clk24      ( clk24          ),
     .pxl_cen    ( pxl_cen        ),
     .pxl2_cen   ( pxl2_cen       ),
+
+    .main_tile_addr( main_tile_addr ),
+    .main_vram_din ( main_vram_din  ),
+    .main_cpu_rnw  ( main_cpu_rnw   ),
+    .main_vram0_cs ( main_vram0_cs  ),
+    .main_vram1_cs ( main_vram1_cs  ),
+    .main_cram0_cs ( main_cram0_cs  ),
+    .main_cram1_cs ( main_cram1_cs  ),
+    .main_vram0_dout( main_vram0_dout ),
+    .main_vram1_dout( main_vram1_dout ),
+    .main_cram0_dout( main_cram0_dout ),
+    .main_cram1_dout( main_cram1_dout ),
 
     .scrolly    ( main_scrolly   ),
     .scrollx    ( main_scrollx   ),
@@ -460,17 +802,11 @@ jtmzone_video u_video(
     .prog_addr  ( prog_addr      ),
     .prom_we    ( prom_we        ),
 
-    .video_scroll_ram_addr( video_scroll_ram_addr ),
-    .video_fix_ram_addr   ( video_fix_ram_addr    ),
-    .video_vram0          ( vram0_dout            ),
-    .video_vram1          ( video_vram1_mux       ),
-    .video_cram0          ( cram0_dout            ),
-    .video_cram1          ( cram1_dout            ),
-
     .fixrom_addr( fixrom_addr      ),
     .fixrom_cs  ( fixrom_cs        ),
     .fixrom_data( fixrom_data      ),
     .fixrom_ok  ( fixrom_ok        ),
+
     .scrrom_addr( scrrom_addr      ),
     .scrrom_cs  ( scrrom_cs        ),
     .scrrom_data( scrrom_data      ),
@@ -486,15 +822,14 @@ jtmzone_video u_video(
     .VS         ( VS             ),
     .LHBL       ( LHBL           ),
     .LVBL       ( LVBL           ),
+    .pre_LVBL   ( video_pre_lvbl ),
     .red        ( red            ),
     .green      ( green          ),
     .blue       ( blue           ),
 
     .clkq_cen   ( clkq_cen       ),
     .h2         ( h2             ),
-    .fix_n      ( fix_n          ),
     .fix_en     ( fix_en         ),
-    .fix_delayed_n( fix_delayed_n ),
     .hdump      ( video_hdump    ),
     .vdump      ( video_vdump    ),
     .vrender    ( video_vrender  )

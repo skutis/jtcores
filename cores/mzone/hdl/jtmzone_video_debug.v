@@ -10,6 +10,7 @@ module jtmzone_video_debug(
     input               pxl_cen,
     input               LHBL,
     input               LVBL,
+    input               flip,
     input        [ 3:0] red_in,
     input        [ 3:0] green_in,
     input        [ 3:0] blue_in,
@@ -19,11 +20,13 @@ module jtmzone_video_debug(
 );
 
 localparam [8:0] FIX_WIDTH = 9'd48;
+localparam [8:0] HVISIBLE  = 9'd288;
 
 wire        marker_yellow;
 wire        marker_green_ref, marker_blue_ref, marker_black_ref;
 wire        fix_ref_green, fix_ref_blue, fix_ref_black;
 wire        fix_only_blank, scroll_only_blank;
+wire [ 8:0] fix_ref_x0, fix_ref_x1;
 
 reg         dbg_active_l;
 reg  [ 8:0] dbg_img_x;
@@ -50,15 +53,16 @@ assign scroll_only_blank = `ifdef MZONE_SCROLL_ONLY dbg_img_x < FIX_WIDTH `else 
 assign marker_green_ref = 1'b0;
 assign marker_blue_ref  = 1'b0;
 assign marker_black_ref = 1'b0;
+assign fix_ref_x0 = flip ? HVISIBLE-FIX_WIDTH-9'd2 : FIX_WIDTH-9'd2;
+assign fix_ref_x1 = flip ? HVISIBLE-FIX_WIDTH-9'd1 : FIX_WIDTH-9'd1;
 `ifdef MZONE_NO_BOUNDARY_MARKERS
 assign fix_ref_green = 1'b0;
 assign fix_ref_blue  = 1'b0;
 `else
-assign fix_ref_green = dbg_img_y == 8'd0 && dbg_img_x == FIX_WIDTH-9'd2;
-assign fix_ref_blue  = dbg_img_y == 8'd0 && dbg_img_x == FIX_WIDTH-9'd1;
+assign fix_ref_green = dbg_img_y == 8'd0 && dbg_img_x == fix_ref_x0;
+assign fix_ref_blue  = dbg_img_y == 8'd0 && dbg_img_x == fix_ref_x1;
 `endif
 assign fix_ref_black = 1'b0;
-
 `ifdef MZONE_SCROLL_MARKER
 assign marker_run = marker_frame >= 10'd2;
 assign marker_step = marker_run ? marker_frame[7:0] - 8'd2 : 8'd0;
