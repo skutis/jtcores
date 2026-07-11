@@ -334,7 +334,10 @@ def main():
             ypos = sprite_ypos[i]
             xpos = sprite_xpos[i]
             pc = write_sprite(rom, pc, i, attr, ypos, code, xpos)
-        pc = write_sprite(rom, pc, 0x21, 0x00, 0x78, 0x44, 0x10)
+        # Boundary reference sprites for raw line-buffer X.
+        pc = write_sprite(rom, pc, 0x21, 0x00, 0x78, 0xD0, 0x00)
+        pc = write_sprite(rom, pc, 0x22, 0x00, 0x78, 0x44, 0xEF)
+        pc = write_sprite(rom, pc, 0x23, 0x00, 0x78, 0x4B, 0x77)
 
     pc = lda_imm(rom, pc, 0x01)
     pc = sta_ext(rom, pc, 0x0007)  # enable main IRQ latch

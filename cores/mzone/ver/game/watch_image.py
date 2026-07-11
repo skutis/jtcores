@@ -12,7 +12,7 @@ from gi.repository import Gdk, GdkPixbuf, GLib, Gtk
 
 
 class ImageWatcher:
-    def __init__(self, path, interval_ms, zoom, hbase, vbase):
+    def __init__(self, path, interval_ms, zoom, hbase, vbase, coord_space):
         self.path = path
         self.directory = os.path.dirname(path) or "."
         self.files = []
@@ -21,6 +21,7 @@ class ImageWatcher:
         self.zoom = zoom
         self.hbase = hbase
         self.vbase = vbase
+        self.coord_space = coord_space
         self.mtime = None
         self.base_pixbuf = None
         self.drag_button = None
@@ -181,10 +182,14 @@ class ImageWatcher:
             and 0 <= img_y < self.base_pixbuf.get_height()
         ):
             raw_x, raw_y = self.raw_coords(img_x, img_y)
-            hdump = (raw_x + self.hbase) % 384
-            vdump = (raw_y + self.vbase) % 264
+            if self.coord_space == "final":
+                hdump = (raw_x + self.hbase) % 384
+                vdump = (self.vbase + (self.base_pixbuf.get_width() - 1 - raw_y)) % 264
+            else:
+                hdump = (raw_x + self.hbase) % 384
+                vdump = (raw_y + self.vbase) % 264
             self.coord_text = (
-                f"img x={img_x} y={img_y}  raw x={raw_x} y={raw_y}  "
+                f"img x={img_x} y={img_y}  {self.coord_space} raw x={raw_x} y={raw_y}  "
                 f"hdump={hdump} vdump={vdump}"
             )
         else:
@@ -373,12 +378,28 @@ def main():
     )
     parser.add_argument("--interval", type=float, default=0.25, help="poll interval in seconds")
     parser.add_argument("--zoom", type=float, default=3.0, help="initial zoom")
-    parser.add_argument("--hbase", type=int, default=0, help="raw active x to hdump offset")
+    parser.add_argument(
+        "--coord-space",
+        choices=("final", "raw"),
+        default="final",
+        help="coordinate labels to show: final RGB/FST output or raw active image coordinates",
+    )
+    parser.add_argument("--hbase", type=int, default=None, help="raw active x to hdump offset")
     parser.add_argument("--vbase", type=int, default=16, help="raw active y to vdump offset")
     args = parser.parse_args()
 
     path = args.path[0] if args.path else "frames/frame_00004.png"
-    ImageWatcher(path, max(50, int(args.interval * 1000)), args.zoom, args.hbase, args.vbase)
+    hbase = args.hbase
+    if hbase is None:
+        hbase = 0
+    ImageWatcher(
+        path,
+        max(50, int(args.interval * 1000)),
+        args.zoom,
+        hbase,
+        args.vbase,
+        args.coord_space,
+    )
     Gtk.main()
 
 

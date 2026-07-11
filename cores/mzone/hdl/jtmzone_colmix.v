@@ -22,8 +22,8 @@ module jtmzone_colmix(
     input               obj_pxl_en,
     input               fix_en,
     input               flip,
-    input               LHBL,
-    input               LVBL,
+    input               preLHBL,
+    input               preLVBL,
     input         [8:0] hdump,
     input         [8:0] vdump,
 
@@ -34,8 +34,8 @@ module jtmzone_colmix(
     output        [3:0] red,
     output        [3:0] green,
     output        [3:0] blue,
-    output              LHBL_dly,
-    output              LVBL_dly,
+    output              LHBL,
+    output              LVBL,
     output              preLBL,
     output        [4:0] dbg_pal_idx,
     output              dbg_obj_opaque
@@ -43,7 +43,6 @@ module jtmzone_colmix(
 
 localparam [21:0] PAL_OFFSET = `ifdef JTFRAME_PROM_START `JTFRAME_PROM_START + 22'h000 `else 22'h000 `endif;
 localparam        BLANK_DLY  = 9;
-localparam        CHAR_DLY   = 3;
 
 wire [ 7:0] pal_prom_dout;
 wire [ 7:0] pal_addr;
@@ -51,23 +50,18 @@ wire [ 3:0] red_raw, green_raw, blue_raw;
 wire [11:0] raw, rgb;
 wire        pal_we;
 wire [ 3:0] red_blank, green_blank, blue_blank;
-wire [ 3:0] char_pxl_dly;
-wire        fix_en_dly;
-wire        obj_en = obj_pxl_en && !fix_en_dly;
+wire        obj_en = obj_pxl_en && !fix_en;
 wire        pal_a4 = !obj_en;
-wire [ 3:0] char_pxl = char_pxl_dly;
-wire [ 4:0] pal_mux = { pal_a4, obj_en ? obj_pxl : char_pxl };
-wire [17:0] rgb_pos_dly;
-wire [17:0] char_pos_dly;
-wire [17:0] raw_pos_dly;
+wire [ 4:0] pal_mux = { pal_a4, obj_en ? obj_pxl : scr_pxl };
+reg  [ 4:0] pal_mux_r;
 wire [ 8:0] hdump_debug = hdump;
 wire [ 8:0] vdump_debug = vdump;
-wire [ 8:0] rgb_hdump_debug = rgb_pos_dly[17:9];
-wire [ 8:0] rgb_vdump_debug = rgb_pos_dly[8:0];
-wire [ 8:0] char_hdump_debug = char_pos_dly[17:9];
-wire [ 8:0] char_vdump_debug = char_pos_dly[8:0];
-wire [ 8:0] raw_hdump_debug = raw_pos_dly[17:9];
-wire [ 8:0] raw_vdump_debug = raw_pos_dly[8:0];
+wire [ 8:0] rgb_hdump_debug = hdump;
+wire [ 8:0] rgb_vdump_debug = vdump;
+wire [ 8:0] char_hdump_debug = hdump;
+wire [ 8:0] char_vdump_debug = vdump;
+wire [ 8:0] raw_hdump_debug = hdump;
+wire [ 8:0] raw_vdump_debug = vdump;
 
 `ifdef MZONE_COLMIX_WATCH
 reg  [15:0] frame_cnt;
@@ -88,9 +82,9 @@ reg  [ 8:0] point_char_hdump_debug_s;
 reg  [ 8:0] point_char_vdump_debug_s;
 `endif
 
-assign pal_addr = { 3'd0, pal_mux };
-assign dbg_pal_idx = pal_mux;
-assign dbg_obj_opaque = !pal_mux[4];
+assign pal_addr = { 3'd0, pal_mux_r };
+assign dbg_pal_idx = pal_mux_r;
+assign dbg_obj_opaque = !pal_mux_r[4];
 assign red_raw   = rg_dac( pal_prom_dout[2:0] );
 assign green_raw = rg_dac( pal_prom_dout[5:3] );
 assign blue_raw  = b_dac ( pal_prom_dout[7:6] );
@@ -102,8 +96,7 @@ assign { red_blank, green_blank, blue_blank } = rgb;
 
 jtframe_prom #(
     .DW ( 8 ),
-    .AW ( 5 ),
-    .ASYNC( 1 )
+    .AW ( 5 )
 ) u_pal_prom(
     .clk    ( clk              ),
     .cen    ( pxl_cen          ),
@@ -114,59 +107,24 @@ jtframe_prom #(
     .q      ( pal_prom_dout    )
 );
 
-jtframe_sh #(.W(4),.L(CHAR_DLY)) u_char_pxl_dly(
-    .clk    ( clk         ),
-    .clk_en ( pxl_cen     ),
-    .din    ( scr_pxl     ),
-    .drop   ( char_pxl_dly )
-);
-
-jtframe_sh #(.W(18),.L(CHAR_DLY)) u_raw_pos_dly(
-    .clk    ( clk             ),
-    .clk_en ( pxl_cen         ),
-    .din    ( { hdump, vdump } ),
-    .drop   ( raw_pos_dly     )
-);
-
-jtframe_sh #(.W(18),.L(CHAR_DLY+BLANK_DLY)) u_char_pos_dly(
-    .clk    ( clk             ),
-    .clk_en ( pxl_cen         ),
-    .din    ( { hdump, vdump } ),
-    .drop   ( char_pos_dly    )
-);
-
-jtframe_sh #(.W(1),.L(CHAR_DLY)) u_fix_en_dly(
-    .clk    ( clk        ),
-    .clk_en ( pxl_cen    ),
-    .din    ( fix_en     ),
-    .drop   ( fix_en_dly )
-);
-
 jtframe_blank #(.DLY(BLANK_DLY),.DW(12)) u_blank(
     .clk        ( clk      ),
     .pxl_cen    ( pxl_cen  ),
-    .preLHBL    ( LHBL     ),
-    .preLVBL    ( LVBL     ),
-    .LHBL       ( LHBL_dly ),
-    .LVBL       ( LVBL_dly ),
+    .preLHBL    ( preLHBL  ),
+    .preLVBL    ( preLVBL  ),
+    .LHBL       ( LHBL     ),
+    .LVBL       ( LVBL     ),
     .preLBL     ( preLBL   ),
     .rgb_in     ( raw      ),
     .rgb_out    ( rgb      )
-);
-
-jtframe_sh #(.W(18),.L(BLANK_DLY)) u_rgb_pos_dly(
-    .clk    ( clk             ),
-    .clk_en ( pxl_cen         ),
-    .din    ( { hdump, vdump } ),
-    .drop   ( rgb_pos_dly     )
 );
 
 jtmzone_video_debug u_debug(
     .rst        ( rst         ),
     .clk        ( clk         ),
     .pxl_cen    ( pxl_cen     ),
-    .LHBL       ( LHBL_dly    ),
-    .LVBL       ( LVBL_dly    ),
+    .LHBL       ( LHBL        ),
+    .LVBL       ( LVBL        ),
     .flip       ( flip        ),
     .red_in     ( red_blank   ),
     .green_in   ( green_blank ),
@@ -178,6 +136,7 @@ jtmzone_video_debug u_debug(
 
 always @(posedge clk) begin
     if( rst ) begin
+        pal_mux_r <= 5'd0;
 `ifdef MZONE_COLMIX_WATCH
         frame_cnt <= 16'd0;
         lvbl_l    <= 1'b0;
@@ -197,21 +156,22 @@ always @(posedge clk) begin
         point_char_vdump_debug_s = 9'd0;
 `endif
     end else if( pxl_cen ) begin
+        pal_mux_r <= pal_mux;
 `ifdef MZONE_COLMIX_WATCH
-        lvbl_l <= LVBL;
-        if( LVBL && !lvbl_l ) frame_cnt <= frame_cnt + 16'd1;
+        lvbl_l <= preLVBL;
+        if( preLVBL && !lvbl_l ) frame_cnt <= frame_cnt + 16'd1;
 `endif
 `ifdef MZONE_POINT_WATCH
-        point_lvbl_l <= LVBL;
-        if( LVBL && !point_lvbl_l ) point_frame <= point_frame + 16'd1;
+        point_lvbl_l <= preLVBL;
+        if( preLVBL && !point_lvbl_l ) point_frame <= point_frame + 16'd1;
 `endif
 `ifdef MZONE_COLMIX_WATCH
         if( frame_cnt >= `MZONE_COLMIX_WATCH_FROM && frame_cnt <= `MZONE_COLMIX_WATCH_TO &&
             hdump >= `MZONE_COLMIX_X0 && hdump <= `MZONE_COLMIX_X1 &&
             vdump >= `MZONE_COLMIX_Y0 && vdump <= `MZONE_COLMIX_Y1 ) begin
             $display("MZONE_COLMIX frame=%0d x=%0d y=%0d obj_en=%b obj=%b fix=%b obj_pxl=%x char_in=%x char_pxl=%x pal_mux=%02x prom=%02x rgb=%x%x%x",
-                frame_cnt, hdump, vdump, obj_en, obj_pxl_en, fix_en_dly, obj_pxl, scr_pxl, char_pxl_dly,
-                pal_mux, pal_prom_dout, red_raw, green_raw, blue_raw);
+                frame_cnt, hdump, vdump, obj_en, obj_pxl_en, fix_en, obj_pxl, scr_pxl, scr_pxl,
+                pal_mux_r, pal_prom_dout, red_raw, green_raw, blue_raw);
         end
 `endif
 `ifdef MZONE_POINT_WATCH
@@ -231,17 +191,17 @@ always @(posedge clk) begin
             point_raw_vdump_debug_s = raw_vdump_debug;
             point_char_hdump_debug_s = char_hdump_debug;
             point_char_vdump_debug_s = char_vdump_debug;
-            $strobe("MZONE_POINT_COLMIX frame=%0d hdump=%0d vdump=%0d hdump_debug=%0d vdump_debug=%0d rgb_hdump_debug=%0d rgb_vdump_debug=%0d raw_hdump_debug=%0d raw_vdump_debug=%0d char_hdump_debug=%0d char_vdump_debug=%0d obj_en=%b obj_pxl_en=%b fix_en=%b fix_en_dly=%b obj_pxl=%x char_in=%x char_dly=%x pal_mux=%02x prom=%02x raw=%x%x%x blank=%x%x%x rgb=%x%x%x LHBL=%b LVBL=%b LHBL_dly=%b LVBL_dly=%b",
+            $strobe("MZONE_POINT_COLMIX frame=%0d hdump=%0d vdump=%0d hdump_debug=%0d vdump_debug=%0d rgb_hdump_debug=%0d rgb_vdump_debug=%0d raw_hdump_debug=%0d raw_vdump_debug=%0d char_hdump_debug=%0d char_vdump_debug=%0d obj_en=%b obj_pxl_en=%b fix_en=%b fix_en_dly=%b obj_pxl=%x char_in=%x char_dly=%x pal_mux=%02x prom=%02x raw=%x%x%x blank=%x%x%x rgb=%x%x%x preLHBL=%b preLVBL=%b LHBL=%b LVBL=%b",
                 point_frame, point_hdump_s, point_vdump_s,
                 point_hdump_debug_s, point_vdump_debug_s,
                 point_rgb_hdump_debug_s, point_rgb_vdump_debug_s,
                 point_raw_hdump_debug_s, point_raw_vdump_debug_s,
                 point_char_hdump_debug_s, point_char_vdump_debug_s,
                 obj_en, obj_pxl_en, fix_en,
-                fix_en_dly, obj_pxl, scr_pxl, char_pxl_dly, pal_mux,
+                fix_en, obj_pxl, scr_pxl, scr_pxl, pal_mux_r,
                 pal_prom_dout, red_raw, green_raw, blue_raw,
                 red_blank, green_blank, blue_blank, red, green, blue,
-                LHBL, LVBL, LHBL_dly, LVBL_dly);
+                preLHBL, preLVBL, LHBL, LVBL);
         end
 `endif
     end

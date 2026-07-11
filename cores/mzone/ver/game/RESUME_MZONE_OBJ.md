@@ -1,10 +1,29 @@
 # M-Zone OBJ Debug Resume
 
-Date: 2026-06-25
+Date: 2026-07-01
+
+## 2026-07-01 Non-Flipped `0xeb` Sprite Line Fix
+
+- Symptom: the non-flipped test sprite at raw OBJ `xpos=0xeb` missed some horizontal rows.
+- Cause found in `../../hdl/jtmzone_obj.v`:
+  - OBJ scan only issued a draw on `inzone && !busy`;
+  - adjacent active sprites can be scanned while `jtmzone_objdraw` is still busy;
+  - the `0xeb` test sprite rows `ysub=3`, `ysub=8`, and `ysub=14` were skipped.
+- Fix implemented:
+  - added a one-entry pending draw latch in `jtmzone_obj.v`;
+  - if an active sprite is scanned while the drawer is busy, it is queued and issued as soon as `busy` clears;
+  - `MZONE_OBJ_WATCH` now reports `MZONE_OBJ_QUEUE` and `MZONE_OBJ_DROP` for this path.
+- Verification:
+  - ROM regenerated with `MZONE_SCROLLTEST_SPRITES=1 ../../tools/make_scrolltest_rom.py`;
+  - non-flipped OBJ-only trace: `/tmp/mzone_eb_nonflip_queue.log`;
+  - `base=088`, code `44`, raw `xpos=eb` now queues rows `ysub=3,8,14`;
+  - no `MZONE_OBJ_DROP` entries for `base=088`;
+  - linebuffer writes to addresses `0xeb..0xfa` are present on all sprite rows `119..134`;
+  - visible OBJ pixels at the right edge are continuous on lines `120..134`.
 
 ## Current Symptom
 
-- Flipped OBJ/sprite rendering still has the same problem after the latest test.
+- Flipped OBJ/sprite rendering may still need re-checking after the non-flipped queue fix.
 - User-observed issue:
   - Around `hdump` line `225`, sprites are black.
   - In previous lines around `hdump 221:223`, pixels are shifted in `vpos +1` for two sprites.
@@ -22,6 +41,30 @@ Date: 2026-06-25
   - The generated PNG is rotated relative to core naming.
   - The final RGB debug position is delayed: `rgb_hdump_debug` was observed as `hdump - 9` in colmix point traces.
   - Therefore an apparent visible/raw point may need a +9 hdump input watch when tracing through colmix.
+
+## OBJ X Counter Timing Note
+
+- During normal rendering, the OBJ `xpos` counter reaches 0 four pixel clocks before `fix_n` goes inactive.
+- That point is the visible area outside the FIX layer, where SCROLL or OBJ can be visible.
+- The four-pixel lead accounts for the OBJ pipeline delay into the color mixer.
+- The last rendered `xpos` is 239, which fits the visible window after pipeline delays.
+- In flipped rendering, OBJ rendering starts 12 pixels before `hblk_n` goes inactive, accounting for the four-pixel OBJ pipeline delay.
+- While flip is active, the counter wraps while `fix_n` is active; those OBJ pixels are not visible.
+- Core implementation in `../../hdl/jtmzone_objdraw.v` uses the HDL render-to-colmix delay, not the PCB four-pixel delay:
+  - `OBJ_CORE_DLY=1` because the linebuffer read reaches colmix one pixel later;
+  - normal: `hread=0` is at `hdump=40`;
+  - flipped: first visible after hblank has sprite counter `8`;
+  - flipped: with current core timing, `hread=8` is read at `hdump=31` and reaches colmix at `hdump=32`;
+  - flipped: the OBJ read counter counts down, so raw `xpos=0xeb` appears near the same screen position as non-flipped raw `xpos=0x10`;
+  - the read counter rolls over; FIX priority, OBJ pixel enable, and blanking mask hidden pixels in colmix/output.
+- MAME-observed flipped X equivalence: raw `xpos=0xeb` in flipped mode matches raw `xpos=0x10` in non-flipped mode.
+  - These are OBJ RAM values; do not rewrite the scanned OBJ RAM X byte in HDL.
+  - Use this as a MAME/PCB reference, not as a direct HDL X transform.
+- Scrolltest sprite references in `../../tools/make_scrolltest_rom.py`:
+  - bytes from OBJ RAM `0x3085`: `78 44 eb c0` for flipped reference boundary;
+  - object index `0x21` uses attr `0f` so the boundary-reference sprite is visible while preserving bytes at `0x3085`;
+  - complete flipped reference entry at object index `0x22`: `c0 78 44 eb`;
+  - non-flip reference entry kept at object index `0x23`: `00 78 44 10`.
 
 ## Latest Attempt That Did Not Fix It
 
@@ -132,3 +175,95 @@ MZONE_ROM=../../../../rom/megazone_scrolltest.rom \
 - In the last aligned traces, several linebuffer reads had `line_has=1` but `pal_pxl=0`, meaning the read address was not hitting sprite data for that coordinate.
 - Also remember `jtframe_obj_buffer` clears after reads. Its `rd` timing matters; M-Zone currently drives `rd` across the whole active object span, unlike Kicker/Road Fighter style `buf_clr = pxl_cen && hread < {1'b1, HOFFSET}`.
 
+## 2026-06-30 Counter Direction Update
+
+- User observed that raw `xpos=0xeb` in flipped mode should match raw `xpos=0x10` in non-flipped mode.
+- The previous core change made flipped `hread` count upward from the first visible value, which put `0xeb` near the far/right end.
+- `../../hdl/jtmzone_objdraw.v` now makes flipped `hread` count down:
+  - `OBJ_FLIP_RD_BASE = OBJ_FLIP_VIS_START - OBJ_CORE_DLY + OBJ_FLIP_FIRST_X`;
+  - `hread = OBJ_FLIP_RD_BASE - hdump`.
+- Focused forced-flip trace: `/tmp/mzone_flip_downcounter_xref.log`.
+  - Shows `hread=0xeb` at raw trace x around 60.
+  - Shows the raw `0x10` reference around the same visible neighborhood instead of the opposite end.
+- Non-flipped smoke sim after this change: `/tmp/mzone_nonflip_after_downcounter.log`.
+
+## 2026-06-30 PCB Linebuffer Update
+
+- User clarified the PCB OBJ linebuffer is 256 x 4 bits, doubled for the two line buffers.
+- `../../hdl/jtmzone_objdraw.v` now instantiates `jtframe_obj_buffer` with `AW=8`, so each jtframe line is 256 x 4.
+- OBJ linebuffer writes use `draw_x[7:0]`; wrapping is intentional.
+- OBJ linebuffer reads run for one 256-clock pass:
+  - normal pass starts at `OBJ_NORM_RD_START`;
+  - flipped pass starts at `OBJ_FLIP_VIS_START - OBJ_CORE_DLY`.
+- Focused forced-flip trace after this change: `/tmp/mzone_flip_256buf.log`.
+- Non-flipped smoke sim after this change: `/tmp/mzone_nonflip_256buf.log`.
+
+## 2026-07-01 Non-Flipped OBJ Read Boundary
+
+- User clarified that for OBJ, CPU/write X=0 should appear immediately after `fix_n` goes high, i.e. when core `fix_src` goes low.
+- Current non-flipped test state in `../../hdl/jtmzone_objdraw.v`:
+  - `hread` resets to 0 at `hdump == 46`, two pixels before the non-flipped `fix_src` falling boundary at `hdump == 48`.
+  - Line state still latches at `hdump == 48`, so the counter lead does not move the linebuffer line boundary.
+  - OBJ output is visible only while `hread < 240`, matching the expected last visible OBJ X of 239.
+  - The logical `hread` counter remains the PCB/reference counter; physical linebuffer `read_addr` is `hread+7` to compensate core output placement.
+  - OBJ visibility still uses `hread < 240`, not the compensated `read_addr`, so the right edge is not cut at raw `x=279`.
+  - OBJ linebuffer writes are clipped to `draw_x < 256` so the 8-bit linebuffer address cannot wrap right-side writes into low addresses.
+  - Linebuffer bank switch is still driven by `fix_src`.
+- Latest focused non-flipped object-only sim:
+  - log: `/tmp/mzone_nonflip_readaddr_plus7_vis_hread.log`
+  - waveform: `/tmp/mzone_nonflip_readaddr_plus7_vis_hread.fst`
+  - PNG: `frames/frame_00008.png`
+- Trace summary: writes and visible OBJ pixels are present on consecutive sprite rows; after the physical read-address shift, OBJ output still reaches `x=286`, so the read-visible window is not cut at raw `x=279`.
+
+## 2026-07-02 SCROLL/FIX Colmix Timing
+
+- Current colmix state in `../../hdl/jtmzone_colmix.v`:
+  - removed the old `CHAR_DLY=3` path;
+  - `BLANK_DLY=1`;
+  - the mixer uses incoming `scr_pxl` and `fix_en` directly;
+  - OBJ debug marker `MZONE_OBJ_X0_MARKER` still bypasses raw RGB to white when enabled.
+- Current FIX state in `../../hdl/jtmzone_fix.v`:
+  - `fix_src` remains the source/address reference;
+  - `fix_sel`/`fix_en` are delayed by 5 clocks in non-flipped mode;
+  - non-flipped `pcb_hcnt` currently advances the renderer by 5 clocks: `h < FIX_WIDTH ? h + 9'd5 : h - 9'd123`;
+  - non-flipped `fix_vis_at` is currently shortened to `FIX_WIDTH-5` so delayed FIX priority drops at the scroll boundary in the watched trace.
+- Current SCROLL state in `../../hdl/jtmzone_scroll.v`:
+  - non-flipped `pcb_hcnt` uses `hn = h - 9'd020`;
+  - this advances scroll fetch/address phase so rendered scroll pixels, not just source address, start at the boundary.
+- Latest non-flipped full scroll/FIX sim:
+  - log: `/tmp/mzone_full_scroll_hlead13.log`
+  - waveform: `/tmp/mzone_full_scroll_hlead13.fst`
+  - PNG: `/tmp/mzone_full_scroll_hlead13_frame_00008.png`
+- Trace result from that sim:
+  - scroll nonzero pixels now start at `hdump=48`;
+  - previous `h - 9'd028` experiment had first nonzero scroll pixels at `hdump=56`;
+  - FIX pixels are visible in the left strip on rows with nonblank glyph data;
+  - the watched `y=16` row is blank for the FIX glyph, so use rows `17..22` when verifying FIX visibility.
+- Follow-up after user reported FIX shifted `+5 hpos`:
+  - log before change: `/tmp/mzone_fix_shift_before.log`
+  - current log: `/tmp/mzone_fix_shift_hlead5.log`
+  - current waveform: `/tmp/mzone_fix_shift_hlead5.fst`
+  - current PNG: `/tmp/mzone_fix_shift_hlead5_frame_00008.png`
+  - only the non-flipped FIX `pcb_hcnt` phase was changed; scroll and colmix were not touched.
+
+## 2026-07-03 PCB OBJ X Write Rule
+
+- Schematic/PCB observation supersedes the earlier speculative OBJ X compensation notes:
+  - OBJ RAM byte 3 is the raw `xpos`.
+  - When byte 3 is read, the PCB resets the local OBJ pixel counter to 0.
+  - During sprite write, the counter runs 0..15.
+  - The effective write coordinate is `xpos + counter`.
+  - There is no PCB `+16` or `-16` compensation on OBJ RAM X.
+- Current HDL state matches this on the non-flipped write side:
+  - `../../hdl/jtmzone_obj.v` passes `xpos_raw_eff` directly into `dr_xpos`.
+  - `../../hdl/jtmzone_obj.v` uses `attr[6]` directly for OBJ horizontal flip.
+  - `../../hdl/jtmzone_objdraw.v` non-flipped write address is `cur_xpos + group*4 + pix_cnt[1:0]`.
+- Therefore, do not add or subtract 16 from OBJ RAM byte 3 in the scan path.
+- Non-flipped OBJ read phase was adjusted in `../../hdl/jtmzone_objdraw.v` so the visible boundary reads linebuffer address `0x10`:
+  - at `hdump == 47`, `hread <= 8'h10`;
+  - this moves the raw `xpos=0x10` reference sprite from `x=64` to `x=49` in the OBJ-only trace;
+  - the remaining one-pixel difference is the linebuffer/output latency to be checked against the full mixer path.
+- Latest non-flipped OBJ-only sim after this read-phase change:
+  - log: `/tmp/mzone_obj_readphase10_nonflip.log`
+  - waveform: `/tmp/mzone_obj_readphase10_nonflip.fst`
+  - PNG: `/tmp/mzone_obj_readphase10_nonflip_frame_00008.png`

@@ -22549,7 +22549,7 @@
 		)
 		(uuid "531ed642-9b09-48f7-97a2-1a618bdb9c10")
 	)
-	(text "When the corresponding line counter is enabled\n,~{LDCNT1}, the x positions go from 0..15, drawing\nevery pixel of the 16 x 16 sprite object to the\nactive line buffer for drawing. When the line\nbuffer toggles after ~{LBRST} goes high the \npixels are read and the x positions go from\n0..247"
+	(text "When the corresponding line counter is enabled\n,~{LDCNT1}, the x positions go from 0..15, drawing\nevery pixel of the 16 x 16 sprite object to the\nactive line buffer for drawing. When the line\nbuffer toggles after ~{LBRST} goes high the \npixels are read and the x positions go from\n0..239 during scroll/obj layers active."
 		(exclude_from_sim no)
 		(at 227.33 237.49 0)
 		(effects

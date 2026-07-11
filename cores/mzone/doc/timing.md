@@ -92,6 +92,35 @@ Timing-sheet text notes currently recorded in the schematic:
 That means the remaining work is mostly phase alignment, not pulse-width
 correction.
 
+## Layer pipeline design rule
+
+Use raw `hdump == 0` as the horizontal reference for all video layers. SCROLL,
+FIX, and OBJ logic should derive their counters from the same free-running
+`hdump` timeline. Prefer free-running counters throughout the layer pipelines;
+do not pause counters to hide latency. Reset a counter only where the hardware
+timing requires a real line/frame reset.
+
+Do not add separate per-layer global X references or source offsets to make a
+layer line up at the mixer. Any ROM/RAM fetch lead must be expressed as the
+layer's local pipeline timing from the common `hdump` reference, not as a second
+horizontal coordinate system.
+
+Each layer has at most eight `hdump` counts of total output latency budget to
+line up with the color mixer. Delay already consumed by the layer's own
+fetch/decode/pixel pipeline counts against that budget. Only add the remaining
+delay needed to reach the shared mixer phase; do not add a blind extra
+eight-count delay at the layer output. Horizontal blanking must then be delayed
+in the color mixer to the same final output phase.
+
+The color mixer should contain one pixel-clock register stage for the final
+palette/priority mux path. Avoid adding extra layer-specific delay in the mixer
+unless it is matching this shared output phase.
+
+This is the same general structure used by the Kicker/Road Fighter video path:
+the scroll and object layers receive the common `hdump`, and the color mixer
+applies the final blank/output delay (`BLANK_DLY(9)` there) after the layer mux
+and palette path.
+
 ## Main CPU decode
 
 The main CPU address decode has been written explicitly in HDL as active-low

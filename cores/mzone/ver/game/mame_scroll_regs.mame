@@ -1,0 +1,5 @@
+focus 0
+wp 1000,0800,w,1,{printf "SCROLLY/H frame=%d pc=%04X addr=%04X data=%02X\n",frame,pc,wpaddr,wpdata;go}
+wp 1800,0800,w,1,{printf "SCROLLX/V frame=%d pc=%04X addr=%04X data=%02X\n",frame,pc,wpaddr,wpdata;go}
+gtime #20000000
+quit

@@ -44,17 +44,18 @@ module jtmzone_scroll(
 );
 
 localparam [8:0] HVISIBLE    = 9'd288;
-localparam [8:0] HTOTAL      = 9'd384;
-localparam [8:0] FLIP_LINE_FETCH_H = 9'd376;
-localparam [8:0] FLIP_LINE_LOAD_H  = 9'd383;
+localparam [8:0] SCR_ORIGIN  = 9'd32;
+localparam [8:0] SCR_LEAD    = 9'd8;
 localparam [2:0] RD_PHASE    = 3'd7;
 localparam [2:0] FETCH_PHASE = 3'd0;
-localparam [2:0] LOAD_PHASE  = 3'd3;
+localparam [2:0] LOAD_PHASE  = 3'd4;
 
 reg  [31:0] pxl_data;
+reg  [31:0] rom_data_latch;
 reg  [ 9:0] ram_addr;
 reg  [ 3:0] pal_msb, cur_pal;
 reg         hflip, cur_hf;
+reg         rom_data_valid;
 `ifdef MZONE_SCROLL_WATCH
 reg  [ 7:0] cur_vram_dbg, cur_cram_dbg;
 reg  [11:0] cur_tile_dbg;
@@ -65,29 +66,30 @@ wire        vram_we = vram_cs & ~cpu_rnw;
 wire        cram_we = cram_cs & ~cpu_rnw;
 wire [ 9:0] eff_addr = cpu_addr;
 
-wire [ 7:0] h_eff = pcb_hcnt(hdump, flip);
+wire [ 8:0] hsum_base = hdump < HVISIBLE ? hdump : hdump - 9'd384;
+wire [ 8:0] scroll_origin = flip ? 9'd0 : SCR_ORIGIN;
+wire [ 8:0] scroll_hsum = hsum_base - scroll_origin;
+wire [ 8:0] hsum = scroll_hsum + SCR_LEAD - { 8'd0, flip };
+// hsum_base is the common raw hdump reference, sign-extended in HBLANK.
+// scroll_origin makes non-flipped scroll H addressing hdump-32. In flip, the
+// mirrored counter already lands on the PCB tile-map origin, so no origin
+// subtraction is applied. SCR_LEAD is only the pipeline lookahead before
+// pixels reach colmix.
+wire [ 7:0] h_eff = flip ? ~hsum[7:0] : hsum[7:0];
 wire [ 7:0] v_eff = pcb_vcnt(vdump, flip);
 wire [ 7:0] heff = h_eff + scrolly;
 wire [ 7:0] veff = v_eff + scrollx;
-wire [ 7:0] ram_heff = heff + (flip ? 8'hff : 8'h01);
 
+wire [31:0] rom_row_data = scr_rom_ok ? scr_rom_data : rom_data_latch;
 wire [31:0] rom_decoded_row;
+wire        rom_load_ready = scr_rom_ok || rom_data_valid;
 wire [11:0] tile_addr = { cram[7], vram, veff[2:0] ^ {3{cram[5]}} };
-wire [ 2:0] pipe_phase = flip ? ~heff[2:0] : heff[2:0];
-wire [ 2:0] load_phase = flip ? 3'd4 : LOAD_PHASE;
-wire        read_tile = pipe_phase == RD_PHASE;
-wire        load_tile = pipe_phase == load_phase;
-wire        fetch_tile = pipe_phase == FETCH_PHASE;
-wire        flip_line_fetch = flip && hdump == FLIP_LINE_FETCH_H;
-wire        flip_line_load  = flip && hdump == FLIP_LINE_LOAD_H;
-
+wire        read_tile = heff[2:0] == RD_PHASE;
+wire        load_tile = heff[2:0] == LOAD_PHASE;
+wire        fetch_tile = heff[2:0] == FETCH_PHASE;
 wire [ 3:0] pxl_raw = cur_hf ? pxl_data[3:0] : pxl_data[31:28];
 wire [ 3:0] color_raw = cur_pal;
 wire [ 7:0] pal_addr = { color_raw, pxl_raw[0], pxl_raw[1], pxl_raw[2], pxl_raw[3] };
-wire [31:0] sh_next = load_tile ? rom_decoded_row :
-                      cur_hf ? pxl_data >> 4 : pxl_data << 4;
-wire [ 3:0] pxl_next_raw = load_tile ? (hflip ? rom_decoded_row[3:0] : rom_decoded_row[31:28]) :
-                           cur_hf ? sh_next[3:0] : sh_next[31:28];
 
 `ifdef MZONE_SCROLL_WATCH
 reg [15:0] watch_frame;
@@ -150,7 +152,7 @@ wire       miss_window =
     ;
 `endif
 
-assign rom_decoded_row = decode_row(scr_rom_data);
+assign rom_decoded_row = decode_row(rom_row_data);
 assign dbg_hcnt = { 1'b0, heff };
 assign dbg_fix = 1'b0;
 assign dbg_rom_addr = tile_addr;
@@ -180,22 +182,10 @@ function [7:0] pcb_vcnt;
     input       f;
     reg   [7:0] vn;
 begin
+    // Raw vdump[8] wraps the bottom blanking lines back to PCB 248..255;
+    // flip mirrors the final 8-bit PCB vcount.
     vn = v[8] ? v[7:0] - 8'd8 : v[7:0];
     pcb_vcnt = f ? ~vn : vn;
-end
-endfunction
-
-function [7:0] pcb_hcnt;
-    input [8:0] h;
-    input       f;
-    reg   [8:0] hn;
-begin
-    if( f ) begin
-        hn = h < HVISIBLE ? 9'd255 - h : 9'd255;
-    end else begin
-        hn = h - 9'd033;
-    end
-    pcb_hcnt = hn[7:0];
 end
 endfunction
 
@@ -203,6 +193,8 @@ always @(posedge clk) begin
     if( rst ) begin
         scr_rom_addr <= 12'd0;
         scr_rom_cs <= 1'b0;
+        rom_data_latch <= 32'd0;
+        rom_data_valid <= 1'b0;
         ram_addr <= 10'd0;
         pxl_data <= 32'd0;
         pal_msb <= 4'd0;
@@ -253,13 +245,20 @@ always @(posedge clk) begin
         if( rom_req_match )
             rom_req_ready <= 1'b1;
 `endif
+        if( scr_rom_ok && scr_rom_cs ) begin
+            rom_data_latch <= scr_rom_data;
+            rom_data_valid <= 1'b1;
+            scr_rom_cs     <= 1'b0;
+        end
+
         if( pxl_cen ) begin
             if( read_tile )
-                ram_addr <= { veff[7:3], ram_heff[7:3] };
+                ram_addr <= { veff[7:3], heff[7:3] };
 
-            if( fetch_tile || flip_line_fetch ) begin
+            if( fetch_tile ) begin
                 scr_rom_addr <= tile_addr;
                 scr_rom_cs   <= 1'b1;
+                rom_data_valid <= 1'b0;
                 pal_msb      <= cram[3:0];
                 hflip        <= cram[6] ^ flip;
 `ifdef MZONE_ROM_MISS_WATCH
@@ -275,22 +274,25 @@ always @(posedge clk) begin
                 rom_req_heff    <= heff;
                 rom_req_veff    <= veff;
 `endif
-            end else begin
-                scr_rom_cs <= 1'b0;
             end
 
-            if( load_tile || flip_line_load ) begin
+            if( load_tile ) begin
 `ifdef MZONE_ROM_MISS_WATCH
-                if( miss_window && rom_req_pending && !rom_ready_now )
+                if( miss_window && rom_req_pending && !rom_ready_now && !rom_load_ready )
                     $display("MZONE_ROM_MISS layer=scr frame=%0d load_hdump=%0d load_vdump=%0d load_heff=%02x load_veff=%02x req_hdump=%0d req_vdump=%0d req_heff=%02x req_veff=%02x req_addr=%03x cur_addr=%03x rom_ok=%b rom_data=%08x",
                         miss_frame, hdump, vdump, heff, veff,
                         rom_req_hdump, rom_req_vdump, rom_req_heff, rom_req_veff,
                         rom_req_addr, scr_rom_addr, scr_rom_ok, scr_rom_data);
                 rom_req_pending <= 1'b0;
 `endif
-                pxl_data <= rom_decoded_row;
-                cur_pal  <= pal_msb;
-                cur_hf   <= hflip;
+                if( rom_load_ready ) begin
+                    pxl_data <= rom_decoded_row;
+                    cur_pal  <= pal_msb;
+                    cur_hf   <= hflip;
+                    rom_data_valid <= 1'b0;
+                end else begin
+                    pxl_data <= 32'd0;
+                end
 `ifdef MZONE_SCROLL_WATCH
                 cur_vram_dbg <= vram;
                 cur_cram_dbg <= cram;
@@ -309,11 +311,10 @@ always @(posedge clk) begin
                 hdump <= `MZONE_POINT_X1 &&
                 vdump >= `MZONE_POINT_Y0 &&
                 vdump <= `MZONE_POINT_Y1 ) begin
-                $display("MZONE_SHIFT_PRE frame=%0d hdump=%0d vdump=%0d heff=%02x veff=%02x read=%b fetch=%b load=%b ram_addr=%03x ram_heff=%02x vram=%02x cram=%02x tile=%03x rom_addr=%03x rom_ok=%b rom_data=%08x dec=%08x hflip=%b cur_hf=%b sh_before=%08x pxl_before=%x sh_next=%08x pxl_next=%x",
+                $display("MZONE_SHIFT_PRE frame=%0d hdump=%0d vdump=%0d heff=%02x veff=%02x read=%b fetch=%b load=%b ram_addr=%03x ram_heff=%02x vram=%02x cram=%02x tile=%03x rom_addr=%03x rom_ok=%b rom_data=%08x dec=%08x hflip=%b cur_hf=%b sh=%08x pxl_raw=%x",
                     point_frame, hdump, vdump, heff, veff, read_tile, fetch_tile, load_tile,
-                    ram_addr, ram_heff, vram, cram, tile_addr, scr_rom_addr, scr_rom_ok,
-                    scr_rom_data, rom_decoded_row, hflip, cur_hf, pxl_data, pxl_raw,
-                    sh_next, pxl_next_raw);
+                    ram_addr, heff, vram, cram, tile_addr, scr_rom_addr, scr_rom_ok,
+                    scr_rom_data, rom_decoded_row, hflip, cur_hf, pxl_data, pxl_raw);
             end
 `endif
 
@@ -344,7 +345,7 @@ always @(posedge clk) begin
                 point_vdump_s = vdump;
                 $strobe("MZONE_POINT_SCROLL frame=%0d hdump=%0d vdump=%0d h_eff=%02x heff=%02x v_eff=%02x veff=%02x ram_addr=%03x ram_heff=%02x read=%b fetch=%b load=%b rom_cs=%b rom_addr=%03x rom_ok=%b rom_data=%08x vram=%02x cram=%02x tile=%03x pal=%x cur_pal=%x hflip=%b cur_hf=%b sh=%08x pxl_raw=%x pxl=%x",
                     point_frame, point_hdump_s, point_vdump_s, h_eff, heff, v_eff, veff,
-                    ram_addr, ram_heff, read_tile, fetch_tile, load_tile,
+                    ram_addr, heff, read_tile, fetch_tile, load_tile,
                     scr_rom_cs, scr_rom_addr, scr_rom_ok, scr_rom_data,
                     vram, cram, tile_addr, pal_msb, cur_pal, hflip, cur_hf,
                     pxl_data, pxl_raw, pxl);
@@ -390,8 +391,7 @@ jtframe_dual_ram #(
 
 jtframe_prom #(
     .DW ( 4 ),
-    .AW ( 8 ),
-    .ASYNC( 1 )
+    .AW ( 8 )
 ) u_palette(
     .clk    ( clk              ),
     .cen    ( pxl_cen          ),

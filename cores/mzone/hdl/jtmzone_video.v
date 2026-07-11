@@ -84,7 +84,6 @@ localparam [21:0] CHR_OFFSET = `ifdef JTFRAME_PROM_START `JTFRAME_PROM_START + 2
 
 wire        pre_lhbl, pre_lvbl, vt_lvbl, pre_hs, vt_vs;
 reg         pcb_vs;
-wire        lhbl_dly, lvbl_dly;
 wire [ 7:0] hcnt;
 wire [ 8:0] tile_dbg_hcnt;
 wire [11:0] tile_dbg_rom_addr;
@@ -93,8 +92,6 @@ wire [ 7:0] tile_dbg_scr_x, tile_dbg_pat_x, tile_dbg_scr_y, tile_dbg_pat_y;
 wire [ 3:0] scr_pxl;
 wire [ 3:0] fix_pxl;
 wire [ 3:0] char_pxl;
-wire        fix_src;
-wire        fix_sel;
 wire [ 3:0] obj_pxl;
 wire        obj_pxl_en;
 wire        pxl2_cen_unused = pxl2_cen;
@@ -106,15 +103,13 @@ wire [ 3:0] dbg_fix_pxl;
 wire [ 3:0] dbg_scr_pxl;
 wire [ 3:0] dbg_obj_pxl;
 wire        dbg_obj_pxl_en;
-wire        dbg_fix_en;
+wire        show_fix_en;
 
 assign obj_lut_we = prom_we && prog_addr >= OBJ_OFFSET && prog_addr < OBJ_OFFSET+22'h100;
 assign char_lut_we = prom_we && prog_addr >= CHR_OFFSET && prog_addr < CHR_OFFSET+22'h100;
 
 assign HS     = pre_hs;
 assign VS     = pcb_vs;
-assign LHBL   = lhbl_dly;
-assign LVBL   = lvbl_dly;
 assign pre_lvbl = vdump >= VVISIBLE && vdump < VB_START;
 assign pre_LVBL = pre_lvbl;
 
@@ -158,8 +153,12 @@ assign dbg_fix_pxl    = dbg_show_fix    ? fix_pxl : 4'd0;
 assign dbg_scr_pxl    = dbg_show_scroll ? scr_pxl : 4'd0;
 assign dbg_obj_pxl    = dbg_show_obj    ? obj_pxl : 4'd0;
 assign dbg_obj_pxl_en = dbg_show_obj && obj_pxl_en;
-assign dbg_fix_en     = dbg_show_fix && fix_en;
-assign char_pxl       = fix_sel ? dbg_fix_pxl : dbg_scr_pxl;
+assign show_fix_en    = dbg_show_fix && fix_en;
+`ifdef MZONE_ONLY_FIX
+assign char_pxl       = dbg_fix_pxl;
+`else
+assign char_pxl       = show_fix_en ? dbg_fix_pxl : dbg_scr_pxl;
+`endif
 
 function [7:0] pcb_hcnt;
     input [8:0] h;
@@ -238,8 +237,6 @@ jtmzone_fix u_fix(
     .rom_addr   ( fixrom_addr     ),
     .rom_cs     ( fixrom_cs       ),
     .pxl        ( fix_pxl         ),
-    .fix_src    ( fix_src         ),
-    .fix_sel    ( fix_sel         ),
     .fix_en     ( fix_en          )
 );
 
@@ -251,10 +248,8 @@ jtmzone_obj u_obj(
     .LVBL       ( LVBL         ),
     .HS         ( pre_hs       ),
     .hdump      ( hdump        ),
-    .hcnt       ( hcnt         ),
     .vdump      ( vdump        ),
     .flip       ( flip         ),
-    .fix_src    ( fix_src      ),
     .oram_addr  ( oram_addr    ),
     .oram_dout  ( oram_dout    ),
     .rom_addr   ( obj_addr     ),
@@ -275,10 +270,10 @@ jtmzone_colmix u_colmix(
     .scr_pxl    ( char_pxl   ),
     .obj_pxl    ( dbg_obj_pxl    ),
     .obj_pxl_en ( dbg_obj_pxl_en ),
-    .fix_en     ( dbg_fix_en     ),
+    .fix_en     ( show_fix_en    ),
     .flip       ( flip       ),
-    .LHBL       ( pre_lhbl   ),
-    .LVBL       ( pre_lvbl   ),
+    .preLHBL    ( pre_lhbl   ),
+    .preLVBL    ( pre_lvbl   ),
     .hdump      ( hdump      ),
     .vdump      ( vdump      ),
     .prog_data  ( prog_data  ),
@@ -287,8 +282,8 @@ jtmzone_colmix u_colmix(
     .red        ( red        ),
     .green      ( green      ),
     .blue       ( blue       ),
-    .LHBL_dly   ( lhbl_dly   ),
-    .LVBL_dly   ( lvbl_dly   ),
+    .LHBL       ( LHBL       ),
+    .LVBL       ( LVBL       ),
     .preLBL     (           ),
     .dbg_pal_idx(           ),
     .dbg_obj_opaque(        )
@@ -348,10 +343,10 @@ always @(posedge clk) begin
             vdump <= `MZONE_POINT_Y1 ) begin
             video_point_hdump_s = hdump;
             video_point_vdump_s = vdump;
-            $strobe("MZONE_POINT_VIDEO frame=%0d hdump=%0d vdump=%0d red=%x green=%x blue=%x LHBL=%b LVBL=%b pre_lhbl=%b pre_lvbl=%b scr_pxl=%x fix_pxl=%x char_pxl=%x fix_sel=%b fix_en=%b",
+            $strobe("MZONE_POINT_VIDEO frame=%0d hdump=%0d vdump=%0d red=%x green=%x blue=%x LHBL=%b LVBL=%b pre_lhbl=%b pre_lvbl=%b scr_pxl=%x fix_pxl=%x char_pxl=%x fix_en=%b",
                 video_point_frame, video_point_hdump_s, video_point_vdump_s, red, green, blue,
                 LHBL, LVBL, pre_lhbl, pre_lvbl, scr_pxl, fix_pxl,
-                char_pxl, fix_sel, fix_en);
+                char_pxl, fix_en);
         end
     end
 end
