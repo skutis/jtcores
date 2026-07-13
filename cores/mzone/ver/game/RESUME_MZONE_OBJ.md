@@ -267,3 +267,78 @@ MZONE_ROM=../../../../rom/megazone_scrolltest.rom \
   - log: `/tmp/mzone_obj_readphase10_nonflip.log`
   - waveform: `/tmp/mzone_obj_readphase10_nonflip.fst`
   - PNG: `/tmp/mzone_obj_readphase10_nonflip_frame_00008.png`
+
+## 2026-07-12 Stale Assembled ROM Diagnosis
+
+- Fragmented sprites initially appeared identical under Verilator 5.024 and
+  5.046, so the simulator version was not the cause.
+- Both development computers had the same Git commit, OBJ HDL, ROM generator,
+  and source `megazone.zip`, but different ignored `rom/megazone.rom` files.
+- Cause: the bad local MRA/ROM had been generated on 2026-05-15, before commit
+  `990f0eb36` added the required OBJ `gfx1` packing rule
+  `width=16, sequence=[0,2,1,3]`. The OBJ reader expects this interleaved
+  16-bit layout; the stale concatenated layout renders fragmented sprites.
+- Rebuild ignored ROM artifacts after ROM packing changes or branch updates:
+
+  ```sh
+  jtframe mra mzone --path ~/.mame/roms -v
+  ```
+
+- Known-good development hashes:
+  - source `megazone.zip` SHA-256: `3714f20cb504e7731135b37208a2181faee1291c99fa4a59c236ee616130e4f6`
+  - assembled `rom/megazone.rom` SHA-256: `8d5b0340c55a5710aa5877246b09acaba0a1cde08637c82feded22898ba1905f`
+  - assembled ROM MD5 / MRA `asm_md5`: `5fdca75da5459ff95354f028efc103ae`
+- Standard non-flipped OBJ test-ROM generation:
+
+  ```sh
+  unset MZONE_SCROLLTEST_FLIP MZONE_FORCE_FLIP
+  MZONE_SCROLLTEST_SPRITES=1 MZONE_SCROLLTEST_SCROLL_STEP=1 \
+    ../../tools/make_scrolltest_rom.py
+  ```
+
+- Expected generated scroll-test ROM SHA-256 with that base and configuration:
+  `1ae75cd091ee43a9ace80abc41cb30d5ef8df9bcc5904d1ff758af754237fdfd`.
+
+## 2026-07-12 OBJ Line-Buffer Read Latency
+
+- PCB timing shows that the OBJ counter reaches X=0 four pixel clocks before
+  the SCROLL/OBJ visible boundary; those four clocks are the PCB render lead.
+- The HDL `jtframe_obj_buffer` read path has two OBJ-specific registered stages:
+  1. the internal synchronous dual-port RAM updates `dump_data`;
+  2. the wrapper registers `dump_data` into `rd_data`/`pal_pxl`.
+- Applying the full PCB lead as `read_addr = hread - 4` left fully opaque test
+  sprites two pixels late in final output.
+- The physical HDL line-buffer address now uses `read_addr = hread - 2`: the
+  buffer's two registered clocks consume two clocks of the PCB four-clock lead,
+  and the address phase supplies the remaining two.
+- Reference test: fully opaque sprite code `0xd0`, raw `xpos=0x08`, should begin
+  at raw X=56 when raw OBJ X=0 aligns with the boundary at raw X=48.
+- A second fully opaque reference at raw `xpos=0xef` exposed a separate counter
+  origin error: it appeared at raw X=279 instead of X=287. The raw `xpos=0`
+  reference had only looked correct because FIX priority masked its early pixels
+  at X=40..47.
+- Keep the two-clock physical buffer compensation (`read_addr = hread - 2`)
+  separate from the logical read-counter origin. The non-flipped `hread` reset
+  origin moved from `hdump=43` to `hdump=51`, while the line-buffer bank handoff
+  remains at `hdump=44`. This shifts the natural mapping from `OBJ X + 40` to
+  the required `OBJ X + 48` without changing buffer latency.
+- A focused adjacent-sprite trace then showed addresses `0x76..0x7d` were
+  written (`linebuf_we=1` and internal `new_we=1`) but cleared before their
+  visible read. Cause: the old 8-bit `hread` wrapped during the 384-pixel line
+  while `buf_rd` remained asserted continuously.
+- The read/clear path now follows Road Fighter: `hread` is the 9-bit coordinate
+  `hdump-OBJ_RD_START`, and `buf_rd` is asserted only while
+  `hread < {1'b1,OBJ_RD_START[7:0]}`. The ninth bit suppresses the unwanted
+  pre-window clear pass; `read_addr` uses `hread[7:0]-2`.
+- Flipped OBJ reads use the mirrored 9-bit coordinate `306-hdump` under the
+  same bounded clear window and physical `-2` buffer compensation. The base is
+  derived from the established equivalence: flipped raw OBJ X=`0xeb` must land
+  at the same final X as non-flipped raw OBJ X=`0x10`.
+- The first flipped test exposed a separate bank-handoff issue: OBJ output was
+  absent at final raw X=0..38 even though the mirrored read window was active.
+  The FST showed both `jtframe_obj_buffer.line` and `read_line_has_obj` still
+  changed at the non-flipped `hdump=44`; after the shared pipeline/blank phase,
+  OBJ enable therefore began around raw X=39.
+- The bank and line-state handoff remains `hdump=44` normally and uses
+  `hdump=5` when flipped. The flipped phase maps the handoff to final raw X=0;
+  it does not change the read-address coordinate or add a layer-wide X offset.

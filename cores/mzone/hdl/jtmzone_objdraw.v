@@ -40,8 +40,12 @@ module jtmzone_objdraw(
 localparam [8:0] HVISIBLE = 9'd288;
 localparam [8:0] BLANK_DLY = 9'd9;
 localparam [8:0] HACTIVE = HVISIBLE + BLANK_DLY;
+localparam [8:0] OBJ_RD_START = 9'd51;
+localparam [8:0] OBJ_RD_FLIP_BASE = 9'd306;
+localparam [8:0] OBJ_RD_LIMIT = { 1'b1, OBJ_RD_START[7:0] };
+localparam [8:0] OBJ_LINE_START = 9'd44;
+localparam [8:0] OBJ_LINE_START_FLIP = 9'd5;
 
-reg [ 7:0] hread;
 reg [ 1:0] group;
 reg [ 1:0] dr_st;
 reg [ 7:0] low_byte, high_byte;
@@ -66,10 +70,21 @@ wire [15:0] raw_word = cur_ysub[0] ? rom_word[31:16] : rom_word[15:0];
 wire       buf_LHBL = hdump < HACTIVE;
 // PCB line-buffer handoff is around hcount 40..43, with the buffer switch
 // at 44.  Visible SCROLL/OBJ pixels start later at hdump 48.
-wire       obj_buf_lhbl = hdump != 9'd44;
-wire       obj_ctr_reset = pxl_cen && !flip && hdump == 9'd43;
-wire       line_start = pxl_cen && !flip && hdump == 9'd44;
-wire       buf_rd = pxl_cen && !flip;
+// Flipped output is already visible at final raw X=0.  Switching the flipped
+// bank at 44 left read_line_has_obj and the old bank active through raw X=38;
+// hdump=5 accounts for the shared buffer/mixer/blank phase at the left edge.
+wire [8:0] line_h = flip ? OBJ_LINE_START_FLIP : OBJ_LINE_START;
+wire       obj_buf_lhbl = hdump != line_h;
+wire       line_start = pxl_cen && hdump == line_h;
+// Road Fighter-style 9-bit read coordinate.  Keeping the wrap bit prevents
+// the 8-bit line-buffer address from starting an unwanted clear pass before
+// OBJ_RD_START on the next 384-pixel raster line.
+// Flipped reads count down.  With the common two-clock buffer compensation,
+// OBJ_RD_FLIP_BASE makes raw OBJ X=eb land at the same final X as non-flipped
+// raw OBJ X=10, matching the MAME/PCB reference.
+wire [8:0] hread = flip ? OBJ_RD_FLIP_BASE - hdump :
+                          hdump - OBJ_RD_START;
+wire       buf_rd = pxl_cen && hread < OBJ_RD_LIMIT;
 wire [5:0] row_base = cur_ysub[3] ? {3'b100,cur_ysub[2:0]} : {3'b000,cur_ysub[2:0]};
 wire [1:0] rom_group = cur_rom_hflip ? ~group : group;
 wire [1:0] next_group = group + 2'd1;
@@ -82,7 +97,12 @@ wire [8:0] draw_x_base = cur_xpos;
 wire [8:0] draw_x = cur_hflip ? draw_x_base + 9'd15 - { 5'd0, group, 2'd0 } - {7'd0,pix_cnt[1:0]} :
                                  draw_x_base + { 5'd0, group, 2'd0 } + {7'd0,pix_cnt[1:0]};
 wire [7:0] draw_addr = draw_x[7:0];
-wire [7:0] read_addr = hread - 8'd4;
+// The PCB launches OBJ pixels four clocks before the visible boundary.  The
+// jtframe line buffer consumes two of those clocks: its dual-port RAM updates
+// dump_data synchronously, then jtframe_obj_buffer registers dump_data into
+// rd_data.  Lead the physical read by the remaining two clocks so raw OBJ X=0
+// reaches the mixer at the SCROLL/OBJ boundary.
+wire [7:0] read_addr = hread[7:0] - 8'd2;
 wire       linebuf_we = wr_phase && draw_pen != 4'd0;
 
 always @* begin
@@ -107,15 +127,7 @@ always @(posedge clk) begin
         rom_pending_data <= 32'd0;
         draw_line_has_obj <= 1'b0;
         read_line_has_obj <= 1'b0;
-        hread <= 8'd0;
     end else begin
-        if( pxl_cen ) begin
-            if( obj_ctr_reset )
-                hread <= 8'h00;
-            else
-                hread <= hread + 8'd1;
-        end
-
         if( rom_cs && rom_ok && !rom_pending )
             rom_pending_data <= rom_data;
         if( rom_cs && rom_ok && !rom_pending )
