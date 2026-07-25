@@ -9,7 +9,6 @@ module jtmzone_obj(
     input               clk,
     input               pxl_cen,
 
-    input               LHBL,
     input               LVBL,
     input               HS,
     input        [ 8:0] hdump,
@@ -28,8 +27,7 @@ module jtmzone_obj(
     input        [ 7:0] prog_addr,
     input               prog_en,
 
-    output       [ 3:0] pxl,
-    output              pxl_en
+    output       [ 3:0] pxl
 );
 
 /*
@@ -87,17 +85,21 @@ bytes from the selected ROM pair become adjacent:
 
     word16 = { byte23, byte01 }
 
-The custom object drawer reads raw 32-bit SDRAM words as:
+The download address mapper transposes the packed within-tile address so each
+32-bit SDRAM word contains two adjacent four-pixel groups for one row.  The
+custom object drawer reads words as:
 
-    rom_addr = { code, ysub[3], group[1:0], ysub[2:1] }
+    rom_addr = { code, ysub[3], half, ysub[2:0] }
 
-where group selects one of the four 4-pixel groups across the 16-pixel row.
-ysub[0] selects the lower or upper 16-bit word inside rom_data:
+where half selects the left or right eight-pixel half.  Each response contains
+two adjacent four-pixel groups in its lower and upper 16-bit lanes:
 
-    word16 = ysub[0] ? rom_data[31:16] : rom_data[15:0]
+    pixels 0..3 = rom_data[15:0]
+    pixels 4..7 = rom_data[31:16]
 
-Pixels are decoded from byte01/byte23 and written to a one-line object buffer,
-like the Kicker-style cores, so no download-time gfx_sort is needed.
+Thus one response supplies eight horizontal pixels and a 16-pixel sprite row
+needs two requests, like Road Fighter.  Pixels are decoded from byte01/byte23
+and written to a one-line object buffer.
 */
 localparam [8:0] OBJ_START       = 9'd40;
 localparam [8:0] OBJ_ARM         = OBJ_START - 9'd1;
@@ -108,8 +110,10 @@ localparam [9:0] DMA_HCOUNTS     = DMA_COPY_BYTES*10'd4 + 10'd1;
 
 reg        lvbl_l, hs_l;
 reg [ 9:0] scan_obj;
-reg [ 3:0] sub_cnt;
-reg [ 7:0] attr, ypos, code, raw_xpos;
+reg [ 2:0] scan_st;
+reg        scan_last;
+reg        cen2, scan_start_x;
+reg [ 7:0] attr, ypos, code;
 reg [ 9:0] dma_addr;
 reg [ 7:0] dma_din;
 reg        dma_en, dma_start_wait, dma_hs_wait, dma_wr;
@@ -132,21 +136,26 @@ wire [7:0] draw_vdump = vdump[7:0] + 8'd1;
 wire [8:0] ysum   = {1'b0,draw_vdump} + {1'b0,ypos};
 wire       inzone = ysum[7:4] == 4'hf;
 wire [3:0] ysub   = ysum[3:0] ^ {4{attr[7]}};
-wire [7:0] xpos_raw_eff = sub_cnt==4'd8 ? scan_dout : raw_xpos;
-wire [8:0] xpos   = {1'b0,xpos_raw_eff};
-wire [1:0] scan_byte = sub_cnt[3] ? 2'd3 : sub_cnt[2:1];
+wire [1:0] scan_byte = scan_st==3'd1 ? 2'd0 :
+                       scan_st==3'd2 ? 2'd1 :
+                       scan_st==3'd3 ? 2'd2 : 2'd3;
 wire [9:0] scan_addr = { scan_obj[7:0], scan_byte };
 // Kicker-style object drawer. It reads the raw PCB/MRA object layout directly:
-// one 32-bit SDRAM word contains two 16-bit {byte23,byte01} groups selected
-// by ysub[0]. The drawer writes decoded pixels into a one-line object buffer.
-wire        dr_rom_hflip = 1'b0;
+// one 32-bit SDRAM word contains two 16-bit {byte23,byte01} groups. The drawer
+// writes decoded pixels into a one-line object buffer.
 
 always @(posedge clk) begin
     lvbl_l <= LVBL;
     hs_l   <= HS;
+    cen2   <= ~cen2;
+    if( scan_start ) scan_start_x <= 1'b1;
+    else if( cen2 )  scan_start_x <= 1'b0;
     if( rst ) begin
         scan_obj    <= 10'd0;
-        sub_cnt     <= 4'd0;
+        scan_st     <= 3'd0;
+        scan_last   <= 1'b0;
+        cen2        <= 1'b0;
+        scan_start_x<= 1'b0;
         draw        <= 1'b0;
         dr_code     <= 8'd0;
         dr_xpos     <= 9'd0;
@@ -154,76 +163,51 @@ always @(posedge clk) begin
         dr_hflip    <= 1'b0;
         dr_vflip    <= 1'b0;
         dr_ysub     <= 4'd0;
-        raw_xpos    <= 8'd0;
         lvbl_l    <= 1'b0;
         hs_l      <= 1'b0;
     end else begin
-        if( busy ) draw <= 1'b0;
         if( vblk_start ) begin
-            sub_cnt <= 4'd0;
+            scan_st <= 3'd0;
+            draw    <= 1'b0;
+        end else if( cen2 ) begin
             draw <= 1'b0;
-        end else if( scan_start ) begin
-            scan_obj  <= 10'd0;
-            sub_cnt   <= 4'd1;
-            draw      <= 1'b0;
-        end else begin
-            if( sub_cnt!=4'd0 ) begin
-                case( sub_cnt )
-                    4'd1: begin
-                        sub_cnt <= 4'd2;
-                    end
-                    4'd2: begin
-                        attr      <= scan_dout;
-                        sub_cnt   <= 4'd3;
-                    end
-                    4'd3: begin
-                        sub_cnt <= 4'd4;
-                    end
-                    4'd4: begin
-                        ypos      <= scan_dout;
-                        sub_cnt   <= 4'd5;
-                    end
-                    4'd5: begin
-                        sub_cnt <= 4'd6;
-                    end
-                    4'd6: begin
-                        code      <= scan_dout;
-                        sub_cnt   <= 4'd7;
-                    end
-                    4'd7: begin
-                        sub_cnt <= 4'd8;
-                    end
-                    default: begin
-                        raw_xpos <= scan_dout;
-                        if( inzone && !busy && !draw ) begin
-                            dr_code      <= code;
-                            dr_xpos      <= xpos;
-                            dr_pal       <= attr[3:0];
-                            // MAME and the 083 shifter behavior show this
-                            // attribute bit is active-low for horizontal flip.
-                            dr_hflip     <= ~attr[6];
-                            dr_vflip     <= attr[7];
-                            dr_ysub      <= ysub;
-                            draw <= 1'b1;
-                            if( scan_obj==OBJ_SCAN_LAST ) begin
-                                sub_cnt   <= 4'd0;
-                            end else begin
-                                scan_obj  <= scan_obj + 10'd1;
-                                sub_cnt   <= 4'd1;
-                            end
-                        end else if( inzone ) begin
-                            sub_cnt <= 4'd8;
-                        end else begin
-                            if( scan_obj==OBJ_SCAN_LAST ) begin
-                                sub_cnt   <= 4'd0;
-                            end else begin
-                                scan_obj  <= scan_obj + 10'd1;
-                                sub_cnt   <= 4'd1;
-                            end
-                        end
-                    end
-                endcase
-            end
+            case( scan_st )
+                3'd0: if( scan_start_x ) begin
+                    scan_obj <= OBJ_SCAN_LAST;
+                    scan_st  <= 3'd1;
+                end
+                3'd1: if( !busy ) begin
+                    attr    <= scan_dout;
+                    scan_st <= 3'd2;
+                end
+                3'd2: begin
+                    ypos    <= scan_dout;
+                    scan_st <= 3'd3;
+                end
+                3'd3: begin
+                    code     <= scan_dout;
+                    scan_st  <= 3'd4;
+                end
+                3'd4: begin
+                    dr_code      <= code;
+                    // Resolve global horizontal flip before the shared-style
+                    // drawer.  224 = 239-(16-1), accounting for the active
+                    // 0..239 span and the 16-pixel sprite width.
+                    dr_xpos      <= {1'b0, flip ? 8'd224-scan_dout : scan_dout};
+                    dr_pal       <= attr[3:0];
+                    // MAME and the 083 shifter behavior show this attribute
+                    // bit is active-low for horizontal flip.
+                    dr_hflip     <= (~attr[6]) ^ flip;
+                    dr_vflip     <= attr[7];
+                    dr_ysub      <= ysub;
+                    draw         <= inzone;
+                    scan_last    <= scan_obj==10'd0;
+                    if( scan_obj!=10'd0 ) scan_obj <= scan_obj-10'd1;
+                    scan_st <= 3'd5;
+                end
+                3'd5: scan_st <= scan_last ? 3'd0 : 3'd1;
+                default: scan_st <= 3'd0;
+            endcase
         end
     end
 end
@@ -302,7 +286,8 @@ jtmzone_objdraw u_draw(
     .rst        ( rst           ),
     .clk        ( clk           ),
     .pxl_cen    ( pxl_cen       ),
-    .LHBL       ( LHBL          ),
+    .cen2       ( cen2          ),
+    .HS         ( HS            ),
     .hdump      ( hdump         ),
     .vdump      ( vdump         ),
     .flip       ( flip          ),
@@ -314,7 +299,6 @@ jtmzone_objdraw u_draw(
     .xpos       ( dr_xpos       ),
     .pal        ( dr_pal        ),
     .hflip      ( dr_hflip      ),
-    .rom_hflip  ( dr_rom_hflip  ),
     .ysub       ( dr_ysub       ),
 
     .prog_data  ( prog_data     ),
@@ -326,8 +310,7 @@ jtmzone_objdraw u_draw(
     .rom_ok     ( rom_ok        ),
     .rom_data   ( rom_data      ),
 
-    .pxl        ( pxl           ),
-    .pxl_en     ( pxl_en        )
+    .pxl        ( pxl           )
 );
 
 endmodule

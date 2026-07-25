@@ -45,6 +45,53 @@ def encode_row(pens):
     return bytes((data[1], data[0], data[3], data[2]))
 
 
+def write_edge_test_sprite(buf, source_code, test_code):
+    del source_code
+    rows = ("8888888888888888",) * 16
+
+    def inverse_post_word(word_addr):
+        low = word_addr & 0x3F
+        raw_low = (
+            (low & 0x30)
+            | ((low & 0x01) << 3)
+            | ((low & 0x08) >> 1)
+            | ((low & 0x04) >> 1)
+            | ((low & 0x02) >> 1)
+        )
+        return (word_addr & ~0x3F) | raw_low
+
+    def encode_obj_word(pens):
+        raw = 0
+        bit_map = (
+            (11, 15, 3, 7), (10, 14, 2, 6),
+            (9, 13, 1, 5), (8, 12, 0, 4),
+            (27, 31, 19, 23), (26, 30, 18, 22),
+            (25, 29, 17, 21), (24, 28, 16, 20),
+        )
+        for pen, bits in zip(pens, bit_map):
+            for shift, bit in zip((3, 2, 1, 0), bits):
+                raw |= ((pen >> shift) & 1) << bit
+        return raw
+
+    for row, pattern in enumerate(rows):
+        pens = [int(pen, 16) for pen in pattern]
+        pens[0] = 1
+        pens[15] = 2
+        for half in range(2):
+            raw = encode_obj_word(pens[half * 8:half * 8 + 8])
+            response = (
+                (test_code << 5)
+                | ((row >> 3) << 4)
+                | (half << 3)
+                | (row & 7)
+            )
+            for lane in range(2):
+                source_word = inverse_post_word(response * 2 + lane)
+                word = (raw >> (lane * 16)) & 0xFFFF
+                put(buf, OBJ_START + source_word * 2,
+                    word & 0xFF, word >> 8)
+
+
 def write_tile_rows(buf, tile, rows):
     for row in range(8):
         pens = [
@@ -160,7 +207,9 @@ def main():
     solid_marker = os.environ.get("MZONE_SCROLLTEST_SOLID_MARKER") == "1"
     column_numbers = os.environ.get("MZONE_SCROLLTEST_COLUMN_NUMBERS") == "1"
     scroll_towards_fix = os.environ.get("MZONE_SCROLLTEST_AWAY_FIX") != "1"
-    scroll_step = int(os.environ.get("MZONE_SCROLLTEST_SCROLL_STEP", "8"), 0) & 0xFF
+    # Move by one pixel per IRQ so short captures show genuine fine scrolling
+    # rather than jumping by complete 8-pixel character columns.
+    scroll_step = int(os.environ.get("MZONE_SCROLLTEST_SCROLL_STEP", "1"), 0) & 0xFF
     if scroll_step not in (0, 1, 2, 4, 8):
         raise ValueError("MZONE_SCROLLTEST_SCROLL_STEP must be 0, 1, 2, 4, or 8")
 
@@ -180,6 +229,10 @@ def main():
     put(rom, PROM_START + 0x01E, 0x3F)
     put(rom, PROM_START + 0x01D, 0xC0)
     put(rom, PROM_START + 0x01C, 0x07)
+    # Decoded pens 1 and 2 are unused by the ordinary sprite. Map only those
+    # through palette F to white and blue.
+    put(rom, PROM_START + 0x020 + 0xF1, 0x05)
+    put(rom, PROM_START + 0x020 + 0xF2, 0x0B)
     for pen in range(1, 16):
         put(rom, PROM_START + 0x020 + 0x10 + pen, 0x0D)
 
@@ -244,14 +297,17 @@ def main():
         write_tile_rows(rom, tile, rows)
 
     obj_code = 0xAA
+    # Keep code bit 0 equal to source code AA: that bit participates in the
+    # OBJ downloader's low-address transpose.
+    edge_test_code = 0xD0
+    write_edge_test_sprite(rom, obj_code, edge_test_code)
     probe_y = int(os.environ.get("MZONE_SCROLLTEST_PROBE_Y", "0x70"), 0) & 0xFF
     bottom_y = int(os.environ.get("MZONE_SCROLLTEST_BOTTOM_Y", "0x09"), 0) & 0xFF
 
     # Main CPU IRQ test program at $8000. Opcode bytes are Konami-1 encoded;
     # operands are stored plain because jtframe only decodes opcode fetches.
     # The IRQ handler advances the scroll register once per vblank IRQ.
-    # Default to an 8-pixel step so short video captures move by whole
-    # character columns, but allow 1-pixel fine-scroll diagnostics.
+    # Default to a one-pixel step for smooth-scroll diagnostics.
     pc = 0x8000
     op(rom, pc, 0x10)              # lds #$3fff, stack in shared RAM
     op(rom, pc + 1, 0xCE)
@@ -331,16 +387,26 @@ def main():
             0x4F, 0x0F, 0xCF, 0x4F, 0x4F,
         )
         sprite_xpos = (0x13, 0x06, 0x05, 0x06, 0x20, 0x48, 0x70, 0x40, 0xFC)
-        sprite_ypos = (0xC5, 0x30, 0x30, 0x30, probe_y, 0x70, 0x70, bottom_y, probe_y)
+        sprite_ypos = (0xC5, 0x30, 0x30, 0x30, probe_y, 0x70, 0xE0, bottom_y, probe_y)
         for i, code in enumerate(sprite_codes):
             attr = sprite_attrs[i]
             ypos = sprite_ypos[i]
             xpos = sprite_xpos[i]
             pc = write_sprite(rom, pc, i, attr, ypos, code, xpos)
         # Boundary reference sprites for raw line-buffer X.
-        pc = write_sprite(rom, pc, 0x21, 0x00, 0x78, 0xD0, 0x00)
-        pc = write_sprite(rom, pc, 0x22, 0x00, 0x78, 0x44, 0xEF)
-        pc = write_sprite(rom, pc, 0x23, 0xCF, 0x70, 0x44, 0x80)
+        # Half-visible balloon/drop at the first scroll/OBJ pixel. X=F8
+        # clips pixels at 248..255; the remaining half wraps to X=0..7.
+        pc = write_sprite(rom, pc, 0x20, 0x4F, 0x6E, obj_code, 0xF8)
+        # Identical, non-mirrored diagnostics: first occupied VDump scanline
+        # white and last occupied VDump scanline blue.
+        # Y=18 places the pair at VDump 215..230, away from the animated
+        # sprites that otherwise overwrite its line-buffer addresses.
+        pc = write_sprite(rom, pc, 0x21, 0x4F, 0x18, edge_test_code, 0x08)
+        pc = write_sprite(rom, pc, 0x22, 0x4F, 0x18, edge_test_code, 0xEF)
+        pc = write_sprite(rom, pc, 0x23, 0xCF, 0xE0, 0x44, 0x80)
+        # Full edge-color diagnostic at raw sprite X48/Y57. The inverted
+        # vertical counter places raw Y57 around VDump 182.
+        pc = write_sprite(rom, pc, 0x1F, 0x4F, 0x39, edge_test_code, 0x00)
 
     pc = lda_imm(rom, pc, 0x01)
     pc = sta_ext(rom, pc, 0x0007)  # enable main IRQ latch

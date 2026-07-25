@@ -93,7 +93,6 @@ wire [ 3:0] scr_pxl;
 wire [ 3:0] fix_pxl;
 wire [ 3:0] char_pxl;
 wire [ 3:0] obj_pxl;
-wire        obj_pxl_en;
 wire        pxl2_cen_unused = pxl2_cen;
 wire        obj_lut_we, char_lut_we;
 wire        dbg_show_fix;
@@ -102,7 +101,6 @@ wire        dbg_show_obj;
 wire [ 3:0] dbg_fix_pxl;
 wire [ 3:0] dbg_scr_pxl;
 wire [ 3:0] dbg_obj_pxl;
-wire        dbg_obj_pxl_en;
 wire        show_fix_en;
 
 assign obj_lut_we = prom_we && prog_addr >= OBJ_OFFSET && prog_addr < OBJ_OFFSET+22'h100;
@@ -152,7 +150,6 @@ assign dbg_show_obj =
 assign dbg_fix_pxl    = dbg_show_fix    ? fix_pxl : 4'd0;
 assign dbg_scr_pxl    = dbg_show_scroll ? scr_pxl : 4'd0;
 assign dbg_obj_pxl    = dbg_show_obj    ? obj_pxl : 4'd0;
-assign dbg_obj_pxl_en = dbg_show_obj && obj_pxl_en;
 assign show_fix_en    = dbg_show_fix && fix_en;
 `ifdef MZONE_ONLY_FIX
 assign char_pxl       = dbg_fix_pxl;
@@ -244,7 +241,6 @@ jtmzone_obj u_obj(
     .rst        ( rst          ),
     .clk        ( clk          ),
     .pxl_cen    ( pxl_cen      ),
-    .LHBL       ( LHBL         ),
     .LVBL       ( LVBL         ),
     .HS         ( pre_hs       ),
     .hdump      ( hdump        ),
@@ -259,8 +255,7 @@ jtmzone_obj u_obj(
     .prog_data  ( prog_data[3:0] ),
     .prog_addr  ( prog_addr[7:0] - OBJ_OFFSET[7:0] ),
     .prog_en    ( obj_lut_we     ),
-    .pxl        ( obj_pxl     ),
-    .pxl_en     ( obj_pxl_en  )
+    .pxl        ( obj_pxl     )
 );
 
 jtmzone_colmix u_colmix(
@@ -269,7 +264,6 @@ jtmzone_colmix u_colmix(
     .pxl_cen    ( pxl_cen    ),
     .scr_pxl    ( char_pxl   ),
     .obj_pxl    ( dbg_obj_pxl    ),
-    .obj_pxl_en ( dbg_obj_pxl_en ),
     .fix_en     ( show_fix_en    ),
     .flip       ( flip       ),
     .preLHBL    ( pre_lhbl   ),

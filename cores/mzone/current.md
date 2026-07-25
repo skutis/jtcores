@@ -175,3 +175,139 @@ Useful conclusion:
 
 - The clean-vs-bad comparison points to the `0769d0d18` object/ROM/mem-layout changes, not only today's PCB X experiment.
 - For implementing PCB X, start from the clean parent behavior and preserve the parent object ROM interface assumptions first, then change only the line-buffer X domain.
+
+## 2026-07-25 Current OBJ Timing Handoff
+
+This section describes the current working tree and supersedes the older OBJ
+implementation notes above. The work is not yet considered finished. The main
+remaining issue is verifying the first and last object columns at the active
+display boundaries without adding an address-zero special case.
+
+### Current implementation
+
+`hdl/jtmzone_objdraw.v` now follows the simpler Road Fighter/Kicker structure:
+
+- Each 32-bit object-ROM response supplies eight decoded pixels.
+- A 16-pixel row uses two ROM requests, selected by `rom_addr[3]`.
+- Pixels are drawn at `cen2` cadence.
+- `rom_pending`, four-pixel grouping, `wr_phase`, and explicit transparent-write
+  suppression were removed.
+- The palette PROM is synchronous BRAM. Its line-buffer address and write enable
+  are delayed one master clock in `buf_al` and `buf_wel`.
+- The color mixer, rather than the object drawer, decides whether object pen
+  zero is transparent.
+- Global horizontal flip is resolved when object coordinates are prepared in
+  `jtmzone_obj.v`; the line buffer itself uses ascending read coordinates.
+- The object-buffer bank switch is driven from `HS` through
+  `obj_buf_lhbl = ~HS`. Reads and writes control actual buffer activity, so the
+  switch can occur safely during horizontal blank.
+
+The current non-flipped read timing is:
+
+```verilog
+localparam [8:0] HOFFSET = 9'd54;
+wire [8:0] hread = hdump - hoffset;
+wire       buf_rd = pxl_cen && hread < 9'd246;
+wire [7:0] buf_rd_addr = hread[7:0];
+```
+
+There is currently no first-pixel prefetch or special address-zero request.
+The six extra reads let the registered object-buffer/mixer path drain after the
+240 object addresses. `HOFFSET_FLIP` remains 6, although flipped operation is
+not the current focus.
+
+The intended non-flipped mapping is line-buffer address 0..239 to raw display
+X 48..287. Physical writes are clipped with `buf_a < 240`.
+
+### Timing experiments and observations
+
+- `HOFFSET` 53 and 54 have both been simulated repeatedly. The current value is
+  54 because the displayed sprites appeared one pixel too far toward lower
+  `hdump` with 53.
+- Changing the read address to `hread + 1` shifted every sprite another pixel
+  toward lower `hdump`; it was reverted.
+- Requesting address zero at wrapped `hread=511` was tried as a prefetch and
+  then removed. Requesting address zero twice could make the left boundary
+  visible, but is not considered a clean solution.
+- With some earlier timing combinations the right-edge diagnostic intended for
+  raw X 287 appeared at X 286, while the first object column at raw X 48 was
+  blank or stale.
+- The user observed in the FST that output appears about two pixel clocks after
+  the corresponding `hread` request. `jtframe_obj_buffer` has a synchronous RAM
+  read plus registered output/clear behavior; its default `BLANK_DLY` is two
+  master clocks.
+- `fix_en` is delayed into the mixer with the other layers. Testing indicates
+  that its active window is not the main cause of the object-boundary problem.
+
+Do not infer a fix from the rendered frame alone. Compare `hread`,
+`buf_rd_addr`, the internal object-buffer RAM output, `pxl`, `fix_en`, and the
+final mixer output in the same FST.
+
+### Diagnostic scroll-test ROM
+
+Regenerate it from `ver/game` with:
+
+```bash
+MZONE_SCROLLTEST_SPRITES=1 ../../tools/make_scrolltest_rom.py
+```
+
+The generator now makes object code `0xd0` as a solid 16x16 diagnostic sprite:
+
+- first pixel column: pen 1, mapped to white by object palette F;
+- middle columns: pen 8, red;
+- last pixel column: pen 2, mapped to blue.
+
+The unusual packed ROM generation is intentional. It reverses the object-ROM
+download address transpose in `jtmzone_game.v`. FST inspection confirmed that
+the first eight-pixel response ends with decoded nibble 1, the second response
+starts with decoded nibble 2, and the interior nibbles are 8.
+
+Relevant test objects currently include:
+
+- Entry `0x20`: balloon/drop wrapping across the left boundary.
+- Entry `0x21`: full `0xd0` diagnostic around raw X 56, isolated vertically
+  around raw VDump 215..230.
+- Entry `0x22`: `0xd0` right-boundary diagnostic; only address 239 should
+  survive, at raw X 287.
+- Entry `0x1f`: `0xd0` left-boundary diagnostic with stored object X 0 and
+  stored raw Y 57. Stored raw Y 57 displays around VDump 182; stored object X 0
+  maps to raw display X 48.
+
+The object scan covers entries 35 down to 0 (`0x23` through `0x00`). A test
+placed at `0x24` will not be scanned.
+
+### Simulation commands
+
+From `ver/game`, run five non-flipped frames with:
+
+```bash
+source ../../env.sh
+MZONE_ROM=../../../../rom/megazone_scrolltest.rom \
+MZONE_SOUND=1 ./sim.sh -video 5 -w
+```
+
+For a flipped comparison, append:
+
+```text
+-d MZONE_FORCE_FLIP
+```
+
+Primary outputs:
+
+```text
+ver/game/test.fst
+ver/game/frames/frame_00005.png
+```
+
+Useful FST signals are under `u_game.u_game.u_video.u_obj.u_draw`; inspect at
+least `hdump`, `vdump`, `hread`, `buf_rd`, `buf_rd_addr`, `pxl`, object-buffer
+RAM/read data, `fix_en`, and the color-mixer inputs/output.
+
+### Suggested next check
+
+Use the `0xd0` sprites to trace one complete row at raw X 48 and the single
+surviving column at raw X 287. Record, for each pixel clock, the requested
+address, synchronous RAM result, registered object-buffer output, and mixer
+result. This should distinguish a read-origin error from the one-read latency
+at activation. Preserve the current HOFFSET=54/no-prefetch result as the
+comparison baseline.

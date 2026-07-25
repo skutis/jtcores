@@ -17,6 +17,8 @@ module jtmzone_game(
 );
 
 localparam [21:0] SND_START = `SND_START;
+localparam [21:0] OBJ_OFFSET = `OBJ_START >> 1;
+localparam [21:0] SCR_OFFSET = `SCR_START >> 1;
 
 wire [15:0] main_stub_addr;
 wire        main_stub_cs;
@@ -656,8 +658,25 @@ assign game_vrender = video_vrender[7:0];
 assign ioctl_din = 8'hff;
 `endif
 
+reg [13:0] obj_pack_addr;
 always @(*) begin
     post_addr = prog_addr;
+    obj_pack_addr = prog_addr[13:0] - OBJ_OFFSET[13:0];
+    if( prog_addr >= OBJ_OFFSET && prog_addr < SCR_OFFSET ) begin
+        // Keep the paired object-plane bytes adjacent, but transpose the
+        // within-tile address so group[0], rather than ysub[0], selects the
+        // 16-bit lane of each 32-bit SDRAM word.  One response then contains
+        // eight adjacent horizontal pixels for a selected sprite row.
+        obj_pack_addr[5:0] = {
+            obj_pack_addr[5], // y3
+            obj_pack_addr[4], // group[1]
+            obj_pack_addr[2], // y2
+            obj_pack_addr[1], // y1
+            obj_pack_addr[0], // y0
+            obj_pack_addr[3]  // group[0], 32-bit lane select
+        };
+        post_addr = OBJ_OFFSET + {8'd0,obj_pack_addr};
+    end
 end
 
 jtmzone_main u_main(

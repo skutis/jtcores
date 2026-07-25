@@ -19,7 +19,6 @@ module jtmzone_colmix(
 
     input         [3:0] scr_pxl,
     input         [3:0] obj_pxl,
-    input               obj_pxl_en,
     input               fix_en,
     input               flip,
     input               preLHBL,
@@ -50,7 +49,7 @@ wire [ 3:0] red_raw, green_raw, blue_raw;
 wire [11:0] raw, rgb;
 wire        pal_we;
 wire [ 3:0] red_blank, green_blank, blue_blank;
-wire        obj_en = obj_pxl_en && !fix_en;
+wire        obj_en = obj_pxl != 4'd0 && !fix_en;
 wire        pal_a4 = !obj_en;
 wire [ 4:0] pal_mux = { pal_a4, obj_en ? obj_pxl : scr_pxl };
 reg  [ 4:0] pal_mux_r;
@@ -169,8 +168,8 @@ always @(posedge clk) begin
         if( frame_cnt >= `MZONE_COLMIX_WATCH_FROM && frame_cnt <= `MZONE_COLMIX_WATCH_TO &&
             hdump >= `MZONE_COLMIX_X0 && hdump <= `MZONE_COLMIX_X1 &&
             vdump >= `MZONE_COLMIX_Y0 && vdump <= `MZONE_COLMIX_Y1 ) begin
-            $display("MZONE_COLMIX frame=%0d x=%0d y=%0d obj_en=%b obj=%b fix=%b obj_pxl=%x char_in=%x char_pxl=%x pal_mux=%02x prom=%02x rgb=%x%x%x",
-                frame_cnt, hdump, vdump, obj_en, obj_pxl_en, fix_en, obj_pxl, scr_pxl, scr_pxl,
+            $display("MZONE_COLMIX frame=%0d x=%0d y=%0d obj_en=%b fix=%b obj_pxl=%x char_in=%x char_pxl=%x pal_mux=%02x prom=%02x rgb=%x%x%x",
+                frame_cnt, hdump, vdump, obj_en, fix_en, obj_pxl, scr_pxl, scr_pxl,
                 pal_mux_r, pal_prom_dout, red_raw, green_raw, blue_raw);
         end
 `endif
@@ -191,14 +190,13 @@ always @(posedge clk) begin
             point_raw_vdump_debug_s = raw_vdump_debug;
             point_char_hdump_debug_s = char_hdump_debug;
             point_char_vdump_debug_s = char_vdump_debug;
-            $strobe("MZONE_POINT_COLMIX frame=%0d hdump=%0d vdump=%0d hdump_debug=%0d vdump_debug=%0d rgb_hdump_debug=%0d rgb_vdump_debug=%0d raw_hdump_debug=%0d raw_vdump_debug=%0d char_hdump_debug=%0d char_vdump_debug=%0d obj_en=%b obj_pxl_en=%b fix_en=%b fix_en_dly=%b obj_pxl=%x char_in=%x char_dly=%x pal_mux=%02x prom=%02x raw=%x%x%x blank=%x%x%x rgb=%x%x%x preLHBL=%b preLVBL=%b LHBL=%b LVBL=%b",
+            $strobe("MZONE_POINT_COLMIX frame=%0d hdump=%0d vdump=%0d hdump_debug=%0d vdump_debug=%0d rgb_hdump_debug=%0d rgb_vdump_debug=%0d raw_hdump_debug=%0d raw_vdump_debug=%0d char_hdump_debug=%0d char_vdump_debug=%0d obj_en=%b fix_en=%b fix_en_dly=%b obj_pxl=%x char_in=%x char_dly=%x pal_mux=%02x prom=%02x raw=%x%x%x blank=%x%x%x rgb=%x%x%x preLHBL=%b preLVBL=%b LHBL=%b LVBL=%b",
                 point_frame, point_hdump_s, point_vdump_s,
                 point_hdump_debug_s, point_vdump_debug_s,
                 point_rgb_hdump_debug_s, point_rgb_vdump_debug_s,
                 point_raw_hdump_debug_s, point_raw_vdump_debug_s,
                 point_char_hdump_debug_s, point_char_vdump_debug_s,
-                obj_en, obj_pxl_en, fix_en,
-                fix_en, obj_pxl, scr_pxl, scr_pxl, pal_mux_r,
+                obj_en, fix_en, fix_en, obj_pxl, scr_pxl, scr_pxl, pal_mux_r,
                 pal_prom_dout, red_raw, green_raw, blue_raw,
                 red_blank, green_blank, blue_blank, red, green, blue,
                 preLHBL, preLVBL, LHBL, LVBL);
