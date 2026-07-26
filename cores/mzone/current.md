@@ -311,3 +311,134 @@ address, synchronous RAM result, registered object-buffer output, and mixer
 result. This should distinguish a read-origin error from the one-read latency
 at activation. Preserve the current HOFFSET=54/no-prefetch result as the
 comparison baseline.
+
+## 2026-07-26 OBJ Read-Timing Handoff
+
+This section supersedes the `HOFFSET=54/no-prefetch` baseline above for the
+current working tree. The boundary problem is still under investigation.
+
+### Active working-tree changes
+
+`hdl/jtmzone_video.v` has a waveform-only coordinate reference:
+
+```verilog
+wire [8:0] dbg_hdump_colmix = hdump - 9'd6;
+```
+
+This expresses the raw layer coordinate currently expected at the color-mixer
+input. A layer pixel for raw X should reach the mixer at physical
+`hdump = X+6`. The color mixer then has two palette stages and the final
+`jtframe_blank` RGB register, giving nine pixel clocks total from raw timing to
+the simulation-picture RGB. `BLANK_DLY=9` includes that final RGB register.
+
+`hdl/jtmzone_objdraw.v` currently has an experimental address-zero
+pre-request:
+
+```verilog
+wire       buf_first = hread == 9'd511;
+wire       buf_rd = pxl_cen && (buf_first || hread<9'd246);
+wire [7:0] buf_rd_addr = buf_first ? 8'd0 : hread[7:0];
+```
+
+With `HOFFSET=54`, this requests address zero at `hdump=53`, then requests it
+again in the normal sequence at `hdump=54`. This experiment did not make the
+raw-X 48 first column visible in the latest simulation.
+
+The diagnostic-generator comment in `tools/make_scrolltest_rom.py` was fixed
+to describe the actual `0xd0` pattern: every row has a white first horizontal
+column (pen 1), red interior (pen 8), and blue last horizontal column (pen 2).
+
+### Latest simulation
+
+The latest non-flipped five-frame test used:
+
+```bash
+source ../../env.sh
+MZONE_SOUND=1 MZONE_ROM=../../../../rom/megazone_scrolltest.rom \
+    ./sim.sh -video 5 -w
+```
+
+It completed successfully. The local outputs are:
+
+```text
+ver/game/test.fst
+ver/game/frames/frame_00005.png
+```
+
+The FST includes both `dbg_hdump_colmix` and `u_obj.u_draw.buf_first`.
+
+### Current coordinate/read relationship
+
+For non-flipped operation:
+
+```verilog
+hread       = hdump - 54;
+buf_rd_addr = hread[7:0];
+```
+
+Ignoring event/delta-cycle presentation:
+
+```text
+hdump 54 -> buffer address 0 -> mixer-coordinate 48
+hdump 55 -> buffer address 1 -> mixer-coordinate 49
+hdump 62 -> buffer address 8 -> mixer-coordinate 56
+```
+
+The ordinary read window covers addresses 0..245 at `hdump` 54..299. Addresses
+240..245 are trailing reads used to drain the registered buffer/mixer path.
+The line-buffer bank switches on the rising edge of `HS`, around `hdump=319`,
+through `obj_buf_lhbl = ~HS`.
+
+### `jtframe_obj_buffer` timing
+
+The generic object buffer continuously presents `rd_addr` to a synchronous
+dual-port RAM. Its `rd` input does not enable the RAM read; it starts the
+delayed output/clear sequence. With the default `BLANK_DLY=2`, conceptually:
+
+```text
+E0, rd=1: RAM samples rd_addr; dly becomes 2'b10
+E1:       dump_data gets the E0 address data; dly becomes 2'b01
+E2:       rd_data captures dump_data; delete_we clears the current rd_addr
+```
+
+Neither the requested address nor its RAM result is explicitly paired with
+the delayed clear event. `rd_addr` also drives the RAM continuously. Correct
+behavior therefore depends on the address remaining stable through the
+relevant master-clock edges.
+
+In the waveform being examined, the raw-X 48 diagnostic's first column does
+not reach the picture, while its second column at raw X49 is correct.
+`delete_we` is observed during physical `hdump=55`, which corresponds to
+`dbg_hdump_colmix=49`. The important unresolved question is exactly which
+`rd_addr` produced `dump_data` at the clock where `rd_data` is updated; inspect
+master-clock edges rather than only pixel-clock/`hdump` transitions.
+
+### Recommended next step
+
+At one affected row (the user was examining approximately `vdump=198`), zoom
+to individual master-clock edges around physical `hdump=53..56` and display:
+
+```text
+clk
+pxl_cen
+hdump
+dbg_hdump_colmix
+hread
+buf_first
+buf_rd
+buf_rd_addr
+u_line.dly
+u_line.delete_we
+u_line.dump_data
+u_line.rd_data
+pal_pxl
+u_colmix.obj_pxl
+```
+
+Record the value before and after each rising `clk` edge. Determine whether
+address zero is lost because the address changes before the `rd_data` capture,
+or because the first `rd` pulse and `dly` phase are one master clock too late.
+Do not change `HOFFSET` or globally shift `buf_rd_addr`: address 1 and later
+pixels already align with mixer coordinates. If a fix is needed, prefer
+pairing/capturing the RAM data associated with the request or separating
+output capture from delayed clearing.

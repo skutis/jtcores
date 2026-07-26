@@ -86,6 +86,7 @@ wire        pre_lhbl, pre_lvbl, vt_lvbl, pre_hs, vt_vs;
 reg         pcb_vs;
 wire [ 7:0] hcnt;
 wire [ 8:0] tile_dbg_hcnt;
+wire [ 8:0] dbg_hdump_colmix = hdump - 9'd6;
 wire [11:0] tile_dbg_rom_addr;
 wire        tile_dbg_fix;
 wire [ 7:0] tile_dbg_scr_x, tile_dbg_pat_x, tile_dbg_scr_y, tile_dbg_pat_y;

@@ -397,8 +397,9 @@ def main():
         # Half-visible balloon/drop at the first scroll/OBJ pixel. X=F8
         # clips pixels at 248..255; the remaining half wraps to X=0..7.
         pc = write_sprite(rom, pc, 0x20, 0x4F, 0x6E, obj_code, 0xF8)
-        # Identical, non-mirrored diagnostics: first occupied VDump scanline
-        # white and last occupied VDump scanline blue.
+        # Identical, non-mirrored diagnostics: the first horizontal pixel
+        # column is white and the last horizontal pixel column is blue across
+        # all 16 occupied VDump scanlines.
         # Y=18 places the pair at VDump 215..230, away from the animated
         # sprites that otherwise overwrite its line-buffer addresses.
         pc = write_sprite(rom, pc, 0x21, 0x4F, 0x18, edge_test_code, 0x08)
