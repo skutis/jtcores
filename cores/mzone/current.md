@@ -442,3 +442,179 @@ Do not change `HOFFSET` or globally shift `buf_rd_addr`: address 1 and later
 pixels already align with mixer coordinates. If a fix is needed, prefer
 pairing/capturing the RAM data associated with the request or separating
 output capture from delayed clearing.
+
+## 2026-07-28 10:49:57 CEST — Road Fighter Comparison and Scene Handoff
+
+This section records the current cross-core comparison work. It also corrects
+the active M-Zone state described in the previous handoff: the current
+`jtmzone_objdraw.v` uses `HOFFSET=54` with no address-zero prefetch.
+
+### Road Fighter object-edge test
+
+A new, currently untracked generator exists at:
+
+```text
+cores/roadf/ver/game/make_objedge_test_rom.py
+```
+
+It builds:
+
+```text
+rom/roadf_objedge_test.rom
+```
+
+from `rom/roadf.rom`. The diagnostic program clears the 34 scanned object
+entries and writes exactly two objects:
+
+```text
+object entry 33: raw X=0, raw Y reference=96
+object entry 32: raw X=8, raw Y reference=128
+```
+
+The assembled Road Fighter main-CPU region retains the complete 64 KiB CPU
+address space after the eight-byte header. Consequently, the correct patch
+mapping is:
+
+```python
+rom_offset = 8 + cpu_address
+```
+
+There is no byte XOR and no subtraction of `0x4000` at this stage. Konami-1
+opcode encryption is applied only to opcode bytes. The program reads CPU
+address `0x1400` once to toggle `obj_frame` and expose the written object-RAM
+bank.
+
+Road Fighter object RAM is CPU-visible at `0x1000..0x13ff`. Each entry is:
+
+```text
++0 attribute/palette/flip/code-high
++1 stored/inverted Y
++2 sprite code
++3 X position
+```
+
+The game has two 1 KiB object-RAM banks. Pixel graphics themselves remain in
+the ROM `sprites` region at `OBJ_START`; `obj.bin` contains only object-list
+RAM.
+
+### Orientation
+
+Both Road Fighter and M-Zone MRAs specify:
+
+```text
+vertical (cw)
+```
+
+The simulation PNG conversion rotates both games clockwise. Raw hardware X
+therefore becomes the displayed PNG vertical axis. Road Fighter objects at
+raw X 0 and 8 appear at the bottom edge of the portrait PNG. Earlier
+references to M-Zone X 48/56 were raw `hdump` coordinates, not unrotated PNG
+coordinates.
+
+### Road Fighter scene 1141
+
+The captured scene is:
+
+```text
+cores/roadf/ver/game/scenes/1141/
+    vram_lo.bin   (2048 bytes)
+    vram_hi.bin   (2048 bytes)
+    obj.bin       (1024 bytes)
+```
+
+These files are ignored by the repository's Git rules. Road Fighter's
+`sim.sh -s` copies the VRAM snapshots and duplicates `obj.bin` into the two
+simulation object-bank files. It also defines `NOMAIN`, `NOSND`, and a
+two-frame video run.
+
+The successful object-only scene command was:
+
+```bash
+cd /home/skutis/github/jtcores-fork
+source ./setprj.sh
+export VERILATOR_ROOT=/home/skutis/github/verilator
+export PATH="$VERILATOR_ROOT/bin:$PATH"
+hash -r
+cd cores/roadf/ver/game
+rm -rf obj_dir frames
+./sim.sh -s scenes/1141 -w -d JTFRAME_SIM_GFXEN=8
+```
+
+Outputs from the successful run:
+
+```text
+cores/roadf/ver/game/frames/frame_00001.png
+cores/roadf/ver/game/test.fst
+```
+
+`JTFRAME_SIM_GFXEN=8` enables only `gfx_en[3]`, the object layer. The captured
+scene renders a vertical group of Road Fighter objects plus the bottom
+CHECK/road-edge objects on a black background.
+
+### Simulator toolchain finding
+
+The Verilator build selected by the default environment:
+
+```text
+/home/skutis/verilator  (Verilator 5.046 development build)
+```
+
+segfaults before simulation initialization for the `NOMAIN` scene build. GDB
+places the failure in `VL_MURMUR64_HASH(vlSelf->vlNamep)` during generated
+model reset. Explicitly passing `"TOP"` to the model constructor did not fix
+it and that experiment was fully reverted.
+
+The repository-local stable build:
+
+```text
+/home/skutis/github/verilator  (Verilator 5.024)
+```
+
+runs scene 1141 successfully and produces both PNG and FST.
+
+All experimental modifications to `modules/jtframe/hdl/ver/test.cpp` have
+been reverted; that file currently has no Git diff.
+
+### MAME scene capture
+
+The tracked Road Fighter helper:
+
+```text
+cores/roadf/ver/game/save.mame
+```
+
+contains:
+
+```text
+save vram_lo.bin,2000,800
+save vram_hi.bin,2800,800
+save obj.bin,1000,400
+```
+
+From the MAME debugger, capture with:
+
+```text
+source /home/skutis/github/jtcores-fork/cores/roadf/ver/game/save.mame
+```
+
+Then place the three outputs in
+`cores/roadf/ver/game/scenes/<scene-name>/` and simulate with:
+
+```bash
+./sim.sh -s scenes/<scene-name> -w
+```
+
+Append `-d JTFRAME_SIM_GFXEN=8` for an object-only render.
+
+### Git state at handoff
+
+There are no tracked modifications under `cores/roadf`. The only visible new
+Road Fighter source file is:
+
+```text
+?? cores/roadf/ver/game/make_objedge_test_rom.py
+```
+
+Road Fighter FSTs, PNG frames, assembled ROMs, scene snapshots, generated RAM
+files, and `obj_dir` are ignored build/debug artifacts. `save.mame` was
+already tracked and remains unchanged.
