@@ -71,11 +71,8 @@ wire [8:0] hoffset = flip ? HOFFSET_FLIP : HOFFSET;
 // Keep six trailing reads after the 240 visible object addresses so the
 // registered buffer/mixer pipeline can drain before FIX becomes active.
 wire [8:0] hread = hdump - hoffset;
-// Request address zero once before the normal read sequence so the
-// synchronous line-buffer output is ready at the left display boundary.
-wire       buf_first = hread == 9'd511;
-wire       buf_rd = pxl_cen && (buf_first || hread<9'd246);
-wire [7:0] buf_rd_addr = buf_first ? 8'd0 : hread[7:0];
+wire       buf_rd = pxl_cen && hread<9'd246;
+wire [7:0] buf_rd_addr = hread[7:0];
 
 // Match Road Fighter's synchronous object-PROM path.  The PROM result becomes
 // valid one master clock after {palette,pen}; delay its line-buffer write
