@@ -68,10 +68,10 @@ wire [3:0] draw_pen = pxl_data[3:0];
 wire       obj_buf_lhbl = ~HS;
 // Layer pixels reach the color-mixer input six pixels after raw timing.
 wire [8:0] hoffset = flip ? HOFFSET_FLIP : HOFFSET;
-// Keep six trailing reads after the 240 visible object addresses so the
-// registered buffer/mixer pipeline can drain before FIX becomes active.
+// Read the 240 visible object addresses. The delayed buffer output continues
+// to drain after the final read pulse.
 wire [8:0] hread = hdump - hoffset;
-wire       buf_rd = pxl_cen && hread<9'd246;
+wire       buf_rd = pxl_cen && hread<9'd240;
 wire [7:0] buf_rd_addr = hread[7:0];
 
 // Match Road Fighter's synchronous object-PROM path.  The PROM result becomes

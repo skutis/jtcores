@@ -2,6 +2,246 @@
 
 This is a handoff note for continuing the MZONE work.
 
+## 2026-08-01 Latest Handoff (Authoritative)
+
+This section supersedes the implementation status and Verilator paths in all
+older sections below. The older sections are retained as an experiment log.
+
+### Current objective
+
+Determine why the Road Fighter and Mega Zone object line buffers are one pixel
+away from the MAME sprite positions and why the first sprite pixel at the
+horizontal boundary can reappear at the far end of the rendered line. The
+result must be correct in the synthesized FPGA core, not just adjusted in the
+PNG conversion.
+
+The Mega Zone background is aligned correctly. The unresolved work is the OBJ
+read/output/clear phase relative to the final RGB and blanking pipeline.
+
+### Current repository state
+
+At this handoff, `git status --short` from the repository root is:
+
+```text
+M  cores/mzone/hdl/jtmzone_objdraw.v
+M  cores/roadf/hdl/jtroadf_game.v
+?? cores/mzone/=
+```
+
+The two HDL modifications are staged. `cores/mzone/=` is an unrelated empty,
+untracked file and has not been removed. Updating this handoff makes
+`cores/mzone/current.md` an additional unstaged tracked modification.
+
+The active Mega Zone change is in `hdl/jtmzone_objdraw.v`:
+
+```verilog
+wire [8:0] hread = hdump - hoffset;
+wire       buf_rd = pxl_cen && hread<9'd240;
+wire [7:0] buf_rd_addr = hread[7:0];
+```
+
+This replaces the previous `<246` window. Mega Zone now requests only the 240
+visible object-buffer addresses; the registered output path is allowed to
+drain after the last request. The temporary address-hold/address-zero
+workaround was removed as requested. Do not assume this is the final fix.
+
+The staged Road Fighter change adds a simulation-only scene control under
+`NOMAIN` in `cores/roadf/hdl/jtroadf_game.v`:
+
+```verilog
+`ifdef ROADF_FORCE_FLIP
+    assign flip = 1;
+`else
+    assign flip = 0;
+`endif
+```
+
+It does not affect a normal FPGA build unless both `NOMAIN` and
+`ROADF_FORCE_FLIP` are defined.
+
+### Latest simulation artifacts
+
+Mega Zone outputs from the current no-workaround `<240` implementation:
+
+```text
+cores/mzone/ver/game/test.fst
+cores/mzone/ver/game/frames/frame_00004.png
+```
+
+They were generated on 2026-07-31 07:11 CEST. The PNG is very small because
+the test scene is mostly black; it is not the earlier completely black failed
+render.
+
+Road Fighter MAME scene 1141 remains at:
+
+```text
+cores/roadf/ver/game/scenes/1141/vram_lo.bin  (2048 bytes)
+cores/roadf/ver/game/scenes/1141/vram_hi.bin  (2048 bytes)
+cores/roadf/ver/game/scenes/1141/obj.bin       (1024 bytes)
+```
+
+Latest Road Fighter outputs:
+
+```text
+cores/roadf/ver/game/test.fst
+cores/roadf/ver/game/frames/frame_00001.png
+```
+
+They were generated on 2026-07-30 07:13 CEST. `obj.bin` is the object/sprite
+attribute RAM dump, not sprite graphics. `vram_lo.bin` and `vram_hi.bin` are
+the two video-RAM planes.
+
+### Commands to reproduce
+
+Mega Zone scroll-test simulation, from `cores/mzone/ver/game`:
+
+```bash
+source ../../env.sh
+MZONE_ROM=../../../../rom/megazone_scrolltest.rom \
+MZONE_SOUND=1 ./sim.sh -video 4 -w
+```
+
+Road Fighter scene simulation, from the repository root:
+
+```bash
+source ./setprj.sh
+export VERILATOR_ROOT=/home/skutis/verilator
+export PATH="$VERILATOR_ROOT/bin:$PATH"
+hash -r
+cd cores/roadf/ver/game
+./sim.sh -g roadf -s scenes/1141 -w
+```
+
+Add `-d JTFRAME_SIM_GFXEN=8` for Road Fighter objects only. Add
+`-d ROADF_FORCE_FLIP` to exercise the scene-only flip control.
+
+### Observed timing and orientation
+
+- The scene flip/orientation test was correct. With the portrait PNG oriented
+  with its origin at the upper right and its long direction horizontal, the
+  sprite horizontal position is effectively `-1-hpos`.
+- User comparison against the open MAME debugger showed all Road Fighter
+  sprites one pixel away in horizontal position.
+- Mega Zone was examined around `vdump=183`, `hdump=54,55`: the expected first
+  white diagnostic pixel was absent.
+- The background is correct, so a global PNG or whole-video shift is not an
+  acceptable explanation/fix.
+- In Road Fighter, the OBJ reader uses `HOFFSET=5`, so
+  `hread = hdump-5`. The generic Kicker drawer asserts reads while
+  `hread < {1'b1,HOFFSET}`, which is `hread<261`. Because only the low eight
+  address bits reach the line buffer, the tail reads wrap addresses 256..260
+  onto addresses 0..4.
+- Road Fighter observation at `vdump=74`: at `hdump=261`, `rd_addr=0` and
+  `rd_data=1` (the blue diagnostic pen); by approximately `hdump=264`, the
+  final blue output is nonzero. This is the pixel seen at the last visible PNG
+  position instead of immediately after blanking.
+- Do not confuse internal `preLHBL`, exported `LHBL`, object `pxl`, palette
+  `raw/rgb`, and final RGB. Road Fighter uses
+  `jtyiear_colmix #(.BLANK_DLY(9))`, so blanking and RGB pass through the same
+  delayed color pipeline.
+
+### Important `jtframe_obj_buffer` finding
+
+Both cores use `modules/jtframe/hdl/ram/jtframe_obj_buffer.v`. Its object RAM
+port continuously uses the current `rd_addr`. A read pulse starts `dly`; later,
+when `delete_we=dly[0]`, the module captures `dump_data` and clears the RAM at
+the **then-current** `rd_addr`:
+
+```verilog
+if( rd ) dly <= {1'b1,{BLANK_DLY-1{1'b0}}};
+else     dly <= dly>>1;
+if( delete_we ) rd_data <= dump_data;
+
+.addr1 ({~line,rd_addr}),
+.we1   (delete_we),
+.q1    (dump_data)
+```
+
+There is no registered request address paired with the delayed output/clear.
+In the Road Fighter FST, a pulse for address 0 can therefore capture/clear the
+next address after `rd_addr` advances. The data at address 0 can survive and
+be read again when the low eight address bits wrap at the end of the line.
+This is the leading explanation for the boundary duplicate, but it is not yet
+proven against the final RGB coordinate and has not been changed in JTFRAME.
+
+This same behavior exists in FPGA RTL. Verilator is not an independent
+software renderer. If different simulators produce different results here,
+that would indicate an ambiguous RAM/scheduling assumption that must be made
+explicit in RTL; selecting a convenient simulator version is not a valid FPGA
+fix.
+
+### Verilator status (corrected)
+
+The Verilator actually installed and used now is:
+
+```text
+/home/skutis/verilator/bin/verilator
+Verilator 5.018 2023-10-30 rev v5.018
+repository tag: v5.018
+```
+
+There is currently no `/home/skutis/github/verilator` stable checkout. Older
+notes below saying `/home/skutis/verilator` is 5.046 and
+`/home/skutis/github/verilator` is 5.024 are stale.
+
+JTFRAME does not pin a Verilator release. `modules/jtframe/bin/jtsim` uses
+`$VERILATOR_ROOT/bin/verilator` when `VERILATOR_ROOT` is set and otherwise
+uses `verilator` from `PATH`. `modules/jtframe/doc/sim.md` mentions Verilator
+4.224 only as the version used in an old performance comparison.
+
+### FST signals to inspect next
+
+For the object line buffer, keep these together at individual master-clock
+edges, not only at `hdump` changes:
+
+```text
+clk
+pxl_cen
+hdump
+vdump
+hread
+buf_rd / buf_clr
+buf_rd_addr / rd_addr
+u_line.dly (M-Zone) or u_buffer.dly (Road Fighter)
+delete_we
+dump_data
+rd_data
+object pxl / obj_pxl
+color-mixer mux
+color-mixer raw
+color-mixer rgb
+preLHBL
+LHBL
+red, green, blue
+```
+
+Relevant hierarchy roots are:
+
+```text
+M-Zone:      u_game.u_game.u_video.u_obj.u_draw
+Road Fighter: u_game.u_game.u_video.u_obj.u_draw
+Road Fighter color mixer: u_game.u_game.u_video.u_colmix
+```
+
+### Recommended continuation
+
+1. In the Road Fighter FST at `vdump=74`, trace one master-clock edge at a time
+   across `hdump=255..265`. Establish exactly which raw object coordinate is
+   present at `obj_pxl`, palette `raw/rgb`, and final RGB, and compare it with
+   exported `LHBL`.
+2. Trace the normal address-zero read near `hdump=5` and the wrapped address-zero
+   read near `hdump=261`. Confirm whether the delayed clear wrote address 1
+   instead of address 0 on the first read.
+3. Repeat the same address/output/clear trace for Mega Zone around
+   `vdump=183`, `hdump=53..57` with the current `<240` window.
+4. If the address association is confirmed, fix it explicitly—preferably in a
+   narrowly tested JTFRAME/object-buffer change or a core-local wrapper—and
+   compare final object position against MAME and the already-correct
+   background. Do not merely alter the PNG, blanking, or Verilator version.
+5. For simulator cross-checking, run the identical scene with Icarus/ModelSim
+   or another Verilator release if available. A changed result is evidence of
+   underspecified RTL, not evidence that one version is the FPGA truth.
+
 ## Current Focus
 
 OBJ DMA/rendering in `cores/mzone`.

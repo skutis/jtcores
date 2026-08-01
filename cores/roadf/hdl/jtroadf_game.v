@@ -133,7 +133,11 @@ jtroadf_main u_main(
     assign snd       = 0;
     assign sample    = 0;
     assign game_led  = 0;
+`ifdef ROADF_FORCE_FLIP
+    assign flip      = 1;
+`else
     assign flip      = 0;
+`endif
     assign pcm_addr  = 0;
     assign obj_frame = 0;
 `endif
