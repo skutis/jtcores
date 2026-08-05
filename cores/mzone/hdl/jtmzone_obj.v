@@ -135,7 +135,7 @@ wire [7:0] scan_dout;
 wire [7:0] draw_vdump = vdump[7:0] + 8'd1;
 wire [8:0] ysum   = {1'b0,draw_vdump} + {1'b0,ypos};
 wire       inzone = ysum[7:4] == 4'hf;
-wire [3:0] ysub   = ysum[3:0] ^ {4{attr[7]}};
+wire [3:0] ysub   = ysum[3:0] ^ {4{attr[7] ^ flip}};
 wire [1:0] scan_byte = scan_st==3'd1 ? 2'd0 :
                        scan_st==3'd2 ? 2'd1 :
                        scan_st==3'd3 ? 2'd2 : 2'd3;
@@ -198,7 +198,7 @@ always @(posedge clk) begin
                     // MAME and the 083 shifter behavior show this attribute
                     // bit is active-low for horizontal flip.
                     dr_hflip     <= (~attr[6]) ^ flip;
-                    dr_vflip     <= attr[7];
+                    dr_vflip     <= attr[7] ^ flip;
                     dr_ysub      <= ysub;
                     draw         <= inzone;
                     scan_last    <= scan_obj==10'd0;

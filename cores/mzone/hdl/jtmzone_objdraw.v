@@ -71,7 +71,9 @@ wire [8:0] hoffset = flip ? HOFFSET_FLIP : HOFFSET;
 // Read the 240 visible object addresses. The delayed buffer output continues
 // to drain after the final read pulse.
 wire [8:0] hread = hdump - hoffset;
-wire       buf_rd = pxl_cen && hread<9'd240;
+// Prime the synchronous line-buffer pipeline one pixel before address zero.
+// hread wraps to 9'h1ff here, selecting the unused byte address 8'hff.
+wire       buf_rd = pxl_cen && (hread==9'h1ff || hread<9'd240);
 wire [7:0] buf_rd_addr = hread[7:0];
 
 // Match Road Fighter's synchronous object-PROM path.  The PROM result becomes

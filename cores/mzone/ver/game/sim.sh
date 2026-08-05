@@ -2,6 +2,39 @@
 
 MZONE_ROM=${MZONE_ROM:-$ROM/${MZONE_SETNAME:-megazone}.rom}
 
+SCENE=
+SIM_ARGS=()
+while (( $# )); do
+    case "$1" in
+        -s|-scene)
+            if (( $# < 2 )); then
+                echo "Missing scene directory after $1" >&2
+                exit 1
+            fi
+            SCENE=$2
+            shift 2
+            ;;
+        *)
+            SIM_ARGS+=("$1")
+            shift
+            ;;
+    esac
+done
+
+if [[ -n "$SCENE" ]]; then
+    [[ -d "$SCENE" ]] || { echo "Cannot find scene $SCENE" >&2; exit 1; }
+    for scene_file in vram0.bin vram1.bin cram0.bin cram1.bin obj.bin shared.bin regs.hex; do
+        [[ -f "$SCENE/$scene_file" ]] || {
+            echo "Scene $SCENE is missing $scene_file" >&2
+            exit 1
+        }
+        cp "$SCENE/$scene_file" "$scene_file" || exit 1
+    done
+    cp shared.bin main_shared.bin || exit 1
+    SIM_ARGS=(-d SIMSCENE -d NOMAIN -video 3 "${SIM_ARGS[@]}")
+fi
+set -- "${SIM_ARGS[@]}"
+
 if [ ! -e rom.bin ] || [ "$(readlink -f rom.bin)" != "$(readlink -f "$MZONE_ROM")" ]; then
     ln -srf "$MZONE_ROM" rom.bin || exit 1
 fi

@@ -69,6 +69,7 @@ bram:
   - name: main_shared
     addr_width: 11
     data_width: 8
+    sim_file: true
     rw: true
     dual_port:
       name: snd_shared

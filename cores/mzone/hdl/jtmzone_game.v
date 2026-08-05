@@ -45,6 +45,21 @@ wire [ 9:0] obj_oram_addr;
 wire [ 7:0] obj_oram_dout;
 wire [ 7:0] main_scrolly, main_scrollx;
 wire        main_flip, main_irq_mask, main_int;
+`ifdef SIMSCENE
+reg  [ 7:0] scene_regs[0:2];
+initial begin
+    $readmemh("regs.hex", scene_regs);
+    $display("MZONE scene registers: scrolly=%02x scrollx=%02x flip=%0d",
+        scene_regs[0], scene_regs[1], scene_regs[2][0]);
+end
+wire [7:0] video_scrolly = scene_regs[0];
+wire [7:0] video_scrollx = scene_regs[1];
+wire       video_flip    = scene_regs[2][0];
+`else
+wire [7:0] video_scrolly = main_scrolly;
+wire [7:0] video_scrollx = main_scrollx;
+wire       video_flip    = main_flip;
+`endif
 wire        main_irq_ack, snd_irq_n;
 wire        main_ba;
 wire        main_bs;
@@ -679,6 +694,7 @@ always @(*) begin
     end
 end
 
+`ifndef NOMAIN
 jtmzone_main u_main(
     .rst        ( rst24          ),
     .clk        ( clk24          ),
@@ -737,8 +753,46 @@ jtmzone_main u_main(
     .snd_irq_n  ( snd_irq_n      ),
     .snd_dout   ( 8'hff          )
 );
+`else
+assign main_stub_addr  = 16'd0;
+assign main_stub_cs    = 1'b0;
+assign main_cpu_cen    = 1'b0;
+assign main_cpu_rnw    = 1'b1;
+assign main_cpu_dout   = 8'd0;
+assign main_scrolly_cs = 1'b0;
+assign main_scrollx_cs = 1'b0;
+assign main_vram0_cs   = 1'b0;
+assign main_vram1_cs   = 1'b0;
+assign main_cram0_cs   = 1'b0;
+assign main_cram1_cs   = 1'b0;
+assign main_objram_cs  = 1'b0;
+assign main_shared_cs  = 1'b0;
+assign main_shared_addr= 11'd0;
+assign main_shared_din = 8'd0;
+assign main_shared_we  = 1'b0;
+assign main_vram_ofs   = 10'd0;
+assign main_vram_din   = 8'd0;
+assign main_vram0_we   = 1'b0;
+assign main_vram1_we   = 1'b0;
+assign main_cram0_we   = 1'b0;
+assign main_cram1_we   = 1'b0;
+assign main_objram_addr= 10'd0;
+assign main_objram_din = 8'd0;
+assign main_objram_we  = 1'b0;
+assign main_scrolly    = 8'd0;
+assign main_scrollx    = 8'd0;
+assign main_flip       = 1'b0;
+assign main_irq_mask   = 1'b0;
+assign main_int        = 1'b0;
+assign main_irq_ack    = 1'b0;
+assign main_ba         = 1'b0;
+assign main_bs         = 1'b0;
+`endif
 
 jtframe_dual_ram #(
+`ifdef SIMSCENE
+    .SIMFILE ( "obj.bin" ),
+`endif
     .AW ( 10 ),
     .DW ( 8  )
 ) u_objram(
@@ -814,9 +868,9 @@ jtmzone_video u_video(
     .main_cram0_dout( main_cram0_dout ),
     .main_cram1_dout( main_cram1_dout ),
 
-    .scrolly    ( main_scrolly   ),
-    .scrollx    ( main_scrollx   ),
-    .flip       ( main_flip      ),
+    .scrolly    ( video_scrolly  ),
+    .scrollx    ( video_scrollx  ),
+    .flip       ( video_flip     ),
     .prog_data  ( prog_data      ),
     .prog_addr  ( prog_addr      ),
     .prom_we    ( prom_we        ),

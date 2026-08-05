@@ -408,6 +408,9 @@ def main():
         # Full edge-color diagnostic at raw sprite X48/Y57. The inverted
         # vertical counter places raw Y57 around VDump 182.
         pc = write_sprite(rom, pc, 0x1F, 0x4F, 0x39, edge_test_code, 0x00)
+        # Matching edge-color diagnostic at raw X49, first visible on
+        # VDump 80: raw X is xpos+48 and first VDump is 239-ypos.
+        pc = write_sprite(rom, pc, 0x1E, 0x4F, 0x9F, edge_test_code, 0x01)
 
     pc = lda_imm(rom, pc, 0x01)
     pc = sta_ext(rom, pc, 0x0007)  # enable main IRQ latch

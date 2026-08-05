@@ -858,3 +858,169 @@ Road Fighter source file is:
 Road Fighter FSTs, PNG frames, assembled ROMs, scene snapshots, generated RAM
 files, and `obj_dir` are ignored build/debug artifacts. `save.mame` was
 already tracked and remains unchanged.
+
+## 2026-08-05 23:07:44 CEST — M-Zone OBJ Origin, ROM Order, and FIX Masking
+
+### Current HDL and simulation state
+
+The non-flipped object read offset experiment has been reverted. The active
+value in `hdl/jtmzone_objdraw.v` is again:
+
+```verilog
+localparam [8:0] HOFFSET      = 9'd54;
+localparam [8:0] HOFFSET_FLIP = 9'd6;
+```
+
+The address-255 priming read remains active:
+
+```verilog
+wire buf_rd = pxl_cen && (hread==9'h1ff || hread<9'd240);
+```
+
+`HOFFSET=48` and then `HOFFSET=44` were tested. `44` made ordinary sprite
+positions look better, but moved the line-buffer read window so its pixels no
+longer fit the FIX/HBL boundary correctly. It was not retained. Recent scene
+and test-ROM simulations completed successfully with waveform output; the
+latest standard test-ROM run used the restored `HOFFSET=54`.
+
+### PCB sprite coordinate observations
+
+On the PCB/model, the object read counter reaches position zero four pixel
+clocks before the SCROLL/OBJ boundary. This is the measured PCB object-pipeline
+lead. Keep that physical lead separate from the HDL line-buffer request phase
+and from final RGB coordinates.
+
+The game was observed changing a moving sprite's raw OBJ RAM X byte through:
+
+```text
+$01, $02, $03, ... $F7
+```
+
+The object is then erased. At `$01`, only the bottom/second eight source pixels
+of the non-opaque sprite are visible at the entry boundary. This is not an
+`$F8` wrap case. Raw X bytes remain the useful evidence; MAME's `sx+32` and
+`sx-11` conversions are bitmap-coordinate adjustments and are not literal PCB
+adders.
+
+### Newly identified FIX masking
+
+The current leading explanation for the eight-pixel entry behaviour is that
+object rendering begins while FIX priority is still active. The first eight
+object pixels are produced but covered by `fix_en`; the following eight arrive
+after `fix_en` deasserts and become visible.
+
+The color mixer implements this directly:
+
+```verilog
+wire obj_en = obj_pxl != 4'd0 && !fix_en;
+```
+
+Confirm on one affected row by tracing:
+
+```text
+hdump
+buf_rd_addr
+obj_pxl
+fix_en_pre
+fix_en
+pal_mux / selected layer
+final RGB
+```
+
+The expected signature is nonzero object pixels for source positions 0..7
+while `fix_en=1`, followed by source positions 8..15 with `fix_en=0`. Per the
+video-pipeline rules, treat `fix_src`/`fix_en_pre` as source/address timing and
+delayed `fix_en` as mixer priority. Do not change FIX timing independently of
+SCROLL without a PCB-aligned trace.
+
+FIX masking can explain clipping at the FIX boundary. It cannot by itself
+explain a uniform horizontal displacement of sprites that are entirely inside
+the playfield.
+
+### Sprite ROM group order and K083
+
+The M-Zone schematic annotation records the physical four-group sequence as:
+
+```text
+01, 00, 11, 10
+```
+
+The PCB Verilog model has also appeared as:
+
+```text
+10, 01, 00, 11
+```
+
+These are cyclic rotations of the same repeating sequence. The actual sprite
+group zero must be determined by sampling the ROM address on the valid K083
+`LD` edge together with the local sprite counter and effective line-buffer
+write enable. A free-running waveform window cannot define the origin.
+
+Mega Zone does not use a K503. Time Pilot's K503 sequence is only a comparison;
+Mega Zone generates its object addresses with discrete logic. The K083 does
+not generate the group-address sequence. It captures ROM data on `LD`, emits
+the first pixel immediately after that load edge, and shifts the remaining
+three pixels over the next pixel clocks. Horizontal flip reverses the four
+pixels within each loaded group. The live ROM address may already show the
+next group while the K083 is shifting the previously latched group.
+
+MAME's `spritelayout` describes final decoded source X using byte offsets:
+
+```text
+$00, $08, $10, $18  -> groups 00, 01, 10, 11
+```
+
+This is not an electrical model of Mega Zone's discrete address generator and
+K083 load phase. Before changing the core, establish whether the current MRA
+packing/download transpose has already converted the raw ROMs into MAME's
+logical order. Do not apply both a packing conversion and a runtime physical
+group permutation.
+
+An incorrect four-pixel group order can move recognizable or nontransparent
+features inside a 16-pixel sprite, but it does not move the allocated
+line-buffer span `xpos..xpos+15` by itself.
+
+### Object lookup PROM and transparency
+
+The original `319b16.c6` object lookup PROM maps raw K083 pen zero to lookup
+value zero for all 16 sprite palettes:
+
+```text
+{palette, raw_pen=0} -> 0
+```
+
+The final palette entry zero is black. More importantly, object lookup output
+zero is transparent. Some nonzero raw K083 pens also map to lookup value zero
+for particular palettes, so transparency must be checked after the object
+lookup PROM:
+
+```text
+lookup output 0000       -> transparent
+lookup output 0001..1111 -> opaque
+```
+
+The PCB/K502-style line-buffer merge preserves an existing nonzero pixel; a
+later sprite only fills a zero location. Therefore any genuine nonzero writes
+seen at positions 0..11 should remain visible later unless they are overwritten
+before priority applies, written to the other bank, cleared before display, or
+masked by FIX/HBLANK. Inspect the last effective stored value before the bank
+handoff rather than only the first RAM data-input transition.
+
+### Next focused check
+
+At the PCB/model boundary case with raw OBJ X `$01`, capture the four K083 load
+groups and line-buffer writes. For each pixel record:
+
+```text
+local sprite X count
+OCHA/address group at K083 LD
+K083 input and shifted output
+object lookup PROM output
+line-buffer bank/address/data/WE/CS
+fix_en_pre and fix_en
+```
+
+This will distinguish three presently coupled questions: the physical ROM
+group origin, whether positions 0..11 are genuine nonzero stored writes, and
+whether the first eight valid object pixels are intentionally hidden by FIX
+priority.

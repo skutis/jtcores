@@ -259,6 +259,9 @@ always @(posedge clk) begin
 end
 
 jtframe_dual_ram #(
+`ifdef SIMSCENE
+    .SIMFILE ( "vram1.bin" ),
+`endif
     .AW ( 10 ),
     .DW ( 8  )
 ) u_vram(
@@ -276,6 +279,9 @@ jtframe_dual_ram #(
 );
 
 jtframe_dual_ram #(
+`ifdef SIMSCENE
+    .SIMFILE ( "cram1.bin" ),
+`endif
     .AW ( 10 ),
     .DW ( 8  )
 ) u_cram(
