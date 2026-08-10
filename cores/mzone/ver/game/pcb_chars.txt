@@ -1,0 +1,10 @@
+M-Zone PCB Character Reference
+==============================
+
+Blue solid
+  Character: 0x31
+  Palette:   0x0D
+
+Yellow solid
+  Character: 0x34
+  Palette:   0x0E

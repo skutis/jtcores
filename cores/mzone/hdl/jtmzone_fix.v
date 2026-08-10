@@ -63,7 +63,9 @@ wire [ 8:0] hsum_base = hdump < HVISIBLE ? hdump : { ~6'h0, hdump[2:0] };
 wire [ 8:0] fix_origin = flip ? FIX_FLIP_START : 9'd0;
 wire [ 8:0] fix_hsum = hsum_base - fix_origin;
 wire [ 8:0] hsum = fix_hsum + FIX_LEAD - {8'd0, flip};
-wire [ 8:0] heff = flip ? FIX_WIDTH - 9'd1 - hsum : hsum;
+wire        blank_fetch = hdump >= 9'd288 && hdump <= 9'd375;
+wire [ 8:0] heff = blank_fetch ? hdump - 9'd160 :
+                    flip ? FIX_WIDTH - 9'd1 - hsum : hsum;
 // Use the PCB's 8-bit wrapped h counter for phase and tile column.
 wire [ 7:0] h_eff = heff[7:0];
 wire [ 7:0] vsum = vdump[8] ? vdump[7:0] - 8'd8 : vdump[7:0];

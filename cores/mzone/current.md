@@ -1024,3 +1024,100 @@ This will distinguish three presently coupled questions: the physical ROM
 group origin, whether positions 0..11 are genuine nonzero stored writes, and
 whether the first eight valid object pixels are intentionally hidden by FIX
 priority.
+
+## Status 2026-08-10 08:16:45 CEST
+
+### Current video timing experiment
+
+The color mixer currently uses:
+
+```verilog
+localparam BLANK_DLY = 8;
+```
+
+FIX has a PCB-counter experiment only during the first part of horizontal
+blanking:
+
+```verilog
+wire        blank_fetch = hdump >= 9'd288 && hdump <= 9'd375;
+wire [ 8:0] heff = blank_fetch ? hdump - 9'd160 :
+                    flip ? FIX_WIDTH - 9'd1 - hsum : hsum;
+```
+
+This produces:
+
+```text
+hdump 288..375 -> FIX heff 128..215
+hdump 376      -> original FIX mapping resumes at heff 0
+hdump 376..383 -> FIX heff 0..7
+```
+
+The restricted range is intentional. Applying `hdump-160` through 383 was
+wrong because it removed the existing `heff=0` restart at hdump 376. SCROLL
+was restored and has no equivalent override; its effective coordinate remains:
+
+```verilog
+wire [7:0] heff = h_eff + scrolly;
+```
+
+FIX and SCROLL fetch phases remain:
+
+```text
+heff[2:0] = 7 -> read_tile
+heff[2:0] = 0 -> fetch_tile
+heff[2:0] = 4 -> load_tile
+```
+
+Thus `load_tile` never coincides with `heff=0`; zero is the graphics-ROM
+request phase and phase four loads the returned row. `FIX_EN_DLY` remains 6.
+
+### Original-PCB solid character combinations
+
+The following existing character-ROM and CRAM combinations were identified:
+
+```text
+solid blue:   character 0x31, palette/attribute 0x0D
+solid yellow: character 0x34, palette/attribute 0x0E
+```
+
+They are also recorded in `ver/game/pcb_chars.txt`. These combinations can be
+selected by main CPU ROM code on an original PCB without replacing the
+character ROM or palette PROMs.
+
+Attribute bits are:
+
+```text
+CRAM[3:0] palette
+CRAM[4]   unused
+CRAM[5]   vertical flip
+CRAM[6]   horizontal flip
+CRAM[7]   character code high bit/bank
+```
+
+FIX tile RAM `0x2400..0x27ff` corresponds to FIX color RAM
+`0x2c00..0x2fff`; for example tile address `0x2440` uses attribute address
+`0x2c40`. SCROLL tile `0x2042` uses attribute address `0x2842`.
+
+### Current scroll-test ROM probes
+
+`tools/make_scrolltest_rom.py` now writes the existing solid character
+combinations into the default first-visible probes:
+
+```text
+SCROLL 0x2042 / CRAM 0x2842 -> character 0x31, attribute 0x0D (blue)
+FIX    0x2440 / CRAM 0x2c40 -> character 0x34, attribute 0x0E (yellow)
+```
+
+The generated diagnostic characters `0x7f` and `0x7e` remain in the test-ROM
+generator for other marker cells. Those generated markers are not suitable
+for a main-ROM-only original-PCB test because the generator modifies graphics
+and PROM data as well as the CPU program.
+
+The standard non-flipped test ROM was regenerated with sprites and one-pixel
+scroll steps, then simulated for 10 frames with sound and waveform output.
+The latest run completed successfully on 2026-08-10 and produced:
+
+```text
+cores/mzone/ver/game/frames/frame_00010.png
+cores/mzone/ver/game/test.fst (about 13 MiB)
+```

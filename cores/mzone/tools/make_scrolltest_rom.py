@@ -364,9 +364,9 @@ def main():
         pc = write_vram_cram(rom, pc, 0x2000, 0x2800, 0x042, marker_tile, marker_color_alt)
         pc = write_vram_cram(rom, pc, 0x2000, 0x2800, 0x041, marker_tile, marker_color)
     else:
-        pc = write_vram_cram(rom, pc, 0x2000, 0x2800, 0x042, marker_tile, 0x0A)
+        pc = write_vram_cram(rom, pc, 0x2000, 0x2800, 0x042, 0x31, 0x0D)
         pc = write_vram_cram(rom, pc, 0x2000, 0x2800, 0x041, marker_tile, marker_color_red)
-    pc = write_vram_cram(rom, pc, 0x2400, 0x2C00, 0x040, marker_tile, 0x0B)
+    pc = write_vram_cram(rom, pc, 0x2400, 0x2C00, 0x040, 0x34, 0x0E)
     if not column_numbers:
         pc = write_vram_cram(rom, pc, 0x2000, 0x2800, 0x3A2, 0x00, 0x0A)
         pc = write_vram_cram(rom, pc, 0x2400, 0x2C00, 0x3A0, 0x00, 0x0B)

@@ -41,7 +41,7 @@ module jtmzone_colmix(
 );
 
 localparam [21:0] PAL_OFFSET = `ifdef JTFRAME_PROM_START `JTFRAME_PROM_START + 22'h000 `else 22'h000 `endif;
-localparam        BLANK_DLY  = 9;
+localparam        BLANK_DLY  = 8;
 
 wire [ 7:0] pal_prom_dout;
 wire [ 7:0] pal_addr;
