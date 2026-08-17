@@ -2,6 +2,62 @@
 
 This is a handoff note for continuing the MZONE work.
 
+## 2026-08-17 09:13:15 CEST — Real-PCB PicoROM program in 6H
+
+The goal is to run new main-CPU code on a real Mega Zone PCB using PicoROM in
+the `.6h` ROM socket. The existing
+`cores/mzone/tools/make_scrolltest_rom.py` already contains the required
+Konami-1 opcode encoding and instruction emitters; a separate assembler
+backend is not required for the instructions covered by those emitters.
+
+The 8 KiB `.6h` device maps to main-CPU addresses `$E000-$FFFF`. A standalone
+PicoROM image for this socket must therefore be exactly `$2000` bytes, with
+CPU addresses translated to file offsets as:
+
+```python
+BASE = 0xE000
+rom = bytearray([0xFF] * 0x2000)
+
+def put_cpu(addr, *values):
+    offset = addr - BASE
+    for i, value in enumerate(values):
+        rom[offset + i] = value & 0xFF
+```
+
+Konami-1 encoding is applied only to opcode bytes. Operands, immediate data,
+addresses, and vectors remain plain. Encoding depends on the absolute CPU
+address, not the offset within the 6H image:
+
+```python
+def konami_opcode(addr, plain):
+    mask = (
+        ((addr >> 1) & 1) << 7
+        | ((~(addr >> 1)) & 1) << 5
+        | ((addr >> 3) & 1) << 3
+        | ((~(addr >> 3)) & 1) << 1
+    )
+    return plain ^ mask
+
+def op(addr, plain_opcode):
+    put_cpu(addr, konami_opcode(addr, plain_opcode))
+```
+
+The scroll-test program currently starts at `$8000`, which belongs to a
+different ROM socket. For a 6H-only PicoROM test, relocate its entry point to
+an address such as `$E000` and retain an IRQ routine at an address such as
+`$FE00`. Patch the vectors as unencoded bytes:
+
+```python
+put_cpu(0xFFF8, 0xFE, 0x00)  # IRQ vector -> $FE00
+put_cpu(0xFFFE, 0xE0, 0x00)  # reset vector -> $E000
+```
+
+The CPU reads the reset vector from `.6h` at `$FFFE-$FFFF` and will then begin
+executing the encoded opcode stream at `$E000`. Reuse the existing helpers
+such as `lda_imm`, `sta_ext`, `ldx_imm`, and the branch emitters, changing
+their storage calls to `put_cpu` while continuing to pass absolute CPU
+addresses to `konami_opcode`.
+
 ## 2026-08-01 Latest Handoff (Authoritative)
 
 This section supersedes the implementation status and Verilator paths in all
