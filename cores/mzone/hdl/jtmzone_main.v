@@ -254,8 +254,10 @@ always @(posedge clk) begin
                 3'd0: b_a13_coin2 <= cpu_dout[0];
                 3'd1: b_a13_coin1 <= cpu_dout[0];
                 3'd3: b_a13_int   <= cpu_dout[0];
+                // Schematic: /MLATCH selects this 74LS259; A[2:0]=5 selects
+                // FLIP and MD0 is the value latched (high means flipped).
                 3'd5: b_a13_flip  <= cpu_dout[0];
-                3'd7: b_a13_intst  <= cpu_dout[0];
+                3'd7: b_a13_intst <= cpu_dout[0];
                 default: ;
             endcase
         end

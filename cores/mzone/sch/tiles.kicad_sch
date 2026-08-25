@@ -18929,6 +18929,16 @@
 		)
 		(uuid "345005aa-a759-40ab-954a-dc0d084aed04")
 	)
+	(text "RA6, Wrong size, only 4 pins on PCB! CHECK!"
+		(exclude_from_sim no)
+		(at 64.77 25.4 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+		)
+		(uuid "441d8fd2-d7e3-401d-9cc8-cc9330ef2ed0")
+	)
 	(text "SCROLL: First visible char at 0x2042\nFIX: First visible char at 0x2440"
 		(exclude_from_sim no)
 		(at 153.035 55.88 0)

@@ -112,18 +112,33 @@ class ImageWatcher:
         ]
         files.sort()
         if not files:
+            # Forget files that disappeared so recreated frame files count as
+            # new when a simulator repopulates the directory.
+            self.files = []
             return
 
+        previous = {os.path.abspath(name) for name in self.files}
+        new_files = [name for name in files if os.path.abspath(name) not in previous]
         current = os.path.abspath(self.path)
         self.files = files
+
+        # After initial startup, follow newly created simulation frames. This
+        # makes the viewer advance from frame_00000.png through the last frame
+        # as the frames directory is populated.
+        if previous and new_files:
+            self.path = new_files[-1]
+            self.index = self.files.index(self.path)
+            self.mtime = None
+            return
+
         for i, name in enumerate(files):
             if os.path.abspath(name) == current:
                 self.index = i
                 break
         else:
+            # Keep polling an explicitly selected path if it temporarily
+            # disappears. Do not silently switch to an older frame.
             self.index = min(self.index, len(files) - 1)
-            self.path = files[self.index]
-            self.mtime = None
 
     def stat_mtime(self):
         try:

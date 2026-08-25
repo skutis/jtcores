@@ -2,6 +2,95 @@
 
 This is a handoff note for continuing the MZONE work.
 
+## 2026-08-25 — Current flipped-OBJ experiment (authoritative)
+
+The latest flipped simulation looks better after removing the core-side
+sprite-X mirror. Preserve the raw object-RAM X coordinate in both screen
+orientations:
+
+```verilog
+dr_xpos <= {1'b0, scan_dout};
+```
+
+Do not restore the recently tested `flip ? 8'd240-scan_dout : scan_dout`
+without new PCB evidence. The `240-x` expression mirrors the bounding box of
+a 16-pixel sprite in a 256-coordinate domain, but it added an unwanted second
+position transformation for the current flipped PCB-test ROM.
+
+The flipped PCB-test ROM intentionally retains its already calibrated sprite
+coordinates. The coordinate conversion is in
+`ver/pcb_test/make_pcb_testrom_6h.py`, functions `flipped_x()` and
+`flipped_y()`, and is enabled/configured by `ver/pcb_test/build_static_tests.sh`.
+Do not remove that test-program conversion: the same generated ROM must be
+used for both the real PCB and simulation.
+
+### Current core behavior
+
+In `hdl/jtmzone_obj.v`:
+
+```verilog
+wire [3:0] ysub = ysum[3:0] ^ {4{attr[7]}};
+dr_xpos  <= {1'b0, scan_dout};
+dr_hflip <= ~attr[6];
+dr_vflip <= attr[7];
+```
+
+Consequently global `flip` currently does not reverse sprite artwork rows or
+columns and does not transform the raw sprite X coordinate. Local sprite
+orientation continues to come from the sprite attribute bits. This remains an
+experiment to compare against PCB behavior.
+
+In `hdl/jtmzone_objdraw.v`, global `flip` still selects different physical
+line-buffer display timing/origins:
+
+```verilog
+HOFFSET=54,      HOFFSET_FLIP=6
+PCB_RD_ORIGIN=9, PCB_RD_ORIGIN_FLIP=13
+RAM_RD_PHASE=1
+```
+
+The read addresses advance forward in both modes. The physical line buffer is
+256 bytes and sprite writes may wrap through all 256 addresses. Display reads
+are gated to `hread=510,511,0..239`: two priming requests followed by the 240
+visible object pixels. In flipped mode these map to circular addresses
+`12,13,14..253` with the current origin and phase.
+
+### PCB-test sprite-coordinate policy
+
+The standard flipped ROM is `ver/pcb_test/tflip_standard_static_6h_sim.rom`
+(simulation) and `tflip_standard_static_6h.bin` (PicoROM). Its flipped
+coordinates are deliberate:
+
+- Balloons use the generator's calibrated `flipped_x()`/`flipped_y()` mapping.
+- White edge and middle sprites use separately calibrated raw coordinates.
+- The flipped sprite attribute toggle is zero in the standard build.
+- The core must be corrected to match the real PCB; do not compensate by
+  silently changing these test-ROM coordinates.
+
+### Latest reproduction and artifacts
+
+From `cores/mzone/ver/game`:
+
+```bash
+source ../../env.sh
+MZONE_SOUND=1 \
+MZONE_ROM="$PWD/../pcb_test/tflip_standard_static_6h_sim.rom" \
+./sim.sh -video 6 -w -d JTFRAME_SIM_GFXEN=9
+```
+
+This enables SCROLL+OBJ and disables FIX for easier object comparison. The
+2026-08-25 run completed successfully after removing `240-x`:
+
+```text
+cores/mzone/ver/game/frames/frame_00004.png
+cores/mzone/ver/game/test.fst
+```
+
+The latest visual assessment was "looking better now." The next comparison
+should determine from PCB/FST evidence whether global flip must also be
+restored in the sprite-local `hflip`/`ysub` orientation logic. Change one
+mechanism at a time and keep the flipped ROM fixed.
+
 ## 2026-08-17 09:13:15 CEST — Real-PCB PicoROM program in 6H
 
 The goal is to run new main-CPU code on a real Mega Zone PCB using PicoROM in

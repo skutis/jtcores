@@ -132,10 +132,12 @@ wire       hs_start = HS && !hs_l;
 wire       dma_copy = pxl_cen && dma_hcnt[1:0]==2'd0 && dma_addr != DMA_COPY_BYTES;
 wire       dma_we = dma_en && dma_wr;
 wire [7:0] scan_dout;
-wire [7:0] draw_vdump = vdump[7:0] + 8'd1;
+// Real-PCB portrait comparison places the simulated sprites one pixel too
+// far right. Use the raw vertical count; the previous +1 caused that shift.
+wire [7:0] draw_vdump = vdump[7:0];
 wire [8:0] ysum   = {1'b0,draw_vdump} + {1'b0,ypos};
 wire       inzone = ysum[7:4] == 4'hf;
-wire [3:0] ysub   = ysum[3:0] ^ {4{attr[7] ^ flip}};
+wire [3:0] ysub   = ysum[3:0] ^ {4{attr[7]}};
 wire [1:0] scan_byte = scan_st==3'd1 ? 2'd0 :
                        scan_st==3'd2 ? 2'd1 :
                        scan_st==3'd3 ? 2'd2 : 2'd3;
@@ -190,15 +192,15 @@ always @(posedge clk) begin
                 end
                 3'd4: begin
                     dr_code      <= code;
-                    // Resolve global horizontal flip before the shared-style
-                    // drawer.  224 = 239-(16-1), accounting for the active
-                    // 0..239 span and the 16-pixel sprite width.
-                    dr_xpos      <= {1'b0, flip ? 8'd224-scan_dout : scan_dout};
+                    // Preserve the raw PCB object coordinate in both screen
+                    // orientations. Global flip changes the display origin,
+                    // not the coordinate written into the line buffer.
+                    dr_xpos      <= {1'b0, scan_dout};
                     dr_pal       <= attr[3:0];
                     // MAME and the 083 shifter behavior show this attribute
                     // bit is active-low for horizontal flip.
-                    dr_hflip     <= (~attr[6]) ^ flip;
-                    dr_vflip     <= attr[7] ^ flip;
+                    dr_hflip     <= ~attr[6];
+                    dr_vflip     <= attr[7];
                     dr_ysub      <= ysub;
                     draw         <= inzone;
                     scan_last    <= scan_obj==10'd0;

@@ -871,6 +871,7 @@ jtmzone_video u_video(
     .scrolly    ( video_scrolly  ),
     .scrollx    ( video_scrollx  ),
     .flip       ( video_flip     ),
+    .gfx_en     ( gfx_en         ),
     .prog_data  ( prog_data      ),
     .prog_addr  ( prog_addr      ),
     .prom_we    ( prom_we        ),

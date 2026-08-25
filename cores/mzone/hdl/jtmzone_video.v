@@ -26,6 +26,7 @@ module jtmzone_video(
     input        [ 7:0] scrolly,
     input        [ 7:0] scrollx,
     input               flip,
+    input        [ 3:0] gfx_en,
 
     input        [ 7:0] prog_data,
     input        [21:0] prog_addr,
@@ -92,17 +93,16 @@ wire        tile_dbg_fix;
 wire [ 7:0] tile_dbg_scr_x, tile_dbg_pat_x, tile_dbg_scr_y, tile_dbg_pat_y;
 wire [ 3:0] scr_pxl;
 wire [ 3:0] fix_pxl;
-wire [ 3:0] char_pxl;
 wire [ 3:0] obj_pxl;
+wire        fix_src;
 wire        pxl2_cen_unused = pxl2_cen;
 wire        obj_lut_we, char_lut_we;
 wire        dbg_show_fix;
 wire        dbg_show_scroll;
 wire        dbg_show_obj;
-wire [ 3:0] dbg_fix_pxl;
-wire [ 3:0] dbg_scr_pxl;
-wire [ 3:0] dbg_obj_pxl;
 wire        show_fix_en;
+wire        show_fix_src;
+wire        colmix_fix_src;
 
 assign obj_lut_we = prom_we && prog_addr >= OBJ_OFFSET && prog_addr < OBJ_OFFSET+22'h100;
 assign char_lut_we = prom_we && prog_addr >= CHR_OFFSET && prog_addr < CHR_OFFSET+22'h100;
@@ -133,29 +133,27 @@ assign dbg_show_fix =
 `ifdef MZONE_HIDE_FIX
     1'b0;
 `else
-    1'b1;
+    gfx_en[1];
 `endif
 assign dbg_show_scroll =
 `ifdef MZONE_HIDE_SCROLL
     1'b0;
 `else
-    1'b1;
+    gfx_en[0];
 `endif
 assign dbg_show_obj =
 `ifdef MZONE_HIDE_OBJ
     1'b0;
 `else
-    1'b1;
+    gfx_en[3];
 `endif
 `endif
-assign dbg_fix_pxl    = dbg_show_fix    ? fix_pxl : 4'd0;
-assign dbg_scr_pxl    = dbg_show_scroll ? scr_pxl : 4'd0;
-assign dbg_obj_pxl    = dbg_show_obj    ? obj_pxl : 4'd0;
 assign show_fix_en    = dbg_show_fix && fix_en;
+assign show_fix_src   = dbg_show_fix && fix_src;
 `ifdef MZONE_ONLY_FIX
-assign char_pxl       = dbg_fix_pxl;
+assign colmix_fix_src = 1'b1;
 `else
-assign char_pxl       = show_fix_en ? dbg_fix_pxl : dbg_scr_pxl;
+assign colmix_fix_src = show_fix_src;
 `endif
 
 function [7:0] pcb_hcnt;
@@ -235,6 +233,7 @@ jtmzone_fix u_fix(
     .rom_addr   ( fixrom_addr     ),
     .rom_cs     ( fixrom_cs       ),
     .pxl        ( fix_pxl         ),
+    .fix_src    ( fix_src         ),
     .fix_en     ( fix_en          )
 );
 
@@ -263,9 +262,12 @@ jtmzone_colmix u_colmix(
     .rst        ( rst        ),
     .clk        ( clk        ),
     .pxl_cen    ( pxl_cen    ),
-    .scr_pxl    ( char_pxl   ),
-    .obj_pxl    ( dbg_obj_pxl    ),
-    .fix_en     ( show_fix_en    ),
+    .scr_pxl    ( scr_pxl        ),
+    .fix_pxl    ( fix_pxl        ),
+    .obj_pxl    ( obj_pxl        ),
+    .gfx_en     ( {dbg_show_obj, 1'b0, dbg_show_fix, dbg_show_scroll} ),
+    .fix_src    ( colmix_fix_src ),
+    .fix_prio   ( show_fix_en    ),
     .flip       ( flip       ),
     .preLHBL    ( pre_lhbl   ),
     .preLVBL    ( pre_lvbl   ),
@@ -338,10 +340,10 @@ always @(posedge clk) begin
             vdump <= `MZONE_POINT_Y1 ) begin
             video_point_hdump_s = hdump;
             video_point_vdump_s = vdump;
-            $strobe("MZONE_POINT_VIDEO frame=%0d hdump=%0d vdump=%0d red=%x green=%x blue=%x LHBL=%b LVBL=%b pre_lhbl=%b pre_lvbl=%b scr_pxl=%x fix_pxl=%x char_pxl=%x fix_en=%b",
+            $strobe("MZONE_POINT_VIDEO frame=%0d hdump=%0d vdump=%0d red=%x green=%x blue=%x LHBL=%b LVBL=%b pre_lhbl=%b pre_lvbl=%b scr_pxl=%x fix_pxl=%x fix_src=%b fix_en=%b",
                 video_point_frame, video_point_hdump_s, video_point_vdump_s, red, green, blue,
                 LHBL, LVBL, pre_lhbl, pre_lvbl, scr_pxl, fix_pxl,
-                char_pxl, fix_en);
+                fix_src, fix_en);
         end
     end
 end

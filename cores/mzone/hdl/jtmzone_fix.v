@@ -35,6 +35,7 @@ module jtmzone_fix #(
     input               rom_ok,
 
     output       [ 3:0] pxl,
+    output              fix_src,
     output              fix_en
 );
 
@@ -43,6 +44,8 @@ localparam [8:0] HTOTAL         = 9'd384;
 localparam [8:0] FIX_WIDTH      = 9'd48;
 localparam [8:0] FIX_FLIP_START = HVISIBLE-FIX_WIDTH;
 localparam [8:0] FIX_LEAD       = 9'd8;
+localparam [8:0] FIX_PRIO_END   = 9'd47;
+localparam [8:0] FIX_SRC_END    = 9'd48;
 localparam [2:0] RD_PHASE       = 3'd7;
 localparam [2:0] FETCH_PHASE    = 3'd0;
 // A row loaded on phase 4 becomes glyph bits on the next pixel and reaches
@@ -78,8 +81,14 @@ wire        fetch_tile = h_eff[2:0] == FETCH_PHASE;
 wire [ 3:0] pxl_raw = cur_hf ? pxl_data[3:0] : pxl_data[31:28];
 wire [ 3:0] color_raw = cur_pal;
 wire [ 7:0] pal_addr = { color_raw, pxl_raw[0], pxl_raw[1], pxl_raw[2], pxl_raw[3] };
-wire        fix_en_pre = flip ? hdump >= FIX_FLIP_START && hdump < HVISIBLE :
-                                hdump >= HVISIBLE || hdump < FIX_WIDTH;
+// On the PCB's non-flipped boundary, FIX remains the character source for one
+// pixel after its forced priority ends. Both controls traverse the same pixel
+// pipeline: priority is active through raw hdump 46, while source selection is
+// active through raw hdump 47. Keep the established flipped window unchanged.
+wire        fix_en_pre  = flip ? hdump >= FIX_FLIP_START && hdump < HVISIBLE :
+                                 hdump >= HVISIBLE || hdump < FIX_PRIO_END;
+wire        fix_src_pre = flip ? hdump >= FIX_FLIP_START && hdump < HVISIBLE :
+                                 hdump >= HVISIBLE || hdump < FIX_SRC_END;
 
 `ifdef MZONE_FIX_WATCH
 reg [15:0] watch_frame;
@@ -109,6 +118,13 @@ jtframe_sh #(.W(1),.L(FIX_EN_DLY)) u_fix_en_dly(
     .clk_en ( pxl_cen    ),
     .din    ( fix_en_pre ),
     .drop   ( fix_en     )
+);
+
+jtframe_sh #(.W(1),.L(FIX_EN_DLY)) u_fix_src_dly(
+    .clk    ( clk         ),
+    .clk_en ( pxl_cen     ),
+    .din    ( fix_src_pre ),
+    .drop   ( fix_src     )
 );
 
 function [31:0] decode_row;

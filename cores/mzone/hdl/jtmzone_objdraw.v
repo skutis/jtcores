@@ -40,6 +40,9 @@ module jtmzone_objdraw(
 // settle within one four-master-clock pixel period.
 localparam [8:0] HOFFSET      = 9'd54;
 localparam [8:0] HOFFSET_FLIP = 9'd6;
+localparam [7:0] PCB_RD_ORIGIN      = 8'd9;
+localparam [7:0] PCB_RD_ORIGIN_FLIP = 8'd13;
+localparam [7:0] RAM_RD_PHASE  = 8'd1;
 
 reg [ 1:0] dr_st;
 reg [31:0] pxl_data;
@@ -71,10 +74,16 @@ wire [8:0] hoffset = flip ? HOFFSET_FLIP : HOFFSET;
 // Read the 240 visible object addresses. The delayed buffer output continues
 // to drain after the final read pulse.
 wire [8:0] hread = hdump - hoffset;
-// Prime the synchronous line-buffer pipeline one pixel before address zero.
-// hread wraps to 9'h1ff here, selecting the unused byte address 8'hff.
-wire       buf_rd = pxl_cen && (hread==9'h1ff || hread<9'd240);
-wire [7:0] buf_rd_addr = hread[7:0];
+// The PCB starts its circular line-buffer display at address 9. The generic
+// synchronous RAM/output path adds one pixel of request-to-output phase, so
+// request one additional address ahead. Start the read-enable window two
+// pixels before the normal sequence, requesting circular addresses 8..9;
+// keep the established trailing boundary unchanged.
+wire       buf_rd = pxl_cen && (hread>=9'd510 || hread<9'd240);
+// Core counters run forward in both orientations; flip selects only the
+// PCB-observed circular starting address.
+wire [7:0] buf_rd_origin = flip ? PCB_RD_ORIGIN_FLIP : PCB_RD_ORIGIN;
+wire [7:0] buf_rd_addr = hread[7:0] + buf_rd_origin + RAM_RD_PHASE;
 
 // Match Road Fighter's synchronous object-PROM path.  The PROM result becomes
 // valid one master clock after {palette,pen}; delay its line-buffer write
@@ -85,7 +94,10 @@ always @(posedge clk) begin
         buf_wel <= 1'b0;
     end else begin
         buf_al  <= buf_a;
-        buf_wel <= buf_we && buf_a<8'd240;
+        // The physical object line buffer is 256 pixels wide. Sprites crossing
+        // address 255 wrap to address 0 before the 0..239 display window clips
+        // them, so writes must not be limited to the 240 displayed addresses.
+        buf_wel <= buf_we;
     end
 end
 

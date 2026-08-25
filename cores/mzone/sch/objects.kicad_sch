@@ -28757,7 +28757,7 @@
 	)
 	(symbol
 		(lib_id "konami:kicker_083")
-		(at 436.88 171.45 0)
+		(at 436.88 170.18 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -28766,7 +28766,7 @@
 		(fields_autoplaced yes)
 		(uuid "3cbc398f-1a71-46d2-b96d-9630ba414ed8")
 		(property "Reference" "U?"
-			(at 435.61 151.13 0)
+			(at 435.61 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28774,7 +28774,7 @@
 			)
 		)
 		(property "Value" "kicker_083"
-			(at 435.61 153.67 0)
+			(at 435.61 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28782,7 +28782,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 436.88 171.45 0)
+			(at 436.88 170.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28791,7 +28791,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 436.88 171.45 0)
+			(at 436.88 170.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28800,7 +28800,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 436.88 171.45 0)
+			(at 436.88 170.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)

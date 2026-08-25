@@ -18,8 +18,11 @@ module jtmzone_colmix(
     input               pxl_cen,
 
     input         [3:0] scr_pxl,
+    input         [3:0] fix_pxl,
     input         [3:0] obj_pxl,
-    input               fix_en,
+    input         [3:0] gfx_en,
+    input               fix_src,
+    input               fix_prio,
     input               flip,
     input               preLHBL,
     input               preLVBL,
@@ -49,9 +52,12 @@ wire [ 3:0] red_raw, green_raw, blue_raw;
 wire [11:0] raw, rgb;
 wire        pal_we;
 wire [ 3:0] red_blank, green_blank, blue_blank;
-wire        obj_en = obj_pxl != 4'd0 && !fix_en;
-wire        pal_a4 = !obj_en;
-wire [ 4:0] pal_mux = { pal_a4, obj_en ? obj_pxl : scr_pxl };
+wire [ 3:0] scr_mux_pxl = gfx_en[0] ? scr_pxl : 4'd0;
+wire [ 3:0] fix_mux_pxl = gfx_en[1] ? fix_pxl : 4'd0;
+wire [ 3:0] char_pxl = fix_src && gfx_en[1] ? fix_mux_pxl : scr_mux_pxl;
+wire        obj_opaque = gfx_en[3] && obj_pxl != 4'd0 && !fix_prio;
+wire        pal_a4 = !obj_opaque;
+wire [ 4:0] pal_mux = { pal_a4, obj_opaque ? obj_pxl : char_pxl };
 reg  [ 4:0] pal_mux_r;
 wire [ 8:0] hdump_debug = hdump;
 wire [ 8:0] vdump_debug = vdump;
@@ -169,7 +175,7 @@ always @(posedge clk) begin
             hdump >= `MZONE_COLMIX_X0 && hdump <= `MZONE_COLMIX_X1 &&
             vdump >= `MZONE_COLMIX_Y0 && vdump <= `MZONE_COLMIX_Y1 ) begin
             $display("MZONE_COLMIX frame=%0d x=%0d y=%0d obj_en=%b fix=%b obj_pxl=%x char_in=%x char_pxl=%x pal_mux=%02x prom=%02x rgb=%x%x%x",
-                frame_cnt, hdump, vdump, obj_en, fix_en, obj_pxl, scr_pxl, scr_pxl,
+                frame_cnt, hdump, vdump, obj_opaque, fix_prio, obj_pxl, char_pxl, char_pxl,
                 pal_mux_r, pal_prom_dout, red_raw, green_raw, blue_raw);
         end
 `endif
@@ -196,7 +202,7 @@ always @(posedge clk) begin
                 point_rgb_hdump_debug_s, point_rgb_vdump_debug_s,
                 point_raw_hdump_debug_s, point_raw_vdump_debug_s,
                 point_char_hdump_debug_s, point_char_vdump_debug_s,
-                obj_en, fix_en, fix_en, obj_pxl, scr_pxl, scr_pxl, pal_mux_r,
+                obj_opaque, fix_prio, fix_prio, obj_pxl, char_pxl, char_pxl, pal_mux_r,
                 pal_prom_dout, red_raw, green_raw, blue_raw,
                 red_blank, green_blank, blue_blank, red, green, blue,
                 preLHBL, preLVBL, LHBL, LVBL);
