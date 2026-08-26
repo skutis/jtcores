@@ -2,7 +2,7 @@
 
 This is a handoff note for continuing the MZONE work.
 
-## 2026-08-25 — Current flipped-OBJ experiment (authoritative)
+## 2026-08-26 — Current flipped-OBJ experiment (authoritative)
 
 The latest flipped simulation looks better after removing the core-side
 sprite-X mirror. Preserve the raw object-RAM X coordinate in both screen
@@ -45,15 +45,20 @@ line-buffer display timing/origins:
 
 ```verilog
 HOFFSET=54,      HOFFSET_FLIP=6
-PCB_RD_ORIGIN=9, PCB_RD_ORIGIN_FLIP=13
+PCB_RD_ORIGIN=9, PCB_RD_ORIGIN_FLIP=16
 RAM_RD_PHASE=1
 ```
+
+`PCB_RD_ORIGIN_FLIP=16` is an active experiment. Baseline was 13. Decreasing
+it to 10 moved the sprites three pixels in the wrong direction, so the current
+opposite-direction test increases it by three to 16. Non-flipped timing is
+unchanged.
 
 The read addresses advance forward in both modes. The physical line buffer is
 256 bytes and sprite writes may wrap through all 256 addresses. Display reads
 are gated to `hread=510,511,0..239`: two priming requests followed by the 240
 visible object pixels. In flipped mode these map to circular addresses
-`12,13,14..253` with the current origin and phase.
+`15,16,17..255,0` with the current origin and phase.
 
 ### PCB-test sprite-coordinate policy
 
@@ -63,9 +68,31 @@ coordinates are deliberate:
 
 - Balloons use the generator's calibrated `flipped_x()`/`flipped_y()` mapping.
 - White edge and middle sprites use separately calibrated raw coordinates.
-- The flipped sprite attribute toggle is zero in the standard build.
+- The flipped sprite attribute toggle is `$C0` in the standard build, so the
+  normal `$4E` attribute becomes `$8E` and reverses both local sprite
+  orientations while preserving palette `$E`. The separately calibrated
+  middle and X=`$FF` references also use `$8E`.
+- MAME decodes local OBJ orientation as `flipx=~attr[6]` and
+  `flipy=attr[7]`. Game software was observed changing orientation attributes
+  by `$C0` between normal and flipped play. `$C0` is an XOR mask, not the final
+  PCB-test attribute: `$4E ^ $C0 = $8E`.
+- Do not also XOR global `flip` into the core's local OBJ orientation based on
+  the game screenshots; that would double-flip sprites already adjusted by
+  software. A real-PCB A/B test using the same asymmetric sprite with `$4E`
+  and `$8E` is still the definitive way to prove whether the PCB adds another
+  global OBJ orientation transform.
 - The core must be corrected to match the real PCB; do not compensate by
   silently changing these test-ROM coordinates.
+
+The rebuilt artifacts are:
+
+```text
+tflip_standard_static_6h.bin
+SHA-256 7b71d7a7f1d8fe27c3100abfbbf7dfef7d6a88f64afcfee72122eb54665db295
+
+tflip_standard_static_6h_sim.rom
+SHA-256 4f34f9729c74e7fca400b700eee0325d77d5359c9cd3228f0453d6ff6ee0b6f6
+```
 
 ### Latest reproduction and artifacts
 
@@ -75,21 +102,31 @@ From `cores/mzone/ver/game`:
 source ../../env.sh
 MZONE_SOUND=1 \
 MZONE_ROM="$PWD/../pcb_test/tflip_standard_static_6h_sim.rom" \
-./sim.sh -video 6 -w -d JTFRAME_SIM_GFXEN=9
+./sim.sh -video 6 -w
 ```
 
-This enables SCROLL+OBJ and disables FIX for easier object comparison. The
-2026-08-25 run completed successfully after removing `240-x`:
+This runs SCROLL, FIX, and OBJ together. The 2026-08-26 run completed
+successfully with the rebuilt `$8E` sprite attributes and the active flipped
+read-origin experiment at 16:
 
 ```text
 cores/mzone/ver/game/frames/frame_00004.png
 cores/mzone/ver/game/test.fst
 ```
 
-The latest visual assessment was "looking better now." The next comparison
-should determine from PCB/FST evidence whether global flip must also be
-restored in the sprite-local `hflip`/`ysub` orientation logic. Change one
-mechanism at a time and keep the flipped ROM fixed.
+`test.fst` was fully read back with `fst2vcd` and is valid. Current hashes:
+
+```text
+test.fst
+SHA-256 5a2db81804571a4255498a6fb4ed613d93d6b56517522027239cf550612157c2
+
+frames/frame_00004.png
+SHA-256 053cff0291b97121b20b9f883cce303cb8ea778c87d3c043f4177288f70c507f
+```
+
+For flipped experiments, overwrite `test.fst` rather than renaming it so an
+open GTKWave session can reload the file without rebuilding its signal list.
+Keep the flipped ROM fixed while changing one core mechanism at a time.
 
 ## 2026-08-17 09:13:15 CEST — Real-PCB PicoROM program in 6H
 

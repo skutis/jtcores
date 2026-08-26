@@ -41,7 +41,7 @@ module jtmzone_objdraw(
 localparam [8:0] HOFFSET      = 9'd54;
 localparam [8:0] HOFFSET_FLIP = 9'd6;
 localparam [7:0] PCB_RD_ORIGIN      = 8'd9;
-localparam [7:0] PCB_RD_ORIGIN_FLIP = 8'd13;
+localparam [7:0] PCB_RD_ORIGIN_FLIP = 8'd16;
 localparam [7:0] RAM_RD_PHASE  = 8'd1;
 
 reg [ 1:0] dr_st;
