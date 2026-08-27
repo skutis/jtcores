@@ -26,16 +26,20 @@ WHITE_MIDDLE_ATTR = int(os.environ.get("MZONE_WHITE_MIDDLE_ATTR", "0x4E"), 0) & 
 FLIP_WHITE_X255 = os.environ.get("MZONE_FLIP_WHITE_X255") == "1"
 WHITE_TOP_Y = int(os.environ.get("MZONE_WHITE_TOP_Y", "0xA5"), 0) & 0xFF
 WHITE_EDGES = os.environ.get("MZONE_WHITE_EDGES") == "1"
-WHITE_EDGE_TOP_X = int(os.environ.get("MZONE_WHITE_EDGE_TOP_X", "0"), 0) & 0xFF
-FLIPPED_X_ADJUST = int(os.environ.get("MZONE_FLIPPED_X_ADJUST", "0"), 0)
 FLIPPED_Y_ADJUST = int(os.environ.get("MZONE_FLIPPED_Y_ADJUST", "0"), 0) & 0xFF
 FLIPPED_Y_MIRROR = os.environ.get("MZONE_FLIPPED_Y_MIRROR") == "1"
 FLIPPED_ATTR_TOGGLE = int(os.environ.get("MZONE_FLIPPED_ATTR_TOGGLE", "0"), 0) & 0xC0
 SCREEN_FLIP = 1 if os.environ.get("MZONE_SCREEN_FLIP") == "1" else 0
+
+
+def flipped_x(value):
+    return (251 - value) & 0xFF
+
+
 # PCB reference: white_top exposes one column at the FIX edge in either mode.
-# Its raw object-RAM X is 250 normally and 0 when the screen is flipped.
+# Apply the same 251-x transform used by every paired flipped sprite.
 WHITE_TOP_X = int(os.environ.get(
-    "MZONE_WHITE_TOP_X", "0" if SCREEN_FLIP else "250"
+    "MZONE_WHITE_TOP_X", str(flipped_x(250) if SCREEN_FLIP else 250)
 ), 0) & 0xFF
 SMOOTH_SCROLL = os.environ.get("MZONE_SMOOTH_SCROLL") == "1"
 CPU_SCROLL = os.environ.get("MZONE_CPU_SCROLL") == "1"
@@ -170,25 +174,21 @@ if SPRITE_X239:
 if SPRITE_X250:
     # A single named white reference; its raw X may differ with screen flip.
     obj[0:4] = bytes((0x4E, WHITE_TOP_Y, 0x44, WHITE_TOP_X))
+middle_x = flipped_x(WHITE_MIDDLE_X) if SCREEN_FLIP else WHITE_MIDDLE_X
 if WHITE_MIDDLE:
-    obj[16:20] = bytes((WHITE_MIDDLE_ATTR, WHITE_MIDDLE_Y, 0x44, WHITE_MIDDLE_X))
+    obj[16:20] = bytes((WHITE_MIDDLE_ATTR, WHITE_MIDDLE_Y, 0x44, middle_x))
 if FLIP_WHITE_X255:
     obj[20:24] = bytes((WHITE_MIDDLE_ATTR, WHITE_MIDDLE_Y, 0x44, 0xFF))
 if WHITE_EDGES:
-    # General PCB sprite conversion. white_middle is calibrated separately
-    # by the standard-test builder because it probes the wrapped edge.
+    # Apply one 251-x conversion to balloons and white reference sprites.
     flipped_attr = 0x4E ^ FLIPPED_ATTR_TOGGLE
     def flipped_y(value):
         base = 241 - value if FLIPPED_Y_MIRROR else value
         return (base + FLIPPED_Y_ADJUST) & 0xFF
-    def flipped_x(value):
-        return (250 - value + FLIPPED_X_ADJUST) & 0xFF
     obj[0:4] = bytes((flipped_attr, flipped_y(0xC5), 0xAA, flipped_x(0x00)))
     obj[4:8] = bytes((flipped_attr, flipped_y(0xC5), 0xAA, flipped_x(0x10)))
-    # The two white edge probes are calibrated at the 8-bit wrap boundary;
-    # keep their PCB-observed raw positions independent of the balloon offset.
-    obj[8:12] = bytes((flipped_attr, flipped_y(0xC5), 0x44, 0x02))
-    obj[12:16] = bytes((flipped_attr, flipped_y(0xA5), 0x44, WHITE_EDGE_TOP_X))
+    obj[8:12] = bytes((flipped_attr, flipped_y(0xC5), 0x44, flipped_x(0xF8)))
+    obj[12:16] = bytes((flipped_attr, flipped_y(0xA5), 0x44, flipped_x(0xFA)))
 
 # Match the regular diagnostic layout. Stock tile $3F is solid pen $F. With
 # the unmodified physical lookup/palette PROMs, CRAM $09 maps it to blue and
@@ -396,19 +396,19 @@ if SPRITE_X250:
     print(f"white_top sprite: attr=$4E, ypos=${WHITE_TOP_Y:02X}, code=$44, xpos=${WHITE_TOP_X:02X} ({WHITE_TOP_X})")
 if WHITE_MIDDLE:
     middle_vdump = (255 - ((WHITE_MIDDLE_Y + 16) & 0xFF)) & 0xFF
-    middle_hdump = (WHITE_MIDDLE_X + 32) & 0xFF
-    print(f"white_middle sprite: attr=${WHITE_MIDDLE_ATTR:02X}, ypos=${WHITE_MIDDLE_Y:02X}, code=$44, xpos=${WHITE_MIDDLE_X:02X} (screen near hdump={middle_hdump}, vdump={middle_vdump})")
+    middle_hdump = ((middle_x - 11) if SCREEN_FLIP else (middle_x + 32)) & 0xFF
+    print(f"white_middle sprite: attr=${WHITE_MIDDLE_ATTR:02X}, ypos=${WHITE_MIDDLE_Y:02X}, code=$44, xpos=${middle_x:02X} (screen near hdump={middle_hdump}, vdump={middle_vdump})")
 if FLIP_WHITE_X255:
     print(f"white_flip_x255 sprite: attr=${WHITE_MIDDLE_ATTR:02X}, ypos=${WHITE_MIDDLE_Y:02X}, code=$44, xpos=$FF (255)")
 if WHITE_EDGES:
-    print(f"Flipped sprite raw-X adjustment: {FLIPPED_X_ADJUST:+d}")
+    print("Flipped sprite raw-X transform: 251-x")
     print(f"Flipped sprite raw-Y mirror: {FLIPPED_Y_MIRROR}")
     print(f"Flipped sprite raw-Y adjustment: +{FLIPPED_Y_ADJUST}")
     print(f"Flipped sprite attribute: ${flipped_attr:02X}")
     print(f"Balloon 0 flipped reference: ypos=${flipped_y(0xC5):02X}, code=$AA, xpos=${flipped_x(0x00):02X} ({flipped_x(0x00)})")
     print(f"Balloon 1 flipped reference: ypos=${flipped_y(0xC5):02X}, code=$AA, xpos=${flipped_x(0x10):02X} ({flipped_x(0x10)})")
-    print(f"white_top sprite: ypos=${flipped_y(0xA5):02X}, code=$44, xpos=${WHITE_EDGE_TOP_X:02X} ({WHITE_EDGE_TOP_X})")
-    print(f"white_bottom sprite: ypos=${flipped_y(0xC5):02X}, code=$44, xpos=$02 (2)")
+    print(f"white_top sprite: ypos=${flipped_y(0xA5):02X}, code=$44, xpos=${flipped_x(0xFA):02X} ({flipped_x(0xFA)})")
+    print(f"white_bottom sprite: ypos=${flipped_y(0xC5):02X}, code=$44, xpos=${flipped_x(0xF8):02X} ({flipped_x(0xF8)})")
 
 sim_rom = bytearray(SOURCE_ROM.read_bytes())
 if len(sim_rom) < BASE + SIZE:

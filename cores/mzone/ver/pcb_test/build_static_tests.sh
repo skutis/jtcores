@@ -18,20 +18,18 @@ MZONE_WHITE_MIDDLE_Y=0xE0 \
 MZONE_SCREEN_FLIP=0 \
     python3 make_pcb_testrom_6h.py
 
-# Exact flipped counterpart. PCB-confirmed X conversion is
-# General mapping: Xflip=(250-Xnormal), Yflip=(241-Ynormal), modulo 256.
+# Exact flipped counterpart. Use Xflip=(251-Xnormal) for every paired sprite
+# and Yflip=(241-Ynormal), modulo 256.
 MZONE_GRID_NAME=tflip_standard_static \
 MZONE_GRID_SCROLLY=0 \
 MZONE_RED_FIX_BOX=1 \
 MZONE_YELLOW_FIX_BOX=1 \
 MZONE_WHITE_EDGES=1 \
-MZONE_WHITE_EDGE_TOP_X=0 \
-MZONE_FLIPPED_X_ADJUST=1 \
 MZONE_FLIPPED_Y_MIRROR=1 \
 MZONE_FLIPPED_Y_ADJUST=1 \
 MZONE_FLIPPED_ATTR_TOGGLE=0xC0 \
 MZONE_WHITE_MIDDLE=1 \
-MZONE_WHITE_MIDDLE_X=0x81 \
+MZONE_WHITE_MIDDLE_X=0x7A \
 MZONE_WHITE_MIDDLE_Y=0x12 \
 MZONE_WHITE_MIDDLE_ATTR=0x8E \
 MZONE_FLIP_WHITE_X255=1 \
