@@ -2,6 +2,150 @@
 
 This is a handoff note for continuing the MZONE work.
 
+## 2026-08-27 23:18:40 CEST — FIX boundary and non-flipped OBJ timing (authoritative)
+
+This section supersedes the earlier FIX-boundary and non-flipped OBJ timing
+experiments below. The worktree is based on pulled commit `1c5436a7f` and has
+two active HDL modifications:
+
+```text
+M cores/mzone/hdl/jtmzone_fix.v
+M cores/mzone/hdl/jtmzone_objdraw.v
+```
+
+### Active FIX source experiment
+
+Keep the proven FIX tile-map and fetch pipeline unchanged:
+
+```verilog
+FIX_LEAD     = 8
+FIX_SRC_END  = 48
+FIX_EN_DLY   = 6
+RD_PHASE     = 7
+FETCH_PHASE  = 0
+LOAD_PHASE   = 4
+```
+
+The only active FIX change is that source selection reaches the mixer one
+pixel before priority:
+
+```verilog
+jtframe_sh #(.W(1),.L(FIX_EN_DLY-1)) u_fix_src_dly(
+    .clk    ( clk         ),
+    .clk_en ( pxl_cen     ),
+    .din    ( fix_src_pre ),
+    .drop   ( fix_src     )
+);
+```
+
+`fix_en` remains delayed by the full `FIX_EN_DLY=6`. This is the current
+one-pixel experiment for removing the extra white FIX column observed at
+screen `hdump=48` while preserving FIX pixel 47 and complete characters.
+Do not change tile-map addressing or `FIX_LEAD` based only on this boundary.
+
+Waveform evidence from the baseline six-cycle `fix_src` delay showed that the
+white column at mixer `hdump=48` came from FIX, not SCROLL. On an affected row:
+
+```text
+fix_src=1, fix_pxl=$F, scr_pxl=$0, char_pxl=$F
+```
+
+### Rejected FIX experiments
+
+- Setting `FIX_SRC_END=47` excluded FIX pixel 47. Only occasional pipeline
+  remnants remained at tile-row transitions such as `vdump=31/32` and
+  `63/64`.
+- Driving `fix_src` directly from `fix_src_pre` cut off the final FIX
+  character; only its first two pixels were visible.
+- Changing `FIX_LEAD` from 8 to 14 moved FIX about six pixels late.
+- Changing `FIX_LEAD` from 8 to 2 produced six garbage/wrong-tile pixels at
+  the start of FIX.
+- Separating a `phase_eff=h_eff+6` counter for read/fetch/load while using a
+  direct `fix_src` moved FIX about six pixels early.
+
+These results reinforce the project rule that FIX tile-map addressing must be
+kept separate from output/source timing. The active one-pixel `fix_src` delay
+change leaves the tile-map/fetch pipeline untouched.
+
+### Active non-flipped OBJ correction
+
+In `hdl/jtmzone_objdraw.v`:
+
+```verilog
+PCB_RD_ORIGIN      = 8
+PCB_RD_ORIGIN_FLIP = 17
+```
+
+The pulled core used non-flipped origin 9. PCB/simulation comparison showed
+the sprite one pixel closer to the origin, so the current experiment changes
+only the non-flipped origin to 8. The flipped origin remains the pulled value
+17. `BLANK_DLY` in `jtmzone_colmix.v` remains 9; reverting it to 8 moved FIX
+vertically by one pixel and was rejected.
+
+### Focused test ROM currently in use
+
+The focused test is now preserved by:
+
+```text
+cores/mzone/ver/pcb_test/make_fix_boundary_test.py
+```
+
+It derives from tracked `tboundary_scrollff` and generates:
+
+```text
+cores/mzone/ver/pcb_test/tfix_boundary_6h.bin
+cores/mzone/ver/pcb_test/tfix_boundary_6h_sim.rom
+```
+
+It retains scroll register `$FF`, the alphanumeric SCROLL boundary pattern,
+the boundary balloon, and the restored final SCROLL grid column. Additional
+FIX probes are:
+
+```text
+vdump 16..23, hdump  0..7  : tile $07, attribute $0F at $2440/$2C40
+vdump 16..23, hdump 40..47 : tile $07, attribute $0F at $2445/$2C45
+vdump 24..31, hdump  0..47 : blue/yellow/blue repeated twice
+blue  = tile $31, attribute $0D
+yellow= tile $34, attribute $0E
+```
+
+The exact saved artifact hashes are:
+
+```text
+0975cb1fd16529d145f896585b8222c1c57a341f33639c50858ce21340a5c8b2  tfix_boundary_6h.bin
+92f77e9afdd7f2c197a49f4823700ec6e35f5ad1c1d6c27bec78c089e26903e9  tfix_boundary_6h_sim.rom
+```
+
+The byte-identical temporary PCB `.bin` was uploaded to PicoROM `mzone-6h`.
+Regenerate the saved artifacts from `ver/pcb_test` with:
+
+```bash
+python3 make_fix_boundary_test.py
+```
+
+The latest simulation used sound, six video frames, and waveform output:
+
+```bash
+source ../../env.sh
+MZONE_SOUND=1 \
+MZONE_ROM="$PWD/../pcb_test/tfix_boundary_6h_sim.rom" \
+./sim.sh -video 6 -w
+```
+
+Latest outputs:
+
+```text
+test.fst
+SHA-256 b0242fbdaf1db8bd39e2e76427b63bcebb6a269986e3329eac46b9983132805d
+
+frames/frame_00004.png
+SHA-256 0698af7be7be1b87d2e60589c6a5b3e73e5f323f170c106af819f5a01b8b8ed1
+```
+
+The simulation completed successfully. The next decision should be based on
+visual comparison of this active five-cycle `fix_src` delay against the PCB,
+especially FIX pixel 47 and the first SCROLL pixel at the boundary.
+
 ## 2026-08-26 — Current flipped-OBJ experiment (authoritative)
 
 The latest flipped simulation looks better after removing the core-side

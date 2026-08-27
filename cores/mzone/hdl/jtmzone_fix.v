@@ -120,7 +120,9 @@ jtframe_sh #(.W(1),.L(FIX_EN_DLY)) u_fix_en_dly(
     .drop   ( fix_en     )
 );
 
-jtframe_sh #(.W(1),.L(FIX_EN_DLY)) u_fix_src_dly(
+// Source selection reaches the mixer one pixel before the separately delayed
+// FIX priority signal, removing the single FIX column at the SCROLL boundary.
+jtframe_sh #(.W(1),.L(FIX_EN_DLY-1)) u_fix_src_dly(
     .clk    ( clk         ),
     .clk_en ( pxl_cen     ),
     .din    ( fix_src_pre ),
