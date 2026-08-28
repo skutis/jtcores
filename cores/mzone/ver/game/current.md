@@ -161,24 +161,27 @@ Repository:
 
 `/home/skutis77/github/gate_arrays`
 
-Current clean commit:
+Base commit (the gate-array tree now has the flip-address edit described
+below):
 
 ```text
 8a711fe428a853dbee99d85b7e1d9255178480d7  mzone core
 ```
 
 In `mzone/mzone.v`, TA now updates immediately when ODD becomes active and
-holds the odd master. The LS273 captures TA on rising `H1'`:
+holds the phase master. The master is odd normally and even when `flip` is
+active because `hcount` contains the flipped H1 bit. The LS273 captures TA on
+rising `H1'`, and the implied address is always one less than the master:
 
 ```verilog
 always @(negedge h1_n or negedge clr_n) begin
     if (!clr_n)
-        TA_ODD <= 8'h00;
+        TA_MASTER <= 8'h00;
     else
-        TA_ODD <= hcount;
+        TA_MASTER <= hcount;
 end
 
-assign TA = !clr_n ? 8'h00 : TA_ODD;
+assign TA = !clr_n ? 8'h00 : TA_MASTER;
 
 always @(posedge h1_n or negedge clr_n) begin
     if (!clr_n)
@@ -186,11 +189,16 @@ always @(posedge h1_n or negedge clr_n) begin
     else
         TCHA <= #TPD_LS273 TA;
 end
+
+assign TCHA_IMPLIED = TCHA_D1 - 8'd1;
+assign #TPD_LS157 TCHD2_MUX =
+    (h1_n ^ flip) ? TCHD2 : TCHA_IMPLIED;
 ```
 
 `make all` passed. Waveform observation: when ODD became active,
 `h1_n=0`, `hcount=3`, and `TA=3`; after rising `H1'` plus the LS273 delay,
-`TCHA=3`.
+`TCHA=3`. With flip active, TA sampled even master `$D6`; after the SRAM stage,
+`TCHA_D1=$D6` and `TCHA_IMPLIED=$D5`.
 
 ## Working-tree caution
 
