@@ -91,6 +91,24 @@ def copy_1k(pc, source, destination):
     return pc
 
 
+def fill_1k(pc, destination, value):
+    """Fill 1 KiB using four 256-byte loops."""
+    pc = ldx_imm(pc, destination)
+    pc = lda_imm(pc, value)
+    for _ in range(4):
+        pc = ldb_imm(pc, 0)
+        loop = pc
+        op(pc, 0xA7)       # sta ,x+
+        put(pc + 1, 0x80)
+        pc += 2
+        op(pc, 0x5A)       # decb
+        pc += 1
+        op(pc, 0x26)       # bne loop
+        put(pc + 1, loop - (pc + 2))
+        pc += 2
+    return pc
+
+
 captures = (
     ("vram0.bin", 0x2000),
     ("vram1.bin", 0x2400),
@@ -115,13 +133,22 @@ op(pc + 1, 0xCE)
 put(pc + 2, 0x3F, 0xFF)
 pc += 4
 
+# Keep both character layers opaque black while the captured VRAM/CRAM blocks
+# are copied.
+pc = fill_1k(pc, 0x2400, 0x10)
+pc = fill_1k(pc, 0x2000, 0x10)
+
 pc = lda_imm(pc, SCROLLY)
 pc = sta_ext(pc, 0x1000)   # horizontal source offset
 pc = lda_imm(pc, 0)
 pc = sta_ext(pc, 0x1800)   # scrollx = 0
 pc = sta_ext(pc, 0x0005)   # flip = 0
 
-for source, destination in sources:
+# Load each layer's attributes behind the opaque-black tile before replacing
+# its VRAM. This prevents captured tiles appearing with reset attributes.
+copy_order = (3, 1, 2, 0, 4)  # FIX CRAM/VRAM, SCROLL CRAM/VRAM, OBJ
+for index in copy_order:
+    source, destination = sources[index]
     pc = copy_1k(pc, source, destination)
 
 watchdog_loop = pc

@@ -52,6 +52,7 @@ localparam [2:0] FETCH_PHASE    = 3'd0;
 // colmix after the character palette. This effective delay is what the
 // colmix blanking delay must match.
 localparam [2:0] LOAD_PHASE     = 3'd4;
+localparam       FIX_ADDR_COLMIX_DLY = 6;
 
 reg  [31:0] pxl_data;
 reg  [ 9:0] ram_addr;
@@ -89,6 +90,7 @@ wire        fix_en_pre  = flip ? hdump >= FIX_FLIP_START && hdump < HVISIBLE :
                                  hdump >= HVISIBLE || hdump < FIX_PRIO_END;
 wire        fix_src_pre = flip ? hdump >= FIX_FLIP_START && hdump < HVISIBLE :
                                  hdump >= HVISIBLE || hdump < FIX_SRC_END;
+wire [ 4:0] dbg_fix_addr_colmix /* verilator public_flat */;
 
 `ifdef MZONE_FIX_WATCH
 reg [15:0] watch_frame;
@@ -113,6 +115,14 @@ wire       rom_ready_now = rom_req_ready || rom_req_match;
 
 assign rom_decoded_row = decode_row(rom_data);
 
+// Debug-only reference: tile-map address at the color-mixer input phase.
+jtframe_sh #(.W(5),.L(FIX_ADDR_COLMIX_DLY)) u_dbg_fix_addr_colmix(
+    .clk    ( clk                 ),
+    .clk_en ( pxl_cen             ),
+    .din    ( ram_addr[4:0]       ),
+    .drop   ( dbg_fix_addr_colmix )
+);
+
 jtframe_sh #(.W(1),.L(FIX_EN_DLY)) u_fix_en_dly(
     .clk    ( clk        ),
     .clk_en ( pxl_cen    ),
@@ -120,9 +130,10 @@ jtframe_sh #(.W(1),.L(FIX_EN_DLY)) u_fix_en_dly(
     .drop   ( fix_en     )
 );
 
-// Source selection reaches the mixer one pixel before the separately delayed
-// FIX priority signal, removing the single FIX column at the SCROLL boundary.
-jtframe_sh #(.W(1),.L(FIX_EN_DLY-1)) u_fix_src_dly(
+// FIX remains the character source for one pixel after its forced priority
+// ends. Delay both controls equally so the one-pixel-wide pre-window
+// difference is preserved at the color mixer.
+jtframe_sh #(.W(1),.L(FIX_EN_DLY)) u_fix_src_dly(
     .clk    ( clk         ),
     .clk_en ( pxl_cen     ),
     .din    ( fix_src_pre ),

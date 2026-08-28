@@ -4875,7 +4875,7 @@
 		)
 		(uuid "276346b1-3d9c-4dc7-ac1c-5c7eb1bb17a9")
 	)
-	(text "- From FIX layer the two last pixels are lost due to CFIX.\n  CFIX is active to HCNT 19. The sequence is 46,47,16,17,18,19,20.."
+	(text "In non-flipped screen FIX is active from HCNT 0:47. It has priority\nover the other layers from HCNT 0:46, the last pixel can be overridden\nby OBJ layer, since CFIX goes inactive at HCNT 47.\n\nLikewise with flipped screen, when HCNT is counting down from 255 after HBLK going\ninactive, the three first pixels in FIX layer (HCNT 45:43) can be overridden by sprites."
 		(exclude_from_sim no)
 		(at 192.405 186.055 0)
 		(effects
