@@ -66,7 +66,8 @@ module jtmzone_video(
     output       [ 8:0] vrender
 );
 
-localparam [8:0] HVISIBLE = 9'd288;
+// PCB measurement: 384 total pixels, 287 active and 97 blanked.
+localparam [8:0] HVISIBLE = 9'd287;
 localparam [8:0] HTOTAL   = 9'd384;
 localparam [8:0] HB_END   = HTOTAL-9'd1;
 localparam [8:0] HB_START = HVISIBLE-9'd1;
@@ -285,6 +286,40 @@ jtmzone_colmix u_colmix(
     .dbg_pal_idx(           ),
     .dbg_obj_opaque(        )
 );
+
+`ifdef SIMULATION
+// Check the mixer-facing horizontal active width after all palette and
+// blanking delays. Ignore the partial line present when reset is released,
+// then validate every complete line at pixel-clock granularity.
+localparam [9:0] HACTIVE_EXPECTED = 10'd287;
+reg        hactive_lhbl_l;
+reg        hactive_armed;
+reg [ 9:0] hactive_count;
+always @(posedge clk) begin
+    if( rst ) begin
+        hactive_lhbl_l <= LHBL;
+        hactive_armed  <= 1'b0;
+        hactive_count  <= 10'd0;
+    end else if( pxl_cen ) begin
+        hactive_lhbl_l <= LHBL;
+        if( !hactive_lhbl_l && LHBL ) begin
+            hactive_armed <= 1'b1;
+            hactive_count <= 10'd1;
+        end else if( LHBL ) begin
+            hactive_count <= hactive_count + 10'd1;
+        end
+        if( hactive_lhbl_l && !LHBL ) begin
+            if( hactive_armed && hactive_count != HACTIVE_EXPECTED )
+                $error("MZONE_HACTIVE width=%0d expected=%0d vdump=%0d hdump=%0d",
+                    hactive_count, HACTIVE_EXPECTED, vdump, hdump);
+            if( hactive_armed && vdump == VVISIBLE )
+                $display("MZONE_HACTIVE width=%0d expected=%0d vdump=%0d hdump=%0d",
+                    hactive_count, HACTIVE_EXPECTED, vdump, hdump);
+            hactive_count <= 10'd0;
+        end
+    end
+end
+`endif
 
 `ifdef MZONE_FETCH_WATCH
 reg        fetch_watch_vs_l;

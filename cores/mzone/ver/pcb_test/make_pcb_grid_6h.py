@@ -12,6 +12,7 @@ SIZE = 0x2000
 DATA_BASE = 0xE400
 OUTPUT_NAME = os.environ.get("MZONE_GRID_NAME", "megazone_grid")
 SCROLLY = int(os.environ.get("MZONE_GRID_SCROLLY", "0"), 0) & 0xFF
+SCREEN_FLIP = 1 if os.environ.get("MZONE_SCREEN_FLIP") == "1" else 0
 OUT = HERE / f"{OUTPUT_NAME}_6h.bin"
 SIM_OUT = HERE / f"{OUTPUT_NAME}_6h_sim.rom"
 SOURCE_ROM = ROOT / "rom" / "megazone.rom"
@@ -142,7 +143,8 @@ pc = lda_imm(pc, SCROLLY)
 pc = sta_ext(pc, 0x1000)   # horizontal source offset
 pc = lda_imm(pc, 0)
 pc = sta_ext(pc, 0x1800)   # scrollx = 0
-pc = sta_ext(pc, 0x0005)   # flip = 0
+pc = lda_imm(pc, SCREEN_FLIP)
+pc = sta_ext(pc, 0x0005)   # screen flip latch
 
 # Load each layer's attributes behind the opaque-black tile before replacing
 # its VRAM. This prevents captured tiles appearing with reset attributes.
@@ -167,6 +169,7 @@ put(0xFFFE, 0xE0, 0x00)    # reset -> $E000
 OUT.write_bytes(rom)
 print(f"Wrote {OUT} ({len(rom)} bytes), program end ${pc:04X}")
 print(f"SCROLLY=${SCROLLY:02X} (visible SCROLL shift {-SCROLLY:d} px modulo 256)")
+print(f"Screen flip: {SCREEN_FLIP}")
 
 sim_rom = bytearray(SOURCE_ROM.read_bytes())
 if len(sim_rom) < BASE + SIZE:

@@ -2,13 +2,16 @@
 """Build the focused FIX/SCROLL boundary and OBJ-position comparison test."""
 
 from pathlib import Path
+import os
 
 
 HERE = Path(__file__).resolve().parent
-SOURCE_BIN = HERE / "tboundary_scrollff_6h.bin"
-SOURCE_SIM = HERE / "tboundary_scrollff_6h_sim.rom"
-OUT = HERE / "tfix_boundary_6h.bin"
-SIM_OUT = HERE / "tfix_boundary_6h_sim.rom"
+SOURCE_NAME = os.environ.get("MZONE_FIX_SOURCE", "tboundary_scrollff")
+OUTPUT_NAME = os.environ.get("MZONE_FIX_NAME", "tfix_boundary")
+SOURCE_BIN = HERE / f"{SOURCE_NAME}_6h.bin"
+SOURCE_SIM = HERE / f"{SOURCE_NAME}_6h_sim.rom"
+OUT = HERE / f"{OUTPUT_NAME}_6h.bin"
+SIM_OUT = HERE / f"{OUTPUT_NAME}_6h_sim.rom"
 
 rom = bytearray(SOURCE_BIN.read_bytes())
 
