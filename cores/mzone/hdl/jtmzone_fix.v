@@ -92,27 +92,6 @@ wire        fix_src_pre = flip ? hdump >= FIX_FLIP_START && hdump < HVISIBLE :
                                  hdump >= HVISIBLE || hdump < FIX_SRC_END;
 wire [ 4:0] dbg_fix_addr_colmix /* verilator public_flat */;
 
-`ifdef MZONE_FIX_WATCH
-reg [15:0] watch_frame;
-reg        watch_lvbl_l;
-wire       watch_lvbl = vdump >= 9'd16 && vdump < 9'd240;
-`endif
-
-`ifdef MZONE_ROM_MISS_WATCH_FIX
-reg [15:0] miss_frame;
-reg        miss_lvbl_l;
-reg        rom_req_pending;
-reg        rom_req_ready;
-reg [11:0] rom_req_addr;
-reg [ 8:0] rom_req_hdump;
-reg [ 8:0] rom_req_vdump;
-reg [ 7:0] rom_req_heff;
-reg [ 7:0] rom_req_veff;
-wire       miss_lvbl = vdump >= 9'd16 && vdump < 9'd240;
-wire       rom_req_match = rom_ok && rom_addr == rom_req_addr;
-wire       rom_ready_now = rom_req_ready || rom_req_match;
-`endif
-
 assign rom_decoded_row = decode_row(rom_data);
 
 // Debug-only reference: tile-map address at the color-mixer input phase.
@@ -203,34 +182,7 @@ always @(posedge clk) begin
         cur_pal <= 4'd0;
         hflip <= 1'b0;
         cur_hf <= 1'b0;
-`ifdef MZONE_FIX_WATCH
-        watch_frame <= 16'd0;
-        watch_lvbl_l <= 1'b0;
-`endif
-`ifdef MZONE_ROM_MISS_WATCH_FIX
-        miss_frame      <= 16'd0;
-        miss_lvbl_l     <= 1'b0;
-        rom_req_pending <= 1'b0;
-        rom_req_ready   <= 1'b0;
-        rom_req_addr    <= 12'd0;
-        rom_req_hdump   <= 9'd0;
-        rom_req_vdump   <= 9'd0;
-        rom_req_heff    <= 8'd0;
-        rom_req_veff    <= 8'd0;
-`endif
     end else if( pxl_cen ) begin
-`ifdef MZONE_FIX_WATCH
-        watch_lvbl_l <= watch_lvbl;
-        if( !watch_lvbl_l && watch_lvbl )
-            watch_frame <= watch_frame + 16'd1;
-`endif
-`ifdef MZONE_ROM_MISS_WATCH_FIX
-        miss_lvbl_l <= miss_lvbl;
-        if( !miss_lvbl_l && miss_lvbl )
-            miss_frame <= miss_frame + 16'd1;
-        if( rom_req_match )
-            rom_req_ready <= 1'b1;
-`endif
         if( read_tile )
             ram_addr <= { v_eff[7:3], h_eff[7:3] };
 
@@ -239,32 +191,11 @@ always @(posedge clk) begin
             rom_cs   <= 1'b1;
             pal_msb  <= cram[3:0];
             hflip    <= cram[6] ^ flip;
-`ifdef MZONE_ROM_MISS_WATCH_FIX
-            if( rom_req_pending && !rom_ready_now )
-                $display("MZONE_ROM_MISS_OVERWRITE layer=fix frame=%0d req_hdump=%0d req_vdump=%0d req_heff=%02x req_veff=%02x req_addr=%03x new_hdump=%0d new_vdump=%0d new_heff=%02x new_veff=%02x new_addr=%03x",
-                    miss_frame, rom_req_hdump, rom_req_vdump, rom_req_heff, rom_req_veff, rom_req_addr,
-                    hdump, vdump, h_eff, v_eff, tile_addr);
-            rom_req_pending <= 1'b1;
-            rom_req_ready   <= 1'b0;
-            rom_req_addr    <= tile_addr;
-            rom_req_hdump   <= hdump;
-            rom_req_vdump   <= vdump;
-            rom_req_heff    <= h_eff;
-            rom_req_veff    <= v_eff;
-`endif
         end else begin
             rom_cs <= 1'b0;
         end
 
         if( load_tile ) begin
-`ifdef MZONE_ROM_MISS_WATCH_FIX
-            if( rom_req_pending && !rom_ready_now )
-                $display("MZONE_ROM_MISS layer=fix frame=%0d load_hdump=%0d load_vdump=%0d load_heff=%02x load_veff=%02x req_hdump=%0d req_vdump=%0d req_heff=%02x req_veff=%02x req_addr=%03x cur_addr=%03x rom_ok=%b rom_data=%08x",
-                    miss_frame, hdump, vdump, h_eff, v_eff,
-                    rom_req_hdump, rom_req_vdump, rom_req_heff, rom_req_veff,
-                    rom_req_addr, rom_addr, rom_ok, rom_data);
-            rom_req_pending <= 1'b0;
-`endif
             pxl_data <= rom_decoded_row;
             cur_pal  <= pal_msb;
             cur_hf   <= hflip;
@@ -272,20 +203,6 @@ always @(posedge clk) begin
             pxl_data <= cur_hf ? pxl_data >> 4 : pxl_data << 4;
         end
 
-`ifdef MZONE_FIX_WATCH
-        if( watch_frame >= `MZONE_FIX_WATCH_FROM &&
-            watch_frame <= `MZONE_FIX_WATCH_TO &&
-            hdump >= `MZONE_FIX_WATCH_X0 &&
-            hdump <= `MZONE_FIX_WATCH_X1 &&
-            vdump >= `MZONE_FIX_WATCH_Y0 &&
-            vdump <= `MZONE_FIX_WATCH_Y1 ) begin
-            $display("MZONE_FIX frame=%0d hdump=%0d vdump=%0d hsum=%03x heff=%03x h_eff=%02x v_eff=%02x en=%b ram_addr=%03x read=%b fetch=%b load=%b rom_cs=%b rom_addr=%03x rom_ok=%b vram=%02x cram=%02x tile=%03x pal=%x cur_pal=%x sh=%08x pxl_raw=%x pxl=%x",
-                watch_frame, hdump, vdump, hsum, heff, h_eff, v_eff,
-                fix_en, ram_addr,
-                read_tile, fetch_tile, load_tile, rom_cs, rom_addr, rom_ok,
-                vram, cram, tile_addr, pal_msb, cur_pal, pxl_data, pxl_raw, pxl);
-        end
-`endif
     end
 end
 

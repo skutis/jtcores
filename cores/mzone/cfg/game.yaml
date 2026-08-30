@@ -8,9 +8,8 @@ game:
       - jtmzone_obj.v
       - jtmzone_objdraw.v
       - jtmzone_scroll.v
-      - jtmzone_fix_old.v
+      - jtmzone_fix.v
       - jtmzone_colmix.v
-      - jtmzone_video_debug.v
       # Planned local modules once schematic extraction reaches those blocks:
   - from: mzone
     unless: NOSOUND,MZONE_FAST_SOUND

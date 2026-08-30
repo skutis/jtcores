@@ -124,20 +124,9 @@ jtframe_blank #(.DLY(BLANK_DLY),.DW(12)) u_blank(
     .rgb_out    ( rgb      )
 );
 
-jtmzone_video_debug u_debug(
-    .rst        ( rst         ),
-    .clk        ( clk         ),
-    .pxl_cen    ( pxl_cen     ),
-    .LHBL       ( LHBL        ),
-    .LVBL       ( LVBL        ),
-    .flip       ( flip        ),
-    .red_in     ( red_blank   ),
-    .green_in   ( green_blank ),
-    .blue_in    ( blue_blank  ),
-    .red        ( red         ),
-    .green      ( green       ),
-    .blue       ( blue        )
-);
+assign red   = red_blank;
+assign green = green_blank;
+assign blue  = blue_blank;
 
 always @(posedge clk) begin
     if( rst ) begin

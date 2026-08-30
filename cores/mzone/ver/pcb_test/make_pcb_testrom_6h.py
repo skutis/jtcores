@@ -61,6 +61,9 @@ if IRQ_LATCH_ADDR not in range(0x0000, 0x0008):
 SCROLL_DIV = int(os.environ.get("MZONE_SCROLL_DIV", "1"), 0)
 if SCROLL_DIV < 1 or SCROLL_DIV > 256 or SCROLL_DIV & (SCROLL_DIV - 1):
     raise ValueError("MZONE_SCROLL_DIV must be a power of two from 1 to 256")
+SCROLL_RANGE = int(os.environ.get("MZONE_SCROLL_RANGE", "256"), 0)
+if SCROLL_RANGE < 1 or SCROLL_RANGE > 256 or SCROLL_RANGE & (SCROLL_RANGE - 1):
+    raise ValueError("MZONE_SCROLL_RANGE must be a power of two from 1 to 256")
 OUT = HERE / f"{OUTPUT_NAME}_6h.bin"
 SIM_OUT = HERE / f"{OUTPUT_NAME}_6h_sim.rom"
 SOURCE_ROM = ROOT / "rom" / "megazone.rom"
@@ -305,6 +308,10 @@ if SMOOTH_SCROLL:
     irq_pc = lda_ext(irq_pc, 0x3800)
     op(irq_pc, 0x4C if SCROLL_DIR == "inc" else 0x4A)  # inca/deca
     irq_pc += 1
+    if SCROLL_RANGE < 256:
+        op(irq_pc, 0x84)          # anda #(range-1): repeat fine-scroll cycle
+        put(irq_pc + 1, SCROLL_RANGE - 1)
+        irq_pc += 2
     irq_pc = sta_ext(irq_pc, 0x3800)
     if SCROLL_REG in ("1000", "both"):
         irq_pc = sta_ext(irq_pc, 0x1000)
@@ -376,7 +383,7 @@ print(f"Flip latch candidate address: ${FLIP_LATCH_ADDR:04X}")
 print(f"IRQ latch address: ${IRQ_LATCH_ADDR:04X}")
 print(f"IRQ latch write skipped: {SKIP_IRQ_LATCH}")
 if SMOOTH_SCROLL:
-    print(f"Smooth scroll register(s) {SCROLL_REG}: vertical-IRQ {SCROLL_DIR} every {SCROLL_DIV} frame(s), repeating forever")
+    print(f"Smooth scroll register(s) {SCROLL_REG}: vertical-IRQ {SCROLL_DIR} every {SCROLL_DIV} frame(s), {SCROLL_RANGE}-pixel cycle")
 if CPU_SCROLL:
     print("CPU-loop scroll register $1000: no INTST write, watchdog serviced continuously")
 if RED_FIX_BOX:
