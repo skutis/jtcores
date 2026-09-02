@@ -74,7 +74,7 @@ localparam [8:0] HB_START = HVISIBLE-9'd1;
 localparam [8:0] HS_START = 9'd319;
 localparam [8:0] HS_END   = 9'd351;
 localparam [8:0] H_VB     = H_VNEXT;
-localparam [8:0] H_VNEXT  = HTOTAL-9'd9;
+localparam [8:0] H_VNEXT  = HS_START;
 localparam [8:0] VB_START = 9'd240;
 localparam [8:0] VB_END   = 9'd015;
 localparam [8:0] VVISIBLE = 9'd016;
@@ -87,11 +87,7 @@ localparam [21:0] CHR_OFFSET = `ifdef JTFRAME_PROM_START `JTFRAME_PROM_START + 2
 wire        pre_lhbl, pre_lvbl, vt_lvbl, pre_hs, vt_vs;
 reg         pcb_vs;
 wire [ 7:0] hcnt;
-wire [ 8:0] tile_dbg_hcnt;
 wire [ 8:0] dbg_hdump_colmix = hdump - 9'd6;
-wire [11:0] tile_dbg_rom_addr;
-wire        tile_dbg_fix;
-wire [ 7:0] tile_dbg_scr_x, tile_dbg_pat_x, tile_dbg_scr_y, tile_dbg_pat_y;
 wire [ 3:0] scr_pxl;
 wire [ 3:0] fix_pxl;
 wire [ 3:0] obj_pxl;
@@ -201,14 +197,7 @@ jtmzone_scroll u_scroll(
     .scr_rom_ok  ( scrrom_ok      ),
     .scr_rom_addr( scrrom_addr    ),
     .scr_rom_cs  ( scrrom_cs      ),
-    .pxl        ( scr_pxl         ),
-    .dbg_hcnt   ( tile_dbg_hcnt   ),
-    .dbg_fix    ( tile_dbg_fix    ),
-    .dbg_rom_addr( tile_dbg_rom_addr ),
-    .dbg_scr_x  ( tile_dbg_scr_x  ),
-    .dbg_pat_x  ( tile_dbg_pat_x  ),
-    .dbg_scr_y  ( tile_dbg_scr_y  ),
-    .dbg_pat_y  ( tile_dbg_pat_y  )
+    .pxl        ( scr_pxl         )
 );
 
 jtmzone_fix u_fix(
@@ -316,37 +305,6 @@ always @(posedge clk) begin
                 $display("MZONE_HACTIVE width=%0d expected=%0d vdump=%0d hdump=%0d",
                     hactive_count, HACTIVE_EXPECTED, vdump, hdump);
             hactive_count <= 10'd0;
-        end
-    end
-end
-`endif
-
-`ifdef MZONE_FETCH_WATCH
-reg        fetch_watch_vs_l;
-reg [15:0] fetch_watch_frame;
-always @(posedge clk) begin
-    if( rst ) begin
-        fetch_watch_vs_l  <= 1'b0;
-        fetch_watch_frame <= 16'd0;
-    end else if( pxl_cen ) begin
-        fetch_watch_vs_l <= VS;
-        if( VS && !fetch_watch_vs_l ) fetch_watch_frame <= fetch_watch_frame + 16'd1;
-        if( fetch_watch_frame >= `MZONE_FETCH_WATCH_FROM &&
-            fetch_watch_frame <= `MZONE_FETCH_WATCH_TO &&
-            vdump >= `MZONE_FETCH_WATCH_V0 &&
-            vdump <= `MZONE_FETCH_WATCH_V1 &&
-            hdump >= `MZONE_FETCH_WATCH_X0 &&
-            hdump <= `MZONE_FETCH_WATCH_X1 &&
-            (tile_dbg_pat_x[2:0] == 3'd0 || tile_dbg_pat_x[2:0] == 3'd4) ) begin
-            $display("MZONE_FETCH frame=%0d hdump=%0d vdump=%0d hcnt=%0d phase=%0d use_fix=%b fix_en=%b tile_addr=%03x req_addr=%03x rom_ok=%b rom_data=%08x pat_x=%02x pat_y=%02x",
-                fetch_watch_frame, hdump, vdump, tile_dbg_hcnt,
-                tile_dbg_pat_x[2:0], tile_dbg_fix,
-                fix_en,
-                tile_dbg_rom_addr,
-                scrrom_addr,
-                scrrom_ok,
-                scrrom_data,
-                tile_dbg_pat_x, tile_dbg_pat_y);
         end
     end
 end
