@@ -22,12 +22,8 @@ module jtmzone_colmix(
     input         [3:0] obj_pxl,
     input         [3:0] gfx_en,
     input               fix_src,
-    input               fix_prio,
-    input               flip,
     input               preLHBL,
     input               preLVBL,
-    input         [8:0] hdump,
-    input         [8:0] vdump,
 
     input         [7:0] prog_data,
     input        [21:0] prog_addr,
@@ -38,9 +34,7 @@ module jtmzone_colmix(
     output        [3:0] blue,
     output              LHBL,
     output              LVBL,
-    output              preLBL,
-    output        [4:0] dbg_pal_idx,
-    output              dbg_obj_opaque
+    output              preLBL
 );
 
 localparam [21:0] PAL_OFFSET = `ifdef JTFRAME_PROM_START `JTFRAME_PROM_START + 22'h000 `else 22'h000 `endif;
@@ -53,43 +47,14 @@ wire [11:0] raw, rgb;
 wire        pal_we;
 wire [ 3:0] red_blank, green_blank, blue_blank;
 wire [ 3:0] scr_mux_pxl = gfx_en[0] ? scr_pxl : 4'd0;
-wire [ 3:0] fix_mux_pxl = gfx_en[1] ? fix_pxl : 4'd0;
-wire [ 3:0] char_pxl = fix_src && gfx_en[1] ? fix_mux_pxl : scr_mux_pxl;
-wire        obj_opaque = gfx_en[3] && obj_pxl != 4'd0 && !fix_prio;
+wire        fix_sel = fix_src && gfx_en[1];
+wire [ 3:0] char_pxl = fix_sel ? fix_pxl : scr_mux_pxl;
+wire        obj_opaque = gfx_en[3] && obj_pxl != 4'd0 && !fix_sel;
 wire        pal_a4 = !obj_opaque;
 wire [ 4:0] pal_mux = { pal_a4, obj_opaque ? obj_pxl : char_pxl };
 reg  [ 4:0] pal_mux_r;
-wire [ 8:0] hdump_debug = hdump;
-wire [ 8:0] vdump_debug = vdump;
-wire [ 8:0] rgb_hdump_debug = hdump;
-wire [ 8:0] rgb_vdump_debug = vdump;
-wire [ 8:0] char_hdump_debug = hdump;
-wire [ 8:0] char_vdump_debug = vdump;
-wire [ 8:0] raw_hdump_debug = hdump;
-wire [ 8:0] raw_vdump_debug = vdump;
-
-`ifdef MZONE_COLMIX_WATCH
-reg  [15:0] frame_cnt;
-reg         lvbl_l;
-`endif
-`ifdef MZONE_POINT_WATCH
-reg  [15:0] point_frame;
-reg         point_lvbl_l;
-reg  [ 8:0] point_hdump_s;
-reg  [ 8:0] point_vdump_s;
-reg  [ 8:0] point_hdump_debug_s;
-reg  [ 8:0] point_vdump_debug_s;
-reg  [ 8:0] point_rgb_hdump_debug_s;
-reg  [ 8:0] point_rgb_vdump_debug_s;
-reg  [ 8:0] point_raw_hdump_debug_s;
-reg  [ 8:0] point_raw_vdump_debug_s;
-reg  [ 8:0] point_char_hdump_debug_s;
-reg  [ 8:0] point_char_vdump_debug_s;
-`endif
 
 assign pal_addr = { 3'd0, pal_mux_r };
-assign dbg_pal_idx = pal_mux_r;
-assign dbg_obj_opaque = !pal_mux_r[4];
 assign red_raw   = rg_dac( pal_prom_dout[2:0] );
 assign green_raw = rg_dac( pal_prom_dout[5:3] );
 assign blue_raw  = b_dac ( pal_prom_dout[7:6] );
@@ -129,75 +94,10 @@ assign green = green_blank;
 assign blue  = blue_blank;
 
 always @(posedge clk) begin
-    if( rst ) begin
+    if( rst )
         pal_mux_r <= 5'd0;
-`ifdef MZONE_COLMIX_WATCH
-        frame_cnt <= 16'd0;
-        lvbl_l    <= 1'b0;
-`endif
-`ifdef MZONE_POINT_WATCH
-        point_frame  <= 16'd0;
-        point_lvbl_l <= 1'b0;
-        point_hdump_s = 9'd0;
-        point_vdump_s = 9'd0;
-        point_hdump_debug_s = 9'd0;
-        point_vdump_debug_s = 9'd0;
-        point_rgb_hdump_debug_s = 9'd0;
-        point_rgb_vdump_debug_s = 9'd0;
-        point_raw_hdump_debug_s = 9'd0;
-        point_raw_vdump_debug_s = 9'd0;
-        point_char_hdump_debug_s = 9'd0;
-        point_char_vdump_debug_s = 9'd0;
-`endif
-    end else if( pxl_cen ) begin
+    else if( pxl_cen )
         pal_mux_r <= pal_mux;
-`ifdef MZONE_COLMIX_WATCH
-        lvbl_l <= preLVBL;
-        if( preLVBL && !lvbl_l ) frame_cnt <= frame_cnt + 16'd1;
-`endif
-`ifdef MZONE_POINT_WATCH
-        point_lvbl_l <= preLVBL;
-        if( preLVBL && !point_lvbl_l ) point_frame <= point_frame + 16'd1;
-`endif
-`ifdef MZONE_COLMIX_WATCH
-        if( frame_cnt >= `MZONE_COLMIX_WATCH_FROM && frame_cnt <= `MZONE_COLMIX_WATCH_TO &&
-            hdump >= `MZONE_COLMIX_X0 && hdump <= `MZONE_COLMIX_X1 &&
-            vdump >= `MZONE_COLMIX_Y0 && vdump <= `MZONE_COLMIX_Y1 ) begin
-            $display("MZONE_COLMIX frame=%0d x=%0d y=%0d obj_en=%b fix=%b obj_pxl=%x char_in=%x char_pxl=%x pal_mux=%02x prom=%02x rgb=%x%x%x",
-                frame_cnt, hdump, vdump, obj_opaque, fix_prio, obj_pxl, char_pxl, char_pxl,
-                pal_mux_r, pal_prom_dout, red_raw, green_raw, blue_raw);
-        end
-`endif
-`ifdef MZONE_POINT_WATCH
-        if( point_frame >= `MZONE_POINT_FRAME0 &&
-            point_frame <= `MZONE_POINT_FRAME1 &&
-            hdump >= `MZONE_POINT_X0 &&
-            hdump <= `MZONE_POINT_X1 &&
-            vdump >= `MZONE_POINT_Y0 &&
-            vdump <= `MZONE_POINT_Y1 ) begin
-            point_hdump_s = hdump;
-            point_vdump_s = vdump;
-            point_hdump_debug_s = hdump_debug;
-            point_vdump_debug_s = vdump_debug;
-            point_rgb_hdump_debug_s = rgb_hdump_debug;
-            point_rgb_vdump_debug_s = rgb_vdump_debug;
-            point_raw_hdump_debug_s = raw_hdump_debug;
-            point_raw_vdump_debug_s = raw_vdump_debug;
-            point_char_hdump_debug_s = char_hdump_debug;
-            point_char_vdump_debug_s = char_vdump_debug;
-            $strobe("MZONE_POINT_COLMIX frame=%0d hdump=%0d vdump=%0d hdump_debug=%0d vdump_debug=%0d rgb_hdump_debug=%0d rgb_vdump_debug=%0d raw_hdump_debug=%0d raw_vdump_debug=%0d char_hdump_debug=%0d char_vdump_debug=%0d obj_en=%b fix_en=%b fix_en_dly=%b obj_pxl=%x char_in=%x char_dly=%x pal_mux=%02x prom=%02x raw=%x%x%x blank=%x%x%x rgb=%x%x%x preLHBL=%b preLVBL=%b LHBL=%b LVBL=%b",
-                point_frame, point_hdump_s, point_vdump_s,
-                point_hdump_debug_s, point_vdump_debug_s,
-                point_rgb_hdump_debug_s, point_rgb_vdump_debug_s,
-                point_raw_hdump_debug_s, point_raw_vdump_debug_s,
-                point_char_hdump_debug_s, point_char_vdump_debug_s,
-                obj_opaque, fix_prio, fix_prio, obj_pxl, char_pxl, char_pxl, pal_mux_r,
-                pal_prom_dout, red_raw, green_raw, blue_raw,
-                red_blank, green_blank, blue_blank, red, green, blue,
-                preLHBL, preLVBL, LHBL, LVBL);
-        end
-`endif
-    end
 end
 
 function [3:0] rg_dac;

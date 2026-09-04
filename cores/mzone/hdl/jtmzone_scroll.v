@@ -28,10 +28,10 @@ module jtmzone_scroll(
     input        [ 7:0] prog_addr,
     input               prog_en,
 
-    output reg   [11:0] scr_rom_addr,
-    output reg          scr_rom_cs,
-    input        [31:0] scr_rom_data,
-    input               scr_rom_ok,
+    output reg   [11:0] rom_addr,
+    output reg          rom_cs,
+    input        [31:0] rom_data,
+    input               rom_ok,
 
     output       [ 3:0] pxl
 );
@@ -66,7 +66,6 @@ wire [ 7:0] v_eff = pcb_vcnt(vdump, flip);
 wire [ 7:0] heff = h_eff + scrolly;
 wire [ 7:0] veff = v_eff + scrollx;
 
-wire [31:0] rom_decoded_row;
 wire [11:0] tile_addr = { cram[7], vram, veff[2:0] ^ {3{cram[5]}} };
 wire        read_tile = heff[2:0] == RD_PHASE;
 wire        load_tile = heff[2:0] == LOAD_PHASE;
@@ -74,24 +73,6 @@ wire        fetch_tile = heff[2:0] == FETCH_PHASE;
 wire [ 3:0] pxl_raw = cur_hf ? pxl_data[3:0] : pxl_data[31:28];
 wire [ 3:0] color_raw = cur_pal;
 wire [ 7:0] pal_addr = { color_raw, pxl_raw[0], pxl_raw[1], pxl_raw[2], pxl_raw[3] };
-
-assign rom_decoded_row = decode_row(scr_rom_data);
-
-function [31:0] decode_row;
-    input [31:0] data;
-begin
-    decode_row = {
-        { data[4],  data[5],  data[6],  data[7]  },
-        { data[0],  data[1],  data[2],  data[3]  },
-        { data[12], data[13], data[14], data[15] },
-        { data[8],  data[9],  data[10], data[11] },
-        { data[20], data[21], data[22], data[23] },
-        { data[16], data[17], data[18], data[19] },
-        { data[28], data[29], data[30], data[31] },
-        { data[24], data[25], data[26], data[27] }
-    };
-end
-endfunction
 
 function [7:0] pcb_vcnt;
     input [8:0] v;
@@ -107,33 +88,45 @@ endfunction
 
 always @(posedge clk) begin
     if( rst ) begin
-        scr_rom_addr <= 12'd0;
-        scr_rom_cs <= 1'b0;
+        rom_addr <= 12'd0;
+        rom_cs <= 1'b0;
         ram_addr <= 10'd0;
         pxl_data <= 32'd0;
         pal_msb <= 4'd0;
         cur_pal <= 4'd0;
         hflip <= 1'b0;
         cur_hf <= 1'b0;
-    end else if( pxl_cen ) begin
-        if( read_tile )
-            ram_addr <= { veff[7:3], heff[7:3] };
+    end else begin
+        if( rom_ok && rom_cs )
+            rom_cs <= 1'b0;
 
-        if( fetch_tile ) begin
-            scr_rom_addr <= tile_addr;
-            scr_rom_cs   <= 1'b1;
-            pal_msb      <= cram[3:0];
-            hflip        <= cram[6] ^ flip;
-        end else begin
-            scr_rom_cs <= 1'b0;
-        end
+        if( pxl_cen ) begin
+            if( read_tile )
+                ram_addr <= { veff[7:3], heff[7:3] };
 
-        if( load_tile ) begin
-            pxl_data <= rom_decoded_row;
-            cur_pal  <= pal_msb;
-            cur_hf   <= hflip;
-        end else begin
-            pxl_data <= cur_hf ? pxl_data >> 4 : pxl_data << 4;
+            if( fetch_tile ) begin
+                rom_addr <= tile_addr;
+                rom_cs   <= 1'b1;
+                pal_msb      <= cram[3:0];
+                hflip        <= cram[6] ^ flip;
+            end
+
+            if( load_tile ) begin
+                pxl_data <= {
+                    rom_data[4],  rom_data[5],  rom_data[6],  rom_data[7],
+                    rom_data[0],  rom_data[1],  rom_data[2],  rom_data[3],
+                    rom_data[12], rom_data[13], rom_data[14], rom_data[15],
+                    rom_data[8],  rom_data[9],  rom_data[10], rom_data[11],
+                    rom_data[20], rom_data[21], rom_data[22], rom_data[23],
+                    rom_data[16], rom_data[17], rom_data[18], rom_data[19],
+                    rom_data[28], rom_data[29], rom_data[30], rom_data[31],
+                    rom_data[24], rom_data[25], rom_data[26], rom_data[27]
+                };
+                cur_pal  <= pal_msb;
+                cur_hf   <= hflip;
+            end else begin
+                pxl_data <= cur_hf ? pxl_data >> 4 : pxl_data << 4;
+            end
         end
     end
 end

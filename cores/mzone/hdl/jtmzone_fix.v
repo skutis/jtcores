@@ -5,8 +5,8 @@
     (at your option) any later version. */
 
 module jtmzone_fix #(
-    // Align FIX priority/window with FIX pixels at the color mixer input.
-    parameter FIX_EN_DLY=6
+    // Align the FIX window with FIX pixels at the color mixer input.
+    parameter FIX_SRC_DLY=6
 )(
     input               rst,
     input               clk,
@@ -35,8 +35,7 @@ module jtmzone_fix #(
     input               rom_ok,
 
     output       [ 3:0] pxl,
-    output              fix_src,
-    output              fix_en
+    output              fix_src
 );
 
 localparam [8:0] HVISIBLE       = 9'd288;
@@ -44,7 +43,6 @@ localparam [8:0] HTOTAL         = 9'd384;
 localparam [8:0] FIX_WIDTH      = 9'd48;
 localparam [8:0] FIX_FLIP_START = HVISIBLE-FIX_WIDTH;
 localparam [8:0] FIX_LEAD       = 9'd8;
-localparam [8:0] FIX_PRIO_END   = 9'd47;
 localparam [8:0] FIX_SRC_END    = 9'd48;
 localparam [2:0] RD_PHASE       = 3'd7;
 localparam [2:0] FETCH_PHASE    = 3'd0;
@@ -52,7 +50,6 @@ localparam [2:0] FETCH_PHASE    = 3'd0;
 // colmix after the character palette. This effective delay is what the
 // colmix blanking delay must match.
 localparam [2:0] LOAD_PHASE     = 3'd4;
-localparam       FIX_ADDR_COLMIX_DLY = 6;
 
 reg  [31:0] pxl_data;
 reg  [ 9:0] ram_addr;
@@ -74,7 +71,6 @@ wire [ 8:0] heff = blank_fetch ? hdump - 9'd160 :
 wire [ 7:0] h_eff = heff[7:0];
 wire [ 7:0] vsum = vdump[8] ? vdump[7:0] - 8'd8 : vdump[7:0];
 wire [ 7:0] v_eff = flip ? ~vsum : vsum;
-wire [31:0] rom_decoded_row;
 wire [11:0] tile_addr = { cram[7], vram, v_eff[2:0] ^ {3{cram[5]}} };
 wire        read_tile = h_eff[2:0] == RD_PHASE;
 wire        load_tile = h_eff[2:0] == LOAD_PHASE;
@@ -82,58 +78,15 @@ wire        fetch_tile = h_eff[2:0] == FETCH_PHASE;
 wire [ 3:0] pxl_raw = cur_hf ? pxl_data[3:0] : pxl_data[31:28];
 wire [ 3:0] color_raw = cur_pal;
 wire [ 7:0] pal_addr = { color_raw, pxl_raw[0], pxl_raw[1], pxl_raw[2], pxl_raw[3] };
-// On the PCB's non-flipped boundary, FIX remains the character source for one
-// pixel after its forced priority ends. Both controls traverse the same pixel
-// pipeline: priority is active through raw hdump 46, while source selection is
-// active through raw hdump 47. Keep the established flipped window unchanged.
-wire        fix_en_pre  = flip ? hdump >= FIX_FLIP_START && hdump < HVISIBLE :
-                                 hdump >= HVISIBLE || hdump < FIX_PRIO_END;
 wire        fix_src_pre = flip ? hdump >= FIX_FLIP_START && hdump < HVISIBLE :
                                  hdump >= HVISIBLE || hdump < FIX_SRC_END;
-wire [ 4:0] dbg_fix_addr_colmix /* verilator public_flat */;
 
-assign rom_decoded_row = decode_row(rom_data);
-
-// Debug-only reference: tile-map address at the color-mixer input phase.
-jtframe_sh #(.W(5),.L(FIX_ADDR_COLMIX_DLY)) u_dbg_fix_addr_colmix(
-    .clk    ( clk                 ),
-    .clk_en ( pxl_cen             ),
-    .din    ( ram_addr[4:0]       ),
-    .drop   ( dbg_fix_addr_colmix )
-);
-
-jtframe_sh #(.W(1),.L(FIX_EN_DLY)) u_fix_en_dly(
-    .clk    ( clk        ),
-    .clk_en ( pxl_cen    ),
-    .din    ( fix_en_pre ),
-    .drop   ( fix_en     )
-);
-
-// FIX remains the character source for one pixel after its forced priority
-// ends. Delay both controls equally so the one-pixel-wide pre-window
-// difference is preserved at the color mixer.
-jtframe_sh #(.W(1),.L(FIX_EN_DLY)) u_fix_src_dly(
+jtframe_sh #(.W(1),.L(FIX_SRC_DLY)) u_fix_src_dly(
     .clk    ( clk         ),
     .clk_en ( pxl_cen     ),
     .din    ( fix_src_pre ),
     .drop   ( fix_src     )
 );
-
-function [31:0] decode_row;
-    input [31:0] data;
-begin
-    decode_row = {
-        { data[4],  data[5],  data[6],  data[7]  },
-        { data[0],  data[1],  data[2],  data[3]  },
-        { data[12], data[13], data[14], data[15] },
-        { data[8],  data[9],  data[10], data[11] },
-        { data[20], data[21], data[22], data[23] },
-        { data[16], data[17], data[18], data[19] },
-        { data[28], data[29], data[30], data[31] },
-        { data[24], data[25], data[26], data[27] }
-    };
-end
-endfunction
 
 // PCB vcount mapping:
 // raw vdump 0..255   -> PCB vcount 0..255
@@ -196,7 +149,16 @@ always @(posedge clk) begin
         end
 
         if( load_tile ) begin
-            pxl_data <= rom_decoded_row;
+            pxl_data <= {
+                rom_data[4],  rom_data[5],  rom_data[6],  rom_data[7],
+                rom_data[0],  rom_data[1],  rom_data[2],  rom_data[3],
+                rom_data[12], rom_data[13], rom_data[14], rom_data[15],
+                rom_data[8],  rom_data[9],  rom_data[10], rom_data[11],
+                rom_data[20], rom_data[21], rom_data[22], rom_data[23],
+                rom_data[16], rom_data[17], rom_data[18], rom_data[19],
+                rom_data[28], rom_data[29], rom_data[30], rom_data[31],
+                rom_data[24], rom_data[25], rom_data[26], rom_data[27]
+            };
             cur_pal  <= pal_msb;
             cur_hf   <= hflip;
         end else begin

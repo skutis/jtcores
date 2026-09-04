@@ -66,7 +66,6 @@ wire        main_bs;
 wire        blank;
 wire        video_pre_lvbl;
 wire        h2;
-wire        fix_en;
 reg         blank_q;
 reg         v16_q;
 
@@ -903,7 +902,6 @@ jtmzone_video u_video(
 
     .clkq_cen   ( clkq_cen       ),
     .h2         ( h2             ),
-    .fix_en     ( fix_en         ),
     .hdump      ( video_hdump    ),
     .vdump      ( video_vdump    ),
     .vrender    ( video_vrender  )

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+SIM_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 MZONE_ROM=${MZONE_ROM:-$ROM/${MZONE_SETNAME:-megazone}.rom}
 
 SCENE=
@@ -22,8 +23,20 @@ while (( $# )); do
 done
 
 if [[ -n "$SCENE" ]]; then
+    if [[ ! -d "$SCENE" && -d "$SIM_DIR/scenes/$SCENE" ]]; then
+        SCENE="$SIM_DIR/scenes/$SCENE"
+    fi
     [[ -d "$SCENE" ]] || { echo "Cannot find scene $SCENE" >&2; exit 1; }
-    for scene_file in vram0.bin vram1.bin cram0.bin cram1.bin obj.bin shared.bin regs.hex; do
+    scene_files=(vram0.bin vram1.bin cram0.bin cram1.bin obj.bin shared.bin regs.hex)
+    scene_missing=0
+    for scene_file in "${scene_files[@]}"; do
+        [[ -f "$SCENE/$scene_file" ]] || scene_missing=1
+    done
+    if (( scene_missing )) && [[ -f "$SCENE/scene.lua" ]]; then
+        echo "Recreating scene data in $SCENE"
+        bash "$SIM_DIR/scenes/capture.sh" "$SCENE" || exit 1
+    fi
+    for scene_file in "${scene_files[@]}"; do
         [[ -f "$SCENE/$scene_file" ]] || {
             echo "Scene $SCENE is missing $scene_file" >&2
             exit 1

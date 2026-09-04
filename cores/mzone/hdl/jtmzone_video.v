@@ -60,7 +60,6 @@ module jtmzone_video(
 
     output              clkq_cen,
     output              h2,
-    output              fix_en,
     output       [ 8:0] hdump,
     output       [ 8:0] vdump,
     output       [ 8:0] vrender
@@ -87,7 +86,6 @@ localparam [21:0] CHR_OFFSET = `ifdef JTFRAME_PROM_START `JTFRAME_PROM_START + 2
 wire        pre_lhbl, pre_lvbl, vt_lvbl, pre_hs, vt_vs;
 reg         pcb_vs;
 wire [ 7:0] hcnt;
-wire [ 8:0] dbg_hdump_colmix = hdump - 9'd6;
 wire [ 3:0] scr_pxl;
 wire [ 3:0] fix_pxl;
 wire [ 3:0] obj_pxl;
@@ -97,7 +95,6 @@ wire        obj_lut_we, char_lut_we;
 wire        dbg_show_fix;
 wire        dbg_show_scroll;
 wire        dbg_show_obj;
-wire        show_fix_en;
 wire        show_fix_src;
 wire        colmix_fix_src;
 
@@ -145,7 +142,6 @@ assign dbg_show_obj =
     gfx_en[3];
 `endif
 `endif
-assign show_fix_en    = dbg_show_fix && fix_en;
 assign show_fix_src   = dbg_show_fix && fix_src;
 `ifdef MZONE_ONLY_FIX
 assign colmix_fix_src = 1'b1;
@@ -193,10 +189,10 @@ jtmzone_scroll u_scroll(
     .prog_data  ( prog_data[3:0]  ),
     .prog_addr  ( prog_addr[7:0] - CHR_OFFSET[7:0] ),
     .prog_en    ( char_lut_we     ),
-    .scr_rom_data( scrrom_data    ),
-    .scr_rom_ok  ( scrrom_ok      ),
-    .scr_rom_addr( scrrom_addr    ),
-    .scr_rom_cs  ( scrrom_cs      ),
+    .rom_data    ( scrrom_data    ),
+    .rom_ok      ( scrrom_ok      ),
+    .rom_addr    ( scrrom_addr    ),
+    .rom_cs      ( scrrom_cs      ),
     .pxl        ( scr_pxl         )
 );
 
@@ -223,8 +219,7 @@ jtmzone_fix u_fix(
     .rom_addr   ( fixrom_addr     ),
     .rom_cs     ( fixrom_cs       ),
     .pxl        ( fix_pxl         ),
-    .fix_src    ( fix_src         ),
-    .fix_en     ( fix_en          )
+    .fix_src    ( fix_src         )
 );
 
 jtmzone_obj u_obj(
@@ -257,12 +252,8 @@ jtmzone_colmix u_colmix(
     .obj_pxl    ( obj_pxl        ),
     .gfx_en     ( {dbg_show_obj, 1'b0, dbg_show_fix, dbg_show_scroll} ),
     .fix_src    ( colmix_fix_src ),
-    .fix_prio   ( show_fix_en    ),
-    .flip       ( flip       ),
     .preLHBL    ( pre_lhbl   ),
     .preLVBL    ( pre_lvbl   ),
-    .hdump      ( hdump      ),
-    .vdump      ( vdump      ),
     .prog_data  ( prog_data  ),
     .prog_addr  ( prog_addr  ),
     .prom_we    ( prom_we    ),
@@ -271,9 +262,7 @@ jtmzone_colmix u_colmix(
     .blue       ( blue       ),
     .LHBL       ( LHBL       ),
     .LVBL       ( LVBL       ),
-    .preLBL     (           ),
-    .dbg_pal_idx(           ),
-    .dbg_obj_opaque(        )
+    .preLBL     (           )
 );
 
 `ifdef SIMULATION
@@ -333,10 +322,10 @@ always @(posedge clk) begin
             vdump <= `MZONE_POINT_Y1 ) begin
             video_point_hdump_s = hdump;
             video_point_vdump_s = vdump;
-            $strobe("MZONE_POINT_VIDEO frame=%0d hdump=%0d vdump=%0d red=%x green=%x blue=%x LHBL=%b LVBL=%b pre_lhbl=%b pre_lvbl=%b scr_pxl=%x fix_pxl=%x fix_src=%b fix_en=%b",
+            $strobe("MZONE_POINT_VIDEO frame=%0d hdump=%0d vdump=%0d red=%x green=%x blue=%x LHBL=%b LVBL=%b pre_lhbl=%b pre_lvbl=%b scr_pxl=%x fix_pxl=%x fix_src=%b",
                 video_point_frame, video_point_hdump_s, video_point_vdump_s, red, green, blue,
                 LHBL, LVBL, pre_lhbl, pre_lvbl, scr_pxl, fix_pxl,
-                fix_src, fix_en);
+                fix_src);
         end
     end
 end
