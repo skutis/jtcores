@@ -60,6 +60,7 @@ module jtmzone_video(
 
     output              clkq_cen,
     output              h2,
+    output              fix_en,
     output       [ 8:0] hdump,
     output       [ 8:0] vdump,
     output       [ 8:0] vrender
@@ -84,6 +85,10 @@ localparam [21:0] OBJ_OFFSET = `ifdef JTFRAME_PROM_START `JTFRAME_PROM_START + 2
 localparam [21:0] CHR_OFFSET = `ifdef JTFRAME_PROM_START `JTFRAME_PROM_START + 22'h120 `else 22'h120 `endif;
 
 wire        pre_lhbl, pre_lvbl, vt_lvbl, pre_hs, vt_vs;
+reg         pre_lhbl_d;
+// In flipped mode the PCB-visible color-mixer window extends one pixel past
+// the common timing window. Delay only the falling (active-to-blank) edge.
+wire        colmix_pre_lhbl = flip ? pre_lhbl | pre_lhbl_d : pre_lhbl;
 reg         pcb_vs;
 wire [ 7:0] hcnt;
 wire [ 3:0] scr_pxl;
@@ -95,6 +100,7 @@ wire        obj_lut_we, char_lut_we;
 wire        dbg_show_fix;
 wire        dbg_show_scroll;
 wire        dbg_show_obj;
+wire        show_fix_en;
 wire        show_fix_src;
 wire        colmix_fix_src;
 
@@ -142,6 +148,7 @@ assign dbg_show_obj =
     gfx_en[3];
 `endif
 `endif
+assign show_fix_en    = dbg_show_fix && fix_en;
 assign show_fix_src   = dbg_show_fix && fix_src;
 `ifdef MZONE_ONLY_FIX
 assign colmix_fix_src = 1'b1;
@@ -219,7 +226,8 @@ jtmzone_fix u_fix(
     .rom_addr   ( fixrom_addr     ),
     .rom_cs     ( fixrom_cs       ),
     .pxl        ( fix_pxl         ),
-    .fix_src    ( fix_src         )
+    .fix_src    ( fix_src         ),
+    .fix_en     ( fix_en          )
 );
 
 jtmzone_obj u_obj(
@@ -252,7 +260,8 @@ jtmzone_colmix u_colmix(
     .obj_pxl    ( obj_pxl        ),
     .gfx_en     ( {dbg_show_obj, 1'b0, dbg_show_fix, dbg_show_scroll} ),
     .fix_src    ( colmix_fix_src ),
-    .preLHBL    ( pre_lhbl   ),
+    .fix_prio   ( show_fix_en    ),
+    .preLHBL    ( colmix_pre_lhbl ),
     .preLVBL    ( pre_lvbl   ),
     .prog_data  ( prog_data  ),
     .prog_addr  ( prog_addr  ),
@@ -269,7 +278,7 @@ jtmzone_colmix u_colmix(
 // Check the mixer-facing horizontal active width after all palette and
 // blanking delays. Ignore the partial line present when reset is released,
 // then validate every complete line at pixel-clock granularity.
-localparam [9:0] HACTIVE_EXPECTED = 10'd287;
+wire [9:0] hactive_expected = flip ? 10'd288 : 10'd287;
 reg        hactive_lhbl_l;
 reg        hactive_armed;
 reg [ 9:0] hactive_count;
@@ -287,12 +296,12 @@ always @(posedge clk) begin
             hactive_count <= hactive_count + 10'd1;
         end
         if( hactive_lhbl_l && !LHBL ) begin
-            if( hactive_armed && hactive_count != HACTIVE_EXPECTED )
+            if( hactive_armed && hactive_count != hactive_expected )
                 $error("MZONE_HACTIVE width=%0d expected=%0d vdump=%0d hdump=%0d",
-                    hactive_count, HACTIVE_EXPECTED, vdump, hdump);
+                    hactive_count, hactive_expected, vdump, hdump);
             if( hactive_armed && vdump == VVISIBLE )
                 $display("MZONE_HACTIVE width=%0d expected=%0d vdump=%0d hdump=%0d",
-                    hactive_count, HACTIVE_EXPECTED, vdump, hdump);
+                    hactive_count, hactive_expected, vdump, hdump);
             hactive_count <= 10'd0;
         end
     end
@@ -334,7 +343,9 @@ end
 always @(posedge clk) begin
     if( rst ) begin
         pcb_vs <= 1'b0;
+        pre_lhbl_d <= 1'b0;
     end else if( pxl_cen ) begin
+        pre_lhbl_d <= pre_lhbl;
         pcb_vs <= vdump[8];
     end
 end

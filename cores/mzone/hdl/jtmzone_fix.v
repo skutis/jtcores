@@ -5,8 +5,8 @@
     (at your option) any later version. */
 
 module jtmzone_fix #(
-    // Align the FIX window with FIX pixels at the color mixer input.
-    parameter FIX_SRC_DLY=6
+    // Align the FIX source and priority windows with FIX pixels at colmix.
+    parameter FIX_EN_DLY=6
 )(
     input               rst,
     input               clk,
@@ -35,14 +35,17 @@ module jtmzone_fix #(
     input               rom_ok,
 
     output       [ 3:0] pxl,
-    output              fix_src
+    output              fix_src,
+    output              fix_en
 );
 
-localparam [8:0] HVISIBLE       = 9'd288;
+localparam [8:0] HVISIBLE       = 9'd287;
 localparam [8:0] HTOTAL         = 9'd384;
 localparam [8:0] FIX_WIDTH      = 9'd48;
-localparam [8:0] FIX_FLIP_START = HVISIBLE-FIX_WIDTH;
+localparam [8:0] FIX_FLIP_START = HVISIBLE-FIX_WIDTH+9'd1;
+localparam [8:0] FIX_FLIP_END   = FIX_FLIP_START+FIX_WIDTH;
 localparam [8:0] FIX_LEAD       = 9'd8;
+localparam [8:0] FIX_PRIO_END   = 9'd47;
 localparam [8:0] FIX_SRC_END    = 9'd48;
 localparam [2:0] RD_PHASE       = 3'd7;
 localparam [2:0] FETCH_PHASE    = 3'd0;
@@ -78,10 +81,21 @@ wire        fetch_tile = h_eff[2:0] == FETCH_PHASE;
 wire [ 3:0] pxl_raw = cur_hf ? pxl_data[3:0] : pxl_data[31:28];
 wire [ 3:0] color_raw = cur_pal;
 wire [ 7:0] pal_addr = { color_raw, pxl_raw[0], pxl_raw[1], pxl_raw[2], pxl_raw[3] };
-wire        fix_src_pre = flip ? hdump >= FIX_FLIP_START && hdump < HVISIBLE :
+// FIX remains the character source for one pixel after its forced priority
+// ends. Both controls use the same delay so that distinction reaches colmix.
+wire        fix_en_pre  = flip ? hdump >= FIX_FLIP_START && hdump < FIX_FLIP_END :
+                                 hdump >= HVISIBLE || hdump < FIX_PRIO_END;
+wire        fix_src_pre = flip ? hdump >= FIX_FLIP_START && hdump < FIX_FLIP_END :
                                  hdump >= HVISIBLE || hdump < FIX_SRC_END;
 
-jtframe_sh #(.W(1),.L(FIX_SRC_DLY)) u_fix_src_dly(
+jtframe_sh #(.W(1),.L(FIX_EN_DLY)) u_fix_en_dly(
+    .clk    ( clk        ),
+    .clk_en ( pxl_cen    ),
+    .din    ( fix_en_pre ),
+    .drop   ( fix_en     )
+);
+
+jtframe_sh #(.W(1),.L(FIX_EN_DLY)) u_fix_src_dly(
     .clk    ( clk         ),
     .clk_en ( pxl_cen     ),
     .din    ( fix_src_pre ),

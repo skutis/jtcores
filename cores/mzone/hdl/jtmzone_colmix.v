@@ -22,6 +22,7 @@ module jtmzone_colmix(
     input         [3:0] obj_pxl,
     input         [3:0] gfx_en,
     input               fix_src,
+    input               fix_prio,
     input               preLHBL,
     input               preLVBL,
 
@@ -49,7 +50,7 @@ wire [ 3:0] red_blank, green_blank, blue_blank;
 wire [ 3:0] scr_mux_pxl = gfx_en[0] ? scr_pxl : 4'd0;
 wire        fix_sel = fix_src && gfx_en[1];
 wire [ 3:0] char_pxl = fix_sel ? fix_pxl : scr_mux_pxl;
-wire        obj_opaque = gfx_en[3] && obj_pxl != 4'd0 && !fix_sel;
+wire        obj_opaque = gfx_en[3] && obj_pxl != 4'd0 && !fix_prio;
 wire        pal_a4 = !obj_opaque;
 wire [ 4:0] pal_mux = { pal_a4, obj_opaque ? obj_pxl : char_pxl };
 reg  [ 4:0] pal_mux_r;
