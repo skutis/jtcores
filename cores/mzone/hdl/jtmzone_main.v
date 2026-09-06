@@ -8,7 +8,6 @@ module jtmzone_main(
     input             rst,
     input             clk,
     input             cpu_clk_cen,
-    output            cpu_cen,
 
     output     [15:0] rom_addr,
     output reg        rom_cs,
@@ -16,7 +15,6 @@ module jtmzone_main(
     input             rom_ok,
 
     output            cpu_rnw,
-    output     [ 7:0] cpu_dout,
 
     output reg        scrolly_cs,
     output reg        scrollx_cs,
@@ -25,33 +23,31 @@ module jtmzone_main(
     output reg        cram0_cs,
     output reg        cram1_cs,
     output reg        objram_cs,
-    output reg        shared_cs,
 
     output     [10:0] shared_addr,
     output     [ 7:0] shared_dout,
     output            shared_we,
     input      [ 7:0] shared_din,
 
-    output     [ 9:0] main_vram_addr,
-    output     [ 7:0] main_vram_din,
-    output            main_vram0_we,
-    output            main_vram1_we,
-    output            main_cram0_we,
-    output            main_cram1_we,
-    input      [ 7:0] main_vram0_dout,
-    input      [ 7:0] main_vram1_dout,
-    input      [ 7:0] main_cram0_dout,
-    input      [ 7:0] main_cram1_dout,
+    output     [ 9:0] vram_addr,
+    output     [ 7:0] vram_din,
+    output            vram0_we,
+    output            vram1_we,
+    output            cram0_we,
+    output            cram1_we,
+    input      [ 7:0] vram0_dout,
+    input      [ 7:0] vram1_dout,
+    input      [ 7:0] cram0_dout,
+    input      [ 7:0] cram1_dout,
 
-    output     [ 9:0] main_objram_addr,
-    output     [ 7:0] main_objram_din,
-    output            main_objram_we,
-    input      [ 7:0] main_objram_dout,
+    output     [ 9:0] objram_addr,
+    output     [ 7:0] objram_din,
+    output            objram_we,
+    input      [ 7:0] objram_dout,
 
     output reg [ 7:0] scrolly,
     output reg [ 7:0] scrollx,
     output            flip,
-    output            irq_mask,
     output            snd_int,
     output            irq_ack,
     output            BA,
@@ -75,19 +71,15 @@ reg         scroll_pend, scroll_pend_x;
 reg  [ 7:0] scroll_pend_data;
 wire [15:0] A;
 wire        RnW, VMA;
+wire        cpu_cen;
+wire [ 7:0] cpu_dout;
+reg         shared_cs;
 wire        intst       = b_a13_intst;
 reg         irq_n;
 wire        firq_n;
 wire        main_mbs = BS;
 reg         vblank_l;
 
-`ifdef MZONE_VRAM_WRITE_WATCH
-`ifndef MZONE_VRAM_WRITE_WATCH_FROM
-`define MZONE_VRAM_WRITE_WATCH_FROM 0
-`endif
-integer     vram_watch_frame;
-reg         vram_watch_vblank_l;
-`endif
 
 wire        ram_cs        = scrolly_cs | scrollx_cs | vram0_cs | vram1_cs |
                             cram0_cs | cram1_cs | objram_cs | shared_cs;
@@ -116,21 +108,16 @@ assign cpu_rnw  = RnW;
 assign shared_addr = A[10:0];
 assign shared_dout = cpu_dout;
 assign shared_we   = ram_we && shared_cs;
-assign main_vram_addr = A[9:0];
-assign main_vram_din  = cpu_dout;
-assign main_objram_addr = A[9:0];
-assign main_objram_din  = cpu_dout;
-assign main_objram_we   = ram_we && objram_cs;
-assign main_vram0_we  = ram_we && vram0_cs;
-assign main_vram1_we  = ram_we && vram1_cs;
-assign main_cram0_we  = ram_we && cram0_cs;
-assign main_cram1_we  = ram_we && cram1_cs;
-`ifdef MZONE_FORCE_FLIP
-assign flip      = 1'b1;
-`else
+assign vram_addr = A[9:0];
+assign vram_din  = cpu_dout;
+assign objram_addr = A[9:0];
+assign objram_din  = cpu_dout;
+assign objram_we   = ram_we && objram_cs;
+assign vram0_we  = ram_we && vram0_cs;
+assign vram1_we  = ram_we && vram1_cs;
+assign cram0_we  = ram_we && cram0_cs;
+assign cram1_we  = ram_we && cram1_cs;
 assign flip      = b_a13_flip;
-`endif
-assign irq_mask  = intst;
 assign snd_int   = b_a13_int;
 
 always @(posedge clk) begin
@@ -144,24 +131,6 @@ always @(posedge clk) begin
     end
 end
 
-`ifdef MZONE_VRAM_WRITE_WATCH
-always @(posedge clk) begin
-    if( rst ) begin
-        vram_watch_frame    <= 0;
-        vram_watch_vblank_l <= 1'b1;
-    end else begin
-        vram_watch_vblank_l <= vblank;
-        if( vram_watch_vblank_l && !vblank )
-            vram_watch_frame <= vram_watch_frame + 1;
-        if( ram_we && vram_watch_frame >= `MZONE_VRAM_WRITE_WATCH_FROM ) begin
-            if( vram0_cs ) $display("MZONE_VRAM_WR frame=%0d addr=%04x ram=vram0 off=%03x data=%02x", vram_watch_frame, A, A[9:0], cpu_dout);
-            if( vram1_cs ) $display("MZONE_VRAM_WR frame=%0d addr=%04x ram=vram1 off=%03x data=%02x", vram_watch_frame, A, A[9:0], cpu_dout);
-            if( cram0_cs ) $display("MZONE_VRAM_WR frame=%0d addr=%04x ram=cram0 off=%03x data=%02x", vram_watch_frame, A, A[9:0], cpu_dout);
-            if( cram1_cs ) $display("MZONE_VRAM_WR frame=%0d addr=%04x ram=cram1 off=%03x data=%02x", vram_watch_frame, A, A[9:0], cpu_dout);
-        end
-    end
-end
-`endif
 
 // B_C1B on the schematic: ~FIRQ is clocked by ~INTMAIN and released by ~MBS.
 // Use qn so jtframe_ff reset leaves the active-low FIRQ inactive.
@@ -205,15 +174,15 @@ always @(*) begin
     if( rom_cs ) begin
         cpu_din = rom_data;
     end else if( vram0_cs ) begin
-        cpu_din = main_vram0_dout;
+        cpu_din = vram0_dout;
     end else if( vram1_cs ) begin
-        cpu_din = main_vram1_dout;
+        cpu_din = vram1_dout;
     end else if( cram0_cs ) begin
-        cpu_din = main_cram0_dout;
+        cpu_din = cram0_dout;
     end else if( cram1_cs ) begin
-        cpu_din = main_cram1_dout;
+        cpu_din = cram1_dout;
     end else if( objram_cs ) begin
-        cpu_din = main_objram_dout;
+        cpu_din = objram_dout;
     end else if( shared_cs ) begin
         cpu_din = shared_din;
     end

@@ -169,11 +169,7 @@ jtframe_obj_buffer #(
     .rd_data( pal_pxl )
 );
 
-`ifdef MZONE_NOOBJ
-assign pxl = 4'd0;
-`else
 assign pxl = pal_pxl;
-`endif
 
 jtframe_prom #(
     .DW     ( 4 ),

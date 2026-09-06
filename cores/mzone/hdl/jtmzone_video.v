@@ -12,16 +12,21 @@ module jtmzone_video(
     input               pxl2_cen,
 
     input        [ 9:0] main_tile_addr,
-    input        [ 7:0] main_vram_din,
+    input        [ 7:0] vram_din,
     input               main_cpu_rnw,
-    input               main_vram0_cs,
-    input               main_vram1_cs,
-    input               main_cram0_cs,
-    input               main_cram1_cs,
-    output       [ 7:0] main_vram0_dout,
-    output       [ 7:0] main_vram1_dout,
-    output       [ 7:0] main_cram0_dout,
-    output       [ 7:0] main_cram1_dout,
+    input               vram0_cs,
+    input               vram1_cs,
+    input               cram0_cs,
+    input               cram1_cs,
+    output       [ 7:0] vram0_dout,
+    output       [ 7:0] vram1_dout,
+    output       [ 7:0] cram0_dout,
+    output       [ 7:0] cram1_dout,
+
+    input        [ 9:0] objram_addr,
+    input        [ 7:0] objram_din,
+    input               objram_we,
+    output       [ 7:0] objram_dout,
 
     input        [ 7:0] scrolly,
     input        [ 7:0] scrollx,
@@ -42,8 +47,6 @@ module jtmzone_video(
     input        [31:0] scrrom_data,
     input               scrrom_ok,
 
-    output       [ 9:0] oram_addr,
-    input        [ 7:0] oram_dout,
     output       [12:0] obj_addr,
     output              obj_cs,
     input        [31:0] obj_data,
@@ -53,14 +56,11 @@ module jtmzone_video(
     output              VS,
     output              LHBL,
     output              LVBL,
-    output              pre_LVBL,
     output       [ 3:0] red,
     output       [ 3:0] green,
     output       [ 3:0] blue,
 
-    output              clkq_cen,
     output              h2,
-    output              fix_en,
     output       [ 8:0] hdump,
     output       [ 8:0] vdump,
     output       [ 8:0] vrender
@@ -94,7 +94,9 @@ wire [ 7:0] hcnt;
 wire [ 3:0] scr_pxl;
 wire [ 3:0] fix_pxl;
 wire [ 3:0] obj_pxl;
-wire        fix_src;
+wire        fix_src, fix_en;
+wire [ 9:0] oram_addr;
+wire [ 7:0] oram_dout;
 wire        pxl2_cen_unused = pxl2_cen;
 wire        obj_lut_we, char_lut_we;
 wire        dbg_show_fix;
@@ -110,51 +112,39 @@ assign char_lut_we = prom_we && prog_addr >= CHR_OFFSET && prog_addr < CHR_OFFSE
 assign HS     = pre_hs;
 assign VS     = pcb_vs;
 assign pre_lvbl = vdump >= VVISIBLE && vdump < VB_START;
-assign pre_LVBL = pre_lvbl;
 
 assign h2 = hcnt[1];
-assign clkq_cen = 1'b0;
 
 assign hcnt     = pcb_hcnt(hdump, flip);
-`ifdef MZONE_ONLY_FIX
-assign dbg_show_fix    = 1'b1;
-assign dbg_show_scroll = 1'b0;
-assign dbg_show_obj    = 1'b0;
-`elsif MZONE_ONLY_SCROLL
-assign dbg_show_fix    = 1'b0;
-assign dbg_show_scroll = 1'b1;
-assign dbg_show_obj    = 1'b0;
-`elsif MZONE_ONLY_OBJ
-assign dbg_show_fix    = 1'b0;
-assign dbg_show_scroll = 1'b0;
-assign dbg_show_obj    = 1'b1;
-`else
 assign dbg_show_fix =
-`ifdef MZONE_HIDE_FIX
-    1'b0;
-`else
     gfx_en[1];
-`endif
 assign dbg_show_scroll =
-`ifdef MZONE_HIDE_SCROLL
-    1'b0;
-`else
     gfx_en[0];
-`endif
 assign dbg_show_obj =
-`ifdef MZONE_HIDE_OBJ
-    1'b0;
-`else
     gfx_en[3];
-`endif
-`endif
 assign show_fix_en    = dbg_show_fix && fix_en;
 assign show_fix_src   = dbg_show_fix && fix_src;
-`ifdef MZONE_ONLY_FIX
-assign colmix_fix_src = 1'b1;
-`else
 assign colmix_fix_src = show_fix_src;
+
+jtframe_dual_ram #(
+`ifdef SIMSCENE
+    .SIMFILE ( "obj.bin" ),
 `endif
+    .AW ( 10 ),
+    .DW ( 8  )
+) u_objram(
+    .clk0   ( clk24             ),
+    .data0  ( objram_din   ),
+    .addr0  ( objram_addr  ),
+    .we0    ( objram_we    ),
+    .q0     ( objram_dout  ),
+
+    .clk1   ( clk               ),
+    .data1  ( 8'd0              ),
+    .addr1  ( oram_addr         ),
+    .we1    ( 1'b0              ),
+    .q1     ( oram_dout         )
+);
 
 function [7:0] pcb_hcnt;
     input [8:0] h;
@@ -182,12 +172,12 @@ jtmzone_scroll u_scroll(
     .clk24      ( clk24           ),
     .pxl_cen    ( pxl_cen         ),
     .cpu_addr   ( main_tile_addr ),
-    .cpu_dout   ( main_vram_din   ),
+    .cpu_dout   ( vram_din   ),
     .cpu_rnw    ( main_cpu_rnw    ),
-    .vram_cs    ( main_vram0_cs   ),
-    .cram_cs    ( main_cram0_cs   ),
-    .vram_dout  ( main_vram0_dout ),
-    .cram_dout  ( main_cram0_dout ),
+    .vram_cs    ( vram0_cs   ),
+    .cram_cs    ( cram0_cs   ),
+    .vram_dout  ( vram0_dout ),
+    .cram_dout  ( cram0_dout ),
     .hdump      ( hdump           ),
     .vdump      ( vdump           ),
     .scrollx    ( scrollx         ),
@@ -209,12 +199,12 @@ jtmzone_fix u_fix(
     .clk24      ( clk24           ),
     .pxl_cen    ( pxl_cen         ),
     .cpu_addr   ( main_tile_addr  ),
-    .cpu_dout   ( main_vram_din   ),
+    .cpu_dout   ( vram_din   ),
     .cpu_rnw    ( main_cpu_rnw    ),
-    .vram_cs    ( main_vram1_cs   ),
-    .cram_cs    ( main_cram1_cs   ),
-    .vram_dout  ( main_vram1_dout ),
-    .cram_dout  ( main_cram1_dout ),
+    .vram_cs    ( vram1_cs   ),
+    .cram_cs    ( cram1_cs   ),
+    .vram_dout  ( vram1_dout ),
+    .cram_dout  ( cram1_dout ),
     .hdump      ( hdump           ),
     .vdump      ( vdump           ),
     .flip       ( flip            ),
@@ -308,37 +298,6 @@ always @(posedge clk) begin
 end
 `endif
 
-`ifdef MZONE_VIDEO_POINT_WATCH
-reg        video_point_lvbl_l;
-reg [15:0] video_point_frame;
-reg [ 8:0] video_point_hdump_s;
-reg [ 8:0] video_point_vdump_s;
-always @(posedge clk) begin
-    if( rst ) begin
-        video_point_lvbl_l <= 1'b0;
-        video_point_frame  <= 16'd0;
-        video_point_hdump_s = 9'd0;
-        video_point_vdump_s = 9'd0;
-    end else if( pxl_cen ) begin
-        video_point_lvbl_l <= pre_lvbl;
-        if( pre_lvbl && !video_point_lvbl_l )
-            video_point_frame <= video_point_frame + 16'd1;
-        if( video_point_frame >= `MZONE_POINT_FRAME0 &&
-            video_point_frame <= `MZONE_POINT_FRAME1 &&
-            hdump >= `MZONE_POINT_X0 &&
-            hdump <= `MZONE_POINT_X1 &&
-            vdump >= `MZONE_POINT_Y0 &&
-            vdump <= `MZONE_POINT_Y1 ) begin
-            video_point_hdump_s = hdump;
-            video_point_vdump_s = vdump;
-            $strobe("MZONE_POINT_VIDEO frame=%0d hdump=%0d vdump=%0d red=%x green=%x blue=%x LHBL=%b LVBL=%b pre_lhbl=%b pre_lvbl=%b scr_pxl=%x fix_pxl=%x fix_src=%b",
-                video_point_frame, video_point_hdump_s, video_point_vdump_s, red, green, blue,
-                LHBL, LVBL, pre_lhbl, pre_lvbl, scr_pxl, fix_pxl,
-                fix_src);
-        end
-    end
-end
-`endif
 
 always @(posedge clk) begin
     if( rst ) begin
@@ -350,31 +309,6 @@ always @(posedge clk) begin
     end
 end
 
-`ifdef MZONE_VCNT_WATCH
-reg        vcnt_watch_lvbl_l, vcnt_watch_vs_l;
-always @(posedge clk) begin
-    if( rst ) begin
-        vcnt_watch_lvbl_l <= 1'b1;
-        vcnt_watch_vs_l   <= 1'b0;
-    end else if( pxl_cen ) begin
-        vcnt_watch_lvbl_l <= pre_lvbl;
-        vcnt_watch_vs_l   <= VS;
-        if( VS != vcnt_watch_vs_l || pre_lvbl != vcnt_watch_lvbl_l ) begin
-            $display("MZONE_VCNT_EDGE hdump=%03d vdump=%03d LVBL=%b VS=%b lvbl_edge=%b vs_edge=%b",
-                hdump, vdump, pre_lvbl, VS,
-                pre_lvbl != vcnt_watch_lvbl_l,
-                VS != vcnt_watch_vs_l);
-        end
-        if( hdump == 9'd0 &&
-            (vdump == 9'd240 || vdump == 9'd248 ||
-             vdump == 9'd256 || vdump == 9'd263 ||
-             vdump == 9'd0   || vdump == 9'd16) ) begin
-            $display("MZONE_VCNT_MARK hdump=%03d vdump=%03d LVBL=%b VS=%b",
-                hdump, vdump, pre_lvbl, VS);
-        end
-    end
-end
-`endif
 
 jtframe_vtimer #(
     .VB_START   ( VB_START ),
