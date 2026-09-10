@@ -75,7 +75,7 @@ localparam [8:0] HS_START = 9'd319;
 localparam [8:0] HS_END   = 9'd351;
 localparam [8:0] H_VB     = H_VNEXT;
 localparam [8:0] H_VNEXT  = HS_START;
-localparam [8:0] VB_START = 9'd240;
+localparam [8:0] VB_START = 9'd239;
 localparam [8:0] VB_END   = 9'd015;
 localparam [8:0] VVISIBLE = 9'd016;
 localparam [8:0] VS_START = 9'd256;
@@ -84,67 +84,29 @@ localparam [8:0] VCNT_END = 9'd263;
 localparam [21:0] OBJ_OFFSET = `ifdef JTFRAME_PROM_START `JTFRAME_PROM_START + 22'h020 `else 22'h020 `endif;
 localparam [21:0] CHR_OFFSET = `ifdef JTFRAME_PROM_START `JTFRAME_PROM_START + 22'h120 `else 22'h120 `endif;
 
-wire        pre_lhbl, pre_lvbl, vt_lvbl, pre_hs, vt_vs;
+wire        pre_lhbl, pre_lvbl;
 reg         pre_lhbl_d;
 // In flipped mode the PCB-visible color-mixer window extends one pixel past
 // the common timing window. Delay only the falling (active-to-blank) edge.
+`ifdef SIMULATION
+wire        colmix_pre_lhbl = pre_lhbl;
+`else
 wire        colmix_pre_lhbl = flip ? pre_lhbl | pre_lhbl_d : pre_lhbl;
-reg         pcb_vs;
+`endif
 wire [ 7:0] hcnt;
 wire [ 3:0] scr_pxl;
 wire [ 3:0] fix_pxl;
 wire [ 3:0] obj_pxl;
 wire        fix_src, fix_en;
-wire [ 9:0] oram_addr;
-wire [ 7:0] oram_dout;
 wire        pxl2_cen_unused = pxl2_cen;
 wire        obj_lut_we, char_lut_we;
-wire        dbg_show_fix;
-wire        dbg_show_scroll;
-wire        dbg_show_obj;
-wire        show_fix_en;
-wire        show_fix_src;
-wire        colmix_fix_src;
 
 assign obj_lut_we = prom_we && prog_addr >= OBJ_OFFSET && prog_addr < OBJ_OFFSET+22'h100;
 assign char_lut_we = prom_we && prog_addr >= CHR_OFFSET && prog_addr < CHR_OFFSET+22'h100;
 
-assign HS     = pre_hs;
-assign VS     = pcb_vs;
-assign pre_lvbl = vdump >= VVISIBLE && vdump < VB_START;
-
 assign h2 = hcnt[1];
 
 assign hcnt     = pcb_hcnt(hdump, flip);
-assign dbg_show_fix =
-    gfx_en[1];
-assign dbg_show_scroll =
-    gfx_en[0];
-assign dbg_show_obj =
-    gfx_en[3];
-assign show_fix_en    = dbg_show_fix && fix_en;
-assign show_fix_src   = dbg_show_fix && fix_src;
-assign colmix_fix_src = show_fix_src;
-
-jtframe_dual_ram #(
-`ifdef SIMSCENE
-    .SIMFILE ( "obj.bin" ),
-`endif
-    .AW ( 10 ),
-    .DW ( 8  )
-) u_objram(
-    .clk0   ( clk24             ),
-    .data0  ( objram_din   ),
-    .addr0  ( objram_addr  ),
-    .we0    ( objram_we    ),
-    .q0     ( objram_dout  ),
-
-    .clk1   ( clk               ),
-    .data1  ( 8'd0              ),
-    .addr1  ( oram_addr         ),
-    .we1    ( 1'b0              ),
-    .q1     ( oram_dout         )
-);
 
 function [7:0] pcb_hcnt;
     input [8:0] h;
@@ -223,14 +185,17 @@ jtmzone_fix u_fix(
 jtmzone_obj u_obj(
     .rst        ( rst          ),
     .clk        ( clk          ),
+    .clk24      ( clk24        ),
     .pxl_cen    ( pxl_cen      ),
+    .objram_addr( objram_addr  ),
+    .objram_din ( objram_din   ),
+    .objram_we  ( objram_we    ),
+    .objram_dout( objram_dout  ),
     .LVBL       ( LVBL         ),
-    .HS         ( pre_hs       ),
+    .HS         ( HS           ),
     .hdump      ( hdump        ),
     .vdump      ( vdump        ),
     .flip       ( flip         ),
-    .oram_addr  ( oram_addr    ),
-    .oram_dout  ( oram_dout    ),
     .rom_addr   ( obj_addr     ),
     .rom_cs     ( obj_cs       ),
     .rom_data   ( obj_data     ),
@@ -248,9 +213,9 @@ jtmzone_colmix u_colmix(
     .scr_pxl    ( scr_pxl        ),
     .fix_pxl    ( fix_pxl        ),
     .obj_pxl    ( obj_pxl        ),
-    .gfx_en     ( {dbg_show_obj, 1'b0, dbg_show_fix, dbg_show_scroll} ),
-    .fix_src    ( colmix_fix_src ),
-    .fix_prio   ( show_fix_en    ),
+    .gfx_en     ( gfx_en     ),
+    .fix_src    ( fix_src    ),
+    .fix_prio   ( fix_en     ),
     .preLHBL    ( colmix_pre_lhbl ),
     .preLVBL    ( pre_lvbl   ),
     .prog_data  ( prog_data  ),
@@ -268,7 +233,7 @@ jtmzone_colmix u_colmix(
 // Check the mixer-facing horizontal active width after all palette and
 // blanking delays. Ignore the partial line present when reset is released,
 // then validate every complete line at pixel-clock granularity.
-wire [9:0] hactive_expected = flip ? 10'd288 : 10'd287;
+localparam [9:0] HACTIVE_EXPECTED = 10'd287;
 reg        hactive_lhbl_l;
 reg        hactive_armed;
 reg [ 9:0] hactive_count;
@@ -286,12 +251,12 @@ always @(posedge clk) begin
             hactive_count <= hactive_count + 10'd1;
         end
         if( hactive_lhbl_l && !LHBL ) begin
-            if( hactive_armed && hactive_count != hactive_expected )
+            if( hactive_armed && hactive_count != HACTIVE_EXPECTED )
                 $error("MZONE_HACTIVE width=%0d expected=%0d vdump=%0d hdump=%0d",
-                    hactive_count, hactive_expected, vdump, hdump);
+                    hactive_count, HACTIVE_EXPECTED, vdump, hdump);
             if( hactive_armed && vdump == VVISIBLE )
                 $display("MZONE_HACTIVE width=%0d expected=%0d vdump=%0d hdump=%0d",
-                    hactive_count, hactive_expected, vdump, hdump);
+                    hactive_count, HACTIVE_EXPECTED, vdump, hdump);
             hactive_count <= 10'd0;
         end
     end
@@ -300,13 +265,10 @@ end
 
 
 always @(posedge clk) begin
-    if( rst ) begin
-        pcb_vs <= 1'b0;
+    if( rst )
         pre_lhbl_d <= 1'b0;
-    end else if( pxl_cen ) begin
+    else if( pxl_cen )
         pre_lhbl_d <= pre_lhbl;
-        pcb_vs <= vdump[8];
-    end
 end
 
 
@@ -333,9 +295,9 @@ jtframe_vtimer #(
     .Hinit      (           ),
     .Vinit      (           ),
     .LHBL       ( pre_lhbl  ),
-    .LVBL       ( vt_lvbl   ),
-    .HS         ( pre_hs    ),
-    .VS         ( vt_vs     )
+    .LVBL       ( pre_lvbl  ),
+    .HS         ( HS        ),
+    .VS         ( VS        )
 );
 
 endmodule

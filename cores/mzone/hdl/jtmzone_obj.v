@@ -7,16 +7,19 @@
 module jtmzone_obj(
     input               rst,
     input               clk,
+    input               clk24,
     input               pxl_cen,
+
+    input        [ 9:0] objram_addr,
+    input        [ 7:0] objram_din,
+    input               objram_we,
+    output       [ 7:0] objram_dout,
 
     input               LVBL,
     input               HS,
     input        [ 8:0] hdump,
     input        [ 8:0] vdump,
     input               flip,
-
-    output reg   [ 9:0] oram_addr,
-    input        [ 7:0] oram_dout,
 
     output       [12:0] rom_addr,
     output              rom_cs,
@@ -109,6 +112,7 @@ localparam [9:0] DMA_COPY_BYTES  = 10'd240;
 localparam [9:0] DMA_HCOUNTS     = DMA_COPY_BYTES*10'd4 + 10'd1;
 
 reg        lvbl_l, hs_l;
+reg [ 9:0] oram_addr;
 reg [ 9:0] scan_obj;
 reg [ 2:0] scan_st;
 reg        scan_last;
@@ -131,6 +135,7 @@ wire       vblk_start = !LVBL && lvbl_l;
 wire       hs_start = HS && !hs_l;
 wire       dma_copy = pxl_cen && dma_hcnt[1:0]==2'd0 && dma_addr != DMA_COPY_BYTES;
 wire       dma_we = dma_en && dma_wr;
+wire [7:0] oram_dout;
 wire [7:0] scan_dout;
 // Real-PCB portrait comparison places the simulated sprites one pixel too
 // far right. Use the raw vertical count; the previous +1 caused that shift.
@@ -145,6 +150,26 @@ wire [9:0] scan_addr = { scan_obj[7:0], scan_byte };
 // Kicker-style object drawer. It reads the raw PCB/MRA object layout directly:
 // one 32-bit SDRAM word contains two 16-bit {byte23,byte01} groups. The drawer
 // writes decoded pixels into a one-line object buffer.
+
+jtframe_dual_ram #(
+`ifdef SIMSCENE
+    .SIMFILE ( "obj.bin" ),
+`endif
+    .AW ( 10 ),
+    .DW ( 8  )
+) u_objram(
+    .clk0   ( clk24        ),
+    .data0  ( objram_din   ),
+    .addr0  ( objram_addr  ),
+    .we0    ( objram_we    ),
+    .q0     ( objram_dout  ),
+
+    .clk1   ( clk          ),
+    .data1  ( 8'd0         ),
+    .addr1  ( oram_addr    ),
+    .we1    ( 1'b0         ),
+    .q1     ( oram_dout    )
+);
 
 always @(posedge clk) begin
     lvbl_l <= LVBL;

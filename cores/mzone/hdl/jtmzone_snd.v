@@ -20,10 +20,10 @@ module jtmzone_snd(
     output reg          rom_cs,
     input       [ 7:0]  rom_data,
     input               rom_ok,
-    output      [11:0]  dac_addr,
-    output              dac_cs,
-    input       [ 7:0]  dac_data,
-    input               dac_ok,
+    output      [11:0]  mcu_rom_addr,
+    output              mcu_rom_cs,
+    input       [ 7:0]  mcu_rom_data,
+    input               mcu_rom_ok,
 
     // Cabinet inputs, same Konami ports used by MAME
     input       [ 1:0]  cab_1p,
@@ -33,9 +33,8 @@ module jtmzone_snd(
     input               service,
     input       [ 7:0]  dipsw_a,
     input       [ 7:0]  dipsw_b,
-    input               blank,
+    input               LVBL,
     input               h2,
-    input               main_irq_ack,
     input               main_int,
 
     // Shared RAM with the main CPU
@@ -43,7 +42,7 @@ module jtmzone_snd(
     output      [ 7:0]  shared_dout,
     output              shared_we,
     input       [ 7:0]  shared_din,
-    output              main_irq_n,
+    output              intmain_n,
 
     // Sound output
     output signed [9:0] ay0a, ay0b, ay0c,
@@ -61,7 +60,6 @@ wire [1:0]          cpu_cen_v, dac_cen_v;
 wire                cpu_cen, ay_cen, dac_cen, irq_rst, int_n, snmi_n;
 wire                wdog_reset_n, snmi_set_n;
 wire                wait_n;
-wire                main_irq_req;
 wire                ay_rd, ay_wr_addr, ay_wr_data;
 reg         [ 7:0]  cpu_din;
 reg         [ 1:0]  ay0a_rcen_r, ay0b_rcen_r, ay0c_rcen_r;
@@ -117,8 +115,8 @@ assign ay0a        = 10'd0;
 assign ay0b        = 10'd0;
 assign ay0c        = 10'd0;
 assign dac         = 8'd0;
-assign dac_addr    = 12'd0;
-assign dac_cs      = 1'b0;
+assign mcu_rom_addr= 12'd0;
+assign mcu_rom_cs  = 1'b0;
 assign dac_cen     = 1'b0;
 assign dac_status  = { fast_timer[7:4], 4'd0 };
 assign ay_dout     = dac_status;
@@ -133,7 +131,8 @@ assign wait_n      =
 assign wdog_reset_n = ~i8039_wdog_cs;
 assign snmi_set_n   = ~rst & (wdog_reset_n | A[0]);
 assign int_n        = ~snd_irq;
-assign main_irq_req = iorq_n && !wr_n && A == 16'ha000;
+// B_B7 output 5: active-low INTMAIN decode for A000-BFFF.
+assign intmain_n = mreq_n || !rfsh_n || A[15:13] != 3'b101;
 
 // PCB Z80 clock is 18.432 MHz / (3*2) = 3.072 MHz. The core clock here is
 // 24 MHz, so generate an exact 24 MHz * 16 / 125 enable.
@@ -241,20 +240,7 @@ jtframe_ff u_irq(
     .qn       (             ),
     .set      ( 1'b0        ),
     .clr      ( irq_rst     ),
-    .sigedge  ( blank       )
-);
-
-// B_C9 / INTMAIN path: sound write at A000 asserts the main-CPU request.
-jtframe_ff u_main_irq(
-    .rst      ( rst          ),
-    .clk      ( clk          ),
-    .cen      ( 1'b1         ),
-    .din      ( 1'b1         ),
-    .q        (              ),
-    .qn       ( main_irq_n   ),
-    .set      ( 1'b0         ),
-    .clr      ( main_irq_ack ),
-    .sigedge  ( main_irq_req )
+    .sigedge  ( ~LVBL       )
 );
 
 assign ay_oa = dac_status;
@@ -330,22 +316,22 @@ jtmzone_8039 u_b4(
     .latch_we   ( latch_cs && !wr_n      ),
     .irq_we     ( i8039_irq_cs && !wr_n  ),
     .status     ( dac_status             ),
-    .rom_addr   ( dac_addr               ),
-    .rom_cs     ( dac_cs                 ),
-    .rom_data   ( dac_data               ),
-    .rom_ok     ( dac_ok                 ),
+    .rom_addr   ( mcu_rom_addr           ),
+    .rom_cs     ( mcu_rom_cs             ),
+    .rom_data   ( mcu_rom_data           ),
+    .rom_ok     ( mcu_rom_ok             ),
     .dac        ( dac                    )
 );
 `endif
 
 `else
 assign rom_addr    = 0;
-assign dac_addr    = 0;
-assign dac_cs      = 0;
+assign mcu_rom_addr= 0;
+assign mcu_rom_cs  = 0;
 assign shared_addr = 0;
 assign shared_dout = 0;
 assign shared_we   = 0;
-assign main_irq_n  = 1'b1;
+assign intmain_n  = 1'b1;
 assign ay0a        = 0;
 assign ay0b        = 0;
 assign ay0c        = 0;

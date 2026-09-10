@@ -1,6 +1,6 @@
 params:
   - { name: SND_OFFSET, value: "`SND_START >> 1" }
-  - { name: DAC_OFFSET, value: "`DAC_START >> 1" }
+  - { name: MCU_ROM_OFFSET, value: "`MCU_ROM_START >> 1" }
   - { name: OBJ_OFFSET, value: "`OBJ_START >> 1" }
   - { name: OBJ_LEN, value: "(`SCR_START-`OBJ_START) >> 1" }
   - { name: SCR_OFFSET, value: "`SCR_START >> 1" }
@@ -56,10 +56,10 @@ sdram:
           data_width: 8
           offset: SND_OFFSET
         -
-          name: dac
+          name: mcu_rom
           addr_width: 12
           data_width: 8
-          offset: DAC_OFFSET
+          offset: MCU_ROM_OFFSET
         -
           name: main
           addr_width: 16

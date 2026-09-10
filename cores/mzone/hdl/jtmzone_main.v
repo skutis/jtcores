@@ -16,13 +16,10 @@ module jtmzone_main(
 
     output            cpu_rnw,
 
-    output reg        scrolly_cs,
-    output reg        scrollx_cs,
     output reg        vram0_cs,
     output reg        vram1_cs,
     output reg        cram0_cs,
     output reg        cram1_cs,
-    output reg        objram_cs,
 
     output     [10:0] shared_addr,
     output     [ 7:0] shared_dout,
@@ -31,10 +28,6 @@ module jtmzone_main(
 
     output     [ 9:0] vram_addr,
     output     [ 7:0] vram_din,
-    output            vram0_we,
-    output            vram1_we,
-    output            cram0_we,
-    output            cram1_we,
     input      [ 7:0] vram0_dout,
     input      [ 7:0] vram1_dout,
     input      [ 7:0] cram0_dout,
@@ -49,16 +42,11 @@ module jtmzone_main(
     output reg [ 7:0] scrollx,
     output            flip,
     output            snd_int,
-    output            irq_ack,
-    output            BA,
-    output            BS,
 
-    input             blank,
     input             vblank,
     input             h2,
     input             dip_pause,
-    input             snd_irq_n,
-    input      [ 7:0] snd_dout
+    input             intmain_n
 );
 
 reg  [ 7:0] cpu_din;
@@ -67,6 +55,7 @@ reg         b_a13_coin1;
 reg         b_a13_flip;
 reg         b_a13_int;
 reg         b_a13_intst;
+reg         scrolly_cs, scrollx_cs, objram_cs;
 reg         scroll_pend, scroll_pend_x;
 reg  [ 7:0] scroll_pend_data;
 wire [15:0] A;
@@ -75,10 +64,11 @@ wire        cpu_cen;
 wire [ 7:0] cpu_dout;
 reg         shared_cs;
 wire        intst       = b_a13_intst;
-reg         irq_n;
+wire        irq_n;
 wire        firq_n;
+wire        BS;
 wire        main_mbs = BS;
-reg         vblank_l;
+wire        irq_trigger = ~vblank & dip_pause;
 
 
 wire        ram_cs        = scrolly_cs | scrollx_cs | vram0_cs | vram1_cs |
@@ -113,23 +103,21 @@ assign vram_din  = cpu_dout;
 assign objram_addr = A[9:0];
 assign objram_din  = cpu_dout;
 assign objram_we   = ram_we && objram_cs;
-assign vram0_we  = ram_we && vram0_cs;
-assign vram1_we  = ram_we && vram1_cs;
-assign cram0_we  = ram_we && cram0_cs;
-assign cram1_we  = ram_we && cram1_cs;
 assign flip      = b_a13_flip;
 assign snd_int   = b_a13_int;
 
-always @(posedge clk) begin
-    vblank_l <= vblank;
-    if( rst ) begin
-        irq_n    <= 1'b1;
-        vblank_l <= 1'b1;
-    end else begin
-        if( !intst || irq_ack ) irq_n <= 1'b1;
-        else if( vblank_l && !vblank ) irq_n <= 1'b0;
-    end
-end
+// B_C12A on the schematic: ~IRQ is clocked by BLANK and released by INTST.
+jtframe_ff u_nirq(
+    .rst      ( rst         ),
+    .clk      ( clk         ),
+    .cen      ( 1'b1        ),
+    .din      ( 1'b1        ),
+    .q        (             ),
+    .qn       ( irq_n       ),
+    .set      ( 1'b0        ),
+    .clr      ( ~intst      ),
+    .sigedge  ( irq_trigger )
+);
 
 
 // B_C1B on the schematic: ~FIRQ is clocked by ~INTMAIN and released by ~MBS.
@@ -143,7 +131,7 @@ jtframe_ff u_nfirq(
     .qn       ( firq_n      ),
     .set      ( 1'b0        ),
     .clr      ( main_mbs    ),
-    .sigedge  ( snd_irq_n   )
+    .sigedge  ( intmain_n   )
 );
 
 always @(*) begin
@@ -247,8 +235,8 @@ jtframe_sys6809 #(
     .nIRQ       ( irq_n     ),
     .nFIRQ      ( firq_n    ),
     .nNMI       ( 1'b1      ),
-    .irq_ack    ( irq_ack   ),
-    .BA         ( BA        ),
+    .irq_ack    (           ),
+    .BA         (           ),
     .BS         ( BS        ),
     .bus_busy   ( 1'b0      ),
 

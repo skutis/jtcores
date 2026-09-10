@@ -322,6 +322,11 @@ if SMOOTH_SCROLL:
     if SCREEN_FLIP:
         irq_pc = lda_imm(irq_pc, SCREEN_FLIP)
         irq_pc = sta_ext(irq_pc, FLIP_LATCH_ADDR)
+    if not SKIP_IRQ_LATCH:
+        irq_pc = lda_imm(irq_pc, 0)
+        irq_pc = sta_ext(irq_pc, IRQ_LATCH_ADDR)
+        irq_pc = lda_imm(irq_pc, 1)
+        irq_pc = sta_ext(irq_pc, IRQ_LATCH_ADDR)
     irq_pc = sta_ext(irq_pc, 0x0800)
     op(irq_pc, 0x3B)          # rti
 elif CPU_SCROLL:

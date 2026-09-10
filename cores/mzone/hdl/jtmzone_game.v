@@ -25,14 +25,11 @@ wire        main_cpu_rnw;
 wire [ 8:0] video_vdump;
 wire [ 8:0] video_hdump;
 wire [ 8:0] video_vrender;
-wire        main_scrolly_cs, main_scrollx_cs;
 wire        vram0_cs, vram1_cs, cram0_cs, cram1_cs;
-wire        vram0_we, vram1_we, cram0_we, cram1_we;
 wire [ 9:0] vram_addr;
 wire [ 9:0] main_tile_addr;
 wire [ 7:0] vram_din;
 wire [ 7:0] vram0_dout, vram1_dout, cram0_dout, cram1_dout;
-wire        objram_cs;
 wire [ 9:0] objram_addr;
 wire [ 7:0] objram_din;
 wire [ 7:0] objram_dout;
@@ -54,20 +51,14 @@ wire [7:0] video_scrolly = main_scrolly;
 wire [7:0] video_scrollx = main_scrollx;
 wire       video_flip    = main_flip;
 `endif
-wire        main_irq_ack, snd_irq_n;
-wire        main_ba;
-wire        main_bs;
-wire        blank;
+wire        intmain_n;
 wire        h2;
-reg         blank_q;
-reg         v16_q;
 
 assign dip_flip   = 0;
 assign debug_view = 0;
 
 assign main_addr   = main_rom_addr;
 assign main_cs     = main_rom_cs;
-assign blank       = ~blank_q;
 assign main_tile_addr = vram_addr;
 
 wire [7:0] main_rom_data = main_data;
@@ -114,13 +105,10 @@ jtmzone_main u_main(
     .rom_ok     ( main_rom_ok    ),
 
     .cpu_rnw    ( main_cpu_rnw   ),
-    .scrolly_cs ( main_scrolly_cs ),
-    .scrollx_cs ( main_scrollx_cs ),
     .vram0_cs   ( vram0_cs   ),
     .vram1_cs   ( vram1_cs   ),
     .cram0_cs   ( cram0_cs   ),
     .cram1_cs   ( cram1_cs   ),
-    .objram_cs  ( objram_cs  ),
     .shared_addr( main_shared_addr ),
     .shared_dout( main_shared_din  ),
     .shared_we  ( main_shared_we   ),
@@ -128,10 +116,6 @@ jtmzone_main u_main(
 
     .vram_addr( vram_addr  ),
     .vram_din ( vram_din  ),
-    .vram0_we ( vram0_we  ),
-    .vram1_we ( vram1_we  ),
-    .cram0_we ( cram0_we  ),
-    .cram1_we ( cram1_we  ),
     .vram0_dout( vram0_dout ),
     .vram1_dout( vram1_dout ),
     .cram0_dout( cram0_dout ),
@@ -147,35 +131,23 @@ jtmzone_main u_main(
     .snd_int    ( main_int       ),
 
     .vblank     ( LVBL           ),
-    .blank      ( blank          ),
     .h2         ( h2             ),
     .dip_pause  ( dip_pause      ),
-    .irq_ack    ( main_irq_ack   ),
-    .BA         ( main_ba        ),
-    .BS         ( main_bs        ),
-    .snd_irq_n  ( snd_irq_n      ),
-    .snd_dout   ( 8'hff          )
+    .intmain_n  ( intmain_n      )
 );
 `else
 assign main_rom_addr   = 16'd0;
 assign main_rom_cs     = 1'b0;
 assign main_cpu_rnw    = 1'b1;
-assign main_scrolly_cs = 1'b0;
-assign main_scrollx_cs = 1'b0;
 assign vram0_cs   = 1'b0;
 assign vram1_cs   = 1'b0;
 assign cram0_cs   = 1'b0;
 assign cram1_cs   = 1'b0;
-assign objram_cs  = 1'b0;
 assign main_shared_addr= 11'd0;
 assign main_shared_din = 8'd0;
 assign main_shared_we  = 1'b0;
 assign vram_addr   = 10'd0;
 assign vram_din   = 8'd0;
-assign vram0_we   = 1'b0;
-assign vram1_we   = 1'b0;
-assign cram0_we   = 1'b0;
-assign cram1_we   = 1'b0;
 assign objram_addr= 10'd0;
 assign objram_din = 8'd0;
 assign objram_we  = 1'b0;
@@ -183,9 +155,6 @@ assign main_scrolly    = 8'd0;
 assign main_scrollx    = 8'd0;
 assign main_flip       = 1'b0;
 assign main_int        = 1'b0;
-assign main_irq_ack    = 1'b0;
-assign main_ba         = 1'b0;
-assign main_bs         = 1'b0;
 `endif
 
 jtmzone_snd u_snd(
@@ -196,10 +165,10 @@ jtmzone_snd u_snd(
     .rom_cs     ( snd_cs         ),
     .rom_data   ( snd_data       ),
     .rom_ok     ( snd_ok         ),
-    .dac_addr   ( dac_addr       ),
-    .dac_cs     ( dac_cs         ),
-    .dac_data   ( dac_data       ),
-    .dac_ok     ( dac_ok         ),
+    .mcu_rom_addr( mcu_rom_addr  ),
+    .mcu_rom_cs  ( mcu_rom_cs    ),
+    .mcu_rom_data( mcu_rom_data  ),
+    .mcu_rom_ok  ( mcu_rom_ok    ),
 
     .cab_1p     ( cab_1p[1:0]    ),
     .coin       ( coin[1:0]      ),
@@ -208,16 +177,14 @@ jtmzone_snd u_snd(
     .service    ( service        ),
     .dipsw_a    ( dipsw[ 7:0]    ),
     .dipsw_b    ( dipsw[15:8]    ),
-    .blank      ( LVBL           ),
+    .LVBL       ( LVBL           ),
     .h2         ( h2             ),
-    .main_irq_ack( main_irq_ack  ),
-
     .shared_addr( snd_shared_addr ),
     .shared_dout( snd_shared_dout ),
     .shared_we  ( snd_shared_we   ),
     .shared_din ( snd_shared_din  ),
     .main_int   ( main_int        ),
-    .main_irq_n ( snd_irq_n       ),
+    .intmain_n  ( intmain_n       ),
 
     .ay0a       ( ay0a           ),
     .ay0a_rcen  ( ay0a_rcen      ),
@@ -287,19 +254,5 @@ jtmzone_video u_video(
     .vdump      ( video_vdump    ),
     .vrender    ( video_vrender  )
 );
-
-always @(posedge clk) begin
-    if( rst ) begin
-        v16_q   <= 1'b0;
-        blank_q <= 1'b1;
-    end else if( pxl_cen ) begin
-        // Schematic BLANK latch: G6B LS74, clocked by V16 and loaded from
-        // ~(V32 & V64 & V128) on the V16 rising edge.
-        if( !v16_q && video_vdump[4] ) begin
-            blank_q <= ~(video_vdump[5] & video_vdump[6] & video_vdump[7]);
-        end
-        v16_q <= video_vdump[4];
-    end
-end
 
 endmodule

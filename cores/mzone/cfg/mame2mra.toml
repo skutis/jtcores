@@ -21,7 +21,7 @@ delete=[{names=["Unused","Unknown"]}]
 regions = [
     { name="maincpu" },
     { name="audiocpu", start="SND_START" },
-    { name="daccpu", start="DAC_START" },
+    { name="daccpu", start="MCU_ROM_START" },
     # Pair matching object-plane ROMs. jtmzone_game post_addr then transposes
     # group[0] with ysub[2:0] during download so each SDRAM word holds 8 X pixels.
     { name="gfx1", no_offset=true, start="OBJ_START", width=16, sequence=[0,2,1,3] },
