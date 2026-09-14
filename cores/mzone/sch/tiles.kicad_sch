@@ -19050,7 +19050,6 @@
 	)
 	(label "SCRX4"
 		(at 74.93 66.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19061,7 +19060,6 @@
 	)
 	(label "~{VRAMWR}"
 		(at 203.2 67.31 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19072,7 +19070,6 @@
 	)
 	(label "TA3"
 		(at 168.91 74.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19083,7 +19080,6 @@
 	)
 	(label "V2S"
 		(at 106.68 83.82 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19094,7 +19090,6 @@
 	)
 	(label "MD'''5"
 		(at 26.67 115.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19105,7 +19100,6 @@
 	)
 	(label "TCOL''1"
 		(at 373.38 186.69 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19116,7 +19110,6 @@
 	)
 	(label "~{FIX'}"
 		(at 102.87 204.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19127,7 +19120,6 @@
 	)
 	(label "V4S'"
 		(at 217.17 128.27 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19138,7 +19130,6 @@
 	)
 	(label "TPAL'1"
 		(at 302.26 203.2 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19149,7 +19140,6 @@
 	)
 	(label "TCHA11"
 		(at 254 138.43 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19160,7 +19150,6 @@
 	)
 	(label "TCHA12"
 		(at 238.76 85.09 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19171,7 +19160,6 @@
 	)
 	(label "TA6"
 		(at 153.67 102.87 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19182,7 +19170,6 @@
 	)
 	(label "TVFLIP"
 		(at 217.17 133.35 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19193,7 +19180,6 @@
 	)
 	(label "VD0"
 		(at 194.31 67.31 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19204,7 +19190,6 @@
 	)
 	(label "TCOL'0"
 		(at 341.63 177.8 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19215,7 +19200,6 @@
 	)
 	(label "TCOL2"
 		(at 341.63 195.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19226,7 +19210,6 @@
 	)
 	(label "TPAL'0"
 		(at 196.85 245.11 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19237,7 +19220,6 @@
 	)
 	(label "TCHA3"
 		(at 254 118.11 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19248,7 +19230,6 @@
 	)
 	(label "~{HBLANK}"
 		(at 45.72 234.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19259,7 +19240,6 @@
 	)
 	(label "MD'''2"
 		(at 245.11 57.15 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19270,7 +19250,6 @@
 	)
 	(label "TA[10..0]"
 		(at 166.37 88.9 90)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19281,7 +19260,6 @@
 	)
 	(label "TPAL'0"
 		(at 302.26 200.66 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19292,7 +19270,6 @@
 	)
 	(label "SCRY''0"
 		(at 130.81 245.11 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19303,7 +19280,6 @@
 	)
 	(label "~{H1''}"
 		(at 101.6 250.19 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19314,7 +19290,6 @@
 	)
 	(label "SCRY'0"
 		(at 52.07 269.24 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19325,7 +19300,6 @@
 	)
 	(label "H32S"
 		(at 106.68 114.3 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19336,7 +19310,6 @@
 	)
 	(label "MD'''2"
 		(at 26.67 125.73 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19347,7 +19320,6 @@
 	)
 	(label "FLIP'"
 		(at 52.07 274.32 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19358,7 +19330,6 @@
 	)
 	(label "TA2"
 		(at 168.91 72.39 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19369,7 +19340,6 @@
 	)
 	(label "TCHA11"
 		(at 254 87.63 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19380,7 +19350,6 @@
 	)
 	(label "TCHD1"
 		(at 299.72 74.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19391,7 +19360,6 @@
 	)
 	(label "TCODE3"
 		(at 302.26 198.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19402,7 +19370,6 @@
 	)
 	(label "V1S'"
 		(at 217.17 143.51 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19413,7 +19380,6 @@
 	)
 	(label "CD0"
 		(at 168.91 208.28 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19424,7 +19390,6 @@
 	)
 	(label "H4F"
 		(at 74.93 154.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19435,7 +19400,6 @@
 	)
 	(label "MD'''0"
 		(at 26.67 123.19 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19446,7 +19410,6 @@
 	)
 	(label "H2S"
 		(at 106.68 147.32 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19457,7 +19420,6 @@
 	)
 	(label "TA1"
 		(at 153.67 140.97 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19468,7 +19430,6 @@
 	)
 	(label "CD3"
 		(at 101.6 240.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19479,7 +19440,6 @@
 	)
 	(label "VD4"
 		(at 209.55 52.07 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19490,7 +19450,6 @@
 	)
 	(label "TCOL'3"
 		(at 341.63 185.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19501,7 +19460,6 @@
 	)
 	(label "TA3"
 		(at 168.91 118.11 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19512,7 +19470,6 @@
 	)
 	(label "SCRY2"
 		(at 35.56 167.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19523,7 +19480,6 @@
 	)
 	(label "V128F"
 		(at 74.93 60.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19534,7 +19490,6 @@
 	)
 	(label "TPAL'2"
 		(at 302.26 205.74 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19545,7 +19500,6 @@
 	)
 	(label "SCRY5"
 		(at 41.91 41.91 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19556,7 +19510,6 @@
 	)
 	(label "TCHD4"
 		(at 281.94 69.85 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19567,7 +19520,6 @@
 	)
 	(label "~{H1'''}"
 		(at 298.45 85.09 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19578,7 +19530,6 @@
 	)
 	(label "TCHD'3"
 		(at 299.72 102.87 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19589,7 +19540,6 @@
 	)
 	(label "TCODE3"
 		(at 331.47 109.22 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19600,7 +19550,6 @@
 	)
 	(label "~{COLRAMH1}"
 		(at 175.26 19.05 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19611,7 +19560,6 @@
 	)
 	(label "AB''1"
 		(at 121.92 147.32 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19622,7 +19570,6 @@
 	)
 	(label "VD6"
 		(at 209.55 87.63 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19633,7 +19580,6 @@
 	)
 	(label "TCHD4"
 		(at 299.72 69.85 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19644,7 +19590,6 @@
 	)
 	(label "TPAL'3"
 		(at 196.85 242.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19655,7 +19600,6 @@
 	)
 	(label "AB''8"
 		(at 121.92 114.3 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19666,7 +19610,6 @@
 	)
 	(label "TA8"
 		(at 153.67 107.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19677,7 +19620,6 @@
 	)
 	(label "TCHD5"
 		(at 281.94 72.39 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19688,7 +19630,6 @@
 	)
 	(label "VD7"
 		(at 209.55 44.45 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19699,7 +19640,6 @@
 	)
 	(label "SCRX5"
 		(at 74.93 68.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19710,7 +19650,6 @@
 	)
 	(label "TA1"
 		(at 168.91 69.85 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19721,7 +19660,6 @@
 	)
 	(label "MD'''5"
 		(at 26.67 76.2 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19732,7 +19670,6 @@
 	)
 	(label "TCOL2"
 		(at 308.61 179.07 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19743,7 +19680,6 @@
 	)
 	(label "V1S"
 		(at 106.68 81.28 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19754,7 +19690,6 @@
 	)
 	(label "TCHD1"
 		(at 281.94 113.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19765,7 +19700,6 @@
 	)
 	(label "TCHD'4"
 		(at 331.47 69.85 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19776,7 +19710,6 @@
 	)
 	(label "TA7"
 		(at 168.91 128.27 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19787,7 +19720,6 @@
 	)
 	(label "TCHD'6"
 		(at 331.47 67.31 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19798,7 +19730,6 @@
 	)
 	(label "SCRY4"
 		(at 58.42 128.27 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19809,7 +19740,6 @@
 	)
 	(label "H2S''"
 		(at 199.39 166.37 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19820,7 +19750,6 @@
 	)
 	(label "H64F"
 		(at 74.93 121.92 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19831,7 +19760,6 @@
 	)
 	(label "TCHA12"
 		(at 254 90.17 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19842,7 +19770,6 @@
 	)
 	(label "SCRX1"
 		(at 58.42 81.28 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19853,7 +19780,6 @@
 	)
 	(label "TVFLIP"
 		(at 217.17 140.97 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19864,7 +19790,6 @@
 	)
 	(label "~{COLRAM'}"
 		(at 129.54 30.48 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19875,7 +19800,6 @@
 	)
 	(label "CD7"
 		(at 168.91 173.99 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19886,7 +19810,6 @@
 	)
 	(label "TCHD'7"
 		(at 299.72 115.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19897,7 +19820,6 @@
 	)
 	(label "TCHA10"
 		(at 238.76 87.63 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19908,7 +19830,6 @@
 	)
 	(label "CD5"
 		(at 168.91 168.91 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19919,7 +19840,6 @@
 	)
 	(label "H4S'"
 		(at 77.47 240.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19930,7 +19850,6 @@
 	)
 	(label "SCRY1"
 		(at 74.93 165.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19941,7 +19860,6 @@
 	)
 	(label "MD'''1"
 		(at 205.74 205.74 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19952,7 +19870,6 @@
 	)
 	(label "VD1"
 		(at 194.31 69.85 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19963,7 +19880,6 @@
 	)
 	(label "TCHD7"
 		(at 281.94 128.27 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19974,7 +19890,6 @@
 	)
 	(label "TPAL'1"
 		(at 196.85 247.65 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19985,7 +19900,6 @@
 	)
 	(label "CD2"
 		(at 168.91 203.2 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19996,7 +19910,6 @@
 	)
 	(label "H2S"
 		(at 45.72 237.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20007,7 +19920,6 @@
 	)
 	(label "H128S"
 		(at 121.92 129.54 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20018,7 +19930,6 @@
 	)
 	(label "SCRY6"
 		(at 35.56 172.72 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20029,7 +19940,6 @@
 	)
 	(label "SCRY4"
 		(at 35.56 170.18 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20040,7 +19950,6 @@
 	)
 	(label "~{VRAM'}"
 		(at 129.54 22.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20051,7 +19960,6 @@
 	)
 	(label "CD4"
 		(at 168.91 198.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20062,7 +19970,6 @@
 	)
 	(label "H128S"
 		(at 106.68 119.38 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20073,7 +19980,6 @@
 	)
 	(label "H1"
 		(at 129.54 27.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20084,7 +19990,6 @@
 	)
 	(label "TCHA8"
 		(at 238.76 95.25 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20095,7 +20000,6 @@
 	)
 	(label "AB''3"
 		(at 121.92 71.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20106,7 +20010,6 @@
 	)
 	(label "PXLCLK"
 		(at 340.36 162.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20117,7 +20020,6 @@
 	)
 	(label "SCRY0F"
 		(at 340.36 201.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20128,7 +20030,6 @@
 	)
 	(label "TA2"
 		(at 168.91 115.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20139,7 +20040,6 @@
 	)
 	(label "V32S"
 		(at 121.92 93.98 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20150,7 +20050,6 @@
 	)
 	(label "TCHA0"
 		(at 254 110.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20161,7 +20060,6 @@
 	)
 	(label "TA0"
 		(at 153.67 143.51 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20172,7 +20070,6 @@
 	)
 	(label "SCRY3"
 		(at 58.42 118.11 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20183,7 +20080,6 @@
 	)
 	(label "SCRY5"
 		(at 58.42 115.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20194,7 +20090,6 @@
 	)
 	(label "TCHA12"
 		(at 254 140.97 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20205,7 +20100,6 @@
 	)
 	(label "H32S"
 		(at 121.92 132.08 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20216,7 +20110,6 @@
 	)
 	(label "AB''10"
 		(at 121.92 76.2 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20227,7 +20120,6 @@
 	)
 	(label "V2S'"
 		(at 217.17 135.89 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20238,7 +20130,6 @@
 	)
 	(label "H4F"
 		(at 102.87 207.01 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20249,7 +20140,6 @@
 	)
 	(label "TCHA5"
 		(at 238.76 77.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20260,7 +20150,6 @@
 	)
 	(label "SCRY7"
 		(at 35.56 154.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20271,7 +20160,6 @@
 	)
 	(label "FLIP'"
 		(at 143.51 237.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20282,7 +20170,6 @@
 	)
 	(label "SCRY0F"
 		(at 196.85 240.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20293,7 +20180,6 @@
 	)
 	(label "TCODE2"
 		(at 331.47 106.68 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20304,7 +20190,6 @@
 	)
 	(label "TA10"
 		(at 168.91 92.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20315,7 +20200,6 @@
 	)
 	(label "TCHA5"
 		(at 254 123.19 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20326,7 +20210,6 @@
 	)
 	(label "TCHA3"
 		(at 254 67.31 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20337,7 +20220,6 @@
 	)
 	(label "THFLIP"
 		(at 217.17 156.21 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20348,7 +20230,6 @@
 	)
 	(label "SCRY4"
 		(at 41.91 54.61 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20359,7 +20240,6 @@
 	)
 	(label "H4S"
 		(at 45.72 240.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20370,7 +20250,6 @@
 	)
 	(label "CD2"
 		(at 101.6 242.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20381,7 +20260,6 @@
 	)
 	(label "H1"
 		(at 49.53 247.65 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20392,7 +20270,6 @@
 	)
 	(label "MD'''6"
 		(at 205.74 193.04 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20403,7 +20280,6 @@
 	)
 	(label "VD6"
 		(at 194.31 82.55 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20414,7 +20290,6 @@
 	)
 	(label "MD'''0"
 		(at 245.11 62.23 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20425,7 +20300,6 @@
 	)
 	(label "SCRY6"
 		(at 41.91 57.15 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20436,7 +20310,6 @@
 	)
 	(label "SCRY3"
 		(at 35.56 160.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20447,7 +20320,6 @@
 	)
 	(label "H64S"
 		(at 106.68 116.84 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20458,7 +20330,6 @@
 	)
 	(label "PXLCLK"
 		(at 163.83 252.73 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20469,7 +20340,6 @@
 	)
 	(label "H8S"
 		(at 106.68 152.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20480,7 +20350,6 @@
 	)
 	(label "H4S"
 		(at 106.68 149.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20491,7 +20360,6 @@
 	)
 	(label "TA9"
 		(at 168.91 90.17 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20502,7 +20370,6 @@
 	)
 	(label "TCHA2"
 		(at 238.76 146.05 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20513,7 +20380,6 @@
 	)
 	(label "~{VRAMWR}"
 		(at 163.83 102.87 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20524,7 +20390,6 @@
 	)
 	(label "THFLIP"
 		(at 138.43 218.44 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20535,7 +20400,6 @@
 	)
 	(label "CD0"
 		(at 194.31 110.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20546,7 +20410,6 @@
 	)
 	(label "VD5"
 		(at 194.31 80.01 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20557,7 +20420,6 @@
 	)
 	(label "TCHD'4"
 		(at 299.72 107.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20568,7 +20430,6 @@
 	)
 	(label "~{TCHL}"
 		(at 254 148.59 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20579,7 +20440,6 @@
 	)
 	(label "TCHA6"
 		(at 254 125.73 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20590,7 +20450,6 @@
 	)
 	(label "TCHD'6"
 		(at 299.72 113.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20601,7 +20460,6 @@
 	)
 	(label "TA6"
 		(at 168.91 125.73 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20612,7 +20470,6 @@
 	)
 	(label "CD7"
 		(at 168.91 190.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20623,7 +20480,6 @@
 	)
 	(label "V2S"
 		(at 168.91 158.75 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20634,7 +20490,6 @@
 	)
 	(label "TCHA6"
 		(at 254 74.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20645,7 +20500,6 @@
 	)
 	(label "SCRY0"
 		(at 44.45 181.61 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20656,7 +20510,6 @@
 	)
 	(label "CD1"
 		(at 168.91 205.74 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20667,7 +20520,6 @@
 	)
 	(label "FIX"
 		(at 24.13 138.43 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20678,7 +20530,6 @@
 	)
 	(label "MD'''7"
 		(at 245.11 44.45 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20689,7 +20540,6 @@
 	)
 	(label "TCOL'0"
 		(at 373.38 147.32 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20700,7 +20550,6 @@
 	)
 	(label "AB''2"
 		(at 121.92 144.78 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20711,7 +20560,6 @@
 	)
 	(label "MD'''1"
 		(at 26.67 81.28 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20722,7 +20570,6 @@
 	)
 	(label "MD'''2"
 		(at 26.67 86.36 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20733,7 +20580,6 @@
 	)
 	(label "TCOL0"
 		(at 341.63 147.32 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20744,7 +20590,6 @@
 	)
 	(label "VD4"
 		(at 194.31 77.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20755,7 +20600,6 @@
 	)
 	(label "SCRX2"
 		(at 74.93 104.14 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20766,7 +20610,6 @@
 	)
 	(label "SCRX3"
 		(at 58.42 78.74 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20777,7 +20620,6 @@
 	)
 	(label "H2S'"
 		(at 77.47 237.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20788,7 +20630,6 @@
 	)
 	(label "CD5"
 		(at 194.31 123.19 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20799,7 +20640,6 @@
 	)
 	(label "MD'''0"
 		(at 26.67 83.82 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20810,7 +20650,6 @@
 	)
 	(label "TCHD'3"
 		(at 331.47 59.69 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20821,7 +20660,6 @@
 	)
 	(label "TA1"
 		(at 168.91 113.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20832,7 +20670,6 @@
 	)
 	(label "TPAL3"
 		(at 166.37 242.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20843,7 +20680,6 @@
 	)
 	(label "FIX"
 		(at 86.36 215.9 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20854,7 +20690,6 @@
 	)
 	(label "TA4"
 		(at 153.67 135.89 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20865,7 +20700,6 @@
 	)
 	(label "TCHA3"
 		(at 238.76 138.43 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20876,7 +20710,6 @@
 	)
 	(label "TA6"
 		(at 168.91 82.55 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20887,7 +20720,6 @@
 	)
 	(label "~{H1}"
 		(at 121.92 118.11 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20898,7 +20730,6 @@
 	)
 	(label "H4S'"
 		(at 168.91 163.83 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20909,7 +20740,6 @@
 	)
 	(label "H2F"
 		(at 74.93 152.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20920,7 +20750,6 @@
 	)
 	(label "TCHD'1"
 		(at 331.47 74.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20931,7 +20760,6 @@
 	)
 	(label "SCRY1"
 		(at 35.56 162.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20942,7 +20770,6 @@
 	)
 	(label "TCHD'7"
 		(at 331.47 62.23 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20953,7 +20780,6 @@
 	)
 	(label "V1F"
 		(at 74.93 86.36 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20964,7 +20790,6 @@
 	)
 	(label "H2S''"
 		(at 217.17 158.75 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20975,7 +20800,6 @@
 	)
 	(label "V128S"
 		(at 121.92 99.06 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20986,7 +20810,6 @@
 	)
 	(label "TCHA0"
 		(at 238.76 161.29 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20997,7 +20820,6 @@
 	)
 	(label "TCHD6"
 		(at 281.94 74.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21008,7 +20830,6 @@
 	)
 	(label "MD'''7"
 		(at 26.67 73.66 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21019,7 +20840,6 @@
 	)
 	(label "TA5"
 		(at 153.67 72.39 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21030,7 +20850,6 @@
 	)
 	(label "CFIX"
 		(at 125.73 209.55 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21041,7 +20860,6 @@
 	)
 	(label "TCOL''3"
 		(at 373.38 191.77 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21052,7 +20870,6 @@
 	)
 	(label "TCHA9"
 		(at 254 133.35 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21063,7 +20880,6 @@
 	)
 	(label "TA0"
 		(at 168.91 110.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21074,7 +20890,6 @@
 	)
 	(label "CD7"
 		(at 194.31 128.27 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21085,7 +20900,6 @@
 	)
 	(label "CD1"
 		(at 101.6 232.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21096,7 +20910,6 @@
 	)
 	(label "~{SCROLLX'}"
 		(at 24.13 96.52 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21107,7 +20920,6 @@
 	)
 	(label "TPAL1"
 		(at 130.81 232.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21118,7 +20930,6 @@
 	)
 	(label "TCHA8"
 		(at 254 80.01 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21129,7 +20940,6 @@
 	)
 	(label "SCRX2"
 		(at 58.42 86.36 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21140,7 +20950,6 @@
 	)
 	(label "TCHD'2"
 		(at 331.47 64.77 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21151,7 +20960,6 @@
 	)
 	(label "TA4"
 		(at 168.91 120.65 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21162,7 +20970,6 @@
 	)
 	(label "~{COLRAMWR}"
 		(at 175.26 35.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21173,7 +20980,6 @@
 	)
 	(label "VD0"
 		(at 209.55 77.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21184,7 +20990,6 @@
 	)
 	(label "V8S"
 		(at 121.92 66.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21195,7 +21000,6 @@
 	)
 	(label "SCRY1"
 		(at 41.91 46.99 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21206,7 +21010,6 @@
 	)
 	(label "TCOL''2"
 		(at 373.38 189.23 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21217,7 +21020,6 @@
 	)
 	(label "TCHA5"
 		(at 254 72.39 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21228,7 +21030,6 @@
 	)
 	(label "TCOL2"
 		(at 327.66 195.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21239,7 +21040,6 @@
 	)
 	(label "TVFLIP"
 		(at 217.17 148.59 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21250,7 +21050,6 @@
 	)
 	(label "V16F"
 		(at 74.93 53.34 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21261,7 +21060,6 @@
 	)
 	(label "SCRY0"
 		(at 41.91 49.53 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21272,7 +21070,6 @@
 	)
 	(label "MD'''3"
 		(at 26.67 118.11 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21283,7 +21080,6 @@
 	)
 	(label "TA8"
 		(at 168.91 87.63 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21294,7 +21090,6 @@
 	)
 	(label "TCHA7"
 		(at 238.76 82.55 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21305,7 +21100,6 @@
 	)
 	(label "H2''"
 		(at 129.54 48.26 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21316,7 +21110,6 @@
 	)
 	(label "H4S''"
 		(at 199.39 163.83 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21327,7 +21120,6 @@
 	)
 	(label "V8S"
 		(at 106.68 88.9 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21338,7 +21130,6 @@
 	)
 	(label "VD2"
 		(at 209.55 82.55 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21349,7 +21140,6 @@
 	)
 	(label "TCHA6"
 		(at 238.76 80.01 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21360,7 +21150,6 @@
 	)
 	(label "TA2"
 		(at 153.67 138.43 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21371,7 +21160,6 @@
 	)
 	(label "VD0"
 		(at 209.55 62.23 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21382,7 +21170,6 @@
 	)
 	(label "SCRX1"
 		(at 74.93 101.6 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21393,7 +21180,6 @@
 	)
 	(label "TCHD5"
 		(at 281.94 123.19 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21404,7 +21190,6 @@
 	)
 	(label "THFLIP"
 		(at 199.39 161.29 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21415,7 +21200,6 @@
 	)
 	(label "AB''5"
 		(at 121.92 78.74 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21426,7 +21210,6 @@
 	)
 	(label "MD'''2"
 		(at 205.74 203.2 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21437,7 +21220,6 @@
 	)
 	(label "H2S'"
 		(at 168.91 166.37 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21448,7 +21230,6 @@
 	)
 	(label "TCHD'0"
 		(at 331.47 77.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21459,7 +21240,6 @@
 	)
 	(label "SCRY7"
 		(at 58.42 113.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21470,7 +21250,6 @@
 	)
 	(label "CD6"
 		(at 194.31 125.73 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21481,7 +21260,6 @@
 	)
 	(label "~{COLRAMH1}"
 		(at 163.83 215.9 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21492,7 +21270,6 @@
 	)
 	(label "TCOL1"
 		(at 341.63 149.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21503,7 +21280,6 @@
 	)
 	(label "AB''9"
 		(at 121.92 111.76 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21514,7 +21290,6 @@
 	)
 	(label "TCHD0"
 		(at 281.94 110.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21525,7 +21300,6 @@
 	)
 	(label "VD3"
 		(at 209.55 95.25 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21536,7 +21310,6 @@
 	)
 	(label "SCRY'0"
 		(at 19.05 266.7 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21547,7 +21320,6 @@
 	)
 	(label "TCHD6"
 		(at 299.72 67.31 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21558,7 +21330,6 @@
 	)
 	(label "TCHD2"
 		(at 281.94 115.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21569,7 +21340,6 @@
 	)
 	(label "MD'''4"
 		(at 26.67 128.27 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21580,7 +21350,6 @@
 	)
 	(label "TPAL2"
 		(at 166.37 229.87 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21591,7 +21360,6 @@
 	)
 	(label "TCOL'1"
 		(at 341.63 180.34 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21602,7 +21370,6 @@
 	)
 	(label "TCHA1"
 		(at 254 113.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21613,7 +21380,6 @@
 	)
 	(label "VD7"
 		(at 209.55 85.09 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21624,7 +21390,6 @@
 	)
 	(label "TCOL1"
 		(at 327.66 193.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21635,7 +21400,6 @@
 	)
 	(label "~{FIX}"
 		(at 45.72 232.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21646,7 +21410,6 @@
 	)
 	(label "TPAL'3"
 		(at 302.26 208.28 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21657,7 +21420,6 @@
 	)
 	(label "CD3"
 		(at 194.31 118.11 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21668,7 +21430,6 @@
 	)
 	(label "SCRX5"
 		(at 58.42 76.2 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21679,7 +21440,6 @@
 	)
 	(label "TCOL0"
 		(at 327.66 190.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21690,7 +21450,6 @@
 	)
 	(label "V64S"
 		(at 106.68 53.34 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21701,7 +21460,6 @@
 	)
 	(label "TCHA4"
 		(at 254 69.85 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21712,7 +21470,6 @@
 	)
 	(label "~{CHBLANK}"
 		(at 130.81 237.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21723,7 +21480,6 @@
 	)
 	(label "MD'''1"
 		(at 26.67 120.65 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21734,7 +21490,6 @@
 	)
 	(label "V16S"
 		(at 106.68 48.26 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21745,7 +21500,6 @@
 	)
 	(label "SCRY2"
 		(at 58.42 125.73 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21756,7 +21510,6 @@
 	)
 	(label "~{VRAMWR}"
 		(at 175.26 27.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21767,7 +21520,6 @@
 	)
 	(label "TCOL'2"
 		(at 373.38 152.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21778,7 +21530,6 @@
 	)
 	(label "~{H1F}"
 		(at 299.72 119.38 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21789,7 +21540,6 @@
 	)
 	(label "SCRY0"
 		(at 58.42 123.19 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21800,7 +21550,6 @@
 	)
 	(label "TPAL'2"
 		(at 196.85 229.87 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21811,7 +21560,6 @@
 	)
 	(label "TCOL1"
 		(at 308.61 176.53 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21822,7 +21570,6 @@
 	)
 	(label "MD'''6"
 		(at 26.67 91.44 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21833,7 +21580,6 @@
 	)
 	(label "SCRY6"
 		(at 58.42 130.81 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21844,7 +21590,6 @@
 	)
 	(label "SCRX0"
 		(at 58.42 83.82 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21855,7 +21600,6 @@
 	)
 	(label "MD'''3"
 		(at 245.11 54.61 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21866,7 +21610,6 @@
 	)
 	(label "CD2"
 		(at 194.31 115.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21877,7 +21620,6 @@
 	)
 	(label "AB''0"
 		(at 121.92 149.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21888,7 +21630,6 @@
 	)
 	(label "V16S"
 		(at 121.92 96.52 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21899,7 +21640,6 @@
 	)
 	(label "TPAL0"
 		(at 130.81 234.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21910,7 +21650,6 @@
 	)
 	(label "TCHA4"
 		(at 254 120.65 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21921,7 +21660,6 @@
 	)
 	(label "VD7"
 		(at 194.31 85.09 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21932,7 +21670,6 @@
 	)
 	(label "TA0"
 		(at 168.91 67.31 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21943,7 +21680,6 @@
 	)
 	(label "TCHA2"
 		(at 254 115.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21954,7 +21690,6 @@
 	)
 	(label "TCOL'1"
 		(at 373.38 149.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21965,7 +21700,6 @@
 	)
 	(label "CD3"
 		(at 168.91 200.66 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21976,7 +21710,6 @@
 	)
 	(label "TCOL3"
 		(at 341.63 154.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21987,7 +21720,6 @@
 	)
 	(label "V32S"
 		(at 106.68 50.8 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21998,7 +21730,6 @@
 	)
 	(label "MD'''3"
 		(at 26.67 78.74 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22009,7 +21740,6 @@
 	)
 	(label "~{H1F}"
 		(at 231.14 237.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22020,7 +21750,6 @@
 	)
 	(label "~{TCHL}"
 		(at 220.98 181.61 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22031,7 +21760,6 @@
 	)
 	(label "~{FLIP'}"
 		(at 52.07 261.62 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22042,7 +21770,6 @@
 	)
 	(label "TA5"
 		(at 168.91 123.19 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22053,7 +21780,6 @@
 	)
 	(label "THFLIP"
 		(at 217.17 163.83 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22064,7 +21790,6 @@
 	)
 	(label "TCHD2"
 		(at 299.72 64.77 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22075,7 +21800,6 @@
 	)
 	(label "TCHA1"
 		(at 238.76 153.67 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22086,7 +21810,6 @@
 	)
 	(label "~{COLRAMWR}"
 		(at 162.56 146.05 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22097,7 +21820,6 @@
 	)
 	(label "AB''6"
 		(at 121.92 109.22 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22108,7 +21830,6 @@
 	)
 	(label "TCODE1"
 		(at 331.47 104.14 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22119,7 +21840,6 @@
 	)
 	(label "MD'''5"
 		(at 245.11 49.53 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22130,7 +21850,6 @@
 	)
 	(label "TCODE0"
 		(at 302.26 190.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22141,7 +21860,6 @@
 	)
 	(label "TCODE1"
 		(at 302.26 193.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22152,7 +21870,6 @@
 	)
 	(label "VD5"
 		(at 209.55 90.17 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22163,7 +21880,6 @@
 	)
 	(label "CD6"
 		(at 168.91 193.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22174,7 +21890,6 @@
 	)
 	(label "VD1"
 		(at 209.55 80.01 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22185,7 +21900,6 @@
 	)
 	(label "SCRY3"
 		(at 41.91 44.45 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22196,7 +21910,6 @@
 	)
 	(label "TA9"
 		(at 168.91 133.35 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22207,7 +21920,6 @@
 	)
 	(label "VD3"
 		(at 194.31 74.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22218,7 +21930,6 @@
 	)
 	(label "SCRX6"
 		(at 74.93 71.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22229,7 +21940,6 @@
 	)
 	(label "TA9"
 		(at 153.67 105.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22240,7 +21950,6 @@
 	)
 	(label "SCRY'0"
 		(at 77.47 242.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22251,7 +21960,6 @@
 	)
 	(label "SCRY0"
 		(at 35.56 165.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22262,7 +21970,6 @@
 	)
 	(label "SCRX0"
 		(at 74.93 99.06 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22273,7 +21980,6 @@
 	)
 	(label "CD6"
 		(at 168.91 161.29 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22284,7 +21990,6 @@
 	)
 	(label "TCHD6"
 		(at 281.94 125.73 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22295,7 +22000,6 @@
 	)
 	(label "~{FIX}"
 		(at 64.77 215.9 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22306,7 +22010,6 @@
 	)
 	(label "~{H1}"
 		(at 121.92 82.55 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22317,7 +22020,6 @@
 	)
 	(label "TCHD2"
 		(at 281.94 64.77 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22328,7 +22030,6 @@
 	)
 	(label "VD6"
 		(at 209.55 46.99 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22339,7 +22040,6 @@
 	)
 	(label "SCRY5"
 		(at 74.93 132.08 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22350,7 +22050,6 @@
 	)
 	(label "V4F"
 		(at 74.93 91.44 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22361,7 +22060,6 @@
 	)
 	(label "VD3"
 		(at 209.55 54.61 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22372,7 +22070,6 @@
 	)
 	(label "V4S'"
 		(at 199.39 171.45 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22383,7 +22080,6 @@
 	)
 	(label "TCHD0"
 		(at 299.72 77.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22394,7 +22090,6 @@
 	)
 	(label "TCHA7"
 		(at 254 128.27 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22405,7 +22100,6 @@
 	)
 	(label "CD5"
 		(at 168.91 195.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22416,7 +22110,6 @@
 	)
 	(label "V1S'"
 		(at 199.39 156.21 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22427,7 +22120,6 @@
 	)
 	(label "TCHD'5"
 		(at 331.47 72.39 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22438,7 +22130,6 @@
 	)
 	(label "TCHD'1"
 		(at 299.72 97.79 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22449,7 +22140,6 @@
 	)
 	(label "MD'''3"
 		(at 205.74 200.66 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22460,7 +22150,6 @@
 	)
 	(label "AB''7"
 		(at 121.92 106.68 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22471,7 +22160,6 @@
 	)
 	(label "VD4"
 		(at 209.55 92.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22482,7 +22170,6 @@
 	)
 	(label "H1"
 		(at 129.54 35.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22493,7 +22180,6 @@
 	)
 	(label "MD'''1"
 		(at 245.11 59.69 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22504,7 +22190,6 @@
 	)
 	(label "SCRY2"
 		(at 74.93 167.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22515,7 +22200,6 @@
 	)
 	(label "V1S"
 		(at 168.91 156.21 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22526,7 +22210,6 @@
 	)
 	(label "H8F"
 		(at 74.93 157.48 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22537,7 +22220,6 @@
 	)
 	(label "H16S"
 		(at 106.68 154.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22548,7 +22230,6 @@
 	)
 	(label "SCRY7"
 		(at 41.91 39.37 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22559,7 +22240,6 @@
 	)
 	(label "TCHD4"
 		(at 281.94 120.65 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22570,7 +22250,6 @@
 	)
 	(label "TCHD1"
 		(at 281.94 62.23 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22581,7 +22260,6 @@
 	)
 	(label "~{VRAMH1}"
 		(at 175.26 16.51 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22592,7 +22270,6 @@
 	)
 	(label "TCHA11"
 		(at 238.76 90.17 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22603,7 +22280,6 @@
 	)
 	(label "MD'''4"
 		(at 205.74 198.12 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22614,7 +22290,6 @@
 	)
 	(label "V64S"
 		(at 121.92 101.6 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22625,7 +22300,6 @@
 	)
 	(label "H16S"
 		(at 121.92 134.62 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22636,7 +22310,6 @@
 	)
 	(label "CD1"
 		(at 194.31 113.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22647,7 +22320,6 @@
 	)
 	(label "TPAL1"
 		(at 166.37 247.65 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22658,7 +22330,6 @@
 	)
 	(label "SCRY2"
 		(at 41.91 52.07 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22669,7 +22340,6 @@
 	)
 	(label "TCOL'3"
 		(at 373.38 154.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22680,7 +22350,6 @@
 	)
 	(label "TCHA7"
 		(at 254 77.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22691,7 +22360,6 @@
 	)
 	(label "MD'''5"
 		(at 205.74 195.58 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22702,7 +22370,6 @@
 	)
 	(label "TCOL1"
 		(at 341.63 193.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22713,7 +22380,6 @@
 	)
 	(label "TCOL2"
 		(at 341.63 152.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22724,7 +22390,6 @@
 	)
 	(label "FLIP'"
 		(at 138.43 223.52 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22735,7 +22400,6 @@
 	)
 	(label "TCOL0"
 		(at 308.61 173.99 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22746,7 +22410,6 @@
 	)
 	(label "TCHD3"
 		(at 281.94 118.11 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22757,7 +22420,6 @@
 	)
 	(label "~{H1''}"
 		(at 142.24 252.73 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22768,7 +22430,6 @@
 	)
 	(label "FIX"
 		(at 24.13 99.06 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22779,7 +22440,6 @@
 	)
 	(label "TA10"
 		(at 168.91 135.89 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22790,7 +22450,6 @@
 	)
 	(label "SCRY6"
 		(at 74.93 134.62 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22801,7 +22460,6 @@
 	)
 	(label "MD'''4"
 		(at 245.11 52.07 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22812,7 +22470,6 @@
 	)
 	(label "VD1"
 		(at 209.55 59.69 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22823,7 +22480,6 @@
 	)
 	(label "TCHA10"
 		(at 254 85.09 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22834,7 +22490,6 @@
 	)
 	(label "~{H1''}"
 		(at 210.82 240.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22845,7 +22500,6 @@
 	)
 	(label "H8S"
 		(at 121.92 137.16 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22856,7 +22510,6 @@
 	)
 	(label "V4S"
 		(at 106.68 86.36 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22867,7 +22520,6 @@
 	)
 	(label "TCHA1"
 		(at 254 62.23 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22878,7 +22530,6 @@
 	)
 	(label "~{H1''}"
 		(at 209.55 100.33 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22889,7 +22540,6 @@
 	)
 	(label "SCRX7"
 		(at 74.93 73.66 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22900,7 +22550,6 @@
 	)
 	(label "TCHD0"
 		(at 281.94 59.69 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22911,7 +22560,6 @@
 	)
 	(label "MD'''7"
 		(at 26.67 113.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22922,7 +22570,6 @@
 	)
 	(label "TPAL3"
 		(at 130.81 240.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22933,7 +22580,6 @@
 	)
 	(label "SCRX3"
 		(at 74.93 106.68 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22944,7 +22590,6 @@
 	)
 	(label "~{TCHH}"
 		(at 220.98 173.99 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22955,7 +22600,6 @@
 	)
 	(label "SCRX6"
 		(at 58.42 91.44 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22966,7 +22610,6 @@
 	)
 	(label "TCODE2"
 		(at 302.26 195.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22977,7 +22620,6 @@
 	)
 	(label "SCRY1"
 		(at 58.42 120.65 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22988,7 +22630,6 @@
 	)
 	(label "TCHA9"
 		(at 254 82.55 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22999,7 +22640,6 @@
 	)
 	(label "H4S''"
 		(at 217.17 151.13 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23010,7 +22650,6 @@
 	)
 	(label "VD2"
 		(at 194.31 72.39 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23021,7 +22660,6 @@
 	)
 	(label "TPAL2"
 		(at 130.81 242.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23032,7 +22670,6 @@
 	)
 	(label "TCHD7"
 		(at 299.72 62.23 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23043,7 +22680,6 @@
 	)
 	(label "TCHA8"
 		(at 254 130.81 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23054,7 +22690,6 @@
 	)
 	(label "SCRY4"
 		(at 74.93 172.72 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23065,7 +22700,6 @@
 	)
 	(label "V128S"
 		(at 106.68 55.88 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23076,7 +22710,6 @@
 	)
 	(label "MD'''7"
 		(at 205.74 190.5 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23087,7 +22720,6 @@
 	)
 	(label "TA4"
 		(at 168.91 77.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23098,7 +22730,6 @@
 	)
 	(label "SCRX7"
 		(at 58.42 73.66 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23109,7 +22740,6 @@
 	)
 	(label "TCHD7"
 		(at 281.94 77.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23120,7 +22750,6 @@
 	)
 	(label "TCHD5"
 		(at 299.72 72.39 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23131,7 +22760,6 @@
 	)
 	(label "TCHA2"
 		(at 254 64.77 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23142,7 +22770,6 @@
 	)
 	(label "TCHA0"
 		(at 254 59.69 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23153,7 +22780,6 @@
 	)
 	(label "VD2"
 		(at 209.55 57.15 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23164,7 +22790,6 @@
 	)
 	(label "TCOL3"
 		(at 341.63 198.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23175,7 +22800,6 @@
 	)
 	(label "WRIH"
 		(at 129.54 43.18 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23186,7 +22810,6 @@
 	)
 	(label "~{COLRAMWR}"
 		(at 163.83 213.36 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23197,7 +22820,6 @@
 	)
 	(label "H64S"
 		(at 121.92 58.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23208,7 +22830,6 @@
 	)
 	(label "TA5"
 		(at 168.91 80.01 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23219,7 +22840,6 @@
 	)
 	(label "TCODE0"
 		(at 331.47 101.6 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23230,7 +22850,6 @@
 	)
 	(label "~{MRD'}"
 		(at 129.54 45.72 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23241,7 +22860,6 @@
 	)
 	(label "TCOL3"
 		(at 327.66 198.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23252,7 +22870,6 @@
 	)
 	(label "V64F"
 		(at 74.93 58.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23263,7 +22880,6 @@
 	)
 	(label "V4S"
 		(at 168.91 171.45 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23274,7 +22890,6 @@
 	)
 	(label "PXLCLK"
 		(at 298.45 82.55 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23285,7 +22900,6 @@
 	)
 	(label "V32F"
 		(at 74.93 55.88 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23296,7 +22910,6 @@
 	)
 	(label "MD'''4"
 		(at 26.67 88.9 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23307,7 +22920,6 @@
 	)
 	(label "H1"
 		(at 19.05 269.24 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23318,7 +22930,6 @@
 	)
 	(label "~{FIX'}"
 		(at 77.47 232.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23329,7 +22940,6 @@
 	)
 	(label "V8F"
 		(at 74.93 93.98 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23340,7 +22950,6 @@
 	)
 	(label "MD'''6"
 		(at 245.11 46.99 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23351,7 +22960,6 @@
 	)
 	(label "AB''4"
 		(at 121.92 142.24 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23362,7 +22970,6 @@
 	)
 	(label "TVFLIP"
 		(at 199.39 168.91 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23373,7 +22980,6 @@
 	)
 	(label "H16F"
 		(at 74.93 160.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23384,7 +22990,6 @@
 	)
 	(label "TCOL3"
 		(at 308.61 181.61 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23395,7 +23000,6 @@
 	)
 	(label "TCHA4"
 		(at 238.76 130.81 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23406,7 +23010,6 @@
 	)
 	(label "FIX"
 		(at 121.92 63.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23417,7 +23020,6 @@
 	)
 	(label "TA7"
 		(at 153.67 100.33 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23428,7 +23030,6 @@
 	)
 	(label "~{SCROLLY'}"
 		(at 24.13 135.89 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23439,7 +23040,6 @@
 	)
 	(label "SCRY3"
 		(at 74.93 170.18 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23450,7 +23050,6 @@
 	)
 	(label "H32F"
 		(at 74.93 119.38 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23461,7 +23060,6 @@
 	)
 	(label "~{H1}"
 		(at 129.54 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23472,7 +23070,6 @@
 	)
 	(label "SCRY0"
 		(at 45.72 242.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23483,7 +23080,6 @@
 	)
 	(label "V2S'"
 		(at 199.39 158.75 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23494,7 +23090,6 @@
 	)
 	(label "TCHD'5"
 		(at 299.72 110.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23505,7 +23100,6 @@
 	)
 	(label "TCHD'0"
 		(at 299.72 95.25 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23516,7 +23110,6 @@
 	)
 	(label "~{VRAMH1}"
 		(at 203.2 69.85 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23527,7 +23120,6 @@
 	)
 	(label "FIX"
 		(at 74.93 147.32 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23538,7 +23130,6 @@
 	)
 	(label "TCOL''0"
 		(at 373.38 184.15 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23549,7 +23140,6 @@
 	)
 	(label "TCHD3"
 		(at 281.94 67.31 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23560,7 +23150,6 @@
 	)
 	(label "~{H1}"
 		(at 121.92 153.67 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23571,7 +23160,6 @@
 	)
 	(label "~{TCHH}"
 		(at 254 97.79 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23582,7 +23170,6 @@
 	)
 	(label "SCRX4"
 		(at 58.42 88.9 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23593,7 +23180,6 @@
 	)
 	(label "TCOL0"
 		(at 341.63 190.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23604,7 +23190,6 @@
 	)
 	(label "TCHA9"
 		(at 238.76 92.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23615,7 +23200,6 @@
 	)
 	(label "~{H1''}"
 		(at 170.18 179.07 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23626,7 +23210,6 @@
 	)
 	(label "TCHD3"
 		(at 299.72 59.69 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23637,7 +23220,6 @@
 	)
 	(label "MD'''6"
 		(at 26.67 130.81 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23648,7 +23230,6 @@
 	)
 	(label "TA10"
 		(at 153.67 69.85 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23659,7 +23240,6 @@
 	)
 	(label "FIX"
 		(at 74.93 81.28 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23670,7 +23250,6 @@
 	)
 	(label "H128F"
 		(at 74.93 124.46 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23681,7 +23260,6 @@
 	)
 	(label "TA8"
 		(at 168.91 130.81 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23692,7 +23270,6 @@
 	)
 	(label "TA7"
 		(at 168.91 85.09 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23703,7 +23280,6 @@
 	)
 	(label "V2F"
 		(at 74.93 88.9 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23714,7 +23290,6 @@
 	)
 	(label "TCHA10"
 		(at 254 135.89 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23725,7 +23300,6 @@
 	)
 	(label "TCOL'2"
 		(at 341.63 182.88 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23736,7 +23310,6 @@
 	)
 	(label "~{H1'''}"
 		(at 165.1 260.35 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23747,7 +23320,6 @@
 	)
 	(label "SCRY5"
 		(at 35.56 157.48 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23758,7 +23330,6 @@
 	)
 	(label "TPAL0"
 		(at 166.37 245.11 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23769,7 +23340,6 @@
 	)
 	(label "VD5"
 		(at 209.55 49.53 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23780,7 +23350,6 @@
 	)
 	(label "MD'''0"
 		(at 205.74 208.28 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23791,7 +23360,6 @@
 	)
 	(label "CD0"
 		(at 101.6 234.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23802,7 +23370,6 @@
 	)
 	(label "SCRY7"
 		(at 74.93 137.16 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23813,7 +23380,6 @@
 	)
 	(label "TCHD'2"
 		(at 299.72 100.33 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23824,7 +23390,6 @@
 	)
 	(label "TA3"
 		(at 153.67 64.77 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23835,7 +23400,6 @@
 	)
 	(label "CD4"
 		(at 194.31 120.65 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23847,7 +23411,6 @@
 	(hierarchical_label "TCOL''[3..0]"
 		(shape output)
 		(at 386.08 181.61 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
