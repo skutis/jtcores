@@ -12,7 +12,7 @@
     You should have received a copy of the GNU General Public License
     along with JTCORES.  If not, see <http://www.gnu.org/licenses/>. */
 
-module jtmzone_8039(
+module jtmzone_mcu(
     input               rst,
     input               clk,
     input               cen,

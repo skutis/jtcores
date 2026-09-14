@@ -10,11 +10,14 @@ game:
       - jtmzone_scroll.v
       - jtmzone_fix.v
       - jtmzone_colmix.v
-      # Planned local modules once schematic extraction reaches those blocks:
+  - from: mzone
+    unless: NOSOUND
+    get:
+      - jtmzone_snd_dev.v
   - from: mzone
     unless: NOSOUND,MZONE_FAST_SOUND
     get:
-      - jtmzone_8039.v
+      - jtmzone_mcu.v
   - from: kicker
     get:
       - common.yaml

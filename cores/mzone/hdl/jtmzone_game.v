@@ -33,9 +33,17 @@ wire [ 7:0] vram0_dout, vram1_dout, cram0_dout, cram1_dout;
 wire [ 9:0] objram_addr;
 wire [ 7:0] objram_din;
 wire [ 7:0] objram_dout;
-wire        objram_we;
+wire        objram_cs;
 wire [ 7:0] main_scrolly, main_scrollx;
-wire        main_flip, main_int;
+wire        main_flip, intsnd;
+// The generic simulation driver does not initialize the optional OSD status
+// bits, so keep simulations on the declared 288-pixel default.
+wire        dip_orig_hactive =
+`ifdef SIMULATION
+                                1'b0;
+`else
+                                status[13];
+`endif
 `ifdef SIMSCENE
 reg  [ 7:0] scene_regs[0:2];
 initial begin
@@ -122,16 +130,15 @@ jtmzone_main u_main(
     .cram1_dout( cram1_dout ),
     .objram_addr( objram_addr ),
     .objram_din ( objram_din  ),
-    .objram_we  ( objram_we   ),
+    .objram_cs  ( objram_cs   ),
     .objram_dout( objram_dout ),
 
     .scrolly    ( main_scrolly   ),
     .scrollx    ( main_scrollx   ),
     .flip       ( main_flip      ),
-    .snd_int    ( main_int       ),
+    .intsnd     ( intsnd         ),
 
-    .vblank     ( LVBL           ),
-    .h2         ( h2             ),
+    .LVBL       ( LVBL           ),
     .dip_pause  ( dip_pause      ),
     .intmain_n  ( intmain_n      )
 );
@@ -150,11 +157,11 @@ assign vram_addr   = 10'd0;
 assign vram_din   = 8'd0;
 assign objram_addr= 10'd0;
 assign objram_din = 8'd0;
-assign objram_we  = 1'b0;
+assign objram_cs  = 1'b0;
 assign main_scrolly    = 8'd0;
 assign main_scrollx    = 8'd0;
 assign main_flip       = 1'b0;
-assign main_int        = 1'b0;
+assign intsnd          = 1'b0;
 `endif
 
 jtmzone_snd u_snd(
@@ -183,7 +190,7 @@ jtmzone_snd u_snd(
     .shared_dout( snd_shared_dout ),
     .shared_we  ( snd_shared_we   ),
     .shared_din ( snd_shared_din  ),
-    .main_int   ( main_int        ),
+    .intsnd     ( intsnd          ),
     .intmain_n  ( intmain_n       ),
 
     .ay0a       ( ay0a           ),
@@ -216,12 +223,13 @@ jtmzone_video u_video(
 
     .objram_addr( objram_addr ),
     .objram_din ( objram_din  ),
-    .objram_we  ( objram_we   ),
+    .objram_cs  ( objram_cs   ),
     .objram_dout( objram_dout ),
 
     .scrolly    ( video_scrolly  ),
     .scrollx    ( video_scrollx  ),
     .flip       ( video_flip     ),
+    .dip_orig_hactive( dip_orig_hactive ),
     .gfx_en     ( gfx_en         ),
     .prog_data  ( prog_data      ),
     .prog_addr  ( prog_addr      ),

@@ -24,6 +24,7 @@ module jtmzone_fix #(
     input        [ 8:0] hdump,
     input        [ 8:0] vdump,
     input               flip,
+    input               dip_orig_hactive,
 
     input        [ 3:0] prog_data,
     input        [ 7:0] prog_addr,
@@ -63,7 +64,9 @@ wire        vram_we = vram_cs & ~cpu_rnw;
 wire        cram_we = cram_cs & ~cpu_rnw;
 wire [ 9:0] eff_addr = cpu_addr;
 
-wire [ 8:0] hsum_base = hdump < HVISIBLE ? hdump : { ~6'h0, hdump[2:0] };
+wire [ 8:0] nonflip_hvisible = dip_orig_hactive ? 9'd287 : 9'd288;
+wire [ 8:0] hsum_limit = flip ? HVISIBLE : nonflip_hvisible;
+wire [ 8:0] hsum_base = hdump < hsum_limit ? hdump : { ~6'h0, hdump[2:0] };
 wire [ 8:0] fix_origin = flip ? FIX_FLIP_START : 9'd0;
 wire [ 8:0] fix_hsum = hsum_base - fix_origin;
 wire [ 8:0] hsum = fix_hsum + FIX_LEAD - {8'd0, flip};
@@ -84,9 +87,9 @@ wire [ 7:0] pal_addr = { color_raw, pxl_raw[0], pxl_raw[1], pxl_raw[2], pxl_raw[
 // FIX remains the character source for one pixel after its forced priority
 // ends. Both controls use the same delay so that distinction reaches colmix.
 wire        fix_en_pre  = flip ? hdump >= FIX_FLIP_START && hdump < FIX_FLIP_END :
-                                 hdump >= HVISIBLE || hdump < FIX_PRIO_END;
+                                 hdump >= nonflip_hvisible || hdump < FIX_PRIO_END;
 wire        fix_src_pre = flip ? hdump >= FIX_FLIP_START && hdump < FIX_FLIP_END :
-                                 hdump >= HVISIBLE || hdump < FIX_SRC_END;
+                                 hdump >= nonflip_hvisible || hdump < FIX_SRC_END;
 
 jtframe_sh #(.W(1),.L(FIX_EN_DLY)) u_fix_en_dly(
     .clk    ( clk        ),

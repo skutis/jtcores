@@ -35,186 +35,138 @@ module jtmzone_main(
 
     output     [ 9:0] objram_addr,
     output     [ 7:0] objram_din,
-    output            objram_we,
+    output reg        objram_cs,
     input      [ 7:0] objram_dout,
 
     output reg [ 7:0] scrolly,
     output reg [ 7:0] scrollx,
-    output            flip,
-    output            snd_int,
+    output reg        flip,
+    output reg        intsnd,
 
-    input             vblank,
-    input             h2,
+    input             LVBL,
     input             dip_pause,
     input             intmain_n
 );
 
 reg  [ 7:0] cpu_din;
-reg         b_a13_coin2;
-reg         b_a13_coin1;
-reg         b_a13_flip;
-reg         b_a13_int;
-reg         b_a13_intst;
-reg         scrolly_cs, scrollx_cs, objram_cs;
-reg         scroll_pend, scroll_pend_x;
-reg  [ 7:0] scroll_pend_data;
+reg         coin2;
+reg         coin1;
+reg         intst;
+reg         main_latch_cs, scrolly_cs, scrollx_cs;
 wire [15:0] A;
 wire        RnW, VMA;
 wire        cpu_cen;
 wire [ 7:0] cpu_dout;
 reg         shared_cs;
-wire        intst       = b_a13_intst;
 wire        irq_n;
 wire        firq_n;
 wire        BS;
-wire        main_mbs = BS;
-wire        irq_trigger = ~vblank & dip_pause;
-
-
-wire        ram_cs        = scrolly_cs | scrollx_cs | vram0_cs | vram1_cs |
-                            cram0_cs | cram1_cs | objram_cs | shared_cs;
-wire        cpu_bus_cen   = cpu_cen;
-wire        ram_we        = ram_cs && !RnW && cpu_bus_cen;
+wire        irq_trigger = ~LVBL & dip_pause;
 wire        scroll_cs     = scrolly_cs | scrollx_cs;
-
-// Schematic-equivalent active-low decode terms. B_B7 decodes the main CPU
-// address space using A15..A11, so each select covers a 2 KB block.
-// B_A13 is the addressable latch inside the first block.
-wire        n_main_latch = ~(VMA && A[15:3]  == 13'h000);
-wire        n_watchdog   = ~(VMA && A[15:11] == 5'h01);
-wire        n_scrolly    = ~(VMA && A[15:11] == 5'h02);
-wire        n_scrollx    = ~(VMA && A[15:11] == 5'h03);
-wire        n_vram       = ~(VMA && A[15:11] == 5'h04);
-wire        n_cram       = ~(VMA && A[15:11] == 5'h05);
-wire        n_vram0      = ~(~n_vram && !A[10]);
-wire        n_vram1      = ~(~n_vram &&  A[10]);
-wire        n_cram0      = ~(~n_cram && !A[10]);
-wire        n_cram1      = ~(~n_cram &&  A[10]);
-wire        n_objram     = ~(VMA && A[15:11] == 5'h06);
-wire        n_shared     = ~(VMA && A[15:11] == 5'h07);
 
 assign rom_addr = A;
 assign cpu_rnw  = RnW;
 assign shared_addr = A[10:0];
 assign shared_dout = cpu_dout;
-assign shared_we   = ram_we && shared_cs;
+assign shared_we   = shared_cs && !RnW;
 assign vram_addr = A[9:0];
 assign vram_din  = cpu_dout;
 assign objram_addr = A[9:0];
 assign objram_din  = cpu_dout;
-assign objram_we   = ram_we && objram_cs;
-assign flip      = b_a13_flip;
-assign snd_int   = b_a13_int;
 
 // B_C12A on the schematic: ~IRQ is clocked by BLANK and released by INTST.
 jtframe_ff u_nirq(
     .rst      ( rst         ),
     .clk      ( clk         ),
     .cen      ( 1'b1        ),
-    .din      ( 1'b1        ),
-    .q        (             ),
-    .qn       ( irq_n       ),
-    .set      ( 1'b0        ),
-    .clr      ( ~intst      ),
+    .din      ( 1'b0        ),
+    .q        ( irq_n       ),
+    .qn       (             ),
+    .set      ( ~intst      ),
+    .clr      ( 1'b0        ),
     .sigedge  ( irq_trigger )
 );
 
 
-// B_C1B on the schematic: ~FIRQ is clocked by ~INTMAIN and released by ~MBS.
-// Use qn so jtframe_ff reset leaves the active-low FIRQ inactive.
+// B_C1B on the schematic: D is grounded, Q drives ~FIRQ and the active-low
+// preset is driven by ~MBS. BS is the corresponding active-high event.
 jtframe_ff u_nfirq(
     .rst      ( rst         ),
     .clk      ( clk         ),
     .cen      ( 1'b1        ),
-    .din      ( 1'b1        ),
-    .q        (             ),
-    .qn       ( firq_n      ),
-    .set      ( 1'b0        ),
-    .clr      ( main_mbs    ),
+    .din      ( 1'b0        ),
+    .q        ( firq_n      ),
+    .qn       (             ),
+    .set      ( BS          ),
+    .clr      ( 1'b0        ),
     .sigedge  ( intmain_n   )
 );
 
 always @(*) begin
-    rom_cs     = 0;
-    scrolly_cs = 0;
-    scrollx_cs = 0;
-    vram0_cs   = 0;
-    vram1_cs   = 0;
-    cram0_cs   = 0;
-    cram1_cs   = 0;
-    objram_cs  = 0;
-    shared_cs  = 0;
+    rom_cs        = VMA && RnW && A[15:14] != 0; // ROM = 4000-FFFF
+    main_latch_cs = 0;
+    scrolly_cs    = 0;
+    scrollx_cs    = 0;
+    vram0_cs      = 0;
+    vram1_cs      = 0;
+    cram0_cs      = 0;
+    cram1_cs      = 0;
+    objram_cs     = 0;
+    shared_cs     = 0;
 
-    if( !n_scrolly ) scrolly_cs = 1;
-    if( !n_scrollx ) scrollx_cs = 1;
-    if( !n_vram0   ) vram0_cs   = 1;
-    if( !n_vram1   ) vram1_cs   = 1;
-    if( !n_cram0   ) cram0_cs   = 1;
-    if( !n_cram1   ) cram1_cs   = 1;
-    if( !n_objram  ) objram_cs  = 1;
-    if( !n_shared  ) shared_cs  = 1;
-
-    if( VMA && A[15:14] != 0 ) rom_cs = RnW;
+    // B_B7 decodes A15..A11 into 2 KB blocks. B_A13 is the
+    // addressable latch at 0000-0007 inside the first block.
+    if( VMA ) begin
+        case( A[15:11] )
+            5'h00: if( A[10:3] == 0 ) main_latch_cs = 1;
+            5'h02: scrolly_cs = 1;
+            5'h03: scrollx_cs = 1;
+            5'h04: if( !A[10] ) vram0_cs = 1;
+                    else         vram1_cs = 1;
+            5'h05: if( !A[10] ) cram0_cs = 1;
+                    else         cram1_cs = 1;
+            5'h06: objram_cs = 1;
+            5'h07: shared_cs = 1;
+            default:;
+        endcase
+    end
 end
 
-always @(*) begin
-    cpu_din = 8'hff;
-    if( rom_cs ) begin
-        cpu_din = rom_data;
-    end else if( vram0_cs ) begin
-        cpu_din = vram0_dout;
-    end else if( vram1_cs ) begin
-        cpu_din = vram1_dout;
-    end else if( cram0_cs ) begin
-        cpu_din = cram0_dout;
-    end else if( cram1_cs ) begin
-        cpu_din = cram1_dout;
-    end else if( objram_cs ) begin
-        cpu_din = objram_dout;
-    end else if( shared_cs ) begin
-        cpu_din = shared_din;
-    end
+always @(posedge clk) begin
+    cpu_din <= rom_cs    ? rom_data   :
+               vram0_cs  ? vram0_dout :
+               vram1_cs  ? vram1_dout :
+               cram0_cs  ? cram0_dout :
+               cram1_cs  ? cram1_dout :
+               objram_cs ? objram_dout :
+               shared_cs ? shared_din : 8'hff;
 end
 
 always @(posedge clk) begin
     if( rst ) begin
         scrolly       <= 0;
         scrollx       <= 0;
-        b_a13_coin2   <= 1'b0;
-        b_a13_coin1   <= 1'b0;
-        b_a13_flip    <= 1'b0;
-        b_a13_int     <= 1'b0;
-        b_a13_intst   <= 1'b0;
-        scroll_pend   <= 1'b0;
-        scroll_pend_x <= 1'b0;
-        scroll_pend_data <= 8'd0;
-    end else begin
-        if( ram_we && scroll_cs ) begin
-            if( !h2 ) begin
-                if( scrolly_cs ) scrolly <= cpu_dout;
-                if( scrollx_cs ) scrollx <= cpu_dout;
-                scroll_pend <= 1'b0;
-            end else begin
-                scroll_pend      <= 1'b1;
-                scroll_pend_x    <= scrollx_cs;
-                scroll_pend_data <= cpu_dout;
-            end
-        end else if( scroll_pend && !h2 ) begin
-            if( scroll_pend_x ) scrollx <= scroll_pend_data;
-            else                scrolly <= scroll_pend_data;
-            scroll_pend <= 1'b0;
+        coin2         <= 1'b0;
+        coin1         <= 1'b0;
+        flip          <= 1'b0;
+        intsnd        <= 1'b0;
+        intst         <= 1'b0;
+    end else if( cpu_cen ) begin
+        if( scroll_cs && !RnW ) begin
+            if( scrolly_cs ) scrolly <= cpu_dout;
+            if( scrollx_cs ) scrollx <= cpu_dout;
         end
-        if( !n_main_latch && !RnW && cpu_bus_cen ) begin
+        if( main_latch_cs && !RnW ) begin
             // B_A13 is a 74LS259 addressable latch. Only the schematic nets
             // currently used by the core are modeled here.
             case( A[2:0] )
-                3'd0: b_a13_coin2 <= cpu_dout[0];
-                3'd1: b_a13_coin1 <= cpu_dout[0];
-                3'd3: b_a13_int   <= cpu_dout[0];
+                3'd0: coin2  <= cpu_dout[0];
+                3'd1: coin1  <= cpu_dout[0];
+                3'd3: intsnd <= cpu_dout[0];
                 // Schematic: /MLATCH selects this 74LS259; A[2:0]=5 selects
                 // FLIP and MD0 is the value latched (high means flipped).
-                3'd5: b_a13_flip  <= cpu_dout[0];
-                3'd7: b_a13_intst <= cpu_dout[0];
+                3'd5: flip   <= cpu_dout[0];
+                3'd7: intst  <= cpu_dout[0];
                 default: ;
             endcase
         end

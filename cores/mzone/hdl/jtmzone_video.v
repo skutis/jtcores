@@ -25,12 +25,13 @@ module jtmzone_video(
 
     input        [ 9:0] objram_addr,
     input        [ 7:0] objram_din,
-    input               objram_we,
+    input               objram_cs,
     output       [ 7:0] objram_dout,
 
     input        [ 7:0] scrolly,
     input        [ 7:0] scrollx,
     input               flip,
+    input               dip_orig_hactive,
     input        [ 3:0] gfx_en,
 
     input        [ 7:0] prog_data,
@@ -66,8 +67,9 @@ module jtmzone_video(
     output       [ 8:0] vrender
 );
 
-// PCB measurement: 384 total pixels, 287 active and 97 blanked.
-localparam [8:0] HVISIBLE = 9'd287;
+// Default to 288 active pixels. Original non-flipped PCB timing blanks the
+// last pixel below, without changing the counter or sync timing.
+localparam [8:0] HVISIBLE = 9'd288;
 localparam [8:0] HTOTAL   = 9'd384;
 localparam [8:0] HB_END   = HTOTAL-9'd1;
 localparam [8:0] HB_START = HVISIBLE-9'd1;
@@ -85,14 +87,10 @@ localparam [21:0] OBJ_OFFSET = `ifdef JTFRAME_PROM_START `JTFRAME_PROM_START + 2
 localparam [21:0] CHR_OFFSET = `ifdef JTFRAME_PROM_START `JTFRAME_PROM_START + 22'h120 `else 22'h120 `endif;
 
 wire        pre_lhbl, pre_lvbl;
-reg         pre_lhbl_d;
-// In flipped mode the PCB-visible color-mixer window extends one pixel past
-// the common timing window. Delay only the falling (active-to-blank) edge.
-`ifdef SIMULATION
-wire        colmix_pre_lhbl = pre_lhbl;
-`else
-wire        colmix_pre_lhbl = flip ? pre_lhbl | pre_lhbl_d : pre_lhbl;
-`endif
+// The PCB-visible color-mixer window is 288 pixels when flipped and 287 when
+// not flipped. Default to a symmetric 288-pixel window for display systems.
+wire        orig_last_pixel = dip_orig_hactive && !flip && hdump == HB_START-9'd1;
+wire        colmix_pre_lhbl = pre_lhbl && !orig_last_pixel;
 wire [ 7:0] hcnt;
 wire [ 3:0] scr_pxl;
 wire [ 3:0] fix_pxl;
@@ -170,6 +168,7 @@ jtmzone_fix u_fix(
     .hdump      ( hdump           ),
     .vdump      ( vdump           ),
     .flip       ( flip            ),
+    .dip_orig_hactive( dip_orig_hactive ),
     .prog_data  ( prog_data[3:0]  ),
     .prog_addr  ( prog_addr[7:0] - CHR_OFFSET[7:0] ),
     .prog_en    ( char_lut_we     ),
@@ -189,7 +188,8 @@ jtmzone_obj u_obj(
     .pxl_cen    ( pxl_cen      ),
     .objram_addr( objram_addr  ),
     .objram_din ( objram_din   ),
-    .objram_we  ( objram_we    ),
+    .objram_cs  ( objram_cs    ),
+    .cpu_rnw    ( main_cpu_rnw ),
     .objram_dout( objram_dout  ),
     .LVBL       ( LVBL         ),
     .HS         ( HS           ),
@@ -233,7 +233,7 @@ jtmzone_colmix u_colmix(
 // Check the mixer-facing horizontal active width after all palette and
 // blanking delays. Ignore the partial line present when reset is released,
 // then validate every complete line at pixel-clock granularity.
-localparam [9:0] HACTIVE_EXPECTED = 10'd287;
+wire [9:0] hactive_expected = dip_orig_hactive && !flip ? 10'd287 : 10'd288;
 reg        hactive_lhbl_l;
 reg        hactive_armed;
 reg [ 9:0] hactive_count;
@@ -251,25 +251,17 @@ always @(posedge clk) begin
             hactive_count <= hactive_count + 10'd1;
         end
         if( hactive_lhbl_l && !LHBL ) begin
-            if( hactive_armed && hactive_count != HACTIVE_EXPECTED )
+            if( hactive_armed && hactive_count != hactive_expected )
                 $error("MZONE_HACTIVE width=%0d expected=%0d vdump=%0d hdump=%0d",
-                    hactive_count, HACTIVE_EXPECTED, vdump, hdump);
+                    hactive_count, hactive_expected, vdump, hdump);
             if( hactive_armed && vdump == VVISIBLE )
                 $display("MZONE_HACTIVE width=%0d expected=%0d vdump=%0d hdump=%0d",
-                    hactive_count, HACTIVE_EXPECTED, vdump, hdump);
+                    hactive_count, hactive_expected, vdump, hdump);
             hactive_count <= 10'd0;
         end
     end
 end
 `endif
-
-
-always @(posedge clk) begin
-    if( rst )
-        pre_lhbl_d <= 1'b0;
-    else if( pxl_cen )
-        pre_lhbl_d <= pre_lhbl;
-end
 
 
 jtframe_vtimer #(

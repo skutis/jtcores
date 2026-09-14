@@ -12,7 +12,8 @@ module jtmzone_obj(
 
     input        [ 9:0] objram_addr,
     input        [ 7:0] objram_din,
-    input               objram_we,
+    input               objram_cs,
+    input               cpu_rnw,
     output       [ 7:0] objram_dout,
 
     input               LVBL,
@@ -135,6 +136,7 @@ wire       vblk_start = !LVBL && lvbl_l;
 wire       hs_start = HS && !hs_l;
 wire       dma_copy = pxl_cen && dma_hcnt[1:0]==2'd0 && dma_addr != DMA_COPY_BYTES;
 wire       dma_we = dma_en && dma_wr;
+wire       objram_we = objram_cs && !cpu_rnw;
 wire [7:0] oram_dout;
 wire [7:0] scan_dout;
 // Real-PCB portrait comparison places the simulated sprites one pixel too
