@@ -15,18 +15,34 @@ clocks:
         - cen_nc
 
 audio:
-  rsum: 1k
+  # Common gain normalization leaves headroom for all four sources.
+  rsum: 40k
+  # 190-ohm volume pot at full volume, loaded by the source branches:
+  # 190 || 10k || 11k || 11k || 11k ~= 177 ohms; wiper capacitor = 100nF.
+  rc: { r: 177, c: 100n }
   channels:
-    - { name: ay0a, module: jt49, rsum: 1k, rc_en: true, rc: [
-        { r: 1k, c: 0 }, { r: 1k, c: 10n }, { r: 1k, c: 220n }, { r: 1k, c: 230n }
+    # AY: 1k before the capacitor node, then 10k to the summing point.
+    # Including pot/source loading gives approximately 911 ohms at each cap.
+    # Each selectable setting is a pair of poles; the second pole is bypassed.
+    - { name: psg0a, data_width: 8, unsigned: true, dcrm: true, rsum: 11k, rc_en: true, rc: [
+        { r: 0,   c: 0    }, { r: 0, c: 0 }, # bypass
+        { r: 911, c: 10n  }, { r: 0, c: 0 }, # ~17.5kHz
+        { r: 911, c: 220n }, { r: 0, c: 0 }, # ~794Hz
+        { r: 911, c: 230n }, { r: 0, c: 0 }, # ~760Hz
       ] }
-    - { name: ay0b, module: jt49, rsum: 1k, rc_en: true, rc: [
-        { r: 1k, c: 0 }, { r: 1k, c: 10n }, { r: 1k, c: 220n }, { r: 1k, c: 230n }
+    - { name: psg0b, data_width: 8, unsigned: true, dcrm: true, rsum: 11k, rc_en: true, rc: [
+        { r: 0,   c: 0    }, { r: 0, c: 0 },
+        { r: 911, c: 10n  }, { r: 0, c: 0 },
+        { r: 911, c: 220n }, { r: 0, c: 0 },
+        { r: 911, c: 230n }, { r: 0, c: 0 },
       ] }
-    - { name: ay0c, module: jt49, rsum: 1k, rc_en: true, rc: [
-        { r: 1k, c: 0 }, { r: 1k, c: 10n }, { r: 1k, c: 220n }, { r: 1k, c: 230n }
+    - { name: psg0c, data_width: 8, unsigned: true, dcrm: true, rsum: 11k, rc_en: true, rc: [
+        { r: 0,   c: 0    }, { r: 0, c: 0 },
+        { r: 911, c: 10n  }, { r: 0, c: 0 },
+        { r: 911, c: 220n }, { r: 0, c: 0 },
+        { r: 911, c: 230n }, { r: 0, c: 0 },
       ] }
-    - { name: dac, data_width: 8, unsigned: true, rsum: 1k }
+    - { name: dac, data_width: 8, unsigned: true, dcrm: true, rsum: 10k }
 
 download:
   post_addr: true
@@ -64,15 +80,3 @@ sdram:
           name: main
           addr_width: 16
           data_width: 8
-
-bram:
-  - name: main_shared
-    addr_width: 11
-    data_width: 8
-    sim_file: true
-    rw: true
-    dual_port:
-      name: snd_shared
-      rw: true
-      din: snd_shared_dout
-      dout: snd_shared_din

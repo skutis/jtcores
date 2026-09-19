@@ -1,10 +1,11 @@
 #!/bin/bash
 set -euo pipefail
 
-cd "$(dirname "$0")"
+source "$(dirname "${BASH_SOURCE[0]}")/common.sh"
+prepare_preset
 
 # PCB-confirmed standard static non-flipped diagnostic.
-# white_middle: raw X=$71, raw Y=$F0 -> about hdump=145, vdump=255.
+# white_middle: raw X=$7A, raw Y=$E0.
 MZONE_GRID_NAME=tnoflip_standard_static \
 MZONE_GRID_SCROLLY=0 \
 MZONE_RED_FIX_BOX=1 \

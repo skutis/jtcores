@@ -31,10 +31,10 @@ module jtmzone_snd_dev(
     input               rom_ok,
     input               shared_cs,
 
-    // Board decoder strobes
-    input               latch_we,
-    input               i8039_irq_we,
-    input               i8039_wdog_we,
+    // Board decoder strobes, qualified by the CPU write signal
+    input               latch_cs,
+    input               mcu_irq_cs,
+    input               mcu_wdog_cs,
 
     // AY readback
     output      [ 7:0]  ay_dout,
@@ -47,8 +47,8 @@ module jtmzone_snd_dev(
     input               mcu_rom_ok,
 
     // Sound output
-    output signed [9:0] ay0a, ay0b, ay0c,
-    output       [1:0] ay0a_rcen, ay0b_rcen, ay0c_rcen,
+    output       [7:0] psg0a, psg0b, psg0c,
+    output       [3:0] psg0a_rcen, psg0b_rcen, psg0c_rcen,
     output       [7:0] dac
 );
 
@@ -62,33 +62,26 @@ wire                wait_n;
 wire                ay_wr_addr, ay_wr_data;
 wire                snd_irq;
 wire                m1_n, iorq_n;
-reg         [ 1:0] ay0a_rcen_r, ay0b_rcen_r, ay0c_rcen_r;
-`ifdef MZONE_FAST_SOUND
+`ifdef NOSOUND
 reg         [ 7:0] fast_timer;
 `endif
 
-function [1:0] rc_sel(input [1:0] sel);
-begin
-    rc_sel = sel[0] ? 2'b01 :
-             sel[1] ? 2'b10 :
-                      2'b00;
-end
-endfunction
-
-`ifndef MZONE_FAST_SOUND
-assign ay0a_rcen = ay0a_rcen_r;
-assign ay0b_rcen = ay0b_rcen_r;
-assign ay0c_rcen = ay0c_rcen_r;
-assign ay0a      = { {2{ay_a8[7]}}, ay_a8 };
-assign ay0b      = { {2{ay_b8[7]}}, ay_b8 };
-assign ay0c      = { {2{ay_c8[7]}}, ay_c8 };
+`ifndef NOSOUND
+assign psg0a = ay_a8;
+assign psg0b = ay_b8;
+assign psg0c = ay_c8;
+// JTFRAME selects one pair of RC poles with a one-hot enable.
+// Port B bit pairs select 10nF, 220nF, or both (230nF).
+assign psg0a_rcen = 4'b0001 << ay_iob[1:0];
+assign psg0b_rcen = 4'b0001 << ay_iob[3:2];
+assign psg0c_rcen = 4'b0001 << ay_iob[5:4];
 `else
-assign ay0a_rcen    = 2'd0;
-assign ay0b_rcen    = 2'd0;
-assign ay0c_rcen    = 2'd0;
-assign ay0a         = 10'd0;
-assign ay0b         = 10'd0;
-assign ay0c         = 10'd0;
+assign psg0a         = 8'd0;
+assign psg0b         = 8'd0;
+assign psg0c         = 8'd0;
+assign psg0a_rcen    = 4'b0001;
+assign psg0b_rcen    = 4'b0001;
+assign psg0c_rcen    = 4'b0001;
 assign dac          = 8'd0;
 assign mcu_rom_addr = 12'd0;
 assign mcu_rom_cs   = 1'b0;
@@ -104,7 +97,7 @@ assign wait_n =
 `else
                 ((~rom_cs) | rom_ok) & ((~shared_cs) | ~h2);
 `endif
-assign wdog_reset_n = ~i8039_wdog_we;
+assign wdog_reset_n = ~mcu_wdog_cs;
 assign snmi_set_n   = ~rst & (wdog_reset_n | A[0]);
 
 // PCB Z80 clock is 18.432 MHz / (3*2) = 3.072 MHz. The core clock here is
@@ -123,7 +116,7 @@ jtframe_cen3p57 #(.CLK24(1)) u_ay_cen(
     .cen_1p78 ( ay_cen   )
 );
 
-`ifndef MZONE_FAST_SOUND
+`ifndef NOSOUND
 jtframe_frac_cen #(.W(2),.WC(8)) u_dac_cen(
     .clk    ( clk       ),
     .n      ( 8'd7      ),  // close to 14.31818 MHz / 2 from the 24 MHz sound clock
@@ -134,28 +127,19 @@ jtframe_frac_cen #(.W(2),.WC(8)) u_dac_cen(
 `endif
 
 assign cpu_cen = cpu_cen_v[0];
-`ifndef MZONE_FAST_SOUND
+`ifndef NOSOUND
 assign dac_cen = dac_cen_v[0];
 `endif
 
+`ifdef NOSOUND
 always @(posedge clk) begin
     if( rst ) begin
-        ay0a_rcen_r <= 2'd0;
-        ay0b_rcen_r <= 2'd0;
-        ay0c_rcen_r <= 2'd0;
-`ifdef MZONE_FAST_SOUND
         fast_timer  <= 8'd0;
-`endif
     end else begin
-`ifndef MZONE_FAST_SOUND
-        ay0a_rcen_r <= rc_sel(ay_iob[1:0]);
-        ay0b_rcen_r <= rc_sel(ay_iob[3:2]);
-        ay0c_rcen_r <= rc_sel(ay_iob[5:4]);
-`else
         if( ay_cen ) fast_timer <= fast_timer + 8'd1;
-`endif
     end
 end
+`endif
 
 jtframe_ff u_irq(
     .rst      ( rst         ),
@@ -210,7 +194,7 @@ jtframe_z80 u_cpu(
     .dout       ( cpu_dout  )
 );
 
-`ifndef MZONE_FAST_SOUND
+`ifndef NOSOUND
 jt49_bus u_ay(
     .rst_n      ( ~rst                    ),
     .clk        ( clk                     ),
@@ -239,8 +223,8 @@ jtmzone_mcu u_b4(
     .clk        ( clk           ),
     .cen        ( dac_cen       ),
     .din        ( cpu_dout      ),
-    .latch_we   ( latch_we      ),
-    .irq_we     ( i8039_irq_we  ),
+    .latch_cs   ( latch_cs      ),
+    .irq_cs     ( mcu_irq_cs    ),
     .status     ( dac_status    ),
     .rom_addr   ( mcu_rom_addr  ),
     .rom_cs     ( mcu_rom_cs    ),

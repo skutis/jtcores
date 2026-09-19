@@ -19,6 +19,31 @@ module jtmzone_game(
 localparam [21:0] OBJ_OFFSET = `OBJ_START >> 1;
 localparam [21:0] SCR_OFFSET = `SCR_START >> 1;
 
+wire [10:0] main_shared_addr, snd_shared_addr;
+wire [ 7:0] main_shared_din, main_shared_dout;
+wire [ 7:0] snd_shared_din, snd_shared_dout;
+wire        main_shared_we, snd_shared_we;
+
+// Scene snapshots initialize shared RAM only for scene simulations.
+// Keep this core-specific choice outside JTFRAME's generated memory wrapper.
+jtframe_dual_ram #(
+    .AW(11)
+`ifdef SIMSCENE
+    ,.SIMFILE("main_shared.bin")
+`endif
+) u_shared(
+    .clk0   ( clk              ),
+    .addr0  ( main_shared_addr ),
+    .data0  ( main_shared_din  ),
+    .we0    ( main_shared_we   ),
+    .q0     ( main_shared_dout ),
+    .clk1   ( clk              ),
+    .addr1  ( snd_shared_addr  ),
+    .data1  ( snd_shared_dout  ),
+    .we1    ( snd_shared_we    ),
+    .q1     ( snd_shared_din   )
+);
+
 wire [15:0] main_rom_addr;
 wire        main_rom_cs;
 wire        main_cpu_rnw;
@@ -193,12 +218,12 @@ jtmzone_snd u_snd(
     .intsnd     ( intsnd          ),
     .intmain_n  ( intmain_n       ),
 
-    .ay0a       ( ay0a           ),
-    .ay0a_rcen  ( ay0a_rcen      ),
-    .ay0b       ( ay0b           ),
-    .ay0b_rcen  ( ay0b_rcen      ),
-    .ay0c       ( ay0c           ),
-    .ay0c_rcen  ( ay0c_rcen      ),
+    .psg0a       ( psg0a           ),
+    .psg0a_rcen  ( psg0a_rcen      ),
+    .psg0b       ( psg0b           ),
+    .psg0b_rcen  ( psg0b_rcen      ),
+    .psg0c       ( psg0c           ),
+    .psg0c_rcen  ( psg0c_rcen      ),
     .dac        ( dac            )
 );
 

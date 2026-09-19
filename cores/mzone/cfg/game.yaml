@@ -11,11 +11,11 @@ game:
       - jtmzone_fix.v
       - jtmzone_colmix.v
   - from: mzone
-    unless: NOSOUND
+    # The sound Z80 also handles cabinet inputs and shared RAM.
     get:
       - jtmzone_snd_dev.v
   - from: mzone
-    unless: NOSOUND,MZONE_FAST_SOUND
+    unless: NOSOUND
     get:
       - jtmzone_mcu.v
   - from: kicker
@@ -28,11 +28,10 @@ jtframe:
     get:
       - jtframe_6809.yaml
   - from: cpu
-    unless: NOSOUND
     get:
       - jtframe_z80.yaml
   - from: cpu
-    unless: NOSOUND,MZONE_FAST_SOUND
+    unless: NOSOUND
     get:
       - t48/t48.yaml
   - from: ram
@@ -58,6 +57,6 @@ jtframe:
       - jtframe_frac_cen.v
 modules:
   other:
-    - unless: NOSOUND,MZONE_FAST_SOUND
+    - unless: NOSOUND
       get:
         - jt49/hdl/jt49.yaml

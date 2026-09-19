@@ -18,8 +18,8 @@ module jtmzone_mcu(
     input               cen,
 
     input       [ 7:0]  din,
-    input               latch_we,
-    input               irq_we,
+    input               latch_cs,
+    input               irq_cs,
 
     output      [ 7:0]  status,
 
@@ -50,8 +50,8 @@ always @(posedge clk) begin
         p2_last     <= 8'd0;
     end else begin
         if( cen ) timer <= timer + 8'd1;
-        if( latch_we ) latch <= din;
-        if( irq_we ) irq_pending <= 1'b1;
+        if( latch_cs ) latch <= din;
+        if( irq_cs ) irq_pending <= 1'b1;
         if( p2_out != p2_last ) begin
             p2_last <= p2_out;
             if( !p2_out[7] ) irq_pending <= 1'b0;

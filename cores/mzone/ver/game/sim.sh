@@ -1,7 +1,15 @@
 #!/bin/bash
 
 SIM_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
-MZONE_ROM=${MZONE_ROM:-$ROM/${MZONE_SETNAME:-megazone}.rom}
+MZONE_ROM=${MZONE_ROM:-${ROM:-$SIM_DIR/../../../../rom}/${MZONE_SETNAME:-megazone}.rom}
+# Resolve caller-relative paths before entering the simulation working directory.
+MZONE_ROM=$(realpath -m -- "$MZONE_ROM") || exit 1
+for path_var in MZONE_SAVE_FILE MZONE_LOAD_FILE JTFRAME_SAVE_FILE JTFRAME_LOAD_FILE; do
+    if [[ -n ${!path_var} ]]; then
+        printf -v "$path_var" '%s' "$(realpath -m -- "${!path_var}")"
+        export "$path_var"
+    fi
+done
 
 SCENE=
 SIM_ARGS=()
@@ -27,6 +35,13 @@ if [[ -n "$SCENE" ]]; then
         SCENE="$SIM_DIR/scenes/$SCENE"
     fi
     [[ -d "$SCENE" ]] || { echo "Cannot find scene $SCENE" >&2; exit 1; }
+    SCENE=$(cd -- "$SCENE" && pwd) || exit 1
+fi
+
+[[ -s "$MZONE_ROM" ]] || { echo "ROM not found or empty: $MZONE_ROM" >&2; exit 1; }
+cd -- "$SIM_DIR" || exit 1
+
+if [[ -n "$SCENE" ]]; then
     scene_files=(vram0.bin vram1.bin cram0.bin cram1.bin obj.bin shared.bin regs.hex)
     scene_missing=0
     for scene_file in "${scene_files[@]}"; do
@@ -50,10 +65,6 @@ set -- "${SIM_ARGS[@]}"
 
 if [ ! -e rom.bin ] || [ "$(readlink -f rom.bin)" != "$(readlink -f "$MZONE_ROM")" ]; then
     ln -srf "$MZONE_ROM" rom.bin || exit 1
-fi
-
-if [ -z "$MZONE_SOUND" ]; then
-    set -- -d MZONE_FAST_SOUND "$@"
 fi
 
 if [ -n "$MZONE_THREADS" ]; then

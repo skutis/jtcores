@@ -45,29 +45,26 @@ module jtmzone_snd(
     output              intmain_n,
 
     // Sound output
-    output signed [9:0] ay0a, ay0b, ay0c,
-    output       [1:0] ay0a_rcen, ay0b_rcen, ay0c_rcen,
+    output       [7:0] psg0a, psg0b, psg0c,
+    output       [3:0] psg0a_rcen, psg0b_rcen, psg0c_rcen,
     output       [7:0] dac
 );
-`ifndef NOSOUND
+// Keep the Z80, cabinet I/O and shared RAM active with NOSOUND.
+// jtmzone_snd_dev bypasses only the AY and 8039 audio devices.
 
 wire        [ 7:0] cpu_dout, ay_dout;
 wire        [15:0] A;
 wire               mreq_n, rd_n, wr_n, rfsh_n;
 wire               ay_rd;
-wire               latch_we, i8039_irq_we, i8039_wdog_we;
 wire        [ 7:0] dipsw_dout = A[0] ? dipsw_a : dipsw_b;
 reg         [ 7:0] cpu_din, cabinet;
 reg                latch_cs, ior_cs, dipsw_cs;
-reg                shared_cs, i8039_irq_cs, i8039_wdog_cs;
+reg                shared_cs, mcu_irq_cs, mcu_wdog_cs;
 
 assign rom_addr      = A[12:0];
 assign shared_addr   = A[10:0];
 assign shared_dout   = cpu_dout;
 assign shared_we     = shared_cs && !wr_n;
-assign latch_we      = latch_cs && !wr_n;
-assign i8039_irq_we  = i8039_irq_cs && !wr_n;
-assign i8039_wdog_we = i8039_wdog_cs && !wr_n;
 // B_B7 output 5: active-low INTMAIN decode for A000-BFFF.
 assign intmain_n     = mreq_n || !rfsh_n || A[15:13] != 3'b101;
 
@@ -77,17 +74,17 @@ always @(*) begin
     ior_cs        = 0;
     dipsw_cs      = 0;
     shared_cs     = 0;
-    i8039_irq_cs  = 0;
-    i8039_wdog_cs = 0;
+    mcu_irq_cs    = 0;
+    mcu_wdog_cs   = 0;
 
     if( !mreq_n && rfsh_n ) begin
         case( A[15:13] )
             0: rom_cs = !rd_n;                                      // 0000-1fff
-            1: i8039_irq_cs = A[12:0] == 13'd0;                     // 2000
-            2: latch_cs = A[12:0] == 13'd0;                         // 4000
+            1: mcu_irq_cs = !wr_n && A[12:0] == 13'd0;              // 2000, write only
+            2: latch_cs = !wr_n && A[12:0] == 13'd0;                // 4000, write only
             3: ior_cs = A[12:2] == 11'd0 && A[1:0] != 2'd3;        // 6000-6002
             4: dipsw_cs = A[12:1] == 12'd0;                         // 8000-8001
-            6: i8039_wdog_cs = A[12:0] == 13'd1;                    // c001
+            6: mcu_wdog_cs = !wr_n && A[12:0] == 13'd1;            // c001, write only
             7: shared_cs = A[12:11] == 2'd0;                        // e000-e7ff
             default: ;                                              // a000-bfff: INTMAIN
         endcase
@@ -124,42 +121,22 @@ jtmzone_snd_dev u_dev(
     .rom_cs         ( rom_cs            ),
     .rom_ok         ( rom_ok            ),
     .shared_cs      ( shared_cs         ),
-    .latch_we       ( latch_we          ),
-    .i8039_irq_we   ( i8039_irq_we      ),
-    .i8039_wdog_we  ( i8039_wdog_we     ),
+    .latch_cs       ( latch_cs          ),
+    .mcu_irq_cs     ( mcu_irq_cs        ),
+    .mcu_wdog_cs    ( mcu_wdog_cs       ),
     .ay_dout        ( ay_dout           ),
     .ay_rd          ( ay_rd             ),
     .mcu_rom_addr   ( mcu_rom_addr      ),
     .mcu_rom_cs     ( mcu_rom_cs        ),
     .mcu_rom_data   ( mcu_rom_data      ),
     .mcu_rom_ok     ( mcu_rom_ok        ),
-    .ay0a           ( ay0a              ),
-    .ay0b           ( ay0b              ),
-    .ay0c           ( ay0c              ),
-    .ay0a_rcen      ( ay0a_rcen         ),
-    .ay0b_rcen      ( ay0b_rcen         ),
-    .ay0c_rcen      ( ay0c_rcen         ),
+    .psg0a          ( psg0a             ),
+    .psg0b          ( psg0b             ),
+    .psg0c          ( psg0c             ),
+    .psg0a_rcen     ( psg0a_rcen        ),
+    .psg0b_rcen     ( psg0b_rcen        ),
+    .psg0c_rcen     ( psg0c_rcen        ),
     .dac            ( dac               )
 );
 
-`else
-assign rom_addr     = 0;
-assign mcu_rom_addr = 0;
-assign mcu_rom_cs   = 0;
-assign shared_addr  = 0;
-assign shared_dout  = 0;
-assign shared_we    = 0;
-assign intmain_n    = 1'b1;
-assign ay0a         = 0;
-assign ay0b         = 0;
-assign ay0c         = 0;
-assign ay0a_rcen    = 0;
-assign ay0b_rcen    = 0;
-assign ay0c_rcen    = 0;
-assign dac          = 0;
-
-always @(*) begin
-    rom_cs = 1'b0;
-end
-`endif
 endmodule

@@ -1,7 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-cd "$(dirname "$0")"
+source "$(dirname "${BASH_SOURCE[0]}")/common.sh"
+prepare_preset
 
 build_scroll_test() {
     local name=$1

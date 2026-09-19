@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 
 from pathlib import Path
+import os
 
 
-SRC = Path("rom.bin").resolve()
-OUT = Path("megazone_intmain_test.rom")
+HERE = Path(__file__).resolve().parent
+SRC = Path(os.environ.get("MZONE_ROM", HERE.parents[3] / "rom" / "megazone.rom")).resolve()
+OUT = HERE / "megazone_intmain_test.rom"
 SOUND_OFFSET = 0x10000
 SOUND_SIZE = 0x2000
 
