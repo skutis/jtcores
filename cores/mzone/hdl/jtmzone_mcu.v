@@ -34,22 +34,26 @@ module jtmzone_mcu(
 wire        xtal3, ram_we;
 wire [ 7:0] ram_addr, ram_din, ram_dout;
 wire [ 7:0] p2_out;
-reg  [ 7:0] latch, timer;
+reg  [ 7:0] latch;
+reg  [14:0] timer;
 reg  [ 7:0] p2_last;
 reg         irq_pending, rstn_t48;
 
 assign rom_cs = 1'b1;
-assign status = { timer[7:4], 1'b0, p2_out[6:4] };
+// B_A12/B_B11/B_B10 divide the 14.318 MHz crystal by 4096 before
+// B_B9 counts the four AY port-A timer bits. cen is crystal / 2, so
+// advance the visible counter every 2048 enables (MAME: AY clock / 512).
+assign status = { timer[14:11], 1'b0, p2_out[6:4] };
 
 always @(posedge clk) begin
     rstn_t48 <= ~rst;
     if( rst ) begin
         irq_pending <= 1'b0;
         latch       <= 8'd0;
-        timer       <= 8'd0;
+        timer       <= 15'd0;
         p2_last     <= 8'd0;
     end else begin
-        if( cen ) timer <= timer + 8'd1;
+        if( cen ) timer <= timer + 15'd1;
         if( latch_cs ) latch <= din;
         if( irq_cs ) irq_pending <= 1'b1;
         if( p2_out != p2_last ) begin
