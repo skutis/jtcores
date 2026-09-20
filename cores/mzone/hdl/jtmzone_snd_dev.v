@@ -58,7 +58,7 @@ wire        [ 7:0] dac_status;
 wire        [ 1:0] cpu_cen_v, dac_cen_v;
 wire                cpu_cen, ay_cen, dac_cen, irq_rst, snmi_n;
 wire                wdog_reset_n, snmi_set_n;
-wire                wait_n;
+wire                shared_busy, cpu_rom_cs;
 wire                ay_wr_addr, ay_wr_data;
 wire                snd_irq;
 wire                m1_n, iorq_n;
@@ -91,11 +91,12 @@ assign ay_dout      = dac_status;
 assign ay_iob       = 8'd0;
 `endif
 
-assign wait_n =
 `ifdef MZONE_Z80_NO_WAIT
-                1'b1;
+assign shared_busy = 1'b0;
+assign cpu_rom_cs  = 1'b0;
 `else
-                ((~rom_cs) | rom_ok) & ((~shared_cs) | ~h2);
+assign shared_busy = shared_cs && h2;
+assign cpu_rom_cs  = rom_cs;
 `endif
 assign wdog_reset_n = ~mcu_wdog_cs;
 assign snmi_set_n   = ~rst & (wdog_reset_n | A[0]);
@@ -173,11 +174,16 @@ jtframe_ff u_snmi(
     .sigedge  ( intsnd      )
 );
 
-jtframe_z80 u_cpu(
+// Use JTFRAME's registered ROM wait handling with the external shared RAM.
+// Do not recover lost clock enables: preserve stalls rather than catching up.
+jtframe_z80_devwait #(.RECOVERY(0)) u_cpu(
     .rst_n      ( ~rst      ),
     .clk        ( clk       ),
     .cen        ( cpu_cen   ),
-    .wait_n     ( wait_n    ),
+    .cpu_cen    (           ),
+    .rom_cs     ( cpu_rom_cs ),
+    .rom_ok     ( rom_ok    ),
+    .dev_busy   ( shared_busy ),
     .int_n      ( ~snd_irq  ),
     .nmi_n      ( snmi_n    ),
     .busrq_n    ( 1'b1      ),

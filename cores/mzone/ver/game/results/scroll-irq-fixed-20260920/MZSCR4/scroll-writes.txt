@@ -1,0 +1,17 @@
+t=99026281476 scrolly=01 v=240 LVBL=0 IRQn=0 flip=0
+t=99029536516 scrollx=01 v=240 LVBL=0 IRQn=0 flip=0
+t=115527381252 scrolly=02 v=240 LVBL=0 IRQn=0 flip=0
+t=115530636292 scrollx=02 v=240 LVBL=0 IRQn=0 flip=0
+t=132026365252 scrolly=03 v=240 LVBL=0 IRQn=0 flip=0
+t=132029620292 scrollx=03 v=240 LVBL=0 IRQn=0 flip=0
+t=148524372740 scrolly=04 v=240 LVBL=0 IRQn=0 flip=0
+t=148527627780 scrollx=04 v=240 LVBL=0 IRQn=0 flip=0
+t=165022868484 scrolly=05 v=240 LVBL=0 IRQn=0 flip=0
+t=165026123524 scrollx=05 v=240 LVBL=0 IRQn=0 flip=0
+t=181523968260 scrolly=06 v=240 LVBL=0 IRQn=0 flip=0
+t=181527223300 scrollx=06 v=240 LVBL=0 IRQn=0 flip=0
+t=198022301252 scrolly=07 v=240 LVBL=0 IRQn=0 flip=0
+t=198025556292 scrollx=07 v=240 LVBL=0 IRQn=0 flip=0
+t=214521122500 scrolly=08 v=240 LVBL=0 IRQn=0 flip=0
+t=214524377540 scrollx=08 v=240 LVBL=0 IRQn=0 flip=0
+TOTAL scroll changes=16 during visible=0 flip=0

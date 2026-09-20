@@ -89,7 +89,9 @@ localparam [21:0] CHR_OFFSET = `ifdef JTFRAME_PROM_START `JTFRAME_PROM_START + 2
 wire        pre_lhbl, pre_lvbl;
 // The PCB-visible color-mixer window is 288 pixels when flipped and 287 when
 // not flipped. Default to a symmetric 288-pixel window for display systems.
-wire        orig_last_pixel = dip_orig_hactive && !flip && hdump == HB_START-9'd1;
+// pre_lhbl remains high at HB_START and falls on the following counter value.
+// Mask the final active pixel, without a one-pixel gap before it.
+wire        orig_last_pixel = dip_orig_hactive && !flip && hdump == HB_START;
 wire        colmix_pre_lhbl = pre_lhbl && !orig_last_pixel;
 wire [ 7:0] hcnt;
 wire [ 3:0] scr_pxl;

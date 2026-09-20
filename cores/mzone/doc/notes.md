@@ -86,3 +86,76 @@ the CPU reached the boot ROM area and `./sim.sh -video 5` generated non-black
 frames. The same `inout` symptom was also observed with `kicker` on 5.046, so
 this should be treated as a JTFRAME simulation-port issue rather than a
 Mega Zone reset or ROM packing bug.
+
+## Sound ROM reads and boot RAM test
+
+The Z80 input mux in `jtmzone_snd.v` registers `rom_data` on `clk24`, while
+the SDRAM interface returns data and `rom_ok` on the faster clock. Using raw
+`rom_ok` to release a bare Z80 can let it sample the previous byte before the
+input register catches up. The sound CPU now uses `jtframe_z80_devwait`,
+whose ROM wait controller holds CPU enable until the registered data can
+be used. Pass `rom_cs` and `rom_ok` directly to that wrapper; no separate
+`rom_ready` register is needed.
+
+The external shared RAM remains in place. Its existing arbitration condition,
+`shared_cs && h2`, drives `dev_busy`. `RECOVERY(0)` disables catch-up enable
+pulses after ROM stalls. This changes shared-RAM stalling from the Z80's
+`WAIT` input to CPU-enable gating; exact PCB bus-cycle timing still needs
+hardware comparison. `MZONE_Z80_NO_WAIT` bypasses both wait sources for debug.
+
+The original stale-data reads caused a reproducible `RAM BAD` at main-CPU
+address `$3B20`: the main
+CPU wrote `$55`, but a prematurely running sound CPU overwrote it with `$00`
+before the comparison at `$B160`. The RAM itself was retaining writes. A
+short CPU trace also showed a Z80 opcode fetch at `$01E0` consuming stale
+`$02` instead of ROM byte `$3A`, corrupting the startup handshake.
+
+For a cold-boot check, source `env.sh` and run
+`ver/game/sim.sh -video 260 -w`. For detailed Z80 fetch timing, use a short
+run with `-video 7 -w -d VERILATOR_KEEP_CPU`. Use the normal `megazone.rom`,
+with sound enabled and without a scene snapshot.
+
+Before the wrapper conversion, the separate ready-register fix was checked
+with a 260-frame cold-boot simulation, which displayed
+`RAM OK` and `ROM OK`. The sound CPU returned `$0606` for both boot handshakes
+(about 1.355 s and 2.122 s); the capture ends during the main CPU's boot
+delay, before attract mode.
+
+With `jtframe_z80_devwait`, the seven-frame waveform check verified 86,164
+post-reset ROM reads with no mismatches. The longer cold-boot run displayed
+`RAM OK` (frame 86), `ROM OK` (frame 130), and advanced to the startup grid
+(frame 265). The SiDi128 build passed compilation and timing checks.
+
+## Video width option
+
+The original-width option must mask `hdump == HB_START`, the last pixel for
+which the registered timer `pre_lhbl` is high. Masking `HB_START-1` instead
+created a 286-pixel active span, a one-pixel blank gap, and another one-pixel
+active span. That extra blanking edge can disturb downstream video processing
+even though HSYNC and VSYNC do not change.
+
+Run `python3 ver/video_width/check.py` to check the actual timer and mixer
+blanking with pixel fetchers stubbed out. It tests 600 lines per width/flip
+combination, including option changes, and compares sync with a fixed-288
+reference. Default mode is 288 active pixels; original mode is 287 unflipped
+and 288 flipped. The full game simulation currently forces the default width,
+so it does not replace this option test.
+
+## Scrolling diagnostic ROM IRQ acknowledgement
+
+Old `tscr4`, `tscr4f`, and `tsmooth_scroll8` ROM artifacts returned from the
+vertical IRQ without clearing INTST at `$0007`. The latched IRQ remained
+asserted, so the CPU repeatedly entered the handler and advanced scrolling
+during visible drawing. A seven-frame trace of the old `tscr4` image counted
+3,374 scroll-register changes, including 2,820 while LVBL was high.
+
+The current generator writes zero then one to `$0007` before returning.
+Rebuild these ignored ROM artifacts with `ver/pcb_test/build_scroll_tests.sh`;
+it now includes both sprite-free, horizontal 0..7 fine-scroll variants as well
+as `tscr4`, `tscr4f`, and `tscr4fs`. Refresh any copied SD-card ROMs afterward.
+The diagnostic tile/sprite data does not need changing for this IRQ fix.
+
+The `tsmooth_scroll8` pair holds each offset for 16 vertical IRQs (about
+264 ms), making its eight-position cycle about 2.1 seconds long. The previous
+one-step-per-frame preset wrapped 7 back to 0 about 7.6 times per second,
+which made this fine-scroll inspection pattern look like rapid rolling.

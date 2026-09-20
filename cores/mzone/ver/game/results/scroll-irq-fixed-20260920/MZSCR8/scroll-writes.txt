@@ -1,0 +1,9 @@
+t=99027583492 scrolly=01 v=240 LVBL=0 IRQn=0 flip=0
+t=115526730244 scrolly=02 v=240 LVBL=0 IRQn=0 flip=0
+t=132026365252 scrolly=03 v=240 LVBL=0 IRQn=0 flip=0
+t=148525674756 scrolly=04 v=240 LVBL=0 IRQn=0 flip=0
+t=165024821508 scrolly=05 v=240 LVBL=0 IRQn=0 flip=0
+t=181523968260 scrolly=06 v=240 LVBL=0 IRQn=0 flip=0
+t=198023277764 scrolly=07 v=240 LVBL=0 IRQn=0 flip=0
+t=214522424516 scrolly=00 v=240 LVBL=0 IRQn=0 flip=0
+TOTAL scroll changes=8 during visible=0 flip=0
