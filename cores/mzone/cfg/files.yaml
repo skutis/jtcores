@@ -13,6 +13,9 @@ mzone:
     # The sound Z80 also handles cabinet inputs and shared RAM.
     get:
       - jtmzone_snd_dev.v
+  - when: [MZONE_CHAR_BRAM]
+    get:
+      - jtmzone_charrom.v
   - unless: [NOSOUND]
     get:
       - jtmzone_mcu.v

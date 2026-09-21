@@ -24,3 +24,8 @@ JTFRAME_PROM_START=0x1F000
 # Mega Zone is a vertical game in MAME.
 JTFRAME_VERTICAL
 JTFRAME_FLIP_RESET
+
+[sidi128]
+# Hardware-verified SDRAM character fetch: six-pixel request window.
+MZONE_FETCH_DIAG
+JTFRAME_IOCTL_RD

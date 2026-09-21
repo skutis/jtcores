@@ -65,6 +65,10 @@ module jtmzone_video(
     output       [ 8:0] hdump,
     output       [ 8:0] vdump,
     output       [ 8:0] vrender
+`ifdef MZONE_FETCH_DIAG
+    ,input       [ 7:0] debug_bus
+    ,output reg  [ 7:0] fetch_debug
+`endif
 );
 
 // Default to 288 active pixels. Original non-flipped PCB timing blanks the
@@ -98,6 +102,43 @@ wire [ 3:0] scr_pxl;
 wire [ 3:0] fix_pxl;
 wire [ 3:0] obj_pxl;
 wire        fix_src, fix_en;
+`ifdef MZONE_FETCH_DIAG
+wire        scr_fetch_late;
+reg         diag_armed;
+reg  [ 7:0] diag_count, diag_last, diag_peak, diag_frames;
+// Count visible deadline misses, excluding the first partial frame.
+// The standard JTFRAME debug selector chooses live, peak, or affected frames.
+always @(posedge clk) begin
+    if( rst ) begin
+        diag_armed <= 1'b0;
+        diag_count <= 8'd0;
+        diag_last  <= 8'd0;
+        diag_peak  <= 8'd0;
+        diag_frames<= 8'd0;
+    end else begin
+        if( pxl_cen && vdump == 9'd239 && hdump == 9'd383 ) begin
+            diag_armed <= 1'b1;
+            diag_last  <= diag_count;
+            diag_count <= 8'd0;
+            if( diag_count > diag_peak ) diag_peak <= diag_count;
+            if( diag_count != 0 && diag_frames != 8'hff )
+                diag_frames <= diag_frames + 8'd1;
+        end
+        if( diag_armed && scr_fetch_late && diag_count != 8'hff &&
+            vdump >= 9'd16 && vdump < 9'd240 &&
+            (flip ? hdump >= 9'd8 && hdump < 9'd232 :
+                    hdump >= 9'd56 && hdump < 9'd280) )
+            diag_count <= diag_count + 8'd1;
+    end
+end
+always @* begin
+    case( debug_bus[1:0] )
+        2'd1: fetch_debug = diag_last;
+        2'd3: fetch_debug = diag_frames;
+        default: fetch_debug = diag_peak; // Stable default; no keyboard needed.
+    endcase
+end
+`endif
 wire        pxl2_cen_unused = pxl2_cen;
 wire        obj_lut_we, char_lut_we;
 
@@ -153,6 +194,9 @@ jtmzone_scroll u_scroll(
     .rom_addr    ( scrrom_addr    ),
     .rom_cs      ( scrrom_cs      ),
     .pxl        ( scr_pxl         )
+`ifdef MZONE_FETCH_DIAG
+    ,.fetch_late( scr_fetch_late )
+`endif
 );
 
 jtmzone_fix u_fix(

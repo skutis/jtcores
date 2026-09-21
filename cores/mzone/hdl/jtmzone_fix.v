@@ -56,6 +56,8 @@ localparam [2:0] FETCH_PHASE    = 3'd0;
 localparam [2:0] LOAD_PHASE     = 3'd4;
 
 reg  [31:0] pxl_data;
+reg  [31:0] fetched_data;
+wire [31:0] load_data = rom_cs && rom_ok ? rom_data : fetched_data;
 reg  [ 9:0] ram_addr;
 reg  [ 3:0] pal_msb, cur_pal;
 reg         hflip, cur_hf;
@@ -78,9 +80,18 @@ wire [ 7:0] h_eff = heff[7:0];
 wire [ 7:0] vsum = vdump[8] ? vdump[7:0] - 8'd8 : vdump[7:0];
 wire [ 7:0] v_eff = flip ? ~vsum : vsum;
 wire [11:0] tile_addr = { cram[7], vram, v_eff[2:0] ^ {3{cram[5]}} };
-wire        read_tile = h_eff[2:0] == RD_PHASE;
+// Advance only the read/request coordinate by two display pixels.
+// Keep the original load coordinate and source/priority delays unchanged.
+wire [8:0] fetch_hdump = hdump >= 9'd382 ? hdump - 9'd382 : hdump + 9'd2;
+wire [8:0] fetch_hsum_base = fetch_hdump < hsum_limit ? fetch_hdump : {~6'h0,fetch_hdump[2:0]};
+wire [8:0] fetch_hsum = fetch_hsum_base - fix_origin + FIX_LEAD - {8'd0,flip};
+wire fetch_blank = fetch_hdump >= 9'd288 && fetch_hdump <= 9'd375;
+wire [8:0] fetch_heff_full = fetch_blank ? fetch_hdump - 9'd160 :
+                           flip ? FIX_WIDTH - 9'd1 - fetch_hsum : fetch_hsum;
+wire [7:0] fetch_heff = fetch_heff_full[7:0];
+wire        read_tile = fetch_heff[2:0] == RD_PHASE;
 wire        load_tile = h_eff[2:0] == LOAD_PHASE;
-wire        fetch_tile = h_eff[2:0] == FETCH_PHASE;
+wire        fetch_tile = fetch_heff[2:0] == FETCH_PHASE;
 wire [ 3:0] pxl_raw = cur_hf ? pxl_data[3:0] : pxl_data[31:28];
 wire [ 3:0] color_raw = cur_pal;
 wire [ 7:0] pal_addr = { color_raw, pxl_raw[0], pxl_raw[1], pxl_raw[2], pxl_raw[3] };
@@ -148,40 +159,47 @@ always @(posedge clk) begin
         rom_cs <= 1'b0;
         ram_addr <= 10'd0;
         pxl_data <= 32'd0;
+        fetched_data <= 32'd0;
         pal_msb <= 4'd0;
         cur_pal <= 4'd0;
         hflip <= 1'b0;
         cur_hf <= 1'b0;
-    end else if( pxl_cen ) begin
-        if( read_tile )
-            ram_addr <= { v_eff[7:3], h_eff[7:3] };
-
-        if( fetch_tile ) begin
-            rom_addr <= tile_addr;
-            rom_cs   <= 1'b1;
-            pal_msb  <= cram[3:0];
-            hflip    <= cram[6] ^ flip;
-        end else begin
+    end else begin
+        // Match SCROLL: keep the request asserted until the ROM acknowledges it.
+        if( rom_ok && rom_cs ) begin
             rom_cs <= 1'b0;
+            fetched_data <= rom_data;
         end
 
-        if( load_tile ) begin
-            pxl_data <= {
-                rom_data[4],  rom_data[5],  rom_data[6],  rom_data[7],
-                rom_data[0],  rom_data[1],  rom_data[2],  rom_data[3],
-                rom_data[12], rom_data[13], rom_data[14], rom_data[15],
-                rom_data[8],  rom_data[9],  rom_data[10], rom_data[11],
-                rom_data[20], rom_data[21], rom_data[22], rom_data[23],
-                rom_data[16], rom_data[17], rom_data[18], rom_data[19],
-                rom_data[28], rom_data[29], rom_data[30], rom_data[31],
-                rom_data[24], rom_data[25], rom_data[26], rom_data[27]
-            };
-            cur_pal  <= pal_msb;
-            cur_hf   <= hflip;
-        end else begin
-            pxl_data <= cur_hf ? pxl_data >> 4 : pxl_data << 4;
-        end
+        if( pxl_cen ) begin
+            if( read_tile )
+                ram_addr <= { v_eff[7:3], fetch_heff[7:3] };
 
+            if( fetch_tile ) begin
+                rom_addr <= tile_addr;
+                rom_cs   <= 1'b1;
+                pal_msb  <= cram[3:0];
+                hflip    <= cram[6] ^ flip;
+            end
+
+            if( load_tile ) begin
+                pxl_data <= {
+                    load_data[4],  load_data[5],  load_data[6],  load_data[7],
+                    load_data[0],  load_data[1],  load_data[2],  load_data[3],
+                    load_data[12], load_data[13], load_data[14], load_data[15],
+                    load_data[8],  load_data[9],  load_data[10], load_data[11],
+                    load_data[20], load_data[21], load_data[22], load_data[23],
+                    load_data[16], load_data[17], load_data[18], load_data[19],
+                    load_data[28], load_data[29], load_data[30], load_data[31],
+                    load_data[24], load_data[25], load_data[26], load_data[27]
+                };
+                cur_pal  <= pal_msb;
+                cur_hf   <= hflip;
+            end else begin
+                pxl_data <= cur_hf ? pxl_data >> 4 : pxl_data << 4;
+            end
+
+        end
     end
 end
 

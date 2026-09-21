@@ -53,11 +53,13 @@ sdram:
       buses:
         -
           name: fixrom
+          unless: [MZONE_CHAR_BRAM]
           addr_width: 14
           data_width: 32
           offset: FIX_OFFSET
         -
           name: scrrom
+          unless: [MZONE_CHAR_BRAM]
           addr_width: 14
           data_width: 32
           offset: SCR_OFFSET
