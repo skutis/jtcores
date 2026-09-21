@@ -67,7 +67,7 @@ wire        dip_orig_hactive =
 `ifdef SIMULATION
                                 1'b0;
 `else
-                                status[13];
+                                status[14];
 `endif
 `ifdef SIMSCENE
 reg  [ 7:0] scene_regs[0:2];

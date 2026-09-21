@@ -94,4 +94,26 @@ export CCACHE_TEMPDIR=${CCACHE_TEMPDIR:-/tmp/ccache-tmp}
 # layouts through ccache/PCH, producing a trace-only crash in ctor_var_reset.
 export OBJCACHE=${OBJCACHE:-}
 
-jtsim -mist -sysname mzone -load -verilator "$@"
+# Current JTFRAME requires a set name and resolves its ROM under $ROM.
+# Stage an alias so custom PCB ROMs are not replaced by the stock set.
+SIM_ROM_DIR=$(mktemp -d) || exit 1
+SIM_SETNAME=${MZONE_SETNAME:-megazone}
+cleanup_sim_rom() {
+    # Keep rom.bin usable after removing the temporary set aliases.
+    ln -srf -- "$MZONE_ROM" "$SIM_DIR/rom.bin"
+    for ext in rom dip mod; do
+        if [[ -L "$SIM_ROM_DIR/$SIM_SETNAME.$ext" ]]; then
+            unlink -- "$SIM_ROM_DIR/$SIM_SETNAME.$ext"
+        fi
+    done
+    rmdir -- "$SIM_ROM_DIR"
+}
+trap cleanup_sim_rom EXIT
+ln -s -- "$MZONE_ROM" "$SIM_ROM_DIR/$SIM_SETNAME.rom" || exit 1
+for ext in dip mod; do
+    if [[ -f "$ROM/$SIM_SETNAME.$ext" ]]; then
+        ln -s -- "$ROM/$SIM_SETNAME.$ext" "$SIM_ROM_DIR/$SIM_SETNAME.$ext" || exit 1
+    fi
+done
+ROM="$SIM_ROM_DIR" jtsim -mist -setname "$SIM_SETNAME" -skipROM -load -verilator "$@"
+exit $?

@@ -36,8 +36,8 @@ wire [ 7:0] ram_addr, ram_din, ram_dout;
 wire [ 7:0] p2_out;
 reg  [ 7:0] latch;
 reg  [14:0] timer;
-reg  [ 7:0] p2_last;
-reg         irq_pending, rstn_t48;
+reg         irq_pending, irq_last, rstn_t48;
+wire        irq_clear = rst | ~p2_out[7];
 
 assign rom_cs = 1'b1;
 // B_A12/B_B11/B_B10 divide the 14.318 MHz crystal by 4096 before
@@ -45,21 +45,23 @@ assign rom_cs = 1'b1;
 // advance the visible counter every 2048 enables (MAME: AY clock / 512).
 assign status = { timer[14:11], 1'b0, p2_out[6:4] };
 
+// P27 asynchronously clears the /INT latch. Only a new /START
+// assertion may set it again; clear has priority over that assertion.
+always @(posedge clk or posedge irq_clear) begin
+    if( irq_clear ) irq_pending <= 1'b0;
+    else if( irq_cs && !irq_last ) irq_pending <= 1'b1;
+end
+
 always @(posedge clk) begin
     rstn_t48 <= ~rst;
     if( rst ) begin
-        irq_pending <= 1'b0;
+        irq_last    <= 1'b0;
         latch       <= 8'd0;
         timer       <= 15'd0;
-        p2_last     <= 8'd0;
     end else begin
+        irq_last <= irq_cs;
         if( cen ) timer <= timer + 15'd1;
         if( latch_cs ) latch <= din;
-        if( irq_cs ) irq_pending <= 1'b1;
-        if( p2_out != p2_last ) begin
-            p2_last <= p2_out;
-            if( !p2_out[7] ) irq_pending <= 1'b0;
-        end
     end
 end
 

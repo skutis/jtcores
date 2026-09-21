@@ -1,6 +1,5 @@
-game:
-  - from: mzone
-    get:
+mzone:
+  - get:
       - jtmzone_game.v
       - jtmzone_main.v
       - jtmzone_snd.v
@@ -10,16 +9,15 @@ game:
       - jtmzone_scroll.v
       - jtmzone_fix.v
       - jtmzone_colmix.v
-  - from: mzone
+  -
     # The sound Z80 also handles cabinet inputs and shared RAM.
     get:
       - jtmzone_snd_dev.v
-  - from: mzone
-    unless: NOSOUND
+  - unless: [NOSOUND]
     get:
       - jtmzone_mcu.v
-  - from: kicker
-    get:
+kicker:
+  - get:
       - common.yaml
 jtframe:
   - get:
@@ -31,9 +29,9 @@ jtframe:
     get:
       - jtframe_z80.yaml
   - from: cpu
-    unless: NOSOUND
+    unless: [NOSOUND]
     get:
-      - t48/t48.yaml
+      - t48.yaml
   - from: ram
     get:
       - jtframe_ram.v
@@ -47,7 +45,7 @@ jtframe:
     get:
       - jtframe_dwnld.v
   - from: sound
-    unless: NOSOUND
+    unless: [NOSOUND]
     get:
       - jtframe_mixer.v
   - from: clocking
@@ -55,8 +53,7 @@ jtframe:
       - jtframe_cen48.v
       - jtframe_crossclk_cen.v
       - jtframe_frac_cen.v
-modules:
-  other:
-    - unless: NOSOUND
-      get:
-        - jt49/hdl/jt49.yaml
+jt12:
+  - unless: [NOSOUND]
+    get:
+      - jt49.yaml

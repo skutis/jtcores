@@ -14058,7 +14058,7 @@
 			(color 0 0 0 0.0000)
 		)
 		(uuid "e41ea64a-5948-44aa-8541-f81680ad8306")
-		(property "Sheetname" "Slave CPU"
+		(property "Sheetname" "Sub CPU"
 			(at 24.13 184.7084 0)
 			(effects
 				(font

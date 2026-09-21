@@ -18,6 +18,8 @@ MZONE_ROM=cores/mzone/ver/pcb_test/tfix_boundary_6h_sim.rom \
 ```
 
 Sound is enabled by default; explicitly pass `-d NOSOUND` to bypass audio.
+The launcher supplies the ROM set required by current JTFRAME and stages custom
+`MZONE_ROM` files under that set name without rebuilding or replacing them.
 `MZONE_SOUND` is no longer needed. Output always goes into `ver/game`.
 Explicit relative ROM, scene-directory and `MZONE_SAVE_FILE`/`MZONE_LOAD_FILE`
 paths are resolved relative to the caller. Scene names resolve under `game/scenes`.

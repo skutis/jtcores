@@ -1,10 +1,11 @@
-[all]
+[*]
 include ../../kicker/cfg/common.def
 JTFRAME_MCLK=49153840
 
 JTFRAME_WIDTH=288
 JTFRAME_HEIGHT=224
-CORE_OSD=OD,Video width,288,Original 287;
+# Bit D is reserved for screen rotation on MiST/SiDi128.
+CORE_OSD=OE,Video width,288,Original 287;
 
 CORENAME=JTMZONE
 GAMETOP=jtmzone_game_sdram
