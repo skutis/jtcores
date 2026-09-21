@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES1.
-    JTCORES1 program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES1 program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES1.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 13-1-2020 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 13-1-2020 */
 
 
 // Scroll 1 is 512x512, 8x8 tiles
@@ -201,6 +187,9 @@ always @(posedge clk or posedge rst) begin
         buf_wr          <= 0;
         buf_data        <= 0;
         rom_ok_dly      <= 0;
+        pxl_data        <= 0;
+        vn              <= 0;
+        tile_addr       <= 0;
     end else begin
         rom_ok_dly <= rom_ok;
         st <= st+6'd1;

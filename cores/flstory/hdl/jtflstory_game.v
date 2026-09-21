@@ -1,0 +1,288 @@
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 23-11-2024 */
+
+module jtflstory_game(
+    `include "jtframe_game_ports.inc" // see $JTFRAME/hdl/inc/jtframe_game_ports.inc
+);
+
+wire        ghflip, gvflip, m2s_wr, s2m_rd, bus_a0, scr_flen, clip,
+            no_used, // noise used
+            mcu_ibf, mcu_obf, busrq_n, busak_n, c2b_we, c2b_rd, b2c_rd, b2c_wr;
+wire [15:0] c2b_addr;
+wire [ 7:0] bus_din, s2m_data, st_snd, sub_din, sub_dout,
+            c2b_dout, cpu_dout, mcu2bus;
+reg  [ 7:0] st_mux;
+reg  [ 1:0] coin_eff;
+wire [ 1:0] pal_bank, scr_bank, bankcfg, sha_hi;
+wire        mute, mirror, mcu_enb, coinxor, gfxcfg, priocfg, sub_en, dec_en,
+            palwcfg, cabcfg, objcfg, iocfg, osdflip_en, psg2_en, large_sha,
+            subsh_cs,sub_wr_n, sub_wait, sub_rd_n, sub_busrq_n, sub_rstn,
+            snd_ibf, snd_obf;
+reg         mcu_rst, osdflip;
+
+assign sha_addr   = {sha_hi,  bus_addr[10:0]};
+assign sha_hi     = large_sha ? bus_addr[12:11] : 2'd0;
+assign bus_a0     = bus_addr[0];
+assign dip_flip   = osdflip_en ? ~dipsw[OSDFLIP_BIT] : (gvflip | ghflip);
+assign ioctl_din  = {mute,scr_flen, gvflip, ghflip, pal_bank, scr_bank};
+assign debug_view = st_mux;
+assign user1_addr = sub_addr;
+
+localparam OSDFLIP_BIT=24;
+
+always @(posedge clk) begin
+    st_mux  <= debug_bus[7] ? st_snd : {osdflip_en,clip,no_used,mute,gfxcfg,mirror,gvflip,ghflip};
+    osdflip <= osdflip_en & dipsw[OSDFLIP_BIT];
+end
+
+jtflstory_header u_header (
+    .clk      ( clk             ),
+    .header   ( header          ),
+    .prog_we  ( prog_we         ),
+    .prog_addr( prog_addr[2:0]  ),
+    .prog_data( prog_data       ),
+    .mirror   ( mirror          ),
+    .osdflip  ( osdflip_en      ),
+    .mcu_enb  ( mcu_enb         ),
+    .coinxor  ( coinxor         ),
+    .gfx      ( gfxcfg          ),
+    .prio     ( priocfg         ),
+    .palw     ( palwcfg         ),
+    .cab      ( cabcfg          ),
+    .obj      ( objcfg          ),
+    .sub      ( sub_en          ),
+    .dec      ( dec_en          ),
+    .banks    ( bankcfg         ),
+    .psg2_en  ( psg2_en         ),
+    .ramcfg   ( large_sha       ),
+    .iocfg    ( iocfg           )
+);
+
+always @(posedge clk) mcu_rst <= rst | mcu_enb;
+always @(posedge clk) coin_eff <= coin[1:0]^{2{coinxor}};
+
+/* verilator tracing_on */
+jtflstory_main u_main(
+    .rst        ( rst       ),
+    .clk        ( clk       ),
+    .cen        ( cen_5p3   ),
+    .lvbl       ( LVBL      ),       // video interrupt
+
+    .mirror     ( mirror    ),
+    .osdflip    ( osdflip   ),
+    .gfxcfg     ( gfxcfg    ),
+    .cabcfg     ( cabcfg    ),
+    .bankcfg    ( bankcfg   ),
+    .dec_en     ( dec_en    ),
+    .iocfg      ( iocfg     ),
+
+    .bus_addr   ( bus_addr  ),
+    .bus_din    ( bus_din   ),
+    .bus_dout   ( bus_dout  ),
+    .cpu_dout   ( cpu_dout  ),
+
+    // sub CPU
+    .sub_rstn   ( sub_rstn  ),
+    .sub_addr   ( sub_addr  ),
+    .sub_cs     ( subsh_cs  ),
+    .sub_wr_n   ( sub_wr_n  ),
+    .sub_rd_n   ( sub_rd_n  ),
+    .sub_dout   ( sub_dout  ),
+    .sub_wait   ( sub_wait  ),
+    .sub_busrq_n(sub_busrq_n),
+    // shared memory
+    .sha_we     ( sha_we    ),
+    .sha_dout   ( sha_dout  ),
+    // bus sharing with MCU
+    .busak_n    ( busak_n   ),
+    .busrq_n    ( busrq_n   ),
+    .c2b_addr   ( c2b_addr  ),
+    .c2b_dout   ( c2b_dout  ),
+    .c2b_rd     ( c2b_rd    ),
+    .c2b_we     ( c2b_we    ),
+    .mcu2bus    ( mcu2bus   ),
+    .b2c_rd     ( b2c_rd    ),
+    .b2c_wr     ( b2c_wr    ),
+    .mcu_ibf    ( mcu_ibf   ),
+    .mcu_obf    ( mcu_obf   ),
+    // sound
+    .m2s_wr     ( m2s_wr    ),
+    .s2m_rd     ( s2m_rd    ),
+    .s2m_data   ( s2m_data  ),
+    .snd_ibf    ( snd_ibf   ),
+    .snd_obf    ( snd_obf   ),
+    // video memories
+    .pal16_we   ( pal16_we  ),
+    .pal16_dout ( pal16_dout),
+    .pal16_addr ( pal16_addr),
+    .vram16_dout(vram16_dout),
+    .oram8_dout ( oram8_dout),
+    .vram_we    ( vram_we   ),
+    .oram_we    ( oram8_we  ),
+    .scr_bank   ( scr_bank  ),
+    .pal_bank   ( pal_bank  ),
+    .scr_flen   ( scr_flen  ),
+    .ghflip     ( ghflip    ),
+    .gvflip     ( gvflip    ),
+    // Cabinet inputs
+    .cab_1p     (cab_1p[1:0]),
+    .coin       ( coin_eff  ),
+    .joystick1  ( joystick1 ),
+    .joystick2  ( joystick2 ),
+    .gun_x      ( gun_1p_x  ),
+    .gun_y      ( gun_1p_y  ),
+    .dipsw      (dipsw[23:0]),
+    .service    ( service   ),
+    .tilt       ( tilt      ),
+    .dip_pause  ( dip_pause ),
+    // ROM access
+    .rom_cs     ( main_cs   ),
+    .rom_addr   ( main_addr ),
+    .rom_data   ( main_data ),
+    .rom_ok     ( main_ok   ),
+
+    .debug_bus  ( debug_bus )
+);
+
+jtflstory_sub u_sub(
+    .rst        ( rst       ),
+    .clk        ( clk       ),
+    .enable     ( sub_en    ),
+    .cen        ( cen_5p3   ),
+    .lvbl       ( LVBL      ),       // video interrupt
+    .nmi_n      ( 1'b1      ),
+
+    .dip_pause  ( dip_pause ),
+
+    .bus_rstn   ( sub_rstn  ),
+    .bus_cs     ( subsh_cs  ),
+    .addr       ( sub_addr  ),
+    .wr_n       ( sub_wr_n  ),
+    .rd_n       ( sub_rd_n  ),
+    .dout       ( sub_dout  ),
+    .bus_din    ( bus_din   ),
+    .bus_wait   ( sub_wait  ),
+    .busrq_n    (sub_busrq_n),
+
+    // ROM access
+    .rom_cs     ( sub_cs    ),
+    .rom_data   ( sub_data  ),
+    .rom_ok     ( sub_ok    ),
+    .user1_cs   ( user1_cs  ),
+    .user1_data ( user1_data),
+    .user1_ok   ( user1_ok  )
+);
+
+/* verilator tracing_off */
+jtflstory_mcu u_mcu(
+    .rst        ( mcu_rst   ),
+    .clk        ( clk       ),
+    .cen        ( cen_mcu   ),
+
+    .busrq_n    ( busrq_n   ),
+    .busak_n    ( busak_n   ),
+    .obf        ( mcu_obf   ),
+    .ibf        ( mcu_ibf   ),
+    // MCU as bus master
+    .bm_addr    ( c2b_addr  ),
+    .bm_dout    ( c2b_dout  ),
+    .bm_din     ( bus_din   ),
+    .bm_we      ( c2b_we    ),
+    .bm_rd      ( c2b_rd    ),
+    // MCU as bus slave
+    .bs_wr      ( b2c_wr    ),
+    .bs_rd      ( b2c_rd    ),
+    .bs_dout    ( bus_dout  ),
+    .bs_din     ( mcu2bus   ),
+    // ROM
+    .rom_addr   ( mcu_addr  ),
+    .rom_data   ( mcu_data  )
+);
+
+/* verilator tracing_off */
+jtflstory_sound u_sound(
+    .rst        ( rst       ),
+    .clk        ( clk       ),
+    .cen4       ( cen4      ),
+    .cen2       ( cen2      ),
+    .cen48k     ( cen48k    ),
+
+    .psg2_en    ( psg2_en   ),
+    // communication with the other CPUs
+    .bus_wr     ( m2s_wr    ),
+    .bus_rd     ( s2m_rd    ),
+    .bus_a0     ( bus_a0    ),
+    .bus_dout   ( bus_dout  ),
+    .bus_din    ( s2m_data  ),
+    .obf        ( snd_obf   ),
+    .ibf        ( snd_ibf   ),
+
+    .rom_addr   ( snd_addr  ),
+    .rom_data   ( snd_data  ),
+    .rom_ok     ( snd_ok    ),
+    .rom_cs     ( snd_cs    ),
+
+    // sound output
+    .mute       ( mute      ),
+    .msm        ( msm       ),
+    .psg        ( psg       ),
+    .psg2       ( psg2      ),
+    .dac        ( dac       ),
+    // debug
+    .debug_bus  ( debug_bus ),
+    .debug_st   ( st_snd    ),
+    .clip       ( clip      ),
+    .no_used    ( no_used   )
+);
+/* verilator tracing_on */
+jtflstory_video u_video(
+    .rst        ( rst       ),
+    .clk        ( clk       ),
+    .pxl_cen    ( pxl_cen   ),
+
+    .priocfg    ( priocfg   ),
+    .palwcfg    ( palwcfg   ),
+    .objcfg     ( objcfg    ),
+
+    .ghflip     ( ghflip    ),
+    .gvflip     ( gvflip    ),
+    .lhbl       ( LHBL      ),
+    .lvbl       ( LVBL      ),
+    .vs         ( VS        ),
+    .hs         ( HS        ),
+
+    .scr_flen   ( scr_flen  ),
+    .scr_bank   ( scr_bank  ),
+    // Scroll
+    .vram_addr  ( vram_addr ),
+    .vram_data  ( vram_dout ),
+    .scr_addr   ( scr_addr  ),
+    .scr_data   ( scr_data  ),
+    .scr_cs     ( scr_cs    ),
+    .scr_ok     ( scr_ok    ),
+
+    // Objects
+    //      RAM shared with CPU
+    .oram_addr  ( oram_addr ),
+    .oram_dout  ( oram_dout ),
+    .oram_we    ( oram_we   ),
+    .oram_din   ( oram_din  ),
+    //      ROM
+    .obj_addr   ( obj_addr  ),
+    .obj_data   ( obj_data  ),
+    .obj_cs     ( obj_cs    ),
+    .obj_ok     ( obj_ok    ),
+
+    // palette - color mixer
+    .pal_bank   ( pal_bank  ),
+    .pal_addr   ( pal_addr  ),
+    .pal_dout   ( pal_dout  ),
+    .red        ( red       ),
+    .green      ( green     ),
+    .blue       ( blue      ),
+    .debug_bus  ( debug_bus ),
+    .gfx_en     ( gfx_en    )
+);
+
+endmodule

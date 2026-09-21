@@ -1,54 +1,48 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 22-3-2022 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 22-3-2022 */
 
 module jtngp_game(
     `include "jtframe_game_ports.inc" // see $JTFRAME/hdl/inc/jtframe_game_ports.inc
 );
 
 wire [15:0] cha_dout, obj_dout, scr1_dout, scr2_dout, regs_dout;
-wire [15:0] gfx_dout, shd_dout, flash0_dout;
-wire [ 7:0] snd_latch, main_latch,
+wire [15:0] gfx_dout, shd_dout, flash0_dout, flash1_dout, f1g_dout;
+wire [ 7:0] snd_latch, main_latch, ioctl_pal, ioctl_main,
             st_video, st_main, st_snd;
 wire [ 1:0] cpu_we, shd_we;
 reg  [ 7:0] st_mux;
-reg  [ 2:0] cart_size;
+reg  [ 3:0] cart_size;
 wire        gfx_cs,
-            flash0_cs, flash0_rdy, flash0_ok;
-wire        snd_ack, snd_nmi, snd_irq, mute_enb, snd_rstn;
-wire        hirq, virq, main_int5, pwr_button, poweron, halted;
+            flash0_cs, flash0_rdy, flash0_ok,
+            flash1_cs, flash1_rdy, flash1_ok, f1g_gcs, pwr_press;
+wire        snd_ack, snd_nmi, snd_irq, mute_enb, snd_rstn, ioctl_rest, mode;
+wire        hirq, virq, main_int5, pwr_button, poweron, halted, new_cart;
 reg         cart_l;
 wire signed [ 7:0] snd_dacl, snd_dacr;
 
 assign debug_view = st_mux;
-
+assign ioctl_rest = ioctl_ram && ioctl_wr && ioctl_addr[13:0]>14'h3000; // ports and RTC are dumped after 12kB of RAM
 assign rom_addr = cpu_addr[15:1];
 assign dip_flip = 0;
 assign {pxl_cen,pxl2_cen}={v1_cen,v0_cen}; // ideally the framework should do this for me
-assign pwr_button = coin[0] & ~&{~ioctl_cart,cart_l,halted}; // active low, positive edge triggered
-assign ioctl_din  = 0;
+assign pwr_button = pwr_press & ~&{~ioctl_cart,cart_l,halted}; // active low, positive edge triggered
+// Flash 1 is only operative for 4 MByte cartridges
+assign f1g_gcs  = cart_size[3] & flash1_cs;
+assign f1g_dout = cart_size[3] ? flash1_dout : 16'd0;
+
+assign {gs1_cs, gs1_addr}=0;
+assign new_cart = ioctl_cart && !cart_l;
 
 `ifdef CARTSIZE initial cart_size=`CARTSIZE; `endif
-
 always @(posedge clk) begin
-    if( prog_ba==1 && !ioctl_ram && ioctl_wr )
-        cart_size <= ioctl_addr[21] ? 3'b100 :
-                     ioctl_addr[20] ? 3'b010 :
-                     ioctl_addr[19] ? 3'b001 : 3'b0;
+    if( new_cart ) cart_size <= 0;
+    if( prog_ba==1 && !ioctl_ram && ioctl_wr ) begin
+        if( prog_addr[17] && cart_size<4'd1 ) cart_size <= 4'b0001;
+        if( prog_addr[18] && cart_size<4'd2 ) cart_size <= 4'b0010;
+        if( prog_addr[19] && cart_size<4'd4 ) cart_size <= 4'b0100;
+        if( prog_addr[20] && cart_size<4'd8 ) cart_size <= 4'b1000;
+    end
 end
 
 always @(posedge clk) begin
@@ -58,13 +52,18 @@ always @(posedge clk) begin
         1: st_mux <= st_video;
         2: st_mux <= st_snd;
         3: case( debug_bus[5:4] )
-            0: st_mux <= { rst, poweron, pwr_button, ioctl_cart, ~flash0_rdy, snd_nmi, snd_irq, snd_rstn };
+            0: st_mux <= { pwr_button, cart_size, poweron, 2'b0 };
             1: st_mux <= snd_latch;
             2: st_mux <= main_latch;
-            default: st_mux <= 0;
+            3: st_mux <= { mode, 4'd0, snd_nmi, snd_irq, snd_rstn };
         endcase
     endcase
 end
+
+assign ioctl_din = ioctl_addr[7] ? ioctl_pal : ioctl_main;
+
+jtngp_pwr u_power_onoff(rst, clk, VS, coin[0], pwr_press);
+
 /* verilator tracing_on */
 jtngp_main u_main(
     .rst        ( rst       ),
@@ -109,10 +108,18 @@ jtngp_main u_main(
     .flash0_cs  ( flash0_cs ),
     .flash0_rdy ( flash0_rdy),
     .flash0_dout(flash0_dout),
-    .flash1_cs  (           ),
+    .flash1_cs  (  flash1_cs),
+    .flash1_rdy ( flash1_rdy),
+    .flash1_dout( f1g_dout  ),
 
     // Firmware access
     .rom_data   ( rom_data  ),
+
+    // RTC dump
+    .ioctl_addr ( ioctl_addr[6:0]),
+    .ioctl_dout ( ioctl_dout),
+    .ioctl_din  ( ioctl_main),
+    .ioctl_wr   ( ioctl_rest),
 
     // NVRAM
     .nvram_dout ( nvram_dout),
@@ -123,8 +130,8 @@ jtngp_main u_main(
     .debug_bus  ( debug_bus ),
     .st_dout    ( st_main   )
 );
-/* verilator tracing_off */
-jtngp_flash u_flash(
+/* verilator tracing_on */
+jtngp_flash u_flash0(
     .rst        ( rst       ),
     .clk        ( clk       ),
 
@@ -145,7 +152,64 @@ jtngp_flash u_flash(
     .cart_ok    ( cart0_ok  ),
     .cart_data  ( cart0_data),
     .cart_dsn   ( cart0_dsn ),
-    .cart_din   ( cart0_din )
+    .cart_din   ( cart0_din ),
+    // save/load memory
+    .cart       ( new_cart  ),
+    .sav_addr   ( sav_addr  ),
+    .sav_dout   ( sav_dout  ),
+    .sav_din    ( sav_din   ),
+    .sav_wr     ( sav_wr    ),
+    .sav_wait   ( sav_wait  ),
+    .sav_done   ( sav_done  ),
+    .sav_ack    ( sav_ack   ),
+    .sav_change ( sav_change),
+    .gs_ok      ( gs0_ok    ),
+    .gs_data    ( gs0_data  ),
+    .gs_din     ( gs0_din   ),
+    .gs_addr    ( gs0_addr  ),
+    .gs_dsn     ( gs0_dsn   ),
+    .gs_we      ( gs0_we    ),
+    .gs_cs      ( gs0_cs    )
+);
+
+jtngp_flash u_flash1(
+    .rst        ( rst       ),
+    .clk        ( clk       ),
+
+    .dev_type   ( cart_size ),
+    // interface to CPU
+    .cpu_addr   ( cpu_addr  ),
+    .cpu_cs     ( f1g_gcs   ),
+    .cpu_we     ( cpu_we    ),
+    .cpu_dout   ( cpu_dout  ),
+    .cpu_din    (flash1_dout),
+    .rdy        ( flash1_rdy),      // rdy / ~bsy pin
+    .cpu_ok     ( flash1_ok ),   // read data available
+    // interface to SDRAM
+    .cart_addr  ( cart1_addr),
+    .cart_we    (           ),
+    .cart_cs    ( cart1_cs  ),
+    .cart_ok    ( cart1_ok  ),
+    .cart_data  ( cart1_data),
+    .cart_dsn   (           ),
+    .cart_din   (           ),
+    // save/load memory
+    .cart       ( new_cart  ),
+    .sav_addr   ( 16'b0     ),
+    .sav_dout   ( 16'b0     ),
+    .sav_din    (           ),
+    .sav_wr     ( 2'b0      ),
+    .sav_wait   (           ),
+    .sav_done   (           ),
+    .sav_ack    ( 1'b0      ),
+    .sav_change (           ),
+    .gs_ok      ( 1'b0      ),
+    .gs_data    ( 16'b0     ),
+    .gs_addr    (           ),
+    .gs_din     (           ),
+    .gs_dsn     (           ),
+    .gs_we      (           ),
+    .gs_cs      (           )
 );
 /* verilator tracing_off */
 jtngp_snd u_snd(
@@ -195,6 +259,7 @@ jtngp_video u_video(
 
     .hirq       ( hirq      ),
     .virq       ( virq      ),
+    .mode       ( mode      ),
 
     .HS         ( HS        ),
     .VS         ( VS        ),
@@ -205,6 +270,9 @@ jtngp_video u_video(
     .blue       ( blue      ),
     .gfx_en     ( gfx_en    ),
     // Debug
+    .ioctl_addr (ioctl_addr[8:0]),
+    .ioctl_din  ( ioctl_pal ),
+    .ioctl_dump ( ioctl_rest),
     .debug_bus  ( debug_bus ),
     .st_dout    ( st_video  )
 );

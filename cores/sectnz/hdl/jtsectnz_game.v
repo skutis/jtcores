@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 29-6-2019 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 29-6-2019 */
 
 
 module jtsectnz_game(
@@ -39,15 +25,6 @@ assign dip_flip   = flip^game_cfg;
 assign scr_part   = scr0 ? { scr_data[27:24], scr_data[19:16], scr_data[11: 8], scr_data[ 3: 0] } :
                            { scr_data[31:28], scr_data[23:20], scr_data[15:12], scr_data[ 7: 4] };
 
-localparam [25:0]   OBJ_START  = `JTFRAME_BA3_START;
-
-always @* begin
-    post_addr = prog_addr;
-    if( ioctl_addr >= OBJ_START ) begin
-        post_addr[5:1] = {prog_addr[4:1],prog_addr[5]};
-    end
-end
-
 always @(posedge clk) begin
     if( header && prog_addr[4:0]==0 && prog_we ) game_cfg <= prog_data[0];
 end
@@ -61,7 +38,6 @@ jtframe_cen48 u_cen(
     .cen1p5 ( cen1p5    )
 );/* verilator lint_on PINMISSING */
 
-`ifndef NOMAIN
 jtcommnd_main #(.GAME(1)) u_main(
     .rst        ( rst           ),
     .clk        ( clk           ),
@@ -132,19 +108,7 @@ jtcommnd_main #(.GAME(1)) u_main(
     .scr1_pal   (               ),
     .scr2_pal   (               )
 );
-`else
-assign main_addr   = 17'd0;
-assign char_cs     = 1'b0;
-assign scr_cs      = 1'b0;
-assign bus_ack     = 1'b0;
-assign flip        = 1'b0;
-assign RnW         = 1'b1;
-assign scr_hpos    = 0;
-assign scr_vpos    = 0;
-assign cpu_cen     = cen3;
-`endif
 
-`ifndef NOSOUND
 jtgng_sound #(.LAYOUT(0)) u_sound (
     .rst            ( rst            ),
     .clk            ( clk            ),
@@ -165,15 +129,12 @@ jtgng_sound #(.LAYOUT(0)) u_sound (
     .psg0           ( psg0           ),
     .psg1           ( psg1           ),
     // unused
+    .mcu_sdin       ( 8'd0           ),
+    .mcu_srd        (                ),
     .snd2_latch     (                ),
     .debug_bus      ( 8'd0           ),
     .debug_view     (                )
 );
-`else
-assign snd_addr = 15'd0;
-assign snd_cs   = 1'b0;
-assign snd      = 16'b0;
-`endif
 
 jtsectnz_video u_video(
     .rst        ( rst           ),

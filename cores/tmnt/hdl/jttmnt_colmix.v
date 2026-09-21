@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 15-4-2023 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 15-4-2023 */
 
 module jttmnt_colmix(
     input             rst,
@@ -95,7 +81,7 @@ assign ioctl_din = ioctl_addr[0]^IOCTL_A0[0] ? pal_dout[7:0] : pal_dout[15:8];
 assign {blue,green,red} = (lvbl & lhbl ) ? bgr : 24'd0;
 
 always @(posedge clk) begin
-    k251_en <= game_id==PUNKSHOT;
+    k251_en <= game_id==PUNKSHOT || game_id==THNDRX2;
 end
 
 always @* begin
@@ -138,7 +124,7 @@ always @(posedge clk) begin
         shl      <= 0;
     end else begin
         if( pxl_cen ) begin
-            shl <= k251_en ? k251_shd[0] : shad;
+            shl <= k251_en ? ~k251_shd[0] : shad;
             bgr <= dim( pal_dout[14:0], shl);
         end
     end
@@ -175,7 +161,7 @@ jtcolmix_053251 u_k251(
     .ci4        ( { 1'b0, lyra_pxl[7:5], lyra_pxl[3:0] } ),
     .ci3        ( { 1'b0, lyrb_pxl[7:5], lyrb_pxl[3:0] } ),
     // shadow
-    .shd_in     ({1'b0,~shadow}), // why do we need the inversion?
+    .shd_in     ({1'b0,shadow}),
     .shd_out    ( k251_shd  ),
     // dump to SD card
     .ioctl_addr ( ioctl_ram ? ioctl_addr[3:0] : debug_bus[3:0] ),

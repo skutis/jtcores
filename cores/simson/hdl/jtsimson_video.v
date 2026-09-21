@@ -1,27 +1,12 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 23-7-2023 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 23-7-2023 */
 
 module jtsimson_video(
     input             rst,
     output            rst8,     // reset signal at 8th frame
     input             clk,
-    input             simson,
-    input             paroda,
+    input             simson, paroda, suratk,
 
     // Base Video
     input             pxl_cen,
@@ -80,44 +65,57 @@ module jtsimson_video(
     output     [ 7:0] blue,
 
     // Debug
-    input      [14:0] ioctl_addr,
+    input      [15:0] ioctl_addr,
     input             ioctl_ram,
-    output reg [ 7:0] ioctl_din,
+    output     [ 7:0] ioctl_din,
 
     input      [ 3:0] gfx_en,
     input      [ 7:0] debug_bus,
-    output reg [ 7:0] st_dout
+    output     [ 7:0] st_dout
 );
+
+localparam FULLOBJ = `ifdef PARODA 1 `else 0 `endif;
 
 wire [ 8:0] hdump, vdump, vrender, vrender1;
 wire [ 7:0] lyrf_pxl, st_scr,
             dump_scr, scr_mmr, dump_obj, dump_pal, obj_mmr, pal_mmr;
+wire [ 6:0] lyra_eff, lyrb_eff;
 wire [11:0] lyra_pxl, lyrb_pxl, pal_addr;
 wire [ 8:0] lyro_pxl;
-wire [ 1:0] obj_shd;
+wire [ 1:0] obj_shd, shd_eff;
 wire [ 4:0] obj_prio;
 wire [15:0] obj16_dout;
+wire [ 3:0] obj_amsb;
+reg         parsur;
 
-assign pal_addr    = { paroda ? pal_bank : cpu_addr[11], cpu_addr[10:0] };
+assign pal_addr    = { parsur ? pal_bank : cpu_addr[11], cpu_addr[10:0] };
 assign objsys_dout = ~cpu_addr[0] ? obj16_dout[15:8] : obj16_dout[7:0]; // big endian
 
-// Debug
 always @(posedge clk) begin
-    st_dout <= debug_bus[5] ? (debug_bus[4] ? pal_mmr : obj_mmr) : st_scr;
-    // VRAM dumps - 16+4+4 = 24kB, then MMR +16 bytes = 24592 bytes
-    if( ioctl_addr<'h4000 )
-        ioctl_din <= dump_scr;  // 16 kB 0000~3FFF
-    else if( ioctl_addr<'h5000 )
-        ioctl_din <= dump_pal;  // 4kB 4000~4FFF
-    else if( ioctl_addr<'h6000 )
-        ioctl_din <= dump_obj;  // 4kB 5000~5FFF
-    else if( ioctl_addr<'h6010 )//     6000~600F
-        ioctl_din <= pal_mmr;
-    else if( !ioctl_addr[3] )
-        ioctl_din <= scr_mmr;  // 8 bytes, MMR ~6017
-    else
-        ioctl_din <= obj_mmr; // 7 bytes, MMR ~601F
+    parsur <= paroda | suratk;
 end
+
+// Debug
+jtriders_dump #(.FULLOBJ(FULLOBJ)) u_dump(
+    .clk            ( clk             ),
+    .dump_scr       ( dump_scr        ),
+    .dump_obj       ( dump_obj        ),
+    .dump_pal       ( dump_pal        ),
+    .pal_mmr        ( pal_mmr         ),
+    .scr_mmr        ( scr_mmr         ),
+    .obj_mmr        ( obj_mmr         ),
+    .psac_mmr       ( 8'b0            ),
+    .other          ( 8'b0            ),
+
+    .ioctl_addr     ( ioctl_addr      ),
+    .ioctl_din      ( ioctl_din       ),
+    .obj_amsb       ( obj_amsb        ),
+    .part_addr      (                 ),
+
+    .debug_bus      ( debug_bus       ),
+    .st_scr         ( st_scr          ),
+    .st_dout        ( st_dout         )
+);
 
 /* verilator tracing_on */
 jtsimson_scroll #(.HB_OFFSET(2)) u_scroll(
@@ -128,6 +126,7 @@ jtsimson_scroll #(.HB_OFFSET(2)) u_scroll(
 
     .paroda     ( paroda    ),
     .simson     ( simson    ),
+    .suratk     ( suratk    ),
     // Base Video
     .lhbl       ( lhbl      ),
     .lvbl       ( lvbl      ),
@@ -189,45 +188,71 @@ jtsimson_scroll #(.HB_OFFSET(2)) u_scroll(
     .st_dout    ( st_scr    )
 );
 
+localparam ORAMW=12;
+wire [ORAMW:1] oram_a;
+wire           nc;
+
+assign oram_a = { cpu_addr[12] & ~parsur, cpu_addr[11:1] };
+
 /* verilator tracing_on  */
-jtsimson_obj u_obj(    // sprite logic
+`ifdef SIMSON
+wire [9:0] voffset = simson ? 10'h117 : 10'h107;
+
+jtsimson_obj #(.RAMW(ORAMW)) u_obj(    // sprite logic
+    .voffset    ( voffset   ),
+    .simson     ( simson    ),
+    .ln_done    (           ),
+`else
+assign obj_shd[1] = 1'b0;
+jtriders_obj #(
+    .RAMW         ( ORAMW   ),
+    .HFLIP_OFFSET ( 10'd134 )
+   ,.SHADOW       ( 1       )
+) u_obj(
+    .lgtnfght   ( 1'b0      ),
+`endif
+    .lvbl       ( lvbl      ),
     .rst        ( rst       ),
     .clk        ( clk       ),
     .pxl_cen    ( pxl_cen   ),
     .pxl2_cen   ( pxl2_cen  ),
 
-    .paroda     ( paroda    ),
-    .simson     ( simson    ),
     // Base Video (inputs)
     .hs         ( hs        ),
-    .vs         ( vs        ),
-    .lvbl       ( lvbl      ),
-    .lhbl       ( lhbl      ),
     .hdump      ( hdump     ),
     .vdump      ( vrender   ),
     // CPU interface
     .ram_cs     ( objsys_cs ),
-    .reg_cs     ( objreg_cs ),
-    .cpu_addr   (cpu_addr[13:1]),
-    .cpu_dout   ({2{cpu_dout}}),
-    .cpu_dsn    ({cpu_addr[0],~cpu_addr[0]}), // Big endian
-    .cpu_we     ( cpu_we    ),
+    .ram_addr   ( oram_a    ),
+    .ram_din    ({2{cpu_dout}}),
+    .ram_we     ( {~cpu_addr[0],cpu_addr[0]}&{2{cpu_we}} ),
     .cpu_din    ( obj16_dout),
+
+    .reg_cs     ( objreg_cs ),
+    .mmr_addr   (cpu_addr[3:0]),
+    .mmr_din    ({8'd0,cpu_dout}),
+    .mmr_we     ( cpu_we    ),
+    .mmr_dsn    ({1'b1,cpu_addr[0]}),
 
     .dma_bsy    ( dma_bsy   ),
     // ROM
-    .rom_addr   ( lyro_addr ),
     .rom_data   ( lyro_data ),
     .rom_ok     ( lyro_ok   ),
     .rom_cs     ( lyro_cs   ),
     .objcha_n   ( objcha_n  ),
+`ifdef SIMSON
+    .rom_addr   ({nc,lyro_addr}),
+    .shd        ( obj_shd   ),
+`else
+    .rom_addr   ( lyro_addr ),
+    .shd        ( obj_shd[0]),
+`endif
     // pixel output
     .pxl        ( lyro_pxl  ),
-    .shd        ( obj_shd   ),
     .prio       ( obj_prio  ),
     // Debug
     .ioctl_ram  ( ioctl_ram ),
-    .ioctl_addr ( ioctl_addr[13:0]-14'h1000 ),
+    .ioctl_addr ( {obj_amsb[1:0],ioctl_addr[11:0]} ),
     .dump_ram   ( dump_obj  ),
     .dump_reg   ( obj_mmr   ),
     .gfx_en     ( gfx_en    ),
@@ -235,15 +260,22 @@ jtsimson_obj u_obj(    // sprite logic
 );
 
 function [6:0] lyrcol( input [7:0] pxl );
-    lyrcol = paroda ? {       pxl[7:5], pxl[3:0] } :
+    lyrcol = parsur ? {       pxl[7:5], pxl[3:0] } :
                       { 1'b0, pxl[7:6], pxl[3:0] };
 endfunction
+
+// scroll layers swapped in Parodius/Surprise Attack
+assign lyra_eff = lyrcol( parsur ? lyrb_pxl[7:0] : lyra_pxl[7:0] );
+assign lyrb_eff = lyrcol( parsur ? lyra_pxl[7:0] : lyrb_pxl[7:0] );
+assign shd_eff  = parsur ? {1'b0, obj_shd[0] }
+                         : obj_shd;
 
 /* verilator tracing_on */
 jtsimson_colmix u_colmix(
     .rst        ( rst       ),
     .clk        ( clk       ),
 
+    .dim_onlyred( parsur    ),
     // Base Video
     .pxl_cen    ( pxl_cen   ),
     .lhbl       ( lhbl      ),
@@ -258,12 +290,12 @@ jtsimson_colmix u_colmix(
 
     // Final pixels
     .lyrf_pxl   ( lyrcol(lyrf_pxl) ),
-    .lyra_pxl   ( lyrcol( paroda ? lyrb_pxl[7:0] : lyra_pxl[7:0] ) ), // scroll layers swapped in Parodius
-    .lyrb_pxl   ( lyrcol( paroda ? lyra_pxl[7:0] : lyrb_pxl[7:0] ) ),
+    .lyra_pxl   ( lyra_eff  ),
+    .lyrb_pxl   ( lyrb_eff  ),
     .lyro_pxl   ( lyro_pxl  ),
 
     .obj_prio   ( obj_prio  ),
-    .obj_shd    ( paroda ? 2'd0 : obj_shd ), // shadow resistors are not mounted in the Parodius PCB
+    .obj_shd    ( shd_eff   ), // shadow resistors are not mounted on the Parodius PCB
 
     .red        ( red       ),
     .green      ( green     ),

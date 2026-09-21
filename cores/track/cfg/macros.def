@@ -1,7 +1,8 @@
-[all]
+[*]
 include ../../kicker/cfg/common.def
 
 CORENAME=JTTRACK
+JTFRAME_RATE=60.60
 
 JTFRAME_BUTTONS=3
 

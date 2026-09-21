@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 4-8-2020 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 4-8-2020 */
 
 // The original priority PROM has been hard coded into equations
 // The end result is the same but the logic gets a bit simpler
@@ -30,10 +16,11 @@ module jttrojan_colmix #(
     input            cen12,
     input            pxl_cen,
     input            cpu_cen,
+    input            avengers,
 
     // pixel input from generator modules
     input [CHARW-1:0]char_pxl,        // character color code
-    input [7:0]      scr_pxl,
+    input [7:0]      scr1_pxl,
     input [6:0]      scr2_pxl,
     input [6:0]      obj_pxl,
     input            preLVBL,
@@ -66,7 +53,8 @@ wire enable_obj  = gfx_en[3];
 
 wire char_blank  = (&char_pxl[1:0]) | ~enable_char;
 wire obj_blank   = (&obj_pxl[3:0])  | ~enable_obj;
-wire scr_blank   = &scr_pxl[3:0];
+wire scr_blank   = &scr1_g[3:0];
+wire [7:0] scr1_g = gfx_en[1] ? scr1_pxl : 8'd0;
 
 reg  [2:0] obj_sel; // signals whether an object pixel is selected
 
@@ -82,10 +70,9 @@ localparam [1:0] SCR2=2'b00, SCR1=2'b01, CHAR=2'b11, OBJ=2'b10;
 
 always @(posedge clk) if(pxl_cen) begin
     seladdr <= { ~char_blank, ~obj_blank,
-        scr_pxl[7], scr_pxl[3:0], scr_blank };
-    scr0  <= scr_pxl;
-    //scr20 <= scr2_pxl;
-    scr20 <= { scr2_pxl[6:4], scr2_pxl[0], scr2_pxl[1], scr2_pxl[2], scr2_pxl[3] };
+        scr1_g[7], scr1_g[3:0], scr_blank };
+    scr0  <= scr1_g;
+    scr20 <= gfx_en[2] ? { scr2_pxl[6:4], scr2_pxl[0], scr2_pxl[1], scr2_pxl[2], scr2_pxl[3] } : 7'd0;
     char0 <= char_pxl;
     obj0  <= obj_pxl;
 
@@ -149,11 +136,17 @@ assign {pal_red, pal_green, pal_blue} = {3{pixel_mux[3:0]}};
 
 wire [11:0] pal_out = {pal_red, pal_green, pal_blue};
 
-jtframe_blank #(.DLY(8),.DW(12)) u_dly(
+reg  LHBLl, LVBLl;
+wire LHBL_mx, LVBL_mx;
+
+always @(posedge clk) if(pxl_cen) {LHBLl,LVBLl} <= {preLHBL,preLVBL};
+assign {LHBL_mx,LVBL_mx} = avengers ? {preLHBL,preLVBL} : {LHBLl,LVBLl};
+
+jtframe_blank #(.DLY(7),.DW(12)) u_dly(
     .clk        ( clk                 ),
     .pxl_cen    ( pxl_cen             ),
-    .preLHBL    ( preLHBL             ),
-    .preLVBL    ( preLVBL             ),
+    .preLHBL    ( LHBL_mx             ),
+    .preLVBL    ( LVBL_mx             ),
     .LHBL       ( LHBL                ),
     .LVBL       ( LVBL                ),
     .rgb_in     ( pal_out             ),

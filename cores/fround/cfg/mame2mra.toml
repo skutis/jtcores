@@ -13,6 +13,11 @@ skip = { machines=[
     "hpuncher",
 ] }
 
+[Audio]
+volume = [
+    { machine="fround", value=0xFA },
+]
+
 [buttons]
 names=[
     { machine="fround", names="Face Punch,Body Punch,Guard" },
@@ -28,17 +33,17 @@ regions = [
     { name="maincpu", width=16, reverse=true  },
     { name="sub", width=16, reverse=true  },
     { name="sub", setnames=[ "fround", "froundl" ], skip = true },
-    { name="data"  },
     { name="audiocpu", start="JTFRAME_BA1_START" },
     { name="fixed",    start="JTFRAME_BA2_START" },
     { name="tiles",    start="SCR_START", width=32 },
     { name="gfxrom",   start="JTFRAME_BA3_START", width=32 },
     { name="k007232"  },
-    { name="upd"  }
+    { name="upd"  },
+    { name="proms", skip=true }
 ]
 
 order = [
-    "maincpu", "sub", "data", "audiocpu",
+    "maincpu", "sub", "audiocpu",
     "k007232", "upd",
     "fixed", "tiles", "gfxrom"
 ]

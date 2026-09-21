@@ -8,7 +8,7 @@ Capcom System 1/1.5/2 compatible verilog core for FPGA by Jose Tejada (jotego).
 
 # Original Documentation
 
-[The internet archive](www.archive.org) holds some schematics related to this work.
+[The Internet Archive](https://archive.org) holds some schematics related to this work.
 
 * [Forgotten Worlds manual](https://archive.org/details/arcademanual_forgotten-worlds/page/n15/mode/2up)
 
@@ -41,7 +41,7 @@ The _rotate screen_ OSD option is ignored for horizontal games.
 
 ## MiST
 
-You need to generate the .rom file using this (tool)[https://github.com/sebdel/mra-tools-c/tree/master/release]. Basically call it like this:
+You need to generate the .rom file using this [tool](https://github.com/sebdel/mra-tools-c/tree/master/release). Basically call it like this:
 
 `mra ghouls.mra -z rompath -A`
 
@@ -57,7 +57,7 @@ Pang! 3 and all CPS 1.5/2 games did not use DIP switches to configure the game, 
 
 # Issues
 
-Please report issues (here)[https://github.com/jotego/jtbin/issues].
+Please report issues [here](https://github.com/jotego/jtbin/issues).
 
 ## QSound Hiss
 
@@ -98,7 +98,7 @@ jedutil -view wl24b.1a gal16v8
 In order to see the equations for Willow's PAL.
 
 # Compilation
-The core is compiled using jtcore from **JTFRAME**. Follow the instructions in the README file of (JTFRAME)[https://github.com/jotego/jtframe] and then:
+The core is compiled using jtcore from **JTFRAME**. Follow the instructions in the README file of [JTFRAME](https://github.com/jotego/jtcores/tree/master/modules/jtframe) and then:
 
 ```
 source setprj.sh
@@ -302,25 +302,25 @@ Aquijacks           Eric J Faulkes      Marcus Hogue        Roman Buser
 Arcade Express      Filip Kindt         Martin Di Palma     rsn8887
 Arjan de Lang       Francis B           Matt Evans          Ryan Fig
 asdfgasfhsn         Frank Hoedemakers   Matt ODonnell       Sassbasket Silvercloud
-atrac17             Frédéric Mahé       Matthew Humphrey    Sebastien Goutal
-Bear S              Gary Greenan        Matthew Woodford    Skeeter
-Ben Toman           Gavin               Matthew Young       Sofia Rose
-Bender              Greg                Max Schütz          Spank Minister
-Bliz 452            Gregory Val         Michael Deshaies    Spencer Bradley
-Bob Gallardo        Gus Douboulidis     Michael Yount       Stephen Goldberg
-Brent Fraser        Handheld Obsession  Mick Stone          Steven Wilson
-Brett T Davis       Hard Rich           Mike Jegenjan       Steven Yedwab
-brian burney        Henrik Nordström    Mike Parks          Thomas Irwin
-Brian Sallee        HFSPlay             MiSTerFPGA.co.uk    Toby Boreham
-Carrboroman         hyp36rmax           mottzilla .         Travis Brown
-Charles             Jacob Hoffman       Nailbomb            Trifle
-Chi Wai Tran        Jeff Roberts        natalie             Ulf Skutnabba
-Chris Jardine       Jeremy Hasse        Neil St Clair       Ultrarobotninja
-Chris smith         Jeremy Kelaher      Nico Stamp          Victor Bly
-Chris W Miller      Jesse Clark         nonamebear          Victor Fontanez
-Christian           Jim Knowler         nullobject          Víctor Gomariz Ladrón de Guevara
-Christian Bailey    Jo Tomiyori         Oliver Jaksch       Xzarian
-Christopher Gelatt                                          yoaarond
+Bear S              Frédéric Mahé       Matthew Humphrey    Sebastien Goutal
+Ben Toman           Gary Greenan        Matthew Woodford    Skeeter
+Bender              Gavin               Matthew Young       Sofia Rose
+Bliz 452            Greg                Max Schütz          Spank Minister
+Bob Gallardo        Gregory Val         Michael Deshaies    Spencer Bradley
+Brent Fraser        Gus Douboulidis     Michael Yount       Stephen Goldberg
+Brett T Davis       Handheld Obsession  Mick Stone          Steven Wilson
+brian burney        Hard Rich           Mike Jegenjan       Steven Yedwab
+Brian Sallee        Henrik Nordström    Mike Parks          Thomas Irwin
+Carrboroman         HFSPlay             MiSTerFPGA.co.uk    Toby Boreham
+Charles             hyp36rmax           mottzilla .         Travis Brown
+Chi Wai Tran        Jacob Hoffman       Nailbomb            Trifle
+Chris Jardine       Jeff Roberts        natalie             Ulf Skutnabba
+Chris smith         Jeremy Hasse        Neil St Clair       Ultrarobotninja
+Chris W Miller      Jeremy Kelaher      Nico Stamp          Victor Bly
+Christian           Jesse Clark         nonamebear          Victor Fontanez
+Christian Bailey    Jim Knowler         nullobject          Víctor Gomariz Ladrón de Guevara
+Christopher Gelatt  Jo Tomiyori         Oliver Jaksch       Xzarian
+                                          yoaarond
 ```
 The following patrons supported the development of CPS2
 ```

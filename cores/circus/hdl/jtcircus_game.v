@@ -1,0 +1,148 @@
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 23-8-2024 */
+
+module jtcircus_game(
+    `include "jtframe_game_ports.inc" // see $JTFRAME/hdl/inc/jtframe_game_ports.inc
+);
+
+// SDRAM offsets
+localparam [21:0] SCR_START  = `JTFRAME_BA2_START,
+                  OBJ_START  = `JTFRAME_BA3_START;
+localparam [24:0] PROM_START = `JTFRAME_PROM_START;
+
+wire        cpu_rnw, cpu_irqn, cpu_nmin, cpu_cen, obj_frame,
+            snd_on, main_pause, mute;
+wire        vram_cs, vgap_cs, oram_cs, flip;
+wire [ 7:0] vcpu_din, obj_dout, st_snd, snd_latch;
+
+assign dip_flip   = flip^dipsw[16]; // extra DIPSW, not in the original
+assign main_pause = dip_pause & ~ioctl_ram;
+assign debug_view = { mute, st_snd[4], 1'd0, dip_flip, st_snd[3:0] };
+assign oram_we    = oram_cs & ~cpu_rnw;
+assign ioctl_din  = 0;
+
+jtcircus_main u_main(
+    .rst            ( rst24         ),
+    .clk            ( clk24         ),        // 24 MHz
+    .cpudiv_cen     ( cpudiv_cen    ),
+    .cpu_cen        ( cpu_cen       ),
+    // ROM
+    .rom_addr       ( main_addr     ),
+    .rom_cs         ( main_cs       ),
+    .rom_data       ( main_data     ),
+    .rom_ok         ( main_ok       ),
+    // cabinet I/O
+    .cab_1p         ( cab_1p        ),
+    .coin           ( coin          ),
+    .joystick1      ( joystick1     ),
+    .joystick2      ( joystick2     ),
+    .service        ( service       ),
+    // GFX
+    .cpu_dout       ( cpu_dout      ),
+    .cpu_rnw        ( cpu_rnw       ),
+    .vgap_cs        ( vgap_cs       ),
+    .vram_cs        ( vram_cs       ),
+    .vram_dout      ( vcpu_din      ),
+
+    .objram_cs      ( oram_cs       ),
+    .obj_dout       ( oram_dout     ),
+    // Sound control
+    .snd_latch      ( snd_latch     ),
+    .snd_irq        ( snd_on        ),
+    .mute           ( mute          ),
+    // GFX configuration
+    .flip           ( flip          ),
+    .obj_frame      ( obj_frame     ),
+    // interrupt triggers
+    .LVBL           ( LVBL          ),
+    // DIP switches
+    .dip_pause      ( main_pause    ),
+    .dipsw_a        ( dipsw[ 7:0]   ),
+    .dipsw_b        ( dipsw[15:8]   ),
+    .dipsw_c        ( 7'h7f         )//unpopulated. None seems to have an effect
+);
+
+jtcircus_snd u_sound(
+    .rst        ( rst       ),
+    .clk        ( clk       ),
+    .psg1_cen   ( psg1_cen  ),    // 3.5MHz
+    .psg2_cen   ( psg2_cen  ),    // 1.7MHz
+    // ROM
+    .rom_addr   ( snd_addr  ),
+    .rom_cs     ( snd_cs    ),
+    .rom_data   ( snd_data  ),
+    .rom_ok     ( snd_ok    ),
+    // From main CPU
+    .main_latch ( snd_latch ),
+    .snd_on     ( snd_on    ),
+    // sound output
+    .psg1       ( psg1      ),
+    .psg2       ( psg2      ),
+    .rdac       ( rdac      ),
+    .psg1_rcen  ( psg1_rcen ),
+    .psg2_rcen  ( psg2_rcen ),
+    .rdac_rcen  ( rdac_rcen ),
+    // debug
+    .st_dout    ( st_snd    )
+);
+
+jtcircus_video u_video(
+    .rst        ( rst       ),
+    .clk        ( clk       ),
+    .clk24      ( clk24     ),
+
+    .pxl_cen    ( pxl_cen   ),
+    .pxl2_cen   ( pxl2_cen  ),
+
+    // configuration
+    .flip       ( dip_flip  ),
+    .obj_frame  ( obj_frame ),
+
+    // CPU interface
+    .cpu_addr   ( main_addr[10:0] ),
+    .cpu_dout   ( cpu_dout  ),
+    .cpu_rnw    ( cpu_rnw   ),
+    // Scroll
+    .vram_cs    ( vram_cs   ),
+    .vram_dout  ( vram_dout ),
+    .vscr_cs    ( vgap_cs   ),
+    .vcpu_din   ( vcpu_din  ),
+    .vramrw_we  ( vramrw_we ),
+    .vramrw_dout(vramrw_dout),
+    .vramrw_addr(vramrw_addr),
+    .vram_addr  ( vram_addr ),
+    // Objects
+    .olut_addr  ( olut_addr ),
+    .olut_dout  ( olut_dout ),
+    // PROMs
+    .prog_data  ( prog_data ),
+    .prog_addr  ( prog_addr[9:0] ),
+    .prom_en    ( prom_we   ),
+
+    // Scroll
+    .scr_addr   ( scr_addr  ),
+    .scr_data   ( scr_data  ),
+    .scr_ok     ( scr_ok    ),
+    .scr_cs     ( scr_cs    ),
+
+    // Objects
+    .obj_addr   ( objrom_addr ),
+    .obj_data   ( objrom_data ),
+    .obj_cs     ( objrom_cs ),
+    .obj_ok     ( objrom_ok ),
+
+    .HS         ( HS        ),
+    .VS         ( VS        ),
+    .LHBL       ( LHBL      ),
+    .LVBL       ( LVBL      ),
+
+    .red        ( red       ),
+    .green      ( green     ),
+    .blue       ( blue      ),
+
+    .gfx_en     ( gfx_en    ),
+    .debug_bus  ( debug_bus )
+);
+
+endmodule

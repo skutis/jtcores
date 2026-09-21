@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 23-10-2022 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 23-10-2022 */
 
 module jts16_mem(
     input            rst,
@@ -35,11 +21,14 @@ module jts16_mem(
 
     // Main CPU
     input            main_cs,
+    input     [ 1:0] main_dsn,
+    input            main_rnw,
     input            vram_cs,
     input            ram_cs,
     input     [18:1] main_addr,
-    output           xram_cs,
+    output reg       xram_cs,
     output reg [18:1] xram_addr,
+    output reg [ 1:0] wram_we,
 
     // Sound CPU
     output           mc8123_we,
@@ -94,7 +83,6 @@ wire [12:0] key_mux;
 wire        fd_we;
 
 
-assign xram_cs    = ram_cs | vram_cs;
 assign gfx_cs     = LVBL || vrender==0 || vrender[8];
 assign n7751_prom = prom_we && prog_addr[21:10]==N7751_PROM [21:10];
 assign fd_we      = prom_we && prog_addr[21:13]==KEY_PROM   [21:13];
@@ -115,13 +103,19 @@ end
 `endif
 
 always @(*) begin
+    xram_cs = vram_cs;
     xram_addr = 0;
     xram_addr[VRAMW-1:1] = { ram_cs, main_addr[VRAMW-2:1] }; // RAM is mapped up
+    wram_we = {2{ram_cs&~main_rnw}} & ~main_dsn;
 `ifndef S16B
     if( ram_cs ) xram_addr[VRAMW-2:14]=0; // only 16kB for RAM
 `else
     // Mask RAM for System16B too, but no for System16C
-    if( ram_cs && !game_fantzn2x ) xram_addr[VRAMW-2:14]=0; // only 16kB for RAM
+    if( ram_cs && game_fantzn2x && xram_addr[VRAMW-2:14]!=0) begin
+        // RAM above 16kB
+        xram_cs = 1;
+        wram_we = 0;
+    end
     if( vram_cs ) xram_addr[VRAMW-2:16]=0;
 `endif
 end

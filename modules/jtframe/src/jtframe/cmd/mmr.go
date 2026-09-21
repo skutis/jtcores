@@ -1,36 +1,54 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 21-1-2023 */
 
-*/
 package cmd
 
 import (
-	// "fmt"
-
+	"fmt"
 	"github.com/spf13/cobra"
-	"github.com/jotego/jtframe/mmr"
+	"path/filepath"
+
+	. "jotego/jtframe/common"
+	"jotego/jtframe/mmr"
 )
 
-// mmrCmd represents the mmr command
-var mmrCmd = &cobra.Command{
-	Use:   "mmr <core-name>",
-	Short: "Generate verilog modules for memory mapped registers",
-	Long: `From a core's cfg/mmr.yml file, generate a MMR implementation in verilog`,
-	Run: func(cmd *cobra.Command, args []string) {
-		mmr.Generate(args[0], verbose)
-	},
-	Args: cobra.ExactArgs(1),
-}
-
 func init() {
+	var module bool
+	var mmrCmd = &cobra.Command{
+		Use:   "mmr [core-or-module-name]",
+		Short: "Generate verilog modules for memory mapped registers",
+		Long:  man_blurb("jtframe-mmr", "Generate Verilog modules for memory mapped registers."),
+		Run: func(cmd *cobra.Command, args []string) {
+			var e error
+			var corename string
+			corename, e = get_mmr_name(args, module)
+			Must(e)
+			mmrpath := mmr.GetMMRPath(corename, module)
+			if FileExists(mmrpath) {
+				Must(mmr.Generate(corename, verbose, module))
+			} else if verbose {
+				fmt.Printf("Skipping MMR for %s (%s not present)\n", corename, mmrpath)
+			}
+		},
+		Args: cobra.MaximumNArgs(1),
+	}
+
+	mmrCmd.Flags().BoolVarP(&module, "module", "m", false, "Use modules/<name> instead of cores/<name>")
 	rootCmd.AddCommand(mmrCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// mmrCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	mmrCmd.Flags().BoolVarP( &verbose, "verbose", "v", false, "Verbose output")
 }
 
+func get_mmr_name(args []string, module bool) (string, error) {
+	if !module {
+		return get_corename(args)
+	}
+	if len(args) == 0 {
+		return "", fmt.Errorf("module name required with --module")
+	}
+	name := args[0]
+	dirname, rest := filepath.Split(name)
+	if dirname != "" || rest != name || name == "" || name == "." || name == ".." {
+		return "", fmt.Errorf("%s is not a valid module folder name", name)
+	}
+	return name, nil
+}

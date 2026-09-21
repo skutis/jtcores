@@ -14,7 +14,8 @@ Resource utilization based on MiST
 Processor   | Logic Cells  |  BRAM |  Remarks
 ------------|--------------|-------|-----------------
 M68000      |  5171        |    6  |  fx68k
-i8751       |  4019        |    5  |  jtframe_8751mcu
+i8751       |  4019        |    5  |  jtframe_8751mcu (Oregano version)
+i8751       |  2631        |    5  |  jtframe_8751mcu (jt8051 version)
 M6809       |  2992        |    0  |  mc6809i
 Konami CPU  |  2521        |    2  |  JTKCPU
 Z80         |  2476        |    2  |  jtframe_sysz80 (T80s)
@@ -25,6 +26,12 @@ jt680x      |   516        |   19  |  6801 variant (ucode synthesized as BRAM)
 6502        |   937        |    0  |  chip_6502 (Andrew Holme)
 PicoBlaze   |   950        |    0  |  PauloBlaze
 MCS48       |   657        |    3  |  T48 (VHDL)
+
+## M68000
+
+fx68k is the preferred module. Because it designed in System Verilog, it cannot be simulated with Verilator. JTCORES points to a fork that contains a version manually converted to Verilog.
+
+A [tool](https://github.com/ijor/fx68k/issues/16) capable of making the conversion from System Verilog to Verilog automatically appeared later. It has not been tested in JTCORES yet.
 
 ## Z80
 
@@ -49,6 +56,10 @@ There are two versions of the 6502 in JTFRAME:
 The netlist to verilog conversion requires a clock at least 16x faster than the target 6502 speed, and a 50% duty cycle for a PHI signal that represents the actual 6502 clock. The output has glitches similar to the original ones (not necessarily at the same time). Because of this, the connection is not straight forward. The wrapper [jtframe_mos6502](../hdl/cpu/jtframe_mos6502.v) takes care of these things. However, trying to use the ready signal so the CPU waits for memory data does not seem to operate reliably.
 
 Because of the issue with the ready signal, the recommended CPU core is the T65 one. T65 also has a smaller footprint.
+
+## 65C02
+
+This CPU is different from the 6502: it has more instructions. The T65 module does not implement it correctly, failing for op codes such as $1A = INC A, or $B2 = LDA ($dir)
 
 ## VHDL
 

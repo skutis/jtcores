@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 2-9-2022 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 2-9-2022 */
 
 module jtkchamp_snd(
     input              rst,
@@ -47,7 +33,7 @@ module jtkchamp_snd(
 //                  PCM_GAIN = 8'h0c,
 //                  DAC_GAIN = 8'h02;
 
-wire        m1_n, mreq_n, iorq_n, rd_n, wr_n,
+wire        m1_n, mreq_n, iorq_n, rfsh_n, rd_n, wr_n,
             wcen, vcen, int_n, tempo_n;
 reg         nmi_on, iord_cs, iowr_cs, pcm_cs, ctrl_cs,
             latch_cs, dac_cs, pcm_nmin;
@@ -57,10 +43,13 @@ reg  [ 1:0] ctrl;
 wire [15:0] A;
 wire [ 7:0] ram_dout, cpu_dout;
 wire [ 3:0] pcm_din;
-reg         ram_cs, pcm_sel, tempo_en;
+reg         ram_cs, pcm_sel, tempo_en, macc_n;
 reg  [ 1:0] bdir, bc1;
 // sound signals
 wire        nmi_n;
+reg         reset;
+
+always @(posedge clk) reset <= rst | ~snd_rstn;
 
 assign rom_addr = A;
 assign pcm_din  = pcm_sel ? pcm_data[7:4] : pcm_data[3:0];
@@ -68,18 +57,19 @@ assign nmi_n    = enc ? pcm_nmin : tempo_n;
 assign psg0bc   = {1'b0,psg0b}+{1'b0,psg0c};
 
 always @* begin
+    macc_n    =  mreq_n | ~rfsh_n;
     iord_cs   = !iorq_n && !rd_n;
     iowr_cs   = !iorq_n && !wr_n;
     if( enc ) begin
-        rom_cs    = !mreq_n && A[14:13]!=3;
-        ram_cs    = !mreq_n && A[14:13]==3;
+        rom_cs    = !macc_n && A[14:13]!=3;
+        ram_cs    = !macc_n && A[14:13]==3;
         latch_cs  = iord_cs && A[1:0]==1;
         dac_cs    = 0;
         bc1[0]    = (iowr_cs && A[2:0]==1) || (iord_cs && A[1:0]==0);
         bc1[1]    = (iowr_cs && A[2:0]==3) || (iord_cs && A[1:0]==2);
     end else begin
-        rom_cs    = !mreq_n && A[15:13]!=7;
-        ram_cs    = !mreq_n && A[15:13]==7;
+        rom_cs    = !macc_n && A[15:13]!=7;
+        ram_cs    = !macc_n && A[15:13]==7;
         latch_cs  = iord_cs && A[2:0]==6;
         dac_cs    = iowr_cs && A[2:0]==4;
         bc1[0]    = iowr_cs && A[2:0]==1;
@@ -92,8 +82,8 @@ always @* begin
     ctrl_cs   = iowr_cs && A[2:0]==5;
 end
 
-always @(posedge clk, posedge rst) begin
-    if( rst ) begin
+always @(posedge clk, posedge reset) begin
+    if( reset ) begin
         ctrl     <= 0;
         pcm_data <= 0;
         pcm_sel  <= 0;
@@ -126,7 +116,7 @@ end
 
 jtframe_ff u_int (
     .clk    (clk     ),
-    .rst    (rst     ),
+    .rst    (reset   ),
     .cen    (1'b1    ),
     .din    (1'b1    ),
     .q      (        ),
@@ -138,7 +128,7 @@ jtframe_ff u_int (
 
 jtframe_ff u_nmi (
     .clk    (clk     ),
-    .rst    (rst     ),
+    .rst    (reset   ),
     .cen    (1'b1    ),
     .din    (1'b1    ),
     .q      (        ),
@@ -149,7 +139,7 @@ jtframe_ff u_nmi (
 );
 
 jtframe_sysz80 #(.RAM_AW(11),.RECOVERY(1)) u_cpu(
-    .rst_n      ( ~rst      ),
+    .rst_n      ( ~reset    ),
     .clk        ( clk       ),
     .cen        ( cen_3     ),
     .cpu_cen    (           ),
@@ -161,7 +151,7 @@ jtframe_sysz80 #(.RAM_AW(11),.RECOVERY(1)) u_cpu(
     .iorq_n     ( iorq_n    ),
     .rd_n       ( rd_n      ),
     .wr_n       ( wr_n      ),
-    .rfsh_n     (           ),
+    .rfsh_n     ( rfsh_n    ),
     .halt_n     (           ),
     .busak_n    (           ),
     .A          ( A         ),
@@ -175,7 +165,7 @@ jtframe_sysz80 #(.RAM_AW(11),.RECOVERY(1)) u_cpu(
 );
 
 jt49_bus u_psg0(
-    .rst_n      (  ~rst     ),
+    .rst_n      (  ~reset   ),
     .clk        (   clk     ),
     .clk_en     (   psg_cen ),
     // bus control pins of original chip
@@ -201,7 +191,7 @@ jt49_bus u_psg0(
 );
 
 jt49_bus u_psg1(
-    .rst_n      (  ~rst     ),
+    .rst_n      (  ~reset   ),
     .clk        (   clk     ),
     .clk_en     (   psg_cen ),
     // bus control pins of original chip

@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES1.
-    JTCORES1 program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES1 program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES1.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 24-1-2021 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 24-1-2021 */
 
 
 module jtcps2_obj_scan(
@@ -118,6 +104,7 @@ always @(posedge clk, posedge rst) begin
         dr_start   <= 0;
         dr_code    <= 0;
         dr_attr    <= 0;
+        dr_bank    <= 0;
         dr_hpos    <= 0;
         dr_prio    <= 0;
         last_start <= 0;
@@ -130,7 +117,11 @@ always @(posedge clk, posedge rst) begin
         // st4_y      <= 0;
         st3_code   <= 0;
         st3_attr   <= 0;
+        st3_prio   <= 0;
+        st3_bank   <= 0;
         st4_attr   <= 0;
+        st4_prio   <= 0;
+        st4_bank   <= 0;
     end else if(cen) begin
         last_start <= start;
 

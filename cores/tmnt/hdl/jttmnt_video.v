@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 13-8-2023 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 13-8-2023 */
 
 module jttmnt_video(
     input             rst,
@@ -84,23 +70,22 @@ module jttmnt_video(
     output     [ 7:0] blue,
 
     // Debug
-    input      [14:0] ioctl_addr,
+    input      [15:0] ioctl_addr,
     input             ioctl_ram,
-    output reg [ 7:0] ioctl_din,
+    output     [ 7:0] ioctl_din,
 
     input      [ 3:0] gfx_en,
     input      [ 7:0] debug_bus,
-    output reg [ 7:0] st_dout
+    output     [ 7:0] st_dout
 );
 
 `include "game_id.inc"
 
 wire [ 8:0] hdump, vdump, vrender, vrender1;
 wire [ 7:0] lyrf_pxl, st_scr, st_obj,
-            dump_scr, dump_obj, dump_pal,
+            dump_scr, dump_obj, dump_pal, dump_other,
             lyrf_col, lyra_col, lyrb_col,
-            opal,     cpu_d8,   mmr_pal,
-            scr_mmr;
+            opal,     cpu_d8,   pal_mmr,  obj_mmr, scr_mmr;
 wire [15:0] cpu_saddr;
 wire [11:0] lyra_pxl, lyrb_pxl, lyro_pxl, lyro_sort;
 wire [10:0] cpu_oaddr;
@@ -122,26 +107,27 @@ assign cpu_weg   = cpu_we && cpu_dsn!=3;
 assign cpu_d8    = ~cpu_dsn[1] ? cpu_dout[15:8] : cpu_dout[7:0];
 assign lyro_sort = { lyro_pxl[11:4],
     sort_en ? lyro_pxl[3:0] : {lyro_pxl[0],lyro_pxl[1],lyro_pxl[2],lyro_pxl[3]} };
+assign dump_other= { 6'd0, cpu_prio };
 
-// Debug
-always @* begin
-    st_dout = debug_bus[5] ? st_obj : st_scr;
-    // VRAM dumps - 16+4+1 = 21kB +17 bytes = 22544 bytes
-    ioctl_mmr = 0;
-    if( ioctl_addr<'h4000 )
-        ioctl_din = dump_scr;  // 16 kB 0000~3FFF
-    else if( ioctl_addr<'h5000 )
-        ioctl_din = dump_pal;  // 4kB 4000~4FFF
-    else if( ioctl_addr<'h5800 )
-        ioctl_din = dump_obj;  // 2kB 5000~5800 (second half equal for 051960)
-    else if( ioctl_addr<'h5808 )
-        ioctl_din = scr_mmr;  // 8 bytes, MMR 5807
-    else if (ioctl_addr<'h5810) begin
-        ioctl_mmr = 1;
-        ioctl_din = dump_obj;  // 7 bytes, MMR 580F
-    end else
-        ioctl_din = { 6'd0, cpu_prio }; // 1 byte, 5810
-end
+jtriders_dump u_dump(
+    .clk            ( clk           ),
+    .dump_scr       ( dump_scr      ),
+    .dump_obj       ( dump_obj      ),
+    .dump_pal       ( dump_pal      ),
+    .pal_mmr        ( pal_mmr       ),
+    .scr_mmr        ( scr_mmr       ),
+    .obj_mmr        ( obj_mmr       ),
+    .psac_mmr       ( 8'b0          ),
+    .other          ( dump_other    ),
+    .ioctl_addr     ( ioctl_addr    ),
+    .ioctl_din      ( ioctl_din     ),
+    .obj_amsb       (               ),
+    .part_addr      (               ),
+
+    .debug_bus      ( debug_bus     ),
+    .st_scr         ( st_scr        ),
+    .st_dout        ( st_dout       )
+);
 
 wire [2:0] gfx_de;
 reg  [9:1] oa; // see sch object page (A column)
@@ -204,7 +190,7 @@ always @* begin
 end
 
 always @(posedge clk) begin
-    sort_en <= game_id!=PUNKSHOT;
+    sort_en <= game_id!=PUNKSHOT && game_id!=THNDRX2;
 end
 
 always @* begin
@@ -219,12 +205,12 @@ always @* begin
                                               {ca[6],  ca[4],ca[2:0],ca[7] },ca[5],ca[3] };
         end
 
-        PUNKSHOT: begin
+        PUNKSHOT, THNDRX2: begin
         lyrf_addr = { pre_f[12:11], lyrf_col[3:2], lyrf_col[4], lyrf_col[1:0], pre_f[10:0] };
         lyra_addr = { pre_a[12:11], lyra_col[3:2], lyra_col[4], lyra_col[1:0], pre_a[10:0] };
         lyrb_addr = { pre_b[12:11], lyrb_col[3:2], lyrb_col[4], lyrb_col[1:0], pre_b[10:0] };
         opal_eff  = { opal[7:5], 1'b0, opal[3:0] };
-        ocode_eff = { opal[4], ocode };
+        ocode_eff = { game_id==THNDRX2 ? 1'b0 : opal[4], ocode };
         lyro_addr = ca;
         end
 
@@ -292,6 +278,10 @@ jtaliens_scroll #(
     .e          ( e         ),
 
     // color byte connection
+    .lyrf_extra (           ),
+    .lyra_extra (           ),
+    .lyrb_extra (           ),
+
     .lyrf_col   ( lyrf_col  ),
     .lyra_col   ( lyra_col  ),
     .lyrb_col   ( lyrb_col  ),
@@ -375,8 +365,8 @@ jtaliens_obj u_obj(    // sprite logic
     // Debug
     .ioctl_addr ( ioctl_addr[10:0]),
     .ioctl_ram  ( ioctl_ram ),
-    .ioctl_mmr  ( ioctl_mmr ),
     .ioctl_din  ( dump_obj  ),
+    .dump_reg   ( obj_mmr   ),
 
     .gfx_en     ( gfx_en    ),
     .debug_bus  ( debug_bus ),
@@ -429,7 +419,7 @@ jttmnt_colmix #(.IOCTL_A0(1)) u_colmix(
     .ioctl_addr ( ioctl_addr[11:0]),
     .ioctl_ram  ( ioctl_ram ),
     .ioctl_din  ( dump_pal  ),
-    .dump_mmr   ( mmr_pal   ),
+    .dump_mmr   ( pal_mmr   ),
 
     .debug_bus  ( debug_bus )
 );

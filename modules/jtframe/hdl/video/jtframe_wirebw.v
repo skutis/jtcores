@@ -1,20 +1,6 @@
-/*  This file is part of JT_FRAME.
-    JTFRAME program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTFRAME program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTFRAME.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 25-9-2019 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 25-9-2019 */
 
 // 1. Sets the video to zero during blanking
 // 2. Adds a low bandwidth effect to the video signal when enabled
@@ -118,13 +104,14 @@ end
 
 always @(*) begin
     result = acc >> (WC-(WOUT-WIN));
-    if ( result > {WOUT{1'b1}} ) result = { {AW-WOUT{1'b0}}, {WOUT{1'b1}} } ;
+    if ( result > { {AW-WOUT{1'b0}}, {WOUT{1'b1}}} ) result = { {AW-WOUT{1'b0}}, {WOUT{1'b1}} } ;
 end
-
+/* verilator lint_off WIDTHEXPAND */
 function [WOUT-1:0] ext; // extends the input from WIN to WOUT
     input [WIN-1:0] a;
     ext = { a, {WOUT-WIN{1'b0}} } | (a>>(2*WIN-WOUT)) ;
 endfunction
+/* verilator lint_on WIDTHEXPAND */
 
 // Mux it to avoid adding a clock cycle
 assign dout = enable ? pdout : ext(din);

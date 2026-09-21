@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 29-4-2024 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 29-4-2024 */
 
 module jts18_vdp(
     input              rst,
@@ -65,7 +51,8 @@ reg  [ 1:0] dtackr;
 reg  [ 2:0] cnt8=0, cnt6=0;
 reg  [ 7:0] hbcnt=0, hsaux;
 reg         clk10=0, clk12x=0, vs_eff, hsn_eff;
-
+reg         rnw_r, asn_r;
+reg  [ 1:0] dsn_r;
 initial st_dout = 0;
 
 assign vs     = ~vs_n;
@@ -124,6 +111,12 @@ always @(posedge clk96) dtackr <= {dtackr[0], dtack_pull};//dtackn <= ~dtack_pul
 
 always @(posedge clk96) clk2 <= ~clk2;
 
+always @(posedge clk96) begin
+    asn_r <= asn;
+    dsn_r <= dsn;
+    rnw_r <= rnw;
+end
+
 always @(negedge clk96) rst_n <= ~rst;
 /* verilator lint_off PINMISSING */
 /* verilator tracing_off */
@@ -142,10 +135,10 @@ ym7101 u_vdp(
     .CD_i       ( CD        ),
     .CD_o       ( dout      ),
     .CD_d       ( CD_d      ),
-    .RW         ( rnw       ),
-    .LDS        ( dsn[0]    ),
-    .UDS        ( dsn[1]    ),
-    .AS         ( asn       ),
+    .RW         ( rnw_r     ),
+    .LDS        ( dsn_r[0]  ),
+    .UDS        ( dsn_r[1]  ),
+    .AS         ( asn_r     ),
     .IPL1_pull  (           ),
     .IPL2_pull  (           ),
     .DTACK_i    ( dtackr[1] ),

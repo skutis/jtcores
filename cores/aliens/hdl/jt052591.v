@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 15-4-2023 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 15-4-2023 */
 
 // Programmable custom chip used in Thunder Force, S.P.Y. and Helix
 // The main CPU writes the program to its internal RAM
@@ -57,7 +43,9 @@ reg  [ 7:0] flag0, flag1, cm, hm, start1, end1, pos1,
             t1, b1, l1, r1, x1, y1;
 reg         bsy, start_l, thunderxa;
 
+`ifdef SIMULATION
 wire   int_we = cs & cpu_we & ~bk; // internal writes are ignored
+`endif
 
 assign cpu2ram_we = cs & cpu_we & bk; // BK writes mapped to the upper half of the RAM
 assign ram_addr = addr;

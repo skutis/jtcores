@@ -1,26 +1,12 @@
-/*  This file is part of JTCORES1.
-    JTCORES1 program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES1 program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES1.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 26-9-2020 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 26-9-2020 */
 
 module jtcps15_game(
     `include "jtframe_game_ports.inc" // see $JTFRAME/hdl/inc/jtframe_game_ports.inc
 );
 
-wire        clk_gfx, rst_gfx;
+wire        clk_gfx, rst_gfx, hold_rst;
 wire        snd_cs, qsnd_cs, main_ram_cs, main_vram_cs, main_rom_cs,
             rom0_cs, rom1_cs,
             vram_dma_cs;
@@ -72,12 +58,9 @@ wire [ 1:0] dsn;
 wire        cen16, cen12, cen8, cen10b;
 wire        cpu_cen, cpu_cenb;
 wire        turbo;
+reg         rst_game;
 
-`ifdef JTCPS_TURBO
-assign turbo = 1;
-`else
-assign turbo = status[6];
-`endif
+`include "turbo.vh"
 
 assign snd_vu     = 0;
 assign debug_view = 0;
@@ -108,6 +91,8 @@ jtframe_cen48 u_cen48(
 assign clk_gfx = clk;
 assign rst_gfx = rst;
 
+always @(posedge clk) rst_game <= hold_rst | rst48;
+
 localparam REGSIZE=24;
 
 // Turbo speed disables DMA
@@ -115,9 +100,8 @@ wire busreq_cpu = busreq & ~turbo;
 wire busack_cpu;
 assign busack = busack_cpu | turbo;
 
-`ifndef NOMAIN
 jtcps1_main u_main(
-    .rst        ( rst48             ),
+    .rst        ( rst_game          ),
     .clk        ( clk48             ),
     .cen10      ( cpu_cen           ),
     .cen10b     ( cpu_cenb          ),
@@ -185,18 +169,6 @@ jtcps1_main u_main(
     .snd_latch1  (                  ),
     .joymode     ( 2'd0             )
 );
-`else
-assign ram_addr = 17'd0;
-assign main_ram_cs = 1'b0;
-assign main_vram_cs = 1'b0;
-assign main_rom_cs = 1'b0;
-assign dsn = 2'b11;
-assign main_rnw   = 1'b1;
-assign sclk       = 0;
-assign sdo        = 0;
-assign scs        = 0;
-assign busack_cpu = 1;
-`endif
 
 reg rst_video, rst_sdram;
 
@@ -296,9 +268,6 @@ jtcps1_video #(REGSIZE) u_video(
     .watch          (               )
 );
 
-`ifndef NOZ80
-// Sound CPU cannot be disabled as there is
-// interaction between both CPUs at power up
 jtcps15_sound u_sound(
     .rst        ( rst               ),
     .clk48      ( clk48             ),
@@ -342,12 +311,6 @@ jtcps15_sound u_sound(
     .sample     ( sample            ),
     .volume     (                   )
 );
-`else
-assign snd_cs = 0;
-assign snd_addr = 0;
-assign qsnd_cs = 0;
-assign qsnd_addr = 0;
-`endif
 
 wire nc0, nc1, nc2, nc3, nc4;
 
@@ -357,6 +320,7 @@ jtcps1_sdram #(.CPS(15), .REGSIZE(REGSIZE)) u_sdram (
     .clk_gfx     ( clk_gfx       ),
     .clk_cpu     ( clk48         ),
     .LVBL        ( LVBL          ),
+    .hold_rst    ( hold_rst      ),
 
     .ioctl_rom   ( ioctl_rom     ),
     .dwnld_busy  ( dwnld_busy    ),

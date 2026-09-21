@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES1.
-    JTCORES1 program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES1 program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES1.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 5-12-2020 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 5-12-2020 */
 
 module jtcps1_sdram #( parameter
            CPS     = 1,
@@ -27,6 +13,7 @@ module jtcps1_sdram #( parameter
     input           clk_gfx,    // 96 MHz
     input           clk_cpu,    // 48 MHz
     input           LVBL,
+    output          hold_rst,
 
     input           ioctl_rom,
     output          dwnld_busy,
@@ -200,7 +187,7 @@ wire [21:0] gfx1_addr, gfx0_addr;
 wire [22:0] main_offset;
 wire        ram_vram_cs;
 wire        ba2_rdy_gfx, ba2_ack_gfx;
-reg  [17:1] main_addr_x; // main addr modified for object bank access
+reg  [20:1] main_addr_x; // main addr modified for object bank access
 reg         ocache_clr, obank_last;
 wire        dump_we;
 
@@ -208,6 +195,7 @@ wire        dump_we;
 assign gfx0_addr   = {rom0_addr, rom0_half, 1'b0 }; // OBJ
 assign gfx1_addr   = {rom1_addr, rom1_half, 1'b0 };
 assign ram_vram_cs = main_ram_cs | main_vram_cs | main_oram_cs;
+// VRAM_OFFSET is selected during reset
 assign main_offset = main_oram_cs ? ORAM_OFFSET :
                     (main_ram_cs  ? WRAM_OFFSET : VRAM_OFFSET );
 assign prog_rd     = 0;
@@ -215,7 +203,9 @@ assign dump_we     = ioctl_wr & ioctl_ram;
 assign ba_wr[3:1]  = 0;
 
 always @(*) begin
-    main_addr_x = main_ram_addr;
+    // Top 3 bits of main_addr_x are always zero, but needed to set the
+    // SLOT extension to cover the ORAM/VRAM_OFFSET during the on-reset erase
+    main_addr_x = {3'd0,main_ram_addr[17:1]};
     `ifdef CPS2
     if( main_oram_cs ) begin
         main_addr_x[17:14]  = 4'd0;
@@ -255,8 +245,8 @@ jtcps1_prom_we #(
 
 jtframe_ram1_5slots #(
     .SDRAMW      ( 23            ),
-    .ERASE       (  0            ),
-    .SLOT0_AW    ( 17            ), // Main CPU RAM
+    .SLOT0_ERASE (  1            ),
+    .SLOT0_AW    ( 20            ), // Main CPU RAM
     .SLOT0_DW    ( 16            ),
     .SLOT0_FASTWR(  0            ),
 
@@ -281,6 +271,17 @@ jtframe_ram1_5slots #(
     .SLOT4_AW    ( Z80_AW        ), // Sound CPU
     .SLOT4_DW    (  8            ),
     .SLOT4_OFFSET(  SND_OFFSET   )
+`ifdef ROMCACHE
+   ,.TAG_RAM     (  1            )
+   ,.CACHE3_SIZE ( 2048          )
+   ,.CACHE3_LARGE(  1            )
+   ,.CACHE4_SIZE ( 1024          )
+   ,.CACHE4_LARGE(  1            )
+`ifdef JTFRAME_BA0_LEN
+   ,.SLOT3_BURSTLEN( `JTFRAME_BA0_LEN )
+   ,.SLOT4_BURSTLEN( `JTFRAME_BA0_LEN )
+`endif
+`endif
 ) u_bank0 (
     .rst         ( rst           ),
     .clk         ( clk           ),
@@ -305,7 +306,7 @@ jtframe_ram1_5slots #(
 
     .slot0_din   ( main_dout     ),
     .slot0_wrmask( dsn           ),
-    .hold_rst    (               ),
+    .hold_rst    ( hold_rst      ),
 
     .slot0_addr  ( main_addr_x   ),
     .slot1_addr  ( vram_dma_addr ),

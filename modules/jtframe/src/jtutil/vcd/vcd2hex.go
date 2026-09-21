@@ -1,17 +1,23 @@
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 4-1-2025 */
+
 package vcd
 
 import (
 	"fmt"
-	"text/template"
 	"os"
+	"text/template"
 )
 
 // Creates a hex file to be used in
 // verilog and the accompanying verilog file
 // to read it
-func (this *LnFile) DumpHex(ss vcdData, fname string) {
-	f, err := os.Create(fname + ".bin")
-	must(err)
+func (this *LnFile) DumpHex(ss VCDData, fname string) (e error) {
+	f, e := os.Create(fname + ".bin")
+	if e != nil {
+		return e
+	}
 	lines := 0
 	tbw := 64
 	outputs := make([]*VCDSignal, len(ss))
@@ -28,12 +34,12 @@ func (this *LnFile) DumpHex(ss vcdData, fname string) {
 			t0 = this.time
 			set_t0 = false
 		}
-		fmt.Fprintf(f, "%064b", (this.time-t0)/1000 ) // convert to ns
+		fmt.Fprintf(f, "%064b", (this.time-t0)/1000) // convert to ns
 		for _, each := range outputs {
 			fms := fmt.Sprintf("%%0%db", each.MSB-each.LSB+1)
 			fmt.Fprintf(f, fms, each.Value)
 		}
-		fmt.Fprintf(f,"\n")
+		fmt.Fprintf(f, "\n")
 		lines++
 	}
 	f.Close()
@@ -71,11 +77,16 @@ endmodule
 		Lines:   lines,
 		Outputs: outputs,
 	}
-	f, err = os.Create(fname + ".v")
-	must(err)
+	f, e = os.Create(fname + ".v")
 	defer f.Close()
-	to := template.Must(template.New(fname).Parse(t))
-	to.Execute(f, info)
+	if e != nil {
+		return e
+	}
+	to, e := template.New(fname).Parse(t)
+	if e != nil {
+		return e
+	}
+	return to.Execute(f, info)
 }
 
 func must(e error) {

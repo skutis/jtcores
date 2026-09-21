@@ -1,20 +1,6 @@
-/*  This file is part of JTFRAME.
-    JTFRAME program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTFRAME program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTFRAME.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 18-12-2022 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 18-12-2022 */
 
 // wrapper for jtframe_objdraw_gate that hides the
 // buffer data ports (buf_pred and buf_din that let
@@ -22,6 +8,7 @@
 // object width is always 16 pixels
 
 module jtframe_objdraw #( parameter
+    AW    =  9,
     CW    = 12,
     PW    =  8,
     ZW    =  6,
@@ -29,11 +16,14 @@ module jtframe_objdraw #( parameter
     ZENLARGE= 0,
     SWAPH =  0,
     HJUMP =  0,
+    HFIX  =  1,
     LATCH =  0,
     FLIP_OFFSET=0,
     KEEP_OLD  = 0,
-    SHADOW    = 0,
     ALPHA     = 0,
+    SHADOW    = 0,
+    SHADOW_PEN  = ALPHA,
+    SW        = 1,
     PACKED    = 0
 )(
     input               rst,
@@ -41,12 +31,12 @@ module jtframe_objdraw #( parameter
     input               pxl_cen,
     input               hs,
     input               flip,
-    input        [ 8:0] hdump,
+    input    [AW-1:0]   hdump,
 
     input               draw,
     output              busy,
     input    [CW-1:0]   code,
-    input      [ 8:0]   xpos,
+    input    [AW-1:0]   xpos,
     input      [ 3:0]   ysub,
     // optional zoom, keep at zero for no zoom
     input    [ZW-1:0]   hzoom,
@@ -67,6 +57,7 @@ module jtframe_objdraw #( parameter
     wire [PW-1:0] buf_d;
 
     jtframe_objdraw_gate #(
+        .AW             ( AW            ),
         .CW             ( CW            ),
         .PW             ( PW            ),
         .ZW             ( ZW            ),
@@ -74,10 +65,13 @@ module jtframe_objdraw #( parameter
         .ZENLARGE       ( ZENLARGE      ),
         .SWAPH          ( SWAPH         ),
         .HJUMP          ( HJUMP         ),
+        .HFIX           ( HFIX          ),
         .LATCH          ( LATCH         ),
         .FLIP_OFFSET    ( FLIP_OFFSET   ),
         .SHADOW         ( SHADOW        ),
+        .SW             ( SW            ),
         .KEEP_OLD       ( KEEP_OLD      ),
+        .SHADOW_PEN     ( SHADOW_PEN    ),
         .ALPHA          ( ALPHA         ),
         .PACKED         ( PACKED        )
     )u_gate(

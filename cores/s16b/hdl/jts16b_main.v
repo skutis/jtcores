@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 5-7-2021 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 5-7-2021 */
 
 module jts16b_main(
     input              rst,
@@ -58,10 +44,10 @@ module jts16b_main(
     output      [12:1] cpu_addr,
 
     // cabinet I/O
-    input       [ 7:0] joystick1,
-    input       [ 7:0] joystick2,
-    input       [ 7:0] joystick3,
-    input       [ 7:0] joystick4,
+    input       [ 8:0] joystick1,
+    input       [ 8:0] joystick2,
+    input       [ 8:0] joystick3,
+    input       [ 8:0] joystick4,
     input       [15:0] joyana1,
     input       [15:0] joyana1b,
     input       [15:0] joyana2,
@@ -93,6 +79,7 @@ module jts16b_main(
     input              dip_test,
     input    [7:0]     dipsw_a,
     input    [7:0]     dipsw_b,
+    input    [7:0]     dipsw_c,
 
     // MCU enable and ROM programming
     input              mcu_en,
@@ -104,10 +91,6 @@ module jts16b_main(
     input    [7:0]     sndmap_din,
     output   [7:0]     sndmap_dout,
     output             sndmap_pbf, // pbf signal == buffer full ?
-
-    // NVRAM - debug
-    input       [16:0] ioctl_addr,
-    output      [ 7:0] ioctl_din,
 
     // status dump
     input       [ 7:0] debug_bus,
@@ -140,6 +123,7 @@ wire        BRn, BGACKn, BGn;
 wire        ASn, UDSn, LDSn, BUSn;
 wire        ok_dly;
 reg         sdram_ok;
+wire        ram_ok_dly;
 wire [15:0] rom_dec, cpu_dout_raw, mul_dout, cmp_dout, cmp2_dout;
 
 reg         io_cs, mul_cs, cmp_cs, cmp2_cs, wdog_cs, tbank_cs;
@@ -218,6 +202,7 @@ jts16b_mapper u_mapper(
     .bus_dsn    ( {UDSn,  LDSn}  ),
     .bus_cs     ( bus_cs         ),
     .bus_busy   ( bus_busy       ),
+    .bus_legit  ( 1'b0           ),
     // effective bus signals
     .addr_out   ( A              ),
 
@@ -269,7 +254,6 @@ jts16b_mapper u_mapper(
 
 
 jtframe_8751mcu #(
-    .DIVCEN     ( 1             ),
     .SYNC_XDATA ( 1             ),
     .SYNC_P1    ( 1             ),
     .SYNC_INT   ( 1             )
@@ -307,6 +291,20 @@ jtframe_8751mcu #(
 
 
 // System 16B memory map
+always @* begin
+    sdram_ok = ASn || (rom_cs ? ok_dly : ram_ok_dly);
+end
+
+wire ram_acc = ram_cs | vram_cs;
+
+jtframe_okdly u_ram_okdly(
+    .rst    ( rst        ),
+    .clk    ( clk        ),
+    .cs     ( ram_acc    ),
+    .ok     ( ram_ok     ),
+    .ok_dly ( ram_ok_dly )
+);
+
 always @(posedge clk, posedge rst) begin
     if( rst ) begin
             rom_cs    <= 0;
@@ -322,13 +320,7 @@ always @(posedge clk, posedge rst) begin
             vram_cs   <= 0; // 32kB
             ram_cs    <= 0;
             tbank_cs  <= 0;
-            sdram_ok  <= 0;
     end else begin
-        if( ASn )
-            sdram_ok <= 0;
-        else if( !BUSn ) begin
-            sdram_ok <= rom_cs ? ok_dly : ram_ok;
-        end
         if( !BUSn || (!ASn && RnW) /*&& BGACKn*/ ) begin
             rom_cs    <= (pcb_5797 ? active[0] : |active[2:0]) && RnW;
             char_cs   <= active[REG_VRAM] && A[16];
@@ -455,6 +447,7 @@ jts16b_cabinet u_cabinet(
     .dip_test       ( dip_test      ),
     .dipsw_a        ( dipsw_a       ),
     .dipsw_b        ( dipsw_b       ),
+    .dipsw_c        ( dipsw_c       ),
 
     // cabinet I/O
     .joystick1      ( joystick1     ),
@@ -591,33 +584,5 @@ jtframe_m68k u_cpu(
     .DTACKn     ( DTACKn      ),
     .IPLn       ( cpu_ipln    ) // VBLANK
 );
-
-// Debug
-`ifdef MISTER
-`ifndef NOSHADOW
-jts16_shadow #(.VRAMW(15)) u_shadow(
-    .clk        ( clk       ),
-    .clk_rom    ( clk_rom   ),
-
-    // Capture SDRAM bank 0 inputs
-    .addr       ( A[15:1]   ),
-    .char_cs    ( char_cs   ),    //  4k
-    .vram_cs    ( vram_cs   ),    // 64k
-    .pal_cs     ( pal_cs    ),    //  4k
-    .objram_cs  ( objram_cs ),    //  2k
-    .din        ( cpu_dout  ),
-    .dswn       ( {UDSWn, LDSWn} ),  // write mask -active low
-
-    .tile_bank  ( tile_bank ),
-    // Let data be dumped via NVRAM interface
-    .ioctl_addr ( ioctl_addr),
-    .ioctl_din  ( ioctl_din )
-);
-`else
-assign ioctl_din = 0;
-`endif
-`else
-assign ioctl_din = 0;
-`endif
 
 endmodule

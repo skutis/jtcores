@@ -1,23 +1,9 @@
-/*  This file is part of JTFRAME.
-    JTFRAME program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTFRAME program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTFRAME.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 29-4-2021 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 29-4-2021 */
 
 // SDRAM is set to burst=2 (64 bits)
-
+/* verilator coverage_off */
 module jtframe_sdram64 #(
     parameter AW=22,
               HF=1,     // 1 for HF operation (idle cycles), 0 for LF operation
@@ -113,7 +99,7 @@ module jtframe_sdram64 #(
     output              sdram_ncs,      // SDRAM Chip Select
     output              sdram_cke       // SDRAM Chip Select
 );
-
+/* verilator coverage_off */
 localparam BURSTLEN=(BA0_LEN>32 || BA1_LEN>32 ||BA2_LEN>32 ||BA3_LEN>32) ? 64 :(
                     (BA0_LEN>16 || BA1_LEN>16 ||BA2_LEN>16 ||BA3_LEN>16) ? 32 : 16);
 
@@ -240,7 +226,7 @@ always @(posedge clk) begin
     end
 end
 
-always @(posedge clk, posedge rst) begin
+always @(posedge clk) begin
     if( rst ) begin
         prio_lfsr <= 1;
     end else begin
@@ -280,6 +266,7 @@ jtframe_sdram64_init #(.HF(HF),.BURSTLEN(BURSTLEN)) u_init(
     .clk        ( clk       ),
 
     .init       ( init      ),
+    .chip       (           ),
     .cmd        ( init_cmd  ),
     .sdram_a    ( init_a    )
 );
@@ -293,6 +280,7 @@ jtframe_sdram64_rfsh #(.HF(HF),.RFSHCNT(RFSHCNT)) u_rfsh(
     .bg         ( rfsh_bg   ),
     .noreq      ( noreq     ),
     .rfshing    ( rfshing   ),
+    .chip       (           ),
     .cmd        ( rfsh_cmd  ),
     .help       ( help      ),
     .sdram_a    ( rfsh_a    )

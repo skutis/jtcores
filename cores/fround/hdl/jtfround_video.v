@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 27-8-2023 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 27-8-2023 */
 
 module jtfround_video(
     input             rst,
@@ -158,8 +144,8 @@ jtframe_vtimer #(
     .HCNT_END   ( 9'h19F    ),
     .HB_START   ( 9'h029+HB_OFFSET ), // 320 visible, 384 total (64 pxl=HB)
     .HB_END     ( 9'h069+HB_OFFSET ),
-    .HS_START   ( 9'h02B    ), // HS starts 2 pixels after HB
-    .HS_END     ( 9'h04B    ), // 32 pixel wide
+    .HS_START   ( 9'h031    ), // HS starts 8 pixels after HB
+    .HS_END     ( 9'h051    ), // 32 pixel wide
 
     .V_START    ( 9'h0F8    ), // 224 visible, 40 blank, 264 total
     .VB_START   ( 9'h1EF    ),
@@ -293,6 +279,7 @@ jtfround_obj u_obj(
     .hdump      ( hdump     ),
     .obj_dx     ( obj_dx    ),
     .obj_dy     ( obj_dy    ),
+    .gvflip     ( vflip     ),
 
     .oram_addr  ( oram_addr ),
     .oram_dout  ( oram_dout ),

@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 30-4-2022 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 30-4-2022 */
 
 module jtvigil_video(
     input         rst,
@@ -31,16 +17,14 @@ module jtvigil_video(
     output        VS,
     output        v1,
 
-    input  [11:0] main_addr,
+    input  [ 7:0] main_addr,
     input  [ 7:0] main_dout,
     input         main_rnw,
 
     input  [ 8:0] scr1pos,
-    input         scr1_ramcs,
+    output        scr1_cs,
     output [17:2] scr1_addr,
     input  [31:0] scr1_data,
-    output [ 7:0] scr1_dout,
-    output        scr1_cs,
     input         scr1_ok,
 
     input  [10:0] scr2pos,
@@ -57,8 +41,12 @@ module jtvigil_video(
     output        obj_cs,
     input         obj_ok,
 
-    input         pal_cs,
-    output [ 7:0] pal_dout,
+    // Scroll VRAM
+    output [11:0] vram_addr,
+    input  [ 7:0] vram_dout,
+    // Palette RAM
+    output [10:0] pal_addr,
+    input  [ 7:0] pal_dout,
 
     output [ 4:0] red,
     output [ 4:0] green,
@@ -75,7 +63,7 @@ wire [7:0] scr1_pxl, obj_pxl;
 
 assign v1 = v[0];
 
-// Measured on the original PCB by atrac17
+// Measured on the original PCB
 // Pixel clock is 6.144MHz
 // H: 256 active pixels, 128 blank pixels
 // HSync lasts for 32 pixels, from pixel 40 to 72.
@@ -112,18 +100,16 @@ jtframe_vtimer #(
     .VS         ( VS        )
 );
 
-`ifndef NOSCR1
 jtvigil_scr1 u_scr1 (
     .rst      ( rst         ),
     .clk      ( clk         ),
     .clk_cpu  ( clk_cpu     ),
     .pxl_cen  ( pxl_cen     ),
+    // VRAM
+    .scan_addr( vram_addr   ),
+    .scan_dout( vram_dout   ),
+    // video
     .flip     ( flip        ),
-    .main_addr( main_addr   ),
-    .main_dout( main_dout   ),
-    .main_din ( scr1_dout   ),
-    .main_rnw ( main_rnw    ),
-    .scr1_cs  ( scr1_ramcs  ),
     .hs       ( HS          ),
     .h        ( h           ),
     .v        ( v           ),
@@ -135,13 +121,7 @@ jtvigil_scr1 u_scr1 (
     .pxl      ( scr1_pxl    ),
     .debug_bus( debug_bus   )
 );
-`else
-    assign scr1_cs   = 0;
-    assign scr1_addr = 0;
-    assign scr1_pxl  = 0;
-`endif
 
-`ifndef NOSCR2
 jtvigil_scr2 u_scr2 (
     .rst        ( rst         ),
     .clk        ( clk         ),
@@ -160,32 +140,26 @@ jtvigil_scr2 u_scr2 (
     .pxl        ( scr2_pxl    ),
     .debug_bus  ( debug_bus   )
 );
-`else
-    assign scr2_cs   = 0;
-    assign scr2_addr = 0;
-    assign scr2_pxl  = 0;
-`endif
-
 
 `ifndef NOOBJ
 jtvigil_obj u_obj (
-    .rst      ( rst            ),
-    .clk      ( clk            ),
-    .clk_cpu  ( clk_cpu        ),
-    .pxl_cen  ( pxl_cen        ),
-    .flip     ( flip           ),
-    .LHBL     ( LHBL           ),
-    .main_addr( main_addr[7:0] ),
-    .main_dout( main_dout      ),
-    .oram_cs  ( oram_cs        ),
-    .h        ( h              ),
-    .v        ( vrender        ),
-    .rom_addr ( obj_addr       ),
-    .rom_data ( obj_data       ),
-    .rom_cs   ( obj_cs         ),
-    .rom_ok   ( obj_ok         ),
-    .pxl      ( obj_pxl        ),
-    .debug_bus( debug_bus      )
+    .rst        ( rst         ),
+    .clk        ( clk         ),
+    .clk_cpu    ( clk_cpu     ),
+    .pxl_cen    ( pxl_cen     ),
+    .flip       ( flip        ),
+    .LHBL       ( LHBL        ),
+    .main_addr  ( main_addr   ),
+    .main_dout  ( main_dout   ),
+    .oram_cs    ( oram_cs     ),
+    .h          ( h           ),
+    .v          ( vrender     ),
+    .rom_addr   ( obj_addr    ),
+    .rom_data   ( obj_data    ),
+    .rom_cs     ( obj_cs      ),
+    .rom_ok     ( obj_ok      ),
+    .pxl        ( obj_pxl     ),
+    .debug_bus  ( debug_bus   )
 );
 `else
     assign obj_cs   = 0;
@@ -196,25 +170,24 @@ jtvigil_obj u_obj (
 jtvigil_colmix u_colmix (
     .rst      ( rst            ),
     .clk      ( clk            ),
-    .clk_cpu  ( clk_cpu        ),
     .pxl_cen  ( pxl_cen        ),
     .LHBL     ( LHBL           ),
     .LVBL     ( LVBL           ),
     .v        ( v              ),
-    .main_addr( main_addr[10:0]), // TODO: Check connection ! Signal/port not matching : Expecting logic [10:0]  -- Found logic [11:0]
-    .main_dout( main_dout      ),
-    .main_din ( pal_dout       ),
-    .main_rnw ( main_rnw       ),
-    .pal_cs   ( pal_cs         ),
     .scr1_pxl ( scr1_pxl       ),
     .scr2col  ( scr2col        ),
     .scr2_pxl ( scr2_pxl       ),
     .scr2enb  ( scr2enb        ),
     .obj_pxl  ( obj_pxl        ),
-    .gfx_en   ( gfx_en         ),
+    // Palette RAM
+    .pal_addr ( pal_addr       ),
+    .pal_dout ( pal_dout       ),
+
     .red      ( red            ),
     .green    ( green          ),
     .blue     ( blue           ),
+    // Debig
+    .gfx_en   ( gfx_en         ),
     .debug_bus( debug_bus      )
 );
 

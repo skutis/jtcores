@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 6-3-2021 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 6-3-2021 */
 
 module jts16_game(
     `include "jtframe_game_ports.inc" // see $JTFRAME/hdl/inc/jtframe_game_ports.inc
@@ -50,6 +36,8 @@ wire        vram_cs, ram_cs;
 wire [13:2] pre_char_addr;
 wire [17:2] pre_scr1_addr, pre_scr2_addr;
 wire [20:1] pre_obj_addr;
+wire [15:0] ram_data;
+wire        ram_ok;
 
 // CPU interface
 wire [12:1] cpu_addr;
@@ -94,6 +82,14 @@ assign st_dout              = st_mux;
 assign xram_dsn             = dsn;
 assign xram_we              = ~main_rnw;
 assign xram_din             = main_dout;
+// dummy ports
+assign nvram_addr           = 0;
+assign nvram_we             = 0;
+assign nvram_din            = 0;
+// Work RAM (16kB)/ other RAM
+assign ram_ok               = ~xram_cs | xram_ok;
+assign ram_data             =  xram_cs ? xram_data : wram_dout;
+assign ioctl_din            = 0;
 
 always @(posedge clk) begin
     case( st_addr[7:4] )
@@ -123,7 +119,6 @@ end
 assign key_mcaddr=0;
 `endif
 /* verilator tracing_on */
-`ifndef NOMAIN
 `JTS16_MAIN u_main(
     .rst        ( rstx      ),
     .clk        ( clk       ),
@@ -149,8 +144,8 @@ assign key_mcaddr=0;
     .rowscr_en  ( rowscr_en ),
     // RAM access
     .ram_cs     ( ram_cs    ),
-    .ram_data   ( xram_data ),
-    .ram_ok     ( xram_ok   ),
+    .ram_data   ( ram_data  ),
+    .ram_ok     ( ram_ok    ),
     // CPU bus
     .cpu_dout   ( main_dout ),
     .UDSWn      ( UDSWn     ),
@@ -212,64 +207,12 @@ assign key_mcaddr=0;
     .dip_test    ( dip_test   ),
     .dipsw_a     ( dipsw_a    ),
     .dipsw_b     ( dipsw_b    ),
+    .dipsw_c     ( dipsw[16+:8]),
     // Status report
     .debug_bus   ( debug_bus  ),
     .st_addr     ( st_addr    ),
-    .st_dout     ( st_main    ),
-    // NVRAM dump
-    .ioctl_din   ( `ifdef JTFRAME_IOCTL_RD ioctl_din `endif ),
-`ifdef S16B
-    .ioctl_addr  ( prog_addr[16:0] )
-`else
-    .ioctl_addr  ( prog_addr[15:0] ) `endif
+    .st_dout     ( st_main    )
 );
-`else
-    assign flip      = 0;
-    assign main_addr = 0;
-    assign main_cs   = 0;
-    assign ram_cs    = 0;
-    assign pal_cs    = 0;
-    assign vram_cs   = 0;
-    assign UDSWn     = 1;
-    assign LDSWn     = 1;
-    assign main_rnw  = 1;
-    assign main_dout = 0;
-    assign video_en  = 1;
-    assign mute_n    = 0; // active low (?)
-    `ifdef S16B
-        reg aux_obf = 0;
-        reg [7:0] aux_dout=0;
-        assign sndmap_dout = aux_dout;
-        assign sndmap_pbf  = aux_obf;
-        integer framecnt=0, last_fcnt=0;
-
-        always @(negedge LVBL) begin
-            framecnt <= framecnt+1;
-        end
-        always @(negedge LHBL) begin
-            last_fcnt <= framecnt;
-            aux_obf <= last_fcnt != framecnt && (framecnt==10
-                || framecnt==12
-                // || framecnt==32
-                // || framecnt==72
-                // || framecnt==112
-            );
-            if( framecnt == 11 ) aux_dout <= 8'h4b; //8'h48 Ok; 4c
-            //if( framecnt == 31 ) aux_dout <= 8'h42;
-            //if( framecnt == 71 ) aux_dout <= 8'h41;
-            //if( framecnt ==111 ) aux_dout <= 8'h40;
-        end
-    `endif
-    `ifdef SIMULATION
-        reg [7:0] sim_def[0:1];
-
-        initial begin
-            $readmemh("tilebank.hex",sim_def);
-            $display("Tile bank set to %X",sim_def[0]);
-        end
-        assign tile_bank = sim_def[0][5:0];
-    `endif
-`endif
 /* verilator tracing_off */
 `JTS16_SND u_sound(
     .rst        ( rst       ),
@@ -433,11 +376,14 @@ jts16_mem u_mem(
 
     // Main CPU
     .main_cs    ( main_cs   ),
+    .main_rnw   ( main_rnw  ),
+    .main_dsn   ( dsn       ),
     .vram_cs    ( vram_cs   ),
     .ram_cs     ( ram_cs    ),
     .main_addr  ( main_addr ),
     .xram_cs    ( xram_cs   ),
     .xram_addr  ( xram_addr ),
+    .wram_we    ( wram_we   ),
 
     // Sound CPU
     .mc8123_we  ( mc8123_we ),

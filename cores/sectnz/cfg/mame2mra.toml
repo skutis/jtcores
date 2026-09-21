@@ -5,6 +5,12 @@ author=["jotego"]
 sourcefile=[ "lwings.cpp" ]
 skip.Machines=[ "avengers", "trojan", "fball" ]
 
+[Audio]
+volume = [
+    { machine="lwings", value=0x40 },
+    { machine="sectionz", value=0x21 },
+]
+
 [buttons]
 names=[
     { machine="sectionz", names="Shoot,Turn" },
@@ -28,4 +34,4 @@ regions=[
     { name="proms",    skip=true },
 ]
 
-order=[ "maincpu", "soundcpu", "adpcm", "gfx1", "gfx2", "gfx3" ]
+order=[ "maincpu", "soundcpu", "gfx1", "gfx2", "gfx3" ]

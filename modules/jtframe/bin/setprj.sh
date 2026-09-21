@@ -1,18 +1,29 @@
 #!/bin/bash
-# Define JTROOT before sourcing this file
-
+# This script may be sourced from any folder inside the project hierarchy.
+setup_dir() {
+    local setup_script=${BASH_SOURCE[0]}
+    if [[ "$setup_script" != */* ]]; then
+        setup_script=$(type -P -- "$setup_script")
+    fi
+    cd -- "$(dirname -- "$setup_script")" && pwd -P
+}
 if (echo $PATH | grep modules/jtframe/bin -q); then
-    unalias jtcore
+    unalias jtcore 2>/dev/null
     PATH=$(echo $PATH | sed 's/:[^:]*jtframe\/bin//g')
     PATH=$(echo $PATH | sed 's/:\.//g')
     unset JT12 JT51 CC MRA ROM CORES
 fi
 
-export JTROOT=$(pwd)
+export JTROOT=$(cd -- "$(setup_dir)/../../.." && pwd -P)
 export JTFRAME=$JTROOT/modules/jtframe
+export CODEX_HOME=$JTROOT/.codex
 # . path comes before JTFRAME/bin as setprj.sh
 # can be in the working directory and in JTFRAME/bin
 PATH=$PATH:.:$JTFRAME/bin
+MANPATH=$(printf ':%s:' "${MANPATH:-}" | sed "s#:$JTFRAME/doc/man:#:#g")
+MANPATH=${MANPATH#:}
+MANPATH=${MANPATH%:}
+export MANPATH=$JTFRAME/doc/man:${MANPATH:-}
 
 if [ ! -d "$JTBIN" ]; then
     export JTBIN=$JTROOT/release
@@ -44,22 +55,35 @@ function cdrls {
     cd $JTROOT/release
 }
 
-# returns the current working directory with the core name
-# changed by its argument. Use it to refer to the equivalent current folder
-# in a different core
-function incore {
-    IFS=/ read -ra string <<< $(pwd)
-    local j="/"
-    local next=0
-    for i in ${string[@]};do
-        if [ $next = 0 ]; then
-            j=${j}${i}/
-        else
-            next=0
-            j=${j}$1/
-        fi
-    done
-    echo $j
+function lint {
+    local CORENAME=$1
+    if [ -z "$CORENAME" ]; then
+        # derive the default core name from the path
+        CORENAME=$(realpath . --relative-to=$CORES)
+        CORENAME=${CORENAME%%/*}
+    fi
+    if [ ! -d "$CORES/$CORENAME" ]; then
+        echo "Use a valid core name or run it from inside the core folder"
+        return 1
+    fi
+    lint-one.sh $CORENAME -u JTFRAME_SKIP
+}
+
+function cpscene {
+    local ramfile
+    local scene_name="$1"
+    ramfile=`find /media/$USER -name "*.RAM" | head -n 1`
+    if [ ! -e "$ramfile" ]; then
+        echo "Did not find any .RAM files"
+        return 1
+    fi
+    if [ -z "$scene_name" ]; then
+        echo "You must specify a name for the scene"
+        return 1
+    fi
+    local folder="scenes/$scene_name"
+    mkdir -p "$folder" || return 1
+    mv $ramfile "$folder"/dump.bin
 }
 
 function swcore {
@@ -103,10 +127,21 @@ function swcore {
     done
 }
 
-if [ "$1" != "--quiet" ]; then
-    echo "Use swcore <corename> to switch to a different core once you are"
-    echo "inside the cores folder"
-fi
+# change to a folder inside "$CORES/*/ver" folders
+function cdgame {
+    local setname=$1
+    if [ -z "$JTROOT" ]; then
+        echo Have you forgot to define JTROOT?
+        return 1
+    fi
+    if [ -z "$setname" ]; then
+        echo "Use cdgame <MAME setname>"
+        return 1
+    fi
+    local path=$(find $JTROOT/cores -name "$1" -path "*/ver/$setname" -type d | head -n 1)
+    if [ -z "$path" ]; then echo "No $setname in verification folders"; return 1; fi
+    cd "$path"
+}
 
 # Git prompt
 source $JTFRAME/bin/git-prompt.sh
@@ -118,12 +153,6 @@ function __git_subdir {
     echo ${PWD##${JTROOT}/}
 }
 PS1='[$(__git_subdir)$(__git_ps1 " (%s)")]\$ '
-
-function jtpull {
-    cd $JTFRAME
-    git pull
-    cd -
-}
 
 # Displays all available macros
 # The argument is used to filter the output
@@ -161,7 +190,7 @@ EOF
 
 # Cleans up the simulation folder
 function cleansim {
-    rm -f *.wav *.f *.def *bak *.raw *.bin test.* game_test.v frame*jpg \
+    rm -f *.wav *.f *.def *bak *.raw *.bin test.* game_test.v frame*jpg frame*png \
           microrom.mem nanorom.mem *.log *.h waiver
     rm -rf obj_dir sdram.old cfg history
 }
@@ -173,46 +202,44 @@ function hexdiff {
 
 # starts gtkwave and opens the test dump file in the current folder
 function gw {
-    if [ -e test.lxt ]; then
-        gtkwave test.lxt &
-    elif [ -e test.fst ]; then
-        local DMPFILE=
-        if [ -e test.gtkw ]; then DMPFILE=test.gtkw; fi
-        gtkwave test.fst $DMPFILE &
-    elif [ -e test.vcd ]; then
-        gtkwave test.vcd &
-    else
+    local DIR=$(basename $(pwd))
+    local DMPFILE=
+    local FOUND=0
+    if [ -e test.gtkw ]; then DMPFILE=$DIR/test.gtkw; fi
+    for ext in lxt fst vcd; do
+        if [ -e test.$ext ]; then
+            # starts from .. so the folder name is shown on
+            # GTKWave's title bar
+            (cd ..; gtkwave $DIR/test.$ext $DMPFILE &)
+            FOUND=1
+            break
+        fi
+    done
+    if [ $FOUND = 0 ]; then
         echo "No test.lxt, test.fst, test.vcd in the current folder"
+        return 1
     fi
 }
 
-# generates a list of valid core names based on the existance of the TOML file
-function get_cores {
-    find "$CORES" -mindepth 1 -maxdepth 1 -type d | while read -r dir; do
-      if [ -e "$dir/cfg/mame2mra.toml" ]; then
-        dir=$(basename "$dir")
-        echo -n "$dir "
-      fi
-    done
+# set default jtframe target by calling the command-line target function
+export TARGET=sidi128
+function target {
+    if [ -z "$1" ]; then
+        echo $TARGET
+        return 0
+    fi
+    if [ ! -d $JTFRAME/target/$1 ]; then
+        echo "$1 is not a valid JTFRAME target"
+        return 1
+    fi
+    export TARGET=$1
+    echo $TARGET
 }
 
 # check that git hooks are present
-cp --no-clobber $JTFRAME/bin/post-merge $(git rev-parse --git-path hooks)/post-merge
-
-# Recompiles jtframe quietly after each commit
-cd $JTFRAME
-JTFRAME_POSTCOMMIT=$(git rev-parse --git-path hooks)/post-commit
-if [ ! -e $JTFRAME_POSTCOMMIT ]; then
-    cat > $JTFRAME_POSTCOMMIT <<EOF
-    #!/bin/bash
-    jtframe > /dev/null
-    if [ $(git branch --no-color --show-current) = master ]; then
-        # automatically push changes to master branch
-        git push
-    fi
-EOF
-    chmod +x $JTFRAME_POSTCOMMIT
-fi
+for HOOK in $JTFRAME/bin/hooks/*; do
+    cp --update $HOOK $(git rev-parse --git-path hooks)
+done
 
 if ! git config -l | grep instead > /dev/null; then
     cat<<EOF

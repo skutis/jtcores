@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 1-1-2023 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 1-1-2023 */
 
 module jttora_objdata(
     input               rst,
@@ -39,8 +25,9 @@ module jttora_objdata(
     input         [7:0] debug_bus
 );
 
-parameter VINV=1; // Assumes that the y position is inverted (needed for Tora, but not Biocom)
-
+parameter VINV=1,  // Assumes that the y position is inverted (needed for Tora, but not Biocom)
+          VOFF=1,  // vertical offset to add to sprites (different for JTBIOCOM)
+          HOFF=13; // horizontal offset
 localparam [7:0] OBJMAX=159;
 
 reg  [ 8:0] Vsum, vf;
@@ -54,7 +41,7 @@ assign lut_addr = { obj_cnt, st };
 
 always @(*) begin
     vf   = vdump^{flip,{8{flip^~VINV[0]}}};
-    Vsum = vf + lut_data[8:0] + 8'd1;
+    Vsum = vf + lut_data[8:0] + VOFF[8:0];
 end
 
 always @(posedge clk) begin
@@ -97,7 +84,7 @@ always @(posedge clk, posedge rst) begin
                     vinzone <= &Vsum[8:4];
                 end
                 3: begin
-                    dr_xpos <= lut_data[8:0] + 9'd13;
+                    dr_xpos <= lut_data[8:0] + HOFF[8:0];
                     if( !vinzone || !dr_busy ) begin
                         obj_cnt <= obj_cnt - 1'd1;
                         if( vinzone ) drawn <= drawn + 1'd1;

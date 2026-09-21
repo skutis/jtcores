@@ -1,20 +1,6 @@
-/*  This file is part of JTFRAME.
-    JTFRAME program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTFRAME program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTFRAME. If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 11-8-2022 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 11-8-2022 */
 
 // shows the JT logo at the screen centre
 module jtframe_center_logo #(parameter
@@ -50,15 +36,21 @@ reg  [ 8:0] hcnt=0,vcnt=0,
             hover=0, vover=9'd100;
 reg  [ 9:0] hdiff, vdiff;
 reg         lhbl_l, lvbl_l;
-wire        idpxl;
+wire        idpxl, blank;
 reg         inzone;
-wire [COLORW*3-1:0] logorgb;
+wire [COLORW*3-1:0] logorgb, logo_id_mx, bg;
+
+assign logo_id_mx = inzone ? logorgb : {3*COLORW{idpxl & SHOWHEX[0] }};
+assign blank      = logo_id_mx == 0;
+assign bg         = `ifdef BETA { {2*COLORW{1'b1}}, {COLORW{1'b0}}}; // yellowish
+                    `else {COLORW{1'b0}}; `endif
 
 always @(posedge clk) if( pxl_cen ) begin
     { hs_out, vs_out     } <= { hs, vs };
     { lhbl_out, lvbl_out } <= { lhbl, lvbl };
-    rgb_out <= !show_en ? rgb_in :                                    // regular video
-              inzone ? logorgb : {3*COLORW{idpxl & SHOWHEX[0] }};     // logo or chip ID
+    rgb_out <= !show_en ? rgb_in :     // regular video
+               !blank   ? logo_id_mx : // logo or chip ID
+                          bg;          // background color
 end
 
 always @* begin

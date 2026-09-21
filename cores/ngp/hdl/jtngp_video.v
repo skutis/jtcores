@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. https://patreon.com/jotego
-    Version: 1.0
-    Date: 22-3-2022 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 22-3-2022 */
 
 module jtngp_video(
     input               rst,
@@ -35,6 +21,7 @@ module jtngp_video(
 
     output              hirq,
     output              virq,
+    output              mode,
 
     output              HS,
     output              VS,
@@ -45,6 +32,9 @@ module jtngp_video(
     output       [ 3:0] blue,
     input        [ 3:0] gfx_en,
     // Debug
+    input        [ 8:0] ioctl_addr,
+    output       [ 7:0] ioctl_din,
+    input               ioctl_dump,
     input        [ 7:0] debug_bus,
     output reg   [ 7:0] st_dout
 );
@@ -57,7 +47,7 @@ wire [ 1:0] dsn;
 
 // Memory map
 reg   ram_cs, obj_cs,  obj2_cs, pal_cs, palrgb_cs,
-      scr1_cs,  scr2_cs, regs_cs, rst_cs;
+      scr1_cs,  scr2_cs, regs_cs, rst_cs, mode_cs;
 reg   rstv;
 // video access
 wire [15:0] scr1_data, scr2_data, obj_data;
@@ -72,8 +62,9 @@ wire [ 7:0] hoffset, voffset,
             view_startx,view_starty;
 wire        scr_order, hirq_en, virq_en, lcd_neg, oow;
 
-wire [ 4:0] obj_pxl;
-wire [ 2:0] scr1_pxl, scr2_pxl, oowc;
+wire [ 8:0] obj_pxl;
+wire [ 6:0] scr1_pxl, scr2_pxl; // color pal (4) + mono pal (1) + ink (2)
+wire [ 2:0] oowc;
 
 wire [15:0] regs_dout, fix_dout,
             obj_dout,  pal_dout,
@@ -108,20 +99,27 @@ end
 always @* begin
     regs_cs   = gfx_cs && in_range(14'h0000,14'h00C0);
     pal_cs    = gfx_cs && in_range(14'h0100,14'h011A); // monochrome palette
-    palrgb_cs = gfx_cs && in_range(14'h0200,14'h0400); // color palette
     rst_cs    = gfx_cs && cpu_addr[13:1]==13'h7e0>>1;
     obj_cs    = gfx_cs && in_range(14'h0800,14'h0900); // OBJ, NGP mode
-    obj2_cs   = gfx_cs && in_range(14'h0C00,14'h0C40); // OBJ, NPGC addition
     scr1_cs   = gfx_cs && in_range(14'h1000,14'h1800); // Scroll VRAM, 1st half
     scr2_cs   = gfx_cs && in_range(14'h1800,14'h2000); //              2nd half
     ram_cs    = gfx_cs && cpu_addr[13:1] >= 13'h1000;  // 2000-4000 character RAM
+`ifdef NGPC
+    obj2_cs   = gfx_cs && in_range(14'h0C00,14'h0C40); // OBJ, NPGC addition
+    palrgb_cs = gfx_cs && in_range(14'h0200,14'h0400); // color palette
+    mode_cs   = gfx_cs && cpu_addr[13:1]==13'h7e2>>1;
+`else
+    obj2_cs   = 0;
+    palrgb_cs = 0;
+    mode_cs   = 0;
+`endif
 end
 
 always @* begin // do not register here
-    cpu_din =  pal_cs   ? pal_dout  :
+    cpu_din =  pal_cs | palrgb_cs ? pal_dout  :
                scr1_cs  ? scr1_dout :
                scr2_cs  ? scr2_dout :
-               regs_cs  ? regs_dout :
+    (mode_cs | regs_cs) ? regs_dout :
                ram_cs   ? fix_dout : obj_dout;
 end
 /* verilator tracing_on */
@@ -164,6 +162,7 @@ jtngp_mmr u_mmr(
     .cpu_dout   ( cpu_dout    ),
     .dsn        ( dsn         ),
     .regs_cs    ( regs_cs     ),
+    .mode_cs    ( mode_cs     ),
     // video access
     .hoffset    ( hoffset     ),
     .voffset    ( voffset     ),
@@ -172,6 +171,7 @@ jtngp_mmr u_mmr(
     .scr2_hpos  ( scr2_hpos   ),
     .scr2_vpos  ( scr2_vpos   ),
     .scr_order  ( scr_order   ),
+    .mode       ( mode        ),
     // Window
     .view_width ( view_width  ),
     .view_height( view_height ), // it influences when interrupts occur too
@@ -204,10 +204,7 @@ jtngp_chram u_chram(
     .scr2_data  ( scr2_data )
 );
 /* verilator tracing_on */
-jtngp_scr #(
-    .SIMFILE_LO("scr1_lo.bin"),
-    .SIMFILE_HI("scr1_hi.bin")
-) u_scr1 (
+jtngp_scr #(.SIMFILE("scr1.bin")) u_scr1 (
     .rst        ( rstv      ),
     .clk        ( clk       ),
     .pxl_cen    ( pxl_cen   ),
@@ -230,10 +227,7 @@ jtngp_scr #(
     .pxl        ( scr1_pxl  )
 );
 
-jtngp_scr #(
-    .SIMFILE_LO("scr2_lo.bin"),
-    .SIMFILE_HI("scr2_hi.bin")
-) u_scr2 (
+jtngp_scr #(.SIMFILE("scr2.bin")) u_scr2 (
     .rst        ( rstv      ),
     .clk        ( clk       ),
     .pxl_cen    ( pxl_cen   ),
@@ -284,14 +278,24 @@ jtngp_obj u_obj(
     .pxl        ( obj_pxl   )
 );
 /* verilator tracing_on */
-jtngp_colmix u_colmix(
+`COLMIX u_colmix(
     .rst        ( rstv      ),
     .clk        ( clk       ),
     .pxl_cen    ( pxl_cen   ),
 
     .lcd_neg    ( lcd_neg   ),
     .scr_order  ( scr_order ),
-
+`ifdef NGPC
+    .mode       ( mode      ),
+    .palrgb_cs  ( palrgb_cs ),
+`else
+    .mode       ( 1'b1      ),
+    // priority mixer output - ignored
+    .lyr        (           ),
+    .pxl        (           ),
+    .col        (           ),
+    .pal        (           ),
+`endif
     // Window
     .oow        ( oow       ),
     .oowc       ( oowc      ),
@@ -302,7 +306,6 @@ jtngp_colmix u_colmix(
     .cpu_dout   ( cpu_dout  ),
     .we         ( we        ),
     .pal_cs     ( pal_cs    ),
-    .palrgb_cs  ( palrgb_cs ),
 
     .LHBL       ( LHBL      ),
     .LVBL       ( LVBL      ),
@@ -311,10 +314,20 @@ jtngp_colmix u_colmix(
     .scr2_pxl   ( scr2_pxl  ),
     .obj_pxl    ( obj_pxl   ),
 
+`ifdef NGPC
+    .ioctl_addr ( ioctl_addr),
+    .ioctl_din  ( ioctl_din ),
+    .ioctl_dump ( ioctl_dump),
+`endif
+
     .red        ( red       ),
     .green      ( green     ),
     .blue       ( blue      ),
     .debug_bus  ( debug_bus )
 );
+
+`ifndef NGPC
+assign ioctl_din=0;
+`endif
 
 endmodule

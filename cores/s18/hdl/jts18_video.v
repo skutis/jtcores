@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 29-4-2024 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 29-4-2024 */
 
 module jts18_video(
     input              rst,
@@ -33,10 +19,12 @@ module jts18_video(
     input              vid16_en,
     input              gray_n,
     input      [ 7:0]  tile_bank,
+    input      [ 7:0]  game_id,
     output     [ 8:0]  vrender,
 
     // CPU interface
     input              dip_pause,
+    input              bank_cs,
     input              char_cs,
     input              objram_cs,
     input      [23:1]  addr,
@@ -58,7 +46,7 @@ module jts18_video(
 
     // SDRAM interface
     input              char_ok,
-    output     [13:2]  char_addr, // 9 addr + 3 vertical + 2 horizontal = 14 bits
+    output     [21:2]  char_addr, // 9 addr + 3 vertical + 2 horizontal = 14 bits
     input      [31:0]  char_data,
 
     input              map1_ok,
@@ -79,7 +67,7 @@ module jts18_video(
 
     input              obj_ok,
     output             obj_cs,
-    output     [20:1]  obj_addr,
+    output     [22:1]  obj_addr,
     input      [15:0]  obj_data,
 
     // Video signal
@@ -96,8 +84,16 @@ module jts18_video(
     input      [ 7:0]  debug_bus,
     // status dump
     input      [ 7:0]  st_addr,
+    input      [ 1:0]  joystick1,
     output     [ 7:0]  st_dout
 );
+
+localparam       PCB_5874 = 0,  // refers to the bit in game_id
+                 PCB_5987_DESERTBR = 1,
+                 PCB_5987 = 2,
+                 PCB_7525 = 3,  // hamaway
+                 PCB_5873 = 4,  // lghost
+                 PCB_7248 = 5;  // shdancer
 
 wire [5:0] s16_r, s16_g, s16_b;
 wire [7:0] vdp_r, vdp_g, vdp_b;
@@ -107,14 +103,26 @@ wire       vdp_hs, vdp_vs, vdp_hde, vdp_vde, vdp_spa_b, vdp_ysn;
 wire       scr_hs, scr_vs, scr_lvbl, scr_lhbl;
 wire       LHBL_dly, LVBL_dly, HS48, VS48, LHBL48, LVBL48,
            scr1_sel, scr2_sel, vdp_on,
-           sa, sb, fix;
+           obj, sa, sb, fix, s1_pri, s2_pri;
 wire [1:0] obj_prio;
+wire [2:0] scr1_bank, scr2_bank;
+wire [3:0] obj_bank;
+(* ramstyle = "logic" *) reg  [7:0] tilebanks[16];
 
-assign st_dout = {3'd0, vdp_en, 3'd0,vdp_on};
-assign scr1_addr[21]=0;
-assign scr2_addr[21]=0;
-assign scr1_addr[20-:4] = scr1_sel ? tile_bank[7:4] : tile_bank[3:0];
-assign scr2_addr[20-:4] = scr2_sel ? tile_bank[7:4] : tile_bank[3:0];
+wire       alt_gfx = game_id[PCB_5987_DESERTBR]|game_id[PCB_5987]|game_id[PCB_7525];
+
+always @(posedge clk48)
+   if (bank_cs) tilebanks[addr[4:1]] <= game_id[PCB_7525] ? (din[7] ? {3'd0, din[4:0]} + 8'h20 : {3'd0, din[4:0]}) : din[7:0];
+wire [7:0] st_show;
+assign st_dout = st_show;//{3'd0, vdp_en, 3'd0,vdp_on};
+assign scr1_sel = scr1_bank[2];
+assign scr2_sel = scr2_bank[2];
+
+assign char_addr[21:14] = alt_gfx ? {tilebanks[0][6:0], 1'b0} : 8'd0;
+assign scr1_addr[21:15] = alt_gfx ? tilebanks[{1'b0, scr1_bank}][6:0] : {1'b0, scr1_sel ? tile_bank[7:4] : tile_bank[3:0], scr1_bank[1:0]};
+assign scr2_addr[21:15] = alt_gfx ? tilebanks[{1'b0, scr2_bank}][6:0] : {1'b0, scr2_sel ? tile_bank[7:4] : tile_bank[3:0], scr2_bank[1:0]};
+
+assign obj_addr[22:17] = (game_id[PCB_5987_DESERTBR]|game_id[PCB_5987]) ? {tilebanks[{1'b1, obj_bank[3:1]}][4:0], obj_bank[0]} : {2'd0, obj_bank};
 
 `ifndef NOVDP
 assign VS   = scr_vs;   // gfx_en[2] ? scr_vs   : vdp_vs;
@@ -137,7 +145,7 @@ assign LHBL = scr_lhbl;
 //     end
 // end
 
-/* verilator tracing_off */
+/* verilator tracing_on */
 jts18_video16 u_video16(
     .rst        ( rst       ),
     .clk        ( clk48     ),
@@ -164,7 +172,7 @@ jts18_video16 u_video16(
 
     // SDRAM interface
     .char_ok    ( char_ok   ),
-    .char_addr  ( char_addr ), // 9 addr + 3 vertical + 2 horizontal = 14 bits
+    .char_addr  ( char_addr[13:2] ), // 9 addr + 3 vertical + 2 horizontal = 14 bits
     .char_data  ( char_data ),
 
     .map1_ok    ( map1_ok   ),
@@ -172,7 +180,7 @@ jts18_video16 u_video16(
     .map1_data  ( map1_data ),
 
     .scr1_ok    ( scr1_ok   ),
-    .scr1_addr  ({scr1_sel,scr1_addr[16:2]}), // 1 bank + 12 addr + 3 vertical = 15 bits
+    .scr1_addr  ({scr1_bank,scr1_addr[14:2]}), // 1 bank + 12 addr + 3 vertical = 15 bits
     .scr1_data  ( scr1_data ),
 
     .map2_ok    ( map2_ok   ),
@@ -180,20 +188,23 @@ jts18_video16 u_video16(
     .map2_data  ( map2_data ),
 
     .scr2_ok    ( scr2_ok   ),
-    .scr2_addr  ({scr2_sel,scr2_addr[16:2]}), // 1 bank + 12 addr + 3 vertical = 15 bits
+    .scr2_addr  ({scr2_bank,scr2_addr[14:2]}), // 1 bank + 12 addr + 3 vertical = 15 bits
     .scr2_data  ( scr2_data ),
 
     .obj_ok     ( obj_ok    ),
     .obj_cs     ( obj_cs    ),
-    .obj_addr   ( obj_addr  ),
+    .obj_addr   ( {obj_bank, obj_addr[16:1]} ),
     .obj_data   ( obj_data  ),
 
     // Video signal
+    .obj        ( obj       ),
     .sa         ( sa        ),
     .sb         ( sb        ),
     .fix        ( fix       ),
     .obj_prio   ( obj_prio  ),
     .tprio      (           ),
+    .s1_pri     ( s1_pri    ),
+    .s2_pri     ( s2_pri    ),
     .HS         ( scr_hs    ),
     .VS         ( scr_vs    ),
     .LHBL       ( scr_lhbl  ),
@@ -207,15 +218,15 @@ jts18_video16 u_video16(
 
     // Debug
     .gfx_en     ( gfx_en    ),
-    .debug_bus  ( debug_bus ),
+    .debug_bus  ( 8'b0/*debug_bus*/ ),
     // status dump
     .st_addr    ( st_addr   ),
     .st_dout    ( st_s16    ),
     .scr_bad    (           )
 );
-/* verilator tracing_on */
+
 // Megadrive VDP
-/* verilator tracing_on */
+/* verilator tracing_off */
 jts18_vdp u_vdp(
     .rst        ( rst       ),
     .clk96      ( clk96     ),
@@ -245,7 +256,7 @@ jts18_vdp u_vdp(
     .spa_b      ( vdp_spa_b ),
     .ys_n       ( vdp_ysn   ),
     .video_en   ( vdp_on    ),
-    .debug_bus  ( debug_bus ),
+    .debug_bus  ( 8'b0/*debug_bus*/ ),
     .st_dout    ( st_vdp    )
 );
 /* verilator tracing_off */
@@ -260,10 +271,13 @@ jts18_colmix u_colmix(
     .vdp_prio   ( vdp_prio  ),
     .vid16_en   ( vid16_en  ),
     // S16 Video priority
+    .obj16     ( obj       ),
     .sa         ( sa        ),
     .sb         ( sb        ),
     .fix        ( fix       ),
     .obj_prio   ( obj_prio  ),
+    .s1_pri     ( s1_pri    ),
+    .s2_pri     ( s2_pri    ),
 
     .LHBL       ( LHBL      ),
     .LVBL       ( LVBL      ),
@@ -278,7 +292,10 @@ jts18_colmix u_colmix(
     .vdp_b      ( vdp_b     ),
     .red        ( red       ),
     .green      ( green     ),
-    .blue       ( blue      )
+    .blue       ( blue      ),
+    .debug_bus  ( 8'b0/*debug_bus*/ ),
+    .st_show    ( st_show   ),
+    .joystick1  ( joystick1 )
 );
 
 endmodule

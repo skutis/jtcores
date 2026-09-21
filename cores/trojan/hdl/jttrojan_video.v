@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 2-8-2020 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 2-8-2020 */
 
 module jttrojan_video #(
     parameter SCRW = 18,
@@ -27,6 +13,8 @@ module jttrojan_video #(
     input               cen6,
     input               cen3,
     input               cpu_cen,
+    input               avengers,
+
     input       [11:0]  cpu_AB,
     output      [ 8:0]  V,
     output      [ 8:0]  H,
@@ -79,6 +67,7 @@ module jttrojan_video #(
     // Palette RAM
     input               blue_cs,
     input               redgreen_cs,
+    input       [7:0]   debug_bus,
     input       [3:0]   gfx_en,
     // Pixel output
     output      [3:0]   red,
@@ -93,11 +82,19 @@ localparam PXL_CHRW=6;
 localparam SCR_OFFSET = 9'd2;
 
 wire [PXL_CHRW-1:0] char_pxl;
-wire [6:0] obj_pxl;
-wire [7:0] scr_pxl;
-wire [6:0] scr2_pxl;
-wire [3:0] cc;
-wire       LHBL_obj, LVBL_obj, preLHBL, preLVBL, HINIT;
+reg  [15:0] scr2_hadj;
+reg  [ 8:0] scr2_vadj;
+wire [ 6:0] obj_pxl;
+wire [ 7:0] scr_pxl;
+wire [ 6:0] scr2_pxl;
+wire [ 3:0] cc;
+wire        LHBL_obj, LVBL_obj, preLHBL, preLVBL, HINIT;
+
+always @(posedge clk) begin
+    // scr2_hadj <= avengers ? scr2_hpos + {{8{debug_bus[7]}},debug_bus} : scr2_hpos;
+    scr2_hadj <= avengers ? scr2_hpos - 16'd30 : scr2_hpos;
+    scr2_vadj <= avengers ? V - 9'd13 : V;
+end
 
 jtgng_timer #(.LAYOUT(6)) u_timer(
     .clk       ( clk      ),
@@ -193,10 +190,10 @@ jt1943_scroll #(
     .rst          ( rst           ),
     .clk          ( clk           ),
     .cen6         ( cen6          ),
-    .V128         ( {1'b0, V[7:0]} ),
+    .V128         ( {1'b0,scr2_vadj[7:0]} ),
     .LHBL         ( LHBL          ),
     .H            ( H             ),
-    .hpos         ( scr2_hpos     ),
+    .hpos         ( scr2_hadj     ),
     .SCxON        ( 1'b1          ),
     .vpos         ( 8'd0          ),
     .flip         ( flip          ),
@@ -217,7 +214,6 @@ jt1943_scroll #(
     .debug_bus    ( 8'd0          )
 );
 
-`ifndef NOOBJ
 jtgng_obj #(
     .ROM_AW       ( OBJW        ),
     .PALW         (  3          ),
@@ -227,6 +223,7 @@ jtgng_obj #(
 u_obj (
     .rst        ( rst         ),
     .clk        ( clk         ),
+    .alt        ( avengers    ),
     .draw_cen   ( cen12       ),
     .dma_cen    ( cen6        ),
     .pxl_cen    ( cen6        ),
@@ -256,11 +253,6 @@ u_obj (
     .prom_lo_we ( 1'b0        ),
     .OBJON      ( 1'b1        )
 );
-`else
-assign blcnten = 1'b0;
-assign bus_req = 1'b0;
-assign obj_pxl = ~6'd0;
-`endif
 
 `ifndef NOCOLMIX
 jttrojan_colmix #(
@@ -272,9 +264,10 @@ u_colmix (
     .cen12        ( cen12         ),
     .pxl_cen      ( cen6          ),
     .cpu_cen      ( cpu_cen       ),
+    .avengers     ( avengers      ),
 
     .char_pxl     ( char_pxl      ),
-    .scr_pxl      ( scr_pxl       ),
+    .scr1_pxl     ( scr_pxl       ),
     .scr2_pxl     ( scr2_pxl      ),
     .obj_pxl      ( obj_pxl       ),
     .preLHBL      ( preLHBL       ),

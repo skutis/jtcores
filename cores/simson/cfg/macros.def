@@ -1,5 +1,16 @@
 CORENAME=JTSIMSON
+JTFRAME_RATE=59.19
+JTFRAME_MR_DDRLOAD
 
+# 96 MHz needed for avoiding incomplete sprites in the final stages
+JTFRAME_CLK48
+JTFRAME_SDRAM96
+
+[mister|mist|sidi|sidi128]
+# priority to compilation over the small sprite issue
+-JTFRAME_SDRAM96
+
+[*]
 JTFRAME_STEREO
 # Video configuration
 JTFRAME_COLORW=8
@@ -7,13 +18,12 @@ JTFRAME_PXLCLK=6
 JTFRAME_WIDTH=320
 JTFRAME_HEIGHT=224
 
-JTFRAME_CREDITS
 JTFRAME_CREDITS_PAGES=4
 JTFRAME_CREDITS_HSTART=32
 
-JTFRAME_4PLAYERS
 JTFRAME_JOY_DURL
 JTFRAME_BUTTONS=3
+JTFRAME_JOY1_POS
 
 # ROM configuration
 JTFRAME_HEADER = 4
@@ -29,9 +39,8 @@ JTFRAME_IOCTL_RD=128
 JTFRAME_OSD_TEST
 # JTFRAME_INPUT_RECORD
 
-[mist|sidi*]
-# debugging content: 128 + 24 kB + 16
-JTFRAME_IOCTL_RD=24736
+# debugging content: (128 +) 24 kB + 16
+debug JTFRAME_IOCTL_RD+=28705
 
 [mist|sidi]
 # OSD credits cannot be used when
@@ -43,4 +52,6 @@ JTFRAME_OSD_NOCREDITS
 [mister]
 JTFRAME_ARX=5
 JTFRAME_ARY=4
-JTFRAME_MR_DDRLOAD
+
+[pocket]
+JTFRAME_EASY_STA

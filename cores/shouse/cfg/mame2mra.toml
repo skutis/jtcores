@@ -1,19 +1,30 @@
+[global]
+orientation = { fixed=true }
+
 [parse]
 sourcefile=[ "namcos1.cpp" ]
 skip = { machines=[ "puzlclub" ] }
 
-debug = { machines=[
-    # Key type 3
-    "rompers", # problems with music
-    # Others
-    "bakutotu",
-    # "berabohm",
-    # "quester",
-], setnames=[
-    # "tankfrcej",
-    # see issue #626
-    "tankfrce4",
-] }
+[Audio]
+volume = [
+    { machine="bakutotu", value=0x93 },
+    { machine="blastoff", value=0x67 },
+    { machine="blazer", value=0x69 },
+    { machine="berabohm", value=0xE7 },
+    { machine="dangseed", value=0xAC },
+    { machine="dspirit", value=0x4E },
+    { machine="galaga88", value=0x75 },
+    { machine="mmaze", value=0x40 },
+    { machine="pacmania", value=0xA8 },
+    { machine="pistoldm", value=0x6E },
+    { machine="wldcourt", value=0xC6 },
+    { machine="ws", value=0x8D },
+    { machine="quester", value=0x80 },
+    { machine="rompers", value=0x77 },
+    { machine="shadowld", value=0x7E },
+    { machine="splatter", value=0x5E },
+    { machine="tankfrce", value=0x8C },
+]
 
 [buttons]
 names = [
@@ -109,9 +120,13 @@ extra=[
     { name="*Sound fix", options="On,Off", bits="8" }
 ]
 
+defaults=[
+    { machine="rompers", value="ff,fe" }, # bit 8 must be low for music to sound correctly
+]
+
 [ROM]
 regions = [
-    { name="user1", rom_len=0x20000 },
+    { name="mainrom",  rom_len=0x20000 },
     { name="audiocpu", start="JTFRAME_BA1_START" },
     { name="voice",    start="PCM_START"  },
     { name="c123tmap:mask",    start="JTFRAME_BA2_START" },
@@ -121,7 +136,7 @@ regions = [
 ]
 
 order = [
-    "user1", "audiocpu", "voice",
+    "mainrom", "audiocpu", "voice",
     "c123tmap:mask", "c123tmap", "sprite", "mcu"
 ]
 

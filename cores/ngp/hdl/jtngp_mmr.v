@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. https://patreon.com/jotego
-    Version: 1.0
-    Date: 23-3-2022 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 23-3-2022 */
 
 module jtngp_mmr(
     input             clk,
@@ -28,6 +14,8 @@ module jtngp_mmr(
     input      [15:0] cpu_dout,
     input      [ 1:0] dsn,
     input             regs_cs,
+    input             mode_cs,
+    output reg        mode,
     // video access
     output reg [ 7:0] hoffset,      // sprite global horizontal offset
     output reg [ 7:0] voffset,      //               vertical
@@ -105,6 +93,7 @@ always @(posedge clk, posedge rst) begin
         view_startx <= 0;
         view_starty <= 0;
         cpu_din     <= 0;
+        mode        <= 0;
     end else begin
         cpu_din <= 0;
         if( regs_cs ) begin
@@ -130,6 +119,10 @@ always @(posedge clk, posedge rst) begin
                 7'h34>>1: `SETREG(scr2_vpos, scr2_hpos)
                 default:;
             endcase
+        end
+        if( mode_cs ) begin
+            if(!dsn[0]) mode <= cpu_dout[7]; // 0 for k2ge, 1 for k1ge
+            cpu_din <= {8'd0,mode,7'd0};
         end
     end
 end

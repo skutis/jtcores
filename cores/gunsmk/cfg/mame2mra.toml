@@ -10,9 +10,14 @@ skip.setnames=[
     "gunsmokeub",
 ]
 
+[Audio]
+volume = [
+    { machine="gunsmoke", value=0x8C },
+]
+
 [buttons]
 names=[
-    { names="Shoot left,Shoot centre,Shoot right" }
+    { names="Shoot left,Shoot centre,Shoot right", map="YXA" }
 ]
 
 [ROM]

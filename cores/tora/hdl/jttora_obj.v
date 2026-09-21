@@ -1,27 +1,15 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 1-12-2022 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 1-12-2022 */
 
 module jttora_obj #(
     parameter
     VINV        =  1,
     DMA_DW      = 12,        // Data width of each DMA transfer
     DMA_AW      = 10,        // Data width of each DMA transfer
-    ROM_AW      = 19
+    ROM_AW      = 19,
+    VOFF        =  1,        // vertical offset
+    HOFF        = 13         // horizontal offset
 ) (
     input               rst,
     input               clk,
@@ -83,7 +71,7 @@ jtgng_objdma #(
     .dma_dout   ( lut_data  )
 );
 
-jttora_objdata #(.VINV(VINV)) u_objdata(
+jttora_objdata #(.VINV(VINV),.VOFF(VOFF),.HOFF(HOFF)) u_objdata(
     .rst        ( rst       ),
     .clk        ( clk       ),
     // screen

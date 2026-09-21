@@ -5,6 +5,13 @@ author=["jotego"]
 sourcefile=[ "1943.cpp" ]
 skip.bootlegs=true
 
+[Audio]
+volume = [
+    { machine="1943kai", value=0x60 },
+    { machine="1943", value=0x51 },
+    { machine="1943mii", value=0x63 },
+]
+
 [buttons]
 names=[
     { names="Shoot,Bomb" }
@@ -14,7 +21,7 @@ names=[
 regions=[
     { name="maincpu", no_offset=true },
     { name="audiocpu"},
-    { name="mcu", skip=true },
+    { name="mcu", start="JTFRAME_PROM_START" },
     { name="gfx1", reverse=true },
     { name="tilerom", reverse=true, no_offset=true, start="JTFRAME_BA1_START" },
     { name="gfx2", width=16, sequence=[4,0,5,1,6,2,7,3], no_offset=true, start="JTFRAME_BA2_START" },
@@ -25,5 +32,5 @@ regions=[
 
 order=[ "maincpu", "audiocpu", "gfx1",
     "tilerom", "gfx2", "gfx3", "gfx4",
-    "proms"
+    "mcu", "proms"
 ]

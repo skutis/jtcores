@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 22-9-2023 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 22-9-2023 */
 
 module jtshouse_obj(
     input             rst,
@@ -97,7 +83,7 @@ always @* begin
         3: ypos = -(oram_dout[15:8] - 8'd28); //  4
     endcase
 
-    ydiff = (vrender[7:0] + yoffset + 8'h10) - ypos;
+    ydiff = ({1'b0, (flip ? ~(vrender[7:0] - 8'h20) : vrender[7:0])} + yoffset + 8'h10) - ypos;
     ydiff[8] = 0;
 
     case(vsize)
@@ -130,7 +116,7 @@ assign rom_addr  = { pre_addr[17-:11],
             dr_hsize[0] ? dr_hmsb[0] : pre_addr[6] /* H8 */ };
 
 always @(posedge clk) begin
-    xoffset  <= pre_xos-(flip ? 9'd3 : 9'd75); //+{debug_bus[7],debug_bus};
+    xoffset  <= pre_xos-(flip ? -9'd7 : 9'd8); //+{debug_bus[7],debug_bus};
     yoffset  <= pre_yos+(flip ? 9'd1 : -9'd1);
 end
 
@@ -166,18 +152,14 @@ always @(posedge clk, posedge rst) begin
                 1: begin // read 13, 12
                     attr[6:0] <= oram_dout[7:1];
                     // xraw      <= {oram_dout[0], oram_dout[15:8]};
-                    xpos      <= ({1'b0,oram_dout[0], oram_dout[15:8]}+xoffset)^{10{flip}};
+                    xpos      <= ({1'b0,oram_dout[0], oram_dout[15:8]}+xoffset);
                     scan_sub   <= 1;
                 end
                 2: begin // read 11, 10
                     code  <= { oram_dout[2:0], oram_dout[15:8] };
                     hsize <= oram_dout[7:6];
                     hos   <= oram_dout[4:3]; // H offset
-                    hflip <= oram_dout[5]^flip;
-                    xpos  <= xpos + (!flip?10'h43:(
-                                    oram_dout[7:6]==0?10'h45:
-                                    oram_dout[7:6]==1?10'h4d:
-                                    oram_dout[7:6]==2?10'h35:10'h51));
+                    hflip <= oram_dout[5];
                 end
                 3: begin
                     if( !dr_bsy ) begin

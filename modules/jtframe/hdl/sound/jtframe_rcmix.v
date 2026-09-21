@@ -1,24 +1,6 @@
-/* This file is part of JTFRAME.
-
-
-    JTFRAME program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTFRAME program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTFRAME.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 4-3-2024
-
-*/
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 4-3-2024 */
 
 // Generic mixer: improves on the jt12_mixer in JT12 repository
 
@@ -37,7 +19,7 @@ module jtframe_rcmix #(parameter
     FRACW=12, FRACN = 1, FRACM=262,
     // Do not set externally:
     WOUT=16,
-    WC  =8,             // pole coefficient resolution
+    WC  =15,             // pole coefficient resolution
     WMX=STEREO ==1?WOUT*2:WOUT,
     WS0=STEREO0==1?  W0*2:W0,
     WS1=STEREO1==1?  W1*2:W1,
@@ -128,19 +110,19 @@ always @(posedge clk) if(cen) begin
 end
 
 // convert to mono if the system is mono, otherwise kept as stereo
-jtframe_st2mono #(.W(W0),.SIN(STEREO0),.SOUT(STEREO)) u_st0(.sin(ch0),.sout(sm0));
-jtframe_st2mono #(.W(W1),.SIN(STEREO1),.SOUT(STEREO)) u_st1(.sin(ch1),.sout(sm1));
-jtframe_st2mono #(.W(W2),.SIN(STEREO2),.SOUT(STEREO)) u_st2(.sin(ch2),.sout(sm2));
-jtframe_st2mono #(.W(W3),.SIN(STEREO3),.SOUT(STEREO)) u_st3(.sin(ch3),.sout(sm3));
-jtframe_st2mono #(.W(W4),.SIN(STEREO4),.SOUT(STEREO)) u_st4(.sin(ch4),.sout(sm4));
-jtframe_st2mono #(.W(W5),.SIN(STEREO5),.SOUT(STEREO)) u_st5(.sin(ch5),.sout(sm5));
+jtframe_st2mono #(.W(W0),.STEREO_IN(STEREO0),.STEREO_OUT(STEREO)) u_st0(.sin(ch0),.sout(sm0));
+jtframe_st2mono #(.W(W1),.STEREO_IN(STEREO1),.STEREO_OUT(STEREO)) u_st1(.sin(ch1),.sout(sm1));
+jtframe_st2mono #(.W(W2),.STEREO_IN(STEREO2),.STEREO_OUT(STEREO)) u_st2(.sin(ch2),.sout(sm2));
+jtframe_st2mono #(.W(W3),.STEREO_IN(STEREO3),.STEREO_OUT(STEREO)) u_st3(.sin(ch3),.sout(sm3));
+jtframe_st2mono #(.W(W4),.STEREO_IN(STEREO4),.STEREO_OUT(STEREO)) u_st4(.sin(ch4),.sout(sm4));
+jtframe_st2mono #(.W(W5),.STEREO_IN(STEREO5),.STEREO_OUT(STEREO)) u_st5(.sin(ch5),.sout(sm5));
 
-jtframe_sndchain #(.W(W0),.DCRM(DCRM0),.STEREO(STEFF0),.FIR(FIR0)) u_ch0(.rst(rst),.clk(clk),.cen(cen),.poles(p0),.gain(g0),.sin(sm0), .sout(ft0), .peak(v[0]));
-jtframe_sndchain #(.W(W1),.DCRM(DCRM1),.STEREO(STEFF1),.FIR(FIR1)) u_ch1(.rst(rst),.clk(clk),.cen(cen),.poles(p1),.gain(g1),.sin(sm1), .sout(ft1), .peak(v[1]));
-jtframe_sndchain #(.W(W2),.DCRM(DCRM2),.STEREO(STEFF2),.FIR(FIR2)) u_ch2(.rst(rst),.clk(clk),.cen(cen),.poles(p2),.gain(g2),.sin(sm2), .sout(ft2), .peak(v[2]));
-jtframe_sndchain #(.W(W3),.DCRM(DCRM3),.STEREO(STEFF3),.FIR(FIR3)) u_ch3(.rst(rst),.clk(clk),.cen(cen),.poles(p3),.gain(g3),.sin(sm3), .sout(ft3), .peak(v[3]));
-jtframe_sndchain #(.W(W4),.DCRM(DCRM4),.STEREO(STEFF4),.FIR(FIR4)) u_ch4(.rst(rst),.clk(clk),.cen(cen),.poles(p4),.gain(g4),.sin(sm4), .sout(ft4), .peak(v[4]));
-jtframe_sndchain #(.W(W5),.DCRM(DCRM5),.STEREO(STEFF5),.FIR(FIR5)) u_ch5(.rst(rst),.clk(clk),.cen(cen),.poles(p5),.gain(g5),.sin(sm5), .sout(ft5), .peak(v[5]));
+jtframe_sndchain #(.FILE("ch0.raw"),.W(W0),.WC(WC),.DCRM(DCRM0),.STEREO(STEFF0),.FIR(FIR0)) u_ch0(.rst(rst),.clk(clk),.cen(cen),.poles(p0),.gain(g0),.sin(sm0), .sout(ft0), .peak(v[0]));
+jtframe_sndchain #(.FILE("ch1.raw"),.W(W1),.WC(WC),.DCRM(DCRM1),.STEREO(STEFF1),.FIR(FIR1)) u_ch1(.rst(rst),.clk(clk),.cen(cen),.poles(p1),.gain(g1),.sin(sm1), .sout(ft1), .peak(v[1]));
+jtframe_sndchain #(.FILE("ch2.raw"),.W(W2),.WC(WC),.DCRM(DCRM2),.STEREO(STEFF2),.FIR(FIR2)) u_ch2(.rst(rst),.clk(clk),.cen(cen),.poles(p2),.gain(g2),.sin(sm2), .sout(ft2), .peak(v[2]));
+jtframe_sndchain #(.FILE("ch3.raw"),.W(W3),.WC(WC),.DCRM(DCRM3),.STEREO(STEFF3),.FIR(FIR3)) u_ch3(.rst(rst),.clk(clk),.cen(cen),.poles(p3),.gain(g3),.sin(sm3), .sout(ft3), .peak(v[3]));
+jtframe_sndchain #(.FILE("ch4.raw"),.W(W4),.WC(WC),.DCRM(DCRM4),.STEREO(STEFF4),.FIR(FIR4)) u_ch4(.rst(rst),.clk(clk),.cen(cen),.poles(p4),.gain(g4),.sin(sm4), .sout(ft4), .peak(v[4]));
+jtframe_sndchain #(.FILE("ch5.raw"),.W(W5),.WC(WC),.DCRM(DCRM5),.STEREO(STEFF5),.FIR(FIR5)) u_ch5(.rst(rst),.clk(clk),.cen(cen),.poles(p5),.gain(g5),.sin(sm5), .sout(ft5), .peak(v[5]));
 
 jtframe_limsum #(.WI(WOUT),.WO(WOUT+1),.K(6)) u_right(
     .rst    ( rst   ),
@@ -221,35 +203,5 @@ generate
         always @(posedge clk) peak <= | {peak_r, v};
     end
 endgenerate
-
-endmodule
-
-// converts stereo to mono by a clipping adder
-// or leaves the signal as stereo if the output can take stereo
-module jtframe_st2mono #(parameter
-    W    = 12,
-    SIN  = 1,
-    SOUT = 1,
-    // Do not assign
-    WI   = (SIN==1?2*W:W),
-    WO   = (SIN==1&&SOUT==1)?2*W:W
-)(
-    input      [WI-1:0] sin,
-    output reg [WO-1:0] sout
-);
-
-wire [W:0] raw = {sin[W-1],sin[0+:W]}+{sin[WI-1],sin[WI-1-:W]};
-reg [W-1:0] mono;
-localparam [1:0] ST2MONO  =2'b10,
-                 STEREO   =2'b11;
-
-always @* begin
-    mono = raw[W]!=raw[W-1] ? { raw[W], {W-1{~raw[W]}}} : raw[W-1:0];
-    case( {SIN[0], SOUT[0]} )
-        STEREO:  sout        = sin[WO-1:0];
-        ST2MONO: sout[W-1:0] = mono;
-        default: sout[W-1:0] = sin[W-1:0];
-    endcase
-end
 
 endmodule

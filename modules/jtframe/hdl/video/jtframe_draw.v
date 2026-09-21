@@ -1,25 +1,12 @@
-/*  This file is part of JTFRAME.
-    JTFRAME program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTFRAME program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTFRAME.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 18-12-2022 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 18-12-2022 */
 
 // Draws one line of a 16x16 tile
 // It could be extended to 32x32 easily
 
 module jtframe_draw#( parameter
+    AW       =  9,    // Buffer with
     CW       = 12,    // code width
     PW       =  8,    // pixel width (lower four bits come from ROM)
     ZW       =  6,    // zoom step width
@@ -34,7 +21,7 @@ module jtframe_draw#( parameter
     input               draw,
     output reg          busy,
     input    [CW-1:0]   code,
-    input      [ 8:0]   xpos,
+    input    [AW-1:0]   xpos,
     input      [ 3:0]   ysub,
     input      [ 1:0]   trunc, // 00=no trunc, 10 = 8 pixels, 11 = 4 pixels
 
@@ -49,17 +36,15 @@ module jtframe_draw#( parameter
     output     [CW+6:2] rom_addr, // HVVVV format
     output reg          rom_cs,
     input               rom_ok,
-    input      [31:0]   rom_data,
+    input      [31:0]   rom_data, // leftmost pixel in LSB
+                                  // one plane per byte
 
-    output reg [ 8:0]   buf_addr,
+    output reg [AW-1:0] buf_addr,
     output              buf_we,
     output     [PW-1:0] buf_din
 );
 
 localparam [ZW-1:0] HZONE = { {ZW-1{1'b0}},1'b1} << ZI;
-
-// Each tile is 16x16 and comes from the same ROM
-// but it looks like the sprites have the two 8x16 halves swapped
 
 reg      [31:0] pxl_data;
 reg             rom_lsb;
@@ -67,10 +52,8 @@ reg      [ 3:0] cnt;
 wire     [ 3:0] ysubf, pxl;
 reg    [ZW-1:0] hz_cnt, nx_hz;
 wire  [ZW-1:ZI] hzint;
-reg             cen=0, moveon, readon;
-wire            msb;
+reg             cen=0, moveon, readon, no_zoom;
 
-assign msb     = !trunc[0] ? cnt[3] : trunc[1] ? cnt[1] : cnt[2]; // 16, 4 or 8 pixels
 assign ysubf   = ysub^{4{vflip}};
 assign buf_din = { pal, pxl };
 assign pxl     = hflip ?
@@ -80,14 +63,14 @@ assign pxl     = hflip ?
 assign rom_addr = { code, rom_lsb^SWAPH[0], ysubf[3:0] };
 assign buf_we   = busy & ~cnt[3];
 assign hzint    = hz_cnt[ZW-1:ZI];
-// assign { skip, nx_hz } = {1'b0, hz_cnt}+{1'b0,hzoom};
 
 always @* begin
     if( ZENLARGE==1 ) begin
         readon = hzint >= 1; // tile pixels read (reduce)
         moveon = hzint <= 1; // buffer moves (enlarge)
         nx_hz = readon ? hz_cnt - HZONE : hz_cnt;
-        if( moveon ) nx_hz = nx_hz + hzoom;
+        if( moveon  ) nx_hz = nx_hz + hzoom;
+        if( no_zoom ) {moveon, readon} = 2'b11;
     end else begin
         readon = 1;
         { moveon, nx_hz } = {1'b1, hz_cnt}-{1'b0,hzoom};
@@ -96,7 +79,7 @@ end
 
 always @(posedge clk) cen <= ~cen;
 
-always @(posedge clk, posedge rst) begin
+always @(posedge clk) begin
     if( rst ) begin
         rom_cs   <= 0;
         buf_addr <= 0;
@@ -104,18 +87,18 @@ always @(posedge clk, posedge rst) begin
         busy     <= 0;
         cnt      <= 0;
         hz_cnt   <= 0;
+        no_zoom  <= 0;
     end else begin
         if( !busy ) begin
             if( draw ) begin
-                rom_lsb <= hflip; // 14+4 = 18 (+2=20)
+                rom_lsb <= hflip;
                 rom_cs  <= 1;
                 busy    <= 1;
                 cnt     <= 8;
+                no_zoom <= hzoom == HZONE || hzoom == 0; // zoom=0 is not valid. Makes counts keep going and busy stays forever. Check simpsons/scene 32
                 if( !hz_keep ) begin
-                    hz_cnt   <= 0;
+                    hz_cnt   <= ZENLARGE==1 ? hzoom : {ZW{1'b1}};
                     buf_addr <= xpos;
-                end else begin
-                    hz_cnt <= nx_hz;
                 end
             end
         end else if(KEEP_OLD==0 || cen || cnt[3] ) begin

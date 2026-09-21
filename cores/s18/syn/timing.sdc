@@ -1,19 +1,17 @@
-set_multicycle_path -from {jts18_game_sdram:u_game|jts18_game:u_game|jts18_video:u_video|jts18_vdp:u_vdp|ym7101:u_vdp|*} -setup 2
-set_multicycle_path -from {jts18_game_sdram:u_game|jts18_game:u_game|jts18_video:u_video|jts18_vdp:u_vdp|ym7101:u_vdp|*} -hold 1
+set s18_vdp_root {*jts18_game_sdram:u_game|jts18_game:u_game|jts18_video:u_video|jts18_vdp:u_vdp}
 
-set_multicycle_path -from {jts18_game_sdram:u_game|jts18_game:u_game|jts18_video:u_video|jts18_vdp:u_vdp|clk2} -setup 2
-set_multicycle_path -from {jts18_game_sdram:u_game|jts18_game:u_game|jts18_video:u_video|jts18_vdp:u_vdp|clk2} -hold 1
-
-set_multicycle_path -from {jts18_game_sdram:u_game|jts18_game:u_game|jts18_video:u_video|jts18_vdp:u_vdp|rst_n} -setup 2
-set_multicycle_path -from {jts18_game_sdram:u_game|jts18_game:u_game|jts18_video:u_video|jts18_vdp:u_vdp|rst_n} -hold 1
-
-set_multicycle_path -from {jts18_game_sdram:u_game|jts18_game:u_game|jts18_video:u_video|jts18_vdp:u_vdp|edclk_l} -setup 2
-set_multicycle_path -from {jts18_game_sdram:u_game|jts18_game:u_game|jts18_video:u_video|jts18_vdp:u_vdp|edclk_l} -hold 1
-
-set_multicycle_path -from {jts18_game_sdram:u_game|jts18_game:u_game|jts18_main:u_main|jtframe_m68k:u_cpu|fx68k:u_cpu|busControl:busControl|rAS} \
-                   -to {jts18_game_sdram:u_game|jts18_game:u_game|jts18_video:u_video|jts18_vdp:u_vdp|ym7101:u_vdp|*} -end -setup 2
-set_multicycle_path -from {jts18_game_sdram:u_game|jts18_game:u_game|jts18_main:u_main|jtframe_m68k:u_cpu|fx68k:u_cpu|busControl:busControl|rAS} \
-                   -to {jts18_game_sdram:u_game|jts18_game:u_game|jts18_video:u_video|jts18_vdp:u_vdp|ym7101:u_vdp|*} -end -hold 1
-
-set_multicycle_path -setup -end -from [get_keepers {jts18_game_sdram:u_game|jts18_game:u_game|jts18_main:u_main|jtframe_m68k:u_cpu|fx68k:u_cpu|busControl:busControl|rRWn}] -to [get_keepers {jts18_game_sdram:u_game|jts18_game:u_game|jts18_video:u_video|jts18_vdp:u_vdp|ym7101:u_vdp|ym_cnt_bit_load:cnt_sa_low_2|ym_sr_bit_array:mem|ym_sr_bit:l1[*].sr|v1[0]}] 2
-set_multicycle_path -hold -end -from [get_keepers {jts18_game_sdram:u_game|jts18_game:u_game|jts18_main:u_main|jtframe_m68k:u_cpu|fx68k:u_cpu|busControl:busControl|rRWn}] -to [get_keepers {jts18_game_sdram:u_game|jts18_game:u_game|jts18_video:u_video|jts18_vdp:u_vdp|ym7101:u_vdp|ym_cnt_bit_load:cnt_sa_low_2|ym_sr_bit_array:mem|ym_sr_bit:l1[*].sr|v1[0]}] 2
+foreach s18_vdp_mcp [list \
+    [get_keepers -nowarn ${s18_vdp_root}|ym7101:u_vdp|*] \
+    [get_keepers -nowarn ${s18_vdp_root}|vram:u_vram|*] \
+    [get_keepers -nowarn ${s18_vdp_root}|clk2] \
+    [get_keepers -nowarn ${s18_vdp_root}|rst_n] \
+    [get_keepers -nowarn ${s18_vdp_root}|edclk_l] \
+    [get_keepers -nowarn ${s18_vdp_root}|asn_r] \
+    [get_keepers -nowarn ${s18_vdp_root}|rnw_r] \
+    [get_keepers -nowarn ${s18_vdp_root}|dsn_r*] \
+] {
+    if { [get_collection_size $s18_vdp_mcp] > 0 } {
+        set_multicycle_path -from $s18_vdp_mcp -setup 2
+        set_multicycle_path -from $s18_vdp_mcp -hold 1
+    }
+}

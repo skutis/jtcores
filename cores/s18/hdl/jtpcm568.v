@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 19-3-2024 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 19-3-2024 */
 
 // Compatible with Ricoh RF5C68A
 // Original pipeline:
@@ -33,7 +19,7 @@ module jtpcm568(
     input         [ 7:0] din,
     output        [ 7:0] dout,
 
-    // ADPCM RAM
+    // ADPCM RAM - ram0/ram1 represent different ports to the same memory
     // Access by PCM logic (read only)
     output reg    [15:0] ram0_addr,
     input         [ 7:0] ram0_dout,
@@ -131,7 +117,9 @@ always @(posedge clk) begin
     ch_cen <= cencnt==0 && cen;
 end
 
-wire [7:0] envmx = (chenb_II || lstop)? 8'd0 : env_II;
+reg  [63:0] last;
+wire [ 7:0] envmx = chenb_II ?      8'd0 : env_II;
+wire [ 7:0] actmx = lstop    ? last[7:0] : ram0_dout; // repeat the last sample on loop conditions
 
 always @(posedge clk, posedge rst) begin
     if( rst ) begin
@@ -151,6 +139,7 @@ always @(posedge clk, posedge rst) begin
         sign_III  <= 0;
         sign_IV   <= 0;
         sign_V    <= 0;
+        last      <= 0;
     end else if(ch_cen) begin
         chI   <= chI+3'd1;
         chII  <= chI;
@@ -162,12 +151,13 @@ always @(posedge clk, posedge rst) begin
         env_II    <= enmx;
         pan_II    <= panmx;
         // II
-        envmul    <= {1'b0, ram0_dout[6:0]}*envmx;
-        sign_III  <= ram0_dout[7];
+        envmul    <= {1'b0, actmx[6:0]}*envmx;
+        sign_III  <= actmx[7];
         pan_III   <= pan_II;
         chenb_III <= chenb_II;
         loop      <= lstop;    // update channel counter
         sanx      <= chsa_II + {11'd0,fdmx};
+        last      <= {ram0_dout,last[63:8]};
         // III
         mul_l     <= envmul*pan_III[3:0];
         mul_r     <= envmul*pan_III[7:4];

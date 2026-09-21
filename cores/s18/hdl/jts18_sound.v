@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 20-4-2024 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 20-4-2024 */
 
 module jts18_sound(
     input                rst,
@@ -51,7 +37,7 @@ module jts18_sound(
 );
 `ifndef NOSOUND
 
-wire        io_wrn, rd_n, wr_n, int_n, mreq_n, iorq_n, m1_n, nmi_n;
+wire        io_wrn, rd_n, wr_n, int_n, mreq_n, rfsh_n, iorq_n, m1_n, nmi_n;
 wire [15:0] A;
 wire [ 7:0] dout, ram_dout, din, pcmctl_dout, fm0_dout, fm1_dout;
 reg  [ 7:0] bank, dmux;
@@ -78,19 +64,21 @@ wire underA = A[15:12]<4'ha;
 wire underC = A[15:12]<4'hc;
 
 always @(*) begin
-    ram_cs  = !mreq_n && &A[15:13];
-    bank_cs = !mreq_n && (!underA && underC);
-    pcm_cs  = !mreq_n && (!underC && A[15:12]<4'he);
-    rom_cs  = !mreq_n &&   underC;
+    ram_cs  = !mreq_n && rfsh_n && &A[15:13];
+    bank_cs = !mreq_n && rfsh_n && (!underA && underC);
+    pcm_cs  = !mreq_n && rfsh_n && (!underC && A[15:12]<4'he);
+    rom_cs  = !mreq_n && rfsh_n &&   underC;
 
     // Port Map
     { fm0_cs, fm1_cs, bkreg_cs, mapper_cs } = 0;
     if( !iorq_n && m1_n ) begin
-        case( A[7:4] )
-            4'h8: fm0_cs    = 1;
-            4'h9: fm1_cs    = 1;
-            4'ha: bkreg_cs  = ~wr_n;
-            4'hc: mapper_cs = 1;
+        case( A[7:5] )
+            4: begin
+                fm0_cs = !A[4];
+                fm1_cs =  A[4];
+            end
+            5: bkreg_cs  = ~wr_n;
+            6: mapper_cs = 1;
             default:;
         endcase
     end
@@ -191,7 +179,7 @@ jtframe_sysz80 #(.RAM_AW(13),.RECOVERY(1)) u_cpu(
     .iorq_n     ( iorq_n      ),
     .rd_n       ( rd_n        ),
     .wr_n       ( wr_n        ),
-    .rfsh_n     (             ),
+    .rfsh_n     ( rfsh_n      ),
     .halt_n     (             ),
     .busak_n    (             ),
     .A          ( A           ),

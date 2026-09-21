@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 11-1-2019 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 11-1-2019 */
 
 // Building the video with so many generate statements made
 // it impossible to have clean warnings in verilator
@@ -49,6 +35,7 @@ module jtgng_objdraw #(parameter
     input       [3:0]  pxlcnt,
     output reg  [8:0]  posx,
     input              flip,
+    input              alt,
     // per-line sprite data
     input       [4:0]  objcnt,
     input    [DW-1:0]  objbuf_data,
@@ -174,8 +161,8 @@ end else begin
             6: begin // Trojan
                 id[10:8]  <= { objbuf_data[7], objbuf_data[5], objbuf_data[6] };
                 hover     <= objbuf_data[0];
-                obj_hflip <= objbuf_data[4];
-                obj_vflip <= 1;
+                obj_hflip <= alt ? 1'b0            : objbuf_data[4];
+                obj_vflip <= alt ? ~objbuf_data[4] : 1'b1;
                 objpal    <= objbuf_data[3:1];
             end
             8: begin // Side Arms

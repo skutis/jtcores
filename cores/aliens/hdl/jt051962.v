@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 15-4-2023 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 15-4-2023 */
 
 // Based on Furrtek's RE work on die shots
 // and MAME documentation
@@ -131,8 +117,8 @@ jtframe_vtimer #(
     .VS         ( vs        )
 );
 
-function [3:0] colidx( input hf, input [31:0] data );
-    colidx = hf ? {data[24],data[16],data[ 8],data[0]} :
+function [3:0] flip4( input hf, input [31:0] data );
+    flip4 = hf ? {data[24],data[16],data[ 8],data[0]} :
                   {data[31],data[23],data[15],data[7]};
 endfunction
 
@@ -143,7 +129,7 @@ endfunction
 // Tile ROM reads by the CPU
 // This will need to include a wait state
 always @(posedge clk) begin
-    case( cpu_addr^debug_bus[1:0] )
+    case( cpu_addr/*^debug_bus[1:0]*/ )
         2'd0: cpu_din <= lyra_data[ 7: 0];
         2'd1: cpu_din <= lyra_data[15: 8];
         2'd2: cpu_din <= lyra_data[23:16];
@@ -151,9 +137,10 @@ always @(posedge clk) begin
     endcase
 end
 
-assign lyrf_pxl = { colf[7:4],colidx(  flip, pxlf_data) };
-assign lyra_pxl = { cola[3:0], cola[7:4], colidx(hflipa, pxla_data) };
-assign lyrb_pxl = { colb[3:0], colb[7:4], colidx(hflipb, pxlb_data) };
+// note the nibble inversion for color bits
+assign lyrf_pxl = gfx_en[0] ? { colf[7:4],            flip4(  flip, pxlf_data) } :  8'd0;
+assign lyra_pxl = gfx_en[1] ? { cola[3:0], cola[7:4], flip4(hflipa, pxla_data) } : 12'd0;
+assign lyrb_pxl = gfx_en[2] ? { colb[3:0], colb[7:4], flip4(hflipb, pxlb_data) } : 12'd0;
 
 assign lyrf_blnk_n = lyrf_pxl[3:0]!=0 & gfx_en[0];
 assign lyra_blnk_n = lyra_pxl[3:0]!=0 & gfx_en[1];

@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 7-3-2021 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 7-3-2021 */
 
 // Implements 315-5197       -- System 16B and Out Run
 // Implements 315-5049 (x2)  -- System 16A
@@ -95,7 +81,10 @@ module jts16_tilemap(
     output             fix,     // CHAR selected (?)
     output             sa,      // SCR1 selected (?)
     output             sb,      // SCR2 selected (?)
+    output             obj,     // OBJ  selected (?)
     output             tprio,   // priority bit of selected tile map layer
+    output             s1_pri,
+    output             s2_pri,
     // Set top priority
     input              set_fix,
 
@@ -112,9 +101,12 @@ parameter MODEL = 1;
 // "The sprite X position defines the starting location of the sprite. The
 //  leftmost pixel of the screen is $00B6, and the rightmost is $1F5."
 parameter [8:0] HB_END = 9'h0bf;
+parameter       HS_END = 9'h09E; // for System 16B 4.8us measured in PCB
 
 parameter [9:0] SCR2_DLY= MODEL ? 10'd9 : 10'd17;
 parameter [9:0] SCR1_DLY= SCR2_DLY;
+parameter [9:0] ROWSCR2_DLY = SCR2_DLY;
+parameter [9:0] ROWSCR1_DLY = SCR1_DLY;
 
 assign flipx    = flip;
 assign ext_flip = flip;
@@ -166,7 +158,7 @@ jtframe_vtimer #(
     .VS_START  ( 9'hEF  ),
     .VS_END    ( 9'hF3  ), // 4 lines
     .HS_START  ( 9'h080 ),
-    .HS_END    ( 9'h09E )  // 4.8us measured in PCB
+    .HS_END    ( HS_END )  // 4.8us measured in PCB
 ) u_timer(
     .clk       ( clk      ),
     .pxl_cen   ( pxl_cen  ),
@@ -255,7 +247,7 @@ jts16_char #(.MODEL(MODEL)) u_char(
     .debug_bus ( debug_bus      )
 );
 
-jts16_scr #(.PXL_DLY(SCR1_DLY),.HB_END(HB_END),.MODEL(MODEL)) u_scr1(
+jts16_scr #(.PXL_DLY(SCR1_DLY),.ROW_PXL_DLY(ROWSCR1_DLY),.HB_END(HB_END),.MODEL(MODEL)) u_scr1(
     .rst       ( rst            ),
     .clk       ( clk            ),
     .pxl2_cen  ( pxl2_cen       ),
@@ -295,7 +287,7 @@ jts16_scr #(.PXL_DLY(SCR1_DLY),.HB_END(HB_END),.MODEL(MODEL)) u_scr1(
     .bad       ( scr1_bad       )
 );
 
-jts16_scr #(.PXL_DLY(SCR2_DLY[8:0]),.MODEL(MODEL)) u_scr2(
+jts16_scr #(.PXL_DLY(SCR2_DLY[8:0]),.ROW_PXL_DLY(ROWSCR2_DLY[8:0]),.MODEL(MODEL)) u_scr2(
     .rst       ( rst            ),
     .clk       ( clk            ),
     .pxl2_cen  ( pxl2_cen       ),
@@ -350,10 +342,13 @@ jts16_prio u_prio(
     .set_fix   ( set_fix        ),
 
     // Selected layer
+    .obj       ( obj            ),
     .sa        ( sa             ),
     .sb        ( sb             ),
     .fix       ( fix            ),
     .tprio     ( tprio          ),
+    .scr1_prio ( s1_pri         ),
+    .scr2_prio ( s2_pri         ),
 
     .pal_addr  ( pal_addr       ),
     .shadow    ( shadow         ),

@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 2-12-2019 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 2-12-2019 */
 
 // Port 4 configured as output --> use as address bus
 // Port 6 configured as output
@@ -37,7 +23,8 @@ module jtdd_mcu(
     // PROM
     output     [13:0]  rom_addr,
     input      [ 7:0]  rom_data,
-    output             rom_cs
+    output             rom_cs,
+    input              rom_ok
 
 );
 
@@ -66,10 +53,12 @@ jtframe_ff u_nmi(
     .qn      (                )
 );
 
+wire cen = mcu_cen & (~rom_cs | rom_ok);
+
 jt63701y #(.ROMW(14),.MODE(2'd2)) u_63701(
     .rst        ( ~mcu_rstb     ),
     .clk        ( clk           ),
-    .cen        ( mcu_cen       ),
+    .cen        ( cen           ),
     // interrupts
     .nmi        ( nmi           ),
     // ports

@@ -1,0 +1,121 @@
+params:
+  - { name: SUB_OFFSET,   value: "`SUB_START>>1"   }
+  - { name: USER1_OFFSET, value: "`USER1_START>>1" }
+ports:
+  - { name: bus_addr, msb: 15 }
+clocks:
+  clk:
+    - freq: 3072k
+      # gate: [ main ]
+      outputs:
+        - cen_mcu
+    - freq: 5366500
+      # gate: [ main ]
+      outputs:
+        - cen_5p3
+    - freq: 8M
+      outputs:
+        - cen8
+        - cen4
+        - cen2
+    - freq: 400k
+      outputs:
+        - cen_pcm
+    - freq: 48k
+      outputs:
+        - cen48k
+audio:
+  # temptative values
+  rsum: 1k
+  # mute: true
+  pcb:
+    # must match PCB order in TOML file - not automated check yet
+    # psg2 not presents on boards marked with 999kOhm resistor to null the gain
+    #                    MSM   PSG  PSG2   DAC
+    - { rfb: 1k, rsums: [   1k,   1k, 999k,   1k ] } # flstory
+    - { rfb: 1k, rsums: [   1k,   1k, 999k, 1.5k ] } # onna34ro
+    - { rfb: 1k, rsums: [   1k,   4k, 999k,   4k ] } # rumba
+    - { rfb: 1k, rsums: [   1k,   4k, 999k,   5k ] } # victnine
+    - { rfb: 1k, rsums: [ 0.5k, 5.0k, 5.0k,   2k ] } # nycaptor
+    - { rfb: 1k, rsums: [ 0.5k, 5.0k, 5.0k,   2k ] } # cyclsht
+  channels:
+#     # FIR should be 3kHz, not 4kHz
+    - { name: msm,   module: jt5232,rsum: 1k, pre: 1.1 }
+    - { name: psg,   module: jt5232,rsum: 1k, pre: 1.0 } # not using jt49 settings because of signed output
+    - { name: psg2,  module: jt5232,rsum: 1k, pre: 1.0 } # not using jt49 settings because of signed output
+    - { name: dac,   data_width: 8, rsum: 1k, unsigned: true, dcrm: true }
+sdram:
+  banks:
+    - buses:
+      - name: main
+        addr_width: 17
+        data_width: 8
+      - name: sub
+        addr_width: 16
+        data_width: 8
+        offset: SUB_OFFSET
+      - name: user1
+        addr_width: 16
+        data_width: 8
+        offset: USER1_OFFSET
+    - buses:
+      - name: snd
+        addr_width: 16
+        data_width: 8
+    - buses:
+      - name: scr
+        addr_width: 17
+        data_width: 32
+      # object slot targets the same area
+      - name: obj
+        addr_width: 17
+        data_width: 32
+bram:
+  - name: mcu
+    addr_width: 11
+    data_width: 8
+    prom: true
+  - name: sha
+    din: bus_dout
+    addr_width: 13
+    data_width: 8
+    rw: true
+  - name: vram
+    addr_width: 11
+    data_width: 16
+    dual_port:
+      name: shram
+      addr: bus_addr[10:1]
+      din:  "{2{bus_dout}}"
+      dout: vram16_dout
+      we:   vram_we
+      rw:   true
+    ioctl:
+      save: true
+      order: 0
+  - name: oram
+    addr_width: 8
+    data_width: 8
+    rw: true
+    dual_port:
+      name: shram
+      addr: bus_addr[7:0]
+      din:  bus_dout
+      dout: oram8_dout
+      we:   oram8_we
+      rw:   true
+    ioctl:
+      save: true
+      order: 1
+  - name: pal
+    addr_width: 11
+    data_width: 16
+    dual_port:
+      name: pal16
+      din: "{2{bus_dout}}"
+      dout: pal16_dout
+      we: pal16_we
+      rw: true
+    ioctl:
+      save: true
+      order: 2

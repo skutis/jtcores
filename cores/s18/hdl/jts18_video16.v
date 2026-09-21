@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 29-4-2024 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 29-4-2024 */
 
 // 315-5361/2 video subsystem
 // equivalent to System 16B 
@@ -84,9 +70,9 @@ module jts18_video16(
 
     // priority bits
     output     [ 1:0]  obj_prio,
-    output             fix, sa, sb, tprio,
+    output             fix, sa, sb, obj, tprio, s1_pri, s2_pri,
     // palette RAM
-    output     [10:0]  pal_addr,
+    output     [11:1]  pal_addr,
     input      [15:0]  pal_dout,
     // Debug
     input      [ 3:0]  gfx_en,
@@ -98,6 +84,7 @@ module jts18_video16(
 );
 
 localparam MODEL=1;
+localparam [9:0] ROWSCR_DLY=10'd17;
 
 // video layers
 wire [11:0] obj_pxl;
@@ -109,7 +96,10 @@ assign gpal  = { pal_dout[ 7:4], pal_dout[13] };
 assign bpal  = { pal_dout[11:8], pal_dout[14] };
 assign obj_prio = obj_pxl[11:10];
 
-jts16_tilemap #(.MODEL(MODEL)) u_tilemap(
+jts16_tilemap #(.MODEL(MODEL),.HS_END(9'hA0),
+    .SCR2_DLY(10'd9),.SCR1_DLY(10'd9),
+    .ROWSCR1_DLY(ROWSCR_DLY),.ROWSCR2_DLY(ROWSCR_DLY)
+    ) u_tilemap(
     .rst        ( rst       ),
     .clk        ( clk       ),
     .pxl2_cen   ( pxl2_cen  ),
@@ -169,13 +159,16 @@ jts16_tilemap #(.MODEL(MODEL)) u_tilemap(
     .st_dout    ( st_dout   ),
     .scr_bad    ( scr_bad   ),
     // Active layer
+    .obj        ( obj       ),
     .fix        ( fix       ),
     .sa         (  sa       ),
     .sb         (  sb       ),
-    .tprio      ( tprio     )
+    .tprio      ( tprio     ),
+    .s1_pri     ( s1_pri    ),
+    .s2_pri     ( s2_pri    )
 );
 
-jts16_obj #(.MODEL(MODEL)) u_obj(
+jts16_obj #(.MODEL(MODEL), .PXL_DLY(9'd17)) u_obj(
     .rst       ( rst            ),
     .clk       ( clk            ),
     .pxl_cen   ( pxl_cen        ),

@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 26-9-2023 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 26-9-2023 */
 
 // Implementation of C123 tilemaps
 // based on MAME's namo_c123tmap.cpp and Atari's schematics
@@ -64,7 +50,6 @@ parameter  [ 8:0] VB_END = 9'h120;
 localparam [ 8:0] HMARGIN=9'h8,
                   HSTART=9'h40-HMARGIN,
                   HEND=9'd288+HSTART+(HMARGIN<<1); // hdump is non blank from 'h40 to 'h160
-localparam [15:0] VSCR =-16'd28;
 
 wire [15:0] hoff0 = flip ? 16'h71 : -16'h0f;
 wire [15:0] hoff1 = flip ? hoff0 + 16'h2 : hoff0 - 16'h2;
@@ -138,7 +123,11 @@ always @(posedge clk, posedge rst) begin
             hcnt2 <= (-hscr[2][2:0] ^ {3{~flip}})+hoff2[2:0];
             hcnt3 <= (-hscr[3][2:0] ^ {3{~flip}})+hoff3[2:0];
 
-            if(vdump[2:0]==0) lin_row <= vdump[8:3]==6'h24 ? 10'd1 : lin_row+10'd36;
+            if(vdump[2:0]==0)
+                if (flip)
+                    lin_row <= vdump[8:3]==6'h24 ? 10'd973 : lin_row-10'd36;
+                else
+                    lin_row <= vdump[8:3]==6'h24 ? 10'd1 : lin_row+10'd36;
             // if(vrender[2:0]==7) lin_row <= vrender[8:3]==6'h24 ? 10'd1 : lin_row+10'd36;
             // if(vrender==9'h120 ) lin_row <= 1;
         end
@@ -157,8 +146,10 @@ always @* begin
     if( mlyr>3 )
         { vpos, hpos } = { 7'd0, vdump, 7'd0, hcnt };
     else
-        { vpos, hpos } = { {7'd0, vdump}-(vscr[mlyr[1:0]] ^ {16{~flip}}) + (flip ? VSCR : -VSCR + 16'd219),
+        { vpos, hpos } = { {7'd0, vdump}+vscr[mlyr[1:0]] + 16'd248,
                            {7'd0,  hcnt}-(hscr[mlyr[1:0]] ^ {16{~flip}}) + hoff};
+
+    if ( flip ) vpos = ~vpos;
 
     // Determines the active layer
     win    = 5;
@@ -246,7 +237,7 @@ jtframe_linebuf #(.DW(14)) u_buffer(
     .wr_addr    ( buf_a     ),
     .wr_data    ({bpxl,bprio}),
     .we         ( buf_we    ),
-    .rd_addr    ( hdump     ),
+    .rd_addr    ( flip ? ~hdump - 9'h5e : hdump ),
     .rd_data    ({pxl,prio} ),
     .rd_gated   (           )
 );

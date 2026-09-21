@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 16-6-2021 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 16-6-2021 */
 
 module jts16_fd1094_dec(
     input             rst,
@@ -43,6 +29,8 @@ module jts16_fd1094_dec(
     input             rom_ok,
     output reg        ok_dly
 );
+
+parameter SIMFILE="maincpu:key";
 
 `define BITSWAP( v, b15, b14, b13, b12, b11, b10, b9, b8, b7, b6, b5, b4, b3, b2, b1, b0 ) { \
     v[b15], v[b14], v[b13], v[b12], v[b11], v[b10], v[b9], v[b8], \
@@ -101,6 +89,23 @@ wire key_6a = key_data[6] ^ gkey2_st[1];
 wire key_6b = key_data[6] ^ gkey2_st[6];
 
 wire key_7a = key_data[7] ^ gkey2_st[4];
+
+`ifdef SIMULATION
+integer fkey, readcnt;
+reg [7:0] faux[0:3];
+
+initial if(SIMFILE!="") begin
+    fkey = $fopen(SIMFILE,"rb");
+    if( fkey!=0 ) begin
+        readcnt = $fread(faux,fkey);
+        if(readcnt==4) begin
+            $display("FD1094 global key data read from maincpu:key");
+            {gkey3,gkey2,gkey1,gkey0} = {faux[3],faux[2],faux[1],faux[0]};
+        end
+    end
+    $fclose(fkey);
+end
+`endif
 
 always @(posedge clk) begin
     if( fd1094_we && prog_addr<4 ) begin

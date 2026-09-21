@@ -3,7 +3,12 @@ author=["jotego"]
 
 [parse]
 sourcefile=[ "gng.cpp" ]
-skip.Setnames=["diamond","gngbl"]
+skip.Setnames=["diamond","gngbl","diamrun"]
+
+[Audio]
+volume = [
+    { machine="gng", value=0x7F },
+]
 
 [buttons]
 names=[

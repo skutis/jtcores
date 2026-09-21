@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 15-4-2023 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 15-4-2023 */
 
 module jtaliens_video(
     input             rst,
@@ -95,7 +81,7 @@ module jtaliens_video(
 wire [ 8:0] hdump, vdump, vrender, vrender1;
 wire [ 7:0] lyrf_pxl, st_scr, st_obj,
             dump_scr, dump_obj, dump_pal,
-            lyrf_col, lyra_col, lyrb_col,
+            lyrf_col, lyra_col, lyrb_col, obj_mmr,
             opal, opal_eff;
 wire [11:0] lyra_pxl, lyrb_pxl;
 wire [11:0] lyro_pxl;
@@ -129,7 +115,7 @@ always @(posedge clk) begin
     else if( !ioctl_addr[3] )
         ioctl_din <= dump_scr;  // 8 bytes, MMR 4C07
     else if (ioctl_addr[2:0]!=7)
-        ioctl_din <= dump_obj;  // 7 bytes, MMR 4C0E
+        ioctl_din <= obj_mmr;   // 7 bytes, MMR 4C0E
     else
         ioctl_din <= { 6'd0, cpu_prio }; // 1 byte, 4C0F
 end
@@ -211,6 +197,10 @@ jtaliens_scroll u_scroll(
     .flip       ( flip      ),
 
     // color byte connection
+    .lyrf_extra (           ),
+    .lyra_extra (           ),
+    .lyrb_extra (           ),
+
     .lyrf_col   ( lyrf_col  ),
     .lyra_col   ( lyra_col  ),
     .lyrb_col   ( lyrb_col  ),
@@ -294,7 +284,7 @@ jtaliens_obj u_obj(    // sprite logic
     .ioctl_addr ( ioctl_addr[10:0]),
     .ioctl_ram  ( ioctl_ram ),
     .ioctl_din  ( dump_obj  ),
-    .ioctl_mmr  ( 1'b0      ),
+    .dump_reg   ( obj_mmr   ),
 
     .gfx_en     ( gfx_en    ),
     .debug_bus  ( debug_bus ),

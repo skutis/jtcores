@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 28-8-2023 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 28-8-2023 */
 
 module jtfround_obj(
     input             rst,
@@ -26,6 +12,7 @@ module jtfround_obj(
     input             lvbl,
     input             hs,
     input             vs,
+    input             gvflip,
 
     input      [ 8:0] vdump,
     input      [ 8:0] hdump,
@@ -56,20 +43,15 @@ wire [CW-1:0] code;
 wire [ 3:0] attr;
 wire [ 1:0] hsize;
 wire        hflip;
-wire [ 8:0] hpos;
+wire [ 9:0] hpos;
 wire        dr_start, dr_busy;
 
 jt00778x #(.CW(CW)) u_scan(    // sprite logic
-    .rst        ( rst       ),
-    .clk        ( clk       ),
-    .pxl_cen    ( pxl_cen   ),
+    .rst            ( rst           ),
+    .clk            ( clk           ),
+    .pxl_cen        ( pxl_cen       ),
 
     // CPU interface
-    // input             cs,
-    // input             cpu_we,
-    // input      [ 7:0] cpu_dout,
-    // input      [10:0] cpu_addr,
-    // output     [ 7:0] cpu_din,
     .obj_dx         ( obj_dx        ),
     .obj_dy         ( obj_dy        ),
 
@@ -88,13 +70,12 @@ jt00778x #(.CW(CW)) u_scan(    // sprite logic
     // control
     .dma_on         ( dma_on        ),
     .dma_bsy        ( dma_bsy       ),
-    .hdump          ( hdump         ),
     .vdump          ( vdump         ),
 
     .vs             ( vs            ),
     .lvbl           ( lvbl          ),
     .hs             ( hs            ),
-    // output            flip,
+    .gvflip         ( gvflip        ),
 
     // draw module
     .dr_start       ( dr_start      ),
@@ -118,7 +99,7 @@ jtfround_objdraw #(
     .draw       ( dr_start  ),
     .busy       ( dr_busy   ),
     .code       ( code      ),
-    .xpos       ( hpos      ),
+    .xpos       ( hpos[8:0] ),
 
     .hflip      ( ~hflip    ),
     .hsize      ( hsize     ),

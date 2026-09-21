@@ -1,3 +1,6 @@
+// look below for
+// Register assignments for debugging.
+/* verilator coverage_off */
 module t80_reg
   (input  clk,
    input  cen,
@@ -238,6 +241,7 @@ module t80_reg
   reg [7:0] n8055_o;
   wire n8056_o;
   wire [7:0] n8057_o;
+
   assign doah = n7987_o;
   assign doal = n8001_o;
   assign dobh = n8015_o;
@@ -3000,7 +3004,8 @@ module t80_mcode_0_0_1_2_3_4_5_6_7
   reg n3776_o;
   reg n3779_o;
   reg n3783_o;
-  wire n3785_o;
+  wire n3785_o, stack_busy; // imperfect busy signal, but it catches some instances
+  assign stack_busy=n3785_o;
   wire [30:0] n3788_o;
   wire n3790_o;
   wire [2:0] n3792_o;
@@ -20353,7 +20358,7 @@ module t80_0_1_0_1_2_3_4_5_6_7
   /* T80.vhd:1224:51  */
   assign n1815_o = tstate == 3'b010;
   /* T80.vhd:1225:49  */
-  assign n1817_o = setei ? 1'b1 : inte_ff1;
+  assign n1817_o = (setei & ~nmicycle) ? 1'b1 : inte_ff1;
   /* T80.vhd:1224:41  */
   assign n1819_o = n1822_o ? 1'b1 : inte_ff2;
   /* T80.vhd:1229:49  */
@@ -21139,6 +21144,13 @@ module T80s
   /* T80s.vhd:184:31  */
   assign u0_n21 = u0_intcycle_n; // (signal)
   /* T80s.vhd:158:9  */
+  wire [211:0] regs;
+  // Register assignments for debugging. Names
+  // match MAME's debugger names
+// IFF2, IFF1, IM, IY, HL', DE', BC', IX, HL, DE, BC, PC, SP, R, I, F', A', F, A
+wire [15:0] AF, BC, DE, HL, AF2, BC2, DE2, HL2,IX,IY,PC,SP;
+wire [ 7:0] I,R;
+assign {IY,HL2,DE2,BC2,IX,HL,DE,BC,PC,SP,R,I,AF2[7:0],AF2[15:8],AF[7:0],AF[15:8]} = regs[0+:208];
   t80_0_1_0_1_2_3_4_5_6_7 u0 (
     .reset_n(RESET_n),
     .clk_n(CLK),
@@ -21166,7 +21178,7 @@ module T80s
     .intcycle_n(u0_intcycle_n),
     .inte(),
     .stop(),
-    .regs());
+    .regs(regs));
   /* T80s.vhd:189:28  */
   assign n56_o = ~RESET_n;
   /* T80s.vhd:201:43  */

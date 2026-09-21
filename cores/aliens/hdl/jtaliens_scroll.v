@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 15-4-2023 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 15-4-2023 */
 
 module jtaliens_scroll(
     input             rst,
@@ -60,9 +46,9 @@ module jtaliens_scroll(
     input      [31:0] lyra_data,
     input      [31:0] lyrb_data,
 
-    output     [ 7:0] lyrf_col,
-    output     [ 7:0] lyra_col,
-    output     [ 7:0] lyrb_col,
+    output     [ 7:0] lyrf_col, lyrf_extra,
+    output     [ 7:0] lyra_col, lyra_extra,
+    output     [ 7:0] lyrb_col, lyrb_extra,
 
     input      [ 7:0] lyrf_cg,
     input      [ 7:0] lyra_cg,
@@ -89,22 +75,24 @@ module jtaliens_scroll(
     output     [ 7:0] st_dout
 );
 
-parameter [8:0] HB_EXTRAL=0,
+parameter [8:0] HB_OFFSET=0,
+                HB_EXTRAL=0,
                 HB_EXTRAR=0;
+parameter       FULLRAM  =0; // Enables the three possible memory chips
 
 wire [ 7:0] tilemap_dout, tilerom_dout;
 wire [ 2:0] hsub_a, hsub_b;
 wire        hflip_en;
 
-assign lyrf_cs = gfx_en[0];
+assign lyrf_cs =  gfx_en[0];
 assign lyra_cs = (gfx_en[1] & ~rmrd) | (rmrd & gfx_cs);
-assign lyrb_cs = gfx_en[2];
+assign lyrb_cs =  gfx_en[2];
 
 assign tile_dout = rmrd ? tilerom_dout : tilemap_dout;
 
 always @(posedge clk) cpu_rom_dtack <= ~(rmrd & gfx_cs) | lyra_ok;
 
-jt052109 u_tilemap(
+jt052109 #(.FULLRAM(FULLRAM)) u_tilemap(
     .rst        ( rst       ),
     .clk        ( clk       ),
     .pxl_cen    ( pxl_cen   ),
@@ -143,6 +131,10 @@ jt052109 u_tilemap(
     .lyra_addr  ( lyra_addr ),
     .lyrb_addr  ( lyrb_addr ),
 
+    .lyrf_extra ( lyrf_extra),
+    .lyra_extra ( lyra_extra),
+    .lyrb_extra ( lyrb_extra),
+
     .lyrf_col   ( lyrf_col  ),
     .lyra_col   ( lyra_col  ),
     .lyrb_col   ( lyrb_col  ),
@@ -159,6 +151,7 @@ jt052109 u_tilemap(
 
 /* verilator tracing_on */
 jt051962 #(
+    .HB_OFFSET  ( HB_OFFSET ),
     .HB_EXTRAL  ( HB_EXTRAL ),
     .HB_EXTRAR  ( HB_EXTRAR )
 ) u_draw(
@@ -177,8 +170,8 @@ jt051962 #(
     .lyrb_data  ( lyrb_data ),
 
     .lyrf_col   ( lyrf_cg   ),
-    .lyra_col   ( lyra_cg   ),
-    .lyrb_col   ( lyrb_cg   ),
+    .lyra_col   ( lyra_cg   ),  // lyra/b color byte get their nibbles
+    .lyrb_col   ( lyrb_cg   ),  // swapped inside this module
 
     // Fine grain scroll
     .hsub_a     ( hsub_a    ),

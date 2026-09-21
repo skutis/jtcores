@@ -1,20 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>.
-
-    Author: Jose Tejada Gomez. Twitter: @topapate
-    Version: 1.0
-    Date: 21-9-2023 */
+/* SPDX-FileCopyrightText: 2026 Jose Tejada Gomez
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Date: 21-9-2023 */
 
 // The implementation of the KEY chips follows MAME's namcos1_m.cpp
 // These chips won't impact any timing accuracy
@@ -112,7 +98,7 @@ always @(posedge clk or posedge rst) begin
         1: begin
             if( cs && ~rnw && addr[7:2] == 0 ) begin
                 if(!cs_l) begin
-                    $display("KEY: %X <- %X",addr[1:0], din);
+                    // $display("KEY: %X <- %X",addr[1:0], din);
                     mmr[addr[2:0]] <= din;
                     div_start <= 1;
                 end
@@ -127,7 +113,7 @@ always @(posedge clk or posedge rst) begin
         2: begin
             if( cs && ~rnw && addr[7:2] == 0 ) begin
                 if(!cs_l) begin
-                    $display("KEY: %X <- %X",addr[1:0], din);
+                    // $display("KEY: %X <- %X",addr[1:0], din);
                     mmr[addr[2:0]] <= din;
                     if (addr[1:0] == 3) begin
                         div_h <= {mmr[4], mmr[5]};
@@ -151,7 +137,7 @@ always @(posedge clk or posedge rst) begin
         end
         3: begin
             if( cs && ~rnw ) begin
-                if(!cs_l) $display("KEY: %X <- %X",addr[6:4], din);
+                // if(!cs_l) $display("KEY: %X <- %X",addr[6:4], din);
                 mmr[addr[6:4]] <= din;
             end
             if( up_rng ) rng <= nx_rng;
@@ -167,18 +153,18 @@ always @(posedge clk or posedge rst) begin
     end
 end
 
-`ifdef SIMULATION
-reg [2:0] addrl;
-reg       rnwl;
+// `ifdef SIMULATION
+// reg [2:0] addrl;
+// reg       rnwl;
 
-always @(posedge clk) begin
-    addrl <= addr[6:4];
-    rnwl  <= rnw;
-    if( !cs && cs_l && rnwl ) begin
-        $display("KEY: %X => %X",addrl, dout);
-    end
-end
-`endif
+// always @(posedge clk) begin
+//     addrl <= addr[6:4];
+//     rnwl  <= rnw;
+//     if( !cs && cs_l && rnwl ) begin
+//         $display("KEY: %X => %X",addrl, dout);
+//     end
+// end
+// `endif
 
 endmodule
 
