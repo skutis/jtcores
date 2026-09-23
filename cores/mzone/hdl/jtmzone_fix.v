@@ -42,6 +42,7 @@ module jtmzone_fix #(
 
 localparam [8:0] HVISIBLE       = 9'd287;
 localparam [8:0] HTOTAL         = 9'd384;
+localparam [8:0] FETCH_ADVANCE  = 9'd2;
 localparam [8:0] FIX_WIDTH      = 9'd48;
 localparam [8:0] FIX_FLIP_START = HVISIBLE-FIX_WIDTH+9'd1;
 localparam [8:0] FIX_FLIP_END   = FIX_FLIP_START+FIX_WIDTH;
@@ -82,7 +83,8 @@ wire [ 7:0] v_eff = flip ? ~vsum : vsum;
 wire [11:0] tile_addr = { cram[7], vram, v_eff[2:0] ^ {3{cram[5]}} };
 // Advance only the read/request coordinate by two display pixels.
 // Keep the original load coordinate and source/priority delays unchanged.
-wire [8:0] fetch_hdump = hdump >= 9'd382 ? hdump - 9'd382 : hdump + 9'd2;
+wire [8:0] fetch_hdump = hdump >= HTOTAL - FETCH_ADVANCE ?
+                        hdump - (HTOTAL - FETCH_ADVANCE) : hdump + FETCH_ADVANCE;
 wire [8:0] fetch_hsum_base = fetch_hdump < hsum_limit ? fetch_hdump : {~6'h0,fetch_hdump[2:0]};
 wire [8:0] fetch_hsum = fetch_hsum_base - fix_origin + FIX_LEAD - {8'd0,flip};
 wire fetch_blank = fetch_hdump >= 9'd288 && fetch_hdump <= 9'd375;

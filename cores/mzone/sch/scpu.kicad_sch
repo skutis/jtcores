@@ -18811,6 +18811,16 @@
 		)
 		(uuid "87af69bf-180a-4c73-81f8-45e867ff767d")
 	)
+	(wire
+		(pts
+			(xy 96.52 176.53) (xy 96.52 185.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "88f97e56-1418-4c65-9f93-c37872b5c5dc")
+	)
 	(bus
 		(pts
 			(xy 168.91 163.83) (xy 168.91 166.37)
@@ -20953,16 +20963,6 @@
 	)
 	(wire
 		(pts
-			(xy 86.36 191.77) (xy 93.98 191.77)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f4aaca13-1b76-4355-bb2a-1a832d1036ed")
-	)
-	(wire
-		(pts
 			(xy 241.3 132.08) (xy 241.3 158.75)
 		)
 		(stroke
@@ -23002,17 +23002,6 @@
 		)
 		(uuid "a9bc0100-9845-4bc3-a4b4-321e6b98cb50")
 	)
-	(label "~{AFR2}"
-		(at 86.36 191.77 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "aa517024-7fcd-47c6-a33a-4ccda7a41917")
-	)
 	(label "YA7"
 		(at 204.47 273.05 0)
 		(fields_autoplaced yes)
@@ -23705,6 +23694,18 @@
 			(justify left bottom)
 		)
 		(uuid "fe3c7b43-dca8-4037-951b-edd389ac74ef")
+	)
+	(hierarchical_label "~{AFR2}"
+		(shape output)
+		(at 86.36 191.77 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b9981321-8c5e-4b19-ae00-3c85bd451e20")
 	)
 	(symbol
 		(lib_name "GND_12")

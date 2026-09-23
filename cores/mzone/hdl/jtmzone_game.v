@@ -19,28 +19,6 @@ module jtmzone_game(
 localparam [21:0] OBJ_OFFSET = `OBJ_START >> 1;
 localparam [21:0] SCR_OFFSET = `SCR_START >> 1;
 
-`ifdef MZONE_CHAR_BRAM
-wire [11:0] fixrom_addr, scrrom_addr;
-wire [31:0] fixrom_data, scrrom_data;
-wire        fixrom_cs, scrrom_cs, fixrom_ok, scrrom_ok;
-
-jtmzone_charrom #(.OFFSET(`SCR_START)) u_charrom(
-    .clk      ( clk ),
-    .rst      ( rst ),
-    .prog_addr( ioctl_addr[25:0] ),
-    .prog_data( ioctl_dout ),
-    .prog_we  ( ioctl_wr && !ioctl_ram && !ioctl_cart ),
-    .fix_addr ( fixrom_addr ),
-    .fix_cs   ( fixrom_cs ),
-    .fix_data ( fixrom_data ),
-    .fix_ok   ( fixrom_ok ),
-    .scr_addr ( scrrom_addr ),
-    .scr_cs   ( scrrom_cs ),
-    .scr_data ( scrrom_data ),
-    .scr_ok   ( scrrom_ok )
-);
-`endif
-
 wire [10:0] main_shared_addr, snd_shared_addr;
 wire [ 7:0] main_shared_din, main_shared_dout;
 wire [ 7:0] snd_shared_din, snd_shared_dout;

@@ -40,6 +40,8 @@ module jtmzone_scroll(
 );
 
 localparam [8:0] HVISIBLE    = 9'd288;
+localparam [8:0] HTOTAL      = 9'd384;
+localparam [8:0] FETCH_ADVANCE = 9'd2;
 localparam [8:0] SCR_ORIGIN  = 9'd32;
 localparam [8:0] SCR_LEAD    = 9'd8;
 localparam [2:0] RD_PHASE    = 3'd7;
@@ -57,7 +59,7 @@ wire        vram_we = vram_cs & ~cpu_rnw;
 wire        cram_we = cram_cs & ~cpu_rnw;
 wire [ 9:0] eff_addr = cpu_addr;
 
-wire [ 8:0] hsum_base = hdump < HVISIBLE ? hdump : hdump - 9'd384;
+wire [ 8:0] hsum_base = hdump < HVISIBLE ? hdump : hdump - HTOTAL;
 wire [ 8:0] scroll_origin = flip ? 9'd0 : SCR_ORIGIN;
 wire [ 8:0] scroll_hsum = hsum_base - scroll_origin;
 wire [ 8:0] hsum = scroll_hsum + SCR_LEAD - { 8'd0, flip };
@@ -74,8 +76,9 @@ wire [ 7:0] veff = v_eff + scrollx;
 wire [11:0] tile_addr = { cram[7], vram, veff[2:0] ^ {3{cram[5]}} };
 // Advance only the read/request coordinate by two display pixels.
 // Keep the original load coordinate and source/priority delays unchanged.
-wire [8:0] fetch_hdump = hdump >= 9'd382 ? hdump - 9'd382 : hdump + 9'd2;
-wire [8:0] fetch_hsum_base = fetch_hdump < HVISIBLE ? fetch_hdump : fetch_hdump - 9'd384;
+wire [8:0] fetch_hdump = hdump >= HTOTAL - FETCH_ADVANCE ?
+                        hdump - (HTOTAL - FETCH_ADVANCE) : hdump + FETCH_ADVANCE;
+wire [8:0] fetch_hsum_base = fetch_hdump < HVISIBLE ? fetch_hdump : fetch_hdump - HTOTAL;
 wire [8:0] fetch_hsum = fetch_hsum_base - scroll_origin + SCR_LEAD - {8'd0,flip};
 wire [7:0] fetch_heff = (flip ? ~fetch_hsum[7:0] : fetch_hsum[7:0]) + scrolly;
 wire        read_tile = fetch_heff[2:0] == RD_PHASE;

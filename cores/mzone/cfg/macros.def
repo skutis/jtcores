@@ -27,5 +27,5 @@ JTFRAME_FLIP_RESET
 
 [sidi128]
 # Hardware-verified SDRAM character fetch: six-pixel request window.
-MZONE_FETCH_DIAG
+debug MZONE_FETCH_DIAG
 JTFRAME_IOCTL_RD

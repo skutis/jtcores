@@ -22,27 +22,30 @@ audio:
   rc: { r: 177, c: 100n }
   channels:
     # AY: 1k before the capacitor node, then 10k to the summing point.
+    # Approximate loaded full-scale voltages: AY 2.25V, buffered DAC 4.98V.
+    # JTFRAME vpp is relative to 5V: 0.45 / 0.996 ~= 0.452 AY/DAC.
+    # This is a fixed gain approximation, not a model of AY output impedance.
     # Including pot/source loading gives approximately 911 ohms at each cap.
     # Each selectable setting is a pair of poles; the second pole is bypassed.
-    - { name: psg0a, data_width: 8, unsigned: true, dcrm: true, rsum: 11k, rc_en: true, rc: [
+    - { name: psg0a, data_width: 8, unsigned: true, dcrm: true, vpp: 0.45, rsum: 11k, rc_en: true, rc: [
         { r: 0,   c: 0    }, { r: 0, c: 0 }, # bypass
         { r: 911, c: 10n  }, { r: 0, c: 0 }, # ~17.5kHz
         { r: 911, c: 220n }, { r: 0, c: 0 }, # ~794Hz
         { r: 911, c: 230n }, { r: 0, c: 0 }, # ~760Hz
       ] }
-    - { name: psg0b, data_width: 8, unsigned: true, dcrm: true, rsum: 11k, rc_en: true, rc: [
+    - { name: psg0b, data_width: 8, unsigned: true, dcrm: true, vpp: 0.45, rsum: 11k, rc_en: true, rc: [
         { r: 0,   c: 0    }, { r: 0, c: 0 },
         { r: 911, c: 10n  }, { r: 0, c: 0 },
         { r: 911, c: 220n }, { r: 0, c: 0 },
         { r: 911, c: 230n }, { r: 0, c: 0 },
       ] }
-    - { name: psg0c, data_width: 8, unsigned: true, dcrm: true, rsum: 11k, rc_en: true, rc: [
+    - { name: psg0c, data_width: 8, unsigned: true, dcrm: true, vpp: 0.45, rsum: 11k, rc_en: true, rc: [
         { r: 0,   c: 0    }, { r: 0, c: 0 },
         { r: 911, c: 10n  }, { r: 0, c: 0 },
         { r: 911, c: 220n }, { r: 0, c: 0 },
         { r: 911, c: 230n }, { r: 0, c: 0 },
       ] }
-    - { name: dac, data_width: 8, unsigned: true, dcrm: true, rsum: 10k }
+    - { name: dac, data_width: 8, unsigned: true, dcrm: true, vpp: 0.996, rsum: 10k }
 
 download:
   post_addr: true
@@ -53,13 +56,11 @@ sdram:
       buses:
         -
           name: fixrom
-          unless: [MZONE_CHAR_BRAM]
           addr_width: 14
           data_width: 32
           offset: FIX_OFFSET
         -
           name: scrrom
-          unless: [MZONE_CHAR_BRAM]
           addr_width: 14
           data_width: 32
           offset: SCR_OFFSET
