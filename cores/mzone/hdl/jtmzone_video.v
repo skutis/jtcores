@@ -61,7 +61,6 @@ module jtmzone_video(
     output       [ 3:0] green,
     output       [ 3:0] blue,
 
-    output              h2,
     output       [ 8:0] hdump,
     output       [ 8:0] vdump,
     output       [ 8:0] vrender
@@ -144,8 +143,6 @@ wire        obj_lut_we, char_lut_we;
 
 assign obj_lut_we = prom_we && prog_addr >= OBJ_OFFSET && prog_addr < OBJ_OFFSET+22'h100;
 assign char_lut_we = prom_we && prog_addr >= CHR_OFFSET && prog_addr < CHR_OFFSET+22'h100;
-
-assign h2 = hcnt[1];
 
 assign hcnt     = pcb_hcnt(hdump, flip);
 

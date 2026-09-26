@@ -85,7 +85,6 @@ wire [7:0] video_scrollx = main_scrollx;
 wire       video_flip    = main_flip;
 `endif
 wire        intmain_n;
-wire        h2;
 
 assign dip_flip   = 0;
 `ifndef MZONE_FETCH_DIAG
@@ -212,7 +211,7 @@ jtmzone_snd u_snd(
     .dipsw_a    ( dipsw[ 7:0]    ),
     .dipsw_b    ( dipsw[15:8]    ),
     .LVBL       ( LVBL           ),
-    .h2         ( h2             ),
+    .hdump      ( video_hdump    ),
     .shared_addr( snd_shared_addr ),
     .shared_dout( snd_shared_dout ),
     .shared_we  ( snd_shared_we   ),
@@ -284,7 +283,6 @@ jtmzone_video u_video(
     .green      ( green          ),
     .blue       ( blue           ),
 
-    .h2         ( h2             ),
     .hdump      ( video_hdump    ),
     .vdump      ( video_vdump    ),
     .vrender    ( video_vrender  )

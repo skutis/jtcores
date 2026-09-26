@@ -16,7 +16,7 @@ module jtmzone_snd_dev(
     input               rst,
     input               clk,
     input               LVBL,
-    input               h2,
+    input       [ 8:0] hdump,
     input               intsnd,
 
     // Sound CPU bus
@@ -95,7 +95,9 @@ assign ay_iob       = 8'd0;
 assign shared_busy = 1'b0;
 assign cpu_rom_cs  = 1'b0;
 `else
-assign shared_busy = shared_cs && h2;
+// K501 WAIT equation adapted from the MiSTer Arcade-TimePilot model:
+// https://github.com/MiSTer-devel/Arcade-TimePilot_MiSTer/blob/master/rtl/custom/k501.sv
+assign shared_busy = shared_cs || hdump[1];
 assign cpu_rom_cs  = rom_cs;
 `endif
 assign wdog_reset_n = ~mcu_wdog_cs;

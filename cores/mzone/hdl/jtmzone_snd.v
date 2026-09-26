@@ -34,7 +34,7 @@ module jtmzone_snd(
     input       [ 7:0]  dipsw_a,
     input       [ 7:0]  dipsw_b,
     input               LVBL,
-    input               h2,
+    input       [ 8:0] hdump,
     input               intsnd,
 
     // Shared RAM with the main CPU
@@ -109,7 +109,7 @@ jtmzone_snd_dev u_dev(
     .rst            ( rst               ),
     .clk            ( clk               ),
     .LVBL           ( LVBL              ),
-    .h2             ( h2                ),
+    .hdump          ( hdump             ),
     .intsnd         ( intsnd            ),
     .A              ( A                 ),
     .cpu_din        ( cpu_din           ),
