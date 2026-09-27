@@ -95,9 +95,9 @@ assign ay_iob       = 8'd0;
 assign shared_busy = 1'b0;
 assign cpu_rom_cs  = 1'b0;
 `else
-// K501 WAIT equation adapted from the MiSTer Arcade-TimePilot model:
-// https://github.com/MiSTer-devel/Arcade-TimePilot_MiSTer/blob/master/rtl/custom/k501.sv
-assign shared_busy = shared_cs || hdump[1];
+// Stall shared RAM accesses only during the busy horizontal phase.
+// OR with shared_cs would prevent the CPU from completing the access.
+assign shared_busy = shared_cs && hdump[1];
 assign cpu_rom_cs  = rom_cs;
 `endif
 assign wdog_reset_n = ~mcu_wdog_cs;
