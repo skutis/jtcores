@@ -1,3 +1,6 @@
 !/ver/game/dump2bin.sh
 !/ver/game/mame_sound.lua
 !/ver/game/mame_sound.md
+!/ver/game/hdmi_border_tb.sv
+!/ver/game/hdmi_border_sim.sh
+!/ver/game/hdmi_border.md
