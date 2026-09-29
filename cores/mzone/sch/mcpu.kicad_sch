@@ -3238,6 +3238,198 @@
 				)
 			)
 		)
+		(symbol "GND_3"
+			(power)
+			(pin_numbers hide)
+			(pin_names
+				(offset 0) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "GND"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "GND_3_0_1"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -1.27) (xy 1.27 -1.27) (xy 0 -2.54) (xy -1.27 -1.27) (xy 0 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "GND_3_1_1"
+				(pin power_in line
+					(at 0 0 270)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "GND_4"
+			(power)
+			(pin_numbers hide)
+			(pin_names
+				(offset 0) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "GND"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "GND_4_0_1"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -1.27) (xy 1.27 -1.27) (xy 0 -2.54) (xy -1.27 -1.27) (xy 0 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "GND_4_1_1"
+				(pin power_in line
+					(at 0 0 270)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "KONAMI-1_1"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -13250,6 +13442,10 @@
 		(uuid "4e9e8db3-e6f8-4d45-9b4d-e274480dab95")
 	)
 	(no_connect
+		(at 185.42 147.32)
+		(uuid "51dcbeb1-ec25-449b-9d8d-9071b30acf60")
+	)
+	(no_connect
 		(at 129.54 167.64)
 		(uuid "5553ee6f-f639-4538-ba1f-a1ed7a428269")
 	)
@@ -13262,12 +13458,32 @@
 		(uuid "6cd4af52-97b3-43d4-a4ba-96dedcf77aab")
 	)
 	(no_connect
+		(at 185.42 149.86)
+		(uuid "764ffc06-2464-462a-8436-bd65142ad9a2")
+	)
+	(no_connect
+		(at 185.42 152.4)
+		(uuid "87ef486d-5856-401a-938f-629e4f615f86")
+	)
+	(no_connect
 		(at 129.54 170.18)
 		(uuid "8d6f4a92-3c36-4979-a5ee-4d693da7016d")
 	)
 	(no_connect
 		(at 215.9 101.6)
 		(uuid "918e3d7c-4e15-41bf-bd35-1de5706e0ea1")
+	)
+	(no_connect
+		(at 160.02 152.4)
+		(uuid "9f7d7354-d765-49d6-be27-09d6b5ee6cd2")
+	)
+	(no_connect
+		(at 160.02 147.32)
+		(uuid "a24fd9b3-5103-4ffd-be36-63c4a40488ed")
+	)
+	(no_connect
+		(at 160.02 149.86)
+		(uuid "c320e718-2abb-4731-a00d-5fc7fb02ba77")
 	)
 	(no_connect
 		(at 104.14 154.94)
@@ -16699,7 +16915,7 @@
 	)
 	(wire
 		(pts
-			(xy 215.9 109.22) (xy 222.25 109.22)
+			(xy 215.9 109.22) (xy 227.33 109.22)
 		)
 		(stroke
 			(width 0)
@@ -17489,7 +17705,7 @@
 	)
 	(wire
 		(pts
-			(xy 215.9 99.06) (xy 222.25 99.06)
+			(xy 229.87 96.52) (xy 233.68 96.52)
 		)
 		(stroke
 			(width 0)
@@ -17526,6 +17742,16 @@
 			(type default)
 		)
 		(uuid "2612269f-bab8-4aee-9f9d-ba1c911a64f9")
+	)
+	(wire
+		(pts
+			(xy 219.71 88.9) (xy 219.71 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "263117ba-d5fd-4490-a6db-7a6346aa6b9d")
 	)
 	(bus
 		(pts
@@ -17569,7 +17795,7 @@
 	)
 	(wire
 		(pts
-			(xy 148.59 262.89) (xy 153.67 262.89)
+			(xy 264.16 121.92) (xy 269.24 121.92)
 		)
 		(stroke
 			(width 0)
@@ -18056,6 +18282,16 @@
 			(type default)
 		)
 		(uuid "3359a0c7-310a-48c7-be74-6001f9cec926")
+	)
+	(wire
+		(pts
+			(xy 248.92 88.9) (xy 261.62 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "33aff52d-ff1b-49fc-949b-938c2af1389d")
 	)
 	(wire
 		(pts
@@ -18686,6 +18922,16 @@
 			(type default)
 		)
 		(uuid "4a9a8dd1-30d2-4c89-a2e4-e2092b0f0e4e")
+	)
+	(wire
+		(pts
+			(xy 248.92 96.52) (xy 261.62 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4ab9f1e2-73bd-4fcd-9be4-4d10a9ddd8b3")
 	)
 	(bus
 		(pts
@@ -19377,16 +19623,6 @@
 		)
 		(uuid "5edaaa80-ec68-4c55-bffa-413635be9ee5")
 	)
-	(wire
-		(pts
-			(xy 128.27 262.89) (xy 133.35 262.89)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5f0f2db9-3bbe-4044-9ceb-73d64ae04db5")
-	)
 	(bus
 		(pts
 			(xy 317.5 115.57) (xy 317.5 118.11)
@@ -19576,6 +19812,16 @@
 			(type default)
 		)
 		(uuid "63c819eb-6125-46c6-bee5-f058ed03793b")
+	)
+	(wire
+		(pts
+			(xy 248.92 107.95) (xy 261.62 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "64a4c465-0ac1-453d-a45b-6bc08dcd351c")
 	)
 	(wire
 		(pts
@@ -20979,7 +21225,7 @@
 	)
 	(wire
 		(pts
-			(xy 215.9 96.52) (xy 222.25 96.52)
+			(xy 219.71 88.9) (xy 233.68 88.9)
 		)
 		(stroke
 			(width 0)
@@ -21059,6 +21305,16 @@
 	)
 	(wire
 		(pts
+			(xy 227.33 109.22) (xy 227.33 121.92)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8deb1782-f599-4035-b63b-c23f290606de")
+	)
+	(wire
+		(pts
 			(xy 372.11 173.99) (xy 377.19 173.99)
 		)
 		(stroke
@@ -21116,6 +21372,16 @@
 			(type default)
 		)
 		(uuid "8f897fd0-0c7b-419d-9f73-77647f3ee647")
+	)
+	(wire
+		(pts
+			(xy 229.87 104.14) (xy 229.87 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8fbc4b99-d3dc-48a5-b927-2f48fb253337")
 	)
 	(wire
 		(pts
@@ -21307,6 +21573,16 @@
 		)
 		(uuid "97086422-1393-4ddd-89f7-1d993920081e")
 	)
+	(wire
+		(pts
+			(xy 229.87 107.95) (xy 233.68 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9744028a-aa6d-43a7-8bdd-02006a84d7f0")
+	)
 	(bus
 		(pts
 			(xy 369.57 105.41) (xy 369.57 107.95)
@@ -21369,7 +21645,7 @@
 	)
 	(wire
 		(pts
-			(xy 215.9 104.14) (xy 222.25 104.14)
+			(xy 215.9 104.14) (xy 229.87 104.14)
 		)
 		(stroke
 			(width 0)
@@ -21966,6 +22242,16 @@
 			(type default)
 		)
 		(uuid "a9ab3b31-bf87-444c-9012-159891b710ff")
+	)
+	(wire
+		(pts
+			(xy 229.87 99.06) (xy 215.9 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a9ef8514-232d-4bb9-9008-e8219293e9f5")
 	)
 	(bus
 		(pts
@@ -23677,6 +23963,16 @@
 		)
 		(uuid "da49c18b-a970-44f8-afad-03f65544a25c")
 	)
+	(wire
+		(pts
+			(xy 219.71 96.52) (xy 215.9 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "da718e00-76fe-42d7-9863-8f0b34b8f2f0")
+	)
 	(bus
 		(pts
 			(xy 317.5 102.87) (xy 317.5 105.41)
@@ -24357,6 +24653,16 @@
 		)
 		(uuid "ed6c2247-1066-4a76-b8d2-b17261d70421")
 	)
+	(wire
+		(pts
+			(xy 229.87 96.52) (xy 229.87 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ee05551c-28d4-469f-9cd6-1c8f23a9dd62")
+	)
 	(bus
 		(pts
 			(xy 369.57 92.71) (xy 369.57 95.25)
@@ -24897,6 +25203,16 @@
 		)
 		(uuid "feab9dda-f77f-4238-9678-c9fccad951e3")
 	)
+	(wire
+		(pts
+			(xy 227.33 121.92) (xy 233.68 121.92)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fee7c4c2-3ffc-4826-a4cf-0e1097249f8d")
+	)
 	(bus
 		(pts
 			(xy 231.14 50.8) (xy 231.14 48.26)
@@ -25128,7 +25444,6 @@
 	)
 	(label "AB7"
 		(at 99.06 198.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25139,7 +25454,6 @@
 	)
 	(label "AB1"
 		(at 372.11 148.59 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25150,7 +25464,6 @@
 	)
 	(label "VA8"
 		(at 264.16 203.2 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25161,7 +25474,6 @@
 	)
 	(label "AB12"
 		(at 372.11 120.65 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25172,7 +25484,6 @@
 	)
 	(label "MD3"
 		(at 349.25 97.79 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25183,7 +25494,6 @@
 	)
 	(label "AB5"
 		(at 372.11 158.75 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25194,7 +25504,6 @@
 	)
 	(label "AB1"
 		(at 320.04 204.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25205,7 +25514,6 @@
 	)
 	(label "~{H2'}"
 		(at 332.74 31.75 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25216,7 +25524,6 @@
 	)
 	(label "AB0"
 		(at 320.04 201.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25227,7 +25534,6 @@
 	)
 	(label "AB7"
 		(at 372.11 219.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25238,7 +25544,6 @@
 	)
 	(label "VA9"
 		(at 248.92 190.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25249,7 +25554,6 @@
 	)
 	(label "AB2"
 		(at 218.44 273.05 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25260,7 +25564,6 @@
 	)
 	(label "AB1"
 		(at 372.11 204.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25271,7 +25574,6 @@
 	)
 	(label "MD7"
 		(at 349.25 219.71 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25282,7 +25584,6 @@
 	)
 	(label "AB1"
 		(at 269.24 63.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25293,7 +25594,6 @@
 	)
 	(label "AB'2"
 		(at 223.52 55.88 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25304,7 +25604,6 @@
 	)
 	(label "AB4"
 		(at 218.44 234.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25315,7 +25614,6 @@
 	)
 	(label "~{H2'}"
 		(at 39.37 153.67 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25326,7 +25624,6 @@
 	)
 	(label "AB6"
 		(at 372.11 161.29 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25337,7 +25634,6 @@
 	)
 	(label "MD'4"
 		(at 180.34 30.48 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25348,7 +25644,6 @@
 	)
 	(label "SCROLLY"
 		(at 129.54 223.52 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25359,7 +25654,6 @@
 	)
 	(label "MD5"
 		(at 139.7 30.48 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25370,7 +25664,6 @@
 	)
 	(label "MD2"
 		(at 349.25 95.25 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25381,7 +25674,6 @@
 	)
 	(label "MRD"
 		(at 73.66 127 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25392,7 +25684,6 @@
 	)
 	(label "AB6"
 		(at 372.11 217.17 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25403,7 +25694,6 @@
 	)
 	(label "VD1"
 		(at 267.97 241.3 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25414,7 +25704,6 @@
 	)
 	(label "AB'11"
 		(at 223.52 33.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25425,7 +25714,6 @@
 	)
 	(label "~{MROM}1"
 		(at 358.14 184.15 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25436,7 +25724,6 @@
 	)
 	(label "MD7"
 		(at 349.25 107.95 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25447,7 +25734,6 @@
 	)
 	(label "~{MROM}5"
 		(at 307.34 128.27 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25458,7 +25744,6 @@
 	)
 	(label "DB3"
 		(at 220.98 147.32 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25469,7 +25754,6 @@
 	)
 	(label "AB5"
 		(at 372.11 102.87 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25480,7 +25764,6 @@
 	)
 	(label "AB'0"
 		(at 223.52 60.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25491,7 +25774,6 @@
 	)
 	(label "INTST'"
 		(at 215.9 114.3 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25502,7 +25784,6 @@
 	)
 	(label "MD0"
 		(at 349.25 146.05 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25513,7 +25794,6 @@
 	)
 	(label "MD3"
 		(at 401.32 153.67 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25524,7 +25804,6 @@
 	)
 	(label "~{MWRAMW}"
 		(at 104.14 106.68 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25535,7 +25814,6 @@
 	)
 	(label "AB'9"
 		(at 237.49 30.48 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25546,7 +25824,6 @@
 	)
 	(label "LACH"
 		(at 53.34 108.585 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25557,7 +25834,6 @@
 	)
 	(label "MD''0"
 		(at 99.06 80.01 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25566,20 +25842,8 @@
 		)
 		(uuid "169e64dd-845f-4c36-bf78-c552d0ac180f")
 	)
-	(label "FLIP'"
-		(at 215.9 109.22 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "18024b65-16d3-45fa-8aba-377167f4752c")
-	)
 	(label "AB'2"
 		(at 237.49 68.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25590,7 +25854,6 @@
 	)
 	(label "MD4"
 		(at 401.32 100.33 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25601,7 +25864,6 @@
 	)
 	(label "~{MROM}2"
 		(at 358.14 128.27 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25612,7 +25874,6 @@
 	)
 	(label "~{MROM}3"
 		(at 316.23 33.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25623,7 +25884,6 @@
 	)
 	(label "MD'0"
 		(at 180.34 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25634,7 +25894,6 @@
 	)
 	(label "AB11"
 		(at 320.04 173.99 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25645,7 +25904,6 @@
 	)
 	(label "AB10"
 		(at 320.04 115.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25656,7 +25914,6 @@
 	)
 	(label "MD3"
 		(at 349.25 153.67 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25667,7 +25924,6 @@
 	)
 	(label "MD6"
 		(at 139.7 25.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25678,7 +25934,6 @@
 	)
 	(label "AB11"
 		(at 355.6 43.18 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25689,7 +25944,6 @@
 	)
 	(label "AS0"
 		(at 185.42 134.62 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25700,7 +25954,6 @@
 	)
 	(label "~{MSHRAM}"
 		(at 259.08 251.46 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25711,7 +25964,6 @@
 	)
 	(label "AB10"
 		(at 320.04 227.33 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25722,7 +25974,6 @@
 	)
 	(label "MBS"
 		(at 99.06 152.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25733,7 +25984,6 @@
 	)
 	(label "~{AB}9"
 		(at 129.54 195.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25744,7 +25994,6 @@
 	)
 	(label "AB0"
 		(at 218.44 270.51 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25755,7 +26004,6 @@
 	)
 	(label "VD2"
 		(at 247.65 142.24 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25766,7 +26014,6 @@
 	)
 	(label "~{BLANK}"
 		(at 74.93 236.22 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25777,7 +26024,6 @@
 	)
 	(label "H1"
 		(at 64.77 273.05 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25788,7 +26034,6 @@
 	)
 	(label "MD6"
 		(at 349.25 217.17 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25799,7 +26044,6 @@
 	)
 	(label "MD'''0"
 		(at 67.31 80.01 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25810,7 +26054,6 @@
 	)
 	(label "AB'1"
 		(at 237.49 63.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25821,7 +26064,6 @@
 	)
 	(label "DB2"
 		(at 220.98 149.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25832,7 +26074,6 @@
 	)
 	(label "AB10"
 		(at 215.9 201.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25843,7 +26084,6 @@
 	)
 	(label "AB12"
 		(at 372.11 232.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25854,7 +26094,6 @@
 	)
 	(label "MD''2"
 		(at 109.22 38.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25865,7 +26104,6 @@
 	)
 	(label "H1''"
 		(at 127 134.62 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25876,7 +26114,6 @@
 	)
 	(label "INTST'"
 		(at 96.52 260.35 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25887,7 +26124,6 @@
 	)
 	(label "CLKE"
 		(at 194.31 53.34 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25898,7 +26134,6 @@
 	)
 	(label "MD1"
 		(at 139.7 33.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25909,7 +26144,6 @@
 	)
 	(label "DB5"
 		(at 220.98 142.24 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25920,7 +26154,6 @@
 	)
 	(label "VD6"
 		(at 289.56 198.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25931,7 +26164,6 @@
 	)
 	(label "AB1"
 		(at 218.44 267.97 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25942,7 +26174,6 @@
 	)
 	(label "AB5"
 		(at 269.24 58.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25953,7 +26184,6 @@
 	)
 	(label "AS6"
 		(at 218.44 224.79 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25964,7 +26194,6 @@
 	)
 	(label "VD5"
 		(at 289.56 195.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25975,7 +26204,6 @@
 	)
 	(label "MD5"
 		(at 401.32 214.63 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25986,7 +26214,6 @@
 	)
 	(label "DB1"
 		(at 220.98 152.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25997,7 +26224,6 @@
 	)
 	(label "MD5"
 		(at 151.13 27.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26008,7 +26234,6 @@
 	)
 	(label "MD2"
 		(at 146.05 68.58 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26019,7 +26244,6 @@
 	)
 	(label "MD0"
 		(at 146.05 63.5 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26030,7 +26254,6 @@
 	)
 	(label "MD7"
 		(at 139.7 22.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26041,7 +26264,6 @@
 	)
 	(label "~{OBJRAM}"
 		(at 96.52 233.68 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26052,7 +26274,6 @@
 	)
 	(label "~{AB}6"
 		(at 129.54 187.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26063,7 +26284,6 @@
 	)
 	(label "AB2"
 		(at 320.04 207.01 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26074,7 +26294,6 @@
 	)
 	(label "AB5"
 		(at 99.06 200.66 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26085,7 +26304,6 @@
 	)
 	(label "VD4"
 		(at 289.56 193.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26096,7 +26314,6 @@
 	)
 	(label "MD4"
 		(at 151.13 30.48 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26107,7 +26324,6 @@
 	)
 	(label "AB0"
 		(at 99.06 165.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26118,7 +26334,6 @@
 	)
 	(label "MD'1"
 		(at 200.66 38.1 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26129,7 +26344,6 @@
 	)
 	(label "VA7"
 		(at 248.92 223.52 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26140,7 +26354,6 @@
 	)
 	(label "CPUCLK"
 		(at 115.57 113.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26151,7 +26364,6 @@
 	)
 	(label "MD''6"
 		(at 99.06 64.77 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26162,7 +26374,6 @@
 	)
 	(label "~{H2'''}"
 		(at 54.61 166.37 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26173,7 +26384,6 @@
 	)
 	(label "~{MLATCH}"
 		(at 386.08 21.59 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26184,7 +26394,6 @@
 	)
 	(label "AB7"
 		(at 372.11 107.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26195,7 +26404,6 @@
 	)
 	(label "MD7"
 		(at 401.32 107.95 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26206,7 +26414,6 @@
 	)
 	(label "MD4"
 		(at 401.32 156.21 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26217,7 +26424,6 @@
 	)
 	(label "CLKQ"
 		(at 194.31 50.8 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26228,7 +26434,6 @@
 	)
 	(label "MRD"
 		(at 96.52 228.6 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26239,7 +26444,6 @@
 	)
 	(label "AB10"
 		(at 372.11 171.45 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26250,7 +26454,6 @@
 	)
 	(label "AB8"
 		(at 269.24 33.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26261,7 +26464,6 @@
 	)
 	(label "~{COLRAM}"
 		(at 96.52 220.98 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26272,7 +26474,6 @@
 	)
 	(label "AB'4"
 		(at 223.52 50.8 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26283,7 +26484,6 @@
 	)
 	(label "BLANK"
 		(at 156.21 66.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26294,7 +26494,6 @@
 	)
 	(label "AB14"
 		(at 283.21 22.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26305,7 +26504,6 @@
 	)
 	(label "AB'10"
 		(at 223.52 35.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26316,7 +26514,6 @@
 	)
 	(label "CLK10"
 		(at 218.44 167.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26327,7 +26524,6 @@
 	)
 	(label "INTSND'"
 		(at 96.52 257.81 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26338,7 +26534,6 @@
 	)
 	(label "VA6"
 		(at 264.16 198.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26349,7 +26544,6 @@
 	)
 	(label "H2'''"
 		(at 218.44 172.72 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26360,7 +26554,6 @@
 	)
 	(label "~{VRAM}"
 		(at 96.52 218.44 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26371,7 +26564,6 @@
 	)
 	(label "COIN1"
 		(at 128.27 255.27 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26382,7 +26574,6 @@
 	)
 	(label "~{SRD}"
 		(at 218.44 160.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26393,7 +26584,6 @@
 	)
 	(label "AB8"
 		(at 372.11 110.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26404,7 +26594,6 @@
 	)
 	(label "~{FIRQ}"
 		(at 139.065 113.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26415,7 +26604,6 @@
 	)
 	(label "AB2"
 		(at 320.04 95.25 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26426,7 +26614,6 @@
 	)
 	(label "MD4"
 		(at 349.25 156.21 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26437,7 +26624,6 @@
 	)
 	(label "VA[10..0]"
 		(at 256.54 213.36 90)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26448,7 +26634,6 @@
 	)
 	(label "MD''1"
 		(at 99.06 77.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26459,7 +26644,6 @@
 	)
 	(label "AB6"
 		(at 269.24 73.66 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26470,7 +26654,6 @@
 	)
 	(label "MD'5"
 		(at 180.34 27.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26481,7 +26664,6 @@
 	)
 	(label "~{VRAM}"
 		(at 72.39 146.05 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26492,7 +26674,6 @@
 	)
 	(label "AB6"
 		(at 218.44 237.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26503,7 +26684,6 @@
 	)
 	(label "MD5"
 		(at 146.05 76.2 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26514,7 +26694,6 @@
 	)
 	(label "AS0"
 		(at 218.44 257.81 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26525,7 +26704,6 @@
 	)
 	(label "AB4"
 		(at 372.11 212.09 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26536,7 +26714,6 @@
 	)
 	(label "AB'11"
 		(at 237.49 27.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26547,7 +26724,6 @@
 	)
 	(label "VD3"
 		(at 267.97 236.22 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26558,7 +26734,6 @@
 	)
 	(label "MD0"
 		(at 401.32 201.93 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26569,7 +26744,6 @@
 	)
 	(label "MD6"
 		(at 401.32 217.17 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26580,7 +26754,6 @@
 	)
 	(label "AB1"
 		(at 184.15 101.6 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26591,7 +26764,6 @@
 	)
 	(label "MD5"
 		(at 349.25 214.63 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26602,7 +26774,6 @@
 	)
 	(label "~{VRAM}"
 		(at 386.08 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26613,7 +26784,6 @@
 	)
 	(label "AB7"
 		(at 320.04 107.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26624,7 +26794,6 @@
 	)
 	(label "VA4"
 		(at 264.16 193.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26635,7 +26804,6 @@
 	)
 	(label "AB6"
 		(at 320.04 217.17 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26646,7 +26814,6 @@
 	)
 	(label "~{MSHRAM}"
 		(at 60.96 48.26 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26657,7 +26824,6 @@
 	)
 	(label "AB'8"
 		(at 223.52 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26668,7 +26834,6 @@
 	)
 	(label "AB10"
 		(at 320.04 171.45 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26679,7 +26844,6 @@
 	)
 	(label "~{IRQ}"
 		(at 195.58 63.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26690,7 +26854,6 @@
 	)
 	(label "MD7"
 		(at 401.32 163.83 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26701,7 +26864,6 @@
 	)
 	(label "DB0"
 		(at 220.98 154.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26712,7 +26874,6 @@
 	)
 	(label "H2'''"
 		(at 127 132.08 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26723,7 +26884,6 @@
 	)
 	(label "AB0"
 		(at 372.11 146.05 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26734,7 +26894,6 @@
 	)
 	(label "VRAM"
 		(at 129.54 218.44 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26745,7 +26904,6 @@
 	)
 	(label "MD0"
 		(at 297.18 243.84 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26754,20 +26912,8 @@
 		)
 		(uuid "4c8a891b-3f4c-4632-9e41-841a769cd803")
 	)
-	(label "COIN2'"
-		(at 215.9 96.52 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "4d51efe7-edd8-4221-b722-6a24909b1165")
-	)
 	(label "VD7"
 		(at 267.97 226.06 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26778,7 +26924,6 @@
 	)
 	(label "AB12"
 		(at 320.04 120.65 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26789,7 +26934,6 @@
 	)
 	(label "MD0"
 		(at 349.25 90.17 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26800,7 +26944,6 @@
 	)
 	(label "~{WAIT}"
 		(at 247.65 160.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26811,7 +26954,6 @@
 	)
 	(label "CLK10"
 		(at 128.27 265.43 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26822,7 +26964,6 @@
 	)
 	(label "MD''2"
 		(at 99.06 74.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26833,7 +26974,6 @@
 	)
 	(label "MD1"
 		(at 349.25 148.59 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26844,7 +26984,6 @@
 	)
 	(label "AB9"
 		(at 269.24 30.48 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26855,7 +26994,6 @@
 	)
 	(label "~{LATCHOE}"
 		(at 110.49 134.62 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26866,7 +27004,6 @@
 	)
 	(label "MD'6"
 		(at 180.34 25.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26877,7 +27014,6 @@
 	)
 	(label "AB6"
 		(at 320.04 161.29 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26888,7 +27024,6 @@
 	)
 	(label "INTST"
 		(at 128.27 260.35 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26899,7 +27034,6 @@
 	)
 	(label "MD5"
 		(at 113.03 76.2 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26910,7 +27044,6 @@
 	)
 	(label "VA0"
 		(at 264.16 182.88 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26921,7 +27054,6 @@
 	)
 	(label "~{AB}0"
 		(at 129.54 165.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26932,7 +27064,6 @@
 	)
 	(label "MD2"
 		(at 113.03 68.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26943,7 +27074,6 @@
 	)
 	(label "BLANK"
 		(at 41.91 191.77 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26954,7 +27084,6 @@
 	)
 	(label "AS9"
 		(at 215.9 184.15 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26965,7 +27094,6 @@
 	)
 	(label "MD5"
 		(at 401.32 158.75 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26976,7 +27104,6 @@
 	)
 	(label "AB1"
 		(at 320.04 92.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26987,7 +27114,6 @@
 	)
 	(label "AB8"
 		(at 320.04 166.37 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26998,7 +27124,6 @@
 	)
 	(label "~{COLRAM}"
 		(at 386.08 43.18 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27009,7 +27134,6 @@
 	)
 	(label "MD3"
 		(at 146.05 71.12 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27020,7 +27144,6 @@
 	)
 	(label "MD4"
 		(at 349.25 100.33 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27031,7 +27154,6 @@
 	)
 	(label "MD'7"
 		(at 200.66 22.86 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27042,7 +27164,6 @@
 	)
 	(label "AB5"
 		(at 320.04 214.63 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27053,7 +27174,6 @@
 	)
 	(label "MD2"
 		(at 139.7 38.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27064,7 +27184,6 @@
 	)
 	(label "AB13"
 		(at 269.24 22.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27075,7 +27194,6 @@
 	)
 	(label "AS2"
 		(at 218.44 260.35 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27086,7 +27204,6 @@
 	)
 	(label "VA9"
 		(at 264.16 205.74 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27097,7 +27214,6 @@
 	)
 	(label "CLK1"
 		(at 64.77 257.81 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27108,7 +27224,6 @@
 	)
 	(label "AB9"
 		(at 320.04 168.91 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27119,7 +27234,6 @@
 	)
 	(label "~{RESET}"
 		(at 194.31 45.72 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27130,7 +27244,6 @@
 	)
 	(label "COIN2"
 		(at 128.27 273.05 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27141,7 +27254,6 @@
 	)
 	(label "AB'6"
 		(at 237.49 73.66 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27152,7 +27264,6 @@
 	)
 	(label "MD3"
 		(at 349.25 209.55 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27163,7 +27274,6 @@
 	)
 	(label "MD'6"
 		(at 200.66 25.4 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27174,7 +27284,6 @@
 	)
 	(label "VA0"
 		(at 248.92 264.16 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27185,7 +27294,6 @@
 	)
 	(label "AS1"
 		(at 185.42 144.78 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27196,7 +27304,6 @@
 	)
 	(label "AB4"
 		(at 320.04 212.09 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27207,7 +27314,6 @@
 	)
 	(label "AB'15"
 		(at 237.49 25.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27218,7 +27324,6 @@
 	)
 	(label "MD'2"
 		(at 180.34 35.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27229,7 +27334,6 @@
 	)
 	(label "VD5"
 		(at 267.97 231.14 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27240,7 +27344,6 @@
 	)
 	(label "AB11"
 		(at 355.6 24.13 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27251,7 +27354,6 @@
 	)
 	(label "MD6"
 		(at 113.03 78.74 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27262,7 +27364,6 @@
 	)
 	(label "MD4"
 		(at 401.32 212.09 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27273,7 +27374,6 @@
 	)
 	(label "MD'4"
 		(at 200.66 30.48 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27284,7 +27384,6 @@
 	)
 	(label "VD6"
 		(at 247.65 152.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27295,7 +27394,6 @@
 	)
 	(label "MD1"
 		(at 151.13 38.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27306,7 +27404,6 @@
 	)
 	(label "AB'12"
 		(at 223.52 30.48 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27315,20 +27412,8 @@
 		)
 		(uuid "65e96ead-43e2-4063-a516-b32370f3ab87")
 	)
-	(label "COIN1'"
-		(at 215.9 99.06 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "65f80676-1713-4c8b-ad8b-2dfccc9fd721")
-	)
 	(label "AS5"
 		(at 218.44 219.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27339,7 +27424,6 @@
 	)
 	(label "MRD"
 		(at 185.42 142.24 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27350,7 +27434,6 @@
 	)
 	(label "MD2"
 		(at 151.13 35.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27361,7 +27444,6 @@
 	)
 	(label "AB11"
 		(at 372.11 229.87 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27372,7 +27454,6 @@
 	)
 	(label "MD0"
 		(at 401.32 90.17 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27383,7 +27464,6 @@
 	)
 	(label "~{AB}10"
 		(at 129.54 193.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27394,7 +27474,6 @@
 	)
 	(label "~{SVRAMW}"
 		(at 262.89 165.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27405,7 +27484,6 @@
 	)
 	(label "VA2"
 		(at 264.16 187.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27416,7 +27494,6 @@
 	)
 	(label "AB'3"
 		(at 223.52 53.34 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27427,7 +27504,6 @@
 	)
 	(label "DB4"
 		(at 220.98 144.78 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27438,7 +27514,6 @@
 	)
 	(label "SCROLLX"
 		(at 129.54 231.14 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27449,7 +27524,6 @@
 	)
 	(label "AB10"
 		(at 372.11 115.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27460,7 +27534,6 @@
 	)
 	(label "MD1"
 		(at 113.03 66.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27471,7 +27544,6 @@
 	)
 	(label "MWR"
 		(at 129.54 228.6 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27482,7 +27554,6 @@
 	)
 	(label "AB'14"
 		(at 237.49 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27493,7 +27564,6 @@
 	)
 	(label "LACH"
 		(at 109.22 86.36 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27504,7 +27574,6 @@
 	)
 	(label "~{AB}5"
 		(at 129.54 200.66 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27515,7 +27584,6 @@
 	)
 	(label "MD''1"
 		(at 109.22 33.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27526,7 +27594,6 @@
 	)
 	(label "~{MROM}2"
 		(at 316.23 30.48 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27537,7 +27604,6 @@
 	)
 	(label "~{H2}~{CLKQ}"
 		(at 283.21 33.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27548,7 +27614,6 @@
 	)
 	(label "MD2"
 		(at 401.32 207.01 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27559,7 +27624,6 @@
 	)
 	(label "MD'''3"
 		(at 67.31 72.39 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27570,7 +27634,6 @@
 	)
 	(label "~{CLKQ}"
 		(at 147.32 137.16 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27579,9 +27642,18 @@
 		)
 		(uuid "6f0205cb-438c-4f78-ae42-302d723ff8dc")
 	)
+	(label "COIN_CNT'_2"
+		(at 248.92 88.9 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6fb6a0d2-9612-4333-9885-68ad87d8e1f7")
+	)
 	(label "MD6"
 		(at 151.13 25.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27592,7 +27664,6 @@
 	)
 	(label "MD'2"
 		(at 200.66 35.56 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27603,7 +27674,6 @@
 	)
 	(label "H2'''"
 		(at 128.27 267.97 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27614,7 +27684,6 @@
 	)
 	(label "AB3"
 		(at 269.24 60.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27625,7 +27694,6 @@
 	)
 	(label "H2'''"
 		(at 165.1 121.285 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27636,7 +27704,6 @@
 	)
 	(label "AB12"
 		(at 355.6 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27647,7 +27714,6 @@
 	)
 	(label "~{AB}4"
 		(at 129.54 185.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27658,7 +27724,6 @@
 	)
 	(label "AB3"
 		(at 320.04 97.79 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27669,7 +27734,6 @@
 	)
 	(label "AB11"
 		(at 372.11 173.99 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27680,7 +27744,6 @@
 	)
 	(label "MD'''4"
 		(at 67.31 69.85 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27691,7 +27754,6 @@
 	)
 	(label "AB7"
 		(at 372.11 163.83 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27702,7 +27764,6 @@
 	)
 	(label "~{MROM}4"
 		(at 307.34 184.15 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27713,7 +27774,6 @@
 	)
 	(label "AB5"
 		(at 218.44 232.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27724,7 +27784,6 @@
 	)
 	(label "AB2"
 		(at 99.06 160.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27735,7 +27794,6 @@
 	)
 	(label "MD7"
 		(at 401.32 219.71 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27746,7 +27804,6 @@
 	)
 	(label "VD3"
 		(at 289.56 190.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27757,7 +27814,6 @@
 	)
 	(label "AB0"
 		(at 320.04 146.05 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27768,7 +27824,6 @@
 	)
 	(label "H2'''"
 		(at 156.21 139.7 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27779,7 +27834,6 @@
 	)
 	(label "~{SVRAM}"
 		(at 218.44 162.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27790,7 +27844,6 @@
 	)
 	(label "AB3"
 		(at 184.15 106.68 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27801,7 +27854,6 @@
 	)
 	(label "~{HALT}"
 		(at 195.58 58.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27812,7 +27864,6 @@
 	)
 	(label "~{MSHRAM}"
 		(at 386.08 48.26 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27823,7 +27874,6 @@
 	)
 	(label "AB2"
 		(at 372.11 95.25 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27834,7 +27884,6 @@
 	)
 	(label "~{SCROLLX}"
 		(at 96.52 231.14 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27845,7 +27894,6 @@
 	)
 	(label "VD1"
 		(at 289.56 185.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27856,7 +27904,6 @@
 	)
 	(label "MR~{W}"
 		(at 223.52 66.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27867,7 +27914,6 @@
 	)
 	(label "VD3"
 		(at 247.65 144.78 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27878,7 +27924,6 @@
 	)
 	(label "H1''"
 		(at 128.27 270.51 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27889,7 +27934,6 @@
 	)
 	(label "MRD'"
 		(at 67.31 85.09 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27900,7 +27944,6 @@
 	)
 	(label "AB0"
 		(at 269.24 66.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27911,7 +27954,6 @@
 	)
 	(label "AB7"
 		(at 218.44 229.87 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27922,7 +27964,6 @@
 	)
 	(label "AB'4"
 		(at 237.49 71.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27933,7 +27974,6 @@
 	)
 	(label "~{IRQ}"
 		(at 139.065 110.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27944,7 +27984,6 @@
 	)
 	(label "AB12"
 		(at 372.11 176.53 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27955,7 +27994,6 @@
 	)
 	(label "AB'5"
 		(at 237.49 58.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27966,7 +28004,6 @@
 	)
 	(label "MD3"
 		(at 401.32 209.55 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27977,7 +28014,6 @@
 	)
 	(label "H1''"
 		(at 20.32 140.335 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27988,7 +28024,6 @@
 	)
 	(label "MD'''5"
 		(at 67.31 67.31 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27999,7 +28034,6 @@
 	)
 	(label "AB4"
 		(at 269.24 71.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28010,7 +28044,6 @@
 	)
 	(label "VA3"
 		(at 264.16 190.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28021,7 +28054,6 @@
 	)
 	(label "MD5"
 		(at 401.32 102.87 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28032,7 +28064,6 @@
 	)
 	(label "~{MROM}0"
 		(at 316.23 25.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28043,7 +28074,6 @@
 	)
 	(label "~{MWRAMW}"
 		(at 215.9 199.39 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28054,7 +28084,6 @@
 	)
 	(label "MD3"
 		(at 113.03 71.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28065,7 +28094,6 @@
 	)
 	(label "MD1"
 		(at 401.32 204.47 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28076,7 +28104,6 @@
 	)
 	(label "~{INTMAIN}"
 		(at 156.21 88.9 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28087,7 +28114,6 @@
 	)
 	(label "MD0"
 		(at 151.13 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28098,7 +28124,6 @@
 	)
 	(label "AB8"
 		(at 372.11 166.37 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28109,7 +28134,6 @@
 	)
 	(label "AB12"
 		(at 320.04 232.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28120,7 +28144,6 @@
 	)
 	(label "~{MROM}3"
 		(at 307.34 240.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28131,7 +28154,6 @@
 	)
 	(label "~{AB}7"
 		(at 129.54 198.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28142,7 +28164,6 @@
 	)
 	(label "VA4"
 		(at 248.92 228.6 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28153,7 +28174,6 @@
 	)
 	(label "AB2"
 		(at 372.11 207.01 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28164,7 +28184,6 @@
 	)
 	(label "MD3"
 		(at 401.32 97.79 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28175,7 +28194,6 @@
 	)
 	(label "AB2"
 		(at 184.15 104.14 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28186,7 +28204,6 @@
 	)
 	(label "MD'0"
 		(at 200.66 40.64 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28195,20 +28212,8 @@
 		)
 		(uuid "8fdfb5f1-953c-42fc-81d9-503584d68ad9")
 	)
-	(label "INTSND'"
-		(at 215.9 104.14 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "90f8800b-e796-4733-9271-4c92af515ba8")
-	)
 	(label "AB'13"
 		(at 237.49 22.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28219,7 +28224,6 @@
 	)
 	(label "AB9"
 		(at 372.11 168.91 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28230,7 +28234,6 @@
 	)
 	(label "MD2"
 		(at 297.18 238.76 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28241,7 +28244,6 @@
 	)
 	(label "MD2"
 		(at 349.25 207.01 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28252,7 +28254,6 @@
 	)
 	(label "AB4"
 		(at 99.06 185.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28261,9 +28262,18 @@
 		)
 		(uuid "934b2512-f93b-4b40-a311-def27ee25da4")
 	)
+	(label "INTSND"
+		(at 248.92 107.95 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9419fa79-b27a-4834-8f01-44fefcb383e6")
+	)
 	(label "AB3"
 		(at 320.04 153.67 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28274,7 +28284,6 @@
 	)
 	(label "AS8"
 		(at 215.9 181.61 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28285,7 +28294,6 @@
 	)
 	(label "VD6"
 		(at 267.97 228.6 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28296,7 +28304,6 @@
 	)
 	(label "MBS"
 		(at 223.52 71.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28307,7 +28314,6 @@
 	)
 	(label "MD'''7"
 		(at 67.31 62.23 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28318,7 +28324,6 @@
 	)
 	(label "AB2"
 		(at 372.11 151.13 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28329,7 +28334,6 @@
 	)
 	(label "MD3"
 		(at 151.13 33.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28340,7 +28344,6 @@
 	)
 	(label "AB1"
 		(at 372.11 92.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28351,7 +28354,6 @@
 	)
 	(label "MD0"
 		(at 401.32 146.05 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28362,7 +28364,6 @@
 	)
 	(label "~{MBS}"
 		(at 129.54 152.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28373,7 +28374,6 @@
 	)
 	(label "~{WRIT}"
 		(at 95.25 124.46 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28384,7 +28384,6 @@
 	)
 	(label "AB5"
 		(at 372.11 214.63 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28395,7 +28394,6 @@
 	)
 	(label "AB2"
 		(at 269.24 68.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28406,7 +28404,6 @@
 	)
 	(label "AB1"
 		(at 99.06 162.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28417,7 +28414,6 @@
 	)
 	(label "MD''4"
 		(at 99.06 69.85 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28428,7 +28424,6 @@
 	)
 	(label "AB'12"
 		(at 237.49 38.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28439,7 +28434,6 @@
 	)
 	(label "MD'5"
 		(at 200.66 27.94 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28450,7 +28444,6 @@
 	)
 	(label "VD4"
 		(at 267.97 233.68 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28461,7 +28454,6 @@
 	)
 	(label "AB'8"
 		(at 237.49 33.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28472,7 +28464,6 @@
 	)
 	(label "~{HALT}"
 		(at 139.065 105.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28483,7 +28474,6 @@
 	)
 	(label "MD3"
 		(at 139.7 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28494,7 +28484,6 @@
 	)
 	(label "OBJRAM"
 		(at 129.54 233.68 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28505,7 +28494,6 @@
 	)
 	(label "~{H2''}"
 		(at 20.32 166.37 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28516,7 +28504,6 @@
 	)
 	(label "~{WRIT}"
 		(at 81.28 104.14 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28527,7 +28514,6 @@
 	)
 	(label "MD0"
 		(at 184.15 96.52 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28538,7 +28524,6 @@
 	)
 	(label "AB8"
 		(at 320.04 222.25 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28549,7 +28534,6 @@
 	)
 	(label "MD0"
 		(at 139.7 27.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28560,7 +28544,6 @@
 	)
 	(label "MD7"
 		(at 146.05 81.28 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28571,7 +28554,6 @@
 	)
 	(label "AS1"
 		(at 218.44 255.27 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28582,7 +28564,6 @@
 	)
 	(label "AB'0"
 		(at 237.49 66.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28593,7 +28574,6 @@
 	)
 	(label "H2"
 		(at 64.77 265.43 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28604,7 +28584,6 @@
 	)
 	(label "~{MBS}"
 		(at 166.37 81.28 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28615,7 +28594,6 @@
 	)
 	(label "MD4"
 		(at 146.05 73.66 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28626,7 +28604,6 @@
 	)
 	(label "AB6"
 		(at 320.04 105.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28637,7 +28614,6 @@
 	)
 	(label "AB14"
 		(at 269.24 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28648,7 +28624,6 @@
 	)
 	(label "AB15"
 		(at 44.45 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28659,7 +28634,6 @@
 	)
 	(label "MD'1"
 		(at 180.34 38.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28670,7 +28644,6 @@
 	)
 	(label "AB0"
 		(at 320.04 90.17 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28681,7 +28654,6 @@
 	)
 	(label "AB5"
 		(at 320.04 102.87 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28692,7 +28664,6 @@
 	)
 	(label "~{MROM}4"
 		(at 316.23 35.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28703,7 +28674,6 @@
 	)
 	(label "AB4"
 		(at 320.04 100.33 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28714,7 +28684,6 @@
 	)
 	(label "MD2"
 		(at 349.25 151.13 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28725,7 +28694,6 @@
 	)
 	(label "VD7"
 		(at 247.65 154.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28736,7 +28704,6 @@
 	)
 	(label "AB8"
 		(at 99.06 190.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28747,7 +28714,6 @@
 	)
 	(label "MD'''2"
 		(at 67.31 74.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28758,7 +28724,6 @@
 	)
 	(label "FLIP'"
 		(at 96.52 262.89 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28769,7 +28734,6 @@
 	)
 	(label "AS4"
 		(at 218.44 222.25 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28780,7 +28744,6 @@
 	)
 	(label "AB8"
 		(at 320.04 110.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28791,7 +28754,6 @@
 	)
 	(label "INTST"
 		(at 166.37 58.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28802,7 +28764,6 @@
 	)
 	(label "~{FIRQ}"
 		(at 195.58 66.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28813,7 +28774,6 @@
 	)
 	(label "AB1"
 		(at 320.04 148.59 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28824,7 +28784,6 @@
 	)
 	(label "~{RESET}"
 		(at 184.15 116.84 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28835,7 +28794,6 @@
 	)
 	(label "CPUCLK"
 		(at 39.37 140.335 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28846,7 +28804,6 @@
 	)
 	(label "AB'5"
 		(at 223.52 48.26 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28857,7 +28814,6 @@
 	)
 	(label "AB3"
 		(at 99.06 203.2 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28868,7 +28824,6 @@
 	)
 	(label "AB'7"
 		(at 237.49 55.88 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28879,7 +28834,6 @@
 	)
 	(label "MD3"
 		(at 297.18 236.22 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28890,7 +28844,6 @@
 	)
 	(label "~{H2}~{CLKQ}"
 		(at 184.15 123.825 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28901,7 +28854,6 @@
 	)
 	(label "UK 2H?"
 		(at 205.74 276.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28912,7 +28864,6 @@
 	)
 	(label "MD1"
 		(at 349.25 92.71 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28923,7 +28874,6 @@
 	)
 	(label "AB10"
 		(at 372.11 227.33 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28934,7 +28884,6 @@
 	)
 	(label "AB6"
 		(at 99.06 187.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28945,7 +28894,6 @@
 	)
 	(label "AB11"
 		(at 320.04 229.87 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28956,7 +28904,6 @@
 	)
 	(label "MD'7"
 		(at 180.34 22.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28967,7 +28914,6 @@
 	)
 	(label "AB12"
 		(at 355.6 21.59 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28978,7 +28924,6 @@
 	)
 	(label "MD5"
 		(at 297.18 231.14 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28989,7 +28934,6 @@
 	)
 	(label "AB8"
 		(at 215.9 194.31 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29000,7 +28944,6 @@
 	)
 	(label "AB10"
 		(at 269.24 35.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29011,7 +28954,6 @@
 	)
 	(label "AB12"
 		(at 320.04 176.53 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29022,7 +28964,6 @@
 	)
 	(label "MD6"
 		(at 146.05 78.74 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29033,7 +28974,6 @@
 	)
 	(label "MD7"
 		(at 151.13 22.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29044,7 +28984,6 @@
 	)
 	(label "~{AB}1"
 		(at 129.54 162.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29055,7 +28994,6 @@
 	)
 	(label "VD1"
 		(at 247.65 139.7 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29066,7 +29004,6 @@
 	)
 	(label "MD6"
 		(at 349.25 105.41 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29077,7 +29014,6 @@
 	)
 	(label "MD''5"
 		(at 109.22 30.48 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29088,7 +29024,6 @@
 	)
 	(label "AB13"
 		(at 283.21 20.32 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29099,7 +29034,6 @@
 	)
 	(label "AB3"
 		(at 320.04 209.55 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29110,7 +29044,6 @@
 	)
 	(label "~{SCROLLY}"
 		(at 386.08 26.67 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29121,7 +29054,6 @@
 	)
 	(label "~{MROM}1"
 		(at 316.23 27.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29132,7 +29064,6 @@
 	)
 	(label "VD7"
 		(at 289.56 200.66 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29143,7 +29074,6 @@
 	)
 	(label "MD''5"
 		(at 99.06 67.31 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29154,7 +29084,6 @@
 	)
 	(label "AB'15"
 		(at 223.52 22.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29165,7 +29094,6 @@
 	)
 	(label "~{MROM}5"
 		(at 316.23 38.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29176,7 +29104,6 @@
 	)
 	(label "MD1"
 		(at 146.05 66.04 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29187,7 +29114,6 @@
 	)
 	(label "VD2"
 		(at 289.56 187.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29198,7 +29124,6 @@
 	)
 	(label "AB'14"
 		(at 223.52 25.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29209,7 +29134,6 @@
 	)
 	(label "AB'10"
 		(at 237.49 35.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29220,7 +29144,6 @@
 	)
 	(label "AB8"
 		(at 372.11 222.25 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29231,7 +29154,6 @@
 	)
 	(label "MD7"
 		(at 113.03 81.28 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29242,7 +29164,6 @@
 	)
 	(label "MD'''6"
 		(at 67.31 64.77 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29253,7 +29174,6 @@
 	)
 	(label "MD1"
 		(at 401.32 92.71 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29264,7 +29184,6 @@
 	)
 	(label "AB7"
 		(at 320.04 163.83 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29275,7 +29194,6 @@
 	)
 	(label "MD6"
 		(at 401.32 105.41 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29286,7 +29204,6 @@
 	)
 	(label "AB0"
 		(at 372.11 201.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29297,7 +29214,6 @@
 	)
 	(label "AB4"
 		(at 372.11 100.33 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29308,7 +29224,6 @@
 	)
 	(label "COIN2'"
 		(at 96.52 273.05 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29319,7 +29234,6 @@
 	)
 	(label "MD2"
 		(at 401.32 95.25 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29330,7 +29244,6 @@
 	)
 	(label "AS10"
 		(at 215.9 189.23 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29341,7 +29254,6 @@
 	)
 	(label "AB3"
 		(at 372.11 209.55 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29352,7 +29264,6 @@
 	)
 	(label "MD''7"
 		(at 109.22 22.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29363,7 +29274,6 @@
 	)
 	(label "AB15"
 		(at 269.24 25.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29374,7 +29284,6 @@
 	)
 	(label "MD'3"
 		(at 200.66 33.02 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29385,7 +29294,6 @@
 	)
 	(label "COIN1'"
 		(at 96.52 255.27 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29396,7 +29304,6 @@
 	)
 	(label "H1''"
 		(at 31.75 108.585 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29407,7 +29314,6 @@
 	)
 	(label "MD''4"
 		(at 109.22 35.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29418,7 +29324,6 @@
 	)
 	(label "~{NMI}"
 		(at 195.58 60.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29429,7 +29334,6 @@
 	)
 	(label "MD0"
 		(at 349.25 201.93 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29440,7 +29344,6 @@
 	)
 	(label "AB'9"
 		(at 223.52 38.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29451,7 +29354,6 @@
 	)
 	(label "AB12"
 		(at 269.24 38.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29462,7 +29364,6 @@
 	)
 	(label "VA7"
 		(at 264.16 200.66 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29473,7 +29374,6 @@
 	)
 	(label "MD''3"
 		(at 109.22 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29484,7 +29384,6 @@
 	)
 	(label "DB6"
 		(at 220.98 139.7 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29495,7 +29394,6 @@
 	)
 	(label "MD7"
 		(at 297.18 226.06 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29506,7 +29404,6 @@
 	)
 	(label "~{MWRAMW}"
 		(at 259.08 248.92 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29517,7 +29414,6 @@
 	)
 	(label "AB3"
 		(at 372.11 153.67 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29528,7 +29424,6 @@
 	)
 	(label "~{LATCHOE}"
 		(at 80.01 50.8 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29539,7 +29434,6 @@
 	)
 	(label "AB9"
 		(at 320.04 224.79 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29550,7 +29444,6 @@
 	)
 	(label "AB10"
 		(at 99.06 193.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29561,7 +29454,6 @@
 	)
 	(label "VA5"
 		(at 264.16 195.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29572,7 +29464,6 @@
 	)
 	(label "MD4"
 		(at 113.03 73.66 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29583,7 +29474,6 @@
 	)
 	(label "VA2"
 		(at 248.92 266.7 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29594,7 +29484,6 @@
 	)
 	(label "MD6"
 		(at 401.32 161.29 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29605,7 +29494,6 @@
 	)
 	(label "AB14"
 		(at 44.45 45.72 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29616,7 +29504,6 @@
 	)
 	(label "AB9"
 		(at 372.11 224.79 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29627,7 +29514,6 @@
 	)
 	(label "MD''0"
 		(at 109.22 27.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29638,7 +29524,6 @@
 	)
 	(label "INTSND"
 		(at 128.27 257.81 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29649,7 +29534,6 @@
 	)
 	(label "CLKQ"
 		(at 185.42 137.16 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29660,7 +29544,6 @@
 	)
 	(label "VD5"
 		(at 247.65 149.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29671,7 +29554,6 @@
 	)
 	(label "VA5"
 		(at 248.92 226.06 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29682,7 +29564,6 @@
 	)
 	(label "~{SCROLLX}"
 		(at 386.08 29.21 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29693,7 +29574,6 @@
 	)
 	(label "AB9"
 		(at 320.04 113.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29704,7 +29584,6 @@
 	)
 	(label "VA8"
 		(at 248.92 187.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29715,7 +29594,6 @@
 	)
 	(label "AS1'"
 		(at 156.21 144.78 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29726,7 +29604,6 @@
 	)
 	(label "VA10"
 		(at 264.16 208.28 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29737,7 +29614,6 @@
 	)
 	(label "~{H2'}"
 		(at 332.74 50.8 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29748,7 +29624,6 @@
 	)
 	(label "MD'''1"
 		(at 67.31 77.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29759,7 +29634,6 @@
 	)
 	(label "AB15"
 		(at 283.21 25.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29770,7 +29644,6 @@
 	)
 	(label "MD''6"
 		(at 109.22 25.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29781,7 +29654,6 @@
 	)
 	(label "MD'3"
 		(at 180.34 33.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29792,7 +29664,6 @@
 	)
 	(label "AB2"
 		(at 320.04 151.13 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29803,7 +29674,6 @@
 	)
 	(label "AB3"
 		(at 218.44 265.43 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29814,7 +29684,6 @@
 	)
 	(label "~{SVRAMW}"
 		(at 215.9 186.69 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29825,7 +29694,6 @@
 	)
 	(label "~{COLRAM}"
 		(at 72.39 140.97 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29836,7 +29704,6 @@
 	)
 	(label "MD4"
 		(at 297.18 233.68 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29847,7 +29714,6 @@
 	)
 	(label "COLRAM"
 		(at 129.54 220.98 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29858,7 +29724,6 @@
 	)
 	(label "MB'[7..0]"
 		(at 193.04 33.02 90)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29869,7 +29734,6 @@
 	)
 	(label "MD1"
 		(at 401.32 148.59 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29880,7 +29744,6 @@
 	)
 	(label "AB'6"
 		(at 223.52 45.72 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29891,7 +29754,6 @@
 	)
 	(label "MD6"
 		(at 297.18 228.6 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29902,7 +29764,6 @@
 	)
 	(label "VD0"
 		(at 267.97 243.84 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29913,7 +29774,6 @@
 	)
 	(label "MD5"
 		(at 349.25 158.75 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29924,7 +29784,6 @@
 	)
 	(label "~{AFR1}"
 		(at 386.08 24.13 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29935,7 +29794,6 @@
 	)
 	(label "AB0"
 		(at 372.11 90.17 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29946,7 +29804,6 @@
 	)
 	(label "AB11"
 		(at 372.11 118.11 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29957,7 +29814,6 @@
 	)
 	(label "AB5"
 		(at 320.04 158.75 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29968,7 +29824,6 @@
 	)
 	(label "MD2"
 		(at 401.32 151.13 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29979,7 +29834,6 @@
 	)
 	(label "AB9"
 		(at 215.9 196.85 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29990,7 +29844,6 @@
 	)
 	(label "MD4"
 		(at 139.7 35.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30001,7 +29854,6 @@
 	)
 	(label "AS3"
 		(at 218.44 252.73 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30012,7 +29864,6 @@
 	)
 	(label "~{H2'''}"
 		(at 67.31 87.63 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30023,7 +29874,6 @@
 	)
 	(label "VD4"
 		(at 247.65 147.32 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30034,7 +29884,6 @@
 	)
 	(label "VD0"
 		(at 247.65 137.16 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30045,7 +29894,6 @@
 	)
 	(label "MD1"
 		(at 297.18 241.3 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30056,7 +29904,6 @@
 	)
 	(label "~{LATCHOE}"
 		(at 109.22 88.9 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30067,7 +29914,6 @@
 	)
 	(label "AB11"
 		(at 269.24 27.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30078,7 +29924,6 @@
 	)
 	(label "AB7"
 		(at 269.24 55.88 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30089,7 +29934,6 @@
 	)
 	(label "AB4"
 		(at 372.11 156.21 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30100,7 +29944,6 @@
 	)
 	(label "MD0"
 		(at 113.03 63.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30111,7 +29954,6 @@
 	)
 	(label "VA10"
 		(at 248.92 195.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30122,7 +29964,6 @@
 	)
 	(label "MD''7"
 		(at 99.06 62.23 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30133,7 +29974,6 @@
 	)
 	(label "MR~{W}"
 		(at 156.21 142.24 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30144,7 +29984,6 @@
 	)
 	(label "~{AB}2"
 		(at 129.54 160.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30155,7 +29994,6 @@
 	)
 	(label "~{AB}8"
 		(at 129.54 190.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30166,7 +30004,6 @@
 	)
 	(label "~{MLATCH}"
 		(at 182.88 111.76 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30177,7 +30014,6 @@
 	)
 	(label "MD7"
 		(at 349.25 163.83 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30188,7 +30024,6 @@
 	)
 	(label "AB9"
 		(at 372.11 113.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30199,7 +30034,6 @@
 	)
 	(label "VD0"
 		(at 289.56 182.88 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30210,7 +30044,6 @@
 	)
 	(label "VA6"
 		(at 248.92 231.14 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30221,7 +30054,6 @@
 	)
 	(label "AB7"
 		(at 320.04 219.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30232,7 +30064,6 @@
 	)
 	(label "~{AB}3"
 		(at 129.54 203.2 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30243,7 +30074,6 @@
 	)
 	(label "AB9"
 		(at 99.06 195.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30254,7 +30084,6 @@
 	)
 	(label "MD5"
 		(at 349.25 102.87 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30265,7 +30094,6 @@
 	)
 	(label "AB'13"
 		(at 223.52 27.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30276,7 +30104,6 @@
 	)
 	(label "AB11"
 		(at 320.04 118.11 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30287,7 +30114,6 @@
 	)
 	(label "H2'''"
 		(at 20.32 153.67 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30298,7 +30124,6 @@
 	)
 	(label "~{SCROLLY}"
 		(at 96.52 223.52 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30309,7 +30134,6 @@
 	)
 	(label "MRD"
 		(at 110.49 45.72 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30320,7 +30144,6 @@
 	)
 	(label "VA3"
 		(at 248.92 259.08 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30331,7 +30154,6 @@
 	)
 	(label "~{NMI}"
 		(at 139.065 107.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30342,7 +30164,6 @@
 	)
 	(label "DB7"
 		(at 220.98 137.16 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30353,7 +30174,6 @@
 	)
 	(label "H1''"
 		(at 218.44 170.18 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30363,8 +30183,7 @@
 		(uuid "f5cdabfc-0c92-4c1e-9f1a-cc1fa84bdeb2")
 	)
 	(label "FLIP'"
-		(at 148.59 262.89 0)
-		(fields_autoplaced yes)
+		(at 264.16 121.92 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30375,7 +30194,6 @@
 	)
 	(label "VA1"
 		(at 248.92 261.62 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30386,7 +30204,6 @@
 	)
 	(label "VD2"
 		(at 267.97 238.76 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30397,7 +30214,6 @@
 	)
 	(label "AB3"
 		(at 372.11 97.79 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30408,7 +30224,6 @@
 	)
 	(label "AB'7"
 		(at 223.52 43.18 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30419,7 +30234,6 @@
 	)
 	(label "CLKE"
 		(at 185.42 139.7 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30430,7 +30244,6 @@
 	)
 	(label "AB'1"
 		(at 223.52 58.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30441,7 +30254,6 @@
 	)
 	(label "MD4"
 		(at 349.25 212.09 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30452,7 +30264,6 @@
 	)
 	(label "~{MROM}0"
 		(at 358.14 240.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30463,7 +30274,6 @@
 	)
 	(label "~{MSHRAM}"
 		(at 81.28 109.22 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30472,9 +30282,18 @@
 		)
 		(uuid "f9efc14b-b944-4321-8b2c-35d3b0c9deb9")
 	)
+	(label "COIN_CNT'_1"
+		(at 248.92 96.52 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fa0aff53-86ac-4b1f-b961-562f30a6e625")
+	)
 	(label "MD''3"
 		(at 99.06 72.39 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30485,7 +30304,6 @@
 	)
 	(label "MD6"
 		(at 349.25 161.29 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30496,7 +30314,6 @@
 	)
 	(label "MR~{W}"
 		(at 151.13 45.72 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30507,7 +30324,6 @@
 	)
 	(label "AB4"
 		(at 320.04 156.21 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30518,7 +30334,6 @@
 	)
 	(label "~{OBJRAM}"
 		(at 386.08 45.72 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30529,7 +30344,6 @@
 	)
 	(label "VA1"
 		(at 264.16 185.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30540,7 +30354,6 @@
 	)
 	(label "MD1"
 		(at 349.25 204.47 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30551,7 +30364,6 @@
 	)
 	(label "AS0'"
 		(at 156.21 134.62 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30562,7 +30374,6 @@
 	)
 	(label "AS7"
 		(at 218.44 217.17 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30573,7 +30384,6 @@
 	)
 	(label "AB'3"
 		(at 237.49 60.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30584,7 +30394,6 @@
 	)
 	(label "AB6"
 		(at 372.11 105.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30596,7 +30405,6 @@
 	(hierarchical_label "~{VBLANK}"
 		(shape output)
 		(at 139.7 236.22 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30608,7 +30416,6 @@
 	(hierarchical_label "~{VBLANK}"
 		(shape input)
 		(at 24.13 191.77 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30620,7 +30427,6 @@
 	(hierarchical_label "RESET"
 		(shape output)
 		(at 129.54 226.06 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30632,7 +30438,6 @@
 	(hierarchical_label "~{RESET}"
 		(shape input)
 		(at 104.14 226.06 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30922,16 +30727,15 @@
 	)
 	(symbol
 		(lib_id "74xx:74LS244_Split")
-		(at 151.13 302.26 0)
+		(at 241.3 107.95 0)
 		(unit 5)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "0d87ea56-d8de-4843-8119-e60f51b9d243")
 		(property "Reference" "B_A14"
-			(at 151.13 293.37 0)
+			(at 246.38 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30939,7 +30743,7 @@
 			)
 		)
 		(property "Value" "74LS244"
-			(at 151.13 295.91 0)
+			(at 246.38 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30947,7 +30751,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 151.13 302.26 0)
+			(at 241.3 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30956,7 +30760,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74ls241.pdf"
-			(at 151.13 302.26 0)
+			(at 241.3 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30965,7 +30769,7 @@
 			)
 		)
 		(property "Description" "Octal Buffer and Line Driver With 3-State Output, active-low enables, non-inverting outputs, split symbol"
-			(at 151.13 302.26 0)
+			(at 241.3 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33025,7 +32829,7 @@
 	)
 	(symbol
 		(lib_id "74xx:74LS244_Split")
-		(at 168.91 287.02 0)
+		(at 154.94 280.67 0)
 		(unit 2)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -33034,7 +32838,7 @@
 		(fields_autoplaced yes)
 		(uuid "326af7a9-c16f-46be-81c6-326f51a09f31")
 		(property "Reference" "B_A14"
-			(at 168.91 278.13 0)
+			(at 154.94 271.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33042,7 +32846,7 @@
 			)
 		)
 		(property "Value" "74LS244"
-			(at 168.91 280.67 0)
+			(at 154.94 274.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33050,7 +32854,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 168.91 287.02 0)
+			(at 154.94 280.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33059,7 +32863,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74ls241.pdf"
-			(at 168.91 287.02 0)
+			(at 154.94 280.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33068,7 +32872,7 @@
 			)
 		)
 		(property "Description" "Octal Buffer and Line Driver With 3-State Output, active-low enables, non-inverting outputs, split symbol"
-			(at 168.91 287.02 0)
+			(at 154.94 280.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33077,64 +32881,64 @@
 			)
 		)
 		(pin "3"
-			(uuid "0fd5807e-0c8a-4a67-90e4-9403c51bbb69")
+			(uuid "0fd5807e-0c8a-4a67-90e4-9403c51bbb6a")
 		)
 		(pin "9"
-			(uuid "20eaf166-adff-4440-b93b-4454f7314975")
+			(uuid "20eaf166-adff-4440-b93b-4454f7314976")
 		)
 		(pin "10"
-			(uuid "4f30b4df-10d1-42cb-a5ef-34ceb94816b9")
+			(uuid "4f30b4df-10d1-42cb-a5ef-34ceb94816ba")
 		)
 		(pin "13"
-			(uuid "3fd47881-06ad-4d12-9673-2a1e66a3ef17")
+			(uuid "3fd47881-06ad-4d12-9673-2a1e66a3ef18")
 		)
 		(pin "15"
-			(uuid "f99812bf-4f2a-480a-8a0d-3226437625ab")
+			(uuid "f99812bf-4f2a-480a-8a0d-3226437625ac")
 		)
 		(pin "1"
-			(uuid "b9ffeae6-c482-4d1f-91e5-f544389b5475")
+			(uuid "b9ffeae6-c482-4d1f-91e5-f544389b5476")
 		)
 		(pin "19"
-			(uuid "c45508b4-ad89-4de3-843f-87e206bffe8e")
+			(uuid "c45508b4-ad89-4de3-843f-87e206bffe8f")
 		)
 		(pin "7"
-			(uuid "20ac8bd8-21b0-40a8-bb6e-efb07776c91f")
+			(uuid "20ac8bd8-21b0-40a8-bb6e-efb07776c920")
 		)
 		(pin "8"
-			(uuid "28791055-5633-440e-9c68-d8a9f997b402")
+			(uuid "28791055-5633-440e-9c68-d8a9f997b403")
 		)
 		(pin "12"
-			(uuid "099773bc-5b97-40be-bb73-ca66d0da360e")
+			(uuid "099773bc-5b97-40be-bb73-ca66d0da360f")
 		)
 		(pin "18"
-			(uuid "0e29d1bd-086a-4b14-a352-8bda686eb070")
+			(uuid "0e29d1bd-086a-4b14-a352-8bda686eb071")
 		)
 		(pin "5"
-			(uuid "10f4bcdd-ffa5-4a8d-bb88-cdf5ac6f8085")
+			(uuid "10f4bcdd-ffa5-4a8d-bb88-cdf5ac6f8086")
 		)
 		(pin "2"
-			(uuid "b8650f7f-6ad0-4d6d-86ef-0af74132510f")
+			(uuid "b8650f7f-6ad0-4d6d-86ef-0af741325110")
 		)
 		(pin "4"
-			(uuid "b9e1a236-3800-4410-b3b1-878275f12997")
+			(uuid "b9e1a236-3800-4410-b3b1-878275f12998")
 		)
 		(pin "16"
-			(uuid "6b91c808-d0e5-46f2-81ee-250eb3c45038")
+			(uuid "6b91c808-d0e5-46f2-81ee-250eb3c45039")
 		)
 		(pin "11"
-			(uuid "2ac5bed4-60df-4fd7-b2b8-74d57c584d66")
+			(uuid "2ac5bed4-60df-4fd7-b2b8-74d57c584d67")
 		)
 		(pin "20"
-			(uuid "37efdca1-7d08-4a36-86af-020e91deeb1c")
+			(uuid "37efdca1-7d08-4a36-86af-020e91deeb1d")
 		)
 		(pin "17"
-			(uuid "cd4f6b5b-3984-4eac-9eea-06ec6bcfa6b6")
+			(uuid "cd4f6b5b-3984-4eac-9eea-06ec6bcfa6b7")
 		)
 		(pin "14"
-			(uuid "943c6f77-5f04-42a0-a3a1-fc21a0e73d46")
+			(uuid "943c6f77-5f04-42a0-a3a1-fc21a0e73d47")
 		)
 		(pin "6"
-			(uuid "f38a1c1b-2106-4096-9fd6-6cb2298d0263")
+			(uuid "f38a1c1b-2106-4096-9fd6-6cb2298d0264")
 		)
 		(instances
 			(project ""
@@ -33838,64 +33642,64 @@
 			)
 		)
 		(pin "3"
-			(uuid "0fd5807e-0c8a-4a67-90e4-9403c51bbb69")
+			(uuid "0fd5807e-0c8a-4a67-90e4-9403c51bbb6b")
 		)
 		(pin "9"
-			(uuid "20eaf166-adff-4440-b93b-4454f7314975")
+			(uuid "20eaf166-adff-4440-b93b-4454f7314977")
 		)
 		(pin "10"
-			(uuid "4f30b4df-10d1-42cb-a5ef-34ceb94816b9")
+			(uuid "4f30b4df-10d1-42cb-a5ef-34ceb94816bb")
 		)
 		(pin "13"
-			(uuid "3fd47881-06ad-4d12-9673-2a1e66a3ef17")
+			(uuid "3fd47881-06ad-4d12-9673-2a1e66a3ef19")
 		)
 		(pin "15"
-			(uuid "f99812bf-4f2a-480a-8a0d-3226437625ab")
+			(uuid "f99812bf-4f2a-480a-8a0d-3226437625ad")
 		)
 		(pin "1"
-			(uuid "b9ffeae6-c482-4d1f-91e5-f544389b5475")
+			(uuid "b9ffeae6-c482-4d1f-91e5-f544389b5477")
 		)
 		(pin "19"
-			(uuid "c45508b4-ad89-4de3-843f-87e206bffe8e")
+			(uuid "c45508b4-ad89-4de3-843f-87e206bffe90")
 		)
 		(pin "7"
-			(uuid "20ac8bd8-21b0-40a8-bb6e-efb07776c91f")
+			(uuid "20ac8bd8-21b0-40a8-bb6e-efb07776c921")
 		)
 		(pin "8"
-			(uuid "28791055-5633-440e-9c68-d8a9f997b402")
+			(uuid "28791055-5633-440e-9c68-d8a9f997b404")
 		)
 		(pin "12"
-			(uuid "099773bc-5b97-40be-bb73-ca66d0da360e")
+			(uuid "099773bc-5b97-40be-bb73-ca66d0da3610")
 		)
 		(pin "18"
-			(uuid "0e29d1bd-086a-4b14-a352-8bda686eb070")
+			(uuid "0e29d1bd-086a-4b14-a352-8bda686eb072")
 		)
 		(pin "5"
-			(uuid "10f4bcdd-ffa5-4a8d-bb88-cdf5ac6f8085")
+			(uuid "10f4bcdd-ffa5-4a8d-bb88-cdf5ac6f8087")
 		)
 		(pin "2"
-			(uuid "b8650f7f-6ad0-4d6d-86ef-0af74132510f")
+			(uuid "b8650f7f-6ad0-4d6d-86ef-0af741325111")
 		)
 		(pin "4"
-			(uuid "b9e1a236-3800-4410-b3b1-878275f12997")
+			(uuid "b9e1a236-3800-4410-b3b1-878275f12999")
 		)
 		(pin "16"
-			(uuid "6b91c808-d0e5-46f2-81ee-250eb3c45038")
+			(uuid "6b91c808-d0e5-46f2-81ee-250eb3c4503a")
 		)
 		(pin "11"
-			(uuid "2ac5bed4-60df-4fd7-b2b8-74d57c584d66")
+			(uuid "2ac5bed4-60df-4fd7-b2b8-74d57c584d68")
 		)
 		(pin "20"
-			(uuid "37efdca1-7d08-4a36-86af-020e91deeb1c")
+			(uuid "37efdca1-7d08-4a36-86af-020e91deeb1e")
 		)
 		(pin "17"
-			(uuid "cd4f6b5b-3984-4eac-9eea-06ec6bcfa6b6")
+			(uuid "cd4f6b5b-3984-4eac-9eea-06ec6bcfa6b8")
 		)
 		(pin "14"
-			(uuid "943c6f77-5f04-42a0-a3a1-fc21a0e73d46")
+			(uuid "943c6f77-5f04-42a0-a3a1-fc21a0e73d48")
 		)
 		(pin "6"
-			(uuid "f38a1c1b-2106-4096-9fd6-6cb2298d0263")
+			(uuid "f38a1c1b-2106-4096-9fd6-6cb2298d0265")
 		)
 		(instances
 			(project ""
@@ -34077,16 +33881,15 @@
 	)
 	(symbol
 		(lib_id "74xx:74LS244_Split")
-		(at 208.28 302.26 0)
+		(at 241.3 88.9 0)
 		(unit 8)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "43a783cc-f0d4-4322-b769-244eef029691")
 		(property "Reference" "B_A14"
-			(at 208.28 293.37 0)
+			(at 248.92 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34094,7 +33897,7 @@
 			)
 		)
 		(property "Value" "74LS244"
-			(at 208.28 295.91 0)
+			(at 248.92 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34102,7 +33905,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 208.28 302.26 0)
+			(at 241.3 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34111,7 +33914,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74ls241.pdf"
-			(at 208.28 302.26 0)
+			(at 241.3 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34120,7 +33923,7 @@
 			)
 		)
 		(property "Description" "Octal Buffer and Line Driver With 3-State Output, active-low enables, non-inverting outputs, split symbol"
-			(at 208.28 302.26 0)
+			(at 241.3 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34129,64 +33932,64 @@
 			)
 		)
 		(pin "3"
-			(uuid "0fd5807e-0c8a-4a67-90e4-9403c51bbb69")
+			(uuid "0fd5807e-0c8a-4a67-90e4-9403c51bbb6c")
 		)
 		(pin "9"
-			(uuid "20eaf166-adff-4440-b93b-4454f7314975")
+			(uuid "20eaf166-adff-4440-b93b-4454f7314978")
 		)
 		(pin "10"
-			(uuid "4f30b4df-10d1-42cb-a5ef-34ceb94816b9")
+			(uuid "4f30b4df-10d1-42cb-a5ef-34ceb94816bc")
 		)
 		(pin "13"
-			(uuid "3fd47881-06ad-4d12-9673-2a1e66a3ef17")
+			(uuid "3fd47881-06ad-4d12-9673-2a1e66a3ef1a")
 		)
 		(pin "15"
-			(uuid "f99812bf-4f2a-480a-8a0d-3226437625ab")
+			(uuid "f99812bf-4f2a-480a-8a0d-3226437625ae")
 		)
 		(pin "1"
-			(uuid "b9ffeae6-c482-4d1f-91e5-f544389b5475")
+			(uuid "b9ffeae6-c482-4d1f-91e5-f544389b5478")
 		)
 		(pin "19"
-			(uuid "c45508b4-ad89-4de3-843f-87e206bffe8e")
+			(uuid "c45508b4-ad89-4de3-843f-87e206bffe91")
 		)
 		(pin "7"
-			(uuid "20ac8bd8-21b0-40a8-bb6e-efb07776c91f")
+			(uuid "20ac8bd8-21b0-40a8-bb6e-efb07776c922")
 		)
 		(pin "8"
-			(uuid "28791055-5633-440e-9c68-d8a9f997b402")
+			(uuid "28791055-5633-440e-9c68-d8a9f997b405")
 		)
 		(pin "12"
-			(uuid "099773bc-5b97-40be-bb73-ca66d0da360e")
+			(uuid "099773bc-5b97-40be-bb73-ca66d0da3611")
 		)
 		(pin "18"
-			(uuid "0e29d1bd-086a-4b14-a352-8bda686eb070")
+			(uuid "0e29d1bd-086a-4b14-a352-8bda686eb073")
 		)
 		(pin "5"
-			(uuid "10f4bcdd-ffa5-4a8d-bb88-cdf5ac6f8085")
+			(uuid "10f4bcdd-ffa5-4a8d-bb88-cdf5ac6f8088")
 		)
 		(pin "2"
-			(uuid "b8650f7f-6ad0-4d6d-86ef-0af74132510f")
+			(uuid "b8650f7f-6ad0-4d6d-86ef-0af741325112")
 		)
 		(pin "4"
-			(uuid "b9e1a236-3800-4410-b3b1-878275f12997")
+			(uuid "b9e1a236-3800-4410-b3b1-878275f1299a")
 		)
 		(pin "16"
-			(uuid "6b91c808-d0e5-46f2-81ee-250eb3c45038")
+			(uuid "6b91c808-d0e5-46f2-81ee-250eb3c4503b")
 		)
 		(pin "11"
-			(uuid "2ac5bed4-60df-4fd7-b2b8-74d57c584d66")
+			(uuid "2ac5bed4-60df-4fd7-b2b8-74d57c584d69")
 		)
 		(pin "20"
-			(uuid "37efdca1-7d08-4a36-86af-020e91deeb1c")
+			(uuid "37efdca1-7d08-4a36-86af-020e91deeb1f")
 		)
 		(pin "17"
-			(uuid "cd4f6b5b-3984-4eac-9eea-06ec6bcfa6b6")
+			(uuid "cd4f6b5b-3984-4eac-9eea-06ec6bcfa6b9")
 		)
 		(pin "14"
-			(uuid "943c6f77-5f04-42a0-a3a1-fc21a0e73d46")
+			(uuid "943c6f77-5f04-42a0-a3a1-fc21a0e73d49")
 		)
 		(pin "6"
-			(uuid "f38a1c1b-2106-4096-9fd6-6cb2298d0263")
+			(uuid "f38a1c1b-2106-4096-9fd6-6cb2298d0266")
 		)
 		(instances
 			(project ""
@@ -34886,64 +34689,64 @@
 			)
 		)
 		(pin "3"
-			(uuid "0fd5807e-0c8a-4a67-90e4-9403c51bbb69")
+			(uuid "0fd5807e-0c8a-4a67-90e4-9403c51bbb6d")
 		)
 		(pin "9"
-			(uuid "20eaf166-adff-4440-b93b-4454f7314975")
+			(uuid "20eaf166-adff-4440-b93b-4454f7314979")
 		)
 		(pin "10"
-			(uuid "4f30b4df-10d1-42cb-a5ef-34ceb94816b9")
+			(uuid "4f30b4df-10d1-42cb-a5ef-34ceb94816bd")
 		)
 		(pin "13"
-			(uuid "3fd47881-06ad-4d12-9673-2a1e66a3ef17")
+			(uuid "3fd47881-06ad-4d12-9673-2a1e66a3ef1b")
 		)
 		(pin "15"
-			(uuid "f99812bf-4f2a-480a-8a0d-3226437625ab")
+			(uuid "f99812bf-4f2a-480a-8a0d-3226437625af")
 		)
 		(pin "1"
-			(uuid "b9ffeae6-c482-4d1f-91e5-f544389b5475")
+			(uuid "b9ffeae6-c482-4d1f-91e5-f544389b5479")
 		)
 		(pin "19"
-			(uuid "c45508b4-ad89-4de3-843f-87e206bffe8e")
+			(uuid "c45508b4-ad89-4de3-843f-87e206bffe92")
 		)
 		(pin "7"
-			(uuid "20ac8bd8-21b0-40a8-bb6e-efb07776c91f")
+			(uuid "20ac8bd8-21b0-40a8-bb6e-efb07776c923")
 		)
 		(pin "8"
-			(uuid "28791055-5633-440e-9c68-d8a9f997b402")
+			(uuid "28791055-5633-440e-9c68-d8a9f997b406")
 		)
 		(pin "12"
-			(uuid "099773bc-5b97-40be-bb73-ca66d0da360e")
+			(uuid "099773bc-5b97-40be-bb73-ca66d0da3612")
 		)
 		(pin "18"
-			(uuid "0e29d1bd-086a-4b14-a352-8bda686eb070")
+			(uuid "0e29d1bd-086a-4b14-a352-8bda686eb074")
 		)
 		(pin "5"
-			(uuid "10f4bcdd-ffa5-4a8d-bb88-cdf5ac6f8085")
+			(uuid "10f4bcdd-ffa5-4a8d-bb88-cdf5ac6f8089")
 		)
 		(pin "2"
-			(uuid "b8650f7f-6ad0-4d6d-86ef-0af74132510f")
+			(uuid "b8650f7f-6ad0-4d6d-86ef-0af741325113")
 		)
 		(pin "4"
-			(uuid "b9e1a236-3800-4410-b3b1-878275f12997")
+			(uuid "b9e1a236-3800-4410-b3b1-878275f1299b")
 		)
 		(pin "16"
-			(uuid "6b91c808-d0e5-46f2-81ee-250eb3c45038")
+			(uuid "6b91c808-d0e5-46f2-81ee-250eb3c4503c")
 		)
 		(pin "11"
-			(uuid "2ac5bed4-60df-4fd7-b2b8-74d57c584d66")
+			(uuid "2ac5bed4-60df-4fd7-b2b8-74d57c584d6a")
 		)
 		(pin "20"
-			(uuid "37efdca1-7d08-4a36-86af-020e91deeb1c")
+			(uuid "37efdca1-7d08-4a36-86af-020e91deeb20")
 		)
 		(pin "17"
-			(uuid "cd4f6b5b-3984-4eac-9eea-06ec6bcfa6b6")
+			(uuid "cd4f6b5b-3984-4eac-9eea-06ec6bcfa6ba")
 		)
 		(pin "14"
-			(uuid "943c6f77-5f04-42a0-a3a1-fc21a0e73d46")
+			(uuid "943c6f77-5f04-42a0-a3a1-fc21a0e73d4a")
 		)
 		(pin "6"
-			(uuid "f38a1c1b-2106-4096-9fd6-6cb2298d0263")
+			(uuid "f38a1c1b-2106-4096-9fd6-6cb2298d0267")
 		)
 		(instances
 			(project ""
@@ -35660,24 +35463,26 @@
 		)
 	)
 	(symbol
-		(lib_id "74xx:74LS244_Split")
-		(at 140.97 262.89 0)
-		(unit 7)
+		(lib_name "GND_3")
+		(lib_id "power:GND")
+		(at 241.3 102.87 0)
+		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "69f90dc0-6504-415f-8608-7d480d15889d")
-		(property "Reference" "B17"
-			(at 143.51 259.08 0)
+		(uuid "6930b935-fdf7-49b0-9493-a47e28e2edee")
+		(property "Reference" "#PWR322"
+			(at 241.3 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Value" "74LS244"
-			(at 146.05 265.43 0)
+		(property "Value" "GND"
+			(at 245.11 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35685,7 +35490,71 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 140.97 262.89 0)
+			(at 241.3 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 241.3 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 241.3 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c5ee32b2-89ad-4995-b3ca-877310eb801a")
+		)
+		(instances
+			(project ""
+				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
+					(reference "#PWR322")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "74xx:74LS244_Split")
+		(at 256.54 121.92 0)
+		(unit 7)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "69f90dc0-6504-415f-8608-7d480d15889d")
+		(property "Reference" "B17"
+			(at 259.08 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "74LS244"
+			(at 261.62 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 256.54 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35694,7 +35563,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74ls241.pdf"
-			(at 140.97 262.89 0)
+			(at 256.54 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35703,7 +35572,7 @@
 			)
 		)
 		(property "Description" "Octal Buffer and Line Driver With 3-State Output, active-low enables, non-inverting outputs, split symbol"
-			(at 140.97 262.89 0)
+			(at 256.54 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36635,7 +36504,7 @@
 	)
 	(symbol
 		(lib_id "74xx:74LS244_Split")
-		(at 132.08 302.26 0)
+		(at 24.13 236.22 0)
 		(unit 9)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -36644,7 +36513,7 @@
 		(fields_autoplaced yes)
 		(uuid "7d630cfc-fd8c-43c9-9f3f-746fb0478772")
 		(property "Reference" "B_A14"
-			(at 138.43 300.9899 0)
+			(at 30.48 234.9499 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36653,7 +36522,7 @@
 			)
 		)
 		(property "Value" "74LS244"
-			(at 138.43 303.5299 0)
+			(at 30.48 237.4899 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36662,7 +36531,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 132.08 302.26 0)
+			(at 24.13 236.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36671,7 +36540,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74ls241.pdf"
-			(at 132.08 302.26 0)
+			(at 24.13 236.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36680,7 +36549,7 @@
 			)
 		)
 		(property "Description" "Octal Buffer and Line Driver With 3-State Output, active-low enables, non-inverting outputs, split symbol"
-			(at 132.08 302.26 0)
+			(at 24.13 236.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36689,64 +36558,64 @@
 			)
 		)
 		(pin "3"
-			(uuid "0fd5807e-0c8a-4a67-90e4-9403c51bbb69")
+			(uuid "0fd5807e-0c8a-4a67-90e4-9403c51bbb6e")
 		)
 		(pin "9"
-			(uuid "20eaf166-adff-4440-b93b-4454f7314975")
+			(uuid "20eaf166-adff-4440-b93b-4454f731497a")
 		)
 		(pin "10"
-			(uuid "4f30b4df-10d1-42cb-a5ef-34ceb94816b9")
+			(uuid "4f30b4df-10d1-42cb-a5ef-34ceb94816be")
 		)
 		(pin "13"
-			(uuid "3fd47881-06ad-4d12-9673-2a1e66a3ef17")
+			(uuid "3fd47881-06ad-4d12-9673-2a1e66a3ef1c")
 		)
 		(pin "15"
-			(uuid "f99812bf-4f2a-480a-8a0d-3226437625ab")
+			(uuid "f99812bf-4f2a-480a-8a0d-3226437625b0")
 		)
 		(pin "1"
-			(uuid "b9ffeae6-c482-4d1f-91e5-f544389b5475")
+			(uuid "b9ffeae6-c482-4d1f-91e5-f544389b547a")
 		)
 		(pin "19"
-			(uuid "c45508b4-ad89-4de3-843f-87e206bffe8e")
+			(uuid "c45508b4-ad89-4de3-843f-87e206bffe93")
 		)
 		(pin "7"
-			(uuid "20ac8bd8-21b0-40a8-bb6e-efb07776c91f")
+			(uuid "20ac8bd8-21b0-40a8-bb6e-efb07776c924")
 		)
 		(pin "8"
-			(uuid "28791055-5633-440e-9c68-d8a9f997b402")
+			(uuid "28791055-5633-440e-9c68-d8a9f997b407")
 		)
 		(pin "12"
-			(uuid "099773bc-5b97-40be-bb73-ca66d0da360e")
+			(uuid "099773bc-5b97-40be-bb73-ca66d0da3613")
 		)
 		(pin "18"
-			(uuid "0e29d1bd-086a-4b14-a352-8bda686eb070")
+			(uuid "0e29d1bd-086a-4b14-a352-8bda686eb075")
 		)
 		(pin "5"
-			(uuid "10f4bcdd-ffa5-4a8d-bb88-cdf5ac6f8085")
+			(uuid "10f4bcdd-ffa5-4a8d-bb88-cdf5ac6f808a")
 		)
 		(pin "2"
-			(uuid "b8650f7f-6ad0-4d6d-86ef-0af74132510f")
+			(uuid "b8650f7f-6ad0-4d6d-86ef-0af741325114")
 		)
 		(pin "4"
-			(uuid "b9e1a236-3800-4410-b3b1-878275f12997")
+			(uuid "b9e1a236-3800-4410-b3b1-878275f1299c")
 		)
 		(pin "16"
-			(uuid "6b91c808-d0e5-46f2-81ee-250eb3c45038")
+			(uuid "6b91c808-d0e5-46f2-81ee-250eb3c4503d")
 		)
 		(pin "11"
-			(uuid "2ac5bed4-60df-4fd7-b2b8-74d57c584d66")
+			(uuid "2ac5bed4-60df-4fd7-b2b8-74d57c584d6b")
 		)
 		(pin "20"
-			(uuid "37efdca1-7d08-4a36-86af-020e91deeb1c")
+			(uuid "37efdca1-7d08-4a36-86af-020e91deeb21")
 		)
 		(pin "17"
-			(uuid "cd4f6b5b-3984-4eac-9eea-06ec6bcfa6b6")
+			(uuid "cd4f6b5b-3984-4eac-9eea-06ec6bcfa6bb")
 		)
 		(pin "14"
-			(uuid "943c6f77-5f04-42a0-a3a1-fc21a0e73d46")
+			(uuid "943c6f77-5f04-42a0-a3a1-fc21a0e73d4b")
 		)
 		(pin "6"
-			(uuid "f38a1c1b-2106-4096-9fd6-6cb2298d0263")
+			(uuid "f38a1c1b-2106-4096-9fd6-6cb2298d0268")
 		)
 		(instances
 			(project ""
@@ -36950,16 +36819,15 @@
 	)
 	(symbol
 		(lib_id "74xx:74LS244_Split")
-		(at 149.86 287.02 0)
+		(at 241.3 96.52 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "801da8f8-40f5-468b-b05d-4a4ba4bd2519")
 		(property "Reference" "B_A14"
-			(at 149.86 278.13 0)
+			(at 247.65 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36967,7 +36835,7 @@
 			)
 		)
 		(property "Value" "74LS244"
-			(at 149.86 280.67 0)
+			(at 247.65 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36975,7 +36843,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 149.86 287.02 0)
+			(at 241.3 96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36984,7 +36852,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74ls241.pdf"
-			(at 149.86 287.02 0)
+			(at 241.3 96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36993,7 +36861,7 @@
 			)
 		)
 		(property "Description" "Octal Buffer and Line Driver With 3-State Output, active-low enables, non-inverting outputs, split symbol"
-			(at 149.86 287.02 0)
+			(at 241.3 96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37002,64 +36870,64 @@
 			)
 		)
 		(pin "3"
-			(uuid "0fd5807e-0c8a-4a67-90e4-9403c51bbb69")
+			(uuid "0fd5807e-0c8a-4a67-90e4-9403c51bbb6f")
 		)
 		(pin "9"
-			(uuid "20eaf166-adff-4440-b93b-4454f7314975")
+			(uuid "20eaf166-adff-4440-b93b-4454f731497b")
 		)
 		(pin "10"
-			(uuid "4f30b4df-10d1-42cb-a5ef-34ceb94816b9")
+			(uuid "4f30b4df-10d1-42cb-a5ef-34ceb94816bf")
 		)
 		(pin "13"
-			(uuid "3fd47881-06ad-4d12-9673-2a1e66a3ef17")
+			(uuid "3fd47881-06ad-4d12-9673-2a1e66a3ef1d")
 		)
 		(pin "15"
-			(uuid "f99812bf-4f2a-480a-8a0d-3226437625ab")
+			(uuid "f99812bf-4f2a-480a-8a0d-3226437625b1")
 		)
 		(pin "1"
-			(uuid "b9ffeae6-c482-4d1f-91e5-f544389b5475")
+			(uuid "b9ffeae6-c482-4d1f-91e5-f544389b547b")
 		)
 		(pin "19"
-			(uuid "c45508b4-ad89-4de3-843f-87e206bffe8e")
+			(uuid "c45508b4-ad89-4de3-843f-87e206bffe94")
 		)
 		(pin "7"
-			(uuid "20ac8bd8-21b0-40a8-bb6e-efb07776c91f")
+			(uuid "20ac8bd8-21b0-40a8-bb6e-efb07776c925")
 		)
 		(pin "8"
-			(uuid "28791055-5633-440e-9c68-d8a9f997b402")
+			(uuid "28791055-5633-440e-9c68-d8a9f997b408")
 		)
 		(pin "12"
-			(uuid "099773bc-5b97-40be-bb73-ca66d0da360e")
+			(uuid "099773bc-5b97-40be-bb73-ca66d0da3614")
 		)
 		(pin "18"
-			(uuid "0e29d1bd-086a-4b14-a352-8bda686eb070")
+			(uuid "0e29d1bd-086a-4b14-a352-8bda686eb076")
 		)
 		(pin "5"
-			(uuid "10f4bcdd-ffa5-4a8d-bb88-cdf5ac6f8085")
+			(uuid "10f4bcdd-ffa5-4a8d-bb88-cdf5ac6f808b")
 		)
 		(pin "2"
-			(uuid "b8650f7f-6ad0-4d6d-86ef-0af74132510f")
+			(uuid "b8650f7f-6ad0-4d6d-86ef-0af741325115")
 		)
 		(pin "4"
-			(uuid "b9e1a236-3800-4410-b3b1-878275f12997")
+			(uuid "b9e1a236-3800-4410-b3b1-878275f1299d")
 		)
 		(pin "16"
-			(uuid "6b91c808-d0e5-46f2-81ee-250eb3c45038")
+			(uuid "6b91c808-d0e5-46f2-81ee-250eb3c4503e")
 		)
 		(pin "11"
-			(uuid "2ac5bed4-60df-4fd7-b2b8-74d57c584d66")
+			(uuid "2ac5bed4-60df-4fd7-b2b8-74d57c584d6c")
 		)
 		(pin "20"
-			(uuid "37efdca1-7d08-4a36-86af-020e91deeb1c")
+			(uuid "37efdca1-7d08-4a36-86af-020e91deeb22")
 		)
 		(pin "17"
-			(uuid "cd4f6b5b-3984-4eac-9eea-06ec6bcfa6b6")
+			(uuid "cd4f6b5b-3984-4eac-9eea-06ec6bcfa6bc")
 		)
 		(pin "14"
-			(uuid "943c6f77-5f04-42a0-a3a1-fc21a0e73d46")
+			(uuid "943c6f77-5f04-42a0-a3a1-fc21a0e73d4c")
 		)
 		(pin "6"
-			(uuid "f38a1c1b-2106-4096-9fd6-6cb2298d0263")
+			(uuid "f38a1c1b-2106-4096-9fd6-6cb2298d0269")
 		)
 		(instances
 			(project ""
@@ -37072,16 +36940,15 @@
 	)
 	(symbol
 		(lib_id "74xx:74LS244_Split")
-		(at 146.05 321.31 0)
+		(at 241.3 121.92 0)
 		(unit 4)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "8195cb4c-ecd6-4341-a808-0553bea310a9")
 		(property "Reference" "B_A14"
-			(at 146.05 312.42 0)
+			(at 245.11 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37089,7 +36956,7 @@
 			)
 		)
 		(property "Value" "74LS244"
-			(at 146.05 314.96 0)
+			(at 246.38 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37097,7 +36964,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 146.05 321.31 0)
+			(at 241.3 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37106,7 +36973,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74ls241.pdf"
-			(at 146.05 321.31 0)
+			(at 241.3 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37115,7 +36982,7 @@
 			)
 		)
 		(property "Description" "Octal Buffer and Line Driver With 3-State Output, active-low enables, non-inverting outputs, split symbol"
-			(at 146.05 321.31 0)
+			(at 241.3 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37124,64 +36991,64 @@
 			)
 		)
 		(pin "3"
-			(uuid "0fd5807e-0c8a-4a67-90e4-9403c51bbb69")
+			(uuid "0fd5807e-0c8a-4a67-90e4-9403c51bbb70")
 		)
 		(pin "9"
-			(uuid "20eaf166-adff-4440-b93b-4454f7314975")
+			(uuid "20eaf166-adff-4440-b93b-4454f731497c")
 		)
 		(pin "10"
-			(uuid "4f30b4df-10d1-42cb-a5ef-34ceb94816b9")
+			(uuid "4f30b4df-10d1-42cb-a5ef-34ceb94816c0")
 		)
 		(pin "13"
-			(uuid "3fd47881-06ad-4d12-9673-2a1e66a3ef17")
+			(uuid "3fd47881-06ad-4d12-9673-2a1e66a3ef1e")
 		)
 		(pin "15"
-			(uuid "f99812bf-4f2a-480a-8a0d-3226437625ab")
+			(uuid "f99812bf-4f2a-480a-8a0d-3226437625b2")
 		)
 		(pin "1"
-			(uuid "b9ffeae6-c482-4d1f-91e5-f544389b5475")
+			(uuid "b9ffeae6-c482-4d1f-91e5-f544389b547c")
 		)
 		(pin "19"
-			(uuid "c45508b4-ad89-4de3-843f-87e206bffe8e")
+			(uuid "c45508b4-ad89-4de3-843f-87e206bffe95")
 		)
 		(pin "7"
-			(uuid "20ac8bd8-21b0-40a8-bb6e-efb07776c91f")
+			(uuid "20ac8bd8-21b0-40a8-bb6e-efb07776c926")
 		)
 		(pin "8"
-			(uuid "28791055-5633-440e-9c68-d8a9f997b402")
+			(uuid "28791055-5633-440e-9c68-d8a9f997b409")
 		)
 		(pin "12"
-			(uuid "099773bc-5b97-40be-bb73-ca66d0da360e")
+			(uuid "099773bc-5b97-40be-bb73-ca66d0da3615")
 		)
 		(pin "18"
-			(uuid "0e29d1bd-086a-4b14-a352-8bda686eb070")
+			(uuid "0e29d1bd-086a-4b14-a352-8bda686eb077")
 		)
 		(pin "5"
-			(uuid "10f4bcdd-ffa5-4a8d-bb88-cdf5ac6f8085")
+			(uuid "10f4bcdd-ffa5-4a8d-bb88-cdf5ac6f808c")
 		)
 		(pin "2"
-			(uuid "b8650f7f-6ad0-4d6d-86ef-0af74132510f")
+			(uuid "b8650f7f-6ad0-4d6d-86ef-0af741325116")
 		)
 		(pin "4"
-			(uuid "b9e1a236-3800-4410-b3b1-878275f12997")
+			(uuid "b9e1a236-3800-4410-b3b1-878275f1299e")
 		)
 		(pin "16"
-			(uuid "6b91c808-d0e5-46f2-81ee-250eb3c45038")
+			(uuid "6b91c808-d0e5-46f2-81ee-250eb3c4503f")
 		)
 		(pin "11"
-			(uuid "2ac5bed4-60df-4fd7-b2b8-74d57c584d66")
+			(uuid "2ac5bed4-60df-4fd7-b2b8-74d57c584d6d")
 		)
 		(pin "20"
-			(uuid "37efdca1-7d08-4a36-86af-020e91deeb1c")
+			(uuid "37efdca1-7d08-4a36-86af-020e91deeb23")
 		)
 		(pin "17"
-			(uuid "cd4f6b5b-3984-4eac-9eea-06ec6bcfa6b6")
+			(uuid "cd4f6b5b-3984-4eac-9eea-06ec6bcfa6bd")
 		)
 		(pin "14"
-			(uuid "943c6f77-5f04-42a0-a3a1-fc21a0e73d46")
+			(uuid "943c6f77-5f04-42a0-a3a1-fc21a0e73d4d")
 		)
 		(pin "6"
-			(uuid "f38a1c1b-2106-4096-9fd6-6cb2298d0263")
+			(uuid "f38a1c1b-2106-4096-9fd6-6cb2298d026a")
 		)
 		(instances
 			(project ""
@@ -37246,64 +37113,64 @@
 			)
 		)
 		(pin "3"
-			(uuid "0fd5807e-0c8a-4a67-90e4-9403c51bbb69")
+			(uuid "0fd5807e-0c8a-4a67-90e4-9403c51bbb71")
 		)
 		(pin "9"
-			(uuid "20eaf166-adff-4440-b93b-4454f7314975")
+			(uuid "20eaf166-adff-4440-b93b-4454f731497d")
 		)
 		(pin "10"
-			(uuid "4f30b4df-10d1-42cb-a5ef-34ceb94816b9")
+			(uuid "4f30b4df-10d1-42cb-a5ef-34ceb94816c1")
 		)
 		(pin "13"
-			(uuid "3fd47881-06ad-4d12-9673-2a1e66a3ef17")
+			(uuid "3fd47881-06ad-4d12-9673-2a1e66a3ef1f")
 		)
 		(pin "15"
-			(uuid "f99812bf-4f2a-480a-8a0d-3226437625ab")
+			(uuid "f99812bf-4f2a-480a-8a0d-3226437625b3")
 		)
 		(pin "1"
-			(uuid "b9ffeae6-c482-4d1f-91e5-f544389b5475")
+			(uuid "b9ffeae6-c482-4d1f-91e5-f544389b547d")
 		)
 		(pin "19"
-			(uuid "c45508b4-ad89-4de3-843f-87e206bffe8e")
+			(uuid "c45508b4-ad89-4de3-843f-87e206bffe96")
 		)
 		(pin "7"
-			(uuid "20ac8bd8-21b0-40a8-bb6e-efb07776c91f")
+			(uuid "20ac8bd8-21b0-40a8-bb6e-efb07776c927")
 		)
 		(pin "8"
-			(uuid "28791055-5633-440e-9c68-d8a9f997b402")
+			(uuid "28791055-5633-440e-9c68-d8a9f997b40a")
 		)
 		(pin "12"
-			(uuid "099773bc-5b97-40be-bb73-ca66d0da360e")
+			(uuid "099773bc-5b97-40be-bb73-ca66d0da3616")
 		)
 		(pin "18"
-			(uuid "0e29d1bd-086a-4b14-a352-8bda686eb070")
+			(uuid "0e29d1bd-086a-4b14-a352-8bda686eb078")
 		)
 		(pin "5"
-			(uuid "10f4bcdd-ffa5-4a8d-bb88-cdf5ac6f8085")
+			(uuid "10f4bcdd-ffa5-4a8d-bb88-cdf5ac6f808d")
 		)
 		(pin "2"
-			(uuid "b8650f7f-6ad0-4d6d-86ef-0af74132510f")
+			(uuid "b8650f7f-6ad0-4d6d-86ef-0af741325117")
 		)
 		(pin "4"
-			(uuid "b9e1a236-3800-4410-b3b1-878275f12997")
+			(uuid "b9e1a236-3800-4410-b3b1-878275f1299f")
 		)
 		(pin "16"
-			(uuid "6b91c808-d0e5-46f2-81ee-250eb3c45038")
+			(uuid "6b91c808-d0e5-46f2-81ee-250eb3c45040")
 		)
 		(pin "11"
-			(uuid "2ac5bed4-60df-4fd7-b2b8-74d57c584d66")
+			(uuid "2ac5bed4-60df-4fd7-b2b8-74d57c584d6e")
 		)
 		(pin "20"
-			(uuid "37efdca1-7d08-4a36-86af-020e91deeb1c")
+			(uuid "37efdca1-7d08-4a36-86af-020e91deeb24")
 		)
 		(pin "17"
-			(uuid "cd4f6b5b-3984-4eac-9eea-06ec6bcfa6b6")
+			(uuid "cd4f6b5b-3984-4eac-9eea-06ec6bcfa6be")
 		)
 		(pin "14"
-			(uuid "943c6f77-5f04-42a0-a3a1-fc21a0e73d46")
+			(uuid "943c6f77-5f04-42a0-a3a1-fc21a0e73d4e")
 		)
 		(pin "6"
-			(uuid "f38a1c1b-2106-4096-9fd6-6cb2298d0263")
+			(uuid "f38a1c1b-2106-4096-9fd6-6cb2298d026b")
 		)
 		(instances
 			(project ""
@@ -42052,6 +41919,72 @@
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
 					(reference "B_F9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_name "GND_4")
+		(lib_id "power:GND")
+		(at 241.3 114.3 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "fc4e57dd-6deb-4703-9e09-14dd36c8f078")
+		(property "Reference" "#PWR323"
+			(at 241.3 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 245.11 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 241.3 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 241.3 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 241.3 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a75cf8d1-3276-4af4-b720-5fe96b77f236")
+		)
+		(instances
+			(project ""
+				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/137d42fd-0de0-4b24-bb55-531ae53d43cc"
+					(reference "#PWR323")
 					(unit 1)
 				)
 			)
