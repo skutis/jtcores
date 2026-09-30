@@ -418,6 +418,10 @@
     [
       "fc0cdb6a-9224-4695-8376-e66e14e5242d",
       "IO"
+    ],
+    [
+      "610cdb1b-17e0-43d7-a514-4891bf2b2c29",
+      "Shared RAM"
     ]
   ],
   "text_variables": {}

@@ -11748,7 +11748,7 @@
 		)
 	)
 	(junction
-		(at 386.715 208.28)
+		(at 383.54 204.47)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "05898756-6f9f-4057-8e79-d39ca9d686a2")
@@ -11874,7 +11874,7 @@
 		(uuid "470e4188-fac7-4bd2-91e5-1fcfee11ce9a")
 	)
 	(junction
-		(at 389.255 208.28)
+		(at 386.08 204.47)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "48a6ef7d-4086-4b23-b9ef-3361a0bf73d2")
@@ -12198,6 +12198,12 @@
 		(uuid "ed20e6fc-9a1a-47c6-b3ff-efe99f45aba3")
 	)
 	(junction
+		(at 393.7 204.47)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f0021220-083a-494e-9f5f-5048c800eba7")
+	)
+	(junction
 		(at 263.525 218.44)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -12252,6 +12258,10 @@
 	(no_connect
 		(at 274.32 270.51)
 		(uuid "9ff7e080-9a20-4290-a606-0c3bd189d017")
+	)
+	(no_connect
+		(at 398.78 228.6)
+		(uuid "e9430a20-978b-4879-84ce-afc24fb890a7")
 	)
 	(no_connect
 		(at 248.92 265.43)
@@ -13306,6 +13316,16 @@
 	)
 	(wire
 		(pts
+			(xy 368.3 222.25) (xy 368.3 228.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2244488e-5a2a-4dd2-a839-2b682722d16d")
+	)
+	(wire
+		(pts
 			(xy 62.23 62.23) (xy 81.28 62.23)
 		)
 		(stroke
@@ -13353,6 +13373,16 @@
 			(type default)
 		)
 		(uuid "234b3789-fc21-4f5c-9696-70aae451cdbf")
+	)
+	(wire
+		(pts
+			(xy 393.7 204.47) (xy 393.7 222.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "235e2576-a4e7-4148-ab70-e0621967e0e3")
 	)
 	(wire
 		(pts
@@ -13636,7 +13666,7 @@
 	)
 	(wire
 		(pts
-			(xy 361.315 210.82) (xy 371.475 210.82)
+			(xy 361.315 207.01) (xy 368.3 207.01)
 		)
 		(stroke
 			(width 0)
@@ -13966,7 +13996,7 @@
 	)
 	(wire
 		(pts
-			(xy 389.255 208.28) (xy 394.335 208.28)
+			(xy 386.08 204.47) (xy 393.7 204.47)
 		)
 		(stroke
 			(width 0)
@@ -13993,6 +14023,16 @@
 			(type default)
 		)
 		(uuid "516ea84e-e16f-450b-b4df-9dfa57f0e8c8")
+	)
+	(wire
+		(pts
+			(xy 393.7 222.25) (xy 368.3 222.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "54ad3322-80a8-4ed5-94d2-887dd5b3735b")
 	)
 	(wire
 		(pts
@@ -14426,7 +14466,7 @@
 	)
 	(wire
 		(pts
-			(xy 386.715 208.28) (xy 389.255 208.28)
+			(xy 383.54 204.47) (xy 386.08 204.47)
 		)
 		(stroke
 			(width 0)
@@ -14456,7 +14496,7 @@
 	)
 	(wire
 		(pts
-			(xy 361.315 223.52) (xy 361.315 210.82)
+			(xy 361.315 223.52) (xy 361.315 207.01)
 		)
 		(stroke
 			(width 0)
@@ -14976,16 +15016,6 @@
 	)
 	(wire
 		(pts
-			(xy 371.475 205.74) (xy 368.3 205.74)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9df7c78d-e20a-45a3-952f-93749d0a6e26")
-	)
-	(wire
-		(pts
 			(xy 135.89 25.4) (xy 135.89 26.67)
 		)
 		(stroke
@@ -15256,7 +15286,7 @@
 	)
 	(wire
 		(pts
-			(xy 368.3 205.74) (xy 368.3 185.42)
+			(xy 368.3 201.93) (xy 368.3 185.42)
 		)
 		(stroke
 			(width 0)
@@ -16344,6 +16374,16 @@
 		)
 		(uuid "fe875368-452f-400f-b3df-f82d82134b40")
 	)
+	(wire
+		(pts
+			(xy 393.7 204.47) (xy 396.24 204.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ff56739d-a390-4b92-8122-c56f3f12b5c8")
+	)
 	(rectangle
 		(start 226.06 156.21)
 		(end 405.13 250.19)
@@ -16400,6 +16440,7 @@
 	)
 	(label "DSW15"
 		(at 285.75 66.04 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16410,6 +16451,7 @@
 	)
 	(label "DSW25"
 		(at 240.03 95.25 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16420,6 +16462,7 @@
 	)
 	(label "AS0"
 		(at 77.47 92.71 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16430,6 +16473,7 @@
 	)
 	(label "DSW11"
 		(at 287.02 107.95 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16440,6 +16484,7 @@
 	)
 	(label "1P_RIGHT"
 		(at 340.36 87.63 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16450,6 +16495,7 @@
 	)
 	(label "COINT_CNT1"
 		(at 387.35 95.25 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16460,6 +16506,7 @@
 	)
 	(label "DSW20"
 		(at 251.46 120.65 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16470,6 +16517,7 @@
 	)
 	(label "~{CSYNC'}"
 		(at 121.92 232.41 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16480,6 +16528,7 @@
 	)
 	(label "DSW24"
 		(at 285.75 55.88 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16490,6 +16539,7 @@
 	)
 	(label "1P_LEFT"
 		(at 21.59 39.37 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16500,6 +16550,7 @@
 	)
 	(label "DB6"
 		(at 318.77 78.74 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16510,6 +16561,7 @@
 	)
 	(label "AS0"
 		(at 271.78 86.36 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16520,6 +16572,7 @@
 	)
 	(label "DSW4"
 		(at 21.59 220.98 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16530,6 +16583,7 @@
 	)
 	(label "COIN_CNT'_2"
 		(at 168.91 234.95 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16540,6 +16594,7 @@
 	)
 	(label "DSW26"
 		(at 251.46 105.41 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16550,6 +16605,7 @@
 	)
 	(label "DSW17"
 		(at 285.75 73.66 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16560,6 +16616,7 @@
 	)
 	(label "COIN_CNT'_1"
 		(at 168.91 201.93 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16570,6 +16627,7 @@
 	)
 	(label "AS1"
 		(at 77.47 95.25 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16580,6 +16638,7 @@
 	)
 	(label "1P_START"
 		(at 21.59 182.88 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16590,6 +16649,7 @@
 	)
 	(label "AS1"
 		(at 173.99 95.25 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16600,6 +16660,7 @@
 	)
 	(label "DSW17"
 		(at 251.46 58.42 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16610,6 +16671,7 @@
 	)
 	(label "COIN1"
 		(at 21.59 26.67 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16620,6 +16682,7 @@
 	)
 	(label "DSW22"
 		(at 287.02 120.65 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16630,6 +16693,7 @@
 	)
 	(label "DSW27"
 		(at 251.46 102.87 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16640,6 +16704,7 @@
 	)
 	(label "COINT_CNT1"
 		(at 208.28 201.93 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16650,6 +16715,7 @@
 	)
 	(label "DSW14"
 		(at 251.46 66.04 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16660,6 +16726,7 @@
 	)
 	(label "COINT_CNT2"
 		(at 208.28 234.95 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16670,6 +16737,7 @@
 	)
 	(label "DSW11"
 		(at 251.46 73.66 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16680,6 +16748,7 @@
 	)
 	(label "DB5"
 		(at 318.77 63.5 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16690,6 +16759,7 @@
 	)
 	(label "DSW15"
 		(at 251.46 63.5 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16700,6 +16770,7 @@
 	)
 	(label "DSW17"
 		(at 240.03 55.88 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16710,6 +16781,7 @@
 	)
 	(label "2P_LEFT"
 		(at 21.59 53.34 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16720,6 +16792,7 @@
 	)
 	(label "DB7"
 		(at 318.77 71.12 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16730,6 +16803,7 @@
 	)
 	(label "DSW15"
 		(at 240.03 50.8 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16740,6 +16814,7 @@
 	)
 	(label "COIN2"
 		(at 387.35 92.71 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16750,6 +16825,7 @@
 	)
 	(label "AS0"
 		(at 173.99 92.71 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16760,6 +16836,7 @@
 	)
 	(label "DSW12"
 		(at 240.03 43.18 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16770,6 +16847,7 @@
 	)
 	(label "DSW23"
 		(at 251.46 113.03 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16780,6 +16858,7 @@
 	)
 	(label "DSW25"
 		(at 285.75 63.5 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16790,6 +16869,7 @@
 	)
 	(label "DB1"
 		(at 106.68 74.93 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16800,6 +16880,7 @@
 	)
 	(label "1P_SHOOT1"
 		(at 115.57 39.37 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16810,6 +16891,7 @@
 	)
 	(label "2P_SHOOT1"
 		(at 115.57 53.34 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16820,6 +16902,7 @@
 	)
 	(label "DSW27"
 		(at 240.03 100.33 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16830,6 +16913,7 @@
 	)
 	(label "~{CSYNC}"
 		(at 100.33 232.41 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16840,6 +16924,7 @@
 	)
 	(label "2P_RIGHT"
 		(at 387.35 77.47 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16850,6 +16935,7 @@
 	)
 	(label "DB3"
 		(at 106.68 180.34 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16860,6 +16946,7 @@
 	)
 	(label "DSW10"
 		(at 287.02 100.33 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16870,6 +16957,7 @@
 	)
 	(label "DB3"
 		(at 318.77 113.03 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16880,6 +16968,7 @@
 	)
 	(label "DSW25"
 		(at 251.46 107.95 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16890,6 +16979,7 @@
 	)
 	(label "DSW10"
 		(at 240.03 38.1 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16900,6 +16990,7 @@
 	)
 	(label "COIN2"
 		(at 21.59 77.47 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16910,6 +17001,7 @@
 	)
 	(label "COIN1"
 		(at 341.63 92.71 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16920,6 +17012,7 @@
 	)
 	(label "DSW16"
 		(at 251.46 60.96 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16930,6 +17023,7 @@
 	)
 	(label "DSW3"
 		(at 21.59 171.45 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16940,6 +17034,7 @@
 	)
 	(label "1P_LEFT"
 		(at 387.35 87.63 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16950,6 +17045,7 @@
 	)
 	(label "DSW23"
 		(at 240.03 90.17 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16960,6 +17056,7 @@
 	)
 	(label "DSW24"
 		(at 240.03 92.71 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16970,6 +17067,7 @@
 	)
 	(label "DSW21"
 		(at 251.46 118.11 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16980,6 +17078,7 @@
 	)
 	(label "DSW10"
 		(at 251.46 76.2 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16990,6 +17089,7 @@
 	)
 	(label "CSYNC"
 		(at 121.92 241.3 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17000,6 +17100,7 @@
 	)
 	(label "AS0"
 		(at 77.47 198.12 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17010,6 +17111,7 @@
 	)
 	(label "DSW13"
 		(at 240.03 45.72 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17020,6 +17122,7 @@
 	)
 	(label "DSW20"
 		(at 240.03 82.55 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17030,6 +17133,7 @@
 	)
 	(label "DSW16"
 		(at 240.03 53.34 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17040,6 +17144,7 @@
 	)
 	(label "~{SYNC}"
 		(at 151.13 232.41 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17050,6 +17155,7 @@
 	)
 	(label "DB4"
 		(at 203.2 57.15 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17060,6 +17166,7 @@
 	)
 	(label "DSW14"
 		(at 285.75 58.42 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17070,6 +17177,7 @@
 	)
 	(label "DSW20"
 		(at 287.02 97.79 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17080,6 +17188,7 @@
 	)
 	(label "2P_UP"
 		(at 21.59 158.75 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17090,6 +17199,7 @@
 	)
 	(label "DSW27"
 		(at 285.75 71.12 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17100,6 +17210,7 @@
 	)
 	(label "DB2"
 		(at 318.77 120.65 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17110,6 +17221,7 @@
 	)
 	(label "DSW1"
 		(at 21.59 66.04 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17120,6 +17232,7 @@
 	)
 	(label "1P_UP"
 		(at 21.59 144.78 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17130,6 +17243,7 @@
 	)
 	(label "DSW5"
 		(at 115.57 66.04 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17140,6 +17254,7 @@
 	)
 	(label "DSW21"
 		(at 240.03 85.09 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17150,6 +17265,7 @@
 	)
 	(label "DSW26"
 		(at 240.03 97.79 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17160,6 +17276,7 @@
 	)
 	(label "2P_START"
 		(at 115.57 26.67 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17170,6 +17287,7 @@
 	)
 	(label "1P_DOWN"
 		(at 21.59 195.58 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17180,6 +17298,7 @@
 	)
 	(label "SPK-"
 		(at 387.35 72.39 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17190,6 +17309,7 @@
 	)
 	(label "DSW6"
 		(at 115.57 115.57 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17200,6 +17320,7 @@
 	)
 	(label "DSW22"
 		(at 251.46 115.57 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17210,6 +17331,7 @@
 	)
 	(label "DB2"
 		(at 106.68 162.56 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17220,6 +17342,7 @@
 	)
 	(label "DSW13"
 		(at 287.02 115.57 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17230,6 +17353,7 @@
 	)
 	(label "DSW12"
 		(at 287.02 123.19 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17240,6 +17364,7 @@
 	)
 	(label "DB5"
 		(at 203.2 74.93 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17250,6 +17375,7 @@
 	)
 	(label "1P_SHOOT2"
 		(at 115.57 90.17 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17260,6 +17386,7 @@
 	)
 	(label "DSW26"
 		(at 285.75 78.74 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17270,6 +17397,7 @@
 	)
 	(label "SPK+"
 		(at 341.63 72.39 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17280,6 +17408,7 @@
 	)
 	(label "DSW24"
 		(at 251.46 110.49 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17290,6 +17419,7 @@
 	)
 	(label "DB1"
 		(at 318.77 105.41 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17300,6 +17430,7 @@
 	)
 	(label "DSW12"
 		(at 251.46 71.12 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17310,6 +17441,7 @@
 	)
 	(label "1P_RIGHT"
 		(at 21.59 90.17 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17320,6 +17452,7 @@
 	)
 	(label "DSW22"
 		(at 240.03 87.63 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17330,6 +17463,7 @@
 	)
 	(label "DB0"
 		(at 318.77 97.79 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17340,6 +17474,7 @@
 	)
 	(label "DSW13"
 		(at 251.46 68.58 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17350,6 +17485,7 @@
 	)
 	(label "2P_SHOOT2"
 		(at 115.57 102.87 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17360,6 +17496,7 @@
 	)
 	(label "SERVICE"
 		(at 21.59 132.08 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17370,6 +17507,7 @@
 	)
 	(label "DSW16"
 		(at 285.75 81.28 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17380,6 +17518,7 @@
 	)
 	(label "DSW14"
 		(at 240.03 48.26 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17390,6 +17529,7 @@
 	)
 	(label "DSW11"
 		(at 240.03 40.64 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17400,6 +17540,7 @@
 	)
 	(label "DSW21"
 		(at 287.02 105.41 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17410,6 +17551,7 @@
 	)
 	(label "DB0"
 		(at 106.68 57.15 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17420,6 +17562,7 @@
 	)
 	(label "DB4"
 		(at 318.77 55.88 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17430,6 +17573,7 @@
 	)
 	(label "2P_LEFT"
 		(at 341.63 77.47 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17440,6 +17584,7 @@
 	)
 	(label "2P_RIGHT"
 		(at 21.59 102.87 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17450,6 +17595,7 @@
 	)
 	(label "2P_DOWN"
 		(at 21.59 208.28 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17460,6 +17606,7 @@
 	)
 	(label "DSW2"
 		(at 21.59 115.57 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17470,6 +17617,7 @@
 	)
 	(label "AS1"
 		(at 77.47 200.66 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17480,6 +17628,7 @@
 	)
 	(label "DSW23"
 		(at 287.02 113.03 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17490,6 +17639,7 @@
 	)
 	(label "COINT_CNT2"
 		(at 387.35 97.79 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17501,6 +17651,7 @@
 	(hierarchical_label "~{AFR2}"
 		(shape input)
 		(at 281.305 242.57 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17512,6 +17663,7 @@
 	(hierarchical_label "~{CABINP}"
 		(shape input)
 		(at 81.28 175.26 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17523,6 +17675,7 @@
 	(hierarchical_label "~{CABINP}"
 		(shape input)
 		(at 177.8 69.85 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17534,6 +17687,7 @@
 	(hierarchical_label "~{DIP}"
 		(shape input)
 		(at 293.37 88.9 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17545,6 +17699,7 @@
 	(hierarchical_label "~{CABINP}"
 		(shape input)
 		(at 81.28 193.04 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17556,6 +17711,7 @@
 	(hierarchical_label "~{AFR1}"
 		(shape input)
 		(at 281.305 223.52 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17567,6 +17723,7 @@
 	(hierarchical_label "~{CABINP}"
 		(shape input)
 		(at 177.8 87.63 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17578,6 +17735,7 @@
 	(hierarchical_label "~{VBLANK}"
 		(shape input)
 		(at 304.165 213.36 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17589,6 +17747,7 @@
 	(hierarchical_label "~{VBLANK}"
 		(shape input)
 		(at 304.165 232.41 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17600,6 +17759,7 @@
 	(hierarchical_label "~{DIP}"
 		(shape input)
 		(at 293.37 130.81 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17610,7 +17770,8 @@
 	)
 	(hierarchical_label "~{RESET}"
 		(shape output)
-		(at 394.335 208.28 0)
+		(at 396.24 204.47 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17622,6 +17783,7 @@
 	(hierarchical_label "~{CABINP}"
 		(shape input)
 		(at 81.28 69.85 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17633,6 +17795,7 @@
 	(hierarchical_label "~{CABINP}"
 		(shape input)
 		(at 81.28 87.63 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -18723,6 +18886,127 @@
 		)
 	)
 	(symbol
+		(lib_id "74xx:74LS240_Split")
+		(at 375.92 228.6 0)
+		(unit 4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "14bc832c-3fa3-4e10-82da-4a075bf72fe2")
+		(property "Reference" "B_B14"
+			(at 375.92 233.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "74LS240"
+			(at 375.92 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 375.92 228.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74ls240.pdf"
+			(at 375.92 228.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Octal Buffer and Line Driver With 3-State Output, active-low enables, inverting outputs, split symbol"
+			(at 375.92 228.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "13"
+			(uuid "f78ed05c-6876-4d1b-8ee0-c70d495017cf")
+		)
+		(pin "8"
+			(uuid "ba470968-4a44-4cde-82d7-99348afff227")
+		)
+		(pin "12"
+			(uuid "3e687fec-0c73-499e-8d39-4da1a998de2a")
+		)
+		(pin "9"
+			(uuid "141e5098-99ea-4706-abc0-43ac34eb6b22")
+		)
+		(pin "16"
+			(uuid "2baa8a87-1ee0-4da1-b51c-faeb61f45140")
+		)
+		(pin "18"
+			(uuid "6591f3e9-7124-4e5e-badf-5f867b035375")
+		)
+		(pin "1"
+			(uuid "c37cb21c-ac5c-444e-afe0-b1845e68e0e2")
+		)
+		(pin "3"
+			(uuid "7ed9169b-6a65-4f63-9c42-9e8e296b9945")
+		)
+		(pin "17"
+			(uuid "2a140aaf-1039-471f-a245-6853b3d03b26")
+		)
+		(pin "11"
+			(uuid "4c751021-44fd-407f-a0c5-cd8019885eb0")
+		)
+		(pin "19"
+			(uuid "fdc67d6b-ca58-49cd-9c9d-fc4945661198")
+		)
+		(pin "15"
+			(uuid "16172ec1-a30e-4a0a-a9eb-f59e5f79d007")
+		)
+		(pin "20"
+			(uuid "53ce9d36-d0fc-41ec-843f-0ba2649667a7")
+		)
+		(pin "7"
+			(uuid "a923b9fa-3e74-401d-a270-1943fc850fb6")
+		)
+		(pin "2"
+			(uuid "b716324f-1e02-4ff0-9ce1-086d4e6eb62c")
+		)
+		(pin "5"
+			(uuid "2d0c44f7-9241-4a7e-aa8b-67d61179e04a")
+		)
+		(pin "10"
+			(uuid "9c9f649c-e05a-474d-b8b9-fba56033c7d2")
+		)
+		(pin "4"
+			(uuid "06b39012-7b98-4365-af57-57966b5d18ea")
+		)
+		(pin "14"
+			(uuid "c6f85451-bb36-4ad9-9428-4a0a9b850a6f")
+		)
+		(pin "6"
+			(uuid "c7e48e4d-b6b1-469c-97fe-45e65e9bea17")
+		)
+		(instances
+			(project "megazone"
+				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/fc0cdb6a-9224-4695-8376-e66e14e5242d"
+					(reference "B_B14")
+					(unit 4)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 34.29 195.58 270)
 		(unit 1)
@@ -19618,7 +19902,7 @@
 	(symbol
 		(lib_name "VCC_7")
 		(lib_id "power:VCC")
-		(at 389.255 200.66 0)
+		(at 386.08 196.85 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -19627,7 +19911,7 @@
 		(fields_autoplaced yes)
 		(uuid "2314e6bd-3de7-45a2-b95a-237eb9ded386")
 		(property "Reference" "#PWR0305"
-			(at 389.255 204.47 0)
+			(at 386.08 200.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19636,7 +19920,7 @@
 			)
 		)
 		(property "Value" "VCC"
-			(at 389.255 195.58 0)
+			(at 386.08 191.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19644,7 +19928,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 389.255 200.66 0)
+			(at 386.08 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19653,7 +19937,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 389.255 200.66 0)
+			(at 386.08 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19662,7 +19946,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"VCC\""
-			(at 389.255 200.66 0)
+			(at 386.08 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23607,7 +23891,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 386.715 212.09 0)
+		(at 383.54 208.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -23616,7 +23900,7 @@
 		(fields_autoplaced yes)
 		(uuid "5eb4c361-3710-4362-b351-6b6a74b8b241")
 		(property "Reference" "B_C41"
-			(at 389.89 210.8199 0)
+			(at 386.715 207.0099 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23625,7 +23909,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 389.89 213.3599 0)
+			(at 386.715 209.5499 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23634,7 +23918,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 387.6802 215.9 0)
+			(at 384.5052 212.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23643,7 +23927,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 386.715 212.09 0)
+			(at 383.54 208.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23652,7 +23936,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 386.715 212.09 0)
+			(at 383.54 208.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24224,7 +24508,7 @@
 	(symbol
 		(lib_name "GND_6")
 		(lib_id "power:GND")
-		(at 386.715 215.9 0)
+		(at 383.54 212.09 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -24233,7 +24517,7 @@
 		(fields_autoplaced yes)
 		(uuid "65676118-c160-4b72-981c-40e3a20cb016")
 		(property "Reference" "#PWR0302"
-			(at 386.715 222.25 0)
+			(at 383.54 218.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24242,7 +24526,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 386.715 220.98 0)
+			(at 383.54 217.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24250,7 +24534,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 386.715 215.9 0)
+			(at 383.54 212.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24259,7 +24543,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 386.715 215.9 0)
+			(at 383.54 212.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24268,7 +24552,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 386.715 215.9 0)
+			(at 383.54 212.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25544,7 +25828,7 @@
 	)
 	(symbol
 		(lib_id "jt74:74LS08")
-		(at 379.095 208.28 0)
+		(at 375.92 204.47 0)
 		(mirror x)
 		(unit 3)
 		(exclude_from_sim no)
@@ -25553,7 +25837,7 @@
 		(dnp no)
 		(uuid "8c1ca39c-302d-4132-b3aa-72747e355fa9")
 		(property "Reference" "B_C13"
-			(at 379.0867 217.17 0)
+			(at 375.285 198.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25561,7 +25845,7 @@
 			)
 		)
 		(property "Value" "74LS08"
-			(at 379.0867 214.63 0)
+			(at 375.285 195.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25569,7 +25853,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 379.095 208.28 0)
+			(at 375.92 204.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25578,7 +25862,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/gpn/sn74LS08"
-			(at 379.095 208.28 0)
+			(at 375.92 204.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25587,7 +25871,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 379.095 208.28 0)
+			(at 375.92 204.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27080,7 +27364,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 389.255 204.47 0)
+		(at 386.08 200.66 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -27089,7 +27373,7 @@
 		(fields_autoplaced yes)
 		(uuid "9f82d0fd-a8cb-41b1-a684-415746c3f026")
 		(property "Reference" "B_R54"
-			(at 391.795 203.1999 0)
+			(at 388.62 199.3899 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27098,7 +27382,7 @@
 			)
 		)
 		(property "Value" "4k7"
-			(at 391.795 205.7399 0)
+			(at 388.62 201.9299 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27107,7 +27391,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 387.477 204.47 90)
+			(at 384.302 200.66 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27116,7 +27400,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 389.255 204.47 0)
+			(at 386.08 200.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27125,7 +27409,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 389.255 204.47 0)
+			(at 386.08 200.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30284,6 +30568,127 @@
 		)
 	)
 	(symbol
+		(lib_id "74xx:74LS240_Split")
+		(at 391.16 228.6 0)
+		(unit 7)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e0cf9c0b-5d0f-43c0-b971-87532214c746")
+		(property "Reference" "C17"
+			(at 391.16 233.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "74LS240"
+			(at 391.16 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 391.16 228.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74ls240.pdf"
+			(at 391.16 228.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Octal Buffer and Line Driver With 3-State Output, active-low enables, inverting outputs, split symbol"
+			(at 391.16 228.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "20"
+			(uuid "43f27633-9a57-4f7b-900a-074d62547f42")
+		)
+		(pin "19"
+			(uuid "4eb40d1b-20f0-449a-8ab2-eb5c7a331743")
+		)
+		(pin "11"
+			(uuid "aa6a766d-b14a-4c79-a103-8ad332b79996")
+		)
+		(pin "7"
+			(uuid "619f84a9-2a6d-4519-8334-817d6d0be2af")
+		)
+		(pin "10"
+			(uuid "ba5aed01-279a-48e9-8860-84a4211aa575")
+		)
+		(pin "13"
+			(uuid "65dd897a-41ef-405b-8e9d-9892ba88de4d")
+		)
+		(pin "12"
+			(uuid "b0ada589-297c-4d6e-9187-62c59f34e997")
+		)
+		(pin "14"
+			(uuid "0119aa57-be28-4a87-b0e6-26836e2d31d2")
+		)
+		(pin "15"
+			(uuid "ad911c24-591b-4bfc-a16b-edc2ee43d3a6")
+		)
+		(pin "16"
+			(uuid "47cb998c-135d-4255-9973-2c5c91571805")
+		)
+		(pin "17"
+			(uuid "7c3ceb26-bdd3-4480-aa91-e4bc2c618cc0")
+		)
+		(pin "3"
+			(uuid "d726da2b-0776-459d-83e9-4d73759f1840")
+		)
+		(pin "1"
+			(uuid "6bb097e8-d0bf-4c5d-88b9-6ca81b78a842")
+		)
+		(pin "2"
+			(uuid "6ad69306-a4d1-4e22-8f2c-3e27c78c8954")
+		)
+		(pin "18"
+			(uuid "d5046467-49f2-42ac-9eac-f836d454b55c")
+		)
+		(pin "5"
+			(uuid "aa6d7bc7-1b22-4bd8-908a-b815d30d7287")
+		)
+		(pin "4"
+			(uuid "8d0382a6-1aa8-4cc2-9b27-aecfb2d8bcb8")
+		)
+		(pin "6"
+			(uuid "faf84855-8fff-41aa-9a8c-0c052633eb27")
+		)
+		(pin "8"
+			(uuid "af233121-9d3b-469c-8d68-ffcb1e4e553d")
+		)
+		(pin "9"
+			(uuid "6de1e343-8569-4820-a7b2-b5d6e4544c6f")
+		)
+		(instances
+			(project "megazone"
+				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/fc0cdb6a-9224-4695-8376-e66e14e5242d"
+					(reference "C17")
+					(unit 7)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C_Polarized")
 		(at 230.505 191.77 0)
 		(unit 1)
@@ -31124,7 +31529,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "3c99f152-720d-44c1-a972-c6d7b0b1be89")
+			(uuid "3c99f152-720d-44c1-a972-c6d7b0b1be8a")
 		)
 		(instances
 			(project ""
@@ -31820,7 +32225,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "34966515-99a4-4dbd-b1ba-e4724b608bf1")
+			(uuid "34966515-99a4-4dbd-b1ba-e4724b608bf2")
 		)
 		(instances
 			(project ""
