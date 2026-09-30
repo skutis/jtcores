@@ -16440,7 +16440,6 @@
 	)
 	(label "DSW15"
 		(at 285.75 66.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16451,7 +16450,6 @@
 	)
 	(label "DSW25"
 		(at 240.03 95.25 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16462,7 +16460,6 @@
 	)
 	(label "AS0"
 		(at 77.47 92.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16473,7 +16470,6 @@
 	)
 	(label "DSW11"
 		(at 287.02 107.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16484,7 +16480,6 @@
 	)
 	(label "1P_RIGHT"
 		(at 340.36 87.63 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16495,7 +16490,6 @@
 	)
 	(label "COINT_CNT1"
 		(at 387.35 95.25 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16506,7 +16500,6 @@
 	)
 	(label "DSW20"
 		(at 251.46 120.65 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16517,7 +16510,6 @@
 	)
 	(label "~{CSYNC'}"
 		(at 121.92 232.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16528,7 +16520,6 @@
 	)
 	(label "DSW24"
 		(at 285.75 55.88 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16539,7 +16530,6 @@
 	)
 	(label "1P_LEFT"
 		(at 21.59 39.37 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16550,7 +16540,6 @@
 	)
 	(label "DB6"
 		(at 318.77 78.74 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16561,7 +16550,6 @@
 	)
 	(label "AS0"
 		(at 271.78 86.36 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16572,7 +16560,6 @@
 	)
 	(label "DSW4"
 		(at 21.59 220.98 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16583,7 +16570,6 @@
 	)
 	(label "COIN_CNT'_2"
 		(at 168.91 234.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16594,7 +16580,6 @@
 	)
 	(label "DSW26"
 		(at 251.46 105.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16605,7 +16590,6 @@
 	)
 	(label "DSW17"
 		(at 285.75 73.66 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16616,7 +16600,6 @@
 	)
 	(label "COIN_CNT'_1"
 		(at 168.91 201.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16627,7 +16610,6 @@
 	)
 	(label "AS1"
 		(at 77.47 95.25 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16638,7 +16620,6 @@
 	)
 	(label "1P_START"
 		(at 21.59 182.88 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16649,7 +16630,6 @@
 	)
 	(label "AS1"
 		(at 173.99 95.25 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16660,7 +16640,6 @@
 	)
 	(label "DSW17"
 		(at 251.46 58.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16671,7 +16650,6 @@
 	)
 	(label "COIN1"
 		(at 21.59 26.67 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16682,7 +16660,6 @@
 	)
 	(label "DSW22"
 		(at 287.02 120.65 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16693,7 +16670,6 @@
 	)
 	(label "DSW27"
 		(at 251.46 102.87 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16704,7 +16680,6 @@
 	)
 	(label "COINT_CNT1"
 		(at 208.28 201.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16715,7 +16690,6 @@
 	)
 	(label "DSW14"
 		(at 251.46 66.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16726,7 +16700,6 @@
 	)
 	(label "COINT_CNT2"
 		(at 208.28 234.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16737,7 +16710,6 @@
 	)
 	(label "DSW11"
 		(at 251.46 73.66 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16748,7 +16720,6 @@
 	)
 	(label "DB5"
 		(at 318.77 63.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16759,7 +16730,6 @@
 	)
 	(label "DSW15"
 		(at 251.46 63.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16770,7 +16740,6 @@
 	)
 	(label "DSW17"
 		(at 240.03 55.88 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16781,7 +16750,6 @@
 	)
 	(label "2P_LEFT"
 		(at 21.59 53.34 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16792,7 +16760,6 @@
 	)
 	(label "DB7"
 		(at 318.77 71.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16803,7 +16770,6 @@
 	)
 	(label "DSW15"
 		(at 240.03 50.8 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16814,7 +16780,6 @@
 	)
 	(label "COIN2"
 		(at 387.35 92.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16825,7 +16790,6 @@
 	)
 	(label "AS0"
 		(at 173.99 92.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16836,7 +16800,6 @@
 	)
 	(label "DSW12"
 		(at 240.03 43.18 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16847,7 +16810,6 @@
 	)
 	(label "DSW23"
 		(at 251.46 113.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16858,7 +16820,6 @@
 	)
 	(label "DSW25"
 		(at 285.75 63.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16869,7 +16830,6 @@
 	)
 	(label "DB1"
 		(at 106.68 74.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16880,7 +16840,6 @@
 	)
 	(label "1P_SHOOT1"
 		(at 115.57 39.37 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16891,7 +16850,6 @@
 	)
 	(label "2P_SHOOT1"
 		(at 115.57 53.34 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16902,7 +16860,6 @@
 	)
 	(label "DSW27"
 		(at 240.03 100.33 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16913,7 +16870,6 @@
 	)
 	(label "~{CSYNC}"
 		(at 100.33 232.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16924,7 +16880,6 @@
 	)
 	(label "2P_RIGHT"
 		(at 387.35 77.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16935,7 +16890,6 @@
 	)
 	(label "DB3"
 		(at 106.68 180.34 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16946,7 +16900,6 @@
 	)
 	(label "DSW10"
 		(at 287.02 100.33 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16957,7 +16910,6 @@
 	)
 	(label "DB3"
 		(at 318.77 113.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16968,7 +16920,6 @@
 	)
 	(label "DSW25"
 		(at 251.46 107.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16979,7 +16930,6 @@
 	)
 	(label "DSW10"
 		(at 240.03 38.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16990,7 +16940,6 @@
 	)
 	(label "COIN2"
 		(at 21.59 77.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17001,7 +16950,6 @@
 	)
 	(label "COIN1"
 		(at 341.63 92.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17012,7 +16960,6 @@
 	)
 	(label "DSW16"
 		(at 251.46 60.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17023,7 +16970,6 @@
 	)
 	(label "DSW3"
 		(at 21.59 171.45 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17034,7 +16980,6 @@
 	)
 	(label "1P_LEFT"
 		(at 387.35 87.63 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17045,7 +16990,6 @@
 	)
 	(label "DSW23"
 		(at 240.03 90.17 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17056,7 +17000,6 @@
 	)
 	(label "DSW24"
 		(at 240.03 92.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17067,7 +17010,6 @@
 	)
 	(label "DSW21"
 		(at 251.46 118.11 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17078,7 +17020,6 @@
 	)
 	(label "DSW10"
 		(at 251.46 76.2 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17089,7 +17030,6 @@
 	)
 	(label "CSYNC"
 		(at 121.92 241.3 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17100,7 +17040,6 @@
 	)
 	(label "AS0"
 		(at 77.47 198.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17111,7 +17050,6 @@
 	)
 	(label "DSW13"
 		(at 240.03 45.72 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17122,7 +17060,6 @@
 	)
 	(label "DSW20"
 		(at 240.03 82.55 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17133,7 +17070,6 @@
 	)
 	(label "DSW16"
 		(at 240.03 53.34 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17144,7 +17080,6 @@
 	)
 	(label "~{SYNC}"
 		(at 151.13 232.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17155,7 +17090,6 @@
 	)
 	(label "DB4"
 		(at 203.2 57.15 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17166,7 +17100,6 @@
 	)
 	(label "DSW14"
 		(at 285.75 58.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17177,7 +17110,6 @@
 	)
 	(label "DSW20"
 		(at 287.02 97.79 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17188,7 +17120,6 @@
 	)
 	(label "2P_UP"
 		(at 21.59 158.75 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17199,7 +17130,6 @@
 	)
 	(label "DSW27"
 		(at 285.75 71.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17210,7 +17140,6 @@
 	)
 	(label "DB2"
 		(at 318.77 120.65 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17221,7 +17150,6 @@
 	)
 	(label "DSW1"
 		(at 21.59 66.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17232,7 +17160,6 @@
 	)
 	(label "1P_UP"
 		(at 21.59 144.78 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17243,7 +17170,6 @@
 	)
 	(label "DSW5"
 		(at 115.57 66.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17254,7 +17180,6 @@
 	)
 	(label "DSW21"
 		(at 240.03 85.09 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17265,7 +17190,6 @@
 	)
 	(label "DSW26"
 		(at 240.03 97.79 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17276,7 +17200,6 @@
 	)
 	(label "2P_START"
 		(at 115.57 26.67 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17287,7 +17210,6 @@
 	)
 	(label "1P_DOWN"
 		(at 21.59 195.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17298,7 +17220,6 @@
 	)
 	(label "SPK-"
 		(at 387.35 72.39 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17309,7 +17230,6 @@
 	)
 	(label "DSW6"
 		(at 115.57 115.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17320,7 +17240,6 @@
 	)
 	(label "DSW22"
 		(at 251.46 115.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17331,7 +17250,6 @@
 	)
 	(label "DB2"
 		(at 106.68 162.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17342,7 +17260,6 @@
 	)
 	(label "DSW13"
 		(at 287.02 115.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17353,7 +17270,6 @@
 	)
 	(label "DSW12"
 		(at 287.02 123.19 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17364,7 +17280,6 @@
 	)
 	(label "DB5"
 		(at 203.2 74.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17375,7 +17290,6 @@
 	)
 	(label "1P_SHOOT2"
 		(at 115.57 90.17 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17386,7 +17300,6 @@
 	)
 	(label "DSW26"
 		(at 285.75 78.74 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17397,7 +17310,6 @@
 	)
 	(label "SPK+"
 		(at 341.63 72.39 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17408,7 +17320,6 @@
 	)
 	(label "DSW24"
 		(at 251.46 110.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17419,7 +17330,6 @@
 	)
 	(label "DB1"
 		(at 318.77 105.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17430,7 +17340,6 @@
 	)
 	(label "DSW12"
 		(at 251.46 71.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17441,7 +17350,6 @@
 	)
 	(label "1P_RIGHT"
 		(at 21.59 90.17 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17452,7 +17360,6 @@
 	)
 	(label "DSW22"
 		(at 240.03 87.63 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17463,7 +17370,6 @@
 	)
 	(label "DB0"
 		(at 318.77 97.79 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17474,7 +17380,6 @@
 	)
 	(label "DSW13"
 		(at 251.46 68.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17485,7 +17390,6 @@
 	)
 	(label "2P_SHOOT2"
 		(at 115.57 102.87 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17496,7 +17400,6 @@
 	)
 	(label "SERVICE"
 		(at 21.59 132.08 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17507,7 +17410,6 @@
 	)
 	(label "DSW16"
 		(at 285.75 81.28 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17518,7 +17420,6 @@
 	)
 	(label "DSW14"
 		(at 240.03 48.26 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17529,7 +17430,6 @@
 	)
 	(label "DSW11"
 		(at 240.03 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17540,7 +17440,6 @@
 	)
 	(label "DSW21"
 		(at 287.02 105.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17551,7 +17450,6 @@
 	)
 	(label "DB0"
 		(at 106.68 57.15 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17562,7 +17460,6 @@
 	)
 	(label "DB4"
 		(at 318.77 55.88 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17573,7 +17470,6 @@
 	)
 	(label "2P_LEFT"
 		(at 341.63 77.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17584,7 +17480,6 @@
 	)
 	(label "2P_RIGHT"
 		(at 21.59 102.87 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17595,7 +17490,6 @@
 	)
 	(label "2P_DOWN"
 		(at 21.59 208.28 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17606,7 +17500,6 @@
 	)
 	(label "DSW2"
 		(at 21.59 115.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17617,7 +17510,6 @@
 	)
 	(label "AS1"
 		(at 77.47 200.66 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17628,7 +17520,6 @@
 	)
 	(label "DSW23"
 		(at 287.02 113.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17639,7 +17530,6 @@
 	)
 	(label "COINT_CNT2"
 		(at 387.35 97.79 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17651,7 +17541,6 @@
 	(hierarchical_label "~{AFR2}"
 		(shape input)
 		(at 281.305 242.57 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17663,7 +17552,6 @@
 	(hierarchical_label "~{CABINP}"
 		(shape input)
 		(at 81.28 175.26 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17675,7 +17563,6 @@
 	(hierarchical_label "~{CABINP}"
 		(shape input)
 		(at 177.8 69.85 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17687,7 +17574,6 @@
 	(hierarchical_label "~{DIP}"
 		(shape input)
 		(at 293.37 88.9 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17699,7 +17585,6 @@
 	(hierarchical_label "~{CABINP}"
 		(shape input)
 		(at 81.28 193.04 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17711,7 +17596,6 @@
 	(hierarchical_label "~{AFR1}"
 		(shape input)
 		(at 281.305 223.52 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17723,7 +17607,6 @@
 	(hierarchical_label "~{CABINP}"
 		(shape input)
 		(at 177.8 87.63 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17735,7 +17618,6 @@
 	(hierarchical_label "~{VBLANK}"
 		(shape input)
 		(at 304.165 213.36 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17747,7 +17629,6 @@
 	(hierarchical_label "~{VBLANK}"
 		(shape input)
 		(at 304.165 232.41 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17759,7 +17640,6 @@
 	(hierarchical_label "~{DIP}"
 		(shape input)
 		(at 293.37 130.81 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17771,7 +17651,6 @@
 	(hierarchical_label "~{RESET}"
 		(shape output)
 		(at 396.24 204.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17783,7 +17662,6 @@
 	(hierarchical_label "~{CABINP}"
 		(shape input)
 		(at 81.28 69.85 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17795,7 +17673,6 @@
 	(hierarchical_label "~{CABINP}"
 		(shape input)
 		(at 81.28 87.63 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
