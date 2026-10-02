@@ -4636,7 +4636,7 @@
 		)
 		(uuid "c094eb94-3abe-404d-bbfc-8cd5637f800f")
 	)
-	(text "H2' To tiles and objects\n~{H2} to timing and objects\n~{H2M} to main"
+	(text "H2' To tiles and objects\n~{H2} to timing and objects\n~{H2B} to main"
 		(exclude_from_sim no)
 		(at 158.75 88.9 0)
 		(effects
@@ -6106,7 +6106,7 @@
 	)
 	(sheet
 		(at 22.86 248.92)
-		(size 26.67 20.32)
+		(size 26.67 39.37)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -6126,13 +6126,143 @@
 			)
 		)
 		(property "Sheetfile" "shram.kicad_sch"
-			(at 22.86 269.8246 0)
+			(at 22.86 288.8746 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left top)
 			)
+		)
+		(pin "H2B" input
+			(at 22.86 254 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "321e372d-d519-4311-8f77-64675a7becd2")
+		)
+		(pin "MRD" input
+			(at 22.86 259.08 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "0fcf869e-b4f2-404d-bcde-f343736f0343")
+		)
+		(pin "~{LACH}" input
+			(at 22.86 261.62 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "bf94c7b4-075a-4f0b-a9c1-550472dbdeba")
+		)
+		(pin "~{MSHRAM}" input
+			(at 22.86 264.16 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "d0ac2602-eee8-4392-afc2-783a6bb8a445")
+		)
+		(pin "H1B" input
+			(at 22.86 251.46 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "0dacce8d-dda8-418f-ab38-3b09b003489c")
+		)
+		(pin "~{WAIT}" output
+			(at 49.53 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "0119b169-e7c7-49e0-bef3-b518fbb3c2dd")
+		)
+		(pin "DB[7..0]" bidirectional
+			(at 22.86 276.86 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "69ed586f-3452-4002-af20-0511a2c4b806")
+		)
+		(pin "~{SRD}" input
+			(at 22.86 266.7 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "2bdc0477-8376-4fec-b627-883a8189bb50")
+		)
+		(pin "~{SVRAM}" input
+			(at 22.86 269.24 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "8d0f9dd5-d476-4ac7-aa38-7676bfe4d9da")
+		)
+		(pin "CLK1" input
+			(at 22.86 256.54 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "45796594-a1e8-4c8f-945c-f4feb43838a8")
+		)
+		(pin "AB[10..0]" input
+			(at 22.86 279.4 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "e0e555d4-34b2-4646-8a7a-fc92b9a745fa")
+		)
+		(pin "MD[7..0]" bidirectional
+			(at 22.86 281.94 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "35f92be7-d8b6-4e60-abfa-73e57ad9bffc")
+		)
+		(pin "AS[10..0]" input
+			(at 22.86 274.32 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "ff709e5e-e180-460b-9a24-b749784327fa")
 		)
 		(instances
 			(project "megazone"

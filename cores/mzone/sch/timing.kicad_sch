@@ -774,6 +774,775 @@
 				)
 			)
 		)
+		(symbol "74xx:74LS244_Split"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at 0 1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "74LS244_Split"
+				(at 0 -1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74ls241.pdf"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Octal Buffer and Line Driver With 3-State Output, active-low enables, non-inverting outputs, split symbol"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "7400 logic ttl low power schottky"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "DIP*W7.62mm* SOIC*7.5x12.8mm*P1.27mm* *SSOP*5.3x7.2mm*P0.65mm*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "74LS244_Split_1_0"
+				(polyline
+					(pts
+						(xy -3.81 3.81) (xy -3.81 -3.81) (xy 3.81 0) (xy -3.81 3.81)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin input inverted
+					(at 0 -6.35 90)
+					(length 4.445)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 7.62 0 180)
+					(length 3.81)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "18"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 0 0)
+					(length 3.81)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "74LS244_Split_1_1"
+				(polyline
+					(pts
+						(xy 0 0.762) (xy 0 -0.762) (xy -1.778 -0.762)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 0.762) (xy -0.762 0.762) (xy -0.762 -0.762)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "74LS244_Split_2_0"
+				(polyline
+					(pts
+						(xy -3.81 3.81) (xy -3.81 -3.81) (xy 3.81 0) (xy -3.81 3.81)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin tri_state line
+					(at 7.62 0 180)
+					(length 3.81)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 0 0)
+					(length 3.81)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "74LS244_Split_2_1"
+				(polyline
+					(pts
+						(xy 0 0.762) (xy 0 -0.762) (xy -1.778 -0.762)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 0.762) (xy -0.762 0.762) (xy -0.762 -0.762)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "74LS244_Split_3_0"
+				(polyline
+					(pts
+						(xy -3.81 3.81) (xy -3.81 -3.81) (xy 3.81 0) (xy -3.81 3.81)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin tri_state line
+					(at 7.62 0 180)
+					(length 3.81)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 0 0)
+					(length 3.81)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "74LS244_Split_3_1"
+				(polyline
+					(pts
+						(xy 0 0.762) (xy 0 -0.762) (xy -1.778 -0.762)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 0.762) (xy -0.762 0.762) (xy -0.762 -0.762)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "74LS244_Split_4_0"
+				(polyline
+					(pts
+						(xy -3.81 3.81) (xy -3.81 -3.81) (xy 3.81 0) (xy -3.81 3.81)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin tri_state line
+					(at 7.62 0 180)
+					(length 3.81)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 0 0)
+					(length 3.81)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "74LS244_Split_4_1"
+				(polyline
+					(pts
+						(xy 0 0.762) (xy 0 -0.762) (xy -1.778 -0.762)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 0.762) (xy -0.762 0.762) (xy -0.762 -0.762)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "74LS244_Split_5_0"
+				(polyline
+					(pts
+						(xy -3.81 3.81) (xy -3.81 -3.81) (xy 3.81 0) (xy -3.81 3.81)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin input line
+					(at -7.62 0 0)
+					(length 3.81)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input inverted
+					(at 0 -6.35 90)
+					(length 4.445)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "19"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 7.62 0 180)
+					(length 3.81)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "74LS244_Split_5_1"
+				(polyline
+					(pts
+						(xy 0 0.762) (xy 0 -0.762) (xy -1.778 -0.762)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 0.762) (xy -0.762 0.762) (xy -0.762 -0.762)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "74LS244_Split_6_0"
+				(polyline
+					(pts
+						(xy -3.81 3.81) (xy -3.81 -3.81) (xy 3.81 0) (xy -3.81 3.81)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin input line
+					(at -7.62 0 0)
+					(length 3.81)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 7.62 0 180)
+					(length 3.81)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "74LS244_Split_6_1"
+				(polyline
+					(pts
+						(xy 0 0.762) (xy 0 -0.762) (xy -1.778 -0.762)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 0.762) (xy -0.762 0.762) (xy -0.762 -0.762)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "74LS244_Split_7_0"
+				(polyline
+					(pts
+						(xy -3.81 3.81) (xy -3.81 -3.81) (xy 3.81 0) (xy -3.81 3.81)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin input line
+					(at -7.62 0 0)
+					(length 3.81)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 7.62 0 180)
+					(length 3.81)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "74LS244_Split_7_1"
+				(polyline
+					(pts
+						(xy 0 0.762) (xy 0 -0.762) (xy -1.778 -0.762)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 0.762) (xy -0.762 0.762) (xy -0.762 -0.762)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "74LS244_Split_8_0"
+				(polyline
+					(pts
+						(xy -3.81 3.81) (xy -3.81 -3.81) (xy 3.81 0) (xy -3.81 3.81)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin input line
+					(at -7.62 0 0)
+					(length 3.81)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "17"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 7.62 0 180)
+					(length 3.81)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "74LS244_Split_8_1"
+				(polyline
+					(pts
+						(xy 0 0.762) (xy 0 -0.762) (xy -1.778 -0.762)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 0.762) (xy -0.762 0.762) (xy -0.762 -0.762)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "74LS244_Split_9_0"
+				(pin power_in line
+					(at 0 -12.7 90)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 12.7 270)
+					(length 5.08)
+					(name "VCC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "20"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "74LS244_Split_9_1"
+				(rectangle
+					(start -5.08 7.62)
+					(end 5.08 -7.62)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+		)
 		(symbol "Device:C"
 			(pin_numbers hide)
 			(pin_names
@@ -11199,6 +11968,16 @@
 	)
 	(wire
 		(pts
+			(xy 288.29 95.25) (xy 293.37 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "050caa5f-28e4-41bc-966e-616c93d0a444")
+	)
+	(wire
+		(pts
 			(xy 107.95 274.32) (xy 111.76 274.32)
 		)
 		(stroke
@@ -11616,6 +12395,16 @@
 			(type default)
 		)
 		(uuid "1a083a4d-abb5-47b6-8acb-dae085e0c699")
+	)
+	(wire
+		(pts
+			(xy 323.85 106.68) (xy 327.66 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1a393ab0-fa73-4736-a8ec-de354b64136a")
 	)
 	(wire
 		(pts
@@ -13659,6 +14448,16 @@
 	)
 	(wire
 		(pts
+			(xy 323.85 95.25) (xy 327.66 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9395ff01-d05e-4ec4-99b8-e748ed2384fe")
+	)
+	(wire
+		(pts
 			(xy 193.04 248.92) (xy 200.66 248.92)
 		)
 		(stroke
@@ -14266,6 +15065,16 @@
 			(type default)
 		)
 		(uuid "b64c4ab7-8a10-493e-ba67-98fd22f8efff")
+	)
+	(wire
+		(pts
+			(xy 288.29 106.68) (xy 293.37 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b69a737f-b520-4339-84fc-f9897f1d014a")
 	)
 	(wire
 		(pts
@@ -16245,6 +17054,17 @@
 		)
 		(uuid "053c5711-7e90-4c05-920d-2ee39c24f622")
 	)
+	(label "H2"
+		(at 288.29 95.25 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "05442ee0-deb1-449a-9dec-e734e246bfc8")
+	)
 	(label "HRD1"
 		(at 320.04 27.94 0)
 		(effects
@@ -16695,6 +17515,17 @@
 		)
 		(uuid "30a97088-4843-49e1-806c-f4c0f0724eae")
 	)
+	(label "H1B"
+		(at 323.85 106.68 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "31bfcadc-4fb2-4bb5-b905-0556493f932e")
+	)
 	(label "V4"
 		(at 349.25 152.4 0)
 		(effects
@@ -16934,6 +17765,17 @@
 			(justify left bottom)
 		)
 		(uuid "524e82c0-63cf-4845-bf29-5f7ef5ace2ee")
+	)
+	(label "H2B"
+		(at 323.85 95.25 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "53aa7323-d312-47e6-96c8-6aa211f0f8b7")
 	)
 	(label "CLKM"
 		(at 347.98 83.82 0)
@@ -17264,6 +18106,17 @@
 			(justify left bottom)
 		)
 		(uuid "80fda2ea-3c04-4e73-b101-6b648d1e4b4d")
+	)
+	(label "H1"
+		(at 288.29 106.68 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "85396b47-5671-4065-b776-0aadda1ad259")
 	)
 	(label "~{ODB}0"
 		(at 228.6 181.61 0)
@@ -22391,6 +23244,127 @@
 		)
 	)
 	(symbol
+		(lib_id "74xx:74LS244_Split")
+		(at 316.23 106.68 0)
+		(unit 7)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "768c3ef2-74e9-4e9b-bc35-1166c18316d8")
+		(property "Reference" "B_A14"
+			(at 316.23 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "74LS244"
+			(at 316.23 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 316.23 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74ls241.pdf"
+			(at 316.23 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Octal Buffer and Line Driver With 3-State Output, active-low enables, non-inverting outputs, split symbol"
+			(at 316.23 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "0fd5807e-0c8a-4a67-90e4-9403c51bbb6d")
+		)
+		(pin "9"
+			(uuid "20eaf166-adff-4440-b93b-4454f7314979")
+		)
+		(pin "10"
+			(uuid "4f30b4df-10d1-42cb-a5ef-34ceb94816bd")
+		)
+		(pin "13"
+			(uuid "3fd47881-06ad-4d12-9673-2a1e66a3ef1b")
+		)
+		(pin "15"
+			(uuid "d51e3097-f866-4bc0-a5cf-11e4bc2c78a0")
+		)
+		(pin "1"
+			(uuid "b9ffeae6-c482-4d1f-91e5-f544389b5479")
+		)
+		(pin "19"
+			(uuid "c45508b4-ad89-4de3-843f-87e206bffe92")
+		)
+		(pin "7"
+			(uuid "20ac8bd8-21b0-40a8-bb6e-efb07776c923")
+		)
+		(pin "8"
+			(uuid "28791055-5633-440e-9c68-d8a9f997b406")
+		)
+		(pin "12"
+			(uuid "099773bc-5b97-40be-bb73-ca66d0da3612")
+		)
+		(pin "18"
+			(uuid "0e29d1bd-086a-4b14-a352-8bda686eb074")
+		)
+		(pin "5"
+			(uuid "beb768f3-ccc2-4ca1-aca9-5402047d714c")
+		)
+		(pin "2"
+			(uuid "b8650f7f-6ad0-4d6d-86ef-0af741325113")
+		)
+		(pin "4"
+			(uuid "b9e1a236-3800-4410-b3b1-878275f1299b")
+		)
+		(pin "16"
+			(uuid "6b91c808-d0e5-46f2-81ee-250eb3c4503c")
+		)
+		(pin "11"
+			(uuid "2ac5bed4-60df-4fd7-b2b8-74d57c584d6a")
+		)
+		(pin "20"
+			(uuid "37efdca1-7d08-4a36-86af-020e91deeb20")
+		)
+		(pin "17"
+			(uuid "cd4f6b5b-3984-4eac-9eea-06ec6bcfa6ba")
+		)
+		(pin "14"
+			(uuid "943c6f77-5f04-42a0-a3a1-fc21a0e73d4a")
+		)
+		(pin "6"
+			(uuid "f38a1c1b-2106-4096-9fd6-6cb2298d0267")
+		)
+		(instances
+			(project "megazone"
+				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/5f39f282-f6bc-4a92-96e2-bfbf1c87933f"
+					(reference "B_A14")
+					(unit 7)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "jt74:74LS32")
 		(at 135.89 199.39 0)
 		(mirror x)
@@ -23094,6 +24068,128 @@
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/5f39f282-f6bc-4a92-96e2-bfbf1c87933f"
 					(reference "F7")
 					(unit 2)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "74xx:74LS244_Split")
+		(at 316.23 95.25 0)
+		(unit 6)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "8ed6820a-376d-4c84-823d-5ecde29f6bff")
+		(property "Reference" "B_A14"
+			(at 316.23 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "74LS244"
+			(at 316.23 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 316.23 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74ls241.pdf"
+			(at 316.23 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Octal Buffer and Line Driver With 3-State Output, active-low enables, non-inverting outputs, split symbol"
+			(at 316.23 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "0fd5807e-0c8a-4a67-90e4-9403c51bbb6b")
+		)
+		(pin "9"
+			(uuid "20eaf166-adff-4440-b93b-4454f7314977")
+		)
+		(pin "10"
+			(uuid "4f30b4df-10d1-42cb-a5ef-34ceb94816bb")
+		)
+		(pin "13"
+			(uuid "0b44ee9c-1116-4431-bb3d-276bc2fbf13b")
+		)
+		(pin "15"
+			(uuid "f99812bf-4f2a-480a-8a0d-3226437625ad")
+		)
+		(pin "1"
+			(uuid "b9ffeae6-c482-4d1f-91e5-f544389b5477")
+		)
+		(pin "19"
+			(uuid "c45508b4-ad89-4de3-843f-87e206bffe90")
+		)
+		(pin "7"
+			(uuid "864de71e-0f1f-4563-bebb-c222069cc725")
+		)
+		(pin "8"
+			(uuid "28791055-5633-440e-9c68-d8a9f997b404")
+		)
+		(pin "12"
+			(uuid "099773bc-5b97-40be-bb73-ca66d0da3610")
+		)
+		(pin "18"
+			(uuid "0e29d1bd-086a-4b14-a352-8bda686eb072")
+		)
+		(pin "5"
+			(uuid "10f4bcdd-ffa5-4a8d-bb88-cdf5ac6f8087")
+		)
+		(pin "2"
+			(uuid "b8650f7f-6ad0-4d6d-86ef-0af741325111")
+		)
+		(pin "4"
+			(uuid "b9e1a236-3800-4410-b3b1-878275f12999")
+		)
+		(pin "16"
+			(uuid "6b91c808-d0e5-46f2-81ee-250eb3c4503a")
+		)
+		(pin "11"
+			(uuid "2ac5bed4-60df-4fd7-b2b8-74d57c584d68")
+		)
+		(pin "20"
+			(uuid "37efdca1-7d08-4a36-86af-020e91deeb1e")
+		)
+		(pin "17"
+			(uuid "cd4f6b5b-3984-4eac-9eea-06ec6bcfa6b8")
+		)
+		(pin "14"
+			(uuid "943c6f77-5f04-42a0-a3a1-fc21a0e73d48")
+		)
+		(pin "6"
+			(uuid "f38a1c1b-2106-4096-9fd6-6cb2298d0265")
+		)
+		(instances
+			(project "megazone"
+				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/5f39f282-f6bc-4a92-96e2-bfbf1c87933f"
+					(reference "B_A14")
+					(unit 6)
 				)
 			)
 		)
@@ -24125,6 +25221,72 @@
 		)
 	)
 	(symbol
+		(lib_name "GND_1")
+		(lib_id "power:GND")
+		(at 300.99 113.03 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a40c4043-87e4-45cc-ab68-ecf117b67051")
+		(property "Reference" "#PWR055"
+			(at 300.99 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 303.53 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 300.99 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 300.99 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 300.99 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c879e1cc-dd58-43ad-9b42-5dfbdd39f529")
+		)
+		(instances
+			(project "megazone"
+				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/5f39f282-f6bc-4a92-96e2-bfbf1c87933f"
+					(reference "#PWR055")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:VCC")
 		(at 177.8 274.32 0)
 		(unit 1)
@@ -25101,6 +26263,127 @@
 		)
 	)
 	(symbol
+		(lib_id "74xx:74LS244_Split")
+		(at 300.99 106.68 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c009a838-cae2-4231-a8d8-5e7238d22863")
+		(property "Reference" "B17"
+			(at 294.64 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "74LS244"
+			(at 306.07 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 300.99 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74ls241.pdf"
+			(at 300.99 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Octal Buffer and Line Driver With 3-State Output, active-low enables, non-inverting outputs, split symbol"
+			(at 300.99 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "15"
+			(uuid "e4185c22-c139-4731-9d05-c7acaa9742f5")
+		)
+		(pin "6"
+			(uuid "30326670-6a84-4c00-a496-6f3eb1083000")
+		)
+		(pin "5"
+			(uuid "cba16223-d236-4fd4-88fa-6dc0b7b29659")
+		)
+		(pin "8"
+			(uuid "ba92dcfb-ae81-4f11-845c-f8d8761961a6")
+		)
+		(pin "4"
+			(uuid "0925489a-5916-4779-ad05-1c1d650adc00")
+		)
+		(pin "7"
+			(uuid "aa5d4731-4299-4b0b-b7b1-6e739ad37f6c")
+		)
+		(pin "13"
+			(uuid "5f0a80be-246c-4c0e-bdb3-fb6a4c7542a5")
+		)
+		(pin "9"
+			(uuid "4650d8f3-9c46-4ead-ab6f-5ab259461689")
+		)
+		(pin "12"
+			(uuid "18d45775-b435-45bd-986d-5447d1d24c36")
+		)
+		(pin "2"
+			(uuid "b940b1b9-4e94-4a1e-baee-0e362bd769f5")
+		)
+		(pin "18"
+			(uuid "55715996-22c6-4226-96c3-07820a15534c")
+		)
+		(pin "1"
+			(uuid "f62fd521-9cd4-4358-a420-b57849e8be46")
+		)
+		(pin "10"
+			(uuid "83a32e4b-4e37-4d35-a541-5402b27fa4b9")
+		)
+		(pin "14"
+			(uuid "7a3c805f-5109-4e69-8589-451216bb58ba")
+		)
+		(pin "20"
+			(uuid "25f8ada5-e19e-4f53-beef-373b73306ad4")
+		)
+		(pin "16"
+			(uuid "dcbe5d2b-d4f1-428e-97b6-0e9e451d5d86")
+		)
+		(pin "17"
+			(uuid "2286632d-10fa-4ef4-8198-6ef6f67fb442")
+		)
+		(pin "3"
+			(uuid "56296503-1722-496a-89df-d95366b76721")
+		)
+		(pin "11"
+			(uuid "fe2e4565-8832-4f71-84f6-128e72d67c27")
+		)
+		(pin "19"
+			(uuid "62ea140e-f9a2-4d28-8a44-6c97fc02a6b8")
+		)
+		(instances
+			(project "megazone"
+				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/5f39f282-f6bc-4a92-96e2-bfbf1c87933f"
+					(reference "B17")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "jt74:74LS10")
 		(at 153.67 242.57 0)
 		(mirror x)
@@ -25437,6 +26720,127 @@
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/5f39f282-f6bc-4a92-96e2-bfbf1c87933f"
 					(reference "#PWR0313")
 					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "74xx:74LS244_Split")
+		(at 300.99 95.25 0)
+		(unit 8)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c5f903ae-544f-425f-95fe-80b5b54826fe")
+		(property "Reference" "B17"
+			(at 299.72 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "74LS244"
+			(at 300.99 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 300.99 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74ls241.pdf"
+			(at 300.99 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Octal Buffer and Line Driver With 3-State Output, active-low enables, non-inverting outputs, split symbol"
+			(at 300.99 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "15"
+			(uuid "e4185c22-c139-4731-9d05-c7acaa9742f2")
+		)
+		(pin "6"
+			(uuid "30326670-6a84-4c00-a496-6f3eb1082ffd")
+		)
+		(pin "5"
+			(uuid "cba16223-d236-4fd4-88fa-6dc0b7b29656")
+		)
+		(pin "8"
+			(uuid "ba92dcfb-ae81-4f11-845c-f8d8761961a3")
+		)
+		(pin "4"
+			(uuid "0925489a-5916-4779-ad05-1c1d650adbfd")
+		)
+		(pin "7"
+			(uuid "aa5d4731-4299-4b0b-b7b1-6e739ad37f69")
+		)
+		(pin "13"
+			(uuid "5f0a80be-246c-4c0e-bdb3-fb6a4c7542a2")
+		)
+		(pin "9"
+			(uuid "4650d8f3-9c46-4ead-ab6f-5ab259461686")
+		)
+		(pin "12"
+			(uuid "18d45775-b435-45bd-986d-5447d1d24c33")
+		)
+		(pin "2"
+			(uuid "efa361c5-92bf-4b1b-975c-b37dbc408261")
+		)
+		(pin "18"
+			(uuid "97e45cc1-ceb5-4b78-895d-d8dc746556c2")
+		)
+		(pin "1"
+			(uuid "25a962b2-d150-4fb2-a1e4-0d3654ad56e3")
+		)
+		(pin "10"
+			(uuid "83a32e4b-4e37-4d35-a541-5402b27fa4b6")
+		)
+		(pin "14"
+			(uuid "7a3c805f-5109-4e69-8589-451216bb58b7")
+		)
+		(pin "20"
+			(uuid "25f8ada5-e19e-4f53-beef-373b73306ad1")
+		)
+		(pin "16"
+			(uuid "dcbe5d2b-d4f1-428e-97b6-0e9e451d5d83")
+		)
+		(pin "17"
+			(uuid "5c6db543-0ab4-44cc-85d5-011f34b15a8a")
+		)
+		(pin "3"
+			(uuid "cb6ae838-eaef-4a6e-a749-2dd341623f8e")
+		)
+		(pin "11"
+			(uuid "fe2e4565-8832-4f71-84f6-128e72d67c24")
+		)
+		(pin "19"
+			(uuid "62ea140e-f9a2-4d28-8a44-6c97fc02a6b5")
+		)
+		(instances
+			(project "megazone"
+				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/5f39f282-f6bc-4a92-96e2-bfbf1c87933f"
+					(reference "B17")
+					(unit 8)
 				)
 			)
 		)
