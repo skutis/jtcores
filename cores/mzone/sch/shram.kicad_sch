@@ -7061,12 +7061,7 @@
 		(uuid "0355ba9c-d403-43ad-8a7c-312517acf017")
 	)
 	(label "VD2"
-<<<<<<< HEAD
-		(at 220.98 193.04 180)
-=======
 		(at 176.53 261.62 180)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7086,12 +7081,7 @@
 		(uuid "06a8176f-d8f9-44f7-bd39-94cd8a0bded0")
 	)
 	(label "VD7"
-<<<<<<< HEAD
-		(at 242.57 154.94 0)
-=======
 		(at 260.35 156.21 0)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7100,19 +7090,6 @@
 		)
 		(uuid "09e72f11-33f2-4e5b-8f44-825ec5276257")
 	)
-<<<<<<< HEAD
-	(label "~{MWRAMW}"
-		(at 168.91 153.67 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "0b6ae5a2-40df-4a53-a8d8-a6e66dad4624")
-	)
-=======
->>>>>>> cc74a88e9 (mzone core)
 	(label "AS6"
 		(at 171.45 179.07 0)
 		(effects
@@ -7164,12 +7141,7 @@
 		(uuid "18bc574c-ac2e-4cb4-b8d5-a46b1ac23c69")
 	)
 	(label "VD4"
-<<<<<<< HEAD
-		(at 242.57 147.32 0)
-=======
 		(at 260.35 148.59 0)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7218,21 +7190,7 @@
 		)
 		(uuid "1fa1d276-fd08-4fac-a19f-382c4b4b568c")
 	)
-<<<<<<< HEAD
-	(label "H1M"
-		(at 171.45 124.46 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "2251bfa6-918f-4978-adea-334de375a192")
-	)
-	(label "AB1"
-=======
 	(label "BA1"
->>>>>>> cc74a88e9 (mzone core)
 		(at 171.45 222.25 0)
 		(effects
 			(font
@@ -7243,12 +7201,7 @@
 		(uuid "258fe166-03cc-4870-ac53-da9f18c78cba")
 	)
 	(label "VD5"
-<<<<<<< HEAD
-		(at 242.57 149.86 0)
-=======
 		(at 260.35 151.13 0)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7288,12 +7241,7 @@
 		(uuid "391374f8-8125-4f56-90f5-11499b7eb977")
 	)
 	(label "VA3"
-<<<<<<< HEAD
-		(at 217.17 144.78 0)
-=======
 		(at 234.95 146.05 0)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7323,12 +7271,7 @@
 		(uuid "3f004a79-edd9-4873-a935-0336e6a937bb")
 	)
 	(label "VA6"
-<<<<<<< HEAD
-		(at 217.17 152.4 0)
-=======
 		(at 234.95 153.67 0)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7348,12 +7291,7 @@
 		(uuid "434f79dc-5aad-44dd-ba9d-e6736055d286")
 	)
 	(label "VD5"
-<<<<<<< HEAD
-		(at 220.98 185.42 180)
-=======
 		(at 176.53 254 180)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7363,12 +7301,7 @@
 		(uuid "47f68bbb-4188-4919-8549-878b26999f16")
 	)
 	(label "MD0"
-<<<<<<< HEAD
-		(at 250.19 198.12 180)
-=======
 		(at 205.74 266.7 180)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7378,12 +7311,7 @@
 		(uuid "4c7422fa-a8b1-41cf-840a-b722098a8404")
 	)
 	(label "VA7"
-<<<<<<< HEAD
-		(at 217.17 154.94 0)
-=======
 		(at 234.95 156.21 0)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7413,12 +7341,7 @@
 		(uuid "577e8689-934a-40b1-89f7-02482230fc89")
 	)
 	(label "MD7"
-<<<<<<< HEAD
-		(at 250.19 180.34 180)
-=======
 		(at 205.74 248.92 180)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7438,12 +7361,7 @@
 		(uuid "5938d177-f6a9-4a3d-be7e-58427aa0097b")
 	)
 	(label "VA5"
-<<<<<<< HEAD
-		(at 217.17 149.86 0)
-=======
 		(at 234.95 151.13 0)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7453,12 +7371,7 @@
 		(uuid "5bfab82b-1211-4fa6-9e61-6372057a6920")
 	)
 	(label "VD6"
-<<<<<<< HEAD
-		(at 242.57 152.4 0)
-=======
 		(at 260.35 153.67 0)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7467,24 +7380,8 @@
 		)
 		(uuid "5d93297c-8e42-4f48-956d-9eb62c42d3ab")
 	)
-<<<<<<< HEAD
-	(label "CLK1"
-		(at 132.08 121.92 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "5e2a0fc3-a0c3-4461-8512-2c28a429291f")
-	)
-	(label "VA1"
-		(at 217.17 139.7 0)
-=======
 	(label "VA1"
 		(at 234.95 140.97 0)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7504,12 +7401,7 @@
 		(uuid "70300230-2fea-42c9-8805-d5d63f792676")
 	)
 	(label "VA0"
-<<<<<<< HEAD
-		(at 217.17 137.16 0)
-=======
 		(at 234.95 138.43 0)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7529,12 +7421,7 @@
 		(uuid "758f1d1e-50b0-4c28-9d5b-d307a32e9ab4")
 	)
 	(label "VD6"
-<<<<<<< HEAD
-		(at 220.98 182.88 180)
-=======
 		(at 176.53 251.46 180)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7554,12 +7441,7 @@
 		(uuid "829016fd-3672-4649-93b3-1e6bf89dfad5")
 	)
 	(label "VD1"
-<<<<<<< HEAD
-		(at 242.57 139.7 0)
-=======
 		(at 260.35 140.97 0)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7569,12 +7451,7 @@
 		(uuid "8336f3ca-62b3-4732-9416-85e9c6b14bb5")
 	)
 	(label "VA8"
-<<<<<<< HEAD
-		(at 217.17 157.48 0)
-=======
 		(at 234.95 158.75 0)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7584,12 +7461,7 @@
 		(uuid "898cd2a1-508c-4609-8e15-9d863909721a")
 	)
 	(label "VD1"
-<<<<<<< HEAD
-		(at 220.98 195.58 180)
-=======
 		(at 176.53 264.16 180)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7609,12 +7481,7 @@
 		(uuid "90107aa7-a2c3-4658-91cc-f7611144b720")
 	)
 	(label "VA10"
-<<<<<<< HEAD
-		(at 217.17 162.56 0)
-=======
 		(at 234.95 163.83 0)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7634,12 +7501,7 @@
 		(uuid "949931e4-8f52-4e22-95ad-1f02b3ef00d1")
 	)
 	(label "VD0"
-<<<<<<< HEAD
-		(at 242.57 137.16 0)
-=======
 		(at 260.35 138.43 0)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7669,12 +7531,7 @@
 		(uuid "9dceb52c-ea66-484d-a788-24b514aa2de1")
 	)
 	(label "MD6"
-<<<<<<< HEAD
-		(at 250.19 182.88 180)
-=======
 		(at 205.74 251.46 180)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7693,24 +7550,8 @@
 		)
 		(uuid "a22b2749-2dbf-4f43-b2fc-af7f3983f9de")
 	)
-<<<<<<< HEAD
-	(label "~{MSHRAM}"
-		(at 212.09 205.74 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "a2c00c10-9819-42b0-8a32-47efeb92b627")
-	)
-	(label "VD4"
-		(at 220.98 187.96 180)
-=======
 	(label "VD4"
 		(at 176.53 256.54 180)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7730,12 +7571,7 @@
 		(uuid "a443a345-be04-484e-9df3-987f3abf94bf")
 	)
 	(label "MD2"
-<<<<<<< HEAD
-		(at 250.19 193.04 180)
-=======
 		(at 205.74 261.62 180)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7745,12 +7581,7 @@
 		(uuid "a7038d21-1468-41ef-a933-754152376da4")
 	)
 	(label "VD7"
-<<<<<<< HEAD
-		(at 220.98 180.34 180)
-=======
 		(at 176.53 248.92 180)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7760,12 +7591,7 @@
 		(uuid "a80d145e-708d-4c88-9d83-abbcfe44919b")
 	)
 	(label "VD2"
-<<<<<<< HEAD
-		(at 242.57 142.24 0)
-=======
 		(at 260.35 143.51 0)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7785,12 +7611,7 @@
 		(uuid "ab5610f6-731c-4e94-9500-313dac5577d6")
 	)
 	(label "VD3"
-<<<<<<< HEAD
-		(at 220.98 190.5 180)
-=======
 		(at 176.53 259.08 180)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7800,12 +7621,7 @@
 		(uuid "acbd45d5-ef54-4626-9558-016abfb69c90")
 	)
 	(label "MD5"
-<<<<<<< HEAD
-		(at 250.19 185.42 180)
-=======
 		(at 205.74 254 180)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7824,19 +7640,6 @@
 		)
 		(uuid "b236f8d4-e834-4729-82b4-1d447b595a42")
 	)
-<<<<<<< HEAD
-	(label "~{SVRAMW}"
-		(at 168.91 140.97 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b64925ab-10f7-4127-be6f-06681c7f2e41")
-	)
-=======
->>>>>>> cc74a88e9 (mzone core)
 	(label "VA9"
 		(at 201.93 144.78 0)
 		(effects
@@ -7848,12 +7651,7 @@
 		(uuid "b6ff2996-54d2-4029-b96f-6e5813eb73c5")
 	)
 	(label "VA4"
-<<<<<<< HEAD
-		(at 217.17 147.32 0)
-=======
 		(at 234.95 148.59 0)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7862,24 +7660,8 @@
 		)
 		(uuid "bb86d637-8e3f-42d1-ab3f-79226184c48d")
 	)
-<<<<<<< HEAD
-	(label "~{WAIT}"
-		(at 200.66 114.3 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "be571b30-a293-41c3-a798-e27c2ae55904")
-	)
-	(label "VA9"
-		(at 217.17 160.02 0)
-=======
 	(label "VA9"
 		(at 234.95 161.29 0)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7888,24 +7670,8 @@
 		)
 		(uuid "be7fb3dd-5f3e-47db-8b8c-13cb3df86d50")
 	)
-<<<<<<< HEAD
-	(label "~{SVRAM}"
-		(at 171.45 116.84 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "bea4bcab-e778-4c16-884c-00dc947fc153")
-	)
-	(label "MD3"
-		(at 250.19 190.5 180)
-=======
 	(label "MD3"
 		(at 205.74 259.08 180)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7936,7 +7702,6 @@
 	)
 	(label "~{MWRAMW}"
 		(at 110.49 153.67 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7986,12 +7751,7 @@
 		(uuid "d4820ae0-bd42-4bad-8a15-0961020fad38")
 	)
 	(label "MD1"
-<<<<<<< HEAD
-		(at 250.19 195.58 180)
-=======
 		(at 205.74 264.16 180)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8000,19 +7760,6 @@
 		)
 		(uuid "d6e5492a-056b-41e8-93da-fc7af4f9c328")
 	)
-<<<<<<< HEAD
-	(label "H2M"
-		(at 171.45 127 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "d8223fe1-c82f-4cc3-bc6d-9fd7dfe1752d")
-	)
-=======
->>>>>>> cc74a88e9 (mzone core)
 	(label "AS1"
 		(at 171.45 209.55 0)
 		(effects
@@ -8024,12 +7771,7 @@
 		(uuid "d862826b-700c-472e-9afd-f8c2188984d7")
 	)
 	(label "VD3"
-<<<<<<< HEAD
-		(at 242.57 144.78 0)
-=======
 		(at 260.35 146.05 0)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8049,12 +7791,7 @@
 		(uuid "da3255f5-287e-486a-be2e-81bbdc3c0ced")
 	)
 	(label "VA2"
-<<<<<<< HEAD
-		(at 217.17 142.24 0)
-=======
 		(at 234.95 143.51 0)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8074,12 +7811,7 @@
 		(uuid "e34a977e-c765-4bf9-ab16-923e0b5757ec")
 	)
 	(label "MD4"
-<<<<<<< HEAD
-		(at 250.19 187.96 180)
-=======
 		(at 205.74 256.54 180)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8128,21 +7860,7 @@
 		)
 		(uuid "ed790bbb-d3ec-43ee-9d63-82b7ad197f7e")
 	)
-<<<<<<< HEAD
-	(label "UK 2H?"
-		(at 158.75 231.14 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "eef3b732-36e2-4ed3-ae6c-4e49cbe430b0")
-	)
-	(label "AB6"
-=======
 	(label "BA6"
->>>>>>> cc74a88e9 (mzone core)
 		(at 171.45 191.77 0)
 		(effects
 			(font
@@ -8153,12 +7871,7 @@
 		(uuid "ef194454-e359-4a5c-8cfb-857d80321788")
 	)
 	(label "~{MWRAMW}"
-<<<<<<< HEAD
-		(at 212.09 203.2 0)
-=======
 		(at 167.64 271.78 0)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8167,14 +7880,8 @@
 		)
 		(uuid "f02ed630-744f-4932-8540-8d579441bac5")
 	)
-<<<<<<< HEAD
-	(label "~{SRD}"
-		(at 171.45 114.3 0)
-=======
 	(label "~{WRIT}"
 		(at 99.06 161.29 0)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8204,12 +7911,7 @@
 		(uuid "f8792597-b908-463f-a751-200955d49ea5")
 	)
 	(label "VD0"
-<<<<<<< HEAD
-		(at 220.98 198.12 180)
-=======
 		(at 176.53 266.7 180)
-		(fields_autoplaced yes)
->>>>>>> cc74a88e9 (mzone core)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8241,7 +7943,6 @@
 	(hierarchical_label "BA[10..0]"
 		(shape input)
 		(at 152.4 181.61 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8253,7 +7954,6 @@
 	(hierarchical_label "MRD"
 		(shape input)
 		(at 80.01 158.75 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8265,7 +7965,6 @@
 	(hierarchical_label "AS[10..0]"
 		(shape input)
 		(at 152.4 168.91 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8277,7 +7976,6 @@
 	(hierarchical_label "~{LACH}"
 		(shape input)
 		(at 80.01 153.67 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8289,7 +7987,6 @@
 	(hierarchical_label "DB[7..0]"
 		(shape bidirectional)
 		(at 168.91 88.9 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8301,7 +7998,6 @@
 	(hierarchical_label "H2B"
 		(shape input)
 		(at 152.4 160.02 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8313,7 +8009,6 @@
 	(hierarchical_label "H1B"
 		(shape input)
 		(at 177.8 124.46 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8325,7 +8020,6 @@
 	(hierarchical_label "~{SVRAM}"
 		(shape input)
 		(at 177.8 116.84 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8337,7 +8031,6 @@
 	(hierarchical_label "~{MSHRAM}"
 		(shape input)
 		(at 176.53 274.32 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8349,7 +8042,6 @@
 	(hierarchical_label "MD[7..0]"
 		(shape bidirectional)
 		(at 177.8 280.67 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8361,7 +8053,6 @@
 	(hierarchical_label "~{MSHRAM}"
 		(shape input)
 		(at 80.01 151.13 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8373,7 +8064,6 @@
 	(hierarchical_label "~{WAIT}"
 		(shape output)
 		(at 200.66 114.3 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8385,7 +8075,6 @@
 	(hierarchical_label "CLK1"
 		(shape input)
 		(at 123.19 121.92 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8397,7 +8086,6 @@
 	(hierarchical_label "~{SRD}"
 		(shape input)
 		(at 177.8 114.3 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)

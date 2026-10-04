@@ -4997,7 +4997,7 @@
 	)
 	(wire
 		(pts
-			(xy 295.91 140.97) (xy 304.8 140.97)
+			(xy 295.91 140.97) (xy 300.99 140.97)
 		)
 		(stroke
 			(width 0)
@@ -5107,7 +5107,7 @@
 	)
 	(wire
 		(pts
-			(xy 295.91 167.64) (xy 304.8 167.64)
+			(xy 295.91 167.64) (xy 300.99 167.64)
 		)
 		(stroke
 			(width 0)
@@ -5597,7 +5597,7 @@
 	)
 	(wire
 		(pts
-			(xy 295.91 154.94) (xy 304.8 154.94)
+			(xy 295.91 154.94) (xy 300.99 154.94)
 		)
 		(stroke
 			(width 0)
@@ -5807,16 +5807,6 @@
 		)
 		(uuid "026a94a4-6045-4996-9da9-799391205965")
 	)
-	(label "BLUE"
-		(at 298.45 167.64 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "05469dab-d649-4eee-b93a-71461e24810e")
-	)
 	(label "OCOL0"
 		(at 160.02 143.51 0)
 		(effects
@@ -6017,16 +6007,6 @@
 		)
 		(uuid "c17176a1-4137-4c75-af63-fb4a793d6cdd")
 	)
-	(label "GREEN"
-		(at 298.45 154.94 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "cc78189c-e394-4151-952b-a406a15451bb")
-	)
 	(label "OCOL2"
 		(at 160.02 148.59 0)
 		(effects
@@ -6036,16 +6016,6 @@
 			(justify left bottom)
 		)
 		(uuid "d0cf8b7b-ba78-4630-a6f7-13996c9c5967")
-	)
-	(label "RED"
-		(at 298.45 140.97 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "d4f06092-75c2-43d3-bf85-0092f824b056")
 	)
 	(label "B0"
 		(at 276.86 134.62 0)
@@ -6118,6 +6088,17 @@
 		)
 		(uuid "00a6a095-0405-475b-9a01-3b1e23ed9c9d")
 	)
+	(hierarchical_label "BLUE"
+		(shape output)
+		(at 300.99 167.64 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "369304f9-37c1-4fc4-b115-f9d0cb88cd9c")
+	)
 	(hierarchical_label "SEL"
 		(shape input)
 		(at 146.05 170.18 180)
@@ -6129,6 +6110,17 @@
 		)
 		(uuid "677e05f5-0c73-47ea-83e0-840300b62de5")
 	)
+	(hierarchical_label "RED"
+		(shape output)
+		(at 300.99 140.97 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "852b1802-42cd-47d2-af46-b47f6b1777e3")
+	)
 	(hierarchical_label "TCOL''[3..0]"
 		(shape input)
 		(at 154.94 153.67 180)
@@ -6139,6 +6131,17 @@
 			(justify right)
 		)
 		(uuid "c1f260a4-0611-4970-8ab0-ba0bd9fbaceb")
+	)
+	(hierarchical_label "GREEN"
+		(shape output)
+		(at 300.99 154.94 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c3b01e2d-8215-462f-8ac8-5981dc92b923")
 	)
 	(symbol
 		(lib_id "Device:R")

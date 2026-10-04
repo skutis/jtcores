@@ -12436,6 +12436,16 @@
 		)
 		(uuid "1cb2ac02-1caa-46b9-b42f-117b7ab40d7c")
 	)
+	(bus
+		(pts
+			(xy 290.83 22.86) (xy 290.83 17.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1ced196d-ba18-441d-8212-814480249f04")
+	)
 	(wire
 		(pts
 			(xy 210.82 142.24) (xy 219.71 142.24)
@@ -14645,6 +14655,16 @@
 			(type default)
 		)
 		(uuid "9e255a4b-0a2a-4829-aed4-cf37ddc9d149")
+	)
+	(bus
+		(pts
+			(xy 290.83 17.78) (xy 294.64 17.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9e2e9f26-37c0-4327-96b0-9e9b05adf80e")
 	)
 	(bus
 		(pts
@@ -17056,7 +17076,6 @@
 	)
 	(label "H2"
 		(at 288.29 95.25 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17517,7 +17536,6 @@
 	)
 	(label "H1B"
 		(at 323.85 106.68 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17768,7 +17786,6 @@
 	)
 	(label "H2B"
 		(at 323.85 95.25 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -18109,7 +18126,6 @@
 	)
 	(label "H1"
 		(at 288.29 106.68 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19020,6 +19036,17 @@
 			(justify left)
 		)
 		(uuid "d1b63677-a03b-44c7-98ba-ae8c4e3af9ff")
+	)
+	(hierarchical_label "~{FIX}"
+		(shape output)
+		(at 294.64 17.78 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "f7d7a75e-e843-4167-a9d2-944da3d357af")
 	)
 	(symbol
 		(lib_id "power:GND")
