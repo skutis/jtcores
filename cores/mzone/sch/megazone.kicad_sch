@@ -6249,8 +6249,8 @@
 		)
 	)
 	(sheet
-		(at 24.13 132.08)
-		(size 22.86 19.05)
+		(at 96.52 114.3)
+		(size 20.32 19.05)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -6261,7 +6261,7 @@
 		)
 		(uuid "47e75e4f-6f19-40f9-a36d-bbd3cfcad077")
 		(property "Sheetname" "Color mixer"
-			(at 24.13 131.3684 0)
+			(at 96.52 113.5884 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6270,13 +6270,103 @@
 			)
 		)
 		(property "Sheetfile" "color_mixer.kicad_sch"
-			(at 24.13 151.7146 0)
+			(at 96.52 133.9346 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left top)
 			)
+		)
+		(pin "OCOL[3..0]" input
+			(at 96.52 130.81 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "e839d5fb-b131-44c2-86b6-721ab084361f")
+		)
+		(pin "TCOL''[3..0]" input
+			(at 96.52 128.27 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "3fcf3fe5-3c41-496a-a1a5-002b86ffe458")
+		)
+		(pin "SEL" input
+			(at 96.52 124.46 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "5140ac03-ce7e-46fe-9afe-c9a3270a149c")
+		)
+		(pin "~{BLANK}" input
+			(at 96.52 119.38 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "45279bc7-0e87-47b8-a85a-caddb5bf0d33")
+		)
+		(pin "CFIX" input
+			(at 96.52 121.92 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "f8c182c4-df5f-442c-8d38-49653e6b7a47")
+		)
+		(pin "~{CHBLANK}" input
+			(at 96.52 116.84 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "00fcb106-14d7-4d15-b040-b36eceea1d0f")
+		)
+		(pin "RED" output
+			(at 116.84 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "cfbc7e99-daa8-4567-86c7-102dbbe4691c")
+		)
+		(pin "GREEN" output
+			(at 116.84 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "c2fc051e-9ac4-43b4-9ece-4db6f5b021f7")
+		)
+		(pin "BLUE" output
+			(at 116.84 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "b0a739a2-ba99-45a8-8a27-1dc78b30c234")
 		)
 		(instances
 			(project "megazone"
@@ -6325,8 +6415,8 @@
 		)
 	)
 	(sheet
-		(at 22.86 248.92)
-		(size 26.67 39.37)
+		(at 138.43 194.31)
+		(size 17.78 35.56)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -6337,7 +6427,7 @@
 		)
 		(uuid "610cdb1b-17e0-43d7-a514-4891bf2b2c29")
 		(property "Sheetname" "Shared RAM"
-			(at 22.86 248.2084 0)
+			(at 138.43 193.5984 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6346,7 +6436,7 @@
 			)
 		)
 		(property "Sheetfile" "shram.kicad_sch"
-			(at 22.86 288.8746 0)
+			(at 138.43 230.4546 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6355,7 +6445,7 @@
 			)
 		)
 		(pin "H2B" input
-			(at 22.86 254 180)
+			(at 138.43 199.39 180)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6365,7 +6455,7 @@
 			(uuid "321e372d-d519-4311-8f77-64675a7becd2")
 		)
 		(pin "MRD" input
-			(at 22.86 259.08 180)
+			(at 138.43 204.47 180)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6375,7 +6465,7 @@
 			(uuid "0fcf869e-b4f2-404d-bcde-f343736f0343")
 		)
 		(pin "~{LACH}" input
-			(at 22.86 261.62 180)
+			(at 138.43 207.01 180)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6385,7 +6475,7 @@
 			(uuid "bf94c7b4-075a-4f0b-a9c1-550472dbdeba")
 		)
 		(pin "~{MSHRAM}" input
-			(at 22.86 264.16 180)
+			(at 138.43 209.55 180)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6395,7 +6485,7 @@
 			(uuid "d0ac2602-eee8-4392-afc2-783a6bb8a445")
 		)
 		(pin "H1B" input
-			(at 22.86 251.46 180)
+			(at 138.43 196.85 180)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6405,7 +6495,7 @@
 			(uuid "0dacce8d-dda8-418f-ab38-3b09b003489c")
 		)
 		(pin "~{WAIT}" output
-			(at 49.53 264.16 0)
+			(at 156.21 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6415,7 +6505,7 @@
 			(uuid "0119b169-e7c7-49e0-bef3-b518fbb3c2dd")
 		)
 		(pin "DB[7..0]" bidirectional
-			(at 22.86 276.86 180)
+			(at 138.43 222.25 180)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6425,7 +6515,7 @@
 			(uuid "69ed586f-3452-4002-af20-0511a2c4b806")
 		)
 		(pin "~{SRD}" input
-			(at 22.86 266.7 180)
+			(at 138.43 212.09 180)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6435,7 +6525,7 @@
 			(uuid "2bdc0477-8376-4fec-b627-883a8189bb50")
 		)
 		(pin "~{SVRAM}" input
-			(at 22.86 269.24 180)
+			(at 138.43 214.63 180)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6445,7 +6535,7 @@
 			(uuid "8d0f9dd5-d476-4ac7-aa38-7676bfe4d9da")
 		)
 		(pin "CLK1" input
-			(at 22.86 256.54 180)
+			(at 138.43 201.93 180)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6455,7 +6545,7 @@
 			(uuid "45796594-a1e8-4c8f-945c-f4feb43838a8")
 		)
 		(pin "AB[10..0]" input
-			(at 22.86 279.4 180)
+			(at 138.43 224.79 180)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6465,7 +6555,7 @@
 			(uuid "e0e555d4-34b2-4646-8a7a-fc92b9a745fa")
 		)
 		(pin "MD[7..0]" bidirectional
-			(at 22.86 281.94 180)
+			(at 138.43 227.33 180)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6475,7 +6565,7 @@
 			(uuid "35f92be7-d8b6-4e60-abfa-73e57ad9bffc")
 		)
 		(pin "AS[10..0]" input
-			(at 22.86 274.32 180)
+			(at 138.43 219.71 180)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6569,8 +6659,8 @@
 		)
 	)
 	(sheet
-		(at 24.13 185.42)
-		(size 20.32 21.59)
+		(at 123.19 149.86)
+		(size 19.05 30.48)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -6581,7 +6671,7 @@
 		)
 		(uuid "e41ea64a-5948-44aa-8541-f81680ad8306")
 		(property "Sheetname" "Sub CPU"
-			(at 24.13 184.7084 0)
+			(at 123.19 149.1484 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6590,13 +6680,133 @@
 			)
 		)
 		(property "Sheetfile" "scpu.kicad_sch"
-			(at 24.13 207.5946 0)
+			(at 123.19 180.9246 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left top)
 			)
+		)
+		(pin "SPK-" output
+			(at 142.24 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "9bc847ee-ac52-40be-8cb4-afba5232a0ee")
+		)
+		(pin "SPK+" output
+			(at 142.24 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "2ef75386-d4f0-4ade-9d34-0d441fad74bf")
+		)
+		(pin "~{DIP}" output
+			(at 142.24 168.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "aa5ee50c-9dc4-4671-a774-3815e2dd0de6")
+		)
+		(pin "~{SVRAM}" output
+			(at 142.24 158.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "84b38354-aa12-4266-acc5-eb1f8775f146")
+		)
+		(pin "~{CABINP}" output
+			(at 142.24 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "734ae3ea-3e0d-4a5e-92f9-991268683f75")
+		)
+		(pin "~{AFR2}" output
+			(at 142.24 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "591c85c2-a6f4-4c68-8cad-6495d178b8c0")
+		)
+		(pin "~{INTMAIN}" output
+			(at 142.24 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "c029a239-1973-4c98-b540-70bee8fc9142")
+		)
+		(pin "~{SRD}" output
+			(at 142.24 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "19854568-b26f-4864-9c65-cab3dbf4e894")
+		)
+		(pin "DB[7..0]" bidirectional
+			(at 142.24 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "f9b62d3a-8623-4048-9254-e918cfc2ab2f")
+		)
+		(pin "SA[1..0]" output
+			(at 142.24 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "86b7c5ab-fe04-4736-8b75-ea8094323ef0")
+		)
+		(pin "BLANK" input
+			(at 123.19 152.4 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "637bc6b6-1ec6-4e52-bb6f-f05fb49fa8f4")
+		)
+		(pin "INTSND" input
+			(at 123.19 154.94 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "5d642d34-f17f-438f-ab94-bae7cd78c358")
 		)
 		(instances
 			(project "megazone"
