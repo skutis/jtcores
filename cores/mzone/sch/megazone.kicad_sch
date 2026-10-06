@@ -6534,7 +6534,7 @@
 			)
 			(uuid "8d0f9dd5-d476-4ac7-aa38-7676bfe4d9da")
 		)
-		(pin "CLK1" input
+		(pin "PXCK1" input
 			(at 138.43 201.93 180)
 			(effects
 				(font
