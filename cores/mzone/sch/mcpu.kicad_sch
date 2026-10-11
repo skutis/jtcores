@@ -12501,6 +12501,15 @@
 		(uuid "f289a78f-87e6-4ef5-b3c6-66169bf390a5")
 	)
 	(bus_entry
+		(at 299.72 138.43)
+		(size 2.54 2.54)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "001ce8d3-fee0-4e7f-9179-b7fe960d4fd2")
+	)
+	(bus_entry
 		(at 195.58 195.58)
 		(size 2.54 2.54)
 		(stroke
@@ -14443,6 +14452,15 @@
 			(type default)
 		)
 		(uuid "bb70fdd7-f09b-4026-be59-2ef3e6a6946a")
+	)
+	(bus_entry
+		(at 299.72 130.81)
+		(size 2.54 2.54)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bd648563-3397-42b9-9ec5-e367aee584dd")
 	)
 	(bus_entry
 		(at 363.22 81.28)
@@ -18048,6 +18066,16 @@
 		)
 		(uuid "6883bc6d-648f-4ed0-9763-475ea9a846a9")
 	)
+	(wire
+		(pts
+			(xy 287.02 130.81) (xy 299.72 130.81)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "68d4c773-fc6b-492a-b499-61fb9fa2444e")
+	)
 	(bus
 		(pts
 			(xy 106.68 76.2) (xy 106.68 78.74)
@@ -20888,6 +20916,16 @@
 		)
 		(uuid "c109a126-85d4-4f5e-b5bf-c4ba3da99bcb")
 	)
+	(bus
+		(pts
+			(xy 302.26 140.97) (xy 304.8 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c16aba1e-e415-4084-9ca2-7842c0c5c308")
+	)
 	(wire
 		(pts
 			(xy 151.13 24.13) (xy 156.21 24.13)
@@ -21260,6 +21298,16 @@
 	)
 	(wire
 		(pts
+			(xy 287.02 138.43) (xy 299.72 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cdfd5f6f-37f6-4034-abca-1fa71e14f26a")
+	)
+	(wire
+		(pts
 			(xy 279.4 29.21) (xy 285.75 29.21)
 		)
 		(stroke
@@ -21467,6 +21515,16 @@
 			(type default)
 		)
 		(uuid "d3cfc50c-4eab-47d0-bd24-675418e63b29")
+	)
+	(bus
+		(pts
+			(xy 302.26 133.35) (xy 302.26 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d54964df-1470-47c8-ae75-8a64b49b09d8")
 	)
 	(wire
 		(pts
@@ -22815,6 +22873,16 @@
 			(justify left bottom)
 		)
 		(uuid "0bc946d8-3770-45fb-a264-d7f199263ba8")
+	)
+	(label "COIN_CNT'1"
+		(at 287.02 138.43 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0c996ea9-37b8-4ddd-b0a1-298fec097c3f")
 	)
 	(label "MD'5"
 		(at 181.61 31.75 0)
@@ -25526,6 +25594,16 @@
 		)
 		(uuid "d063c1b0-a72c-4830-892a-94e22fff8c0e")
 	)
+	(label "COIN_CNT'2"
+		(at 287.02 130.81 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d13bb579-eb76-4a17-913b-7f352724d4e8")
+	)
 	(label "MA9"
 		(at 331.47 50.8 0)
 		(effects
@@ -26081,17 +26159,6 @@
 		)
 		(uuid "33864ae7-4bf3-48f1-911c-7c98ec409b58")
 	)
-	(hierarchical_label "COIN_CNT'_2"
-		(shape output)
-		(at 287.02 130.81 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "34e0fdee-1279-4b6d-88f7-5c5f0452713d")
-	)
 	(hierarchical_label "~{H2}"
 		(shape input)
 		(at 72.39 88.9 180)
@@ -26235,17 +26302,6 @@
 		)
 		(uuid "b8270c67-255e-432b-b09d-03f4842593a2")
 	)
-	(hierarchical_label "COIN_CNT'_1"
-		(shape output)
-		(at 287.02 138.43 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "bb3dfbc8-5438-4c19-8f6e-4c3aa1835eff")
-	)
 	(hierarchical_label "H2B"
 		(shape input)
 		(at 189.23 208.28 180)
@@ -26289,6 +26345,17 @@
 			(justify left)
 		)
 		(uuid "d58bb7c4-190e-4899-9f7c-bd057e27db8a")
+	)
+	(hierarchical_label "COIN_CNT'[2..1]"
+		(shape output)
+		(at 304.8 140.97 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "d84b2f1e-ccba-4a4c-8dc8-7daa57a3294a")
 	)
 	(hierarchical_label "FLIP"
 		(shape output)

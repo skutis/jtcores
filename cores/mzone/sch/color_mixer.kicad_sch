@@ -5565,16 +5565,6 @@
 	)
 	(wire
 		(pts
-			(xy 203.2 165.1) (xy 210.82 165.1)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cb9cfd74-f922-4a31-8dfe-86ae30e2af84")
-	)
-	(wire
-		(pts
 			(xy 241.3 154.94) (xy 241.3 147.32)
 		)
 		(stroke
@@ -5955,16 +5945,6 @@
 		)
 		(uuid "c03abbfc-f2e7-4076-a41c-51e3c7bde60a")
 	)
-	(label "PXCK2'"
-		(at 203.2 165.1 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "c17176a1-4137-4c75-af63-fb4a793d6cdd")
-	)
 	(label "OCOL2"
 		(at 160.02 148.59 0)
 		(effects
@@ -6100,6 +6080,17 @@
 			(justify left)
 		)
 		(uuid "852b1802-42cd-47d2-af46-b47f6b1777e3")
+	)
+	(hierarchical_label "PXCK2'"
+		(shape input)
+		(at 210.82 165.1 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "aebe3f90-a9c7-427e-8fb8-58b901707759")
 	)
 	(hierarchical_label "CFIX"
 		(shape input)
