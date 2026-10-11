@@ -4636,17 +4636,6 @@
 		)
 		(uuid "c094eb94-3abe-404d-bbfc-8cd5637f800f")
 	)
-	(text "H2' To tiles and objects\n~{H2} to timing and objects\n~{H2B} to main"
-		(exclude_from_sim no)
-		(at 158.75 88.9 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "dc4a4bb3-2c34-4eb3-84ea-57c4b9dc8535")
-	)
 	(symbol
 		(lib_id "power:VCC")
 		(at 304.8 193.04 0)
@@ -6032,7 +6021,7 @@
 			)
 			(uuid "f1b26582-c9c2-4784-a644-9e008a82ed30")
 		)
-		(pin "~{COLRAM'}" output
+		(pin "~{CRAM'}" output
 			(at 83.82 154.94 0)
 			(effects
 				(font
@@ -6211,8 +6200,8 @@
 		)
 	)
 	(sheet
-		(at 26.67 50.8)
-		(size 21.59 16.51)
+		(at 59.69 30.48)
+		(size 21.59 48.26)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -6223,7 +6212,7 @@
 		)
 		(uuid "38169478-425e-465f-ae73-cb39e377a8cb")
 		(property "Sheetname" "Tiles"
-			(at 26.67 50.0884 0)
+			(at 59.69 29.7684 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6232,13 +6221,213 @@
 			)
 		)
 		(property "Sheetfile" "tiles.kicad_sch"
-			(at 26.67 67.8946 0)
+			(at 59.69 79.3246 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left top)
 			)
+		)
+		(pin "~{SCROLLY}" input
+			(at 59.69 62.23 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "1217f7a8-37d3-4ea5-a630-7ba1f5d35511")
+		)
+		(pin "~{SCROLLX}" input
+			(at 59.69 59.69 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "d1681df6-830c-412b-95c1-792c18bb8ee2")
+		)
+		(pin "MA'[10..0]" input
+			(at 59.69 73.66 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "500bc7a8-57fe-4aaa-9f22-6277f90f426a")
+		)
+		(pin "HF[128..2]" input
+			(at 59.69 45.72 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "533bac5f-e253-473a-b7ba-97980ff6bd07")
+		)
+		(pin "MD[7..0]" bidirectional
+			(at 59.69 76.2 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "0a3583c1-c8ee-4f50-9a13-f9e51b3eea39")
+		)
+		(pin "VF[128..1]" input
+			(at 59.69 48.26 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "8c805e6f-f1b5-4c30-b163-ef52c157f9ba")
+		)
+		(pin "CFIX" output
+			(at 81.28 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "81beea77-ba35-4286-9cca-6d8e116ea964")
+		)
+		(pin "~{CHBLANK}" output
+			(at 81.28 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "d272f2a2-36b4-40b7-9450-4cb49715ea94")
+		)
+		(pin "~{H1}" input
+			(at 59.69 38.1 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "6d44bf70-ae09-4d35-9926-3a77463356dd")
+		)
+		(pin "H4" input
+			(at 59.69 43.18 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "d7ab893d-8c31-4a84-8333-53cb32f96211")
+		)
+		(pin "H1" input
+			(at 59.69 35.56 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "b283ba2b-81c5-454a-a5c5-b9a92df42abe")
+		)
+		(pin "WRIH" input
+			(at 59.69 50.8 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "27cae312-6e29-4427-9ad7-b0dfb133849e")
+		)
+		(pin "MWR" input
+			(at 59.69 71.12 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "cbd678ac-da5c-4e73-9252-24ef94cb40f6")
+		)
+		(pin "H2'" input
+			(at 59.69 40.64 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "a7ea2ebf-db52-4465-9324-4ee3af168ef9")
+		)
+		(pin "~{CRAM'}" input
+			(at 59.69 64.77 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "823bcf20-a99c-4217-80c8-fe6764745c15")
+		)
+		(pin "~{VRAM'}" input
+			(at 59.69 67.31 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "f58f407e-8c35-4254-b2ed-d328a91c928d")
+		)
+		(pin "~{HBLANK}" input
+			(at 59.69 57.15 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "25ca31dc-7f80-42c3-ae80-dec87622bc7b")
+		)
+		(pin "~{FIX}" input
+			(at 59.69 54.61 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "62702c9d-d96d-4d77-bf0e-69af1d8f7369")
+		)
+		(pin "TCOL''[3..0]" output
+			(at 81.28 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "78dda010-7c04-41f5-b87a-eb029eba3ac8")
+		)
+		(pin "PXCK2'" input
+			(at 59.69 33.02 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "bd6c95d3-dba3-4018-a504-a740a20f058a")
 		)
 		(instances
 			(project "megazone"
@@ -6378,7 +6567,7 @@
 	)
 	(sheet
 		(at 99.06 30.48)
-		(size 19.05 73.66)
+		(size 19.05 76.2)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -6398,7 +6587,7 @@
 			)
 		)
 		(property "Sheetfile" "timing.kicad_sch"
-			(at 99.06 104.7246 0)
+			(at 99.06 107.2646 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6547,7 +6736,7 @@
 			(uuid "e36b24ff-dce1-4bc7-87ce-3bb5eb2262ad")
 		)
 		(pin "V[256..1]" output
-			(at 118.11 53.34 0)
+			(at 118.11 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6557,7 +6746,7 @@
 			(uuid "a27f87ab-901d-4fe6-b075-ecbdaadbc48d")
 		)
 		(pin "OP3" output
-			(at 118.11 96.52 0)
+			(at 118.11 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6567,7 +6756,7 @@
 			(uuid "4524f4a3-61ff-47fb-a97c-aa3a180ae05d")
 		)
 		(pin "~{OP}2" output
-			(at 118.11 99.06 0)
+			(at 118.11 100.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6597,7 +6786,7 @@
 			(uuid "ebe38347-4ca0-4bd1-8c3c-c77d57200656")
 		)
 		(pin "OP0OP1" output
-			(at 118.11 101.6 0)
+			(at 118.11 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6647,7 +6836,7 @@
 			(uuid "53f36f46-b009-40fd-b3ea-f37981a2595f")
 		)
 		(pin "H2'" output
-			(at 118.11 43.18 0)
+			(at 118.11 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6657,7 +6846,7 @@
 			(uuid "2756064e-e82f-4393-b38d-12d6426732eb")
 		)
 		(pin "~{H2}" output
-			(at 118.11 45.72 0)
+			(at 118.11 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6667,7 +6856,7 @@
 			(uuid "5d05240a-e9f5-42e8-a52f-7441ef341759")
 		)
 		(pin "H2B" output
-			(at 118.11 48.26 0)
+			(at 118.11 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6675,6 +6864,26 @@
 				(justify right)
 			)
 			(uuid "aa9bf5ef-3492-4345-b089-ecf60c7b2904")
+		)
+		(pin "~{ODB}[5..0]" output
+			(at 118.11 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "168727db-78df-4c31-92e7-a19cc1d03b8b")
+		)
+		(pin "~{H1}" output
+			(at 118.11 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "9ac88ef9-00d8-45e0-ace1-6dcd31c217c2")
 		)
 		(instances
 			(project "megazone"
@@ -6853,8 +7062,8 @@
 		)
 	)
 	(sheet
-		(at 25.4 105.41)
-		(size 21.59 17.78)
+		(at 198.12 35.56)
+		(size 24.13 31.75)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -6865,7 +7074,7 @@
 		)
 		(uuid "7d6cb67e-2840-48bb-bdfa-8937eee90d74")
 		(property "Sheetname" "Objects 2"
-			(at 25.4 104.6984 0)
+			(at 198.12 34.8484 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6874,13 +7083,143 @@
 			)
 		)
 		(property "Sheetfile" "objects2.kicad_sch"
-			(at 25.4 123.7746 0)
+			(at 198.12 67.8946 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left top)
 			)
+		)
+		(pin "~{LB2EN}" input
+			(at 198.12 52.07 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "81baf56e-fe29-46e3-b01d-cef4521848be")
+		)
+		(pin "~{LB1EN}" input
+			(at 198.12 49.53 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "a6165d40-4c99-4d7f-89e6-68018b559b9c")
+		)
+		(pin "COL'[3..0]" input
+			(at 198.12 55.88 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "6896c3f5-a838-47dd-88b0-f6c03bbd0f37")
+		)
+		(pin "OPCK" input
+			(at 198.12 43.18 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "b85849a3-7442-4fe0-900b-0e9b3c4acaa0")
+		)
+		(pin "PXCK2" input
+			(at 198.12 40.64 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "c986fdcd-8b1f-4a23-a10d-c8f52f92e2c4")
+		)
+		(pin "PXCK1" input
+			(at 198.12 38.1 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "7a78e09c-d73d-4b86-a89c-a21cd2da458e")
+		)
+		(pin "~{OBEN''}" input
+			(at 198.12 58.42 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "6eec2c14-976e-47bd-999c-08a81e15715f")
+		)
+		(pin "XPOS[17..10]" input
+			(at 198.12 62.23 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "bc875707-1e88-4e0a-8d60-9b4baac22efc")
+		)
+		(pin "~{ODB5L}[1..2]" output
+			(at 222.25 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "c9a93497-9e4e-4df7-a85e-2f561c743623")
+		)
+		(pin "~{ODB}5" input
+			(at 198.12 46.99 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "266669c1-439a-4b13-a6a0-11f8b2793435")
+		)
+		(pin "SEL" output
+			(at 222.25 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "4d77ea38-ad2e-4022-a789-0bbd1a73500b")
+		)
+		(pin "OCOL[3..0]" output
+			(at 222.25 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "d39a62eb-9ff1-4835-a56a-180cd651633e")
+		)
+		(pin "XPOS[27..20]" input
+			(at 198.12 64.77 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "eecaf0ef-0504-4bb6-8902-e76b5ed1ed1e")
 		)
 		(instances
 			(project "megazone"
@@ -6891,8 +7230,8 @@
 		)
 	)
 	(sheet
-		(at 26.67 76.2)
-		(size 21.59 19.05)
+		(at 147.32 34.29)
+		(size 29.21 52.07)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -6903,7 +7242,7 @@
 		)
 		(uuid "d8a28836-aaeb-4e12-ae3e-25f30200210e")
 		(property "Sheetname" "Objects"
-			(at 26.67 75.4884 0)
+			(at 147.32 33.5784 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6912,13 +7251,233 @@
 			)
 		)
 		(property "Sheetfile" "objects.kicad_sch"
-			(at 26.67 95.8346 0)
+			(at 147.32 86.9446 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left top)
 			)
+		)
+		(pin "~{OBJRAM}" input
+			(at 147.32 74.93 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "c2d1a381-4b70-464e-a741-64429dd22a71")
+		)
+		(pin "H2'" input
+			(at 147.32 36.83 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "a28cff29-e87f-4a48-96e5-b635a6bc5de3")
+		)
+		(pin "~{LBRST}" input
+			(at 147.32 54.61 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "820ef97f-cfea-4483-99f2-acc3b775ab27")
+		)
+		(pin "XPOS[27..20]" output
+			(at 176.53 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "6e499fda-148c-4cbf-959e-f9e17b32c5aa")
+		)
+		(pin "MD[7..0]" bidirectional
+			(at 147.32 81.28 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "aae3ee0b-3bd3-49c7-8fe2-93d640224ad4")
+		)
+		(pin "OCLK[1..2]" input
+			(at 147.32 41.91 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "04451cd7-1f6f-4b0b-8522-3101ea06a033")
+		)
+		(pin "~{ODB5L}[1..2]" input
+			(at 147.32 52.07 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "c444bc3f-aeb1-4c53-a600-130d46309cb7")
+		)
+		(pin "XPOS[17..10]" output
+			(at 176.53 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "adb63449-7637-4ddf-8de1-8d0683183d0a")
+		)
+		(pin "WRIH" input
+			(at 147.32 46.99 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "85cd4076-1f5e-481b-a5d5-2a3e32594d98")
+		)
+		(pin "DMA" input
+			(at 147.32 59.69 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "1ff229c8-48b8-4b5f-a608-d0f985bb0a24")
+		)
+		(pin "MWR" input
+			(at 147.32 78.74 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "c7780901-95f1-44d4-8783-8d9ad153022d")
+		)
+		(pin "~{ODB}[5..0]" input
+			(at 147.32 49.53 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "1e2eff78-9ab0-4a3d-8c40-8dfaa1089152")
+		)
+		(pin "~{H2}" input
+			(at 147.32 39.37 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "3b62040e-ce14-4e84-bd23-49f7923ca0ee")
+		)
+		(pin "OA[7..0]" input
+			(at 147.32 69.85 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "a0432f51-e78c-41fd-b50a-13b267d1d96e")
+		)
+		(pin "MA'[9..0]" input
+			(at 147.32 83.82 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "78c37260-4bff-4eb5-87d7-3790825b1f4b")
+		)
+		(pin "~{OBEN''}" output
+			(at 176.53 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "c3cca4e2-4751-46e9-af70-77dc1aae7c0d")
+		)
+		(pin "COL'[3..0]" output
+			(at 176.53 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "2d43b632-00b1-4eb2-9817-186eeb627e1f")
+		)
+		(pin "OP0OP1" input
+			(at 147.32 67.31 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "54855e2a-4b13-4816-882c-1bd7ea77d0d0")
+		)
+		(pin "OPCK" input
+			(at 147.32 44.45 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "f5555287-1194-4caa-8161-0470f5b75f04")
+		)
+		(pin "~{OACNTEN'}" input
+			(at 147.32 57.15 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "700bcf49-ff67-414d-9fab-9b2cdddc4f27")
+		)
+		(pin "~{OP2}" input
+			(at 147.32 62.23 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "0fe76e8d-8407-4634-a964-769e7831acdf")
+		)
+		(pin "OP3" input
+			(at 147.32 64.77 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "834c7fd2-fd60-40f7-99ed-4f9903c82c6e")
 		)
 		(instances
 			(project "megazone"
