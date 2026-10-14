@@ -36871,6 +36871,14 @@
 				(hide yes)
 			)
 		)
+		(property "ki_locked" ""
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "ki_keywords" "TTL Buffer BUS 3State"
 			(at 0 0 0)
 			(effects
@@ -36916,24 +36924,6 @@
 					)
 				)
 				(number "1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin power_in line
-				(at 0 -15.24 90)
-				(length 5.08) hide
-				(name "GND"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "10"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -37121,24 +37111,6 @@
 					)
 				)
 			)
-			(pin power_in line
-				(at 0 15.24 270)
-				(length 5.08) hide
-				(name "VCC"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "20"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
 			(pin tri_state line
 				(at 12.7 -5.08 180)
 				(length 5.08)
@@ -37272,6 +37244,57 @@
 				(end 7.62 -15.24)
 				(stroke
 					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+		(symbol "74LS244_2_0"
+			(pin power_in line
+				(at 0 -7.62 90)
+				(length 2.54)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at 0 7.62 270)
+				(length 2.54)
+				(name "VCC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "20"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "74LS244_2_1"
+			(rectangle
+				(start -5.08 5.08)
+				(end 5.08 -5.08)
+				(stroke
+					(width 0)
 					(type default)
 				)
 				(fill
@@ -54435,7 +54458,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(property "Reference" "U"
-			(at -7.62 13.97 0)
+			(at 2.54 6.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -54443,7 +54466,7 @@
 			)
 		)
 		(property "Value" "74LS375"
-			(at -7.62 -16.51 0)
+			(at 5.08 -6.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -54451,7 +54474,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 0 0 0)
+			(at 0 -1.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -54460,7 +54483,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/gpn/sn74LS375"
-			(at 0 0 0)
+			(at -1.27 -13.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -54469,7 +54492,7 @@
 			)
 		)
 		(property "Description" "4-bit Latch"
-			(at 0 0 0)
+			(at 0 -16.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -54630,24 +54653,6 @@
 					)
 				)
 			)
-			(pin input line
-				(at 0 17.78 270)
-				(length 5.08) hide
-				(name "VCC"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "16"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
 			(pin output line
 				(at 12.7 7.62 180)
 				(length 5.08)
@@ -54757,24 +54762,6 @@
 				)
 			)
 			(pin input line
-				(at 0 -20.32 90)
-				(length 5.08) hide
-				(name "GND"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "8"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin input line
 				(at -12.7 0 0)
 				(length 5.08)
 				(name "D2"
@@ -54799,6 +54786,57 @@
 				(end 7.62 -15.24)
 				(stroke
 					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+		(symbol "74LS375_2_0"
+			(pin input line
+				(at 0 7.62 270)
+				(length 2.54)
+				(name "VCC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "16"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -7.62 90)
+				(length 2.54)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "74LS375_2_1"
+			(rectangle
+				(start -5.08 5.08)
+				(end 5.08 -5.08)
+				(stroke
+					(width 0)
 					(type default)
 				)
 				(fill
