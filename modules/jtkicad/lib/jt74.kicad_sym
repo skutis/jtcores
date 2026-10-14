@@ -29809,7 +29809,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(property "Reference" "U"
-			(at 6.35 13.97 0)
+			(at 2.54 6.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29817,7 +29817,7 @@
 			)
 		)
 		(property "Value" "74LS174"
-			(at 0 -5.08 0)
+			(at 5.08 -6.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29843,7 +29843,7 @@
 			)
 		)
 		(property "Description" "Hex D-type Flip-Flop, reset"
-			(at 0 0 0)
+			(at 2.54 -21.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29875,16 +29875,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(symbol "74LS174_0_0"
-			(text "hex flip flop"
-				(at 0 -10.16 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
 			)
 		)
 		(symbol "74LS174_1_0"
@@ -30153,9 +30143,22 @@
 					(type background)
 				)
 			)
+		)
+		(symbol "74LS174_2_1"
+			(rectangle
+				(start -5.08 5.08)
+				(end 5.08 -5.08)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
 			(pin power_in line
-				(at 0 12.7 270)
-				(length 5.08) hide
+				(at 0 7.62 270)
+				(length 2.54)
 				(name "VCC"
 					(effects
 						(font
@@ -30172,8 +30175,8 @@
 				)
 			)
 			(pin power_in line
-				(at 0 -15.24 90)
-				(length 5.08) hide
+				(at 0 -7.62 90)
+				(length 2.54)
 				(name "GND"
 					(effects
 						(font

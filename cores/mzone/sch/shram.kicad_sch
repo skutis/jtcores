@@ -10089,7 +10089,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Quad 2-input OR"
 			(at 208.28 119.38 0)
 			(effects
 				(font
