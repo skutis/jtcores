@@ -6747,7 +6747,6 @@
 	)
 	(label "~{ODB}5"
 		(at 186.69 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6758,7 +6757,6 @@
 	)
 	(label "SA[1..0]"
 		(at 313.69 209.55 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6769,7 +6767,6 @@
 	)
 	(label "SA[10..0]"
 		(at 201.93 210.82 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
