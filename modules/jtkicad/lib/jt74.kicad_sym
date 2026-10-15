@@ -40165,7 +40165,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(property "Reference" "U"
-			(at 6.35 21.59 0)
+			(at 0 21.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40173,7 +40173,7 @@
 			)
 		)
 		(property "Value" "74LS253"
-			(at 5.08 -24.13 0)
+			(at 0 -24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40190,7 +40190,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/gpn/sn74LS253"
-			(at 0 0 0)
+			(at -1.27 -19.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40199,7 +40199,7 @@
 			)
 		)
 		(property "Description" "Dual Multiplexer 4 to 1, 3-State Outputs"
-			(at 0 0 0)
+			(at -1.27 -19.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40231,24 +40231,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(symbol "74LS253_0_0"
-			(text "4-to-1 mux"
-				(at 0 -10.16 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(text "4-to-1 mux"
-				(at 0 7.62 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
 			)
 		)
 		(symbol "74LS253_1_0"
@@ -40378,24 +40360,6 @@
 					)
 				)
 			)
-			(pin power_in line
-				(at 0 20.32 270)
-				(length 5.08) hide
-				(name "VCC"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "16"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
 			(pin input line
 				(at -12.7 -20.32 0)
 				(length 5.08)
@@ -40504,24 +40468,6 @@
 					)
 				)
 			)
-			(pin power_in line
-				(at 0 -22.86 90)
-				(length 5.08) hide
-				(name "GND"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "8"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
 			(pin tri_state line
 				(at 12.7 0 180)
 				(length 5.08)
@@ -40547,6 +40493,73 @@
 				(end 7.62 -22.86)
 				(stroke
 					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(text "4-to-1 mux"
+				(at 0 -10.16 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(text "4-to-1 mux"
+				(at 0 7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+		)
+		(symbol "74LS253_2_0"
+			(pin power_in line
+				(at 0 7.62 270)
+				(length 2.54)
+				(name "VCC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "16"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at 0 -7.62 90)
+				(length 2.54)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "74LS253_2_1"
+			(rectangle
+				(start -5.08 5.08)
+				(end 5.08 -5.08)
+				(stroke
+					(width 0)
 					(type default)
 				)
 				(fill
@@ -41706,7 +41719,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(property "Reference" "U"
-			(at -7.62 13.97 0)
+			(at 2.54 6.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41714,7 +41727,7 @@
 			)
 		)
 		(property "Value" "74LS259"
-			(at -7.62 -13.97 0)
+			(at 5.08 -6.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41731,7 +41744,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.alldatasheet.com/datasheet-pdf/pdf/51061/FAIRCHILD/74LS259.html"
-			(at 0 0 0)
+			(at -2.54 -17.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41740,12 +41753,20 @@
 			)
 		)
 		(property "Description" "8-bit addressable latch"
-			(at 0 0 0)
+			(at 1.27 -16.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "ki_locked" ""
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(property "ki_keywords" "TTL REG DFF"
@@ -41764,24 +41785,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(symbol "74LS259_0_0"
-			(text " LATCHES"
-				(at 2.54 -11.43 0)
-				(effects
-					(font
-						(size 0.762 0.762)
-					)
-				)
-			)
-			(text "ADDRESSABLE"
-				(at 2.54 -10.16 0)
-				(effects
-					(font
-						(size 0.762 0.762)
-					)
-				)
 			)
 		)
 		(symbol "74LS259_1_0"
@@ -41911,24 +41914,6 @@
 					)
 				)
 			)
-			(pin power_in line
-				(at 0 12.7 270)
-				(length 5.08) hide
-				(name "VCC"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "16"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
 			(pin input line
 				(at -12.7 2.54 0)
 				(length 5.08)
@@ -42037,24 +42022,6 @@
 					)
 				)
 			)
-			(pin power_in line
-				(at 0 -12.7 90)
-				(length 5.08) hide
-				(name "GND"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "8"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
 			(pin output line
 				(at 12.7 0 180)
 				(length 5.08)
@@ -42080,6 +42047,73 @@
 				(end 7.62 -12.7)
 				(stroke
 					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(text " LATCHES"
+				(at 2.54 -11.43 0)
+				(effects
+					(font
+						(size 0.762 0.762)
+					)
+				)
+			)
+			(text "ADDRESSABLE"
+				(at 2.54 -10.16 0)
+				(effects
+					(font
+						(size 0.762 0.762)
+					)
+				)
+			)
+		)
+		(symbol "74LS259_2_0"
+			(pin power_in line
+				(at 0 7.62 270)
+				(length 2.54)
+				(name "VCC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "16"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at 0 -7.62 90)
+				(length 2.54)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "74LS259_2_1"
+			(rectangle
+				(start -5.08 5.08)
+				(end 5.08 -5.08)
+				(stroke
+					(width 0)
 					(type default)
 				)
 				(fill
