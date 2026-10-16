@@ -4,6 +4,11 @@
 	(generator_version "8.0")
 	(uuid "2da529e9-c7fb-413a-b419-dc3b8920c2fd")
 	(paper "A3")
+	(title_block
+		(title "Megazone")
+		(date "2026-10-16")
+		(company "Konami GX319")
+	)
 	(lib_symbols
 		(symbol "501_1"
 			(exclude_from_sim no)
@@ -4210,24 +4215,6 @@
 					)
 				)
 				(pin passive line
-					(at -11.43 1.27 0)
-					(length 5.08)
-					(name "NC"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "14"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
 					(at -11.43 -1.27 0)
 					(length 5.08)
 					(name "NC"
@@ -4238,6 +4225,24 @@
 						)
 					)
 					(number "15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -11.43 1.27 0)
+					(length 5.08)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "16"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -7366,6 +7371,7 @@
 	)
 	(label "VD2"
 		(at 200.66 96.52 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7376,6 +7382,7 @@
 	)
 	(label "VD2"
 		(at 176.53 261.62 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7386,6 +7393,7 @@
 	)
 	(label "MA'9"
 		(at 168.91 151.13 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7396,6 +7404,7 @@
 	)
 	(label "VD7"
 		(at 260.35 156.21 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7406,6 +7415,7 @@
 	)
 	(label "SA6"
 		(at 171.45 179.07 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7416,6 +7426,7 @@
 	)
 	(label "SA8"
 		(at 168.91 135.89 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7426,6 +7437,7 @@
 	)
 	(label "DB5"
 		(at 173.99 96.52 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7436,6 +7448,7 @@
 	)
 	(label "MA'5"
 		(at 171.45 186.69 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7446,6 +7459,7 @@
 	)
 	(label "SA0"
 		(at 171.45 212.09 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7456,6 +7470,7 @@
 	)
 	(label "VD4"
 		(at 260.35 148.59 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7466,6 +7481,7 @@
 	)
 	(label "SA2"
 		(at 171.45 214.63 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7476,6 +7492,7 @@
 	)
 	(label "VD3"
 		(at 200.66 99.06 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7486,6 +7503,7 @@
 	)
 	(label "SA10"
 		(at 168.91 143.51 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7496,6 +7514,7 @@
 	)
 	(label "VA7"
 		(at 201.93 177.8 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7506,6 +7525,7 @@
 	)
 	(label "MA'1"
 		(at 171.45 222.25 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7516,6 +7536,7 @@
 	)
 	(label "VD5"
 		(at 260.35 151.13 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7526,6 +7547,7 @@
 	)
 	(label "SA9"
 		(at 168.91 138.43 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7536,6 +7558,7 @@
 	)
 	(label "VD0"
 		(at 200.66 91.44 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7546,6 +7569,7 @@
 	)
 	(label "MA'3"
 		(at 171.45 219.71 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7556,6 +7580,7 @@
 	)
 	(label "VA3"
 		(at 234.95 146.05 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7566,6 +7591,7 @@
 	)
 	(label "MA'7"
 		(at 171.45 184.15 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7576,6 +7602,7 @@
 	)
 	(label "DB4"
 		(at 173.99 99.06 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7586,6 +7613,7 @@
 	)
 	(label "VA6"
 		(at 234.95 153.67 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7596,6 +7624,7 @@
 	)
 	(label "MA'2"
 		(at 171.45 227.33 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7606,6 +7635,7 @@
 	)
 	(label "VD5"
 		(at 176.53 254 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7616,6 +7646,7 @@
 	)
 	(label "MD0"
 		(at 205.74 266.7 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7626,6 +7657,7 @@
 	)
 	(label "VA7"
 		(at 234.95 156.21 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7636,6 +7668,7 @@
 	)
 	(label "SA5"
 		(at 171.45 173.99 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7646,6 +7679,7 @@
 	)
 	(label "SA3"
 		(at 171.45 207.01 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7656,6 +7690,7 @@
 	)
 	(label "MD7"
 		(at 205.74 248.92 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7666,6 +7701,7 @@
 	)
 	(label "SA7"
 		(at 171.45 171.45 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7676,6 +7712,7 @@
 	)
 	(label "VA5"
 		(at 234.95 151.13 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7686,6 +7723,7 @@
 	)
 	(label "VD6"
 		(at 260.35 153.67 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7696,6 +7734,7 @@
 	)
 	(label "VA1"
 		(at 234.95 140.97 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7706,6 +7745,7 @@
 	)
 	(label "VA0"
 		(at 201.93 218.44 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7716,6 +7756,7 @@
 	)
 	(label "VA0"
 		(at 234.95 138.43 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7726,6 +7767,7 @@
 	)
 	(label "DB7"
 		(at 173.99 91.44 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7736,6 +7778,7 @@
 	)
 	(label "VD6"
 		(at 176.53 251.46 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7746,6 +7789,7 @@
 	)
 	(label "DB6"
 		(at 173.99 93.98 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7756,6 +7800,7 @@
 	)
 	(label "VD1"
 		(at 260.35 140.97 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7766,6 +7811,7 @@
 	)
 	(label "VA8"
 		(at 234.95 158.75 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7776,6 +7822,7 @@
 	)
 	(label "VD1"
 		(at 176.53 264.16 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7786,6 +7833,7 @@
 	)
 	(label "VA[10..0]"
 		(at 209.55 167.64 90)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7796,6 +7844,7 @@
 	)
 	(label "VA10"
 		(at 234.95 163.83 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7806,6 +7855,7 @@
 	)
 	(label "VA5"
 		(at 201.93 180.34 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7816,6 +7866,7 @@
 	)
 	(label "VD0"
 		(at 260.35 138.43 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7826,6 +7877,7 @@
 	)
 	(label "MA'8"
 		(at 168.91 148.59 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7836,6 +7888,7 @@
 	)
 	(label "DB3"
 		(at 173.99 101.6 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7846,6 +7899,7 @@
 	)
 	(label "MD6"
 		(at 205.74 251.46 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7856,6 +7910,7 @@
 	)
 	(label "MA'10"
 		(at 168.91 156.21 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7866,6 +7921,7 @@
 	)
 	(label "VD4"
 		(at 176.53 256.54 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7876,6 +7932,7 @@
 	)
 	(label "VD6"
 		(at 200.66 106.68 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7886,6 +7943,7 @@
 	)
 	(label "MD2"
 		(at 205.74 261.62 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7896,6 +7954,7 @@
 	)
 	(label "VD7"
 		(at 176.53 248.92 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7906,6 +7965,7 @@
 	)
 	(label "VD2"
 		(at 260.35 143.51 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7916,6 +7976,7 @@
 	)
 	(label "VD4"
 		(at 200.66 101.6 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7926,6 +7987,7 @@
 	)
 	(label "VD3"
 		(at 176.53 259.08 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7936,6 +7998,7 @@
 	)
 	(label "MD5"
 		(at 205.74 254 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7946,6 +8009,7 @@
 	)
 	(label "MA'4"
 		(at 171.45 189.23 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7956,6 +8020,7 @@
 	)
 	(label "VA9"
 		(at 201.93 144.78 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7966,6 +8031,7 @@
 	)
 	(label "VA4"
 		(at 234.95 148.59 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7976,6 +8042,7 @@
 	)
 	(label "VA9"
 		(at 234.95 161.29 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7986,6 +8053,7 @@
 	)
 	(label "MD3"
 		(at 205.74 259.08 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7996,6 +8064,7 @@
 	)
 	(label "DB0"
 		(at 173.99 109.22 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8006,6 +8075,7 @@
 	)
 	(label "MA'0"
 		(at 171.45 224.79 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8016,6 +8086,7 @@
 	)
 	(label "~{MWRAMW}"
 		(at 110.49 153.67 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8026,6 +8097,7 @@
 	)
 	(label "VA8"
 		(at 201.93 142.24 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8036,6 +8108,7 @@
 	)
 	(label "VA4"
 		(at 201.93 182.88 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8046,6 +8119,7 @@
 	)
 	(label "VD7"
 		(at 200.66 109.22 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8056,6 +8130,7 @@
 	)
 	(label "VA10"
 		(at 201.93 149.86 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8066,6 +8141,7 @@
 	)
 	(label "MD1"
 		(at 205.74 264.16 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8076,6 +8152,7 @@
 	)
 	(label "SA1"
 		(at 171.45 209.55 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8086,6 +8163,7 @@
 	)
 	(label "VD3"
 		(at 260.35 146.05 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8096,6 +8174,7 @@
 	)
 	(label "VA6"
 		(at 201.93 185.42 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8106,6 +8185,7 @@
 	)
 	(label "VA2"
 		(at 234.95 143.51 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8116,6 +8196,7 @@
 	)
 	(label "VA2"
 		(at 201.93 220.98 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8126,6 +8207,7 @@
 	)
 	(label "MD4"
 		(at 205.74 256.54 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8134,8 +8216,20 @@
 		)
 		(uuid "e861f358-a946-43ec-99b3-1e3d272326bf")
 	)
+	(label "VD[7..0]"
+		(at 226.06 110.49 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e887b37a-6652-4979-9cb0-b70d90b1f262")
+	)
 	(label "SA4"
 		(at 171.45 176.53 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8146,6 +8240,7 @@
 	)
 	(label "~{SVRAMW}"
 		(at 215.9 119.38 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8156,6 +8251,7 @@
 	)
 	(label "VA1"
 		(at 201.93 215.9 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8166,6 +8262,7 @@
 	)
 	(label "VD5"
 		(at 200.66 104.14 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8176,6 +8273,7 @@
 	)
 	(label "MA'6"
 		(at 171.45 191.77 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8186,6 +8284,7 @@
 	)
 	(label "~{MWRAMW}"
 		(at 167.64 271.78 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8196,6 +8295,7 @@
 	)
 	(label "~{WRIT}"
 		(at 99.06 161.29 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8206,6 +8306,7 @@
 	)
 	(label "VD1"
 		(at 200.66 93.98 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8216,6 +8317,7 @@
 	)
 	(label "VA3"
 		(at 201.93 213.36 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8226,6 +8328,7 @@
 	)
 	(label "VD0"
 		(at 176.53 266.7 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8236,6 +8339,7 @@
 	)
 	(label "DB1"
 		(at 173.99 106.68 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8246,6 +8350,7 @@
 	)
 	(label "DB2"
 		(at 173.99 104.14 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8257,6 +8362,7 @@
 	(hierarchical_label "MA'[10..0]"
 		(shape input)
 		(at 152.4 181.61 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8268,6 +8374,7 @@
 	(hierarchical_label "MRD"
 		(shape input)
 		(at 80.01 158.75 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8279,6 +8386,7 @@
 	(hierarchical_label "SA[10..0]"
 		(shape input)
 		(at 152.4 168.91 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8290,6 +8398,7 @@
 	(hierarchical_label "~{LACH}"
 		(shape input)
 		(at 80.01 153.67 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8301,6 +8410,7 @@
 	(hierarchical_label "DB[7..0]"
 		(shape bidirectional)
 		(at 168.91 88.9 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8312,6 +8422,7 @@
 	(hierarchical_label "H2B"
 		(shape input)
 		(at 152.4 160.02 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8323,6 +8434,7 @@
 	(hierarchical_label "H1B"
 		(shape input)
 		(at 177.8 124.46 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8334,6 +8446,7 @@
 	(hierarchical_label "~{SSHRAM}"
 		(shape input)
 		(at 177.8 116.84 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8345,6 +8458,7 @@
 	(hierarchical_label "~{MSHRAM}"
 		(shape input)
 		(at 176.53 274.32 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8356,6 +8470,7 @@
 	(hierarchical_label "MD[7..0]"
 		(shape bidirectional)
 		(at 177.8 280.67 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8367,6 +8482,7 @@
 	(hierarchical_label "~{MSHRAM}"
 		(shape input)
 		(at 80.01 151.13 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8378,6 +8494,7 @@
 	(hierarchical_label "~{WAIT}"
 		(shape output)
 		(at 200.66 114.3 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8389,6 +8506,7 @@
 	(hierarchical_label "PXCK1"
 		(shape input)
 		(at 123.19 121.92 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8400,6 +8518,7 @@
 	(hierarchical_label "~{SRD}"
 		(shape input)
 		(at 177.8 114.3 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8903,7 +9022,7 @@
 		(pin "26"
 			(uuid "d0a9935f-3fde-41eb-9e02-793f8c944d79")
 		)
-		(pin "14"
+		(pin "16"
 			(uuid "cd5d7201-4a0a-4594-98a3-04055743f16b")
 		)
 		(pin "20"
@@ -9286,7 +9405,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "71a357da-0ded-4c3d-a5fe-0f77290591f3")
-		(property "Reference" "#PWR156"
+		(property "Reference" "#PWR0156"
 			(at 355.6 228.6 0)
 			(effects
 				(font
@@ -9336,7 +9455,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/610cdb1b-17e0-43d7-a514-4891bf2b2c29"
-					(reference "#PWR156")
+					(reference "#PWR0156")
 					(unit 1)
 				)
 			)
@@ -9844,7 +9963,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bd1ecf61-c7b2-43e8-9d4d-748d7fbfc534")
-		(property "Reference" "#PWR157"
+		(property "Reference" "#PWR0157"
 			(at 355.6 246.38 0)
 			(effects
 				(font
@@ -9894,7 +10013,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/610cdb1b-17e0-43d7-a514-4891bf2b2c29"
-					(reference "#PWR157")
+					(reference "#PWR0157")
 					(unit 1)
 				)
 			)

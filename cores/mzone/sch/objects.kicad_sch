@@ -4,881 +4,12 @@
 	(generator_version "8.0")
 	(uuid "814de387-7a9e-4209-a4c4-5ca39fbe7846")
 	(paper "A3")
+	(title_block
+		(title "Megazone")
+		(date "2026-10-16")
+		(company "Konami GX319")
+	)
 	(lib_symbols
-		(symbol "74LS10_1"
-			(pin_names
-				(offset 1.016)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "U"
-				(at 0 1.27 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "74LS10"
-				(at 0 -1.27 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "http://www.ti.com/lit/gpn/sn74LS10"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Triple 3-input NAND"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_locked" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "TTL Nand3"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "DIP?14*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "74LS10_1_1_1"
-				(arc
-					(start 0 -3.81)
-					(mid 3.7934 0)
-					(end 0 3.81)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 3.81) (xy -3.81 3.81) (xy -3.81 -3.81) (xy 0 -3.81)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(pin input line
-					(at -7.62 2.54 0)
-					(length 3.81)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output inverted
-					(at 7.62 0 180)
-					(length 3.81)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "12"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -7.62 -2.54 0)
-					(length 3.81)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "13"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -7.62 0 0)
-					(length 3.81)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "74LS10_1_1_2"
-				(arc
-					(start -3.81 -3.81)
-					(mid -2.589 0)
-					(end -3.81 3.81)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start -0.6096 -3.81)
-					(mid 2.1842 -2.5851)
-					(end 3.81 0)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy -3.81 -3.81) (xy -0.635 -3.81)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy -3.81 3.81) (xy -0.635 3.81)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy -0.635 3.81) (xy -3.81 3.81) (xy -3.81 3.81) (xy -3.556 3.4036) (xy -3.0226 2.2606) (xy -2.6924 1.0414)
-						(xy -2.6162 -0.254) (xy -2.7686 -1.4986) (xy -3.175 -2.7178) (xy -3.81 -3.81) (xy -3.81 -3.81)
-						(xy -0.635 -3.81)
-					)
-					(stroke
-						(width -25.4)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(arc
-					(start 3.81 0)
-					(mid 2.1915 2.5936)
-					(end -0.6096 3.81)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(pin input inverted
-					(at -7.62 2.54 0)
-					(length 4.318)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 7.62 0 180)
-					(length 3.81)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "12"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input inverted
-					(at -7.62 -2.54 0)
-					(length 4.318)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "13"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input inverted
-					(at -7.62 0 0)
-					(length 4.953)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "74LS10_1_2_1"
-				(arc
-					(start 0 -3.81)
-					(mid 3.7934 0)
-					(end 0 3.81)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 3.81) (xy -3.81 3.81) (xy -3.81 -3.81) (xy 0 -3.81)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(pin input line
-					(at -7.62 2.54 0)
-					(length 3.81)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -7.62 0 0)
-					(length 3.81)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -7.62 -2.54 0)
-					(length 3.81)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output inverted
-					(at 7.62 0 180)
-					(length 3.81)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "74LS10_1_2_2"
-				(arc
-					(start -3.81 -3.81)
-					(mid -2.589 0)
-					(end -3.81 3.81)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start -0.6096 -3.81)
-					(mid 2.1842 -2.5851)
-					(end 3.81 0)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy -3.81 -3.81) (xy -0.635 -3.81)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy -3.81 3.81) (xy -0.635 3.81)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy -0.635 3.81) (xy -3.81 3.81) (xy -3.81 3.81) (xy -3.556 3.4036) (xy -3.0226 2.2606) (xy -2.6924 1.0414)
-						(xy -2.6162 -0.254) (xy -2.7686 -1.4986) (xy -3.175 -2.7178) (xy -3.81 -3.81) (xy -3.81 -3.81)
-						(xy -0.635 -3.81)
-					)
-					(stroke
-						(width -25.4)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(arc
-					(start 3.81 0)
-					(mid 2.1915 2.5936)
-					(end -0.6096 3.81)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(pin input inverted
-					(at -7.62 2.54 0)
-					(length 4.318)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input inverted
-					(at -7.62 0 0)
-					(length 4.953)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input inverted
-					(at -7.62 -2.54 0)
-					(length 4.318)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 7.62 0 180)
-					(length 3.81)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "74LS10_1_3_1"
-				(arc
-					(start 0 -3.81)
-					(mid 3.7934 0)
-					(end 0 3.81)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 3.81) (xy -3.81 3.81) (xy -3.81 -3.81) (xy 0 -3.81)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(pin input line
-					(at -7.62 0 0)
-					(length 3.81)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "10"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -7.62 -2.54 0)
-					(length 3.81)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output inverted
-					(at 7.62 0 180)
-					(length 3.81)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -7.62 2.54 0)
-					(length 3.81)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "9"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "74LS10_1_3_2"
-				(arc
-					(start -3.81 -3.81)
-					(mid -2.589 0)
-					(end -3.81 3.81)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start -0.6096 -3.81)
-					(mid 2.1842 -2.5851)
-					(end 3.81 0)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy -3.81 -3.81) (xy -0.635 -3.81)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy -3.81 3.81) (xy -0.635 3.81)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy -0.635 3.81) (xy -3.81 3.81) (xy -3.81 3.81) (xy -3.556 3.4036) (xy -3.0226 2.2606) (xy -2.6924 1.0414)
-						(xy -2.6162 -0.254) (xy -2.7686 -1.4986) (xy -3.175 -2.7178) (xy -3.81 -3.81) (xy -3.81 -3.81)
-						(xy -0.635 -3.81)
-					)
-					(stroke
-						(width -25.4)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(arc
-					(start 3.81 0)
-					(mid 2.1915 2.5936)
-					(end -0.6096 3.81)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(pin input inverted
-					(at -7.62 0 0)
-					(length 4.953)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "10"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input inverted
-					(at -7.62 -2.54 0)
-					(length 4.318)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 7.62 0 180)
-					(length 3.81)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input inverted
-					(at -7.62 2.54 0)
-					(length 4.318)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "9"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "74LS10_1_4_0"
-				(pin power_in line
-					(at 0 7.62 270)
-					(length 5.08) hide
-					(name "VCC"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "14"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 0 -7.62 90)
-					(length 5.08) hide
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "74LS10_1_4_1"
-				(rectangle
-					(start -5.08 7.62)
-					(end 5.08 -7.62)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(text "+"
-					(at 0 6.35 0)
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-		)
 		(symbol "74LS174_1"
 			(pin_names
 				(offset 1.016)
@@ -4496,7 +3627,7 @@
 				(pin power_in line
 					(at 0 -7.62 90)
 					(length 5.08) hide
-					(name "VSS"
+					(name "GND"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4522,6 +3653,14 @@
 					)
 					(fill
 						(type background)
+					)
+				)
+				(text "+"
+					(at 0 6.35 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
 					)
 				)
 			)
@@ -4880,7 +4019,7 @@
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "U"
-				(at -7.62 16.51 0)
+				(at 6.35 16.51 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -10362,7 +9501,15 @@
 					(hide yes)
 				)
 			)
-			(symbol "SRAM1K4B_0_1"
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "SRAM1K4B_1_1"
 				(rectangle
 					(start -5.08 17.78)
 					(end 5.08 -17.78)
@@ -10374,8 +9521,6 @@
 						(type background)
 					)
 				)
-			)
-			(symbol "SRAM1K4B_1_1"
 				(pin input line
 					(at -10.16 0 0)
 					(length 5.08)
@@ -10538,24 +9683,6 @@
 						)
 					)
 				)
-				(pin power_in line
-					(at 7.62 -12.7 180)
-					(length 2.54)
-					(name "VCC"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "18"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin input line
 					(at -10.16 2.54 0)
 					(length 5.08)
@@ -10682,8 +9809,28 @@
 						)
 					)
 				)
+			)
+			(symbol "SRAM1K4B_2_0"
 				(pin power_in line
-					(at 7.62 -15.24 180)
+					(at 0 7.62 270)
+					(length 2.54)
+					(name "VCC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "18"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -7.62 90)
 					(length 2.54)
 					(name "GND"
 						(effects
@@ -10698,6 +9845,19 @@
 								(size 1.27 1.27)
 							)
 						)
+					)
+				)
+			)
+			(symbol "SRAM1K4B_2_1"
+				(rectangle
+					(start -5.08 5.08)
+					(end 5.08 -5.08)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type background)
 					)
 				)
 			)
@@ -11296,6 +10456,9 @@
 			)
 		)
 		(symbol "jt_rom:PROM256W4B"
+			(pin_names
+				(offset 1.016)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -11342,7 +10505,15 @@
 					(hide yes)
 				)
 			)
-			(symbol "PROM256W4B_1_1"
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "PROM256W4B_1_0"
 				(rectangle
 					(start -3.81 15.24)
 					(end 3.81 -15.24)
@@ -11354,6 +10525,8 @@
 						(type background)
 					)
 				)
+			)
+			(symbol "PROM256W4B_1_1"
 				(pin input line
 					(at -8.89 -2.54 0)
 					(length 5.08)
@@ -11480,24 +10653,6 @@
 						)
 					)
 				)
-				(pin power_in line
-					(at 6.35 -5.08 180)
-					(length 2.54)
-					(name "VCC"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "16"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin input line
 					(at -8.89 0 0)
 					(length 5.08)
@@ -11606,24 +10761,6 @@
 						)
 					)
 				)
-				(pin power_in line
-					(at 6.35 -2.54 180)
-					(length 2.54)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin tri_state line
 					(at 8.89 5.08 180)
 					(length 5.08)
@@ -11640,6 +10777,57 @@
 								(size 1.27 1.27)
 							)
 						)
+					)
+				)
+			)
+			(symbol "PROM256W4B_2_0"
+				(pin power_in line
+					(at 0 7.62 270)
+					(length 2.54)
+					(name "VCC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -7.62 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "PROM256W4B_2_1"
+				(rectangle
+					(start -5.08 5.08)
+					(end 5.08 -5.08)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type background)
 					)
 				)
 			)
@@ -12413,6 +11601,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2b7ef501-9203-446d-807a-4c5ab6f144dd")
+	)
+	(junction
+		(at 222.25 248.92)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2e2f620f-247b-4a50-801e-5419b0a8c6a9")
 	)
 	(junction
 		(at 173.99 269.24)
@@ -16651,6 +15845,16 @@
 	)
 	(bus
 		(pts
+			(xy 222.25 256.54) (xy 222.25 259.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "17b31327-385b-40c1-a4c5-be79615954da")
+	)
+	(bus
+		(pts
 			(xy 160.02 228.6) (xy 160.02 231.14)
 		)
 		(stroke
@@ -16861,7 +16065,7 @@
 	)
 	(bus
 		(pts
-			(xy 222.25 226.06) (xy 222.25 254)
+			(xy 222.25 226.06) (xy 222.25 248.92)
 		)
 		(stroke
 			(width 0)
@@ -17288,6 +16492,16 @@
 			(type default)
 		)
 		(uuid "251c2626-ce6d-4a7d-bb91-ccbbb2b2668e")
+	)
+	(polyline
+		(pts
+			(xy 72.39 266.7) (xy 100.33 266.7)
+		)
+		(stroke
+			(width 0)
+			(type dash)
+		)
+		(uuid "25740af1-4329-4e8c-a9ef-1ad623ed89f5")
 	)
 	(bus
 		(pts
@@ -17908,6 +17122,16 @@
 			(type default)
 		)
 		(uuid "388aeaec-fd87-43d0-bd20-6867ebfd96b0")
+	)
+	(polyline
+		(pts
+			(xy 114.3 176.53) (xy 71.12 176.53)
+		)
+		(stroke
+			(width 0)
+			(type dash)
+		)
+		(uuid "390f9b90-07ae-47fd-bae8-dd83891af353")
 	)
 	(wire
 		(pts
@@ -18581,16 +17805,6 @@
 	)
 	(bus
 		(pts
-			(xy 222.25 256.54) (xy 222.25 259.08)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4bfa1b34-d488-445e-a902-b9e11f228da8")
-	)
-	(bus
-		(pts
 			(xy 176.53 129.54) (xy 176.53 127)
 		)
 		(stroke
@@ -18639,6 +17853,16 @@
 		)
 		(uuid "4d742c7f-f17d-4117-a293-4d18456f40a0")
 	)
+	(polyline
+		(pts
+			(xy 71.12 176.53) (xy 71.12 266.7)
+		)
+		(stroke
+			(width 0)
+			(type dash)
+		)
+		(uuid "4db68b88-be36-4342-a5b0-90231986d150")
+	)
 	(bus
 		(pts
 			(xy 133.35 33.02) (xy 127 33.02)
@@ -18678,6 +17902,16 @@
 			(type default)
 		)
 		(uuid "4ebe9faf-4958-47fe-b470-eb183819e963")
+	)
+	(polyline
+		(pts
+			(xy 114.3 242.57) (xy 114.3 176.53)
+		)
+		(stroke
+			(width 0)
+			(type dash)
+		)
+		(uuid "4ec342a4-2db6-4c72-941d-e5b80b6bf8bb")
 	)
 	(bus
 		(pts
@@ -19469,6 +18703,16 @@
 		)
 		(uuid "653ccfb5-4792-42be-afca-7da821121a3c")
 	)
+	(bus
+		(pts
+			(xy 222.25 259.08) (xy 222.25 261.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "653f3617-bd09-405e-b487-8b4c4dd821bb")
+	)
 	(wire
 		(pts
 			(xy 220.98 20.32) (xy 220.98 15.24)
@@ -19888,6 +19132,16 @@
 			(type default)
 		)
 		(uuid "6cdab618-6a36-444f-a340-a9913e12672b")
+	)
+	(polyline
+		(pts
+			(xy 71.12 266.7) (xy 72.39 266.7)
+		)
+		(stroke
+			(width 0)
+			(type dash)
+		)
+		(uuid "6cfded02-2392-4d5a-8393-6b4ecafcc3ab")
 	)
 	(wire
 		(pts
@@ -21491,7 +20745,7 @@
 	)
 	(bus
 		(pts
-			(xy 222.25 259.08) (xy 222.25 261.62)
+			(xy 222.25 248.92) (xy 222.25 254)
 		)
 		(stroke
 			(width 0)
@@ -21591,7 +20845,7 @@
 	)
 	(bus
 		(pts
-			(xy 222.25 261.62) (xy 224.79 261.62)
+			(xy 222.25 248.92) (xy 227.33 248.92)
 		)
 		(stroke
 			(width 0)
@@ -22999,6 +22253,16 @@
 		)
 		(uuid "c90fa299-a36a-43dd-bd73-1b682e06f1b9")
 	)
+	(polyline
+		(pts
+			(xy 100.33 242.57) (xy 114.3 242.57)
+		)
+		(stroke
+			(width 0)
+			(type dash)
+		)
+		(uuid "c9b739e4-3c90-4282-bf55-a76cd69df01b")
+	)
 	(wire
 		(pts
 			(xy 223.52 53.34) (xy 223.52 58.42)
@@ -24209,6 +23473,16 @@
 		)
 		(uuid "ecdddf0a-feca-4b5d-b2c4-35eb99286037")
 	)
+	(polyline
+		(pts
+			(xy 100.33 266.7) (xy 100.33 242.57)
+		)
+		(stroke
+			(width 0)
+			(type dash)
+		)
+		(uuid "ecec088c-b831-4f51-a7df-e566f64f940d")
+	)
 	(bus
 		(pts
 			(xy 322.58 204.47) (xy 322.58 207.01)
@@ -24781,18 +24055,6 @@
 		)
 		(uuid 63a6a204-6bea-493a-aba0-ddd82203b3d0)
 	)
-	(rectangle
-		(start 71.12 176.53)
-		(end 114.3 269.24)
-		(stroke
-			(width 0)
-			(type dash)
-		)
-		(fill
-			(type none)
-		)
-		(uuid f9e513a0-89b3-43a3-8c21-eb6575dab506)
-	)
 	(text "When the corresponding line counter is enabled\n,~{ODB5L}1 or ~{ODB5L}2, the x positions go from\n0..15, drawing every pixel of the 16 x 16 sprite\nobject to the active line buffer for drawing.\nWhen the line buffer toggles after ~{LBRST}\ngoes high the pixels are read and the\nx positions go from 0..239 during scroll/obj\nlayers active."
 		(exclude_from_sim no)
 		(at 226.06 237.49 0)
@@ -24894,7 +24156,7 @@
 	)
 	(text "OBJ RAM\nBuffer 1"
 		(exclude_from_sim no)
-		(at 88.9 267.97 0)
+		(at 87.63 265.43 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24905,6 +24167,7 @@
 	)
 	(label "OCD7"
 		(at 369.57 123.19 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24915,6 +24178,7 @@
 	)
 	(label "OD'4"
 		(at 135.89 121.92 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24925,6 +24189,7 @@
 	)
 	(label "OD'3"
 		(at 137.16 91.44 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24935,6 +24200,7 @@
 	)
 	(label "OCHA6"
 		(at 325.12 147.32 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24945,6 +24211,7 @@
 	)
 	(label "OBD1"
 		(at 123.19 228.6 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24955,6 +24222,7 @@
 	)
 	(label "~{OCHAH}"
 		(at 326.39 58.42 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24965,6 +24233,7 @@
 	)
 	(label "OCHA11"
 		(at 325.12 50.8 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24975,6 +24244,7 @@
 	)
 	(label "OD2"
 		(at 92.71 40.64 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24985,6 +24255,7 @@
 	)
 	(label "V16"
 		(at 182.88 22.86 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24995,6 +24266,7 @@
 	)
 	(label "OD'7"
 		(at 135.89 119.38 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25005,6 +24277,7 @@
 	)
 	(label "XPOS12"
 		(at 212.09 220.98 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25015,6 +24288,7 @@
 	)
 	(label "OCD3"
 		(at 353.06 139.7 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25025,6 +24299,7 @@
 	)
 	(label "OD'2"
 		(at 135.89 111.76 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25035,6 +24310,7 @@
 	)
 	(label "OCD14"
 		(at 353.06 38.1 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25045,6 +24321,7 @@
 	)
 	(label "OD5"
 		(at 153.67 185.42 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25055,6 +24332,7 @@
 	)
 	(label "COL'2"
 		(at 389.89 180.34 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25065,6 +24343,7 @@
 	)
 	(label "OBA4"
 		(at 78.74 237.49 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25075,6 +24354,7 @@
 	)
 	(label "PAL'0"
 		(at 367.03 185.42 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25085,6 +24365,7 @@
 	)
 	(label "OCHA9"
 		(at 166.37 109.22 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25095,6 +24376,7 @@
 	)
 	(label "OA1"
 		(at 41.91 38.1 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25105,6 +24387,7 @@
 	)
 	(label "XPOS24"
 		(at 212.09 182.88 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25115,6 +24398,7 @@
 	)
 	(label "OCHA4"
 		(at 325.12 33.02 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25125,6 +24409,7 @@
 	)
 	(label "OCHA1"
 		(at 325.12 189.23 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25135,6 +24420,7 @@
 	)
 	(label "OCHA7"
 		(at 325.12 95.25 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25145,6 +24431,7 @@
 	)
 	(label "OD'2"
 		(at 182.88 220.98 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25155,6 +24442,7 @@
 	)
 	(label "XPOS13"
 		(at 212.09 223.52 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25165,6 +24453,7 @@
 	)
 	(label "OCHA2"
 		(at 325.12 137.16 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25175,6 +24464,7 @@
 	)
 	(label "XPOS20"
 		(at 212.09 147.32 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25185,6 +24475,7 @@
 	)
 	(label "FLIPX''"
 		(at 307.34 119.38 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25195,6 +24486,7 @@
 	)
 	(label "OD'6"
 		(at 137.16 88.9 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25205,6 +24497,7 @@
 	)
 	(label "OBA9"
 		(at 78.74 250.19 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25215,6 +24508,7 @@
 	)
 	(label "~{OCHAL}"
 		(at 326.39 167.64 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25225,6 +24519,7 @@
 	)
 	(label "OD'2"
 		(at 135.89 35.56 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25235,6 +24530,7 @@
 	)
 	(label "PAL3"
 		(at 275.59 129.54 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25245,6 +24541,7 @@
 	)
 	(label "OD'0"
 		(at 135.89 116.84 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25255,6 +24552,7 @@
 	)
 	(label "OCHA9"
 		(at 325.12 100.33 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25265,6 +24563,7 @@
 	)
 	(label "OD'0"
 		(at 120.65 38.1 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25275,6 +24574,7 @@
 	)
 	(label "OD'6"
 		(at 120.65 48.26 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25285,6 +24585,7 @@
 	)
 	(label "OCHA3"
 		(at 325.12 194.31 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25295,6 +24596,7 @@
 	)
 	(label "XPOS25"
 		(at 212.09 185.42 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25305,6 +24607,7 @@
 	)
 	(label "PAL3"
 		(at 166.37 91.44 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25315,6 +24618,7 @@
 	)
 	(label "XPOS23"
 		(at 212.09 154.94 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25325,6 +24629,7 @@
 	)
 	(label "OCA2"
 		(at 287.02 57.15 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25335,6 +24640,7 @@
 	)
 	(label "OCHA10"
 		(at 325.12 102.87 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25345,6 +24651,7 @@
 	)
 	(label "PAL2"
 		(at 275.59 116.84 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25355,6 +24662,7 @@
 	)
 	(label "OCHA1"
 		(at 311.15 67.31 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25365,6 +24673,7 @@
 	)
 	(label "OBA8"
 		(at 78.74 247.65 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25375,6 +24684,7 @@
 	)
 	(label "OBD5"
 		(at 123.19 185.42 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25385,6 +24695,7 @@
 	)
 	(label "OCHA4"
 		(at 311.15 44.45 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25395,6 +24706,7 @@
 	)
 	(label "OCHA9"
 		(at 325.12 209.55 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25405,6 +24717,7 @@
 	)
 	(label "YPOS0"
 		(at 165.1 48.26 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25415,6 +24728,7 @@
 	)
 	(label "OBA2"
 		(at 78.74 190.5 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25425,6 +24739,7 @@
 	)
 	(label "~{ODB}3"
 		(at 237.49 68.58 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25435,6 +24750,7 @@
 	)
 	(label "OD'3"
 		(at 135.89 38.1 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25445,6 +24761,7 @@
 	)
 	(label "MD2"
 		(at 157.48 236.22 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25455,6 +24772,7 @@
 	)
 	(label "~{ODB5L}1"
 		(at 179.07 264.16 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25465,6 +24783,7 @@
 	)
 	(label "COL'1"
 		(at 389.89 177.8 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25475,6 +24794,7 @@
 	)
 	(label "OCHA4"
 		(at 325.12 87.63 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25485,6 +24805,7 @@
 	)
 	(label "YPOS5"
 		(at 181.61 38.1 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25495,6 +24816,7 @@
 	)
 	(label "~{DMWR}"
 		(at 69.85 149.86 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25503,8 +24825,9 @@
 		)
 		(uuid "26ad0408-e858-40c8-8048-485d466d8106")
 	)
-	(label "OBA[7..0]"
+	(label "OBA[9..0]"
 		(at 69.85 224.79 90)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25515,6 +24838,7 @@
 	)
 	(label "OCHA[12..0]"
 		(at 201.93 106.68 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25525,6 +24849,7 @@
 	)
 	(label "OBD1"
 		(at 123.19 200.66 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25535,6 +24860,7 @@
 	)
 	(label "~{OCHAL}"
 		(at 200.66 115.57 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25545,6 +24871,7 @@
 	)
 	(label "YPOS6"
 		(at 181.61 40.64 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25555,6 +24882,7 @@
 	)
 	(label "OCHA7"
 		(at 325.12 149.86 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25565,6 +24893,7 @@
 	)
 	(label "PAL'3"
 		(at 307.34 129.54 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25575,6 +24904,7 @@
 	)
 	(label "MD5"
 		(at 157.48 228.6 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25585,6 +24915,7 @@
 	)
 	(label "OCD11"
 		(at 369.57 133.35 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25595,6 +24926,7 @@
 	)
 	(label "OD3"
 		(at 66.04 43.18 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25605,6 +24937,7 @@
 	)
 	(label "OD0"
 		(at 153.67 187.96 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25615,6 +24948,7 @@
 	)
 	(label "OCA2"
 		(at 269.24 45.72 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25625,6 +24959,7 @@
 	)
 	(label "OD'5"
 		(at 120.65 35.56 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25635,6 +24970,7 @@
 	)
 	(label "OA0"
 		(at 41.91 35.56 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25645,6 +24981,7 @@
 	)
 	(label "OA6"
 		(at 31.75 185.42 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25655,6 +24992,7 @@
 	)
 	(label "OBA4"
 		(at 78.74 195.58 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25665,6 +25003,7 @@
 	)
 	(label "OD'1"
 		(at 120.65 50.8 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25675,6 +25014,7 @@
 	)
 	(label "OBD6"
 		(at 123.19 236.22 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25685,6 +25025,7 @@
 	)
 	(label "~{ODB}0"
 		(at 135.89 96.52 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25695,6 +25036,7 @@
 	)
 	(label "OA3"
 		(at 41.91 85.09 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25705,6 +25047,7 @@
 	)
 	(label "OCHA4"
 		(at 325.12 196.85 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25715,6 +25058,7 @@
 	)
 	(label "COL'3"
 		(at 389.89 182.88 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25725,6 +25069,7 @@
 	)
 	(label "YPOS2"
 		(at 181.61 76.2 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25735,6 +25080,7 @@
 	)
 	(label "OCHA0"
 		(at 325.12 22.86 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25745,6 +25091,7 @@
 	)
 	(label "OCHA7"
 		(at 325.12 40.64 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25755,6 +25102,7 @@
 	)
 	(label "COL'0"
 		(at 389.89 175.26 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25765,6 +25113,7 @@
 	)
 	(label "XPOS16"
 		(at 212.09 256.54 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25775,6 +25124,7 @@
 	)
 	(label "OCHA0"
 		(at 325.12 77.47 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25785,6 +25135,7 @@
 	)
 	(label "XPOS26"
 		(at 212.09 187.96 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25795,6 +25146,7 @@
 	)
 	(label "OCD13"
 		(at 353.06 35.56 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25805,6 +25157,7 @@
 	)
 	(label "OCD12"
 		(at 369.57 135.89 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25815,6 +25168,7 @@
 	)
 	(label "OCHA6"
 		(at 325.12 38.1 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25825,6 +25179,7 @@
 	)
 	(label "OD'4"
 		(at 120.65 53.34 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25835,6 +25190,7 @@
 	)
 	(label "OD'5"
 		(at 182.88 254 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25845,6 +25201,7 @@
 	)
 	(label "OCHA11"
 		(at 166.37 124.46 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25855,6 +25212,7 @@
 	)
 	(label "OD'[7..0]"
 		(at 133.35 73.66 90)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25865,6 +25223,7 @@
 	)
 	(label "OBA6"
 		(at 62.23 191.77 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25875,6 +25234,7 @@
 	)
 	(label "OCA0"
 		(at 269.24 58.42 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25885,6 +25245,7 @@
 	)
 	(label "MD4"
 		(at 157.48 231.14 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25895,6 +25256,7 @@
 	)
 	(label "OCHA10"
 		(at 325.12 212.09 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25905,6 +25267,7 @@
 	)
 	(label "OD'0"
 		(at 135.89 48.26 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25915,6 +25278,7 @@
 	)
 	(label "PAL'1"
 		(at 307.34 114.3 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25925,6 +25289,7 @@
 	)
 	(label "OCHA2"
 		(at 325.12 82.55 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25935,6 +25300,7 @@
 	)
 	(label "MD3"
 		(at 157.48 233.68 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25945,6 +25311,7 @@
 	)
 	(label "OCHA3"
 		(at 311.15 52.07 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25955,6 +25322,7 @@
 	)
 	(label "OBA8"
 		(at 62.23 275.59 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25965,6 +25333,7 @@
 	)
 	(label "OCHA3"
 		(at 325.12 30.48 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25975,6 +25344,7 @@
 	)
 	(label "FLIPX'"
 		(at 283.21 25.4 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25985,6 +25355,7 @@
 	)
 	(label "XPOS10"
 		(at 212.09 215.9 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25995,6 +25366,7 @@
 	)
 	(label "OCD9"
 		(at 353.06 80.01 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26005,6 +25377,7 @@
 	)
 	(label "OD'0"
 		(at 182.88 147.32 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26015,6 +25388,7 @@
 	)
 	(label "OCD1"
 		(at 369.57 107.95 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26025,6 +25399,7 @@
 	)
 	(label "OA7"
 		(at 31.75 187.96 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26035,6 +25410,7 @@
 	)
 	(label "OCD1"
 		(at 353.06 134.62 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26045,6 +25421,7 @@
 	)
 	(label "OBD1"
 		(at 102.87 229.87 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26055,6 +25432,7 @@
 	)
 	(label "MD6"
 		(at 157.48 226.06 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26065,6 +25443,7 @@
 	)
 	(label "OCHA9"
 		(at 325.12 45.72 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26075,6 +25454,7 @@
 	)
 	(label "OD'7"
 		(at 182.88 259.08 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26085,6 +25465,7 @@
 	)
 	(label "PAL1"
 		(at 275.59 114.3 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26095,6 +25476,7 @@
 	)
 	(label "MD7"
 		(at 157.48 223.52 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26105,6 +25487,7 @@
 	)
 	(label "OBD0"
 		(at 123.19 187.96 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26115,6 +25498,7 @@
 	)
 	(label "OCHA6"
 		(at 325.12 92.71 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26125,6 +25509,7 @@
 	)
 	(label "OD'5"
 		(at 135.89 124.46 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26135,6 +25520,7 @@
 	)
 	(label "OCD8"
 		(at 353.06 77.47 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26145,6 +25531,7 @@
 	)
 	(label "OA6"
 		(at 41.91 92.71 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26155,6 +25542,7 @@
 	)
 	(label "FLIPY"
 		(at 166.37 86.36 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26165,6 +25553,7 @@
 	)
 	(label "OA5"
 		(at 31.75 193.04 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26175,6 +25564,7 @@
 	)
 	(label "YPOS4"
 		(at 181.61 35.56 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26185,6 +25575,7 @@
 	)
 	(label "OBA9"
 		(at 62.23 267.97 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26195,6 +25586,7 @@
 	)
 	(label "OBA3"
 		(at 78.74 193.04 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26203,8 +25595,20 @@
 		)
 		(uuid "57208885-d0b5-476d-8982-f5cfa1fc6925")
 	)
+	(label "OCA[3..0]"
+		(at 276.86 40.64 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "573532c0-18cf-464f-a4b6-757b77d71bcc")
+	)
 	(label "OBA7"
 		(at 78.74 203.2 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26215,6 +25619,7 @@
 	)
 	(label "COL0"
 		(at 367.03 175.26 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26225,6 +25630,7 @@
 	)
 	(label "OCD10"
 		(at 369.57 130.81 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26235,6 +25641,7 @@
 	)
 	(label "MA'7"
 		(at 31.75 200.66 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26243,8 +25650,20 @@
 		)
 		(uuid "5dd87981-5e42-4705-8711-e15463a7b474")
 	)
+	(label "PAL[3..0]"
+		(at 217.17 93.98 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5ddd334f-e396-40be-be72-35052aaa5689")
+	)
 	(label "OCHA5"
 		(at 325.12 90.17 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26255,6 +25674,7 @@
 	)
 	(label "OA4"
 		(at 41.91 87.63 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26265,6 +25685,7 @@
 	)
 	(label "YPOS2"
 		(at 165.1 35.56 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26275,6 +25696,7 @@
 	)
 	(label "OCA3"
 		(at 269.24 60.96 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26285,6 +25707,7 @@
 	)
 	(label "~{OBEN'}"
 		(at 275.59 121.92 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26295,6 +25718,7 @@
 	)
 	(label "~{ODB}1"
 		(at 134.62 58.42 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26303,8 +25727,9 @@
 		)
 		(uuid "5f31caa8-f67c-4217-8313-58339e4e5f7b")
 	)
-	(label "ODB[7..0]"
+	(label "OBD[7..0]"
 		(at 111.76 208.28 90)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26315,6 +25740,7 @@
 	)
 	(label "OCHA2"
 		(at 325.12 27.94 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26325,6 +25751,7 @@
 	)
 	(label "OD0"
 		(at 92.71 38.1 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26335,6 +25762,7 @@
 	)
 	(label "OA4"
 		(at 41.91 45.72 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26345,6 +25773,7 @@
 	)
 	(label "OCHA11"
 		(at 325.12 214.63 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26355,6 +25784,7 @@
 	)
 	(label "OCA0"
 		(at 287.02 72.39 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26365,6 +25795,7 @@
 	)
 	(label "XPOS15"
 		(at 212.09 254 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26375,6 +25806,7 @@
 	)
 	(label "OD'7"
 		(at 137.16 86.36 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26385,6 +25817,7 @@
 	)
 	(label "OD'1"
 		(at 137.16 78.74 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26395,6 +25828,7 @@
 	)
 	(label "OA3"
 		(at 31.75 229.87 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26405,6 +25839,7 @@
 	)
 	(label "OD6"
 		(at 66.04 82.55 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26415,6 +25850,7 @@
 	)
 	(label "MA'0"
 		(at 31.75 250.19 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26425,6 +25861,7 @@
 	)
 	(label "OCD6"
 		(at 369.57 120.65 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26435,6 +25872,7 @@
 	)
 	(label "OBD2"
 		(at 123.19 226.06 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26445,6 +25883,7 @@
 	)
 	(label "OD3"
 		(at 92.71 43.18 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26455,6 +25894,7 @@
 	)
 	(label "OD'2"
 		(at 137.16 83.82 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26465,6 +25905,7 @@
 	)
 	(label "OBA0"
 		(at 62.23 243.84 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26475,6 +25916,7 @@
 	)
 	(label "MA'2"
 		(at 31.75 247.65 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26485,6 +25927,7 @@
 	)
 	(label "MD0"
 		(at 157.48 241.3 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26495,6 +25938,7 @@
 	)
 	(label "YPOS1"
 		(at 181.61 73.66 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26505,6 +25949,7 @@
 	)
 	(label "OCD0"
 		(at 353.06 186.69 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26515,6 +25960,7 @@
 	)
 	(label "OCHA12"
 		(at 166.37 127 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26525,6 +25971,7 @@
 	)
 	(label "OBD2"
 		(at 102.87 232.41 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26535,6 +25982,7 @@
 	)
 	(label "OCD0"
 		(at 353.06 132.08 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26545,6 +25993,7 @@
 	)
 	(label "OCLK1"
 		(at 180.34 236.22 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26555,6 +26004,7 @@
 	)
 	(label "OCHA9"
 		(at 325.12 154.94 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26565,6 +26015,7 @@
 	)
 	(label "OBD5"
 		(at 102.87 187.96 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26575,6 +26026,7 @@
 	)
 	(label "~{OCHAH}"
 		(at 326.39 222.25 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26585,6 +26037,7 @@
 	)
 	(label "PAL'1"
 		(at 367.03 187.96 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26595,6 +26048,7 @@
 	)
 	(label "OBD6"
 		(at 123.19 198.12 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26605,6 +26059,7 @@
 	)
 	(label "YPOS3"
 		(at 181.61 78.74 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26615,6 +26070,7 @@
 	)
 	(label "XPOS17"
 		(at 212.09 259.08 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26625,6 +26081,7 @@
 	)
 	(label "OCHA11"
 		(at 325.12 105.41 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26635,6 +26092,7 @@
 	)
 	(label "OCHA6"
 		(at 166.37 116.84 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26645,6 +26103,7 @@
 	)
 	(label "OCHA12"
 		(at 325.12 217.17 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26655,6 +26114,7 @@
 	)
 	(label "OCHA10"
 		(at 166.37 121.92 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26665,6 +26125,7 @@
 	)
 	(label "OCHA11"
 		(at 325.12 160.02 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26675,6 +26136,7 @@
 	)
 	(label "V32"
 		(at 182.88 25.4 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26685,6 +26147,7 @@
 	)
 	(label "OBA0"
 		(at 78.74 185.42 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26695,6 +26158,7 @@
 	)
 	(label "OCD9"
 		(at 369.57 128.27 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26705,6 +26169,7 @@
 	)
 	(label "OBD3"
 		(at 123.19 223.52 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26715,6 +26180,7 @@
 	)
 	(label "OA3"
 		(at 41.91 43.18 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26725,6 +26191,7 @@
 	)
 	(label "OCA3"
 		(at 287.02 34.29 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26735,6 +26202,7 @@
 	)
 	(label "PAL'3"
 		(at 367.03 193.04 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26745,6 +26213,7 @@
 	)
 	(label "OBA7"
 		(at 78.74 245.11 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26755,6 +26224,7 @@
 	)
 	(label "XPOS14"
 		(at 212.09 251.46 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26765,6 +26235,7 @@
 	)
 	(label "OCD4"
 		(at 353.06 196.85 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26775,6 +26246,7 @@
 	)
 	(label "OCHA0"
 		(at 311.15 74.93 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26785,6 +26257,7 @@
 	)
 	(label "OD1"
 		(at 92.71 50.8 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26795,6 +26268,7 @@
 	)
 	(label "YPOS6"
 		(at 165.1 43.18 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26805,6 +26279,7 @@
 	)
 	(label "OBD7"
 		(at 123.19 233.68 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26815,6 +26290,7 @@
 	)
 	(label "OD'4"
 		(at 182.88 182.88 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26825,6 +26301,7 @@
 	)
 	(label "OD'0"
 		(at 182.88 215.9 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26835,6 +26312,7 @@
 	)
 	(label "PAL'2"
 		(at 367.03 190.5 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26845,6 +26323,7 @@
 	)
 	(label "OA5"
 		(at 41.91 90.17 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26855,6 +26334,7 @@
 	)
 	(label "OD'7"
 		(at 182.88 190.5 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26865,6 +26345,7 @@
 	)
 	(label "~{OCHAL}"
 		(at 326.39 113.03 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26875,6 +26356,7 @@
 	)
 	(label "OD'3"
 		(at 182.88 223.52 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26885,6 +26367,7 @@
 	)
 	(label "V64"
 		(at 182.88 27.94 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26895,6 +26378,7 @@
 	)
 	(label "OA6"
 		(at 41.91 50.8 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26905,6 +26389,7 @@
 	)
 	(label "OBA3"
 		(at 78.74 234.95 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26915,6 +26400,7 @@
 	)
 	(label "OCHA8"
 		(at 325.12 43.18 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26925,6 +26411,7 @@
 	)
 	(label "OBA5"
 		(at 78.74 198.12 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26935,6 +26422,7 @@
 	)
 	(label "OCD12"
 		(at 353.06 33.02 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26945,6 +26433,7 @@
 	)
 	(label "OD'1"
 		(at 182.88 149.86 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26955,6 +26444,7 @@
 	)
 	(label "OCA1"
 		(at 269.24 63.5 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26965,6 +26455,7 @@
 	)
 	(label "PAL0"
 		(at 166.37 81.28 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26975,6 +26466,7 @@
 	)
 	(label "OCHA2"
 		(at 325.12 191.77 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26985,6 +26477,7 @@
 	)
 	(label "OD[7..0]"
 		(at 101.6 149.86 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26995,6 +26488,7 @@
 	)
 	(label "OD'6"
 		(at 182.88 187.96 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27005,6 +26499,7 @@
 	)
 	(label "~{ODB5L}2"
 		(at 179.07 160.02 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27015,6 +26510,7 @@
 	)
 	(label "OA0"
 		(at 41.91 77.47 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27025,6 +26521,7 @@
 	)
 	(label "COL2"
 		(at 396.24 110.49 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27035,6 +26532,7 @@
 	)
 	(label "OCD13"
 		(at 369.57 138.43 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27045,6 +26543,7 @@
 	)
 	(label "~{ODB}3"
 		(at 135.89 132.08 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27055,6 +26554,7 @@
 	)
 	(label "OCHA0"
 		(at 325.12 132.08 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27065,6 +26565,7 @@
 	)
 	(label "MA'3"
 		(at 31.75 242.57 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27075,6 +26576,7 @@
 	)
 	(label "OCD2"
 		(at 353.06 137.16 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27085,6 +26587,7 @@
 	)
 	(label "OD7"
 		(at 66.04 85.09 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27095,6 +26598,7 @@
 	)
 	(label "OCLK2"
 		(at 180.34 167.64 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27105,6 +26609,7 @@
 	)
 	(label "OCD4"
 		(at 353.06 142.24 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27115,6 +26620,7 @@
 	)
 	(label "OD4"
 		(at 66.04 77.47 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27125,6 +26631,7 @@
 	)
 	(label "OA1"
 		(at 31.75 232.41 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27135,6 +26642,7 @@
 	)
 	(label "V4"
 		(at 182.88 63.5 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27145,6 +26653,7 @@
 	)
 	(label "OCHA12"
 		(at 325.12 107.95 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27155,6 +26664,7 @@
 	)
 	(label "OCHA8"
 		(at 325.12 97.79 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27165,6 +26675,7 @@
 	)
 	(label "COL[3..0]"
 		(at 381 165.1 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27175,6 +26686,7 @@
 	)
 	(label "OCD6"
 		(at 353.06 147.32 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27185,6 +26697,7 @@
 	)
 	(label "FLIPY'"
 		(at 269.24 50.8 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27195,6 +26708,7 @@
 	)
 	(label "OBA1"
 		(at 62.23 238.76 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27205,6 +26719,7 @@
 	)
 	(label "OD7"
 		(at 92.71 45.72 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27215,6 +26730,7 @@
 	)
 	(label "OD1"
 		(at 66.04 38.1 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27225,6 +26741,7 @@
 	)
 	(label "OBA2"
 		(at 78.74 232.41 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27235,6 +26752,7 @@
 	)
 	(label "MA'8"
 		(at 41.91 273.05 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27245,6 +26763,7 @@
 	)
 	(label "OCHA1"
 		(at 325.12 134.62 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27255,6 +26774,7 @@
 	)
 	(label "~{OBEN}"
 		(at 269.24 55.88 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27265,6 +26785,7 @@
 	)
 	(label "OBA9"
 		(at 78.74 208.28 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27275,6 +26796,7 @@
 	)
 	(label "YPOS4"
 		(at 165.1 40.64 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27285,6 +26807,7 @@
 	)
 	(label "YPOS7"
 		(at 165.1 50.8 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27295,6 +26818,7 @@
 	)
 	(label "OCD4"
 		(at 369.57 115.57 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27305,6 +26829,7 @@
 	)
 	(label "OCHA0"
 		(at 325.12 186.69 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27315,6 +26840,7 @@
 	)
 	(label "OCD15"
 		(at 353.06 95.25 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27325,6 +26851,7 @@
 	)
 	(label "YPOS5"
 		(at 165.1 45.72 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27335,6 +26862,7 @@
 	)
 	(label "OD4"
 		(at 92.71 53.34 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27345,6 +26873,7 @@
 	)
 	(label "OBA5"
 		(at 78.74 240.03 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27353,8 +26882,9 @@
 		)
 		(uuid "abb4bfa3-ade8-43ae-858f-4c12979fce8a")
 	)
-	(label "OD4"
+	(label "OBD4"
 		(at 123.19 241.3 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27365,6 +26895,7 @@
 	)
 	(label "OD1"
 		(at 153.67 200.66 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27375,6 +26906,7 @@
 	)
 	(label "OD'4"
 		(at 182.88 251.46 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27385,6 +26917,7 @@
 	)
 	(label "OCHA7"
 		(at 166.37 114.3 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27395,6 +26928,7 @@
 	)
 	(label "PAL1"
 		(at 166.37 78.74 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27405,6 +26939,7 @@
 	)
 	(label "OCD5"
 		(at 369.57 118.11 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27415,6 +26950,7 @@
 	)
 	(label "COL0"
 		(at 396.24 105.41 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27425,6 +26961,7 @@
 	)
 	(label "OCD5"
 		(at 353.06 199.39 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27435,6 +26972,7 @@
 	)
 	(label "OCA1"
 		(at 287.02 64.77 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27445,6 +26983,7 @@
 	)
 	(label "OCHA8"
 		(at 166.37 111.76 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27455,6 +26994,7 @@
 	)
 	(label "OD2"
 		(at 66.04 40.64 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27463,8 +27003,20 @@
 		)
 		(uuid "b3490169-baf9-40da-aef2-1d77dc753f26")
 	)
+	(label "YPOS[7..0]"
+		(at 179.07 64.77 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b368ed66-553a-4701-b156-ef6d5c061a2c")
+	)
 	(label "OA5"
 		(at 41.91 48.26 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27475,6 +27027,7 @@
 	)
 	(label "OCD7"
 		(at 353.06 204.47 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27485,6 +27038,7 @@
 	)
 	(label "OCHA5"
 		(at 325.12 35.56 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27495,6 +27049,7 @@
 	)
 	(label "OCD9"
 		(at 353.06 25.4 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27505,6 +27060,7 @@
 	)
 	(label "PAL'2"
 		(at 307.34 116.84 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27515,6 +27071,7 @@
 	)
 	(label "OBA1"
 		(at 78.74 229.87 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27525,6 +27082,7 @@
 	)
 	(label "OBA6"
 		(at 78.74 242.57 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27535,6 +27093,7 @@
 	)
 	(label "OBD0"
 		(at 123.19 231.14 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27545,6 +27104,7 @@
 	)
 	(label "V2"
 		(at 182.88 60.96 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27555,6 +27115,7 @@
 	)
 	(label "COL3"
 		(at 396.24 113.03 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27565,6 +27126,7 @@
 	)
 	(label "OCD2"
 		(at 353.06 191.77 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27575,6 +27137,7 @@
 	)
 	(label "OBA8"
 		(at 78.74 205.74 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27585,6 +27148,7 @@
 	)
 	(label "OBA1"
 		(at 78.74 187.96 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27595,6 +27159,7 @@
 	)
 	(label "V128"
 		(at 182.88 30.48 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27605,6 +27170,7 @@
 	)
 	(label "OCD1"
 		(at 353.06 189.23 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27615,6 +27181,7 @@
 	)
 	(label "OD6"
 		(at 153.67 198.12 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27625,6 +27192,7 @@
 	)
 	(label "OBD7"
 		(at 102.87 193.04 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27635,6 +27203,7 @@
 	)
 	(label "OCD8"
 		(at 369.57 125.73 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27645,6 +27214,7 @@
 	)
 	(label "OD'7"
 		(at 135.89 50.8 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27655,6 +27225,7 @@
 	)
 	(label "MA'1"
 		(at 31.75 245.11 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27665,6 +27236,7 @@
 	)
 	(label "OBD4"
 		(at 102.87 185.42 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27675,6 +27247,7 @@
 	)
 	(label "OCHA2"
 		(at 311.15 59.69 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27685,6 +27258,7 @@
 	)
 	(label "OCD6"
 		(at 353.06 201.93 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27695,6 +27269,7 @@
 	)
 	(label "~{OCHAH}"
 		(at 200.66 121.92 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27705,6 +27280,7 @@
 	)
 	(label "OCHA6"
 		(at 325.12 201.93 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27715,6 +27291,7 @@
 	)
 	(label "OCHA12"
 		(at 325.12 162.56 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27725,6 +27302,7 @@
 	)
 	(label "MA'5"
 		(at 31.75 205.74 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27735,6 +27313,7 @@
 	)
 	(label "OD'5"
 		(at 182.88 185.42 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27745,6 +27324,7 @@
 	)
 	(label "OCD10"
 		(at 353.06 82.55 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27755,6 +27335,7 @@
 	)
 	(label "OD'2"
 		(at 120.65 40.64 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27765,6 +27346,7 @@
 	)
 	(label "OCHA3"
 		(at 325.12 85.09 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27775,6 +27357,7 @@
 	)
 	(label "XPOS22"
 		(at 212.09 152.4 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27785,6 +27368,7 @@
 	)
 	(label "OD'6"
 		(at 182.88 256.54 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27795,6 +27379,7 @@
 	)
 	(label "OA7"
 		(at 41.91 95.25 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27805,6 +27390,7 @@
 	)
 	(label "OD'1"
 		(at 135.89 53.34 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27815,6 +27401,7 @@
 	)
 	(label "OCD[15..0]"
 		(at 361.95 114.3 90)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27825,6 +27412,7 @@
 	)
 	(label "PAL'0"
 		(at 307.34 111.76 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27835,6 +27423,7 @@
 	)
 	(label "OBD7"
 		(at 123.19 193.04 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27845,6 +27434,7 @@
 	)
 	(label "OCD14"
 		(at 369.57 140.97 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27855,6 +27445,7 @@
 	)
 	(label "OD0"
 		(at 66.04 35.56 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27865,6 +27456,7 @@
 	)
 	(label "OD'6"
 		(at 135.89 127 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27875,6 +27467,7 @@
 	)
 	(label "OCHA10"
 		(at 325.12 48.26 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27885,6 +27478,7 @@
 	)
 	(label "OCD13"
 		(at 353.06 90.17 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27895,6 +27489,7 @@
 	)
 	(label "OD'6"
 		(at 135.89 43.18 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27905,6 +27500,7 @@
 	)
 	(label "OA7"
 		(at 41.91 53.34 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27915,6 +27511,7 @@
 	)
 	(label "OD'4"
 		(at 135.89 40.64 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27925,6 +27522,7 @@
 	)
 	(label "OCHA8"
 		(at 325.12 152.4 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27935,6 +27533,7 @@
 	)
 	(label "OCD14"
 		(at 353.06 92.71 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27945,6 +27544,7 @@
 	)
 	(label "OD'0"
 		(at 137.16 81.28 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27955,6 +27555,7 @@
 	)
 	(label "XPOS21"
 		(at 212.09 149.86 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27965,6 +27566,7 @@
 	)
 	(label "XPOS27"
 		(at 212.09 190.5 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27975,6 +27577,7 @@
 	)
 	(label "OCD11"
 		(at 353.06 85.09 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27985,6 +27588,7 @@
 	)
 	(label "PAL0"
 		(at 275.59 111.76 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27995,6 +27599,7 @@
 	)
 	(label "COL3"
 		(at 367.03 182.88 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28005,6 +27610,7 @@
 	)
 	(label "OA0"
 		(at 31.75 237.49 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28015,6 +27621,7 @@
 	)
 	(label "OCHA10"
 		(at 325.12 157.48 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28025,6 +27632,7 @@
 	)
 	(label "OBA2"
 		(at 62.23 241.3 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28035,6 +27643,7 @@
 	)
 	(label "OD'7"
 		(at 120.65 45.72 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28045,6 +27654,7 @@
 	)
 	(label "OBD6"
 		(at 102.87 190.5 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28055,6 +27665,7 @@
 	)
 	(label "OD'3"
 		(at 120.65 43.18 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28065,6 +27676,7 @@
 	)
 	(label "OBA6"
 		(at 78.74 200.66 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28075,6 +27687,7 @@
 	)
 	(label "V1"
 		(at 182.88 58.42 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28085,6 +27698,7 @@
 	)
 	(label "XPOS11"
 		(at 212.09 218.44 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28095,6 +27709,7 @@
 	)
 	(label "OCHA3"
 		(at 325.12 139.7 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28105,6 +27720,7 @@
 	)
 	(label "OBD3"
 		(at 102.87 234.95 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28115,6 +27731,7 @@
 	)
 	(label "OD'2"
 		(at 182.88 152.4 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28125,6 +27742,7 @@
 	)
 	(label "OA1"
 		(at 41.91 80.01 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28135,6 +27753,7 @@
 	)
 	(label "OCHA1"
 		(at 325.12 25.4 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28145,6 +27764,7 @@
 	)
 	(label "OCD15"
 		(at 369.57 143.51 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28155,6 +27775,7 @@
 	)
 	(label "OBD0"
 		(at 102.87 227.33 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28165,6 +27786,7 @@
 	)
 	(label "OBD2"
 		(at 123.19 190.5 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28175,6 +27797,7 @@
 	)
 	(label "OD'1"
 		(at 135.89 114.3 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28185,6 +27808,7 @@
 	)
 	(label "OCD3"
 		(at 369.57 113.03 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28195,6 +27819,7 @@
 	)
 	(label "OBA0"
 		(at 78.74 227.33 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28205,6 +27830,7 @@
 	)
 	(label "YPOS0"
 		(at 181.61 71.12 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28215,6 +27841,7 @@
 	)
 	(label "OBA4"
 		(at 62.23 196.85 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28225,6 +27852,7 @@
 	)
 	(label "OBD5"
 		(at 123.19 238.76 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28235,6 +27863,7 @@
 	)
 	(label "YPOS7"
 		(at 181.61 43.18 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28245,6 +27874,7 @@
 	)
 	(label "OA2"
 		(at 41.91 82.55 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28255,6 +27885,7 @@
 	)
 	(label "OCD0"
 		(at 369.57 105.41 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28265,6 +27896,7 @@
 	)
 	(label "OCHA12"
 		(at 325.12 53.34 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28275,6 +27907,7 @@
 	)
 	(label "OD'5"
 		(at 135.89 45.72 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28285,6 +27918,7 @@
 	)
 	(label "COL1"
 		(at 396.24 107.95 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28295,6 +27929,7 @@
 	)
 	(label "OD6"
 		(at 92.71 48.26 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28305,6 +27940,7 @@
 	)
 	(label "OBA7"
 		(at 62.23 194.31 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28315,6 +27951,7 @@
 	)
 	(label "OCD7"
 		(at 353.06 149.86 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28325,6 +27962,7 @@
 	)
 	(label "OCHA1"
 		(at 325.12 80.01 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28335,6 +27973,7 @@
 	)
 	(label "OBA5"
 		(at 62.23 199.39 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28345,6 +27984,7 @@
 	)
 	(label "OA2"
 		(at 41.91 40.64 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28355,6 +27995,7 @@
 	)
 	(label "OD'3"
 		(at 182.88 154.94 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28365,6 +28006,7 @@
 	)
 	(label "OCD2"
 		(at 369.57 110.49 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28375,6 +28017,7 @@
 	)
 	(label "OCLK1"
 		(at 180.34 271.78 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28385,6 +28028,7 @@
 	)
 	(label "OCD11"
 		(at 353.06 30.48 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28395,6 +28039,7 @@
 	)
 	(label "OD'1"
 		(at 182.88 218.44 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28405,6 +28050,7 @@
 	)
 	(label "~{ODB5L}1"
 		(at 179.07 228.6 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28415,6 +28061,7 @@
 	)
 	(label "OBD3"
 		(at 123.19 195.58 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28425,6 +28072,7 @@
 	)
 	(label "OD2"
 		(at 153.67 190.5 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28435,6 +28083,7 @@
 	)
 	(label "YPOS3"
 		(at 165.1 38.1 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28445,6 +28094,7 @@
 	)
 	(label "OD3"
 		(at 153.67 195.58 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28455,6 +28105,7 @@
 	)
 	(label "OA4"
 		(at 31.75 190.5 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28465,6 +28116,7 @@
 	)
 	(label "COL2"
 		(at 367.03 180.34 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28475,6 +28127,7 @@
 	)
 	(label "~{ODB}5"
 		(at 276.86 137.16 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28485,6 +28138,7 @@
 	)
 	(label "OCD5"
 		(at 353.06 144.78 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28495,6 +28149,7 @@
 	)
 	(label "OCHA4"
 		(at 325.12 142.24 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28505,6 +28160,7 @@
 	)
 	(label "OD5"
 		(at 66.04 80.01 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28515,6 +28171,7 @@
 	)
 	(label "OCHA8"
 		(at 325.12 207.01 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28525,6 +28182,7 @@
 	)
 	(label "MA'6"
 		(at 31.75 198.12 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28535,6 +28193,7 @@
 	)
 	(label "OCD15"
 		(at 353.06 40.64 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28545,6 +28204,7 @@
 	)
 	(label "FLIPX'"
 		(at 269.24 48.26 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28555,6 +28215,7 @@
 	)
 	(label "OBD4"
 		(at 123.19 203.2 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28565,6 +28226,7 @@
 	)
 	(label "FLIPX'"
 		(at 275.59 119.38 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28575,6 +28237,7 @@
 	)
 	(label "OCD8"
 		(at 353.06 22.86 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28585,6 +28248,7 @@
 	)
 	(label "OCD10"
 		(at 353.06 27.94 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28595,6 +28259,7 @@
 	)
 	(label "OCHA5"
 		(at 325.12 199.39 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28605,6 +28270,7 @@
 	)
 	(label "COL1"
 		(at 367.03 177.8 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28615,6 +28281,7 @@
 	)
 	(label "OBA3"
 		(at 62.23 236.22 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28625,6 +28292,7 @@
 	)
 	(label "OCLK2"
 		(at 180.34 203.2 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28635,6 +28303,7 @@
 	)
 	(label "~{ODB5L}2"
 		(at 179.07 195.58 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28645,6 +28314,7 @@
 	)
 	(label "MA'4"
 		(at 31.75 203.2 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28655,6 +28325,7 @@
 	)
 	(label "OCD3"
 		(at 353.06 194.31 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28665,6 +28336,7 @@
 	)
 	(label "PAL2"
 		(at 166.37 83.82 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28675,6 +28347,7 @@
 	)
 	(label "MA'9"
 		(at 41.91 265.43 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28685,6 +28358,7 @@
 	)
 	(label "OA2"
 		(at 31.75 234.95 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28695,6 +28369,7 @@
 	)
 	(label "OCD12"
 		(at 353.06 87.63 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28705,6 +28380,7 @@
 	)
 	(label "PAL'[3..0]"
 		(at 339.09 231.14 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28715,6 +28391,7 @@
 	)
 	(label "YPOS1"
 		(at 165.1 53.34 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28725,6 +28402,7 @@
 	)
 	(label "MD1"
 		(at 157.48 238.76 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28735,6 +28413,7 @@
 	)
 	(label "FLIPX"
 		(at 166.37 88.9 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28745,6 +28424,7 @@
 	)
 	(label "OD'3"
 		(at 135.89 109.22 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28755,6 +28435,7 @@
 	)
 	(label "OCHA5"
 		(at 325.12 144.78 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28765,6 +28446,7 @@
 	)
 	(label "V8"
 		(at 182.88 66.04 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28775,6 +28457,7 @@
 	)
 	(label "OCHA5"
 		(at 311.15 36.83 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28785,6 +28468,7 @@
 	)
 	(label "OD5"
 		(at 92.71 35.56 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28795,6 +28479,7 @@
 	)
 	(label "OD4"
 		(at 153.67 203.2 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28805,6 +28490,7 @@
 	)
 	(label "OCHA7"
 		(at 325.12 204.47 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28815,6 +28501,7 @@
 	)
 	(label "OD7"
 		(at 153.67 193.04 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28826,6 +28513,7 @@
 	(hierarchical_label "~{ODB}[5..0]"
 		(shape input)
 		(at 125.73 139.7 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28837,6 +28525,7 @@
 	(hierarchical_label "~{H2}"
 		(shape input)
 		(at 36.83 152.4 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28848,6 +28537,7 @@
 	(hierarchical_label "OPCK"
 		(shape input)
 		(at 275.59 134.62 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28859,6 +28549,7 @@
 	(hierarchical_label "H2'"
 		(shape input)
 		(at 34.29 270.51 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28870,6 +28561,7 @@
 	(hierarchical_label "H2'"
 		(shape input)
 		(at 36.83 254 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28880,7 +28572,8 @@
 	)
 	(hierarchical_label "XPOS[17..10]"
 		(shape output)
-		(at 224.79 261.62 0)
+		(at 227.33 248.92 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28892,6 +28585,7 @@
 	(hierarchical_label "~{OACNTEN'}"
 		(shape input)
 		(at 260.35 124.46 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28903,6 +28597,7 @@
 	(hierarchical_label "~{OBJRAM}"
 		(shape input)
 		(at 128.27 248.92 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28914,6 +28609,7 @@
 	(hierarchical_label "XPOS[27..20]"
 		(shape output)
 		(at 224.79 193.04 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28925,6 +28621,7 @@
 	(hierarchical_label "~{OBEN''}"
 		(shape output)
 		(at 307.34 121.92 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28936,6 +28633,7 @@
 	(hierarchical_label "MA'[9..0]"
 		(shape input)
 		(at 24.13 240.03 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28947,6 +28645,7 @@
 	(hierarchical_label "~{LBRST}"
 		(shape input)
 		(at 186.69 208.28 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28958,6 +28657,7 @@
 	(hierarchical_label "WRIH"
 		(shape input)
 		(at 54.61 149.86 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28969,6 +28669,7 @@
 	(hierarchical_label "~{OBJRAM}"
 		(shape input)
 		(at 39.37 168.91 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28980,6 +28681,7 @@
 	(hierarchical_label "COL'[3..0]"
 		(shape output)
 		(at 396.24 168.91 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28991,6 +28693,7 @@
 	(hierarchical_label "H2'"
 		(shape input)
 		(at 127 208.28 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29002,6 +28705,7 @@
 	(hierarchical_label "~{LBRST}"
 		(shape input)
 		(at 186.69 276.86 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29013,6 +28717,7 @@
 	(hierarchical_label "MD[7..0]"
 		(shape bidirectional)
 		(at 157.48 254 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29024,6 +28729,7 @@
 	(hierarchical_label "~{LBRST}"
 		(shape input)
 		(at 186.69 241.3 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29035,6 +28741,7 @@
 	(hierarchical_label "OPCK"
 		(shape input)
 		(at 375.92 153.67 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29046,6 +28753,7 @@
 	(hierarchical_label "OP3"
 		(shape input)
 		(at 295.91 41.91 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29057,6 +28765,7 @@
 	(hierarchical_label "H2'"
 		(shape input)
 		(at 39.37 176.53 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29068,6 +28777,7 @@
 	(hierarchical_label "DMA"
 		(shape input)
 		(at 54.61 160.02 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29079,6 +28789,7 @@
 	(hierarchical_label "MWR"
 		(shape input)
 		(at 39.37 173.99 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29090,6 +28801,7 @@
 	(hierarchical_label "OP0OP1"
 		(shape input)
 		(at 375.92 151.13 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29101,6 +28813,7 @@
 	(hierarchical_label "~{LBRST}"
 		(shape input)
 		(at 186.69 172.72 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29112,6 +28825,7 @@
 	(hierarchical_label "~{ODB5L}[1..2]"
 		(shape input)
 		(at 168.91 261.62 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29123,6 +28837,7 @@
 	(hierarchical_label "~{OP2}"
 		(shape input)
 		(at 295.91 54.61 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29134,6 +28849,7 @@
 	(hierarchical_label "OA[7..0]"
 		(shape input)
 		(at 26.67 180.34 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29145,6 +28861,7 @@
 	(hierarchical_label "V[128..1]"
 		(shape input)
 		(at 172.72 20.32 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29156,6 +28873,7 @@
 	(hierarchical_label "DMA"
 		(shape input)
 		(at 54.61 147.32 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29167,6 +28885,7 @@
 	(hierarchical_label "OCLK[1..2]"
 		(shape input)
 		(at 168.91 269.24 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29178,6 +28897,7 @@
 	(hierarchical_label "WRIH"
 		(shape input)
 		(at 39.37 171.45 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29189,6 +28909,7 @@
 	(hierarchical_label "H2'"
 		(shape input)
 		(at 36.83 209.55 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29372,7 +29093,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "SRAM 4kbit (1024-word x 4-bit)"
 			(at 55.88 92.71 0)
 			(effects
 				(font
@@ -29830,7 +29551,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "SRAM 4kbit (1024-word x 4-bit)"
 			(at 92.71 242.57 0)
 			(effects
 				(font
@@ -30170,7 +29891,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Synchronous 4-bit programmable binary Counter"
 			(at 199.39 228.6 0)
 			(effects
 				(font
@@ -30476,6 +30197,254 @@
 		)
 	)
 	(symbol
+		(lib_id "power:VCC")
+		(at 237.49 260.35 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "1b702998-5d1d-483d-afe6-dbe44c1b5710")
+		(property "Reference" "#PWR0158"
+			(at 237.49 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VCC"
+			(at 237.49 255.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 237.49 260.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 237.49 260.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VCC\""
+			(at 237.49 260.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "931a215a-4327-4228-bf31-e9fed7b67302")
+		)
+		(instances
+			(project "megazone"
+				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
+					(reference "#PWR0158")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 107.95 281.94 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1d143f89-1567-4469-bd9a-96974c88313b")
+		(property "Reference" "#PWR0191"
+			(at 107.95 288.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 111.76 283.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 107.95 281.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 107.95 281.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 107.95 281.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3e895d27-ffe6-4fd7-b1c9-18743fed6297")
+		)
+		(instances
+			(project "megazone"
+				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
+					(reference "#PWR0191")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "jt_ram:SRAM1K4B")
+		(at 120.65 274.32 0)
+		(unit 2)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1ef2aebd-fbcf-4764-8d0a-a4248e902d2c")
+		(property "Reference" "F15"
+			(at 120.65 267.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SRAM1K4B"
+			(at 120.65 280.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 124.46 255.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://archive.org/details/1kx4_Static_RAM_2114"
+			(at 120.65 293.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "SRAM 4kbit (1024-word x 4-bit)"
+			(at 120.65 274.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "10"
+			(uuid "1504f73b-7ead-4704-9b1b-f518242ecb56")
+		)
+		(pin "4"
+			(uuid "a69e0671-34f4-4b8c-a677-05d26b798833")
+		)
+		(pin "5"
+			(uuid "c979d3fa-31d4-4ba9-a42d-d94f10511efb")
+		)
+		(pin "18"
+			(uuid "3ee80e89-c395-49f4-962f-58ccf072f893")
+		)
+		(pin "9"
+			(uuid "b5cf0da7-8833-4c72-8790-e34c63a2938a")
+		)
+		(pin "17"
+			(uuid "5eeab2cd-3ba6-401d-9605-0158746f02cc")
+		)
+		(pin "2"
+			(uuid "6190cbd9-9ca4-451a-978b-8d1aa3ca1d0c")
+		)
+		(pin "16"
+			(uuid "173bbbcd-1ff5-4edf-8d73-17ea905a2747")
+		)
+		(pin "7"
+			(uuid "f23070a8-af4e-4990-89c6-91e0d781d31b")
+		)
+		(pin "12"
+			(uuid "60e86f0c-255b-4b14-ae4e-486f185d10db")
+		)
+		(pin "13"
+			(uuid "0303c58f-36cb-4888-bc98-471e022a5447")
+		)
+		(pin "14"
+			(uuid "eeee4068-4b87-4dd0-89d0-5114962416d0")
+		)
+		(pin "11"
+			(uuid "0134cc9d-769f-4884-b230-b7d1f60daa0c")
+		)
+		(pin "6"
+			(uuid "3128c154-3a91-464b-b00b-e995c38f184c")
+		)
+		(pin "1"
+			(uuid "33b0c41a-dd35-4d64-a1d6-2934d7e28d7f")
+		)
+		(pin "8"
+			(uuid "f1367c72-9a34-40ce-9173-f76d9550ad73")
+		)
+		(pin "3"
+			(uuid "e41e273a-c187-4e71-898b-e50fd458bf35")
+		)
+		(pin "15"
+			(uuid "f8f305c9-b835-4383-96c0-831ca41e413e")
+		)
+		(instances
+			(project "megazone"
+				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
+					(reference "F15")
+					(unit 2)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "jt74:74LS161")
 		(at 199.39 195.58 0)
 		(unit 1)
@@ -30518,7 +30487,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Synchronous 4-bit programmable binary Counter"
 			(at 199.39 195.58 0)
 			(effects
 				(font
@@ -30687,7 +30656,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "SRAM 4kbit (1024-word x 4-bit)"
 			(at 92.71 200.66 0)
 			(effects
 				(font
@@ -31051,6 +31020,123 @@
 		)
 	)
 	(symbol
+		(lib_id "jt_ram:SRAM1K4B")
+		(at 146.05 274.32 0)
+		(unit 2)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2dc07dc4-6302-4066-a684-d69e6e5dac69")
+		(property "Reference" "E15"
+			(at 146.05 267.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SRAM1K4B"
+			(at 146.05 280.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 149.86 255.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://archive.org/details/1kx4_Static_RAM_2114"
+			(at 146.05 293.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "SRAM 4kbit (1024-word x 4-bit)"
+			(at 146.05 274.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "10"
+			(uuid "1504f73b-7ead-4704-9b1b-f518242ecb57")
+		)
+		(pin "4"
+			(uuid "a69e0671-34f4-4b8c-a677-05d26b798834")
+		)
+		(pin "5"
+			(uuid "c979d3fa-31d4-4ba9-a42d-d94f10511efc")
+		)
+		(pin "18"
+			(uuid "c8c01a3b-2915-49d2-af6f-03d09dd3ddf7")
+		)
+		(pin "9"
+			(uuid "99931f10-df47-4bd3-a6e4-f7fd929492c5")
+		)
+		(pin "17"
+			(uuid "5eeab2cd-3ba6-401d-9605-0158746f02cd")
+		)
+		(pin "2"
+			(uuid "6190cbd9-9ca4-451a-978b-8d1aa3ca1d0d")
+		)
+		(pin "16"
+			(uuid "173bbbcd-1ff5-4edf-8d73-17ea905a2748")
+		)
+		(pin "7"
+			(uuid "f23070a8-af4e-4990-89c6-91e0d781d31c")
+		)
+		(pin "12"
+			(uuid "60e86f0c-255b-4b14-ae4e-486f185d10dc")
+		)
+		(pin "13"
+			(uuid "0303c58f-36cb-4888-bc98-471e022a5448")
+		)
+		(pin "14"
+			(uuid "eeee4068-4b87-4dd0-89d0-5114962416d1")
+		)
+		(pin "11"
+			(uuid "0134cc9d-769f-4884-b230-b7d1f60daa0d")
+		)
+		(pin "6"
+			(uuid "3128c154-3a91-464b-b00b-e995c38f184d")
+		)
+		(pin "1"
+			(uuid "33b0c41a-dd35-4d64-a1d6-2934d7e28d80")
+		)
+		(pin "8"
+			(uuid "f1367c72-9a34-40ce-9173-f76d9550ad74")
+		)
+		(pin "3"
+			(uuid "e41e273a-c187-4e71-898b-e50fd458bf36")
+		)
+		(pin "15"
+			(uuid "f8f305c9-b835-4383-96c0-831ca41e413f")
+		)
+		(instances
+			(project "megazone"
+				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
+					(reference "E15")
+					(unit 2)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 271.78 275.59 0)
 		(unit 1)
@@ -31177,6 +31263,188 @@
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
 					(reference "#PWR0105")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "jt_ram:SRAM1K4B")
+		(at 107.95 274.32 0)
+		(unit 2)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3225ed50-5643-4485-afab-1ef7a8b0705f")
+		(property "Reference" "F14"
+			(at 107.95 267.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SRAM1K4B"
+			(at 107.95 280.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 111.76 255.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://archive.org/details/1kx4_Static_RAM_2114"
+			(at 107.95 293.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "SRAM 4kbit (1024-word x 4-bit)"
+			(at 107.95 274.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "10"
+			(uuid "1504f73b-7ead-4704-9b1b-f518242ecb58")
+		)
+		(pin "4"
+			(uuid "a69e0671-34f4-4b8c-a677-05d26b798835")
+		)
+		(pin "5"
+			(uuid "c979d3fa-31d4-4ba9-a42d-d94f10511efd")
+		)
+		(pin "18"
+			(uuid "852be4e9-3e79-4277-8f00-74e0bb3263bc")
+		)
+		(pin "9"
+			(uuid "a3f0f915-bbe3-4f0d-af95-a4d0c37509e1")
+		)
+		(pin "17"
+			(uuid "5eeab2cd-3ba6-401d-9605-0158746f02ce")
+		)
+		(pin "2"
+			(uuid "6190cbd9-9ca4-451a-978b-8d1aa3ca1d0e")
+		)
+		(pin "16"
+			(uuid "173bbbcd-1ff5-4edf-8d73-17ea905a2749")
+		)
+		(pin "7"
+			(uuid "f23070a8-af4e-4990-89c6-91e0d781d31d")
+		)
+		(pin "12"
+			(uuid "60e86f0c-255b-4b14-ae4e-486f185d10dd")
+		)
+		(pin "13"
+			(uuid "0303c58f-36cb-4888-bc98-471e022a5449")
+		)
+		(pin "14"
+			(uuid "eeee4068-4b87-4dd0-89d0-5114962416d2")
+		)
+		(pin "11"
+			(uuid "0134cc9d-769f-4884-b230-b7d1f60daa0e")
+		)
+		(pin "6"
+			(uuid "3128c154-3a91-464b-b00b-e995c38f184e")
+		)
+		(pin "1"
+			(uuid "33b0c41a-dd35-4d64-a1d6-2934d7e28d81")
+		)
+		(pin "8"
+			(uuid "f1367c72-9a34-40ce-9173-f76d9550ad75")
+		)
+		(pin "3"
+			(uuid "e41e273a-c187-4e71-898b-e50fd458bf37")
+		)
+		(pin "15"
+			(uuid "f8f305c9-b835-4383-96c0-831ca41e4140")
+		)
+		(instances
+			(project ""
+				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
+					(reference "F14")
+					(unit 2)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 133.35 281.94 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "38b9a21b-9ccc-4a12-88f8-4f8ef34e880b")
+		(property "Reference" "#PWR0358"
+			(at 133.35 288.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 137.16 283.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 133.35 281.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 133.35 281.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 133.35 281.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c73e6d64-c16e-4d89-bf22-fa31e06c8600")
+		)
+		(instances
+			(project "megazone"
+				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
+					(reference "#PWR0358")
 					(unit 1)
 				)
 			)
@@ -31395,7 +31663,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "PROM 1kbit (256 x 4bit) Bipolar PROM"
 			(at 381 187.96 0)
 			(effects
 				(font
@@ -31688,73 +31956,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:VCC")
-		(at 387.35 193.04 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "45f3eccd-1795-4107-96fe-a2e696d605fb")
-		(property "Reference" "#PWR0358"
-			(at 383.54 193.04 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "VCC"
-			(at 391.16 193.0399 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 387.35 193.04 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 387.35 193.04 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"VCC\""
-			(at 387.35 193.04 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "bab6a8e7-5656-4fba-9975-854703ebd42b")
-		)
-		(instances
-			(project ""
-				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
-					(reference "#PWR0358")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "jt_rom:27C64")
 		(at 327.66 242.57 0)
 		(unit 2)
@@ -31902,35 +32103,34 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 387.35 190.5 90)
-		(unit 1)
+		(lib_id "jt_rom:PROM256W4B")
+		(at 237.49 267.97 0)
+		(unit 2)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "4a2f143b-37c1-49a6-8aba-a31ec4dcc80f")
-		(property "Reference" "#PWR0357"
-			(at 393.7 190.5 0)
+		(uuid "4a088bbf-0741-4d6c-8c5f-dfa081f1e153")
+		(property "Reference" "C6"
+			(at 231.14 261.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
+				(justify left)
 			)
 		)
-		(property "Value" "GND"
-			(at 391.16 190.4999 90)
+		(property "Value" "PROM256W4B"
+			(at 222.25 274.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
-			(at 387.35 190.5 0)
+			(at 238.76 238.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31938,8 +32138,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
-			(at 387.35 190.5 0)
+		(property "Datasheet" "http://www.applelogic.org/files/6309PROM.pdf"
+			(at 238.76 285.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31947,89 +32147,68 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 387.35 190.5 0)
+		(property "Description" "PROM 1kbit (256 x 4bit) Bipolar PROM"
+			(at 237.49 267.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
 			)
+		)
+		(pin "11"
+			(uuid "702a06da-dbc0-4fe5-aae1-c0c56ebefec0")
+		)
+		(pin "9"
+			(uuid "ccddca2b-35d1-43e3-b695-8c077809c4fe")
+		)
+		(pin "2"
+			(uuid "0d109904-c12c-430b-b9ea-05561f6c7fd7")
+		)
+		(pin "10"
+			(uuid "eb66a098-b781-4799-a10c-6fb97aa45a0c")
+		)
+		(pin "3"
+			(uuid "36390974-ba4d-4ca0-8a42-1406930137a2")
+		)
+		(pin "4"
+			(uuid "6d8c974d-77aa-4187-9a48-32a40ca7abb7")
+		)
+		(pin "7"
+			(uuid "292dbcf8-af3e-430d-a328-ac053b9b3e26")
+		)
+		(pin "16"
+			(uuid "0bd9e766-8788-49ae-b5c2-addc021cdded")
 		)
 		(pin "1"
-			(uuid "fad59c38-dbbe-4e13-add4-94ee573f3f50")
+			(uuid "d190a548-b9b0-4938-84f0-16b2f3791cf1")
+		)
+		(pin "15"
+			(uuid "93685c56-de9b-477e-b68e-def373d99770")
+		)
+		(pin "13"
+			(uuid "e24a5dc3-6aba-4c8e-9db8-921a4875aeb3")
+		)
+		(pin "8"
+			(uuid "d2667d77-a690-4bb3-9113-5031bca33fdf")
+		)
+		(pin "5"
+			(uuid "96021646-3588-4d01-8228-1e65d860fbe4")
+		)
+		(pin "12"
+			(uuid "450df324-ba2b-415c-abe3-ea64eb303eaf")
+		)
+		(pin "6"
+			(uuid "4fe2d7b4-d737-4270-961b-80ca30ef5905")
+		)
+		(pin "14"
+			(uuid "974d8b01-bb2b-40cd-ad13-1b75a08e95b5")
 		)
 		(instances
 			(project ""
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
-					(reference "#PWR0357")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 63.5 66.04 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "4c2b1856-fb55-49ac-ab43-cd909b4566d2")
-		(property "Reference" "#PWR095"
-			(at 69.85 66.04 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 66.04 66.04 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" ""
-			(at 63.5 66.04 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 63.5 66.04 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 63.5 66.04 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "d44282eb-b115-45c8-bc5a-4f622ff0ae92")
-		)
-		(instances
-			(project "megazone"
-				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
-					(reference "#PWR095")
-					(unit 1)
+					(reference "C6")
+					(unit 2)
 				)
 			)
 		)
@@ -32228,72 +32407,6 @@
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
 					(reference "#PWR098")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 63.5 107.95 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "534cfbf5-08b7-4ec9-a3fb-4318d960f58b")
-		(property "Reference" "#PWR097"
-			(at 69.85 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 63.5 111.76 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" ""
-			(at 63.5 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 63.5 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 63.5 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "064575b8-6dc3-4654-b5e2-3b9a6fca7629")
-		)
-		(instances
-			(project "megazone"
-				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
-					(reference "#PWR097")
 					(unit 1)
 				)
 			)
@@ -32821,6 +32934,71 @@
 		)
 	)
 	(symbol
+		(lib_id "power:VCC")
+		(at 107.95 266.7 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "62534a5e-8dc2-46d2-9422-6987075908a8")
+		(property "Reference" "#PWR0190"
+			(at 107.95 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VCC"
+			(at 110.49 265.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 107.95 266.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 107.95 266.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VCC\""
+			(at 107.95 266.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9e1a2d61-452c-4dcf-a522-c88317f561fe")
+		)
+		(instances
+			(project "megazone"
+				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
+					(reference "#PWR0190")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "jt74:74LS86")
 		(at 303.53 52.07 0)
 		(unit 4)
@@ -33187,17 +33365,16 @@
 		)
 	)
 	(symbol
-		(lib_id "power:VCC")
-		(at 100.33 255.27 270)
+		(lib_id "power:GND")
+		(at 146.05 281.94 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "726e6f4a-899f-4c43-9a53-92b4a50adb21")
-		(property "Reference" "#PWR0354"
-			(at 96.52 255.27 0)
+		(uuid "6df99e26-c6ac-4231-8309-d85964e4e469")
+		(property "Reference" "#PWR0377"
+			(at 146.05 288.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33205,17 +33382,16 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "VCC"
-			(at 104.14 255.2699 90)
+		(property "Value" "GND"
+			(at 149.86 283.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" ""
-			(at 100.33 255.27 0)
+			(at 146.05 281.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33224,7 +33400,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 100.33 255.27 0)
+			(at 146.05 281.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33232,8 +33408,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol creates a global label with name \"VCC\""
-			(at 100.33 255.27 0)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 146.05 281.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33242,12 +33418,78 @@
 			)
 		)
 		(pin "1"
-			(uuid "90db3383-c439-4ad2-8b17-70cd3f14fe0e")
+			(uuid "f6219ab0-86a5-4e57-9bff-1b5ae04159d9")
 		)
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
-					(reference "#PWR0354")
+					(reference "#PWR0377")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 237.49 275.59 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6effd0b2-2762-438f-9bb3-2d1f7c17d6df")
+		(property "Reference" "#PWR0159"
+			(at 237.49 281.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 237.49 280.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 237.49 275.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 237.49 275.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 237.49 275.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "86196052-1d83-4592-a781-71a1178e7ae6")
+		)
+		(instances
+			(project "megazone"
+				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
+					(reference "#PWR0159")
 					(unit 1)
 				)
 			)
@@ -33428,7 +33670,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Synchronous 4-bit programmable binary Counter"
 			(at 199.39 160.02 0)
 			(effects
 				(font
@@ -34077,7 +34319,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "SRAM 4kbit (1024-word x 4-bit)"
 			(at 55.88 50.8 0)
 			(effects
 				(font
@@ -34653,52 +34895,52 @@
 			)
 		)
 		(pin "6"
-			(uuid "2ce33682-1832-4413-b618-cfab5206d840")
+			(uuid "2ce33682-1832-4413-b618-cfab5206d841")
 		)
 		(pin "4"
-			(uuid "f24b2c5c-7201-4641-9a22-514a21fb93bf")
+			(uuid "f24b2c5c-7201-4641-9a22-514a21fb93c0")
 		)
 		(pin "7"
-			(uuid "45efc233-b735-4d9e-b2b3-180705f9d35a")
+			(uuid "45efc233-b735-4d9e-b2b3-180705f9d35b")
 		)
 		(pin "14"
-			(uuid "545697b5-2b78-4783-b0df-0345046c6b5b")
+			(uuid "545697b5-2b78-4783-b0df-0345046c6b5c")
 		)
 		(pin "2"
-			(uuid "33fff584-3eaa-4fc0-bf0a-f685fb492ff8")
+			(uuid "33fff584-3eaa-4fc0-bf0a-f685fb492ff9")
 		)
 		(pin "11"
-			(uuid "f0ed834e-1f51-4891-bee6-aab4b2db425a")
+			(uuid "f0ed834e-1f51-4891-bee6-aab4b2db425b")
 		)
 		(pin "10"
-			(uuid "eeda9038-293c-4d50-a8ba-44eec2f70868")
+			(uuid "eeda9038-293c-4d50-a8ba-44eec2f70869")
 		)
 		(pin "1"
-			(uuid "5c4fb487-f7fc-4459-9f98-af996d7481eb")
+			(uuid "5c4fb487-f7fc-4459-9f98-af996d7481ec")
 		)
 		(pin "16"
-			(uuid "f1841a90-2911-4abb-be71-1705f901cb0d")
+			(uuid "f1841a90-2911-4abb-be71-1705f901cb0e")
 		)
 		(pin "9"
-			(uuid "809cd41f-681f-43ac-8cc7-e58ce2fef0c6")
+			(uuid "809cd41f-681f-43ac-8cc7-e58ce2fef0c7")
 		)
 		(pin "13"
-			(uuid "f6b4938c-085a-411e-8bad-435d0c26a941")
+			(uuid "f6b4938c-085a-411e-8bad-435d0c26a942")
 		)
 		(pin "12"
-			(uuid "58c60313-f090-4e8a-b628-04cfde566af2")
+			(uuid "58c60313-f090-4e8a-b628-04cfde566af3")
 		)
 		(pin "3"
-			(uuid "fbce0f19-8389-4a73-98f9-aa373acde0e5")
+			(uuid "fbce0f19-8389-4a73-98f9-aa373acde0e6")
 		)
 		(pin "15"
-			(uuid "a43bb2a7-c6d6-4481-b905-9c976d437abf")
+			(uuid "a43bb2a7-c6d6-4481-b905-9c976d437ac0")
 		)
 		(pin "5"
-			(uuid "ff935ac6-3833-47e5-8bde-fc7776be9421")
+			(uuid "ff935ac6-3833-47e5-8bde-fc7776be9422")
 		)
 		(pin "8"
-			(uuid "e939f18b-9fd9-413a-8bbc-ed3147dfc9b3")
+			(uuid "e939f18b-9fd9-413a-8bbc-ed3147dfc9b4")
 		)
 		(instances
 			(project ""
@@ -34880,7 +35122,6 @@
 		)
 	)
 	(symbol
-		(lib_name "74LS10_1")
 		(lib_id "jt74:74LS10")
 		(at 261.62 267.97 0)
 		(unit 4)
@@ -34995,7 +35236,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "92113e39-399d-4fef-995e-eeeede55862b")
-		(property "Reference" "#PWR270"
+		(property "Reference" "#PWR0270"
 			(at 247.65 281.94 0)
 			(effects
 				(font
@@ -35045,7 +35286,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
-					(reference "#PWR270")
+					(reference "#PWR0270")
 					(unit 1)
 				)
 			)
@@ -35565,7 +35806,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a22462b0-f9fe-4cbe-9dc9-5d211f62c077")
-		(property "Reference" "#PWR184"
+		(property "Reference" "#PWR0184"
 			(at 247.65 264.16 0)
 			(effects
 				(font
@@ -35615,7 +35856,7 @@
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
-					(reference "#PWR184")
+					(reference "#PWR0184")
 					(unit 1)
 				)
 			)
@@ -35997,72 +36238,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:VCC")
-		(at 63.5 63.5 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "b7841b65-327f-44c2-a343-44761da87394")
-		(property "Reference" "#PWR094"
-			(at 59.69 63.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "VCC"
-			(at 66.04 63.5 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 63.5 63.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 63.5 63.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"VCC\""
-			(at 63.5 63.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "3793a3e6-ea04-427b-b48c-91525f76a8f1")
-		)
-		(instances
-			(project "megazone"
-				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
-					(reference "#PWR094")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "jt74:74LS10")
 		(at 62.23 149.86 0)
 		(unit 1)
@@ -36106,7 +36281,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Triple 3-input NAND"
 			(at 62.23 149.86 0)
 			(effects
 				(font
@@ -36380,7 +36555,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Synchronous 4-bit programmable binary Counter"
 			(at 199.39 264.16 0)
 			(effects
 				(font
@@ -36442,15 +36617,15 @@
 	)
 	(symbol
 		(lib_id "power:VCC")
-		(at 63.5 105.41 270)
+		(at 146.05 266.7 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "c5f8bbdd-53a7-45d9-8d4e-af30963f0afc")
-		(property "Reference" "#PWR096"
-			(at 59.69 105.41 0)
+		(uuid "c623c8ab-017d-4770-a839-4c0c9fe5cd00")
+		(property "Reference" "#PWR0376"
+			(at 146.05 270.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36459,16 +36634,15 @@
 			)
 		)
 		(property "Value" "VCC"
-			(at 63.5 101.6 90)
+			(at 148.59 265.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" ""
-			(at 63.5 105.41 0)
+			(at 146.05 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36477,7 +36651,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 63.5 105.41 0)
+			(at 146.05 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36486,7 +36660,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"VCC\""
-			(at 63.5 105.41 0)
+			(at 146.05 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36495,13 +36669,130 @@
 			)
 		)
 		(pin "1"
-			(uuid "1f2a23aa-46e5-46aa-bcc5-30b561e257e8")
+			(uuid "67275d6a-00fb-42c8-a28f-99ea4fbf151b")
 		)
 		(instances
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
-					(reference "#PWR096")
+					(reference "#PWR0376")
 					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "jt_ram:SRAM1K4B")
+		(at 133.35 274.32 0)
+		(unit 2)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c88c9ba5-f99a-4730-8e1b-96f5b9807854")
+		(property "Reference" "E14"
+			(at 133.35 267.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SRAM1K4B"
+			(at 133.35 280.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 137.16 255.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://archive.org/details/1kx4_Static_RAM_2114"
+			(at 133.35 293.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "SRAM 4kbit (1024-word x 4-bit)"
+			(at 133.35 274.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "10"
+			(uuid "1504f73b-7ead-4704-9b1b-f518242ecb59")
+		)
+		(pin "4"
+			(uuid "a69e0671-34f4-4b8c-a677-05d26b798836")
+		)
+		(pin "5"
+			(uuid "c979d3fa-31d4-4ba9-a42d-d94f10511efe")
+		)
+		(pin "18"
+			(uuid "3609b08c-7248-4ef7-9720-c81849c1ecdc")
+		)
+		(pin "9"
+			(uuid "729addd6-11d7-4fc6-9303-b6e887aca3ca")
+		)
+		(pin "17"
+			(uuid "5eeab2cd-3ba6-401d-9605-0158746f02cf")
+		)
+		(pin "2"
+			(uuid "6190cbd9-9ca4-451a-978b-8d1aa3ca1d0f")
+		)
+		(pin "16"
+			(uuid "173bbbcd-1ff5-4edf-8d73-17ea905a274a")
+		)
+		(pin "7"
+			(uuid "f23070a8-af4e-4990-89c6-91e0d781d31e")
+		)
+		(pin "12"
+			(uuid "60e86f0c-255b-4b14-ae4e-486f185d10de")
+		)
+		(pin "13"
+			(uuid "0303c58f-36cb-4888-bc98-471e022a544a")
+		)
+		(pin "14"
+			(uuid "eeee4068-4b87-4dd0-89d0-5114962416d3")
+		)
+		(pin "11"
+			(uuid "0134cc9d-769f-4884-b230-b7d1f60daa0f")
+		)
+		(pin "6"
+			(uuid "3128c154-3a91-464b-b00b-e995c38f184f")
+		)
+		(pin "1"
+			(uuid "33b0c41a-dd35-4d64-a1d6-2934d7e28d82")
+		)
+		(pin "8"
+			(uuid "f1367c72-9a34-40ce-9173-f76d9550ad76")
+		)
+		(pin "3"
+			(uuid "e41e273a-c187-4e71-898b-e50fd458bf38")
+		)
+		(pin "15"
+			(uuid "f8f305c9-b835-4383-96c0-831ca41e4141")
+		)
+		(instances
+			(project "megazone"
+				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
+					(reference "E14")
+					(unit 2)
 				)
 			)
 		)
@@ -36670,73 +36961,6 @@
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
 					(reference "DE18")
 					(unit 2)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 100.33 215.9 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "cd1a848a-b703-4c9a-a801-2b9c49b76d66")
-		(property "Reference" "#PWR0355"
-			(at 106.68 215.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 104.14 215.8999 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" ""
-			(at 100.33 215.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 100.33 215.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 100.33 215.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "c2392171-9ae1-4d2a-8ffd-14084cb8dd59")
-		)
-		(instances
-			(project ""
-				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
-					(reference "#PWR0355")
-					(unit 1)
 				)
 			)
 		)
@@ -37296,6 +37520,136 @@
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
 					(reference "CD18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:VCC")
+		(at 133.35 266.7 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "dcdd5199-1058-41d4-9747-3a7f8871ad66")
+		(property "Reference" "#PWR0357"
+			(at 133.35 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VCC"
+			(at 135.89 265.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 133.35 266.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 133.35 266.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VCC\""
+			(at 133.35 266.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ba619cc9-b615-4748-821e-f92e2d837387")
+		)
+		(instances
+			(project "megazone"
+				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
+					(reference "#PWR0357")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:VCC")
+		(at 120.65 266.7 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "de5c46f9-96d0-4b0a-bfc1-b0ae26db73e8")
+		(property "Reference" "#PWR0354"
+			(at 120.65 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VCC"
+			(at 123.19 265.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 120.65 266.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 120.65 266.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VCC\""
+			(at 120.65 266.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e541c86e-94a0-416d-90bd-873c2858d16c")
+		)
+		(instances
+			(project "megazone"
+				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
+					(reference "#PWR0354")
 					(unit 1)
 				)
 			)
@@ -38145,6 +38499,71 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 120.65 281.94 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f47547f0-8bba-45f3-ae9b-ead9d6075329")
+		(property "Reference" "#PWR0356"
+			(at 120.65 288.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 124.46 283.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 120.65 281.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 120.65 281.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 120.65 281.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5db09a92-000a-49bb-b05f-c19b7bad1fec")
+		)
+		(instances
+			(project "megazone"
+				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
+					(reference "#PWR0356")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:VCC")
 		(at 398.78 234.95 0)
 		(unit 1)
@@ -38205,140 +38624,6 @@
 			(project "megazone"
 				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
 					(reference "#PWR0411")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:VCC")
-		(at 100.33 213.36 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "f6435a7c-304e-4ac8-894f-a1f59777d57a")
-		(property "Reference" "#PWR0173"
-			(at 96.52 213.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "VCC"
-			(at 104.14 213.3599 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 100.33 213.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 100.33 213.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"VCC\""
-			(at 100.33 213.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "01b65627-db83-4267-ba8e-849ae120772d")
-		)
-		(instances
-			(project ""
-				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
-					(reference "#PWR0173")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 100.33 257.81 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "fa5ca66c-d197-4641-a576-5c99874137e7")
-		(property "Reference" "#PWR0356"
-			(at 106.68 257.81 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 104.14 257.8099 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" ""
-			(at 100.33 257.81 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 100.33 257.81 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 100.33 257.81 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "715482ed-f702-4132-8337-564cbb5c8acd")
-		)
-		(instances
-			(project "megazone"
-				(path "/b3e039a8-74b0-4cb4-b612-5df1f0b42747/d8a28836-aaeb-4e12-ae3e-25f30200210e"
-					(reference "#PWR0356")
 					(unit 1)
 				)
 			)

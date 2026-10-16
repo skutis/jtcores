@@ -34183,7 +34183,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(property "Reference" "U"
-			(at 0 1.27 0)
+			(at 1.27 6.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34191,7 +34191,7 @@
 			)
 		)
 		(property "Value" "74LS21"
-			(at 0 -1.27 0)
+			(at 3.81 -6.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34208,7 +34208,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/gpn/sn74LS21"
-			(at 0 0 0)
+			(at -1.27 -16.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34217,7 +34217,7 @@
 			)
 		)
 		(property "Description" "Dual 4-input AND"
-			(at 0 0 0)
+			(at -1.27 -16.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34817,8 +34817,8 @@
 		)
 		(symbol "74LS21_3_0"
 			(pin input line
-				(at 0 12.7 270)
-				(length 5.08) hide
+				(at 0 7.62 270)
+				(length 2.54)
 				(name "VCC"
 					(effects
 						(font
@@ -34835,8 +34835,8 @@
 				)
 			)
 			(pin input line
-				(at 0 -12.7 90)
-				(length 5.08) hide
+				(at 0 -7.62 90)
+				(length 2.54)
 				(name "GND"
 					(effects
 						(font
@@ -34855,8 +34855,8 @@
 		)
 		(symbol "74LS21_3_1"
 			(rectangle
-				(start -5.08 7.62)
-				(end 5.08 -7.62)
+				(start -5.08 5.08)
+				(end 5.08 -5.08)
 				(stroke
 					(width 0.254)
 					(type default)
