@@ -60,26 +60,23 @@ module jtframe_scan2x #(parameter COLORW=4, HLEN=512)(
     output        sd_cke
 );
 
+reg sd_hs, sd_vs, sd_HB, sd_VB;
+
 localparam AW=HLEN<=512 ? 9:10;
 localparam DW=COLORW*3;
 
 reg  [DW-1:0] preout=0;
-reg           preout_vb=1;
-reg           preout_hb=1;
 reg  [AW-1:0] wraddr, rdaddr, hlen, hswidth, hb_rise, hb_fall, vb_rise, vb_fall, vs_rise, vs_fall;
 reg           scanline;
 reg           last_HS, last_VS, last_HB, last_VB;
 reg           vb_rising, vb_falling, vs_rising, vs_falling;
 reg           line=0;
 reg           vchng=0, vwait=0;
-//reg           x2_HB, x2_VB;
 
 wire          HS_posedge     =  x1_hs && !last_HS;
 wire          HS_negedge     = !x1_hs &&  last_HS;
 wire [DW-1:0] next;
 wire [DW-1:0] linebuf_q;
-wire          linebuf_vb;
-wire          linebuf_hb;
 wire [DW-1:0] dim2, dim4;
 reg [COLORW:0] ab;
 wire [COLORW*3-1:0] gated_pxl;
@@ -124,27 +121,18 @@ reg [CLKSTEPS-1:0] mixst;
 always@(posedge clk) begin
     if( rst ) begin
         preout <= {DW{1'b0}};
-        preout_vb <= 1;
-        preout_hb <= 1;
     end else begin
         `ifndef JTFRAME_SCAN2X_NOBLEND
             // mixing can only be done if clk is at least 4x pxl2_cen
             mixst <= { mixst[0+:CLKSTEPS-1],pxl2_cen};
             if(mixst==BLEND_ST) begin
-                preout_vb <= linebuf_vb;
-                preout_hb <= linebuf_hb;
                 preout <= blend_en ?
                     blend( rdaddr=={AW{1'b0}} ? {DW{1'b0}} : preout, next) :
                     next;
-            end else if( mixst==PURE_ST ) begin
+            end else if( mixst==PURE_ST )
                 preout <= next;
-                preout_vb <= linebuf_vb;
-                preout_hb <= linebuf_hb;
-            end
         `else
             preout <= next;
-            preout_vb <= linebuf_vb;
-            preout_hb <= linebuf_hb;
         `endif
     end
 end
@@ -175,17 +163,17 @@ always @(posedge clk) if(pxl2_cen) begin
         hlen     <= wraddr;
         line     <= ~line;
         scanline <= 0;
-        x2_hs    <= 1;
+        sd_hs    <= 1;
     end else begin
         if(alt_pxl) wraddr <= wraddr + 1'd1;
         if( rdaddr == hlen ) begin
             rdaddr   <= {AW{1'b0}};
-            x2_hs    <= 1;
+            sd_hs    <= 1;
             scanline <= 1;
         end else begin
             rdaddr <= rdaddr+1'd1;
             if( rdaddr == hswidth ) begin
-                x2_hs <= 0;
+                sd_hs <= 0;
             end
         end
     end
@@ -234,19 +222,14 @@ always @(posedge clk) if(pxl2_cen) begin
         vs_falling <= 1;
         vs_rising <= 0;
     end
-    if (rdaddr == hb_rise) x2_HB <= 1;
-    if (rdaddr == hb_fall) x2_HB <= 0;
-    if (vb_rising && rdaddr == vb_rise) x2_VB <= 1;
-    if (vb_falling && rdaddr == vb_fall) x2_VB <= 0;
-    if (vs_rising && rdaddr == vs_rise) x2_vs <= 1;
-    if (vs_falling && rdaddr == vs_fall) x2_vs <= 0;
+    if (rdaddr == hb_rise) sd_HB <= 1;
+    if (rdaddr == hb_fall) sd_HB <= 0;
+    if (vb_rising && rdaddr == vb_rise) sd_VB <= 1;
+    if (vb_falling && rdaddr == vb_fall) sd_VB <= 0;
+    if (vs_rising && rdaddr == vs_rise) sd_vs <= 1;
+    if (vs_falling && rdaddr == vs_fall) sd_vs <= 0;
 
-    // The unrotated picture comes from the previous buffered input line.
-    // Replay its blanking through the same pipeline as RGB. Reconstructing
-    // it from live input edges can select the wrong line or pixel phase.
-    // Keep the existing reconstructed timing for the rotation framebuffer.
-    if( rotation==0 ) {x2_HB,x2_VB} <= {preout_hb,preout_vb};
-    if( enb ) {x2_hs,x2_HB,x2_vs,x2_VB} <= {x1_hs,x1_hb,x1_vs,x1_vb};
+    if( enb ) {sd_hs,sd_HB,sd_vs,sd_VB} <= {x1_hs,x1_hb,x1_vs,x1_vb};
 end
 
 assign x2_de = ~(x2_VB | x2_HB);
@@ -258,6 +241,22 @@ assign x2_de = ~(x2_VB | x2_HB);
 `endif
 
 `ifdef JTFRAME_SCAN2X_ROTATE
+// The rotation output has eight pixel enables of latency, including the
+// linebuffer read, both three-stage colour interpolators and output latch.
+// Keep sync and blanking with those pixels, including at fractional enables.
+localparam ROTATE_DELAY=8;
+reg [3:0] rotate_sync[0:ROTATE_DELAY-1];
+integer sync_idx;
+always @(posedge clk) if (pxl2_cen) begin
+    rotate_sync[0] <= {sd_hs, sd_vs, sd_HB, sd_VB};
+    for (sync_idx=1; sync_idx<ROTATE_DELAY; sync_idx=sync_idx+1)
+        rotate_sync[sync_idx] <= rotate_sync[sync_idx-1];
+end
+always @* begin
+    {x2_hs, x2_vs, x2_HB, x2_VB} = (|rotation && !enb) ?
+        rotate_sync[ROTATE_DELAY-1] : {sd_hs, sd_vs, sd_HB, sd_VB};
+end
+
 wire [COLORW-1:0] rotate_r, rotate_g, rotate_b;
 wire        vidin_req;
 wire  [1:0] vidin_frame;
@@ -288,9 +287,9 @@ scandoubler_rotate #(.COLOR_DEPTH(COLORW), .OUT_COLOR_DEPTH(COLORW)) u_rotate(
     .r_in       ( x1_pxl[COLORW*3-1:COLORW*2] ),
     .g_in       ( x1_pxl[COLORW*2-1:COLORW] ),
     .b_in       ( x1_pxl[COLORW-1:0] ),
-    .hb_sd      ( x2_HB    ),
-    .vb_sd      ( x2_VB    ),
-    .vs_sd      ( x2_vs    ),
+    .hb_sd      ( sd_HB    ),
+    .vb_sd      ( sd_VB    ),
+    .vs_sd      ( sd_vs    ),
     .r_out      ( rotate_r ),
     .g_out      ( rotate_g ),
     .b_out      ( rotate_b ),
@@ -353,6 +352,7 @@ scandoubler_sdram u_sdram (
 assign sd_cke = 1;
 assign next = |rotation ? {rotate_r, rotate_g, rotate_b} : linebuf_q;
 `else
+always @* {x2_hs, x2_vs, x2_HB, x2_VB} = {sd_hs, sd_vs, sd_HB, sd_VB};
 assign next = linebuf_q;
 assign sd_data = 16'hZZZZ;
 assign sd_addr = 0;
@@ -365,16 +365,16 @@ assign sd_cas = 1;
 assign sd_cke = 0;
 `endif
 
-jtframe_dual_ram #(.DW(DW+2),.AW(AW+1)) u_buffer(
+jtframe_dual_ram #(.DW(DW),.AW(AW+1)) u_buffer(
     .clk0   ( clk            ),
     .clk1   ( clk            ),
     // Port 0: read
-    .data0  ( {(DW+2){1'b0}} ),
+    .data0  ( {DW{1'b0}}     ),
     .addr0  ( {line, rdaddr} ),
     .we0    ( 1'b0           ),
-    .q0     ( {linebuf_hb, linebuf_vb, linebuf_q} ),
+    .q0     ( linebuf_q      ),
     // Port 1: write
-    .data1  ( {x1_hb, x1_vb, gated_pxl} ),
+    .data1  ( gated_pxl      ),
     .addr1  ( {~line, wraddr}),
     .we1    ( pxl_cen        ),
     .q1     (                )
