@@ -19,6 +19,7 @@ cores/mzone/hdl/jtmzone_scroll.v
 cores/mzone/hdl/jtmzone_snd.v
 cores/mzone/hdl/jtmzone_snd_dev.v
 cores/mzone/hdl/jtmzone_video.v
+cores/mzone/ver/game/README.md
 cores/mzone/ver/game/sim.sh
 cores/mzone/ver/game/scenes/capture.sh
 cores/mzone/ver/game/scenes/capture.lua
