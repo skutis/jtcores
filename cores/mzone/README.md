@@ -1,27 +1,48 @@
-# JTMZONE FPGA core compatible with Mega Zone hardware
+# JTMZONE — Mega Zone FPGA core
 
-This core is being organized as a JTFRAME core. The current source of truth for
-the board-level implementation is the KiCad schematic set in `sch/`.
+FPGA implementation of Konami's Mega Zone (1983, GX319), developed by
+Ulf Skutnabba using the JTFRAME framework.
 
-## Structure
+The implementation is based on the Mega Zone PCB schematics and hardware
+investigation, with MAME used as an additional reference. The KiCad schematics
+are in [sch/](sch/).
 
-- `cfg/`: JTFRAME metadata, ROM conversion, SDRAM bus, and macro definitions.
-- `hdl/`: local Mega Zone modules. Shared Konami 082/083-style blocks should be
-  reused from `kicker`, `yiear`, and `roc` when the interfaces match.
-- `sch/`: extracted KiCad schematics for the Mega Zone PCB.
-- `ver/`: simulation and regression entry points.
-- `doc/`: implementation notes derived from schematics and measurements.
+## Status
 
-## Hardware Notes
+The core is under development. The intended targets are SiDi128, MiSTer, and
+Analogue Pocket.
 
-Mega Zone uses a Konami-1/6809-compatible main CPU, a Z80 sound CPU, an 8039 DAC
-CPU, one AY-3-8910 PSG, and Konami 083 video logic. The MAME driver lists a
-18.432 MHz video/main clock and a 14.31818 MHz sound/DAC clock.
+| Platform | Hardware testing |
+| --- | --- |
+| SiDi128 | Used during development; release validation remains to be completed |
+| MiSTer | Testing status to be confirmed |
+| Analogue Pocket | Not tested on hardware; a tester is needed |
 
-The first HDL split should follow the small Konami cores:
+Platform build and timing results should be recorded before release. Inclusion
+of a ROM set in the configuration does not mean that every revision has been
+tested on hardware.
 
-- `jtmzone_game.v`: JTFRAME game wrapper and SDRAM address swizzle.
-- `jtmzone_main.v`: main CPU, shared RAM, scroll, video RAM, object RAM, I/O.
-- `jtmzone_snd.v`: Z80, AY-3-8910, 8039/DAC command path.
-- `jtmzone_video.v`: tile, object, timing, and mixer integration.
+Remaining validation includes video alignment on SiDi128 HDMI output and
+comparison of the PSG/DAC audio balance with the original PCB.
 
+## Video options
+
+Mega Zone uses a vertically oriented display. The **Video width** option selects
+between the default 288-pixel width and the original 287-pixel non-flipped
+visible width. In flipped mode, the original-width setting retains 288 pixels.
+
+## Hardware
+
+- Konami-1/6809-compatible main CPU.
+- Z80 sound and input CPU, with shared RAM.
+- 8039 CPU for DAC audio.
+- AY-3-8910 programmable sound generator.
+- Scrolling character layer, fixed character layer, sprites, and PROM palettes.
+
+## Credits
+
+- **Ulf Skutnabba** — Mega Zone core development and schematic work.
+- **Ace9921** — Author of the `k501.v` Verilog module reused in this core.
+- **JOTEGO and jtcores contributors** — JTFRAME and shared FPGA components.
+- **MAME contributors** — Mega Zone emulation and hardware documentation used
+  as reference material.
