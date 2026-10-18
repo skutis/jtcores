@@ -1,0 +1,33 @@
+Candidate files for a future mzone-core branch
+
+cores/mzone/README.md
+doc/mame.xml
+modules/jtframe/hdl/cpu/jtframe_sys6809.v
+cores/mzone/cfg/files.yaml
+cores/mzone/cfg/macros.def
+cores/mzone/cfg/mame2mra.toml
+cores/mzone/cfg/mem.yaml
+cores/mzone/cfg/msg
+cores/mzone/hdl/jtmzone_colmix.v
+cores/mzone/hdl/jtmzone_fix.v
+cores/mzone/hdl/jtmzone_game.v
+cores/mzone/hdl/jtmzone_main.v
+cores/mzone/hdl/jtmzone_mcu.v
+cores/mzone/hdl/jtmzone_obj.v
+cores/mzone/hdl/jtmzone_objdraw.v
+cores/mzone/hdl/jtmzone_scroll.v
+cores/mzone/hdl/jtmzone_snd.v
+cores/mzone/hdl/jtmzone_snd_dev.v
+cores/mzone/hdl/jtmzone_video.v
+cores/mzone/ver/game/sim.sh
+cores/mzone/ver/game/scenes/capture.sh
+cores/mzone/ver/game/scenes/capture.lua
+cores/mzone/ver/game/scenes/989/scene.lua
+cores/mzone/ver/game/watch_image.py
+cores/mzone/ver/video_width/check.py
+cores/mzone/ver/video_width/tb.v
+
+Excluded: schematics already merged upstream, shared SDRAM and scan-doubler changes, local notes, old results, generated files, ROMs, and sim_old.sh.
+
+This list is maintained on mzone to prepare a future mzone-core branch from upstream/master. It is a candidate selection, not a validated release.
+Documentation and final validation remain to be prepared.
