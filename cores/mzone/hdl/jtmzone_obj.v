@@ -1,8 +1,4 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version. */
+// SPDX-License-Identifier: GPL-3.0-or-later
 
 module jtmzone_obj(
     input               rst,
@@ -34,77 +30,8 @@ module jtmzone_obj(
     output       [ 3:0] pxl
 );
 
-/*
-On real Megazone PCB:
+// PCB scan/DMA timing and ROM layout: doc/timing.md, "PCB object hardware".
 
-Object rendering:
-Object render RAM is scanned from byte A=0..143 once per line. The scan
-starts at HCNT=40 and completes before the next HCNT=40. The 144 bytes are
-36 object entries, four bytes each.
-
-Object DMA:
-DMA arms when VBLK goes active, starts one pixel count after HSYNC goes
-active, and lasts for 240*4+1 HCNTs. The object RAM and object render RAM
-address go from 0 to 240 in that time.
-
-
-PCB object ROMs:
-Four ROMs are read as two selectable pairs. Object code byte 2 bit 7 selects
-the pair:
-
-    code[7]=0: codes 0x00..0x7f output { byte23, byte01 }
-    code[7]=1: codes 0x80..0xff output { byte23, byte01 }
-
-For one 4-pixel group, MAME's x offsets use bit 0 for pixel 0:
-
-    byte01 = { pl0_px3, pl0_px2, pl0_px1, pl0_px0,
-               pl1_px3, pl1_px2, pl1_px1, pl1_px0 }
-
-    byte23 = { pl2_px3, pl2_px2, pl2_px1, pl2_px0,
-               pl3_px3, pl3_px2, pl3_px1, pl3_px0 }
-
-Pixels are reconstructed as:
-
-    pxN = { pl3_pxN, pl2_pxN, pl1_pxN, pl0_pxN }
-
-PCB address order inside the selected ROM pair:
-
-    addr[0] = v0
-    addr[1] = v1
-    addr[2] = v2
-    addr[3] = h0
-    addr[4] = h1
-    addr[5] = v3
-
-MAME flattens the four ROMs into one gfx1 region:
-
-    gfx1 + 0x0000: byte01 for codes 0x00..0x7f
-    gfx1 + 0x2000: byte01 for codes 0x80..0xff
-    gfx1 + 0x4000: byte23 for codes 0x00..0x7f
-    gfx1 + 0x6000: byte23 for codes 0x80..0xff
-
-Core ROM layout without jtframe gfx_sort:
-mame2mra repacks MAME order with sequence=[0,2,1,3], width=16 so matching
-bytes from the selected ROM pair become adjacent:
-
-    word16 = { byte23, byte01 }
-
-The download address mapper transposes the packed within-tile address so each
-32-bit SDRAM word contains two adjacent four-pixel groups for one row.  The
-custom object drawer reads words as:
-
-    rom_addr = { code, ysub[3], half, ysub[2:0] }
-
-where half selects the left or right eight-pixel half.  Each response contains
-two adjacent four-pixel groups in its lower and upper 16-bit lanes:
-
-    pixels 0..3 = rom_data[15:0]
-    pixels 4..7 = rom_data[31:16]
-
-Thus one response supplies eight horizontal pixels and a 16-pixel sprite row
-needs two requests, like Road Fighter.  Pixels are decoded from byte01/byte23
-and written to a one-line object buffer.
-*/
 localparam [8:0] OBJ_START       = 9'd40;
 localparam [8:0] OBJ_ARM         = OBJ_START - 9'd1;
 localparam [9:0] OBJ_SCAN_LAST   = 10'd35;
@@ -318,7 +245,6 @@ jtmzone_objdraw u_draw(
     .cen2       ( cen2          ),
     .HS         ( HS            ),
     .hdump      ( hdump         ),
-    .vdump      ( vdump         ),
     .flip       ( flip          ),
 
     .draw       ( draw          ),

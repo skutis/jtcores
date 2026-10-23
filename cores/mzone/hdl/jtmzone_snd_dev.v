@@ -1,16 +1,4 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>. */
+// SPDX-License-Identifier: GPL-3.0-or-later
 
 module jtmzone_snd_dev(
     input               rst,
@@ -103,12 +91,12 @@ assign cpu_rom_cs  = rom_cs;
 assign wdog_reset_n = ~mcu_wdog_cs;
 assign snmi_set_n   = ~rst & (wdog_reset_n | A[0]);
 
-// PCB Z80 clock is 18.432 MHz / (3*2) = 3.072 MHz. The core clock here is
-// 24 MHz, so generate an exact 24 MHz * 16 / 125 enable.
+// PCB Z80 clock is 18.432 MHz / 6 = 3.072 MHz. Divide the
+// approximately 24.576 MHz sound clock by eight to match it.
 jtframe_frac_cen #(.W(2),.WC(8)) u_cpu_cen(
     .clk    ( clk       ),
-    .n      ( 8'd16     ),
-    .m      ( 8'd125    ),
+    .n      ( 8'd1      ),
+    .m      ( 8'd8      ),
     .cen    ( cpu_cen_v ),
     .cenb   (           )
 );

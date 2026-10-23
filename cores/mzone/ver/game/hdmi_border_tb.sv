@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 `timescale 1ns/1ps
 // Focused, unrotated scan2x + SiDi128 HDMI OSD diagnostic.
 // Synthetic 384x264 raster, 288x224 active. No game CPU/audio instantiated.

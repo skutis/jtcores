@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 params:
   - { name: SND_OFFSET, value: "`SND_START >> 1" }
   - { name: MCU_ROM_OFFSET, value: "`MCU_ROM_START >> 1" }
@@ -47,9 +49,6 @@ audio:
       ] }
     - { name: dac, data_width: 8, unsigned: true, dcrm: true, vpp: 0.996, rsum: 10k }
 
-download:
-  post_addr: true
-
 sdram:
   banks:
     -
@@ -69,6 +68,9 @@ sdram:
           addr_width: 15
           data_width: 32
           offset: OBJ_OFFSET
+          gfx_sort: hvvvx
+          # Limit sorting to the object ROM; character ROM follows it.
+          gfx_sort_en: "(ioctl_addr < `SCR_START)"
         -
           name: snd
           addr_width: 13

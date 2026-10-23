@@ -1,8 +1,4 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version. */
+// SPDX-License-Identifier: GPL-3.0-or-later
 
 module jtmzone_fix #(
     // Align the FIX source and priority windows with FIX pixels at colmix.
@@ -67,6 +63,10 @@ wire        vram_we = vram_cs & ~cpu_rnw;
 wire        cram_we = cram_cs & ~cpu_rnw;
 wire [ 9:0] eff_addr = cpu_addr;
 
+// FIX local X uses the common hdump reference, sign-extended in HBLANK.
+// Its origin is 0 normally and FIX_FLIP_START (240) when flipped.
+// hsum/heff include the fetch lead and the existing -flip phase correction.
+// PCB counter reference mappings are documented in ../doc/timing.md.
 wire [ 8:0] nonflip_hvisible = dip_orig_hactive ? 9'd287 : 9'd288;
 wire [ 8:0] hsum_limit = flip ? HVISIBLE : nonflip_hvisible;
 wire [ 8:0] hsum_base = hdump < hsum_limit ? hdump : { ~6'h0, hdump[2:0] };
@@ -78,6 +78,7 @@ wire [ 8:0] heff = blank_fetch ? hdump - 9'd160 :
                     flip ? FIX_WIDTH - 9'd1 - hsum : hsum;
 // Use the PCB's 8-bit wrapped h counter for phase and tile column.
 wire [ 7:0] h_eff = heff[7:0];
+// Wrap the last eight raw lines onto PCB vcount 248..255 before flipping.
 wire [ 7:0] vsum = vdump[8] ? vdump[7:0] - 8'd8 : vdump[7:0];
 wire [ 7:0] v_eff = flip ? ~vsum : vsum;
 wire [11:0] tile_addr = { cram[7], vram, v_eff[2:0] ^ {3{cram[5]}} };
@@ -118,42 +119,6 @@ jtframe_sh #(.W(1),.L(FIX_EN_DLY)) u_fix_src_dly(
     .drop   ( fix_src     )
 );
 
-// PCB vcount mapping:
-// raw vdump 0..255   -> PCB vcount 0..255
-// raw vdump 256..263 -> PCB vcount 248..255
-// flip mirrors the final 8-bit PCB vcount with bitwise inversion
-//
-// if( vdump[8] )
-//     vsum = vdump[7:0] - 8'd8;
-// else
-//     vsum = vdump[7:0];
-//
-// v_eff = flip ? ~vsum : vsum;
-// PCB hcount mapping noted for reference. Do not use this directly in the
-// current FIX fetch path; it already has its own effective counter.
-//
-// The active FIX counter is RoadF-like, but with a M-Zone local origin:
-// hsum_base   = common raw hdump reference, sign-extended in HBLANK
-// fix_hsum    = local FIX X, origin 0 normally and 240 when flipped
-// hsum/heff   = fetch-leaded address counter; flip mirrors the local 0..47 span
-//               and uses the RoadF-style -flip one-pixel phase correction
-//
-// During the visible FIX span this corresponds to:
-// non-flip: raw hdump 0..47   -> local counter 0..47
-// flip:     raw hdump 240..287 -> local counter 47..0
-//
-// if( flip ) begin
-//     hn = h < 9'd048 ? 9'd047 - h :
-//          h < 9'd128 ? 9'd271 - h :
-//          h < 9'd144 ? 9'd143 - h :
-//          h < 9'd288 ? 9'd399 - h :
-//                        9'd399 - h;
-// end else begin
-//     hn = h < 9'd048 ? h :
-//          h < 9'd288 ? h - 9'd032 :
-//                        h - 9'd160;
-// end
-// pcb_hcnt = hn[7:0];
 
 always @(posedge clk) begin
     if( rst ) begin

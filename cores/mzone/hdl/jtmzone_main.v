@@ -1,8 +1,4 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version. */
+// SPDX-License-Identifier: GPL-3.0-or-later
 
 module jtmzone_main(
     input             rst,
@@ -49,8 +45,6 @@ module jtmzone_main(
 );
 
 reg  [ 7:0] cpu_din;
-reg         coin2;
-reg         coin1;
 reg         intst;
 reg         main_latch_cs, scrolly_cs, scrollx_cs;
 wire [15:0] A;
@@ -146,8 +140,6 @@ always @(posedge clk) begin
     if( rst ) begin
         scrolly       <= 0;
         scrollx       <= 0;
-        coin2         <= 1'b0;
-        coin1         <= 1'b0;
         flip          <= 1'b0;
         intsnd        <= 1'b0;
         intst         <= 1'b0;
@@ -160,8 +152,8 @@ always @(posedge clk) begin
             // B_A13 is a 74LS259 addressable latch. Only the schematic nets
             // currently used by the core are modeled here.
             case( A[2:0] )
-                3'd0: coin2  <= cpu_dout[0];
-                3'd1: coin1  <= cpu_dout[0];
+                // 0: coin 2 counter
+                // 1: coin 1 counter
                 3'd3: intsnd <= cpu_dout[0];
                 // Schematic: /MLATCH selects this 74LS259; A[2:0]=5 selects
                 // FLIP and MD0 is the value latched (high means flipped).

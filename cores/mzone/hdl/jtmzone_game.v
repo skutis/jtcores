@@ -1,16 +1,4 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    JTCORES program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with JTCORES.  If not, see <http://www.gnu.org/licenses/>. */
+// SPDX-License-Identifier: GPL-3.0-or-later
 
 module jtmzone_game(
     `include "jtframe_game_ports.inc"
@@ -24,8 +12,7 @@ wire [ 7:0] main_shared_din, main_shared_dout;
 wire [ 7:0] snd_shared_din, snd_shared_dout;
 wire        main_shared_we, snd_shared_we;
 
-// Scene snapshots initialize shared RAM only for scene simulations.
-// Keep this core-specific choice outside JTFRAME's generated memory wrapper.
+// Main/Z80 shared RAM; preload captured contents for scene simulation.
 jtframe_dual_ram #(
     .AW(11)
 `ifdef SIMSCENE
@@ -106,27 +93,6 @@ assign game_vrender = video_vrender[7:0];
 `ifdef JTFRAME_IOCTL_RD
 assign ioctl_din = 8'hff;
 `endif
-
-reg [13:0] obj_pack_addr;
-always @(*) begin
-    post_addr = prog_addr;
-    obj_pack_addr = prog_addr[13:0] - OBJ_OFFSET[13:0];
-    if( prog_addr >= OBJ_OFFSET && prog_addr < SCR_OFFSET ) begin
-        // Keep the paired object-plane bytes adjacent, but transpose the
-        // within-tile address so group[0], rather than ysub[0], selects the
-        // 16-bit lane of each 32-bit SDRAM word.  One response then contains
-        // eight adjacent horizontal pixels for a selected sprite row.
-        obj_pack_addr[5:0] = {
-            obj_pack_addr[5], // y3
-            obj_pack_addr[4], // group[1]
-            obj_pack_addr[2], // y2
-            obj_pack_addr[1], // y1
-            obj_pack_addr[0], // y0
-            obj_pack_addr[3]  // group[0], 32-bit lane select
-        };
-        post_addr = OBJ_OFFSET + {8'd0,obj_pack_addr};
-    end
-end
 
 `ifndef NOMAIN
 jtmzone_main u_main(
@@ -233,7 +199,6 @@ jtmzone_video u_video(
     .clk        ( clk            ),
     .clk24      ( clk24          ),
     .pxl_cen    ( pxl_cen        ),
-    .pxl2_cen   ( pxl2_cen       ),
 
     .main_tile_addr( main_tile_addr ),
     .vram_din ( vram_din  ),

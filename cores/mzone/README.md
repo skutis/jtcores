@@ -3,33 +3,43 @@
 FPGA implementation of Konami's Mega Zone (1983, GX319), developed by
 Ulf Skutnabba using the JTFRAME framework.
 
-The implementation is based on the Mega Zone PCB schematics and hardware
-investigation, with MAME used as an additional reference. The KiCad schematics
+The core was developed using an original Mega Zone PCB, existing schematics,
+and new schematics drawn during the hardware investigation. Custom ROM code
+run through PicoROM was used to test hardware behaviour. The KiCad schematics
 are in [sch/](sch/).
+
+MAME was used for quick code verification and cross-checks. Final verification
+is against the original PCB.
 
 ## Status
 
-The core is under development. The intended targets are SiDi128, MiSTer, and
-Analogue Pocket.
+The core is under development for SiDi128, MiSTer FPGA, and Analogue Pocket.
 
 | Platform | Hardware testing |
 | --- | --- |
-| SiDi128 | Used during development; release validation remains to be completed |
-| MiSTer | Testing status to be confirmed |
-| Analogue Pocket | Not tested on hardware; a tester is needed |
+| SiDi128 | Tested on hardware |
+| MiSTer FPGA | Tested on hardware |
+| Analogue Pocket | Not tested; a device is needed for hardware validation |
 
-Platform build and timing results should be recorded before release. Inclusion
-of a ROM set in the configuration does not mean that every revision has been
-tested on hardware.
+SiDi128 HDMI alignment remains to be checked.
 
-Remaining validation includes video alignment on SiDi128 HDMI output and
-comparison of the PSG/DAC audio balance with the original PCB.
+Builds for all three platforms passed JTCORE's timing checks with Quartus Prime
+Lite 20.1 and fitter seed 1. MiSTer and Pocket reports include unconstrained
+paths, and shared platform clock warnings remain under review. These build
+results do not establish complete timing closure or replace hardware testing.
 
-## Video options
+## Video options and PCB findings
 
-Mega Zone uses a vertically oriented display. The **Video width** option selects
-between the default 288-pixel width and the original 287-pixel non-flipped
-visible width. In flipped mode, the original-width setting retains 288 pixels.
+Mega Zone uses a vertically oriented display. The **Video width** DIP-switch
+option selects between the default 288-pixel width and the PCB's original
+287-pixel non-flipped visible width. In flipped mode, the original-width setting
+retains 288 pixels.
+
+Comparison with the original PCB identified incorrect sprite positions and
+tile-layer offsets in MAME. The PCB also gives sprites priority over tiles
+at horizontal position 47 when a sprite occupies that position.
+
+See [doc/timing.md](doc/timing.md) for counter mappings and object hardware details.
 
 ## Hardware
 

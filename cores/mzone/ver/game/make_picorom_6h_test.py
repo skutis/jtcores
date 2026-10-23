@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Build a standalone 8 KiB Mega Zone main-CPU test ROM for socket 6H."""
 
 from pathlib import Path

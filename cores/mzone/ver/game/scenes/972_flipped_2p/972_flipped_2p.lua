@@ -1,3 +1,5 @@
+-- SPDX-License-Identifier: GPL-3.0-or-later
+
 -- Mega Zone input sequence for scene 972_flipped_2p.
 --
 -- Coin 1 and Coin 2 are held during frame 356.  Start 2 is held during

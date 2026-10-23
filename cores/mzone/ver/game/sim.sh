@@ -1,7 +1,7 @@
 #!/bin/bash
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 # ROMs must already exist as $ROM/<setname>.rom; default: megazone.
-# For automatic scene capture and MZONE_SAVE_* support, use sim_old.sh.
 SIM_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd) || exit 1
 SETNAME=${MZONE_SETNAME:-megazone}
 SCENE=

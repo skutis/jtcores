@@ -1,3 +1,5 @@
+-- SPDX-License-Identifier: GPL-3.0-or-later
+
 -- Generic M-Zone scene capture. The per-scene file returns the target frame
 -- and, when needed, input callbacks.
 

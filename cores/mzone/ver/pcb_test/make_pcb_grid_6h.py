@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Build a 6H PicoROM image that restores the captured MAME grid scene."""
 
 from pathlib import Path

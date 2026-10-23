@@ -1,15 +1,10 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version. */
+// SPDX-License-Identifier: GPL-3.0-or-later
 
 module jtmzone_video(
     input               rst,
     input               clk,
     input               clk24,
     input               pxl_cen,
-    input               pxl2_cen,
 
     input        [ 9:0] main_tile_addr,
     input        [ 7:0] vram_din,
@@ -96,7 +91,6 @@ wire        pre_lhbl, pre_lvbl;
 // Mask the final active pixel, without a one-pixel gap before it.
 wire        orig_last_pixel = dip_orig_hactive && !flip && hdump == HB_START;
 wire        colmix_pre_lhbl = pre_lhbl && !orig_last_pixel;
-wire [ 7:0] hcnt;
 wire [ 3:0] scr_pxl;
 wire [ 3:0] fix_pxl;
 wire [ 3:0] obj_pxl;
@@ -106,7 +100,7 @@ wire        scr_fetch_late;
 reg         diag_armed;
 reg  [ 7:0] diag_count, diag_last, diag_peak, diag_frames;
 // Count visible deadline misses, excluding the first partial frame.
-// The standard JTFRAME debug selector chooses live, peak, or affected frames.
+// JTFRAME debug selector: 1 = last frame, 3 = affected frames, otherwise peak.
 always @(posedge clk) begin
     if( rst ) begin
         diag_armed <= 1'b0;
@@ -138,138 +132,116 @@ always @* begin
     endcase
 end
 `endif
-wire        pxl2_cen_unused = pxl2_cen;
 wire        obj_lut_we, char_lut_we;
 
 assign obj_lut_we = prom_we && prog_addr >= OBJ_OFFSET && prog_addr < OBJ_OFFSET+22'h100;
 assign char_lut_we = prom_we && prog_addr >= CHR_OFFSET && prog_addr < CHR_OFFSET+22'h100;
 
-assign hcnt     = pcb_hcnt(hdump, flip);
-
-function [7:0] pcb_hcnt;
-    input [8:0] h;
-    input       f;
-    reg   [8:0] hn;
-begin
-    if( f ) begin
-        hn = h < 9'd048 ? 9'd047 - h :
-             h < 9'd128 ? 9'd271 - h :
-             h < 9'd144 ? 9'd143 - h :
-             h < 9'd288 ? 9'd399 - h :
-                           9'd399 - h;
-    end else begin
-        hn = h < 9'd048 ? h :
-             h < 9'd288 ? h - 9'd032 :
-                           h - 9'd160;
-    end
-    pcb_hcnt = hn[7:0];
-end
-endfunction
 
 jtmzone_scroll u_scroll(
-    .rst        ( rst             ),
-    .clk        ( clk             ),
-    .clk24      ( clk24           ),
-    .pxl_cen    ( pxl_cen         ),
-    .cpu_addr   ( main_tile_addr ),
-    .cpu_dout   ( vram_din   ),
-    .cpu_rnw    ( main_cpu_rnw    ),
-    .vram_cs    ( vram0_cs   ),
-    .cram_cs    ( cram0_cs   ),
-    .vram_dout  ( vram0_dout ),
-    .cram_dout  ( cram0_dout ),
-    .hdump      ( hdump           ),
-    .vdump      ( vdump           ),
-    .scrollx    ( scrollx         ),
-    .scrolly    ( scrolly         ),
-    .flip       ( flip            ),
-    .prog_data  ( prog_data[3:0]  ),
-    .prog_addr  ( prog_addr[7:0] - CHR_OFFSET[7:0] ),
-    .prog_en    ( char_lut_we     ),
-    .rom_data    ( scrrom_data    ),
-    .rom_ok      ( scrrom_ok      ),
-    .rom_addr    ( scrrom_addr    ),
-    .rom_cs      ( scrrom_cs      ),
-    .pxl        ( scr_pxl         )
+    .rst              ( rst                              ),
+    .clk              ( clk                              ),
+    .clk24            ( clk24                            ),
+    .pxl_cen          ( pxl_cen                          ),
+    .cpu_addr         ( main_tile_addr                   ),
+    .cpu_dout         ( vram_din                         ),
+    .cpu_rnw          ( main_cpu_rnw                     ),
+    .vram_cs          ( vram0_cs                         ),
+    .cram_cs          ( cram0_cs                         ),
+    .vram_dout        ( vram0_dout                       ),
+    .cram_dout        ( cram0_dout                       ),
+    .hdump            ( hdump                            ),
+    .vdump            ( vdump                            ),
+    .scrollx          ( scrollx                          ),
+    .scrolly          ( scrolly                          ),
+    .flip             ( flip                             ),
+    .prog_data        ( prog_data[3:0]                   ),
+    .prog_addr        ( prog_addr[7:0] - CHR_OFFSET[7:0] ),
+    .prog_en          ( char_lut_we                      ),
+    .rom_data         ( scrrom_data                      ),
+    .rom_ok           ( scrrom_ok                        ),
+    .rom_addr         ( scrrom_addr                      ),
+    .rom_cs           ( scrrom_cs                        ),
+    .pxl              ( scr_pxl                          )
 `ifdef MZONE_FETCH_DIAG
-    ,.fetch_late( scr_fetch_late )
+    ,.fetch_late       ( scr_fetch_late                   )
 `endif
 );
 
 jtmzone_fix u_fix(
-    .rst        ( rst             ),
-    .clk        ( clk             ),
-    .clk24      ( clk24           ),
-    .pxl_cen    ( pxl_cen         ),
-    .cpu_addr   ( main_tile_addr  ),
-    .cpu_dout   ( vram_din   ),
-    .cpu_rnw    ( main_cpu_rnw    ),
-    .vram_cs    ( vram1_cs   ),
-    .cram_cs    ( cram1_cs   ),
-    .vram_dout  ( vram1_dout ),
-    .cram_dout  ( cram1_dout ),
-    .hdump      ( hdump           ),
-    .vdump      ( vdump           ),
-    .flip       ( flip            ),
-    .dip_orig_hactive( dip_orig_hactive ),
-    .prog_data  ( prog_data[3:0]  ),
-    .prog_addr  ( prog_addr[7:0] - CHR_OFFSET[7:0] ),
-    .prog_en    ( char_lut_we     ),
-    .rom_data   ( fixrom_data     ),
-    .rom_ok     ( fixrom_ok       ),
-    .rom_addr   ( fixrom_addr     ),
-    .rom_cs     ( fixrom_cs       ),
-    .pxl        ( fix_pxl         ),
-    .fix_src    ( fix_src         ),
-    .fix_en     ( fix_en          )
+    .rst              ( rst                              ),
+    .clk              ( clk                              ),
+    .clk24            ( clk24                            ),
+    .pxl_cen          ( pxl_cen                          ),
+    .cpu_addr         ( main_tile_addr                   ),
+    .cpu_dout         ( vram_din                         ),
+    .cpu_rnw          ( main_cpu_rnw                     ),
+    .vram_cs          ( vram1_cs                         ),
+    .cram_cs          ( cram1_cs                         ),
+    .vram_dout        ( vram1_dout                       ),
+    .cram_dout        ( cram1_dout                       ),
+    .hdump            ( hdump                            ),
+    .vdump            ( vdump                            ),
+    .flip             ( flip                             ),
+    .dip_orig_hactive ( dip_orig_hactive                 ),
+    .prog_data        ( prog_data[3:0]                   ),
+    .prog_addr        ( prog_addr[7:0] - CHR_OFFSET[7:0] ),
+    .prog_en          ( char_lut_we                      ),
+    .rom_data         ( fixrom_data                      ),
+    .rom_ok           ( fixrom_ok                        ),
+    .rom_addr         ( fixrom_addr                      ),
+    .rom_cs           ( fixrom_cs                        ),
+    .pxl              ( fix_pxl                          ),
+    .fix_src          ( fix_src                          ),
+    .fix_en           ( fix_en                           )
 );
 
 jtmzone_obj u_obj(
-    .rst        ( rst          ),
-    .clk        ( clk          ),
-    .clk24      ( clk24        ),
-    .pxl_cen    ( pxl_cen      ),
-    .objram_addr( objram_addr  ),
-    .objram_din ( objram_din   ),
-    .objram_cs  ( objram_cs    ),
-    .cpu_rnw    ( main_cpu_rnw ),
-    .objram_dout( objram_dout  ),
-    .LVBL       ( LVBL         ),
-    .HS         ( HS           ),
-    .hdump      ( hdump        ),
-    .vdump      ( vdump        ),
-    .flip       ( flip         ),
-    .rom_addr   ( obj_addr     ),
-    .rom_cs     ( obj_cs       ),
-    .rom_data   ( obj_data     ),
-    .rom_ok     ( obj_ok       ),
-    .prog_data  ( prog_data[3:0] ),
-    .prog_addr  ( prog_addr[7:0] - OBJ_OFFSET[7:0] ),
-    .prog_en    ( obj_lut_we     ),
-    .pxl        ( obj_pxl     )
+    .rst              ( rst                              ),
+    .clk              ( clk                              ),
+    .clk24            ( clk24                            ),
+    .pxl_cen          ( pxl_cen                          ),
+    .objram_addr      ( objram_addr                      ),
+    .objram_din       ( objram_din                       ),
+    .objram_cs        ( objram_cs                        ),
+    .cpu_rnw          ( main_cpu_rnw                     ),
+    .objram_dout      ( objram_dout                      ),
+    .LVBL             ( LVBL                             ),
+    .HS               ( HS                               ),
+    .hdump            ( hdump                            ),
+    .vdump            ( vdump                            ),
+    .flip             ( flip                             ),
+    .rom_addr         ( obj_addr                         ),
+    .rom_cs           ( obj_cs                           ),
+    .rom_data         ( obj_data                         ),
+    .rom_ok           ( obj_ok                           ),
+    .prog_data        ( prog_data[3:0]                   ),
+    .prog_addr        ( prog_addr[7:0] - OBJ_OFFSET[7:0] ),
+    .prog_en          ( obj_lut_we                       ),
+    .pxl              ( obj_pxl                          )
 );
 
 jtmzone_colmix u_colmix(
-    .rst        ( rst        ),
-    .clk        ( clk        ),
-    .pxl_cen    ( pxl_cen    ),
-    .scr_pxl    ( scr_pxl        ),
-    .fix_pxl    ( fix_pxl        ),
-    .obj_pxl    ( obj_pxl        ),
-    .gfx_en     ( gfx_en     ),
-    .fix_src    ( fix_src    ),
-    .fix_prio   ( fix_en     ),
-    .preLHBL    ( colmix_pre_lhbl ),
-    .preLVBL    ( pre_lvbl   ),
-    .prog_data  ( prog_data  ),
-    .prog_addr  ( prog_addr  ),
-    .prom_we    ( prom_we    ),
-    .red        ( red        ),
-    .green      ( green      ),
-    .blue       ( blue       ),
-    .LHBL       ( LHBL       ),
-    .LVBL       ( LVBL       ),
-    .preLBL     (           )
+    .rst              ( rst                              ),
+    .clk              ( clk                              ),
+    .pxl_cen          ( pxl_cen                          ),
+    .scr_pxl          ( scr_pxl                          ),
+    .fix_pxl          ( fix_pxl                          ),
+    .obj_pxl          ( obj_pxl                          ),
+    .gfx_en           ( gfx_en                           ),
+    .fix_src          ( fix_src                          ),
+    .fix_prio         ( fix_en                           ),
+    .preLHBL          ( colmix_pre_lhbl                  ),
+    .preLVBL          ( pre_lvbl                         ),
+    .prog_data        ( prog_data                        ),
+    .prog_addr        ( prog_addr                        ),
+    .prom_we          ( prom_we                          ),
+    .red              ( red                              ),
+    .green            ( green                            ),
+    .blue             ( blue                             ),
+    .LHBL             ( LHBL                             ),
+    .LVBL             ( LVBL                             ),
+    .preLBL           (                                  )
 );
 
 `ifdef SIMULATION
@@ -308,31 +280,31 @@ end
 
 
 jtframe_vtimer #(
-    .VB_START   ( VB_START ),
-    .VB_END     ( VB_END   ),
-    .VCNT_END   ( VCNT_END ),
-    .VS_START   ( VS_START ),
-    .VS_END     ( VS_END   ),
-    .HB_END     ( HB_END   ),
-    .HB_START   ( HB_START ),
-    .HCNT_END   ( HB_END   ),
-    .HS_START   ( HS_START ),
-    .HS_END     ( HS_END   ),
-    .H_VB       ( H_VB     ),
-    .H_VNEXT    ( H_VNEXT  )
+    .VB_START         ( VB_START                         ),
+    .VB_END           ( VB_END                           ),
+    .VCNT_END         ( VCNT_END                         ),
+    .VS_START         ( VS_START                         ),
+    .VS_END           ( VS_END                           ),
+    .HB_END           ( HB_END                           ),
+    .HB_START         ( HB_START                         ),
+    .HCNT_END         ( HB_END                           ),
+    .HS_START         ( HS_START                         ),
+    .HS_END           ( HS_END                           ),
+    .H_VB             ( H_VB                             ),
+    .H_VNEXT          ( H_VNEXT                          )
 ) u_vtimer(
-    .clk        ( clk       ),
-    .pxl_cen    ( pxl_cen   ),
-    .vdump      ( vdump     ),
-    .vrender    ( vrender   ),
-    .vrender1   (           ),
-    .H          ( hdump     ),
-    .Hinit      (           ),
-    .Vinit      (           ),
-    .LHBL       ( pre_lhbl  ),
-    .LVBL       ( pre_lvbl  ),
-    .HS         ( HS        ),
-    .VS         ( VS        )
+    .clk              ( clk                              ),
+    .pxl_cen          ( pxl_cen                          ),
+    .vdump            ( vdump                            ),
+    .vrender          ( vrender                          ),
+    .vrender1         (                                  ),
+    .H                ( hdump                            ),
+    .Hinit            (                                  ),
+    .Vinit            (                                  ),
+    .LHBL             ( pre_lhbl                         ),
+    .LVBL             ( pre_lvbl                         ),
+    .HS               ( HS                               ),
+    .VS               ( VS                               )
 );
 
 endmodule

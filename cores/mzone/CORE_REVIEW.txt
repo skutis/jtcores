@@ -1,34 +1,40 @@
 Candidate files for a future mzone-core branch
 
+A "X" before the file name, followed by <TAB> means I have checked it is ok. I.E removed redundant comments.
+
+
 cores/mzone/README.md
-doc/mame.xml
-modules/jtframe/hdl/cpu/jtframe_sys6809.v
-cores/mzone/cfg/files.yaml
-cores/mzone/cfg/macros.def
-cores/mzone/cfg/mame2mra.toml
-cores/mzone/cfg/mem.yaml
-cores/mzone/cfg/msg
-cores/mzone/hdl/jtmzone_colmix.v
-cores/mzone/hdl/jtmzone_fix.v
-cores/mzone/hdl/jtmzone_game.v
-cores/mzone/hdl/jtmzone_main.v
-cores/mzone/hdl/jtmzone_mcu.v
-cores/mzone/hdl/jtmzone_obj.v
-cores/mzone/hdl/jtmzone_objdraw.v
-cores/mzone/hdl/jtmzone_scroll.v
-cores/mzone/hdl/jtmzone_snd.v
-cores/mzone/hdl/jtmzone_snd_dev.v
-cores/mzone/hdl/jtmzone_video.v
-cores/mzone/ver/game/README.md
-cores/mzone/ver/game/sim.sh
-cores/mzone/ver/game/scenes/capture.sh
-cores/mzone/ver/game/scenes/capture.lua
-cores/mzone/ver/game/scenes/989/scene.lua
-cores/mzone/ver/game/watch_image.py
-cores/mzone/ver/video_width/check.py
-cores/mzone/ver/video_width/tb.v
+X	jtcores/doc/mame.xml
+X	modules/jtframe/hdl/cpu/jtframe_sys6809.v
+X	cores/mzone/cfg/files.yaml
+X	cores/mzone/cfg/macros.def
+X	cores/mzone/cfg/mame2mra.toml
+X	cores/mzone/cfg/mem.yaml
+X	cores/mzone/cfg/msg
+x	cores/mzone/cfg/reg.yaml
+X	cores/mzone/doc/timing.md
+X	cores/mzone/hdl/jtmzone_colmix.v
+X	cores/mzone/hdl/jtmzone_fix.v
+X	cores/mzone/hdl/jtmzone_game.v
+X	cores/mzone/hdl/jtmzone_main.v
+x	cores/mzone/hdl/jtmzone_mcu.v
+X	cores/mzone/hdl/jtmzone_obj.v
+X	cores/mzone/hdl/jtmzone_objdraw.v
+X	cores/mzone/hdl/jtmzone_scroll.v
+X	cores/mzone/hdl/jtmzone_snd.v
+X	cores/mzone/hdl/jtmzone_snd_dev.v
+X	cores/mzone/hdl/jtmzone_video.v
+X	cores/mzone/ver/game/README.md
+X	cores/mzone/ver/game/sim.sh
+X	cores/mzone/ver/game/scenes/ (all files and subdirectories)
+X	cores/mzone/ver/game/frame_viewer.py
+X	cores/mzone/ver/megazone/reg.cab
+X	cores/mzone/ver/video_width/check.py
+X	cores/mzone/ver/video_width/tb.v
 
 Excluded: schematics already merged upstream, shared SDRAM and scan-doubler changes, local notes, old results, generated files, ROMs, and sim_old.sh.
+
+Regression reference frames and audio remain outside Git in $REGRUNS; include only cfg/reg.yaml, ver/megazone/reg.cab, and the shared runner fix for regression integration.
 
 This list is maintained on mzone to prepare a future mzone-core branch from upstream/master. It is a candidate selection, not a validated release.
 Documentation and final validation remain to be prepared.

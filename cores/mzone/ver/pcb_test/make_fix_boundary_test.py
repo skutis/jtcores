@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Build the focused FIX/SCROLL boundary and OBJ-position comparison test."""
 
 from pathlib import Path

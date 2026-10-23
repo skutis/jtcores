@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: GPL-3.0-or-later
 # Shared setup for fixed PCB test presets; low-level generators still accept
 # MZONE_* overrides when invoked directly for experiments.
 PCB_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)

@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 # Source this from anywhere inside the mzone core:
 #   source env.sh

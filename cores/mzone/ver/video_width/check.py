@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Check active-line continuity and sync while changing the width option."""
 from pathlib import Path
 import subprocess

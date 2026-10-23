@@ -8,9 +8,6 @@ JTFRAME/Verilator tools and an assembled ROM in `$ROM`.
 
 - `sim.sh`: normal game simulation and loading existing scenes. `-g` selects
   a ROM set (default `megazone`); `-s` or `--scene` selects `scenes/<name>/`.
-- `sim_old.sh`: preserved development launcher with automatic MAME capture,
-  arbitrary `MZONE_ROM` paths, and `MZONE_SAVE_*`/`MZONE_LOAD_FILE` support.
-  Its scene option is `-scene` or `-s`, and its scene mode keeps sound enabled.
 
 ```sh
 # Normal game: two frames, sound enabled, waveform output.
@@ -62,7 +59,7 @@ by itself.
 
 | File | Purpose |
 | --- | --- |
-| `watch_image.py` | GTK image viewer with automatic reload, zoom, pan, and pixel-coordinate display; requires Python PyGObject/GTK 3 |
+| `frame_viewer.py` | GTK image viewer with automatic reload, zoom, pan, and pixel-coordinate display; requires Python PyGObject/GTK 3 |
 | `vcd_cpu_summary.py` | Extracts selected CPU and memory activity from a VCD waveform |
 | `make_intmain_test_rom.py` | Builds a diagnostic ROM with a replacement sound-CPU program |
 | `make_picorom_6h_test.py` | Builds a main-CPU test image for socket 6H and a simulation ROM |
@@ -73,7 +70,7 @@ by itself.
 For example, inspect a generated image with:
 
 ```sh
-python3 watch_image.py frames/frame_00001.png
+python3 frame_viewer.py frames/frame_00001.png
 ```
 
 Use the actual generated filename if it differs.
@@ -90,5 +87,4 @@ Use the actual generated filename if it differs.
   captures, archives, and historical working notes, rather than required inputs
   for a normal simulation.
 
-See [../README.md](../README.md) for the broader PCB-test workflow. Its older
-`-scene` and `MZONE_ROM` examples apply to `sim_old.sh`.
+See [../README.md](../README.md) for the broader PCB-test workflow.

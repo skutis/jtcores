@@ -1,9 +1,6 @@
-/*  This file is part of JTCORES.
-    JTCORES program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version. */
+// SPDX-License-Identifier: GPL-3.0-or-later
 
+// PCB object ROM organization and core packing: doc/timing.md, "PCB object hardware".
 module jtmzone_objdraw(
     input               rst,
     input               clk,
@@ -12,7 +9,6 @@ module jtmzone_objdraw(
 
     input               HS,
     input        [ 8:0] hdump,
-    input        [ 8:0] vdump,
     input               flip,
 
     input               draw,
@@ -36,12 +32,13 @@ module jtmzone_objdraw(
     output       [ 3:0] pxl
 );
 
-// Mixer-aligned physical read origins. The object RAM and wrapper registers
-// settle within one four-master-clock pixel period.
+// Raw hdump positions used as hread=0 in each orientation.
 localparam [8:0] HOFFSET      = 9'd54;
 localparam [8:0] HOFFSET_FLIP = 9'd6;
+// Circular line-buffer starting addresses, before read-latency compensation.
 localparam [7:0] PCB_RD_ORIGIN      = 8'd9;
 localparam [7:0] PCB_RD_ORIGIN_FLIP = 8'd16;
+// Request one address ahead to compensate for the synchronous read path.
 localparam [7:0] RAM_RD_PHASE  = 8'd1;
 
 reg [ 1:0] dr_st;
@@ -69,34 +66,26 @@ wire [3:0] draw_pen = pxl_data[3:0];
 // Switch banks on the leading edge of HS, during horizontal blank.  The
 // object buffer switches on a falling LHBL input, hence the inversion.
 wire       obj_buf_lhbl = ~HS;
-// Layer pixels reach the color-mixer input six pixels after raw timing.
+// Position the object read sequence relative to raw horizontal timing.
 wire [8:0] hoffset = flip ? HOFFSET_FLIP : HOFFSET;
-// Read the 240 visible object addresses. The delayed buffer output continues
-// to drain after the final read pulse.
 wire [8:0] hread = hdump - hoffset;
-// The PCB starts its circular line-buffer display at address 9. The generic
-// synchronous RAM/output path adds one pixel of request-to-output phase, so
-// request one additional address ahead. Start the read-enable window two
-// pixels before the normal sequence, requesting circular addresses 8..9;
-// keep the established trailing boundary unchanged.
+// Enable reads at hread=-2,-1 and 0..239. The two early reads prime
+// the synchronous read pipeline; output drains after the last request.
 wire       buf_rd = pxl_cen && (hread>=9'd510 || hread<9'd240);
-// Core counters run forward in both orientations; flip selects only the
-// PCB-observed circular starting address.
+// Select the circular buffer origin for each orientation, then advance
+// the request address by RAM_RD_PHASE to compensate for read latency.
+// Eight-bit arithmetic wraps the address modulo 256.
 wire [7:0] buf_rd_origin = flip ? PCB_RD_ORIGIN_FLIP : PCB_RD_ORIGIN;
 wire [7:0] buf_rd_addr = hread[7:0] + buf_rd_origin + RAM_RD_PHASE;
 
-// Match Road Fighter's synchronous object-PROM path.  The PROM result becomes
-// valid one master clock after {palette,pen}; delay its line-buffer write
-// address and enable by the same clock.
+// The synchronous object PROM produces its result one master clock after
+// {palette,pen}; delay the line-buffer write address and enable by the same clock.
 always @(posedge clk) begin
     if( rst ) begin
         buf_al  <= 8'd0;
         buf_wel <= 1'b0;
     end else begin
         buf_al  <= buf_a;
-        // The physical object line buffer is 256 pixels wide. Sprites crossing
-        // address 255 wrap to address 0 before the 0..239 display window clips
-        // them, so writes must not be limited to the 240 displayed addresses.
         buf_wel <= buf_we;
     end
 end
